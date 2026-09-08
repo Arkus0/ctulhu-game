@@ -190,3 +190,10 @@ The public repository must exclude the source PDF and current cropped module ill
 - [x] Documentados los motivos, estados, señales, controles, persistencia, límites de voces y limpieza de nodos en `docs/DIRECCION-DE-AUDIO.md`.
 - [x] El recorrido automatizado corto cubrió hotel, conversación, investigación, subsuelo y cierre sin errores de consola; mute, volúmenes, recarga y activaciones consecutivas quedaron comprobados.
 - [ ] La auditoría continua de quince minutos se detuvo a petición del usuario después de 225 segundos estables en Hotel y la entrada en Investigación; no se reanudó antes de publicar.
+
+## Claridad de las tiradas porcentuales (8 de septiembre de 2026)
+
+- [x] Aclarado en la tarjeta y el historial que las pruebas son *roll-under*: el resultado debe ser igual o menor que el umbral efectivo.
+- [x] La interfaz muestra por separado tirada, umbral requerido, habilidad base, dificultad y veredicto de la prueba.
+- [x] El estado textual estructurado expone `required` y `success` durante una tirada pendiente.
+- [x] Añadida una regresión explícita para el caso comunicado: 67 contra 55 es una prueba fallida.

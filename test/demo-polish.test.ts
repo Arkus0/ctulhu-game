@@ -198,6 +198,26 @@ describe('guardado y audio', () => {
       outcome: game.view().pendingRoll?.roll.success ? 'success' : 'failure',
     })
   })
+
+  it('explica sin ambigüedad que 67 contra 55 es una prueba fallida', () => {
+    let match: { game: Game; turn: ReturnType<Game['performAction']> } | null = null
+    for (let index = 0; index < 1000; index += 1) {
+      const game = new Game(content, `roll-under-${index}`)
+      const turn = game.performAction('arrival_question_clinton')
+      if (game.view().pendingRoll?.roll.value === 67) {
+        match = { game, turn }
+        break
+      }
+    }
+
+    expect(match).not.toBeNull()
+    const roll = match!.game.view().pendingRoll!.roll
+    const line = match!.turn.lines.find((candidate) => candidate.kind === 'tirada')
+    expect(roll.target).toBe(55)
+    expect(roll.success).toBe(false)
+    expect(line?.text).toContain('Tirada 67; necesitabas 55 o menos')
+    expect(line?.text).toContain('prueba fallida')
+  })
 })
 
 describe('contratos de contenido', () => {

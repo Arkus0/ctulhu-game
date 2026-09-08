@@ -20,7 +20,15 @@ import {
   type TailResult,
 } from './perception'
 import { Rng } from './rng'
-import { luckCost, OUTCOME_LABEL, spendLuck as applyLuck, type Difficulty, type RollResult } from './rules'
+import {
+  DIFFICULTY_LABEL,
+  luckCost,
+  OUTCOME_LABEL,
+  spendLuck as applyLuck,
+  threshold,
+  type Difficulty,
+  type RollResult,
+} from './rules'
 import { sanityCheck } from './sanity'
 import { Scheduler, type SchedulerSnapshot, type TickReport, type TraceDef } from './scheduler'
 import { WorldState, type WorldSnapshot } from './worldstate'
@@ -1614,9 +1622,13 @@ export class Game {
         : r.penalty > r.bonus
           ? ` (+${r.penalty - r.bonus} penalizacion)`
           : ''
+    const required = threshold(r.target, r.difficulty)
+    const verdict = r.success
+      ? `prueba superada (${OUTCOME_LABEL[r.outcome]})`
+      : 'prueba fallida'
     return {
       kind: 'tirada',
-      text: `${r.label} · ${r.value} contra ${r.target}${mods} → ${OUTCOME_LABEL[r.outcome]}`,
+      text: `${r.label} · Tirada ${r.value}; necesitabas ${required} o menos (dificultad ${DIFFICULTY_LABEL[r.difficulty]}, habilidad ${r.target})${mods} → ${verdict}`,
     }
   }
 

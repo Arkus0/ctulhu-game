@@ -2,6 +2,7 @@ import { loadContent, ContentError } from './content/index'
 import { Game, type GameSnapshot, type Line, type Turn } from './engine/game'
 import type { DialogueTopic } from './engine/dialogue'
 import type { GuidedAction } from './engine/adventure'
+import { DIFFICULTY_LABEL, threshold } from './engine/rules'
 import { ArtRenderer, type TimeOfDay } from './ui/art'
 import { AudioManager, type AudioBus, type AudioZone, type MusicState, type SynthCue } from './ui/audio'
 import './ui/style.css'
@@ -559,8 +560,10 @@ class UI {
     card.className = `roll-card ${pending.roll.success ? 'success' : 'failure'}`
     const value = document.createElement('strong')
     value.textContent = String(pending.roll.value).padStart(2, '0')
+    value.setAttribute('aria-label', `Tirada ${pending.roll.value}`)
     const detail = document.createElement('span')
-    detail.textContent = `${pending.roll.label}. Objetivo difícil: ${Math.floor(pending.roll.target / 2)}.`
+    const required = threshold(pending.roll.target, pending.roll.difficulty)
+    detail.textContent = `${pending.roll.success ? 'Prueba superada' : 'Prueba fallida'}. Necesitas ${required} o menos · ${pending.roll.label} ${pending.roll.target}% · dificultad ${DIFFICULTY_LABEL[pending.roll.difficulty]}.`
     const stakes = document.createElement('small')
     stakes.textContent = pending.stakes
     card.append(value, detail, stakes)
@@ -791,7 +794,7 @@ class UI {
   }
 
   private tone(text: string): string {
-    return /pifia|fallo/.test(text) ? 'failure' : /éxito|exito/.test(text) ? 'success' : ''
+    return /pifia|fallo|fallida/.test(text) ? 'failure' : /éxito|exito|superada/.test(text) ? 'success' : ''
   }
 
   private openPanel(title: string): void {
@@ -1164,7 +1167,13 @@ class UI {
       leads: view.leads.map((lead) => ({ title: lead.title, status: lead.status, deadline: lead.deadline })),
       companions: view.companions.map((companion) => ({ name: companion.name, location: companion.location, state: companion.state, assignment: companion.assignment })),
       resources,
-      pendingRoll: view.pendingRoll ? { title: view.pendingRoll.title, value: view.pendingRoll.roll.value, canSpendLuck: view.pendingRoll.canSpendLuck } : null,
+      pendingRoll: view.pendingRoll ? {
+        title: view.pendingRoll.title,
+        value: view.pendingRoll.roll.value,
+        required: threshold(view.pendingRoll.roll.target, view.pendingRoll.roll.difficulty),
+        success: view.pendingRoll.roll.success,
+        canSpendLuck: view.pendingRoll.canSpendLuck,
+      } : null,
       page: { current: this.pageIndex + 1, total: Math.max(1, this.pages.length) },
       narration: [...this.log.querySelectorAll('p')].map((item) => item.dataset['full'] ?? item.textContent ?? ''),
       audio: this.audio.diagnostics,

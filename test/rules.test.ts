@@ -139,6 +139,10 @@ describe('clasificacion de tiradas (7a edicion)', () => {
     expect(classify(81, 80)).toBe(Outcome.Fail)
   })
 
+  it('67 contra 55 es fallo porque la tirada debe quedar en el umbral o por debajo', () => {
+    expect(classify(67, 55)).toBe(Outcome.Fail)
+  })
+
   it('meets exige el nivel pedido', () => {
     expect(meets(Outcome.Regular, 'regular')).toBe(true)
     expect(meets(Outcome.Regular, 'hard')).toBe(false)
