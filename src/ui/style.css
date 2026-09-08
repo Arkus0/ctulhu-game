@@ -540,6 +540,13 @@ button { font-family: inherit; }
 #choices > button:hover small,
 #choices > button:focus-visible small { color: var(--blue); }
 .cost { color: var(--silver); font-size: 0.75rem; white-space: nowrap; }
+/* La opcion resaltada se pinta sobre --silver y el coste tambien era --silver:
+   el precio en minutos desaparecia justo en la opcion que se iba a elegir, que
+   es cuando hace falta leerlo. `small` ya tenia esta correccion y `.cost` no. */
+#choices > button:hover .cost,
+#choices > button:focus-visible .cost { color: var(--blue); }
+#choices > button:hover .key,
+#choices > button:focus-visible .key { color: var(--blue); }
 
 .roll-card {
   display: grid;

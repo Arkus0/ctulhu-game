@@ -638,3 +638,12 @@ describe('densidad de examen y validación', () => {
     expect(problemas.some((problema) => problema.includes('Contabilidad'))).toBe(true)
   })
 })
+
+describe('el coste en minutos siempre se lee', () => {
+  it('la opción resaltada no esconde su precio', () => {
+    // El boton resaltado se pinta sobre --silver y `.cost` era --silver: el
+    // coste desaparecia justo en la opcion que se estaba a punto de elegir.
+    expect(hojaDeEstilos).toMatch(/#choices > button:focus-visible \.cost/)
+    expect(hojaDeEstilos).toMatch(/#choices > button:hover \.cost/)
+  })
+})
