@@ -23,10 +23,13 @@ export interface AudioDiagnostics {
   unlocked: boolean
   contextState: AudioContextState | 'uninitialized'
   musicState: MusicState
+  musicTheme: string | null
+  phrasesPlayed: number
   preferences: Readonly<AudioPreferences>
   activeMusicVoices: number
   activeEffectVoices: number
   phraseTimerPending: boolean
+  nextPhraseDelayMs: number | null
   investigationTimerPending: boolean
 }
 
@@ -56,6 +59,15 @@ const LEGACY_STORAGE_KEY = 'la-broma-macabra.audio.v1'
 const DEFAULTS: AudioPreferences = { muted: false, music: 0.22, effects: 0.45 }
 const MUSIC_POLYPHONY = 12
 const EFFECTS_POLYPHONY = 14
+
+export const MUSIC_TIMING = {
+  introSectionsMs: [3_800, 6_000, 7_000, 6_000] as const,
+  hotelEntryMs: [250, 700] as const,
+  hotelCycleMs: [10_000, 16_000] as const,
+  investigationEntryMs: [550, 1_100] as const,
+  investigationCycleMs: [7_000, 12_000] as const,
+  undergroundCycleMs: [7_500, 13_500] as const,
+} as const
 
 const memoryStorage: AudioStorage = { getItem: () => null, setItem: () => undefined }
 
@@ -102,12 +114,19 @@ export class AudioManager {
   private noise: AudioBuffer | null = null
   private voices = new Set<Voice>()
   private phraseTimer: ReturnType<typeof setTimeout> | null = null
+  private nextPhraseDelayMs: number | null = null
   private investigationTimer: ReturnType<typeof setTimeout> | null = null
   private unlockPromise: Promise<void> | null = null
   private prefs: AudioPreferences
   private _unlocked = false
   private baseState: MusicState = 'hotel'
   private activeState: MusicState = 'hotel'
+  private phraseIndex = 0
+  private phrasesPlayed = 0
+  private currentTheme: string | null = null
+  private lastHotelVariant = -1
+  private lastInvestigationVariant = -1
+  private lastUndergroundVariant = -1
   private investigationActive = false
   private investigationUntil = 0
   private pageHidden = false
@@ -134,10 +153,13 @@ export class AudioManager {
       unlocked: this._unlocked,
       contextState: this.context?.state ?? 'uninitialized',
       musicState: this.activeState,
+      musicTheme: this.currentTheme,
+      phrasesPlayed: this.phrasesPlayed,
       preferences: { ...this.prefs },
       activeMusicVoices: this.voiceCount('music'),
       activeEffectVoices: this.voiceCount('effects'),
       phraseTimerPending: this.phraseTimer != null,
+      nextPhraseDelayMs: this.nextPhraseDelayMs,
       investigationTimerPending: this.investigationTimer != null,
     }
   }
@@ -358,7 +380,11 @@ export class AudioManager {
   private refreshMusic(force = false): void {
     const desired = this.desiredMusicState()
     const changed = desired !== this.activeState
-    if (changed) this.activeState = desired
+    if (changed) {
+      this.activeState = desired
+      this.phraseIndex = 0
+      this.currentTheme = null
+    }
     if (!this.context || !this.musicStateGain || !this._unlocked) return
     if (this.prefs.muted || this.prefs.music === 0 || this.pageHidden) {
       this.cancelPhraseTimer()
@@ -368,6 +394,7 @@ export class AudioManager {
     if (desired === 'silent') {
       const now = this.context.currentTime
       this.cancelPhraseTimer()
+      this.currentTheme = null
       this.musicStateGain.gain.cancelScheduledValues(now)
       this.musicStateGain.gain.setValueAtTime(this.musicStateGain.gain.value, now)
       this.musicStateGain.gain.linearRampToValueAtTime(0.0001, now + 0.45)
@@ -391,16 +418,18 @@ export class AudioManager {
 
   private initialDelay(state: MusicState): number {
     if (state === 'intro') return 220
-    if (state === 'hotel') return this.randomBetween(4_000, 8_000)
-    if (state === 'investigation') return this.randomBetween(1_200, 2_400)
-    return this.randomBetween(1_600, 3_000)
+    if (state === 'hotel') return this.randomBetween(...MUSIC_TIMING.hotelEntryMs)
+    if (state === 'investigation') return this.randomBetween(...MUSIC_TIMING.investigationEntryMs)
+    return this.randomBetween(900, 1_600)
   }
 
   private schedulePhrase(delayMs: number): void {
     this.cancelPhraseTimer()
     if (!this.context || this.prefs.muted || this.prefs.music === 0 || this.pageHidden || this.activeState === 'silent') return
+    this.nextPhraseDelayMs = Math.max(0, delayMs)
     this.phraseTimer = setTimeout(() => {
       this.phraseTimer = null
+      this.nextPhraseDelayMs = null
       if (!this.context || this.context.state === 'closed') return
       const nextDelay = this.composePhrase(this.activeState)
       this.schedulePhrase(nextDelay)
@@ -410,58 +439,205 @@ export class AudioManager {
   private composePhrase(state: MusicState): number {
     if (!this.context || !this.musicStateGain) return 30_000
     const now = this.context.currentTime + 0.04
-    if (state === 'intro') return this.introPhrase(now)
+    const phraseIndex = this.phraseIndex
+    this.phraseIndex += 1
+    this.phrasesPlayed += 1
+    if (state === 'intro') return this.introPhrase(now, phraseIndex)
     if (state === 'hotel') return this.hotelPhrase(now)
     if (state === 'investigation') return this.investigationPhrase(now)
     if (state === 'underground') return this.undergroundPhrase(now)
     return 30_000
   }
 
-  private introPhrase(start: number): number {
+  private introPhrase(start: number, phraseIndex: number): number {
     const beat = 60 / 58
-    ;[45, 52, 57].forEach((note, index) => {
-      this.fmTone(midi(note), start + index * beat * 0.16, 3.4, 'music', {
-        ratio: index === 1 ? 2.01 : 2,
-        index: 1.8,
-        attack: 0.55,
+    const section = phraseIndex % MUSIC_TIMING.introSectionsMs.length
+    if (section === 0) {
+      this.currentTheme = 'intro-titulo'
+      ;[45, 52, 57].forEach((note, index) => {
+        this.fmTone(midi(note), start + index * beat * 0.12, 3.35, 'music', {
+          ratio: index === 1 ? 2.01 : 2,
+          index: 1.8,
+          attack: 0.48,
+          level: 0.019,
+        })
+      })
+      ;[69, 68, 64].forEach((note, index) => {
+        this.fmTone(midi(note), start + beat * (0.6 + index * 1.02), 0.95, 'music', {
+          ratio: 2.01,
+          index: 2.2,
+          attack: 0.07,
+          level: 0.024,
+        })
+      })
+    } else if (section === 1) {
+      this.currentTheme = 'intro-hotel'
+      ;[50, 57, 63].forEach((note, index) => {
+        this.fmTone(midi(note), start + index * beat * 0.11, 4.9, 'music', {
+          ratio: 2,
+          index: 1.45,
+          attack: 0.6,
+          level: 0.018,
+        })
+      })
+      ;[69, 72, 71].forEach((note, index) => {
+        this.fmTone(midi(note), start + beat * (0.65 + index * 1.55), 1.1, 'music', {
+          ratio: index === 1 ? 2.01 : 2,
+          index: 1.85,
+          attack: 0.025,
+          level: 0.026,
+        })
+      })
+      this.fmTone(midi(62), start + beat * 4.95, 0.9, 'music', {
+        ratio: 2.01,
+        index: 1.3,
         level: 0.018,
       })
-    })
-    ;[69, 68, 64].forEach((note, index) => {
-      this.fmTone(midi(note), start + beat * (1.35 + index * 1.4), 1.2, 'music', {
-        ratio: 2.01,
-        index: 2.2,
-        attack: 0.08,
-        level: 0.022,
+    } else if (section === 2) {
+      this.currentTheme = 'intro-investigadores'
+      ;[45, 52].forEach((note, index) => {
+        this.fmTone(midi(note), start + index * beat * 0.18, 6.15, 'music', {
+          ratio: index === 0 ? 1.997 : 2.01,
+          index: 1.55,
+          attack: 0.72,
+          level: 0.017,
+        })
       })
-    })
-    return 18_000
+      ;[64, 67, 70].forEach((note, index) => {
+        this.fmTone(midi(note), start + beat * (0.75 + index * 1.95), 1.2, 'music', {
+          ratio: 2.01,
+          index: 1.7 + index * 0.18,
+          attack: 0.045,
+          level: 0.024,
+        })
+      })
+      this.fmTone(midi(58), start + beat * 5.65, 0.9, 'music', {
+        ratio: 3.98,
+        index: 1.1,
+        level: 0.017,
+      })
+    } else {
+      this.currentTheme = 'intro-telegrama'
+      ;[44, 51, 57].forEach((note, index) => {
+        this.fmTone(midi(note), start + index * beat * 0.13, 5.5, 'music', {
+          ratio: index === 1 ? 2.014 : 1.997,
+          index: 2.05,
+          attack: 0.62,
+          level: 0.017,
+          detune: index === 2 ? 5 : 0,
+        })
+      })
+      ;[69, 68, 64, 63].forEach((note, index) => {
+        this.fmTone(midi(note), start + beat * (0.55 + index * 1.18), 1.0, 'music', {
+          ratio: index % 2 === 0 ? 2.01 : 1.997,
+          index: 2.15,
+          attack: 0.055,
+          level: 0.023,
+        })
+      })
+    }
+    return MUSIC_TIMING.introSectionsMs[section]!
   }
 
   private hotelPhrase(start: number): number {
-    const beat = 60 / 66
-    const variant = Math.floor(this.random() * 3)
-    const chords = [[50, 57, 63], [50, 57], [57, 63]]
-    for (const note of chords[variant]!) {
-      this.fmTone(midi(note), start, 1.6, 'music', { ratio: 2, index: 1.15, attack: 0.018, level: 0.018 })
+    const firstPublicPhrase = this.lastHotelVariant < 0 && this.lastZone === 'public'
+    const variant = firstPublicPhrase ? 0 : this.nextVariant(3, this.lastHotelVariant)
+    this.lastHotelVariant = variant
+    const levelScale = this.lastZone === 'private' ? 0.82 : 1
+    if (variant === 0) {
+      this.currentTheme = 'hotel-cortesia-rota'
+      const beat = 60 / 66
+      for (const note of [50, 57, 63]) {
+        this.fmTone(midi(note), start, 2.5, 'music', {
+          ratio: 2,
+          index: 1.2,
+          attack: 0.024,
+          level: 0.021 * levelScale,
+        })
+      }
+      ;[69, 72, 71, 67].forEach((note, index) => {
+        const offsets = [1, 2.45, 4.25, 6.8]
+        this.fmTone(midi(note), start + beat * offsets[index]!, 1.08, 'music', {
+          ratio: index === 1 ? 2.01 : 2,
+          index: 1.7,
+          attack: 0.012,
+          level: 0.032 * levelScale,
+        })
+      })
+      this.fmTone(midi(50), start + beat * 6.15, 1.75, 'music', {
+        ratio: 1,
+        index: 0.7,
+        attack: 0.12,
+        level: 0.015 * levelScale,
+      })
+      return this.randomBetween(10_000, 14_000)
     }
-    const motif = variant === 2 ? [69, 72] : [69, 72, 71]
-    motif.forEach((note, index) => {
-      this.fmTone(midi(note), start + beat * (1.1 + index * 1.35), 1.05, 'music', {
-        ratio: index === 1 ? 2.01 : 2,
+    if (variant === 1) {
+      this.currentTheme = 'hotel-galeria-de-espejos'
+      const beat = 60 / 70
+      for (const note of [53, 60, 64]) {
+        this.fmTone(midi(note), start, 2.85, 'music', {
+          ratio: 2.01,
+          index: 1.35,
+          attack: 0.035,
+          level: 0.019 * levelScale,
+        })
+      }
+      ;[72, 75, 71].forEach((note, index) => {
+        const offsets = [0.9, 2.9, 5.35]
+        this.fmTone(midi(note), start + beat * offsets[index]!, 1.2, 'music', {
+          ratio: index === 1 ? 3.99 : 2.01,
+          index: 1.9,
+          attack: 0.018,
+          level: 0.029 * levelScale,
+        })
+      })
+      ;[65, 64].forEach((note, index) => {
+        this.fmTone(midi(note), start + beat * (7.1 + index * 1.15), 0.9, 'music', {
+          ratio: 2,
+          index: 1.35,
+          level: 0.022 * levelScale,
+        })
+      })
+      return this.randomBetween(11_000, 15_000)
+    }
+    this.currentTheme = 'hotel-despues-de-hora'
+    const beat = 60 / 62
+    for (const note of [48, 55, 61]) {
+      this.fmTone(midi(note), start, 3.15, 'music', {
+        ratio: 1.997,
         index: 1.65,
-        attack: 0.01,
-        level: 0.027,
+        attack: 0.08,
+        level: 0.018 * levelScale,
+      })
+    }
+    ;[67, 66, 70, 69].forEach((note, index) => {
+      const offsets = [1.25, 3.05, 4.95, 7.15]
+      this.fmTone(midi(note), start + beat * offsets[index]!, 1.12, 'music', {
+        ratio: index === 2 ? 3.98 : 2.014,
+        index: 1.65,
+        attack: 0.02,
+        level: 0.028 * levelScale,
+        detune: index % 2 === 0 ? -2 : 2,
       })
     })
-    return this.randomBetween(18_000, 35_000)
+    return this.randomBetween(12_000, 16_000)
   }
 
   private investigationPhrase(start: number): number {
     const beat = 60 / 72
+    const variants = [
+      { pulse: [38, 44], motif: [62, 63, 66], name: 'investigacion-piezas' },
+      { pulse: [36, 43], motif: [59, 62, 63, 67], name: 'investigacion-margen' },
+      { pulse: [41, 47], motif: [65, 66, 69], name: 'investigacion-indicio' },
+    ] as const
+    const variant = this.nextVariant(variants.length, this.lastInvestigationVariant)
+    this.lastInvestigationVariant = variant
+    const theme = variants[variant]!
+    this.currentTheme = theme.name
     const pulses = 5 + Math.floor(this.random() * 3)
     for (let index = 0; index < pulses; index += 1) {
-      const note = index % 2 === 0 ? 38 : 44
+      const note = theme.pulse[index % theme.pulse.length]!
       this.fmTone(midi(note), start + index * beat, 0.32, 'music', {
         ratio: 1,
         index: 0.75,
@@ -470,7 +646,7 @@ export class AudioManager {
         type: 'triangle',
       })
     }
-    const motif = this.random() > 0.35 ? [62, 63, 66] : [62, 63]
+    const motif = this.random() > 0.22 ? theme.motif : theme.motif.slice(0, -1)
     motif.forEach((note, index) => {
       this.fmTone(midi(note), start + beat * (1.5 + index * 1.55), 0.72, 'music', {
         ratio: 2.02,
@@ -479,29 +655,38 @@ export class AudioManager {
         level: 0.02,
       })
     })
-    return this.randomBetween(8_000, 18_000)
+    return this.randomBetween(...MUSIC_TIMING.investigationCycleMs)
   }
 
   private undergroundPhrase(start: number): number {
+    const variants = [
+      { notes: [36, 42], noise: [520, 170], name: 'subsuelo-respiracion' },
+      { notes: [34, 41], noise: [430, 125], name: 'subsuelo-piedra' },
+      { notes: [37, 43], noise: [610, 190], name: 'subsuelo-maquina-imposible' },
+    ] as const
+    const variant = this.nextVariant(variants.length, this.lastUndergroundVariant)
+    this.lastUndergroundVariant = variant
+    const theme = variants[variant]!
+    this.currentTheme = theme.name
     const firstLength = this.randomBetween(3_200, 5_400) / 1000
     const secondStart = start + this.randomBetween(1_100, 2_300) / 1000
-    this.fmTone(midi(36), start, firstLength, 'music', {
+    this.fmTone(midi(theme.notes[0]), start, firstLength, 'music', {
       ratio: 1.997,
       index: 2.8,
       attack: 0.75,
       level: 0.019,
-      endFrequency: midi(37),
+      endFrequency: midi(theme.notes[0] + 1),
       detune: -7,
     })
-    this.fmTone(midi(42), secondStart, this.randomBetween(2_500, 4_600) / 1000, 'music', {
+    this.fmTone(midi(theme.notes[1]), secondStart, this.randomBetween(2_500, 4_600) / 1000, 'music', {
       ratio: 2.014,
       index: 3.2,
       attack: 0.9,
       level: 0.013,
       detune: 9,
     })
-    this.noiseBreath(start + 0.35, firstLength * 0.8, 'music', 520, 170, 0.009)
-    return this.randomBetween(10_000, 22_000)
+    this.noiseBreath(start + 0.35, firstLength * 0.8, 'music', theme.noise[0], theme.noise[1], 0.009)
+    return this.randomBetween(...MUSIC_TIMING.undergroundCycleMs)
   }
 
   private fmTone(frequency: number, start: number, duration: number, bus: AudioBus, options: FmOptions = {}): void {
@@ -679,6 +864,7 @@ export class AudioManager {
   private cancelPhraseTimer(): void {
     if (this.phraseTimer) clearTimeout(this.phraseTimer)
     this.phraseTimer = null
+    this.nextPhraseDelayMs = null
   }
 
   private clearInvestigationHold(): void {
@@ -703,5 +889,10 @@ export class AudioManager {
 
   private randomBetween(min: number, max: number): number {
     return Math.round(min + (max - min) * this.random())
+  }
+
+  private nextVariant(count: number, previous: number): number {
+    if (previous < 0 || count < 2) return Math.floor(this.random() * count)
+    return (previous + 1 + Math.floor(this.random() * (count - 1))) % count
   }
 }

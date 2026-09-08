@@ -203,7 +203,7 @@ class UI {
     return new Game(this.content, this.seedOverride ?? String(Date.now()))
   }
 
-  private async startFreshGame(): Promise<void> {
+  private async startFreshGame(includeBriefing = true): Promise<void> {
     this.cancelIntroTimer()
     this.game = this.newGame()
     this.narratedScene = null
@@ -217,22 +217,18 @@ class UI {
     this.gameRoot.hidden = false
     this.closePanel(false)
     const view = this.game.view()
-    this.write([
-      { kind: 'titular', text: 'EL DISCO EGIPCIO' },
-      {
-        kind: 'narracion',
-        text: 'Hotel Shepheard’s, El Cairo. Martes 21 de noviembre de 1922, nueve de la mañana. Un telegrama del director os ha traído hasta aquí: «fenómenos inexplicables», decía, y «ruego discreción». Fuera hace ya treinta grados y el polvo se pega a la piel.',
-      },
-      {
-        kind: 'sistema',
-        text: 'Caso reúne lo descubierto; Mapa mueve; Equipo coordina. Un compañero separado conserva lo que sabe hasta volver a reunirse.',
-      },
+    const opening: Line[] = [
+      ...(includeBriefing ? [{
+        kind: 'narracion' as const,
+        text: 'El Cairo · 21 de noviembre de 1922 · 09:00. Behler os ha llamado al Shepheard’s para investigar fenómenos inexplicables con discreción.',
+      }] : []),
       { kind: 'titular', text: view.location.name },
       // Con una escena abierta, su descripcion y la de la sala cuentan lo mismo
       // dos veces y obligan a pasar dos paginas antes de la primera decision.
       ...(view.scene ? [] : [{ kind: 'narracion' as const, text: view.description }]),
       ...this.sceneOpeningLines(),
-    ])
+    ]
+    this.write(opening)
     await this.paint()
   }
 
@@ -335,7 +331,7 @@ class UI {
   private async finishIntro(): Promise<void> {
     if (this.phase !== 'intro') return
     this.cancelIntroTimer()
-    await this.startFreshGame()
+    await this.startFreshGame(false)
   }
 
   private async continueFrom(save: SaveEnvelope): Promise<void> {
