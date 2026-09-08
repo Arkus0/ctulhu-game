@@ -1,0 +1,853 @@
+[
+  {
+    "id": "dieter_por_escrito",
+    "npc": "dieter",
+    "label": "Ofrecerle ponérselo por escrito",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "once": true,
+    "minutes": 5,
+    "always": {
+      "text": "Dieter Lounpeen levanta la vista del periódico por primera vez.\n—Por escrito. —Repite la palabra como quien prueba un vino—. Sí. Por escrito. En una cuartilla, con la fecha arriba a la derecha, y me la dejan en recepción y yo la leo cuando me convenga y contesto si procede.\nDobla el periódico. Es un hombre de dos metros de descontento que acaba de encontrar un asa por la que cogerse.\n—Nadie hace eso. Aquí todo el mundo habla, habla, habla, y luego nada de lo que se ha dicho existe. —Les mira, y por un instante casi es cordial—. Está bien. Pregunten. Pero háganlo en orden y no me interrumpan a media frase, que es la costumbre inglesa que más detesto de todas, y detesto casi todas.",
+      "facts": [
+        "dieter_quiere_todo_por_escrito"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 20
+        }
+      ],
+      "unlocks": [
+        "dieter_coleccion",
+        "dieter_alemania"
+      ]
+    },
+    "note": "Pág. 29: «Dieter no quiere hablar con nadie, quiere que los demás le solucionen los problemas por escrito». Sus tres ganchos penalizan la aproximación directa; esta es la única manera barata de compensarlo."
+  },
+  {
+    "id": "dieter_negocios",
+    "npc": "dieter",
+    "label": "Preguntarle por sus negocios",
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Compro y vendo objetos antiguos con papeles en regla. —La palabra papeles la dice medio segundo tarde, y se oye decirla, y se enfada consigo mismo—. Los papeles, señores, son una convención. En Egipto todo tiene papeles y ningún papel significa nada. Yo he comprado en subasta pública piezas que salieron de una tumba el martes anterior y he pagado el impuesto correspondiente al gobierno de Su Majestad.\n»Este año he duplicado la fortuna de mi mujer. —Lo dice sin ninguna alegría—. Duplicado. Mis abogados auguraban la ruina. Vendo pequeño para comprar grande, y esta vez he vendido muchísimo pequeño.\nSe recompone.\n—Si tienen algo que ofrecer, estoy en la doscientos cuatro. Si no lo tienen, tengo prisa.",
+      "facts": [
+        "dieter_es_mercader",
+        "padre_compra_piezas_robadas",
+        "dieter_ha_vendido_mucho",
+        "hab_lounpeen_204"
+      ],
+      "unlocks": [
+        "dieter_compra"
+      ]
+    },
+    "onHard": {
+      "text": "—Compro y vendo objetos antiguos con papeles en regla. —La palabra papeles la dice medio segundo tarde—. Vendo piezas menores para adquirir mayores; es el único método serio y lo aplico desde hace veinte años, la tercera semana de cada mes, sin excepción.\n»Si tienen algo que ofrecer, estoy en la doscientos cuatro. Si no lo tienen, tengo prisa.",
+      "facts": [
+        "dieter_es_mercader",
+        "hab_lounpeen_204"
+      ],
+      "unlocks": [
+        "dieter_compra"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Compro y vendo objetos antiguos con papeles en regla. —La palabra papeles la dice medio segundo tarde—. Si tienen algo que ofrecer, estoy en la doscientos cuatro. Si no lo tienen, tengo prisa.",
+      "facts": [
+        "dieter_es_mercader",
+        "hab_lounpeen_204"
+      ]
+    },
+    "onFailure": {
+      "text": "Dieter les mide de arriba abajo, decide que no van a comprar nada y se levanta.\nPero se levanta mal: se le engancha el pie en la silla, se agarra a la mesa y suelta un juramento en alemán que ninguno de ustedes entiende, salvo que va dirigido a un tal Weder y a la hora en que quedaron.\n—Cuatro —dice, recuperando la compostura y la chaqueta—. A las cuatro. No me hagan perder más tiempo.",
+      "facts": [
+        "cita_weder_dieter_a_las_cuatro",
+        "weder_conoce_a_dieter"
+      ]
+    },
+    "note": "Pág. 28: «Vende piezas para comprar otras mayores en los grandes mercados de arte […] Este año ha duplicado la fortuna que heredó de su esposa». Pág. 54: a las 16:00 se reúne con Weder en la habitación de este."
+  },
+  {
+    "id": "dieter_coleccion",
+    "npc": "dieter",
+    "label": "Preguntarle por su colección de Berlín",
+    "approaches": [
+      "adular",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Es como abrir una compuerta. Habla cuarenta minutos y no hay manera humana de pararle.\n—Ochenta y tres sarcófagos. En el pasillo largo, en la galería y en las dos salas del ala este. Ochenta y tres, y el Museo Egipcio de Berlín tiene noventa y uno, y no van a tenerlos mucho tiempo.\n»¿Y sabe usted por qué empecé? —No espera respuesta—. Por un cuñado. Un carnicero enriquecido, «Drei Ferkel», tres cerditos, ese es el nombre de su empresa y esa es la clase de hombre que es. Tenía cuatro anjs de nada en la casa de verano y se reía de mí con ellos en la mano, delante de mi mujer, que era su hermana y se reía también.\nSe queda callado un momento. Cuando vuelve a hablar, más bajo:\n—Llevo catorce años comprando. Él tiene cuatro anjs. Yo tengo ochenta y tres ataúdes. Y sigo sin dormir, señores, así que ya me dirán ustedes cuál de los dos ganó.",
+      "facts": [
+        "sarcofagos_en_berlin",
+        "dieter_colecciona_por_envidia",
+        "dieter_no_duerme"
+      ],
+      "unlocks": [
+        "dieter_nefertiti",
+        "dieter_esposa",
+        "dieter_cabeza"
+      ]
+    },
+    "onHard": {
+      "text": "—Docenas de sarcófagos. —Se yergue—. Docenas, señores. Poco tengo que envidiar al Museo Egipcio de Berlín, y no lo digo por vanidad: lo digo porque es cierto y porque en Berlín lo saben.\n»Empecé por una cuestión de honor familiar que no viene al caso. Un cuñado. Un hombre que fabrica salchichas y colecciona antigüedades, imagínense el desatino.",
+      "facts": [
+        "sarcofagos_en_berlin",
+        "dieter_colecciona_por_envidia"
+      ],
+      "unlocks": [
+        "dieter_nefertiti",
+        "dieter_cabeza"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Considerable. —Levanta la barbilla—. Es cuanto voy a decir, porque hablar del patrimonio propio delante de desconocidos es de gente sin educación. Digamos que en mi casa hay más Egipto que en algunos museos con presupuesto público.",
+      "facts": [
+        "sarcofagos_en_berlin"
+      ]
+    },
+    "onFailure": {
+      "text": "—Mi colección no es asunto suyo. —Y sin embargo, incapaz de dejarlo estar, añade—: Aunque le diré una cosa: cualquiera de mis piezas menores vale más que todo lo que hay expuesto en esta ciudad para los turistas. Cualquiera. La más pequeña.\nY lo dice mirando el suelo de mármol del vestíbulo, no a ustedes. Mirando hacia abajo, como si supiera exactamente a qué distancia está lo que de verdad quiere.",
+      "facts": [
+        "sarcofagos_en_berlin",
+        "dieter_mira_al_suelo"
+      ]
+    },
+    "note": "Pág. 28: «Actualmente, conserva docenas de sarcófagos en su mansión de Berlín. A día de hoy poco tiene que envidiar a la colección que atesora el Museo Egipcio de Berlín». Su cuñado, «muy rico gracias al éxito de su empresa cárnica Drei Ferkel», es el origen de todo."
+  },
+  {
+    "id": "dieter_nefertiti",
+    "npc": "dieter",
+    "label": "Mencionarle el busto de Nefertiti",
+    "approaches": [
+      "adular",
+      "enganar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "El color le sube de la corbata a la frente en dos segundos exactos.\n—No. —Y luego, mucho más alto de lo necesario—: ¡No! No lo conseguí. Estuve cerca. Estuve a esto. —Junta el índice y el pulgar y los sostiene delante de las narices de ustedes más tiempo del que resulta cómodo—. Y me lo quitó un comité. Un comité, señores. Hombres que no distinguen basalto de granito reunidos alrededor de una mesa decidiendo quién merece la belleza.\nRespira. Se estira la chaqueta.\n—Desde entonces no compro en subasta si puedo evitarlo. Ahora compro antes. —Y se da cuenta de lo que acaba de decir un instante después de decirlo.",
+      "facts": [
+        "dieter_perdio_nefertiti",
+        "dieter_compra_antes_de_la_subasta",
+        "padre_compra_piezas_robadas"
+      ],
+      "unlocks": [
+        "dieter_compra"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un asunto cerrado. —Se estira los puños de la camisa—. Hubo un desacuerdo administrativo y la pieza fue a parar a manos que no la merecían. No es el único caso. Es el más doloroso.",
+      "facts": [
+        "dieter_perdio_nefertiti"
+      ]
+    },
+    "onFailure": {
+      "text": "—Ese asunto no se menciona en mi presencia. —Y se marcha tres pasos, y vuelve, porque no puede irse sin la última palabra—. Y para que conste: la oferta era buena. Era muy buena. El problema no fue el dinero.\nSe va del todo. La frase «el problema no fue el dinero» se queda flotando encima de la mesa como el humo de un puro.",
+      "facts": [
+        "dieter_perdio_nefertiti"
+      ]
+    },
+    "note": "Pág. 28: «Su último desvarío ha sido intentar adquirir el busto de Nefertiti, sin éxito»."
+  },
+  {
+    "id": "dieter_cabeza",
+    "npc": "dieter",
+    "label": "«¿Compró usted algo en Viena hace dos años?»",
+    "approaches": [
+      "adular",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Dieter Lounpeen se pone gris.\n—La Ausperghaus. —Se sienta, cosa que no había hecho—. Una cabeza de latón. Yo creí que era egipcia, una momia dentro de una funda, y el comisario me juró que era germánica, del siglo trece, y que estaba hueca. Le compré igual. Los ojos y la boca tienen goznes. Goznes, señores, en una escultura de mil doscientos.\n»Quise abrirla. Con herramientas, como un animal, y le estropeé la superficie, así que decidí ablandar los goznes hirviéndola. Y al meterla en el agua me hice un corte en la mano con el borde del latón.\nSe mira la palma de la mano derecha, donde hay una cicatriz vieja y blanca.\n—Y la cabeza abrió los ojos. —Levanta la vista—. Los abrió y me miró. A mí. Yo tengo cincuenta y cinco años, soy un hombre de negocios y no bebo, y esa cabeza abrió los ojos y me miró y no ha vuelto a cerrarlos.\n»La tengo en Berlín, tapada con un paño. Y desde entonces no soy la misma persona, y usted acaba de hacer que se lo cuente a tres desconocidos en el vestíbulo de un hotel, y yo no sé por qué se lo estoy contando.",
+      "facts": [
+        "dieter_hirvio_la_cabeza",
+        "la_cabeza_descarada",
+        "dieter_ha_visto_lo_imposible"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 15
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ],
+      "unlocks": [
+        "dieter_von_junzt"
+      ]
+    },
+    "onHard": {
+      "text": "—Una escultura de latón, en la Ausperghaus. —Traga—. La compré convencido de que contenía una cabeza momificada. No la contenía. Contenía otra cosa, y no quiero hablar de otra cosa.\n»Le diré solo esto: hay objetos que responden. No en sentido figurado. Responden. Y el hombre que le explique a usted cómo se les pregunta no será un anticuario ni un profesor: será un sacerdote de algo.",
+      "facts": [
+        "la_cabeza_descarada",
+        "dieter_ha_visto_lo_imposible"
+      ],
+      "unlocks": [
+        "dieter_von_junzt"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Compré una pieza en Viena, sí. —Se toca la mano derecha sin darse cuenta—. Una adquisición desafortunada. Está en Berlín, tapada, y no la enseño a nadie. Cambiemos de tema.",
+      "facts": [
+        "la_cabeza_descarada"
+      ]
+    },
+    "onFailure": {
+      "text": "—En Viena se compran muchas cosas. —Y de pronto se le pone la voz un tono más alta—: ¿Quién les ha hablado a ustedes de Viena? ¿Ha sido mi hija? ¿Ha sido el austriaco del museo?\nY antes de que nadie conteste, se va. Pero se ha llevado la mano derecha al bolsillo, cerrada, como quien esconde algo que ya no está.",
+      "facts": [
+        "dieter_esconde_lo_de_viena"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": -10
+        }
+      ]
+    },
+    "note": "Pág. 28: la «cabeza descarada» comprada en la Ausperghaus de Viena. Hervirla en su propia sangre es uno de los requisitos para despertarla; Lounpeen no completa el conjuro, «pero sí se abren los párpados y los ojos le miran fijamente. Lounpeen grita horrorizado y pierde 3 puntos de cordura». De ahí su 5% en Mitos de Cthulhu."
+  },
+  {
+    "id": "dieter_von_junzt",
+    "npc": "dieter",
+    "label": "«¿Y qué leyó usted para entenderla?»",
+    "approaches": [
+      "adular",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "—Von Junzt. —Lo dice como quien confiesa una enfermedad venérea—. Unaussprechlichen Kulten. El ejemplar de la Biblioteca Nacional de Austria, que no se presta, así que pagué a un bibliotecario y lo copié a mano durante once tardes.\n»Ahí está el conjuro. Lo he intentado dos veces. —Se le va la vista—. Dos litros de mi propia sangre, señores, sacados por un médico al que pagué muy bien, y las palabras exactas, y la cabeza abre los ojos y no dice nada. Falta algo. Siempre falta algo.\nY entonces mira a ustedes con una lucidez horrible.\n—¿Saben qué es lo peor? Que en este hotel hay un hombre que sabe qué es lo que falta. Lo sé porque le he oído hablar y usa las palabras como quien las ha usado. Y me ha citado a las cuatro.",
+      "facts": [
+        "von_junzt",
+        "dieter_probo_el_conjuro",
+        "cita_weder_dieter_a_las_cuatro",
+        "weder_ocultista"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un libro alemán del siglo pasado que no debería existir. —Aparta la vista—. Lo consulté en Viena. Aprendí lo suficiente para saber que lo que tengo en casa está vivo de alguna manera y no lo suficiente para hacer nada al respecto. Es la peor cantidad de conocimiento posible.",
+      "facts": [
+        "von_junzt",
+        "dieter_ha_visto_lo_imposible"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no leo esa clase de literatura. Soy comerciante, no ocultista. —Se ajusta la corbata—. Váyanse a hablar de espíritus con las inglesas del salón Isis, que para eso vienen.\nY dicho esto se palpa el bolsillo interior de la chaqueta, dos veces, comprobando que sigue ahí una cosa del tamaño de un cuaderno pequeño. Once tardes de copia a mano tienen ese tamaño.",
+      "facts": [
+        "dieter_lleva_un_cuaderno"
+      ]
+    },
+    "note": "Pág. 29: «sabe que existe un conjuro mágico que la activa. Lo ha intentado dos veces sin éxito, utilizando dos litros de su propia sangre y pronunciando las palabras exactas sacadas de su lectura del Unaussprechlichen Kulten, de Von Junzt, el ejemplar de la Biblioteca Nacional de Austria»."
+  },
+  {
+    "id": "dieter_compra",
+    "npc": "dieter",
+    "label": "«¿Qué ha venido usted a comprar exactamente?»",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Dieter mira a los lados como un hombre que no está acostumbrado a mirar a los lados y lo hace fatal.\n—Un disco. —Bajísimo—. De oro, del tamaño de un plato de postre, con unas prolongaciones cubiertas de piedras preciosas y unos puntos metálicos por detrás unidos con hilo de cobre. Electrodos, señores. Electrodos en una pieza de tres mil años.\n»Cinco mil libras, pagaderas a dos años, con mil de depósito que ya he entregado. Es el precio más bajo que he pagado nunca por algo así y esa es exactamente la razón por la que llevo dos noches sin dormir. Cuando un hombre le pide a usted la mitad de lo que la cosa vale, no le está vendiendo: le está pasando el muerto.",
+      "facts": [
+        "disco_solar_existe",
+        "dieter_compra_el_disco",
+        "deposito_de_mil_libras",
+        "el_disco_tiene_electrodos"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "disco_solar"
+        }
+      ],
+      "unlocks": [
+        "dieter_weder"
+      ]
+    },
+    "onHard": {
+      "text": "—Una pieza única, procedente de un hallazgo reciente que aún no se ha anunciado. —Se le nota el orgullo por debajo de la prudencia—. Áurea. Ceremonial. Y no le voy a decir más porque el trato no está cerrado y en este hotel las paredes tienen barman.",
+      "facts": [
+        "disco_solar_existe",
+        "dieter_compra_el_disco"
+      ],
+      "unlocks": [
+        "dieter_weder"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Piezas. —Se encoge de hombros con esfuerzo—. Un lote procedente de una excavación privada. Nada que le interese a la aduana ni a ustedes.",
+      "facts": [
+        "padre_compra_piezas_robadas"
+      ]
+    },
+    "onFailure": {
+      "text": "—Nada. No he venido a comprar nada. He venido de vacaciones con mi hija. —Y lo dice un hombre que no ha pisado el jardín, que come solo, que no ha subido a las pirámides y que lleva encima, en este momento, un sobre con mil libras en efectivo del que se le ve la esquina por el bolsillo del pecho.",
+      "facts": [
+        "padre_compra_piezas_robadas",
+        "deposito_de_mil_libras"
+      ]
+    },
+    "note": "Pág. 54: «Weder le entrega el Disco Solar a cambio de 5.000 libras, pagaderas a dos años, con un depósito de 1.000 libras. En el momento de tocarlo con los dedos, Dieter recibe una descarga eléctrica que le tira al suelo. Bajo las prolongaciones cubiertas por piedras preciosas, descubren lo que parecen unos primitivos electrodos»."
+  },
+  {
+    "id": "dieter_weder",
+    "npc": "dieter",
+    "label": "Preguntarle por el austriaco del museo",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "—Garth Weder. —Y por primera vez en toda la conversación Dieter Lounpeen baja la voz sin que nadie se lo pida—. Director del museo, vienés, impecable. Un hombre que le vende a usted una pieza y mientras se la envuelve le explica para qué sirve, y a mitad de la explicación uno se da cuenta de que no está describiendo el pasado.\n»No me gusta. No me gusta nada. Pero es el único que ha puesto delante de mí en veinte años algo que no había visto antes.\nSe queda callado.\n—Y hay una cosa que no encaja, y la digo porque no tengo a quién decírsela. Ese hombre no necesita mi dinero. Su museo tampoco. Entonces, ¿por qué me vende? —Levanta un dedo—. Porque quiere que se sepa. Quiere que alguien en Europa cuente que él tenía esto. Y un hombre que vende para que se sepa está enseñando los dientes a otro hombre. Yo solo soy el escaparate.",
+      "facts": [
+        "weder_dirige_el_museo",
+        "weder_vende_las_piezas",
+        "weder_quiere_que_se_sepa",
+        "dieter_es_el_escaparate"
+      ]
+    },
+    "onHard": {
+      "text": "—El director del museo. Un caballero. —Se encoge de hombros—. Vende lo que no debería vender y lo hace con unos modales excelentes, que en el fondo es lo único que se le pide a un hombre en su posición.\n»Nos vimos en Viena hace años, en un congreso. Él se acordaba de mí. Yo no me acordaba de él, cosa que me inquieta bastante.",
+      "facts": [
+        "weder_dirige_el_museo",
+        "weder_vende_las_piezas",
+        "weder_conoce_a_dieter"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un colega. —Corta—. Tenemos una cita a las cuatro y no pienso llegar tarde por su culpa.",
+      "facts": [
+        "cita_weder_dieter_a_las_cuatro"
+      ]
+    },
+    "onFailure": {
+      "text": "—No conozco a ningún austriaco. —Dicho por un hombre cuyo inglés lleva media hora saliendo por debajo del alemán, resulta especialmente increíble.\nY además consulta el reloj de bolsillo. Y después de consultarlo mira hacia la escalera del ala norte, que es donde están las habitaciones que no son la suya.",
+      "facts": [
+        "cita_weder_dieter_a_las_cuatro"
+      ]
+    },
+    "note": "Pág. 54: «Weder pretende que se sepa en El Cairo que él tiene acceso al poder. Quiere que el resto de los miembros de la Hermandad le envidien, y para ello qué mejor manera que vender ciertas piezas pequeñas a individuos rastreros, ambiciosos y soberbios como Dieter»."
+  },
+  {
+    "id": "dieter_najir",
+    "npc": "dieter",
+    "label": "Nombrarle a Faraz Najir",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "faraz_najir"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Ese hombre es un ladrón. —Y lo dice tan alto que se vuelven dos mesas—. Un ladrón con una tienda. Compra a los viejos del Khan el Khalili por una libra lo que vale cincuenta y luego se sienta a esperar en las subastas a que los europeos nos matemos.\n»Llevo diez años perdiendo contra él y le diré por qué pierdo: porque yo pujo y él ya ha comprado. Siempre ha comprado antes. —Aprieta el puño—. Si ese individuo está en El Cairo esta semana, no es casualidad. Y si está en este hotel, alguien le ha llamado.",
+      "facts": [
+        "najir_pesadilla_de_dieter",
+        "alguien_ha_llamado_a_najir"
+      ],
+      "unlocks": [
+        "dieter_gasparini"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un competidor sin escrúpulos y con muy buen ojo. —Le tiembla un músculo de la mandíbula—. La combinación más desagradable que existe en este oficio. No hablemos de él.",
+      "facts": [
+        "najir_pesadilla_de_dieter"
+      ]
+    },
+    "onFailure": {
+      "text": "—No me suena.\nY se acabó la conversación: se levanta, cruza el vestíbulo y pide en recepción, muy educadamente, que le confirmen si un caballero egipcio ha reservado habitación para hoy. Se lo confirman. Vuelve a sentarse. Ya no hace falta preguntarle nada más.",
+      "facts": [
+        "najir_pesadilla_de_dieter",
+        "najir_llega_esta_tarde"
+      ]
+    },
+    "note": "Pág. 55: Najir «es la pesadilla de su padre, ese sucio mercader egipcio que se hace con las mejores piezas en las subastas». A las 21:30 de esa noche discutirán en la mascarada."
+  },
+  {
+    "id": "dieter_gasparini",
+    "npc": "dieter",
+    "label": "Contarle lo del barman",
+    "approaches": [
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Dieter escucha sin moverse. Cuando terminan, tarda cinco segundos largos en contestar, y lo hace muy despacio.\n—Un camarero. —Deja la taza—. Un camarero italiano de veintidós años se acuesta con mi hija para sacarle qué he venido a comprar y se lo vende a Faraz Najir por una comisión.\nSe levanta. Se estira la chaqueta. Está perfectamente tranquilo y es lo más alarmante que han visto en todo el día.\n—Les agradezco la información. De verdad. Es la primera cosa útil que me dice alguien en este hotel. —Se ajusta los gemelos—. Y ahora háganme el favor de no volver a mencionar a mi hija en esta conversación ni en ninguna otra. Nunca. A ninguno de ustedes.\nY se va hacia el bar largo, que está cerrado hasta las cuatro, y se queda un rato mirando la puerta acristalada.",
+      "facts": [
+        "dieter_sabe_lo_de_gasparini",
+        "dieter_ira_a_por_gasparini"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "dieter_sabe_lo_de_gasparini"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Un barman? —Frunce el ceño—. Mi hija no habla con el servicio.\nPero se le ha quedado dentro. Se le nota en que a partir de ese momento, cada vez que un camarero pasa por delante, le mira la cara.",
+      "facts": [
+        "dieter_sabe_lo_de_gasparini"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "dieter_sabe_lo_de_gasparini"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "No llegan a terminar la frase.\n—Fuera. —Se pone de pie de golpe y la silla cae hacia atrás—. ¡Fuera de mi mesa! ¿Quiénes son ustedes para hablarme así de mi hija? ¡Frisby! ¡El director! ¡Que venga el director!\nMedio vestíbulo les está mirando. Cuando por fin se calla, dice, con una dignidad espantosa y perfectamente audible:\n—Mi hija tiene veintisiete años y no ha dado un solo disgusto a esta familia.\nY se sienta. Y se queda sentado mucho rato.",
+      "facts": [
+        "dieter_no_sabe_lo_de_gasparini",
+        "sois_non_gratos_para_dieter"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": -40
+        },
+        {
+          "kind": "setFlag",
+          "flag": "dieter_os_odia"
+        }
+      ]
+    },
+    "note": "Pág. 29: «Si pilla a los investigadores in fraganti riendo o charlando con Olga, los considerará gente non grata y buscará la manera de echarles del hotel». Pág. 63: al día siguiente irá a por Gasparini «desesperado», y si le han robado el Disco, con la pistola del .32."
+  },
+  {
+    "id": "dieter_olga",
+    "npc": "dieter",
+    "label": "Preguntarle por su hija",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Olga es exactamente igual que su madre y no se parece a ella en nada. —Se queda con esa frase, sorprendido de haberla dicho—. Es inteligente. Mucho más que yo, y eso lo sé desde que tenía nueve años y me corrigió una fecha delante de un invitado.\n»Y no la controlo. Antes había alguien en casa que sabía hablar con ella. Ahora hay dos personas en un comedor de veinte metros.\nCarraspea, incómodo de sí mismo.\n—Si ustedes consiguieran que esa chica no se metiera en líos esta semana… —Los mira, y hay algo casi humilde debajo de toda la pompa—. Serían ustedes caballeros. Caballeros de verdad, de los que respetan las tradiciones y la decencia. Y yo sé pagar eso.",
+      "facts": [
+        "dieter_teme_por_olga",
+        "dieter_pagara_por_olga"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "dieter_encargo_olga"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 25
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Mi hija me acompaña en este viaje. —Punto—. Es todo lo que hay que saber de mi hija.\nY después de un silencio, más bajo:\n—Vigílenla si la ven bebiendo. No por mí. Por ella.",
+      "facts": [
+        "dieter_teme_por_olga"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Perdón?\nEs una sola palabra y baja seis grados la temperatura del vestíbulo.\n—Mi hija no es un tema de conversación. Ni con ustedes, ni con el conserje, ni con ese camarero de la sonrisa que se cree que yo no le veo.\nY se marcha. Pero acaba de decir «ese camarero de la sonrisa», y nadie ha mencionado a ningún camarero.",
+      "facts": [
+        "dieter_sospecha_de_gasparini"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": -20
+        }
+      ],
+      "unlocks": [
+        "dieter_gasparini"
+      ]
+    },
+    "note": "Pág. 28: «Si los investigadores consiguen que Olga no se meta en líos, Dieter los considerará imprescindibles, caballeros honorables que respetan el digno desenvolvimiento de las tradiciones». Pág. 29: cualquier insinuación sobre ella le convierte en enemigo. Su gancho `su_hija` penaliza con dos dados la aproximación directa."
+  },
+  {
+    "id": "dieter_esposa",
+    "npc": "dieter",
+    "label": "Preguntarle por su mujer",
+    "approaches": [
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "Dieter Lounpeen se calla mucho rato.\n—Murió hace tres años. —Y luego, con una precisión de contable—: Era la única persona que me explicaba a mí mismo. Yo le decía «estoy furioso» y ella me decía «no, estás asustado», y tenía razón, y entonces yo dejaba de estar furioso.\n»Ahora no tengo quien me lo diga. —Se estira los puños—. Así que estoy furioso todo el rato, señores, y ya no sé de qué.\nY se levanta antes de que nadie pueda decir nada amable, porque no sabría qué hacer con ello.",
+      "facts": [
+        "olga_madre_muerta",
+        "dieter_perdido_sin_su_mujer"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Falleció hace tres años. —Sin mirarles—. Era la hermana del hombre de las salchichas, sí. La vida tiene esas simetrías desagradables. Gracias por preguntar. No lo hace nadie.",
+      "facts": [
+        "olga_madre_muerta"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 10
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—No.\nY se queda mirando el mantel. Al cabo de un rato largo, sin levantar la vista, dice:\n—Todo esto lo compraba para enseñárselo a alguien. Ese era el sistema. Ahora compro igual y no se lo enseño a nadie, y sigo comprando, que es lo que no entiende nadie de mí.",
+      "facts": [
+        "dieter_perdido_sin_su_mujer"
+      ]
+    },
+    "note": "Pág. 28: «Amaba a su mujer porque le ayudaba a gestionar sus carencias emocionales. Desde que ha muerto se encuentra perdido»."
+  },
+  {
+    "id": "dieter_alemania",
+    "npc": "dieter",
+    "label": "Preguntarle qué opina de los ingleses",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onHard": {
+      "text": "—Con simpatía. —Levanta un dedo—. Detesto a los británicos con simpatía, que es la única forma civilizada de detestar a alguien.\n»Su cámara de los lores es un antro de corrupción y estulticia. Un edificio lleno de señores que heredaron el derecho a opinar. En Alemania esto no ocurriría, y si ocurriera se haría por escrito y quedaría constancia.\n»Y otra cosa. —Se inclina—. Sería infinitamente más sencillo para todos si la gente se expresara normalmente en alemán. No lo digo por patriotismo. Lo digo por eficiencia. El inglés es un idioma que sirve para no decir las cosas, y por eso les gusta tanto.",
+      "facts": [
+        "dieter_desprecia_a_los_britanicos",
+        "dieter_quiere_todo_por_escrito"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Son ustedes agotadores y ganaron la guerra. —Se encoge de hombros—. Ambas cosas son ciertas y ninguna me consuela.",
+      "facts": [
+        "dieter_desprecia_a_los_britanicos"
+      ]
+    },
+    "onFailure": {
+      "text": "Contesta en alemán. Cuatro frases largas, con mucha estructura y evidente satisfacción.\nCuando ve que nadie ha entendido nada, suspira, mira al techo y traduce una sola palabra:\n—Payasos.\nY vuelve al periódico, notablemente de mejor humor que antes.",
+      "facts": [
+        "dieter_desprecia_a_los_britanicos"
+      ]
+    },
+    "note": "Pág. 29: «Su inglés con acento germánico parece una broma de mal gusto. Nunca ha tenido la disposición suficiente para hablar inglés y no entiende tampoco por qué la gente no se expresa normalmente en alemán. La cámara de los lores es un antro de corrupción y estulticia, propia de británicos, a los que detesta con simpatía»."
+  },
+  {
+    "id": "dieter_egipto",
+    "npc": "dieter",
+    "label": "«¿Qué le parece El Cairo?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—De Egipto me interesa el pasado. —Aparta el plato dos centímetros—. El presente es farragoso y desagradable. Huele. Toda la ciudad huele, y la comida es un atentado, y no hay una sola calle en la que uno pueda caminar sin que le ofrezcan algo.\n»En cuanto al nacionalismo, no tengo opinión formada y no pienso formármela. Si quieren ser independientes, que lo sean. Lo que no soporto es el ruido. —Muy serio—. Detesto a cualquiera que haga ruido para nada, y en esta ciudad todo el mundo hace ruido para nada, incluidos los que mandan.\nY sin darse cuenta, mientras dice esto, ha estado colocando los cubiertos paralelos, tres veces seguidas.",
+      "facts": [
+        "dieter_odia_el_egipto_vivo",
+        "dieter_odia_el_ruido"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Sucio, ruidoso y caro. —Bebe agua—. Como todos los sitios de los que se saca algo. Los sitios limpios y silenciosos no tienen nada dentro.",
+      "facts": [
+        "dieter_odia_el_egipto_vivo"
+      ]
+    },
+    "onFailure": {
+      "text": "—No he salido del hotel.\nY es una respuesta ridícula para un hombre que lleva dos días en El Cairo, hasta que uno se da cuenta de que es literalmente cierta: no ha salido. Ha comido aquí, ha dormido aquí y solo baja del ala norte para reunirse con alguien de dentro.",
+      "facts": [
+        "dieter_no_sale_del_hotel"
+      ]
+    },
+    "note": "Pág. 29: «De Egipto le interesa su pasado, pero su presente es farragoso y desagradable. No soporta el olor de las calles ni su comida […] detesta a cualquiera que haga ruido para nada»."
+  },
+  {
+    "id": "dieter_aga_khan",
+    "npc": "dieter",
+    "label": "Ofrecerle una presentación al Aga Khan",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "aga_khan_viene"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "onSuccess": {
+      "text": "Dieter Lounpeen se queda con el tenedor en el aire.\n—¿Ustedes conocen a Su Alteza? —Y por primera vez en dos días se le olvida estar ofendido—. Ese hombre tiene la mejor colección privada de piezas islámicas de Europa y la mitad de sus egipcias se las vendió Najir. Najir. —Deja el tenedor—. Yo llevo seis años intentando que me reciba y no he pasado de un secretario con cara de armario.\n»Preséntenme. Preséntenme y tendrán ustedes en Berlín un amigo con casa, coche y muy mala memoria para las deudas ajenas.",
+      "facts": [
+        "dieter_quiere_al_aga_khan",
+        "aga_khan_compra_a_najir"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "dieter_debe_un_favor"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 40
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Ustedes? —Los mira de arriba abajo con una franqueza brutal—. No.\nY vuelve al periódico. Pero al cabo de un minuto, sin bajarlo, pregunta al aire:\n—¿Y a qué hora llega?",
+      "facts": [
+        "dieter_quiere_al_aga_khan"
+      ]
+    },
+    "note": "Pág. 28: «Lounpeen no conoce al Aga Khan y le encantaría hacerlo». Pág. 31: el palacio del Aga Khan «está lleno de piezas de Najir», dato que a Dieter le duele especialmente."
+  },
+  {
+    "id": "dieter_churchill",
+    "npc": "dieter",
+    "label": "Ofrecerle una presentación a Churchill",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "churchill_en_el_hotel"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 10,
+    "onSuccess": {
+      "text": "—El señor Churchill. —Asiente despacio, tomando nota mental con una solemnidad cómica—. Un hombre con el que se puede discrepar. Eso es raro entre británicos: casi todos se ofenden.\n»Acepto. Y que conste que no me interesa su cargo: me interesa que un hombre que ha perdido unas elecciones y le acaban de operar siga viajando. Eso es carácter.\n—Y añade, muy digno—: No hace falta que le diga usted que soy alemán. Ya se lo dirá mi acento, que es más rápido que yo.",
+      "facts": [
+        "dieter_quiere_a_churchill"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 25
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—No tengo el menor interés en conocer políticos ingleses. —Pasa la página del periódico. La página que ha pasado es la de la fotografía de Churchill bajando de un barco, y la ha mirado dos segundos más de lo necesario antes de pasarla.\n—De todas formas, si coincidiéramos en el salón, tampoco sería una descortesía saludarle.",
+      "facts": [
+        "dieter_quiere_a_churchill"
+      ]
+    },
+    "note": "Pág. 28: «Si los investigadores le presentan a Churchill, Dieter tomará nota muy positiva de ello. Churchill no tiene particular interés en conocerle, pero tampoco se negará a hacerlo». Y no sabe quién es Agatha Christie."
+  },
+  {
+    "id": "dieter_el_disco",
+    "npc": "dieter",
+    "label": "«Ese disco no es suyo»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "dieter_tiene_el_disco"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "presionar",
+      "enganar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Dieter Lounpeen se pone de un color muy feo y enseña la palma de la mano derecha: tiene una quemadura en abanico, fina, de las que dejan las chispas.\n—Es mío. Lo he pagado, y lo que se paga es de uno. —La voz le sube y la baja a la fuerza—. Y sí, hace algo. Cuando lo toqué me tiró al suelo delante de ese alemán sonriente. Lleva metal por debajo, hilos de cobre, cosas que no existían hace tres mil años y que están ahí. ¿Saben lo que vale una pieza así en Berlín? No lo saben. Nadie lo sabe, porque no hay otra. Y no, no está en esta habitación, así que pueden dejar de mirar la cama.",
+      "facts": [
+        "dieter_compro_el_disco",
+        "electrodos_del_disco",
+        "disco_bajo_el_colchon_confirmado"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": -10
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—He hecho una compra legítima a un director de museo, con recibo. —Se cruza de brazos—. Que el señor Carter tenga una opinión distinta sobre a quién pertenece lo que hay en un sótano que no es suyo es un problema del señor Carter, y no pienso discutirlo con desconocidos.",
+      "facts": [
+        "dieter_compro_el_disco"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Yo compro y vendo obras de arte, y todo lo que compro tiene papeles. —Se le va la vista hacia la puerta de su habitación una fracción de segundo—. Buenas tardes.",
+      "facts": [
+        "dieter_compro_el_disco"
+      ]
+    },
+    "onFailure": {
+      "text": "—¡Fuera! —Y os cierra la puerta en las narices. Pero antes de cerrarla, mientras se giraba, le habéis visto la mano derecha: la tiene marcada con una quemadura en abanico, muy fina, muy reciente, de las que deja una chispa fuerte.",
+      "facts": [
+        "electrodos_del_disco"
+      ]
+    },
+    "note": "Módulo, pág. 54: al tocar el Disco Solar, Dieter recibe una descarga eléctrica que le tira al suelo."
+  },
+  {
+    "id": "dieter_frigorifico",
+    "npc": "dieter",
+    "label": "«Ya está usted fuera de la nevera»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "dieter_liberado_por_el_grupo"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "Dieter tarda en hablar porque todavía le castañetean los dientes, y cuando habla no os mira.\n—Cuatro horas. Cuatro horas ahí dentro con los corderos, y ni uno de los que llamaban a mi puerta esta mañana ha bajado a preguntar por mí. —Se frota los brazos—. Ustedes sí. No sé por qué y prefiero no saberlo. Voy a apuntar sus nombres en una lista que tengo, y por una vez no es esa lista.",
+      "facts": [
+        "dieter_nos_debe_una",
+        "dieter_hace_una_lista"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "dieter",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Gracias. —Le sale una sola palabra y le cuesta un mundo—. Ese barman. Ese barman de mierda. Esto no se queda así, y no lo digo por decir. Pero a ustedes, gracias.",
+      "facts": [
+        "dieter_nos_debe_una"
+      ]
+    },
+    "onFailure": {
+      "text": "—Sí, sí, gracias. —Y se va escaleras arriba envuelto en una manta de la cocina, sin dejar de repetir dos nombres en alemán entre dientes. Uno es el del barman. El otro es de mujer, y no es el de su hija.",
+      "facts": [
+        "dieter_hace_una_lista"
+      ]
+    },
+    "note": "Continuación del detalle almacen_frigorifico de la cocina: solo aparece si el grupo le saca antes de que lo hagan los camareros a las 11:30 del día 2."
+  }
+]

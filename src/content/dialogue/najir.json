@@ -1,0 +1,939 @@
+[
+  {
+    "id": "najir_frances",
+    "npc": "najir",
+    "label": "Hablarle en francés",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "once": true,
+    "minutes": 5,
+    "always": {
+      "text": "Faraz Najir se detiene en seco a media frase.\nHasta este momento venía hablando un inglés atropellado y muy alto, empujando las palabras unas encima de otras, con la cabeza ladeada para poner delante la oreja que le funciona. Al oír el francés se le afloja algo en los hombros.\n—Ah. —Y contesta en francés, y de pronto es otro hombre: más lento, más irónico, con la mitad buena de la cara haciendo cosas que antes no hacía—. Gracias. Muchas gracias. Llevo veinte años vendiendo a ingleses en un idioma que me pone en ridículo.\nSe toca la oreja izquierda.\n—Y hablen ustedes de este lado. De este. Del otro no oigo nada desde hace dos años y me canso mucho de fingir que sí.",
+      "facts": [
+        "najir_prefiere_el_frances",
+        "najir_es_sordo_del_izquierdo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 25
+        }
+      ],
+      "unlocks": [
+        "najir_cara"
+      ]
+    },
+    "note": "Pág. 31: «Najir habla alto y atropelladamente. Su inglés es muy deficiente; es mejor hablarle en una mezcla de francés e inglés (se realiza una tirada combinada de ambas habilidades, con un dado de bonificación)». El esquema no puede exigir esa tirada combinada, así que aquí el francés se paga en disposición, que es lo que de verdad cambia."
+  },
+  {
+    "id": "najir_cara",
+    "npc": "najir",
+    "label": "Preguntarle por la cicatriz",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "Faraz Najir se lleva las dos manos a la mitad quemada de la cara. Es un gesto que hace mucho y que no parece consciente.\n—Fuego. —Y luego, más bajo—: No fuego de casa. No fuego de lámpara. Otro fuego.\nSe sienta. Habla en francés, despacio, buscando las palabras y encontrándolas todas.\n—Hace dos años y tres meses. Mi tienda estaba en la calle de los Chacales, en el casco viejo, y era la mejor tienda de antigüedades de esta ciudad, y lo digo yo que soy el que menos derecho tiene a decirlo.\n»Entró por la ventana. No entró un hombre: entró una cosa que ardía y que no consumía la madera. —Se pasa la lengua por los labios—. Se quedó en el aire encima del mostrador, quieta, mirándome. Y yo levanté la cara para verla mejor, señores. Ese es mi error y me acompaña todos los días: que levanté la cara.\nBaja las manos.\n—Perdí este oído y casi este ojo. Y todavía me duele. Todos los días. Dos años después.\nMira a los lados.\n—Y no fue un accidente. Fue un mensaje. Y ahora ustedes no me pregunten de quién, porque si me lo preguntan aquí me levanto y me voy.",
+      "facts": [
+        "najir_cara_quemada",
+        "calle_de_los_chacales",
+        "la_tienda_de_najir_ardio",
+        "najir_es_sordo_del_izquierdo",
+        "un_fuego_que_no_consumia"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 15
+        }
+      ],
+      "unlocks": [
+        "najir_shakti",
+        "najir_tienda"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un incendio. —Corta, alto, deprisa—. Mi tienda. Hace dos años. Se quemó todo y yo estaba dentro.\nY se toca la cara.\n—Duele todavía. Eso no lo dice nadie de las quemaduras: que siguen doliendo cuando ya están curadas. Dos años.",
+      "facts": [
+        "najir_cara_quemada",
+        "la_tienda_de_najir_ardio"
+      ],
+      "unlocks": [
+        "najir_tienda",
+        "najir_shakti"
+      ]
+    },
+    "onFailure": {
+      "text": "—No. —Levanta una mano—. Esa pregunta no.\nY cambia de tema hablando de precios, muy alto y muy deprisa, sobre el mercado de la cerámica del Fayum, durante cuatro minutos enteros.\nPero mientras habla no deja de tocarse la mejilla. Una y otra vez, con los dedos abiertos, como quien comprueba que una puerta sigue cerrada.",
+      "facts": [
+        "najir_cara_quemada"
+      ],
+      "unlocks": [
+        "najir_tienda"
+      ]
+    },
+    "note": "Pág. 31: «Tiene la mitad de la cara quemada por el ataque de un vampiro de fuego en su tienda de la calle Chacales». Pág. 55: «Faraz se toca la mitad quemada de la cara con las manos: esto me lo hizo hace más de dos años y todavía me duele»."
+  },
+  {
+    "id": "najir_tienda",
+    "npc": "najir",
+    "label": "«¿Y dónde vende usted ahora?»",
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—En ninguna parte. —Se ríe, y la risa le sale por el lado bueno de la cara—. En todas partes. Ya no tengo tienda: tengo una habitación en el casco viejo con una mesa y un teléfono, y eso es mejor.\nSe inclina.\n—Una tienda es una dirección, señores. Y una dirección se puede quemar. Un hombre con una mesa y un teléfono no se puede quemar: hay que encontrarlo primero.\n»Ahora compro en las casas y vendo en los hoteles. En este vendo mucho. —Cuenta con los dedos—. En dos años he vendido en el Shepheard's a catorce clientes, y a nueve de ellos les vendí piezas que compré la misma semana a un fellah por la centésima parte, y eso no es robar: eso es saber a quién le duele una cosa y a quién le sobra dinero.\nY entonces, muy serio:\n—Yo no soy un ladrón. Soy el único hombre de esta ciudad que le dice al fellah lo que vale su cesta antes de comprársela. Se la compro barata igual. Pero se lo digo.",
+      "facts": [
+        "najir_no_tiene_tienda",
+        "najir_vende_en_el_hotel",
+        "najir_compra_a_los_fellahin"
+      ],
+      "unlocks": [
+        "najir_tasacion"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Sin tienda. —Encoge un hombro—. Una habitación, una mesa y un teléfono. Compro en las casas y vendo en los hoteles. En este hotel, mucho.",
+      "facts": [
+        "najir_no_tiene_tienda",
+        "najir_vende_en_el_hotel"
+      ],
+      "unlocks": [
+        "najir_tasacion"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no vendo. Yo tasso. —Se le tuercen las palabras inglesas—. Taso. Tasar. Yo digo lo que vale una cosa y otro la vende.\nY entonces, sin transición y con una avidez que no puede esconder:\n—¿Ustedes tienen algo? ¿Han traído algo de Inglaterra? ¿Han comprado algo en el zoco? Enséñenmelo. Se lo taso gratis. Gratis, gratis. Solo por verlo.",
+      "facts": [
+        "najir_tasa_gratis"
+      ],
+      "unlocks": [
+        "najir_tasacion"
+      ]
+    },
+    "note": "Pág. 31: Tasación 75%, la habilidad más alta de su ficha. Pág. 55: «roba joyas a los ancianos de Khan el Khalili», según Olga; él lo cuenta de otra manera."
+  },
+  {
+    "id": "najir_tasacion",
+    "npc": "najir",
+    "label": "Pedirle que tase algo",
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Najir coge el objeto con las dos manos, se lo lleva al ojo bueno y se olvida por completo de que hay alguien delante.\nTarda cuatro minutos. Le da la vuelta seis veces. Lo huele. Lo raspa con la uña en un sitio que no se ve.\n—Bien. —Lo devuelve—. Escuchen, que esto vale más que la pieza.\n»En El Cairo hay cuatro maneras de saber si algo salió ayer de una tumba. Uno: la arena. La arena de tumba está seca por dentro; la del desierto, no. Dos: el olor. Tres: si los lados están limpios y el fondo sucio, es que alguien lo cogió con la mano derecha por un lado y lo apoyó, y eso lo hace el que roba, no el que excava.\n»Y cuatro. —Levanta un dedo—. Que la traiga un europeo. Los europeos nunca compran lo robado a sabiendas. Siempre les han dado papeles. Los papeles se hacen en una calle de aquí al lado y cuestan dos libras.\nSonríe con media cara.\n—Ahora ya saben tasar. Ya no me necesitan. Es una tontería enseñar esto y lo hago siempre, porque me gusta que me miren mientras lo digo.",
+      "facts": [
+        "najir_ensena_a_tasar",
+        "los_papeles_se_falsifican",
+        "najir_tasa_gratis"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "Najir se lo lleva al ojo bueno, le da la vuelta dos veces y lo devuelve.\n—Turista. —Sin ninguna crueldad—. Buen trabajo, hecho aquí, hace menos de un año. Vale lo que pagaron por él, que ya es más de lo que se puede decir de casi todo lo que se vende en este hotel.",
+      "facts": [
+        "najir_tasa_gratis"
+      ]
+    },
+    "onFailure": {
+      "text": "Lo mira medio segundo y lo aparta con dos dedos.\n—No.\nY entonces, porque no puede evitar hablar de lo que sabe:\n—Escuchen. Yo esta semana no he venido por cosas así. Esta semana en este hotel hay algo que no se tasa, porque para tasar una cosa hace falta que exista otra parecida y se haya vendido antes. —Se recuesta—. Y de esto no hay otra. De esto solo hay lo que hay.",
+      "facts": [
+        "najir_busca_algo_concreto",
+        "piezas_negras"
+      ]
+    },
+    "note": "Pág. 31: Tasación 75%. Su discurso sobre cómo reconocer una pieza recién salida de una tumba es la herramienta más práctica que un PNJ le puede dar al grupo."
+  },
+  {
+    "id": "najir_maletas",
+    "npc": "najir",
+    "label": "«¿Por qué trae usted el equipaje vacío?»",
+    "approaches": [
+      "directo",
+      "enganar",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Najir se queda muy quieto. Después se ríe, alto, y varias cabezas se vuelven en el vestíbulo.\n—¡Muy bien! ¡Muy bien! —Y baja la voz de golpe—. ¿Quién se lo ha dicho? ¿El pequeño de los suizos? Ese chico tiene los ojos bien puestos. Denle dinero.\nSe inclina hacia el lado bueno.\n—Sí. Cuatro maletas y un baúl, y los cinco vacíos. Y ahora les explico por qué, porque es una cosa de oficio y las cosas de oficio me gusta contarlas.\n»Cuando un hombre sale de un hotel de El Cairo con más equipaje del que trajo, el portero se acuerda. El portero se acuerda siempre, y por dos libras se acuerda delante de un policía. —Levanta un dedo—. Pero un hombre que llega con cinco bultos y se va con cinco bultos no ha hecho nada. Ha estado de viaje.\nSe recuesta.\n—Yo no vengo a comprar, señores. A comprar viene el alemán, que trae dinero. Yo vengo por si mañana hay algo que nadie reclama.",
+      "facts": [
+        "najir_trae_maletas_vacias",
+        "najir_viene_a_llevarse_algo",
+        "dieter_es_mercader"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 10
+        }
+      ],
+      "unlocks": [
+        "najir_dieter"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Porque vuelvo lleno. —Y sonríe con media cara—. Es mi oficio, señor. Un mercader que viaja con las maletas llenas es un mercader que no ha vendido nada.",
+      "facts": [
+        "najir_trae_maletas_vacias"
+      ],
+      "unlocks": [
+        "najir_dieter"
+      ]
+    },
+    "onFailure": {
+      "text": "—Vacío no. Vacío no. Ropa. —Habla más deprisa y más alto que antes—. Ropa, papeles, cosas de un hombre que viaja.\nY se marcha hacia el ascensor. Pero al recoger el baúl del suelo lo levanta con una sola mano, sin doblar la espalda, y sigue andando sin darse cuenta de lo que acaba de enseñar.",
+      "facts": [
+        "najir_trae_maletas_vacias"
+      ],
+      "unlocks": [
+        "najir_dieter"
+      ]
+    },
+    "note": "Pág. 54: «A las 17:00 h, Faraz Najir llega al hotel alertado por Gasparini y cargado de maletas vacías para poder transportar objetos sin levantar sospechas»."
+  },
+  {
+    "id": "najir_gasparini",
+    "npc": "najir",
+    "label": "«¿Quién le ha avisado a usted?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "llamo_a_najir"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "enganar",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—El chico del bar. —Ni lo niega un segundo—. Carlo. El del rizo.\nSe encoge de hombros.\n—Me llamó a la una y me pidió el veinte por ciento. Yo le ofrecí el quince por educación, porque si aceptas a la primera el hombre se queda pensando toda la noche que pidió poco. —Sonríe con media cara—. Y luego le di el veinte.\n»Y le voy a decir una cosa que ese chico no sabe: no le voy a pagar. Ni el veinte ni el quince ni nada. —Levanta las palmas—. No por avaricia, señores. Porque el veinte por ciento de lo que hay en este hotel es más dinero del que ese chico va a ver en su vida, y un hombre con ese dinero de golpe habla. Y si habla, me matan.\nSe toca la cara quemada.\n—Otra vez.",
+      "facts": [
+        "llamo_a_najir",
+        "gasparini_pidio_el_veinte",
+        "najir_no_piensa_pagar",
+        "najir_teme_por_su_vida"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un socio del hotel. —Deprisa, alto—. Un chico del bar me pasó un dato y discutimos el precio, como se discute siempre. No es un secreto. Es comercio.",
+      "facts": [
+        "llamo_a_najir",
+        "gasparini_pidio_el_veinte"
+      ]
+    },
+    "onFailure": {
+      "text": "—Nadie. Yo vengo mucho a este hotel. —Y mira hacia el arco del bar largo, una sola vez, muy deprisa.\nY después, con una tranquilidad que resulta escalofriante:\n—Pero si alguien les ha dicho a ustedes que a mí me llamó alguien, díganme quién se lo ha dicho. No para nada malo. Solo para saber cuánta gente lo sabe.\nY se queda esperando la respuesta con las dos manos quietas encima de la mesa.",
+      "facts": [
+        "najir_quiere_saber_quien_habla"
+      ]
+    },
+    "note": "Pág. 52: Gasparini llama a Najir «pidiéndole un porcentaje a cambio del chivatazo». Pág. 54: Najir llega alertado por él."
+  },
+  {
+    "id": "najir_dieter",
+    "npc": "najir",
+    "label": "Preguntarle por el mercader alemán",
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Lounpeen. —Y suena a escupitajo y a admiración a partes iguales—. Compra mal, paga bien y no sabe nada. Es el mejor cliente que existe y es el peor enemigo que existe, y las dos cosas por lo mismo: porque no entiende lo que compra.\nSe inclina.\n—Ese hombre está a punto de comprar una cosa que le va a matar. Se lo digo yo, que le conozco desde hace diez años y le he vendido tres piezas. —Levanta un dedo—. Y he intentado decírselo. Esta noche voy a intentarlo otra vez, en la fiesta, y me va a contestar que es suyo y que lo ha pagado y que hace lo que quiere con ello.\n»Y tendrá razón, señores. Esa es la parte mala: que tendrá toda la razón del mundo.",
+      "facts": [
+        "najir_pesadilla_de_dieter",
+        "dieter_compra_el_disco",
+        "najir_avisara_a_dieter",
+        "el_disco_es_peligroso"
+      ],
+      "unlocks": [
+        "najir_piezas_negras"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un competidor. —Alto y deprisa—. Rico, alemán y sin gusto. Compra todo lo que tenga tres mil años y no pregunta de dónde sale, y por eso yo llevo diez años ganándole.",
+      "facts": [
+        "najir_pesadilla_de_dieter",
+        "padre_compra_piezas_robadas"
+      ]
+    },
+    "onFailure": {
+      "text": "—No hablo de mis clientes. —Corta.\nY dos segundos después, incapaz de dejarlo ahí:\n—Pero ese señor no es cliente mío esta semana. Esta semana ese señor está comprando a otro, y a mí no me han llamado, y llevo veinte años en esto y a mí siempre me llaman. —Se toca la cara—. Cuando no me llaman, es que la pieza no se puede enseñar.",
+      "facts": [
+        "padre_compra_piezas_robadas",
+        "la_pieza_no_se_puede_ensenar"
+      ]
+    },
+    "note": "Pág. 55: en la mascarada, a las 21:30, Najir y Dieter discuten: «No sabes controlar el Disco […] Weder te está utilizando […] No sabes lo que dices. Pueden matarte»."
+  },
+  {
+    "id": "najir_shakti",
+    "npc": "najir",
+    "label": "Nombrarle a Omar Shakti",
+    "approaches": [
+      "directo",
+      "enganar",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Faraz Najir se levanta a medias, mira las tres salidas del salón y se vuelve a sentar. Todo en dos segundos.\n—Aquí no se dice ese nombre. —Susurra, y susurrar le cuesta, porque este hombre no sabe hablar bajo—. Aquí no. En ninguna parte, pero aquí menos.\nSe pasa la mano por la cara buena.\n—Le robé. Hace tres años. Cuatro piezas de un almacén suyo y se las vendí a un inglés, a un tal Besart, ayudante de un americano rico. —Traga—. Y a los seis meses vino el fuego a mi tienda.\n»Y no acabó ahí, señores. Eso es lo que ustedes no entienden y yo no sé explicar. —Se le va la voz—. Desde esa noche viene todas las noches. Duermo y está. Me habla en egipcio y me maldice, y me lo dice todo, y yo entiendo cada palabra aunque nunca aprendí ese idioma.\nSe mira las manos.\n—Tres años soñando lo mismo. Tres años. Yo ya no sé si sueño con él o si él me visita y me deja creer que sueño.",
+      "facts": [
+        "omar_shakti",
+        "najir_robo_a_shakti",
+        "warren_besart",
+        "najir_suena_con_shakti",
+        "najir_entiende_egipcio"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 20
+        }
+      ],
+      "unlocks": [
+        "najir_egipcio",
+        "najir_carlyle",
+        "najir_proteccion"
+      ]
+    },
+    "onHard": {
+      "text": "—Ese nombre no. —Baja la voz por primera vez desde que le conocen—. Le debo dinero. Le debo más que dinero. Le robé unas piezas hace años y él quemó mi tienda conmigo dentro, y eso, señores, es lo que hay entre él y yo.\nSe toca la cara.\n—Si ese hombre pisa este hotel, yo no estoy. Que quede dicho ahora.",
+      "facts": [
+        "omar_shakti",
+        "najir_robo_a_shakti",
+        "la_tienda_de_najir_ardio"
+      ],
+      "unlocks": [
+        "najir_egipcio",
+        "najir_carlyle",
+        "najir_proteccion"
+      ]
+    },
+    "onFailure": {
+      "text": "Najir se pone de pie tan deprisa que vuelca la silla.\n—No. No, no, no. —Alto, atropellado, mirando las puertas—. ¿Quién les ha dicho ese nombre a ustedes? ¿Aquí? ¿En este salón?\nY se va. Se va deprisa, sin despedirse, y en la puerta se vuelve una vez para mirar si alguien les está mirando a ustedes.\nY ustedes se quedan con una certeza que vale más que la conversación entera: en este hotel hay un nombre que hace salir corriendo a un hombre de cuarenta y dos años con la cara quemada.",
+      "facts": [
+        "omar_shakti",
+        "najir_huye_del_nombre"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": -15
+        }
+      ],
+      "unlocks": [
+        "najir_proteccion"
+      ]
+    },
+    "note": "Pág. 31: «La pesadilla que le quita el sueño es encontrarse cara a cara con Omar Shakti, líder de la Hermandad, al que traicionó robándole unas piezas arqueológicas que posteriormente vendió a Warren Besart […] Shakti ocupa literalmente sus pesadillas: desde el robo, el hechicero se le aparece en sueños y le maldice en egipcio»."
+  },
+  {
+    "id": "najir_egipcio",
+    "npc": "najir",
+    "label": "«¿Cómo aprendió usted esa lengua?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "—No la aprendí. —Y se ríe, y es la risa más fea que le han oído—. Me la enseñaron dormido.\nSe inclina hacia el lado bueno y habla muy despacio.\n—Tres años oyendo todas las noches a un hombre insultarme en un idioma que no existe desde hace dos mil años. Y al principio no entendía nada, y era peor. Después empecé a distinguir palabras. Y después frases.\n»Y un día, en el zoco, un profesor alemán leyó en voz alta una inscripción de un fragmento que yo vendía. Y yo le corregí. —Abre las manos—. Le corregí, señores. Yo, que no sé leer más que el árabe.\nSe queda callado un momento.\n—Entiendo el egipcio clásico y el demótico. Los dos. Hablados. No los leo ni los escribo y no los he estudiado nunca. Los repito en voz baja cuando estoy solo para no perderlos, como una oración.\nY entonces les mira con el ojo bueno.\n—Si alguna vez oyen ustedes hablar en este hotel un idioma que no reconozcan, vengan a buscarme. Vengan corriendo. Yo soy el único hombre de El Cairo que puede decirles qué se está diciendo, y créanme que preferiría no serlo.",
+      "facts": [
+        "najir_entiende_egipcio",
+        "najir_traduce",
+        "najir_suena_con_shakti"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_traduce"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—De los sueños. —Muy serio, sin ninguna intención de parecer misterioso—. Entiendo el egipcio antiguo, el de los templos, y el otro, el del pueblo. Hablados. No los leo.\nSe encoge de hombros.\n—No me pregunten cómo. Si alguna vez necesitan que alguien traduzca algo que no debería poder traducirse, ya saben dónde estoy.",
+      "facts": [
+        "najir_entiende_egipcio",
+        "najir_traduce"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_traduce"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo hablo árabe y mal francés. —Corta—. Nada más.\nY sin embargo, un minuto después, mientras discute el precio de un té con el camarero, se le escapan tres palabras que no son árabe ni francés ni inglés, y el camarero le mira raro, y Najir se calla de golpe y se toca la boca con dos dedos.",
+      "facts": [
+        "najir_entiende_egipcio"
+      ]
+    },
+    "note": "Pág. 31: «precisamente de esas pesadillas ha obtenido Najir una de sus cualidades más valiosas: su dominio del egipcio clásico y demótico (que no lee ni escribe, pero entiende)». Pág. 66: es la única baza del grupo para entender la conversación entre Shakti y Khephnés."
+  },
+  {
+    "id": "najir_carlyle",
+    "npc": "najir",
+    "label": "«¿Y quién era el inglés que compró aquello?»",
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "—Warren Besart. —Asiente—. Un francés, en realidad, aunque hablaba inglés como un lord. Trabajaba para un americano riquísimo, Carlyle, uno de esos que vienen a Egipto con veinte baúles y un fotógrafo.\nSe recuesta.\n—Le vendí las cuatro piezas en el veinte, en Alejandría, y me pagó lo que le pedí sin discutir, cosa que en un comprador es siempre mala señal.\nY entonces baja la voz.\n—La expedición de ese hombre entró en el Sudán en el veinticinco y no volvió nadie. Nadie, señores. Los encontraron en Kenia. O encontraron algo en Kenia. —Se toca la cara—. Y yo pregunto a la gente que va y viene, y hay quien dice que Carlyle no estaba entre los muertos. Que no encontraron el cuerpo.\n»Y yo llevo dos años preguntándome si el fuego de mi tienda fue por robarle a quien le robé… o por vendérselo a quien se lo vendí.",
+      "facts": [
+        "warren_besart",
+        "roger_carlyle",
+        "carlyle_no_aparecio",
+        "najir_robo_a_shakti"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Besart. Warren Besart. —Encoge un hombro—. Trabajaba para un americano llamado Carlyle. Le vendí cuatro piezas y no he vuelto a saber de él, y espero no volver a saber.\nY añade, sin que le pregunten:\n—Dicen que Carlyle murió en África. Dicen.",
+      "facts": [
+        "warren_besart",
+        "roger_carlyle"
+      ]
+    },
+    "onFailure": {
+      "text": "—Un cliente. —Alto y deprisa—. Hace años. Ya no me acuerdo.\nY dos frases más adelante, hablando de otra cosa completamente distinta, deja caer:\n—…y por eso yo ya no vendo a americanos. A americanos no. Los americanos compran cosas que no entienden y luego se van a sitios de donde no vuelven, y después alguien viene a preguntarme a mí.",
+      "facts": [
+        "najir_no_vende_a_americanos",
+        "roger_carlyle"
+      ]
+    },
+    "note": "Pág. 31: Warren Besart, «un asistente de Roger Carlyle (MN, pág. 123)». Pág. 55, fragmento del bar: «—Por cierto, ¿Carlyle no había muerto? —Eso es lo que dicen, pero en Kenia no encontraron…»."
+  },
+  {
+    "id": "najir_hermandad",
+    "npc": "najir",
+    "label": "Preguntarle qué sabe de la Hermandad",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "hermandad_faraon_negro"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "enganar",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "—Yo no soy de ellos. —Lo primero que dice, y lo dice antes de que nadie le acuse—. Escúchenme bien: no soy de ellos. Pero negocio con ellos y no me tiembla la mano, porque en esta ciudad el que no negocia con la Hermandad no negocia con nadie.\nSe inclina hacia el lado bueno.\n—Son gente. Eso es lo que ustedes no entienden. Son un cocinero, un funcionario de aduanas, dos hombres del ferrocarril y un señor que vende algodón. Van a trabajar por la mañana. Tienen hijos.\n»Y una noche al mes bajan a un sitio y hacen algo, y a la mañana siguiente vuelven a la aduana. —Abre las manos—. Eso es lo que da miedo, señores. No las máscaras. Que se quiten las máscaras y sean el hombre que te sella el pasaporte.\nBaja la voz.\n—En este hotel hay tres. Por lo menos tres. Yo he visto a uno de ellos servir el desayuno.",
+      "facts": [
+        "hermandad_faraon_negro",
+        "najir_trafica_con_la_hermandad",
+        "hay_sectarios_en_el_hotel",
+        "los_seis_camareros"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        }
+      ],
+      "unlocks": [
+        "najir_shakti"
+      ]
+    },
+    "onHard": {
+      "text": "—Los conozco. —Sin alardear—. No pertenezco. Comercio con ellos, que es distinto y es peor, porque el que pertenece está protegido y el que comercia está solo.\n»Y le digo una cosa gratis: en este hotel hay gente suya. No sé cuántos. Sé que hay.",
+      "facts": [
+        "hermandad_faraon_negro",
+        "najir_trafica_con_la_hermandad",
+        "hay_sectarios_en_el_hotel"
+      ],
+      "unlocks": [
+        "najir_shakti"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Existen. —Se encoge de hombros—. Y no son una leyenda de café, si es lo que quieren saber. Yo he vendido a hombres que llevaban un anillo que no se puede describir en una carta.",
+      "facts": [
+        "hermandad_faraon_negro"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sé de qué me hablan. —Y se levanta, y esta vez no huye: se queda de pie mirándoles.\n—Ustedes preguntan mucho por cosas que no se preguntan. —Muy serio—. Yo llevo veinte años en esta ciudad y sigo vivo porque sé cuándo se pregunta y cuándo se paga por no preguntar.\n»Y les voy a dar un consejo que no me han pedido y que no vale nada: si van a seguir preguntando eso, cambien de hotel. O no duerman.",
+      "facts": [
+        "najir_no_habla_de_la_hermandad",
+        "hay_sectarios_en_el_hotel"
+      ]
+    },
+    "note": "Pág. 31: «No pertenece a la Hermandad del Faraón Negro, pero la conoce sobradamente y no se arredra cuando hay que negociar con ella»."
+  },
+  {
+    "id": "najir_piezas_negras",
+    "npc": "najir",
+    "label": "Preguntarle qué son las piezas negras",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "piezas_negras"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Y aquí Faraz Najir deja de ser un mercader y se convierte en otra cosa.\n—No son piezas. —Muy bajo, muy despacio, en francés—. Una pieza es una cosa que estuvo viva en una cultura y ahora está muerta en una vitrina. Esto no está muerto.\nCuenta con los dedos.\n—Hay un disco de oro que quema y que da descargas. Hay un cuchillo con la cabeza de un ibis. Hay un manojo de cincuenta y tres llaves de materiales que no existen. Y hay una caja de piedra negra de seis metros con las patas mal.\n»Yo he tocado dos en mi vida y las dos veces supe una cosa que no sabía antes y que no quería saber.\nSe pasa la mano por la cara buena.\n—Y le voy a decir lo único importante, señores, y después me callo: no son de aquí. No son egipcias. Los egipcios las encontraron. Las encontraron ya hechas y les pusieron nombres de sus dioses porque no tenían otros nombres que ponerles.\n»Yo daría los dos ojos que me quedan por tener una. —Y sonríe con media cara, y no es una sonrisa agradable—. Y ustedes también, cuando las vean. Ya lo verán.",
+      "facts": [
+        "piezas_negras",
+        "disco_solar_existe",
+        "daga_de_akhenaton",
+        "manojo_de_llaves",
+        "sarcofago_de_basalto",
+        "las_piezas_no_son_egipcias",
+        "najir_las_quiere"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "piezas_negras"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Un conjunto. —Se inclina—. No piezas sueltas: un conjunto. Se han vendido por separado durante siglos y por eso nadie sabe que van juntas, y el que las junte tendrá algo que ningún museo del mundo puede pagar.\n»Un disco. Un cuchillo. Unas llaves. Y una caja grande. —Levanta la vista—. Y todo eso está debajo de este edificio ahora mismo. Ustedes lo saben y yo lo sé, y por eso estamos los dos hablando en voz baja.",
+      "facts": [
+        "piezas_negras",
+        "disco_solar_existe",
+        "piezas_en_el_sotano"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "piezas_negras"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cosas que no se venden en el zoco. —Encoge un hombro—. Diez o doce objetos que llevan tres mil años cambiando de mano y matando gente por el camino. En el oficio se sabe de ellos como se sabe de una enfermedad.",
+      "facts": [
+        "piezas_negras"
+      ]
+    },
+    "onFailure": {
+      "text": "—Cuentos de mercado. —Alto, deprisa, con la mano en el aire.\nY entonces, sin ninguna transición, hace una pregunta que le delata entera:\n—¿Cuántas han visto ustedes?\nY cuando ustedes no contestan, insiste, y se le nota en la voz que la respuesta le importa muchísimo más que el disimulo:\n—¿Cuántas? Díganme el número. Solo el número.",
+      "facts": [
+        "najir_las_quiere",
+        "piezas_negras"
+      ]
+    },
+    "note": "Pág. 31: «Najir es capaz de todo por las piezas negras. Cualquier plan o estratagema para conseguirlas se le antojará excelente». Capítulo 5: las diez piezas negras."
+  },
+  {
+    "id": "najir_sotano",
+    "npc": "najir",
+    "label": "Ofrecerle bajar con ustedes al sótano",
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Najir se deshace en halagos, y es una cosa incómoda de presenciar.\n—¡Amigos míos! ¡Amigos! —Les coge las manos, las dos—. Ustedes son gente honrada. Se ve. Se ve en la cara. Yo llevo veinte años leyendo caras y las suyas son buenas caras.\nY cuando termina el número, que dura casi un minuto, se sienta y se pone práctico de golpe, y entonces sí es útil.\n—Bien. Escuchen. Tres cosas.\n»Una: no vamos por la cocina. Por la cocina se baja de día y de día está el cocinero. Se baja por la escalera de la lavandería, que sale al mismo pasillo y no la vigila nadie porque huele a lejía.\n»Dos: llevamos lámpara de aceite, no eléctrica. Ahí abajo las cosas eléctricas hacen cosas raras y yo he visto una linterna apagarse a dos metros de una pieza.\n»Y tres. —Levanta un dedo, y ya no hay ninguna adulación en la cara—. Si yo digo que subimos, subimos. Sin discutir y sin preguntar por qué. Ustedes no saben lo que hay ahí abajo. Yo tampoco. Pero yo he estado cerca de una de esas cosas y ustedes no.",
+      "facts": [
+        "najir_baja_con_vosotros",
+        "escalera_de_la_lavanderia",
+        "lo_electrico_falla_abajo"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_aliado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 40
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Sí. —Ni lo piensa—. Sí, sí, sí. Cuando quieran. Ahora.\nY se levanta, y hay que sentarlo otra vez.\n—Perdón. Perdón. Pero llevo cuatro horas en este hotel esperando que alguien me diga eso.",
+      "facts": [
+        "najir_baja_con_vosotros"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_aliado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 25
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Con ustedes? —Se ríe alto—. Yo no bajo a ningún sótano con tres personas que conocí hace media hora.\nY después, mucho más bajo:\n—Yo bajo solo. Cuando sepa la hora buena. —Se recuesta—. Ahora bien: si ustedes averiguan la hora buena y me la dicen, entonces hablamos otra vez, y hablamos en otro tono.",
+      "facts": [
+        "najir_bajara_solo",
+        "najir_quiere_la_hora"
+      ]
+    },
+    "note": "Pág. 31: «Si los investigadores le ayudan a bajar al sótano, se lo agradecerá deshaciéndose en halagos». Pág. 55: «Les acompañará, si se lo permiten, al sótano. De lo contrario, vigilará sus movimientos desde lejos, pero sin apartarse de ellos un solo instante»."
+  },
+  {
+    "id": "najir_proteccion",
+    "npc": "najir",
+    "label": "Prometerle protección frente a Shakti",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Faraz Najir se queda mirándoles con el ojo bueno durante mucho rato.\n—No pueden. —Muy tranquilo—. Ustedes no pueden protegerme de ese hombre. Nadie puede. Yo lo sé y ustedes lo saben y lo estamos diciendo igual, y por eso mismo esto que están haciendo aquí vale algo.\nSe pasa la mano por la cara quemada, de arriba abajo, sin prisa.\n—Nadie me ha ofrecido eso en tres años. Ni mi hermano. Mi hermano me cambió de casa cuando lo del fuego, para que no le quemaran la suya.\nY entonces hace una cosa: se quita del cuello un cordón con una llave pequeña y la deja en la mesa.\n—Habitación cuatrocientos ochenta y siete. Ahí duermo yo esta noche y ahí está todo lo mío. Si a mí me pasa algo, entren ustedes antes que la policía y llévense lo que hay debajo del lavabo.\nRecoge el cordón, no la llave.\n—Y ahora escúchenme, que esto es lo importante y no lo voy a repetir. Yo haré por ustedes lo que sea. Lo que sea, señores. Bajaré donde digan, traduciré lo que oigan y mentiré a quien haga falta.\n»Pero cuando esas piezas estén encima de una mesa y ustedes se den la vuelta, yo voy a intentar robárselas. —Sonríe con media cara—. Se lo digo ahora, con la llave delante, para que después no digan que Faraz Najir no avisa.",
+      "facts": [
+        "najir_es_vuestro_aliado",
+        "hab_najir_487",
+        "najir_intentara_robaros",
+        "najir_teme_por_su_vida"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_aliado"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "najir_protegido"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 60
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "Najir escucha entero y no interrumpe.\n—Está bien. —Asiente despacio—. No les creo, pero está bien. Hacía tiempo que nadie me mentía por amabilidad.\nSe recuesta.\n—Cuenten conmigo mientras dure. Bajo donde digan y traduzco lo que oigan. Y no me pregunten qué pasa cuando esto acabe, porque ni yo lo sé.",
+      "facts": [
+        "najir_es_vuestro_aliado"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_aliado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 30
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Protegerme? —Y se ríe, alto, con toda la mitad buena de la cara, y varias cabezas se vuelven—. ¡Ustedes!\nSe seca los ojos.\n—Perdón. Perdón. No es por ustedes. Es que esa palabra… —Niega con la cabeza—. Yo tenía cuatro hombres en la puerta de mi tienda la noche del fuego. Cuatro. Armados. Ninguno vio entrar nada.\nY se pone serio de golpe.\n—Guarden ustedes su protección. Y si de verdad quieren hacer algo por mí, hagan lo único que sirve: que ese hombre no sepa que existo. Eso sí lo pueden hacer. Con no decir mi nombre delante de nadie, ya lo están haciendo.",
+      "facts": [
+        "najir_teme_por_su_vida",
+        "no_digais_el_nombre_de_najir"
+      ]
+    },
+    "note": "Pág. 31: «Si además le protegen de Shakti, hará por ellos lo que sea […] Será un aliado perfecto. Después, obviamente, pretenderá robárselas a los investigadores, pero a corto plazo es un aliado fiel». El libro pide que la traición esté anunciada."
+  },
+  {
+    "id": "najir_aga_khan",
+    "npc": "najir",
+    "label": "Preguntarle si conoce al Aga Khan",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "aga_khan_viene"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—¿Que si le conozco? —Se ríe—. Su palacio está lleno de mí, señores. La galería del ala sur entera. Cuarenta y una piezas y las cuarenta y una se las vendí yo.\nSe recuesta, y por una vez está disfrutando.\n—Paga al contado, no regatea y no pregunta de dónde salen las cosas. Es el mejor cliente del Mediterráneo y le tengo un cariño enorme.\nY entonces se pone serio.\n—Pero óiganme una cosa. Ese señor está aquí esta semana y ese señor colecciona. Si alguien le enseña una sola de las piezas de este sótano, la compra. La compra sin preguntar, la mete en un baúl y se la lleva a la India.\n»Y entonces esto ya no se arregla nunca. —Levanta un dedo—. Yo soy un ladrón, señores, y les estoy diciendo que hay algo que no debe venderse. Piensen en lo raro que es que yo diga eso.",
+      "facts": [
+        "aga_khan_compra_a_najir",
+        "aga_khan_colecciona",
+        "najir_teme_que_se_disperse"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Sobradamente. —Asiente con orgullo—. Su palacio está lleno de piezas mías. Paga al contado y no regatea, y eso en un hombre tan rico es casi una virtud religiosa.",
+      "facts": [
+        "aga_khan_compra_a_najir",
+        "aga_khan_colecciona"
+      ]
+    },
+    "onFailure": {
+      "text": "—Le conozco. —Corta—. Pero esta semana no quiero verle y él no quiere verme a mí.\nY después, tocándose la cara:\n—Un hombre como yo no se pasea delante de un cliente rico cuando está haciendo algo que no debe hacer. Los clientes ricos se acuerdan de dónde te vieron.",
+      "facts": [
+        "aga_khan_compra_a_najir",
+        "najir_no_quiere_ser_visto"
+      ]
+    },
+    "note": "Pág. 31: «Conoce al Aga Khan sobradamente. Su palacio está lleno de piezas de Najir»."
+  },
+  {
+    "id": "najir_churchill",
+    "npc": "najir",
+    "label": "Ofrecerle una presentación a Churchill",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "churchill_en_el_hotel"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 10,
+    "onSuccess": {
+      "text": "Najir se queda con la boca abierta medio segundo y después se levanta y les estrecha la mano a los tres, uno por uno, apretando mucho.\n—Eso… eso sería… —Y se le atropella el inglés del todo y se pasa al francés—. Miren, se lo explico. A mí me da igual la política. Me da exactamente igual quién mande en Egipto: mande quien mande, yo compro barato y vendo caro.\n»Pero un hombre como yo, con esta cara, en una aduana, con un cajón… —Abre las manos—. Si yo puedo decir una sola vez, delante de un funcionario, «yo conozco al señor Churchill», ese cajón pasa. Y pasa el siguiente. Y el de dentro de diez años.\nSe sienta.\n—Preséntenmelo aunque sea treinta segundos. Que me vea la gente dándole la mano. Con eso me basta y les debo la vida entera.",
+      "facts": [
+        "najir_quiere_a_churchill"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 40
+        },
+        {
+          "kind": "setFlag",
+          "flag": "najir_os_debe_un_favor"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Ese señor no me daría la mano. —Se toca la cara quemada, y por una vez no hay ironía ninguna—. Y no se lo reprocho. Yo tampoco me la doy cuando me afeito.\nY luego, recuperando el tono comercial:\n—Pero si algún día tienen ustedes que pasar algo por una aduana de este país, acuérdense de una cosa: no hace falta conocer a los grandes. Hace falta que los pequeños crean que los conoces.",
+      "facts": [
+        "najir_quiere_a_churchill",
+        "najir_ensena_a_pasar_aduanas"
+      ]
+    },
+    "note": "Pág. 31: «Les estará infinitamente agradecido a los investigadores si le ponen en contacto con Churchill, pero este no tiene particular interés en conocerle»."
+  },
+  {
+    "id": "najir_la_comitiva",
+    "npc": "najir",
+    "label": "«Usted bajó con el Rey»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "najir_baja_al_sotano"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Najir se toca la mitad quemada de la cara, que es lo que hace cuando dice la verdad.\n—Bajé, sí. Y no pedí nada de lo que había: solo pedí que me informaran. Un hombre que sabe antes que nadie qué se ha encontrado vale más que un hombre que tiene una pieza. —Se inclina—. Pero les voy a decir lo que vi, porque ustedes no me van a creer y eso me tranquiliza: hay una caja de piedra negra de seis metros que no la hizo ningún egipcio, y hay un cubo de cobre que el alemán dice que sirve para viajar. Y en el túnel del fondo hay cosas que comen y a las que el cocinero llama por su nombre.",
+      "facts": [
+        "cubo_de_estasis",
+        "sarcofago_visto",
+        "algo_vive_abajo",
+        "piezas_negras"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "el_principe_en_el_templo"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Acompañé a su majestad, en efecto. —Sonríe con media cara—. Un privilegio que agradezco. De lo que hay ahí abajo no puedo hablar sin faltar a una confianza, pero les diré que salí de allí con la certeza de que el señor Lounpeen ha comprado la pieza equivocada. La suya es bonita. Las otras son otra cosa.",
+      "facts": [
+        "piezas_negras"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un paseo por las bodegas del hotel. —Se ajusta los gemelos—. Su majestad tenía curiosidad y yo tengo la costumbre de no perderme nada. Le aseguro que abajo solo hay humedad y ratas.",
+      "facts": [
+        "najir_se_une_a_la_comitiva"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sé de qué me hablan. —Y se ríe, pero se está frotando las muñecas y tiene las uñas partidas y sucias de una tierra que no es la de la calle Ibrahim Pachá, sino una tierra gris, muy fina, que no se ve a la luz del sol desde hace tres mil años.",
+      "facts": [
+        "najir_se_une_a_la_comitiva"
+      ]
+    },
+    "note": "Módulo, pág. 59: si Najir baja con la comitiva, pide únicamente ser informado de todos los descubrimientos."
+  },
+  {
+    "id": "najir_rescate",
+    "npc": "najir",
+    "label": "«¿Qué pasó al otro lado de esa puerta?»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "najir_aliado"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 15,
+    "always": {
+      "text": "Najir os coge la mano con las dos suyas y no la suelta mientras habla.\n—Cerraron la puerta. Los dos, juntos, sin discutirlo. Yo estaba a cuatro metros y me vieron. —Traga—. Y entonces oí venir algo por el corredor, y no venía deprisa. Eso es lo peor que les puedo contar: no tenía ninguna prisa. —Se pasa la mano por la cara buena—. Ustedes me han sacado de ahí. En este país eso es una deuda que no se salda con dinero, así que no lo voy a intentar. Lo que necesiten. Y hay algo que necesitarán: yo leo egipcio clásico y demótico. No los hablo, nadie los habla, pero los leo. En esta ciudad seremos cuatro, y los otros tres trabajan para Shakti.",
+      "facts": [
+        "najir_lee_egipcio_clasico",
+        "carter_y_weder_cerraron_la_puerta",
+        "omar_shakti"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_traduce"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "najir",
+          "by": 10
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "najir_rescatado"
+        }
+      ],
+      "unlocks": [
+        "najir_shakti",
+        "najir_hermandad"
+      ]
+    },
+    "note": "Módulo, pág. 60: «Si estos le salvan la vida, Najir será su aliado para siempre... Faraz Najir sabe egipcio clásico y demótico (solo entenderlos), una habilidad rarísima». Sin tirada: se la ha ganado el grupo, no los dados."
+  }
+]

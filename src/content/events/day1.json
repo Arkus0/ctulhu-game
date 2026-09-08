@@ -1,0 +1,2824 @@
+[
+  {
+    "id": "d1_lounpeen_registro",
+    "at": "D1 09:30",
+    "until": "D1 10:00",
+    "location": "recepcion",
+    "actors": [
+      "dieter",
+      "olga"
+    ],
+    "priority": 5,
+    "witnessText": "Se registran a la vez que vosotros un alemán alto, enjuto y malhumorado, y una mujer escultural, pelirroja y descarada, que resulta ser su hija. Habitación 204. Él dice que viene «por negocios». Ella mira de un lado a otro del hall: está claro que busca a alguien, y no es a su padre.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "lounpeen_en_el_hotel"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "los_lounpeen"
+      }
+    ],
+    "traces": [
+      {
+        "id": "registro_204",
+        "location": "recepcion",
+        "text": "En el libro de registro, con fecha de esta mañana: Lounpeen, D. y Lounpeen, O. Habitación 204. En el motivo de la estancia, una sola palabra: «negocios»."
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 46: La extraña pareja."
+  },
+  {
+    "id": "d1_behler_terraza",
+    "at": "D1 11:00",
+    "until": "D1 12:00",
+    "location": "terraza",
+    "actors": [
+      "behler"
+    ],
+    "priority": 10,
+    "witnessText": "Charles Behler os espera en una mesa redonda de hierro, para cuatro. Se limpia el sudor de la frente con un pañuelo bordado con las siglas del hotel. Es temprano y ya hace treinta grados.",
+    "scene": "behler_encargo",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "cita_behler_ocurrio"
+      }
+    ],
+    "traces": [
+      {
+        "id": "behler_esperando",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«El señor Behler les ha estado esperando en la terraza toda la mañana. Ha preguntado por ustedes tres veces. No parecía contento, y eso en él es mala señal»."
+      }
+    ],
+    "tags": [
+      "encargo"
+    ],
+    "note": "Módulo, pág. 48: La charla con Behler. 100 libras egipcias a cada uno, más otras 100 si ve resultados."
+  },
+  {
+    "id": "d1_terraza_carter_weder",
+    "at": "D1 11:00",
+    "until": "D1 12:00",
+    "location": "terraza",
+    "actors": [
+      "carter",
+      "weder"
+    ],
+    "priority": 5,
+    "witnessText": "En otra mesa, dos hombres hablan con las cabezas juntas. Uno es enjuto, de mirada huidiza, con las piernas temblándole de puro tic nervioso: no mira a los ojos ni una sola vez. El otro es alemán, guapo, de pronunciación excelente y ademanes demasiado afables. Ultiman algo.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "carter_weder_visibles"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carter_y_weder_juntos"
+      }
+    ],
+    "traces": [
+      {
+        "id": "camarero_terraza",
+        "location": "terraza",
+        "text": "Un camarero recoge dos tazas de una mesa del fondo. «El señor Carter y el señor Weder, sí. Toda la mañana ahí. Hablando bajito, como siempre»."
+      }
+    ],
+    "tags": [
+      "escucha",
+      "conspiracion"
+    ],
+    "note": "Módulo, pág. 48: Las cucarachas de Weder. Conversación espiable de seis fragmentos."
+  },
+  {
+    "id": "d1_weder_baja",
+    "at": "D1 12:00",
+    "until": "D1 12:15",
+    "location": "cocina",
+    "actors": [
+      "weder",
+      "mahadni"
+    ],
+    "priority": 8,
+    "requires": [
+      {
+        "kind": "npcAlive",
+        "npc": "weder"
+      }
+    ],
+    "witnessText": "Weder cruza el restaurante, saluda al metre con una cordialidad que no siente y entra en las cocinas. Mahadni está descuartizando una docena de corderos. Weder solo hace un gesto con la mano: el cocinero suelta el cuchillo, escupe el cigarro consumido que le cuelga de los labios y le acompaña hasta las escaleras del sótano, limpiándose las manos en el delantal.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "weder_bajo_al_sotano"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "weder_baja_al_sotano"
+      }
+    ],
+    "traces": [
+      {
+        "id": "cocinero_ausente",
+        "location": "cocina",
+        "text": "Sobre la mesa de despiece, un cuchillo enorme abandonado a media faena y media docena de corderos sin terminar. El jefe de cocina no está, y los pinches evitan mirar hacia la puerta del fondo."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 49: Bajo tierra."
+  },
+  {
+    "id": "d1_gasparini_olga",
+    "at": "D1 12:00",
+    "until": "D1 13:00",
+    "location": "salon_isis",
+    "actors": [
+      "gasparini",
+      "olga"
+    ],
+    "priority": 5,
+    "witnessText": "Entre las palmeras del jardín, a resguardo de la balconada, el barman del hotel retoza apaciblemente con la pelirroja que se registró esta mañana. Entre besos y arrumacos, ella le está contando algo.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "gasparini_olga_jardin"
+      }
+    ],
+    "traces": [
+      {
+        "id": "botones_chismoso",
+        "location": "recepcion",
+        "text": "Un botones se ríe por lo bajo cuando preguntáis por el barman. «El señor Gasparini libra esta mañana. Pero si le buscan, empieza siempre sus romances en los jardines del salón Isis. Siempre»."
+      }
+    ],
+    "tags": [
+      "escucha"
+    ],
+    "note": "Módulo, pág. 50: En el jardín del salón Isis."
+  },
+  {
+    "id": "d1_carter_encerrado",
+    "at": "D1 12:00",
+    "until": "D1 13:30",
+    "location": "hab_carter",
+    "actors": [
+      "carter"
+    ],
+    "priority": 3,
+    "witnessText": "Carter vuelve a sus aposentos apartando las moscas que le revolotean alrededor, y no vuelve a salir.",
+    "traces": [
+      {
+        "id": "puerta_362",
+        "location": "pasillo_habitaciones",
+        "text": "Desde el pasillo de la tercera planta se oye a alguien dar vueltas dentro de la 362. Y hay un olor. Débil, dulzón, con fondo de carne pasada, que sale por debajo de la puerta."
+      }
+    ],
+    "tags": [
+      "habitaciones"
+    ],
+    "note": "Módulo, pág. 49: Carter no sale de su habitación hasta las 13:30."
+  },
+  {
+    "id": "d1_las_orejas",
+    "at": "D1 12:15",
+    "until": "D1 12:35",
+    "location": "sala_escombros",
+    "actors": [
+      "weder",
+      "mahadni"
+    ],
+    "priority": 8,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_weder_baja"
+      }
+    ],
+    "witnessText": "Del túnel negro del fondo llegan unos quejidos que no son humanos. Mahadni se acerca con precaución y saca algo del bolsillo de la chilaba. Son un par de orejas. Las lanza a la oscuridad. Unas garras peludas salen de las sombras, recogen los trozos con un esmero casi delicado y desaparecen dentro de la abertura de piedra. No llegáis a verles la cara.",
+    "effects": [
+      {
+        "kind": "sanityLoss",
+        "loss": "0/1D3"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "algo_vive_abajo"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "las_orejas"
+      }
+    ],
+    "traces": [
+      {
+        "id": "restos_orejas",
+        "location": "sala_escombros",
+        "text": "En el suelo, junto a la boca del túnel norte, hay un cartílago pequeño y curvo que la humedad no ha llegado a deshacer. Es el lóbulo de una oreja."
+      }
+    ],
+    "tags": [
+      "sotano",
+      "horror"
+    ],
+    "note": "Módulo, pág. 50: Las orejas. Tres gules y dos hombres rata custodian el tesoro."
+  },
+  {
+    "id": "d1_weder_coge_disco",
+    "at": "D1 12:30",
+    "until": "D1 13:00",
+    "location": "viejo_templo",
+    "actors": [
+      "weder",
+      "mahadni"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_weder_baja"
+      },
+      {
+        "kind": "custody",
+        "item": "disco_solar",
+        "holder": "nobody"
+      }
+    ],
+    "witnessText": "Weder camina hasta las piezas de la esquina noreste, abre una de las cajas de madera labrada y rebusca. Saca una tela deshilachada que oculta un objeto circular de unos treinta centímetros. Durante un segundo, la cara se le transforma: ese hombre acaba de comprender que tiene entre las manos el objeto más poderoso de la faz de la Tierra.",
+    "scene": "solar_disk",
+    "interruptibleBy": [
+      "disk_observe",
+      "disk_authority",
+      "disk_snatch"
+    ],
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "disco_scene_open"
+      }
+    ],
+    "traces": [
+      {
+        "id": "caja_manipulada",
+        "location": "viejo_templo",
+        "text": "Una de las cajas de madera labrada ha sido abierta hace poco y muy mal. Entre la tela deshilachada del fondo queda la huella redonda de algo de unos treinta centímetros que ya no está."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 50: Los movimientos de Weder. Aquí arranca la cadena de custodia del Disco Solar."
+  },
+  {
+    "id": "d1_weder_toma_disco",
+    "at": "D1 13:00",
+    "location": "viejo_templo",
+    "actors": [
+      "weder",
+      "mahadni"
+    ],
+    "priority": 11,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_weder_coge_disco"
+      },
+      {
+        "kind": "custody",
+        "item": "disco_solar",
+        "holder": "nobody"
+      }
+    ],
+    "effects": [
+      {
+        "kind": "moveCustody",
+        "item": "disco_solar",
+        "to": "weder"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "weder_tiene_el_disco"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "disco_resuelto"
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Resolución canónica de la escena si los investigadores no intervienen durante su ventana."
+  },
+  {
+    "id": "d1_gasparini_llama",
+    "at": "D1 13:00",
+    "location": "correos",
+    "actors": [
+      "gasparini"
+    ],
+    "priority": 6,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_gasparini_olga"
+      }
+    ],
+    "witnessText": "El barman deja a la pelirroja un momento y baja a la oficina de correos. Pide una conferencia y discute con alguien por un porcentaje. «Un veinte, Faraz. Un veinte o no hay nada». Cuelga sonriendo.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "najir_avisado"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "llamada_de_gasparini"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "la_llamada"
+      }
+    ],
+    "traces": [
+      {
+        "id": "thornhill_recuerda",
+        "location": "correos",
+        "teller": "thornhill",
+        "text": "«¿Esta mañana? El señor Gasparini, sí. Una conferencia a un número del casco antiguo. Discutieron por un veinte por ciento, y él parecía muy satisfecho al colgar. El otro señor se llamaba Faraz. Faraz Najir»."
+      }
+    ],
+    "tags": [
+      "escucha"
+    ],
+    "note": "Módulo, pág. 51: Gasparini llama a Faraz Najir pidiendo un porcentaje por el chivatazo.",
+    "until": "D1 13:20"
+  },
+  {
+    "id": "d1_weder_sube",
+    "at": "D1 13:00",
+    "location": "hab_weder",
+    "actors": [
+      "weder"
+    ],
+    "priority": 5,
+    "requires": [
+      {
+        "kind": "custody",
+        "item": "disco_solar",
+        "holder": "weder"
+      }
+    ],
+    "witnessText": "Weder sube a la habitación 407 y no vuelve a salir hasta las dos. Guarda el disco en la caja fuerte que hay junto al escritorio.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "disco_en_caja_fuerte"
+      },
+      {
+        "kind": "scheduleEvent",
+        "event": "d1_disco_solo",
+        "atMinute": 840
+      }
+    ],
+    "traces": [
+      {
+        "id": "weder_ausente_terraza",
+        "location": "terraza",
+        "text": "La mesa donde estaban los dos hombres está vacía. Solo quedan dos tazas y, en el suelo bajo la silla del alemán, algo oscuro que se escabulle a toda prisa hacia la sombra."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 50: Weder sube a su habitación a las 13:00.",
+    "until": "D1 14:00"
+  },
+  {
+    "id": "d1_fuad_llega",
+    "at": "D1 13:30",
+    "until": "D1 13:50",
+    "location": "recepcion",
+    "actors": [
+      "fuad"
+    ],
+    "priority": 10,
+    "witnessText": "El hall se vuelve del revés. Entra el Príncipe Fuad con su séquito: soldados, guardia personal armada hasta los dientes y varios secretarios de estado. Behler en persona sale a recibirle y le acompaña hasta el mostrador. Cleveland Clinton pierde los nervios y exige a gritos que suban veinte botones a por el equipaje. Conviene recordar que desde el 15 de marzo es Rey, y que a nadie se le ocurra llamarle otra cosa.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "fuad_en_el_hotel"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fuad_ha_llegado"
+      }
+    ],
+    "traces": [
+      {
+        "id": "hall_revuelto",
+        "location": "recepcion",
+        "text": "El hall está patas arriba: maletas por todas partes, botones sudando y un cordón de soldados egipcios junto al ascensor. Alguien importante acaba de subir."
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 51: Llega el Príncipe. 1D6 soldados, 1D10 guardias, 1D3 secretarios."
+  },
+  {
+    "id": "d1_almuerzo_lounpeen",
+    "at": "D1 13:30",
+    "until": "D1 15:00",
+    "location": "restaurante",
+    "actors": [
+      "dieter"
+    ],
+    "priority": 4,
+    "witnessText": "Dieter Lounpeen come solo, mirando la puerta cada dos minutos. Su hija no aparece hasta las dos, y cuando lo hace se defiende de las preguntas de su padre diciendo que ha estado en la tienda de Juliette Belanger viendo las novedades de París. Le cuesta no reírse mientras lo dice.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "almuerzo_lounpeen"
+      }
+    ],
+    "traces": [
+      {
+        "id": "mesa_lounpeen",
+        "location": "restaurante",
+        "text": "En una mesa junto al ventanal, dos servicios usados. El metre comenta que el señor alemán ha estado esperando a su hija más de media hora, y que no ha sido una comida agradable."
+      }
+    ],
+    "tags": [
+      "comida"
+    ],
+    "note": "Módulo, pág. 51: Lunch inquietante en el restaurante."
+  },
+  {
+    "id": "d1_carter_come_solo",
+    "at": "D1 13:45",
+    "until": "D1 15:45",
+    "location": "restaurante",
+    "actors": [
+      "carter",
+      "rolland"
+    ],
+    "priority": 3,
+    "requires": [
+      {
+        "kind": "npcAlive",
+        "npc": "carter"
+      }
+    ],
+    "witnessText": "Howard Carter come solo en una mesa alejada del ventanal: un triste plato de verduras a la plancha que no llega a terminarse. En dos horas no sube ni una sola vez a su habitación. Michel Rolland da vueltas de mesa en mesa sin saber qué hacer con las vaharadas de olor pestilente que suben por las escaleras de la cocina, ni con las ratas que asoman en las esquinas.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "carter_evita_su_habitacion"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "olor_de_la_cocina"
+      }
+    ],
+    "traces": [
+      {
+        "id": "plato_de_verduras",
+        "location": "restaurante",
+        "teller": "rolland",
+        "text": "«¿El señor Carter? Dos horas ahí sentado, con un plato de verduras que no ha tocado, y sin subir a su habitación. Y mientras, el olor. Yo ya no sé si sale de la cocina o de otro sitio, monsieur, y le juro que prefiero no averiguarlo»."
+      }
+    ],
+    "tags": [
+      "comida"
+    ],
+    "note": "Módulo, pág. 51: Carter come solo hasta las 15:45. No es capaz de volver a la 362 porque el hedor del saco es insoportable."
+  },
+  {
+    "id": "d1_fuad_sube",
+    "at": "D1 14:00",
+    "location": "pasillo_habitaciones",
+    "actors": [
+      "fuad"
+    ],
+    "priority": 5,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_fuad_llega"
+      }
+    ],
+    "witnessText": "El Príncipe sube a la suite real rodeado de su séquito. Tres guardias reales se quedan custodiando el pasillo. No volverá a salir hasta la fiesta de esta noche.",
+    "effects": [
+      {
+        "kind": "moveNpc",
+        "npc": "fuad",
+        "to": "hab_fuad"
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 51: A las 14:00 Fuad se encierra en la 415 hasta las 22:00.",
+    "until": "D1 14:20",
+    "traces": [
+      {
+        "id": "cordon_de_soldados",
+        "location": "pasillo_habitaciones",
+        "text": "En la cuarta planta, tres guardias reales con uniforme de gala cortan el pasillo a la altura de la 415. No hablan, no dejan pasar y no responden a nada que no sea una pregunta de sus secretarios. Detrás de ellos, nueve habitaciones y una puerta cerrada."
+      }
+    ]
+  },
+  {
+    "id": "d1_disco_solo",
+    "at": "D1 14:00",
+    "until": "D1 15:00",
+    "location": "hab_weder",
+    "priority": 2,
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "disco_en_caja_fuerte"
+      }
+    ],
+    "witnessText": "Weder baja a la terraza a comer algo rápido. No quiere separarse mucho tiempo del disco, y por eso vuelve enseguida. Durante una hora exacta, la habitación 407 está vacía.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "ventana_407_abierta"
+      }
+    ],
+    "traces": [
+      {
+        "id": "weder_comiendo",
+        "location": "terraza",
+        "text": "El alemán del museo come solo y deprisa en una esquina de la terraza, mirando de reojo hacia las plantas superiores cada pocos bocados."
+      }
+    ],
+    "tags": [
+      "custodia",
+      "oportunidad"
+    ],
+    "note": "Módulo, pág. 50: «Durante una hora, el Disco Solar está solo en la habitación de Weder». Esta es LA ventana del día 1."
+  },
+  {
+    "id": "d1_servicio_de_habitaciones_fuad",
+    "at": "D1 14:30",
+    "until": "D1 21:00",
+    "location": "pasillo_habitaciones",
+    "priority": 2,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_fuad_sube"
+      }
+    ],
+    "witnessText": "Cada media hora, como un reloj, sube un camarero a la cuarta planta con un carro cubierto por un paño blanco. Comida, bebida, hielo, y a veces cosas que no van en bandeja: la corte del Príncipe es insaciable y en 1922 casi todo es legal. Los guardias levantan el paño, miran debajo y dejan pasar. Nadie mira la cara del que empuja el carro.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "servicio_a_la_suite_real"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carros_a_la_suite_real"
+      }
+    ],
+    "traces": [
+      {
+        "id": "carros_en_el_pasillo",
+        "location": "pasillo_habitaciones",
+        "text": "Junto al ascensor de la cuarta planta se amontonan cinco carros de servicio vacíos, con los paños blancos tirados de cualquier manera y los platos sin recoger. Alguien de ahí dentro come cada media hora, o al menos pide comida cada media hora."
+      }
+    ],
+    "tags": [
+      "oportunidad"
+    ],
+    "note": "Módulo, pág. 51: el servicio de habitaciones sube cada media hora toda la tarde. Los investigadores pueden hacerse pasar por camareros (Disfrazarse) para entrar en la suite real; la ventana es larga a propósito."
+  },
+  {
+    "id": "d1_weder_vuelve_a_la_407",
+    "at": "D1 15:00",
+    "until": "D1 16:00",
+    "location": "hab_weder",
+    "actors": [
+      "weder"
+    ],
+    "priority": 7,
+    "requires": [
+      {
+        "kind": "custody",
+        "item": "disco_solar",
+        "holder": "weder"
+      }
+    ],
+    "witnessText": "Weder sube de la terraza con paso vivo, comprueba la caja fuerte con los nudillos antes de abrirla y se encierra a descansar hasta las cuatro. La ventana se ha cerrado.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "ventana_407_abierta",
+        "value": false
+      },
+      {
+        "kind": "setFlag",
+        "flag": "weder_descansa"
+      }
+    ],
+    "traces": [
+      {
+        "id": "no_molestar_407",
+        "location": "pasillo_habitaciones",
+        "text": "En la cuarta planta, la puerta de la 407 está cerrada y por debajo no pasa luz. Una camarera que empuja un carro de toallas dice que el señor del museo ha pedido que no le molesten hasta las cuatro, y que lo ha pedido dos veces."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 50: Weder regresa a sus aposentos a las 15:00 y descansa hasta las 16:00, hora de la cita con Dieter. Aquí se cierra la ventana que abre d1_disco_solo."
+  },
+  {
+    "id": "d1_dieter_al_cafe",
+    "at": "D1 15:00",
+    "until": "D1 16:00",
+    "location": "terraza",
+    "actors": [
+      "dieter"
+    ],
+    "priority": 4,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_almuerzo_lounpeen"
+      }
+    ],
+    "witnessText": "Dieter Lounpeen abandona el restaurante antes de tiempo y se sienta en la terraza delante de un café que se le enfría. No mira a nadie ni habla con nadie. Sospecha que su hija no le está contando toda la verdad, y le está costando un esfuerzo visible no montar un escándalo aquí mismo.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "dieter_sospecha_de_olga"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "dieter",
+        "by": -5
+      }
+    ],
+    "traces": [
+      {
+        "id": "taza_de_dieter",
+        "location": "terraza",
+        "text": "En una mesa de la terraza queda una taza de café intacta y fría junto a un cenicero con seis colillas apagadas con saña. El camarero recuerda al señor alemán: se ha levantado y se ha ido sin pagar, y no parecía darse cuenta de nada."
+      }
+    ],
+    "tags": [
+      "conspiracion"
+    ],
+    "note": "Módulo, pág. 51: a las 15:00 Dieter abandona inquieto el restaurante y se va a la terraza a tomar un café."
+  },
+  {
+    "id": "d1_weder_vende_el_disco",
+    "at": "D1 16:00",
+    "until": "D1 17:00",
+    "location": "hab_weder",
+    "actors": [
+      "weder",
+      "dieter"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "custody",
+        "item": "disco_solar",
+        "holder": "weder"
+      },
+      {
+        "kind": "npcAlive",
+        "npc": "weder"
+      }
+    ],
+    "witnessText": "En la 407, Weder abre la caja fuerte delante de Dieter Lounpeen. Cinco mil libras pagaderas a dos años, con mil de depósito, y el Disco Solar cambia de manos sin que Howard Carter sepa una palabra. En el momento de tocarlo con los dedos, Dieter recibe una descarga eléctrica que lo tira al suelo. Los dos se miran estupefactos. Bajo las prolongaciones cubiertas de piedras preciosas hay puntos metálicos unidos por hilos de cobre. Parecen electrodos primitivos, y tienen tres mil años.",
+    "effects": [
+      {
+        "kind": "moveCustody",
+        "item": "disco_solar",
+        "to": "dieter"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "disco_vendido"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "ventana_407_abierta",
+        "value": false
+      },
+      {
+        "kind": "learnFact",
+        "fact": "weder_vende_las_piezas"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "precio_del_disco"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "electrodos_del_disco"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "la_venta_del_disco"
+      }
+    ],
+    "traces": [
+      {
+        "id": "recibo_407",
+        "location": "hab_weder",
+        "text": "Sobre el escritorio de la 407, un papel escrito a mano y firmado dos veces: «recibí de D. L. mil libras esterlinas a cuenta; el resto, cuatro mil, a dos años vista». No dice de qué. Al lado, la caja fuerte entreabierta y vacía."
+      },
+      {
+        "id": "quemadura_alfombra",
+        "location": "hab_weder",
+        "text": "En la alfombra de la 407 hay una marca redonda y chamuscada del tamaño de un plato, y un olor persistente a pelo quemado que el ventilador no termina de llevarse."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 54, «Siniestros movimientos en la 407». El libro dice L25 por errata: la habitación de Weder es la 407 (L24). Segundo eslabón de la cadena de custodia: solo ocurre si el disco sigue en manos de Weder."
+  },
+  {
+    "id": "d1_carter_sale_con_el_saco",
+    "at": "D1 16:00",
+    "until": "D1 16:20",
+    "location": "recepcion",
+    "actors": [
+      "carter",
+      "clinton"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "npcAlive",
+        "npc": "carter"
+      }
+    ],
+    "witnessText": "Carter cruza el hall con un pañuelo sucio tapándose la nariz y un saco de arpillera al hombro que gotea. Clinton le pregunta si necesita ayuda. Carter no se detiene ni se digna a contestarle. Nadie se escandaliza: en este hotel, un explorador británico con un saco al hombro no es ni la tercera cosa más rara de la mañana.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "carter_baja_con_el_saco"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "carter_bajo_al_sotano"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "el_saco_de_carter"
+      }
+    ],
+    "traces": [
+      {
+        "id": "reguero_hall",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«¿El señor Carter? Ha cruzado por aquí hace un rato con un saco al hombro y sin saludar. Y ha dejado un reguero en la alfombra buena que ya me dirá usted quién limpia. Olía... no sabría decirle. A carnicería en agosto»."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 54: «Alimentar a las bestias». A las 16:00 Carter abandona la 362 con el saco."
+  },
+  {
+    "id": "d1_olga_al_bar",
+    "at": "D1 16:00",
+    "until": "D1 18:00",
+    "location": "bar_largo",
+    "actors": [
+      "olga",
+      "gasparini"
+    ],
+    "priority": 5,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_almuerzo_lounpeen"
+      }
+    ],
+    "witnessText": "El Long Bar abre a las cuatro y Gasparini vuelve a reinar detrás de su barra. Olga Lounpeen se despide de Rolland, cruza el restaurante y se sienta sola a una mesa. El barman no le hace ni caso —está trabajando, dice—, así que ella se emborracha sola bebiendo ginebra a pelo, con la calma de quien lleva años entrenando y sabe exactamente dónde está su límite.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "olga_en_el_bar"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "olga_bebe_sola"
+      }
+    ],
+    "traces": [
+      {
+        "id": "botella_de_ginebra",
+        "location": "bar_largo",
+        "teller": "gasparini",
+        "text": "«¿La señorita Lounpeen? Ha estado ahí sentada desde que abrí, sí». Gasparini seca un vaso que ya está seco. «Ginebra sola, sin hielo y sin hablar con nadie. Y no, no me pregunten por qué no me he sentado con ella. Hoy no era buen día»."
+      }
+    ],
+    "tags": [
+      "escucha"
+    ],
+    "note": "Módulo, pág. 55: «En el bar largo». A las 16:00 Olga abandona el restaurante y se emborracha sola en el L18."
+  },
+  {
+    "id": "d1_carter_cruza_la_cocina",
+    "at": "D1 16:20",
+    "until": "D1 16:35",
+    "location": "cocina",
+    "actors": [
+      "carter",
+      "mahadni"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_carter_sale_con_el_saco"
+      }
+    ],
+    "witnessText": "Carter atraviesa las cocinas y saluda a Mahadni con la cabeza. El cocinero le pregunta si quiere que le eche una mano con el saco. «Ya llevo varias», bromea Carter, y baja las escaleras. Ninguno de los dos se ríe.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "carter_y_mahadni_se_conocen"
+      },
+      {
+        "kind": "npcLearnsFact",
+        "npc": "mahadni",
+        "fact": "carter_baja_con_el_saco"
+      }
+    ],
+    "traces": [
+      {
+        "id": "escaleras_manchadas",
+        "location": "cocina",
+        "teller": "mahadni",
+        "text": "«El señor Carter, sí. Baja él solo, siempre solo». Mahadni sonríe con el cigarro apagado entre los dientes y señala con el cuchillo la puerta del fondo. «Le ofrecí ayuda y me contestó una gracia sobre el saco. Aquí abajo cada uno alimenta a lo suyo»."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 54: Carter cruza la cocina y bromea con Mahadni: «ya llevo varias»."
+  },
+  {
+    "id": "d1_carter_alimenta_a_las_bestias",
+    "at": "D1 16:40",
+    "until": "D1 17:20",
+    "location": "viejo_templo",
+    "actors": [
+      "carter"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_carter_cruza_la_cocina"
+      }
+    ],
+    "witnessText": "Las criaturas no le atacan. Carter lanza el saco al pasillo norte sin mirar, con el gesto cansado de quien lo ha hecho muchas veces, y mientras tres gules y dos hombres rata desgarran la arpillera y se reparten lo que hay dentro —hay una mano, hay medio brazo, hay algo que fue una cara—, el arqueólogo se pone tranquilamente a catalogar las piezas con una linterna y un cuaderno.",
+    "effects": [
+      {
+        "kind": "sanityLoss",
+        "loss": "0/1D6"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carter_alimenta_a_las_criaturas"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "algo_vive_abajo"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "las_bestias_del_tunel"
+      }
+    ],
+    "traces": [
+      {
+        "id": "arpillera_reventada",
+        "location": "viejo_templo",
+        "text": "En la boca del túnel norte hay un saco de arpillera reventado y vacío, con la cuerda de esparto todavía anudada en un extremo. La tela está tiesa de sangre seca. A un metro, un zapato de hombre. Con el pie dentro."
+      }
+    ],
+    "tags": [
+      "sotano",
+      "horror"
+    ],
+    "note": "Módulo, pág. 54: «Carter en el Templo de Ibn Tulun». Ver los miembros putrefactos cuesta 0/1D6 de Cordura."
+  },
+  {
+    "id": "d1_najir_llega",
+    "at": "D1 17:00",
+    "until": "D1 17:40",
+    "location": "recepcion",
+    "actors": [
+      "najir",
+      "clinton"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "npcAlive",
+        "npc": "najir"
+      }
+    ],
+    "witnessText": "Entra en el hall un egipcio menudo y elegantísimo, seguido de un botones que carga cuatro maletas sin ningún esfuerzo porque están vacías. La mitad izquierda de su cara es una cicatriz de quemadura antigua, brillante y tirante, que le tira del ojo hacia abajo. Se registra como Faraz Najir, mercader de obras de arte. Desde ese momento, Cleveland Clinton no le quita el ojo de encima.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "faraz_najir"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "najir_en_el_hotel"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "llega_najir"
+      }
+    ],
+    "traces": [
+      {
+        "id": "maletas_vacias",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«El señor Najir, habitación 487. Cuatro maletas, y las cuatro vacías: se lo digo yo, que he visto lo poco que le costaba al muchacho subirlas. Un hombre no viene a El Cairo con cuatro maletas vacías si no piensa llenarlas. Y esa cara, señores... esa cara no se la hizo un accidente»."
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 54: «Más mezquinos». A las 17:00 llega Najir, alertado por Gasparini, cargado de maletas vacías para transportar objetos sin levantar sospechas."
+  },
+  {
+    "id": "d1_dieter_esconde_el_disco",
+    "at": "D1 17:00",
+    "until": "D1 17:40",
+    "location": "hab_lounpeen",
+    "actors": [
+      "dieter"
+    ],
+    "priority": 8,
+    "requires": [
+      {
+        "kind": "custody",
+        "item": "disco_solar",
+        "holder": "dieter"
+      }
+    ],
+    "witnessText": "Dieter envuelve el Disco Solar con la tela deshilachada, lo mete en una caja metálica hecha a medida —la traía preparada desde Alejandría, lo que dice bastante de cuánto sabía antes de llegar— y la esconde bajo el colchón de su cama. Después se sienta en la butaca a mirar la cama durante un buen rato.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "disco_bajo_el_colchon"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "dieter_tiene_el_disco"
+      }
+    ],
+    "traces": [
+      {
+        "id": "colchon_torcido",
+        "location": "hab_lounpeen",
+        "text": "La cama de la izquierda está mal hecha, con el colchón visiblemente descentrado sobre el somier y una arruga dura en mitad del embozo, como si debajo hubiera algo con esquinas."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 54: Dieter vuelve a la L22 a las 17:00 y esconde el artefacto en una caja metálica bajo el colchón. Tercer eslabón de la cadena de custodia."
+  },
+  {
+    "id": "d1_carter_descubre_el_robo",
+    "at": "D1 17:20",
+    "until": "D1 18:00",
+    "location": "viejo_templo",
+    "actors": [
+      "carter"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_carter_alimenta_a_las_bestias"
+      },
+      {
+        "kind": "not",
+        "of": {
+          "kind": "custody",
+          "item": "disco_solar",
+          "holder": "nobody"
+        }
+      }
+    ],
+    "witnessText": "Carter llega a la caja de madera labrada de la esquina noreste y se queda muy quieto. La abre del todo, saca la tela deshilachada y la sacude. Comprueba la otra caja. Vuelve a la primera. Cuando entiende que el Disco Solar no está, la linterna le tiembla en la mano, y lo que sale de su boca no es una palabra inglesa.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "carter_furioso"
+      },
+      {
+        "kind": "npcLearnsFact",
+        "npc": "carter",
+        "fact": "disco_robado"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "falta_una_pieza"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carter_sabe_que_falta_el_disco"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "carter",
+        "by": -10
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "la_colera_de_carter"
+      }
+    ],
+    "traces": [
+      {
+        "id": "caja_comprobada",
+        "location": "viejo_templo",
+        "text": "La caja labrada de la esquina noreste está abierta de par en par y su contenido, revuelto por segunda vez en un día. La tela deshilachada ha sido sacudida y tirada al suelo, y hay marcas recientes de dedos en el polvo del borde. Quien pasó por aquí la última vez no buscaba: comprobaba."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 54: «Consternado, advierte que falta una de las piezas más preciadas: el Disco Solar. Carter monta en cólera». Ocurre igual si el ladrón fue el grupo: basta con que el disco ya no esté en su sitio."
+  },
+  {
+    "id": "d1_aga_khan_llega",
+    "at": "D1 17:30",
+    "until": "D1 18:10",
+    "location": "recepcion",
+    "actors": [
+      "aga_khan",
+      "ibrahim",
+      "behler"
+    ],
+    "priority": 9,
+    "witnessText": "El Aga Khan llega al Shepheard's con su séquito e intenta, sin el menor éxito, que no se note. Behler sale a recibirle con un abrazo de amigo viejo. Detrás, Ibrahim ben Alí carga personalmente una caja plana y larguísima que no deja tocar a ningún botones: el traje de faraón que el imán lucirá esta noche, y que ha costado más de diez mil libras esterlinas.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "aga_khan_viene"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "aga_khan_en_el_hotel"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "el_aga_khan"
+      }
+    ],
+    "traces": [
+      {
+        "id": "caja_del_traje",
+        "location": "recepcion",
+        "teller": "murray",
+        "text": "«¿Su alteza el Aga Khan? Llegó a las cinco y media. Discretísimo, dice él: nueve personas y catorce baúles. Y una caja plana que no dejó tocar a nadie, ni a mí. El traje de esta noche. Faraón, me han dicho. Faraón, con el Príncipe sentado a diez metros»."
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 54: «Llega el Aga Khan», amigo personal de Behler, a las 17:30."
+  },
+  {
+    "id": "d1_najir_a_su_habitacion",
+    "at": "D1 17:30",
+    "until": "D1 17:50",
+    "location": "hab_najir",
+    "actors": [
+      "najir"
+    ],
+    "priority": 6,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_najir_llega"
+      }
+    ],
+    "witnessText": "Najir sube a la 487, alinea las maletas abiertas contra la pared con una precisión de comerciante, se lava la cara con mucho cuidado delante del espejo y vuelve a bajar. No deshace el equipaje: no ha traído nada que deshacer.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "najir_instalado"
+      }
+    ],
+    "traces": [
+      {
+        "id": "maletas_en_fila",
+        "location": "hab_najir",
+        "text": "Cuatro maletas abiertas y vacías, alineadas contra la pared con una precisión que no es de viajero, sino de un hombre que ya ha calculado cuánto le va a caber. En la mesita, un tarro grande de crema para quemaduras, casi terminado."
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 54: a las 17:30 Najir sube a la L28."
+  },
+  {
+    "id": "d1_los_tres_en_recepcion",
+    "at": "D1 18:00",
+    "until": "D1 18:15",
+    "location": "recepcion",
+    "actors": [
+      "carter",
+      "weder",
+      "dieter"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "npcAlive",
+        "npc": "carter"
+      }
+    ],
+    "witnessText": "Los tres se encuentran en el hall a las seis en punto. Weder hace las presentaciones con una sonrisa espléndida; Carter mira a Dieter Lounpeen de arriba abajo, no le tiende la mano y no dice nada. Salen los tres juntos hacia el restaurante sin volver a hablar.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "los_tres_bajan_juntos"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carter_y_weder_juntos"
+      }
+    ],
+    "traces": [
+      {
+        "id": "tres_en_el_hall",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«A las seis se juntaron los tres aquí mismo: el señor Carter, el alemán del museo y el otro alemán, el que llegó esta mañana con la hija. Y para el restaurante. Le diré una cosa: no se caían bien. Eso se ve»."
+      }
+    ],
+    "tags": [
+      "sotano",
+      "custodia"
+    ],
+    "note": "Módulo, pág. 54: «Lounpeen y Weder again». A las 18:00 la pareja se reúne con Carter en la L2 para bajar a los sótanos."
+  },
+  {
+    "id": "d1_najir_gasparini_bar",
+    "at": "D1 18:00",
+    "until": "D1 19:00",
+    "location": "bar_largo",
+    "actors": [
+      "najir",
+      "gasparini",
+      "olga"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_najir_llega"
+      }
+    ],
+    "witnessText": "Faraz Najir entra en el bar y se sienta con Gasparini en la mesa del fondo. Olga se levanta y va derecha hacia ellos; el barman le pide discretamente, con dos dedos, que se aparte, y a ella se le pone la cara de alguien que acaba de decidir algo. Se queda a tres mesas, de espaldas, con la oreja puesta. Los dos hombres hablan bajo. Uno de ellos no para de mirar a su alrededor.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "najir_y_gasparini_hablan"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "llamo_a_najir"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "olga",
+        "by": -10
+      }
+    ],
+    "traces": [
+      {
+        "id": "mesa_del_fondo",
+        "location": "bar_largo",
+        "teller": "gasparini",
+        "text": "«Un amigo de El Cairo, nada más. Vino a tomar algo». Gasparini sonríe demasiado rápido. «Ya sabe cómo es esta ciudad: uno tiene amigos en todas partes y no todos se pueden presentar a todo el mundo»."
+      },
+      {
+        "id": "olga_furiosa",
+        "location": "bar_largo",
+        "text": "En la mesa del fondo quedan dos vasos y, tres mesas más allá, otro vaso volcado sobre el mantel y una silla apartada de golpe. Alguien se ha levantado con prisa y sin educación."
+      }
+    ],
+    "tags": [
+      "escucha",
+      "conspiracion"
+    ],
+    "note": "Módulo, pág. 55: a las 18:00 Najir baja al bar a hablar con Gasparini, y Olga se acerca a pegar la oreja. Ancla de la conversación espiable gasparini_najir_bar."
+  },
+  {
+    "id": "d1_preparativos_mascarada",
+    "at": "D1 18:00",
+    "until": "D1 21:00",
+    "location": "salon_baile",
+    "actors": [
+      "behler"
+    ],
+    "priority": 6,
+    "witnessText": "Behler supervisa los preparativos, feliz, orgulloso y completamente ajeno a la tragedia que se masca doce metros más abajo. Docenas de macetas con palmeras, mesas supletorias con el cordero asado que despiezaba Mahadni, miles de velas en candelabros de cobre sobre alfombras persas. De los brazos de los candelabros cuelgan serpientes vivas, loros y papagayos. De la lámpara central bajan cientos de lianas por las que se balancean monos rojos, macacos, gibones, monos araña, capuchinos y babuinos, entrenados para no atacar a los humanos, o al menos eso promete Behler. A ambos lados de la mesa real, dos leones encadenados.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "salon_preparado"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "mascarada_esta_noche"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "la_mascarada"
+      }
+    ],
+    "traces": [
+      {
+        "id": "salon_montado",
+        "location": "salon_baile",
+        "text": "El salón está montado y vacío, que es cuando más impresiona: cinco mil velas sin encender, un escenario para cincuenta músicos, jaulas cubiertas con paños y, junto a la mesa principal, dos argollas de hierro atornilladas al suelo con cadenas gruesas del grosor de un brazo. Sea lo que sea lo que va atado ahí, todavía no ha llegado."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 54-55: «La preparación de la mascarada», a partir de las 18:00 en el L17."
+  },
+  {
+    "id": "d1_aga_khan_se_recluye",
+    "at": "D1 18:00",
+    "until": "D1 21:00",
+    "location": "hab_aga_khan",
+    "actors": [
+      "aga_khan",
+      "ibrahim"
+    ],
+    "priority": 4,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_aga_khan_llega"
+      }
+    ],
+    "witnessText": "A las seis, el Aga Khan ya está recluido en sus aposentos de la tercera planta y no piensa salir hasta la fiesta. Ibrahim monta guardia en la puerta sin que nadie se lo haya pedido.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "aga_khan_recluido"
+      }
+    ],
+    "traces": [
+      {
+        "id": "guardia_387",
+        "location": "pasillo_habitaciones",
+        "text": "En la tercera planta, delante de la 387, hay un hombre enorme sentado en una silla que ha sacado él mismo al pasillo. No lee, no fuma, no habla con las camareras. Solo mira."
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 54: a las 18:00 el Aga Khan está ya recluido en la L29."
+  },
+  {
+    "id": "d1_los_tres_bajan",
+    "at": "D1 18:15",
+    "until": "D1 18:40",
+    "location": "cocina",
+    "actors": [
+      "carter",
+      "weder",
+      "dieter",
+      "mahadni"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_los_tres_en_recepcion"
+      }
+    ],
+    "witnessText": "Los tres cruzan las cocinas en fila. Mahadni deja el cuchillo sobre la mesa de despiece y les abre la puerta del fondo sin que nadie se lo pida. Dieter se tapa la boca con el pañuelo en cuanto pisa el primer escalón. Weder baja delante, encantado. Carter, el último, no ha dicho una palabra desde el hall.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "weder_baja_al_sotano"
+      }
+    ],
+    "traces": [
+      {
+        "id": "puerta_del_fondo_abierta",
+        "location": "cocina",
+        "teller": "mahadni",
+        "text": "«Tres. Han bajado tres». Mahadni no levanta la vista del cordero. «El inglés, el alemán guapo y otro que no conozco y que no me ha gustado. Les he abierto la puerta. Yo abro puertas, es mi trabajo»."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 54: bajan a los sótanos a contemplar el resto de las piezas robadas."
+  },
+  {
+    "id": "d1_bronca_en_el_templo",
+    "at": "D1 18:40",
+    "until": "D1 19:30",
+    "location": "viejo_templo",
+    "actors": [
+      "carter",
+      "weder",
+      "dieter"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_los_tres_bajan"
+      }
+    ],
+    "witnessText": "Entre las columnas, la linterna de Weder pasea por el sarcófago negro y por las cajas doradas como si enseñara un salón. Dieter mira a su alrededor desconfiado, olfateando el hedor que sube del túnel norte sin llegar a entender qué lo produce. Y entonces Carter estalla: prohíbe a Weder vender una sola pieza, le llama traidor a la cara y se vuelve hacia Dieter. «Si ese hombre tiene el Disco Solar, que lo devuelva inmediatamente o le pego un tiro aquí mismo». No lo dice como una amenaza. Lo dice como una hora.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "bronca_en_el_templo"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "viejo_templo_existe"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "piezas_negras"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carter_prohibe_la_venta"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "carter",
+        "by": -5
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "la_bronca_del_templo"
+      }
+    ],
+    "traces": [
+      {
+        "id": "linterna_rota",
+        "location": "viejo_templo",
+        "text": "Al pie de una columna hay una linterna de mano con el cristal reventado, todavía tibia, y tres juegos de huellas frescas en el polvo de mil años. Dos van y vienen; el tercero se planta delante del sarcófago y no se mueve de ahí."
+      },
+      {
+        "id": "gritos_en_el_sotano",
+        "location": "cocina",
+        "teller": "mahadni",
+        "text": "«Gritos, sí. Abajo». Mahadni se encoge de hombros. «El inglés gritaba y los otros callaban. Aquí abajo los gritos se oyen muy raro, se doblan en las paredes. No pregunté. Nunca pregunto»."
+      }
+    ],
+    "tags": [
+      "sotano",
+      "custodia"
+    ],
+    "note": "Módulo, pág. 54: Carter prohíbe la venta y exige el Disco Solar a Dieter. El módulo pide una tirada de Crédito por investigador para rebajar su furia un 10% cada éxito; el esquema de eventos no la admite, así que aquí solo se declara la escena."
+  },
+  {
+    "id": "d1_pelea_carter_dieter",
+    "at": "D1 19:30",
+    "until": "D1 19:50",
+    "location": "viejo_templo",
+    "actors": [
+      "carter",
+      "dieter"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_bronca_en_el_templo"
+      },
+      {
+        "kind": "any",
+        "of": [
+          {
+            "kind": "all",
+            "of": [
+              {
+                "kind": "anyoneAt",
+                "location": "viejo_templo"
+              },
+              {
+                "kind": "chance",
+                "percent": 60
+              }
+            ]
+          },
+          {
+            "kind": "all",
+            "of": [
+              {
+                "kind": "not",
+                "of": {
+                  "kind": "anyoneAt",
+                  "location": "viejo_templo"
+                }
+              },
+              {
+                "kind": "chance",
+                "percent": 50
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "witnessText": "Carter se enzarza a puñetazos con Dieter entre las columnas. No es una pelea de caballeros: es un arqueólogo de cuarenta y ocho años y un traficante de arte rodando por el polvo de un templo de tres mil años mientras Weder grita que paren y no hace absolutamente nada por separarlos. Del túnel norte llega una respiración pesada que se ha vuelto atenta.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "pelea_carter_dieter"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "carter",
+        "by": -10
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "dieter",
+        "by": -10
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carter_y_dieter_a_punetazos"
+      }
+    ],
+    "traces": [
+      {
+        "id": "sangre_en_el_polvo",
+        "location": "viejo_templo",
+        "text": "En el polvo, delante del sarcófago, hay un revolcón entero marcado: rodillas, codos, un botón de nácar arrancado y unas gotas de sangre que alguien pisó después sin darse cuenta."
+      },
+      {
+        "id": "labio_partido",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«El señor alemán, el de la 204, ha vuelto con el labio partido y sin dar explicaciones. Y el señor Carter subió detrás con los nudillos pelados. Yo no he visto nada, entiéndame, pero he visto los nudillos»."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 54: 50% de probabilidad de que Carter se enzarce a puñetazos con Dieter; 60% si además descubre a los investigadores escondidos entre las columnas. Las dos ramas son excluyentes por construcción y solo se tira un dado, porque `any` evalúa en corto."
+  },
+  {
+    "id": "d1_olga_al_probador",
+    "at": "D1 19:30",
+    "until": "D1 20:30",
+    "location": "tienda_moda_mujer",
+    "actors": [
+      "olga",
+      "belanger"
+    ],
+    "priority": 4,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_olga_al_bar"
+      }
+    ],
+    "witnessText": "Olga, considerablemente ebria, entra en Le Petit France dando un portazo y exige probarse su disfraz. Juliette Belanger la sostiene por el codo con la naturalidad de quien lleva años haciéndolo y corre la cortina del probador. Lo que sale de ahí dentro veinte minutos después no es un disfraz: es una declaración de guerra con dos tiras de piel.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "olga_tiene_disfraz"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "olga_y_belanger_son_amigas"
+      }
+    ],
+    "traces": [
+      {
+        "id": "probador_revuelto",
+        "location": "tienda_moda_mujer",
+        "teller": "belanger",
+        "text": "«Olga estuvo aquí a las siete y media. Bebida, sí, ¿y qué?». Juliette Belanger dobla algo con mucho cuidado. «Se probó el traje para esta noche. Le diré lo que le dije a ella: con ese traje, esta noche pasa algo. Y ella me contestó que de eso se trataba»."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 55: a las 19:30 Olga, ebria, va a la tienda de Juliette Belanger (L8) a probarse su impúdico disfraz."
+  },
+  {
+    "id": "d1_mascarada_empieza",
+    "at": "D1 21:00",
+    "until": "D1 22:00",
+    "location": "salon_baile",
+    "actors": [
+      "behler",
+      "gasparini"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_preparativos_mascarada"
+      }
+    ],
+    "witnessText": "A las nueve empiezan a llegar los invitados, recibidos por camareros nubios enormes con uniforme blanco bordado en oro y jambias del Yemen al cinto. La lista está en su poder y el control es exhaustivo: sin figurar en ella y sin un documento que lo acredite, no se entra. Dentro, cincuenta músicos de jazz y las flappers bailando descalzas sobre el mármol con los ojos en blanco. Marco Antonios, Cleopatras, demasiados Napoleones, dos parejas vestidas de cubismo y una mujer disfrazada de gorila que baila el foxtrot de una manera que va a dar que hablar en El Cairo durante un año.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "mascarada_en_marcha"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fiesta_es_exclusiva"
+      }
+    ],
+    "traces": [
+      {
+        "id": "musica_desde_el_pasillo",
+        "location": "restaurante",
+        "teller": "rolland",
+        "text": "«El dixie se oye desde aquí, monsieur, y desde la cuarta planta, y desde la calle». Rolland se aprieta el puente de la nariz. «Están dentro doscientas personas y en la puerta hay dos nubios con la lista. Si usted no está en esa lista, usted no existe»."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 56: «En el salón de baile». La fiesta arranca a las 21:00 con control de lista; se entra con Crédito y luego Charlatanería de cada uno de los que hablen (ver el detalle control_de_invitados del salón)."
+  },
+  {
+    "id": "d1_discusion_mercaderes",
+    "at": "D1 21:30",
+    "until": "D1 22:10",
+    "location": "salon_baile",
+    "actors": [
+      "dieter",
+      "najir",
+      "olga"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_mascarada_empieza"
+      },
+      {
+        "kind": "npcAlive",
+        "npc": "dieter"
+      }
+    ],
+    "witnessText": "Olga se acerca a su padre y le cuenta, con una sonrisa muy fea, que Gasparini trama algo con Faraz Najir. Dieter le prohíbe volver a ver al barman. Olga le empuja con las dos manos, se ríe y salta a la pista. Su padre se queda un segundo con los brazos colgando y después empieza a buscar a Najir entre los disfraces. Lo encuentra junto a una columna, y lo que empieza como una conversación en voz baja no lo sigue siendo mucho rato.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "dieter_y_najir_discuten"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "dieter",
+        "by": -5
+      },
+      {
+        "kind": "learnFact",
+        "fact": "najir_avisa_a_dieter"
+      }
+    ],
+    "traces": [
+      {
+        "id": "columna_de_la_discusion",
+        "location": "salon_baile",
+        "text": "Junto a una de las columnas del lado sur hay dos copas abandonadas y un corro de invitados que todavía comenta, riéndose, la escena de la pelirroja empujando a su padre. Nadie oyó lo que se dijeron después los dos hombres, pero todos vieron cómo se separaron."
+      },
+      {
+        "id": "najir_incomodo",
+        "location": "salon_baile",
+        "teller": "najir",
+        "text": "«¿El señor Lounpeen? Hemos hablado de negocios». Najir se toca la mitad quemada de la cara sin darse cuenta de que lo hace. «Le he dado un consejo que no me ha pedido y no le ha gustado. Es lo que pasa con los consejos gratis: valen exactamente lo que cuestan»."
+      }
+    ],
+    "tags": [
+      "escucha",
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 57: «La discusión de los mercaderes», 21:30. Ancla de la conversación espiable dieter_najir_fiesta."
+  },
+  {
+    "id": "d1_fuad_entra_en_la_fiesta",
+    "at": "D1 22:00",
+    "until": "D1 22:35",
+    "location": "salon_baile",
+    "actors": [
+      "fuad",
+      "aga_khan"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_fuad_sube"
+      }
+    ],
+    "witnessText": "A las diez hace acto de presencia el Príncipe Fuad, apartando físicamente a los invitados que se cruzan en su camino, y va derecho a la mesa real rodeado de su séquito. Los ilustres se acercan a presentar sus respetos. Entre ellos, el mismísimo Aga Khan, vestido de faraón, circunstancia que en esta sala y con este monarca podría considerarse un agravio. Los leones lo notan antes que nadie y empiezan a rugir.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "fuad_en_la_fiesta"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fuad_y_aga_khan_en_la_misma_sala"
+      }
+    ],
+    "traces": [
+      {
+        "id": "mesa_real_ocupada",
+        "location": "salon_baile",
+        "text": "La mesa real está ocupada y el resto del salón se organiza alrededor de ella como el agua alrededor de una piedra. Junto a las cadenas, dos leones que llevan un buen rato de pie, y ocho hombres armados que llevan aún más rato mirando al hombre vestido de faraón."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 56: «Los leones de Fuad». A las 22:00 el Príncipe entra en el salón."
+  },
+  {
+    "id": "d1_rugidos_y_punetazos",
+    "at": "D1 22:00",
+    "until": "D1 22:40",
+    "location": "salon_baile",
+    "actors": [
+      "dieter",
+      "gasparini",
+      "olga"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_mascarada_empieza"
+      },
+      {
+        "kind": "npcAlive",
+        "npc": "dieter"
+      }
+    ],
+    "witnessText": "Gasparini, disfrazado de conejo, baila con Olga, vestida de mujer prehistórica y prácticamente desnuda, delante de docenas de dementes alcoholizados que rugen a su alrededor. Dieter cruza la pista y trata de golpear al barman. Los soldados del Príncipe le tienen antes de que llegue: se lo llevan a empujones, lo bajan a las cocinas y lo encierran en el almacén frigorífico para templarle los ánimos. En el revuelo —al que se suman todos los invitados aficionados a este tipo de diversión salvaje, que son muchos— alguien se despista lo justo, y los dos leones de Fuad se sueltan de las cadenas.",
+    "effects": [
+      {
+        "kind": "sanityLoss",
+        "loss": "0/1D3"
+      },
+      {
+        "kind": "setNpcStatus",
+        "npc": "dieter",
+        "status": "detained"
+      },
+      {
+        "kind": "moveNpc",
+        "npc": "dieter",
+        "to": "cocina"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "dieter_encerrado"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "leones_sueltos"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "dieter_en_el_frigorifico"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "los_leones_de_fuad"
+      }
+    ],
+    "traces": [
+      {
+        "id": "sillas_por_los_aires",
+        "location": "salon_baile",
+        "text": "Media docena de sillas doradas están patas arriba, hay cristal por el suelo y una cadena de eslabones gruesos cortada limpiamente junto a la mesa real. Dos camareros nubios friegan una mancha que no es vino. Nadie sabe explicar dónde están los leones ahora mismo, y todos prefieren no preguntarlo en voz alta."
+      },
+      {
+        "id": "golpes_en_el_frigorifico",
+        "location": "cocina",
+        "teller": "mahadni",
+        "text": "«El alemán de la 204 está ahí dentro». Mahadni señala con el mentón la puerta metálica del almacén frigorífico, de la que salen golpes espaciados y regulares. «Lo bajaron los soldados. Yo no tengo la llave y no pienso buscarla»."
+      }
+    ],
+    "tags": [
+      "fiesta",
+      "horror"
+    ],
+    "note": "Módulo, pág. 57: «Rugidos y puñetazos», hacia las 22:00. Dieter queda encerrado en el frigorífico hasta que le liberen los camareros a las 11:30 del día 2; la bandera dieter_encerrado es una de las que tiene que leer la agenda del día siguiente."
+  },
+  {
+    "id": "d1_fuad_se_enoja",
+    "at": "D1 22:05",
+    "until": "D1 22:45",
+    "location": "salon_baile",
+    "actors": [
+      "fuad"
+    ],
+    "priority": 7,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_fuad_entra_en_la_fiesta"
+      },
+      {
+        "kind": "chance",
+        "percent": 40
+      }
+    ],
+    "witnessText": "El Príncipe mira el traje de faraón del Aga Khan, después mira a Behler, y después no mira a nadie durante un rato muy largo. No dice nada. Los secretarios cambian de sitio, los guardias se colocan, y a partir de este momento acercarse a Fuad con una petición es una idea considerablemente peor que hace cinco minutos.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "fuad_enojado"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "fuad",
+        "by": -15
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fuad_de_mal_humor"
+      }
+    ],
+    "traces": [
+      {
+        "id": "corte_incomoda",
+        "location": "salon_baile",
+        "teller": "behler",
+        "text": "«Su majestad está de un humor delicado esta noche». Behler lo dice sonriendo y sin mover los labios. «Yo, en su lugar, esperaría a mañana para pedirle nada. Y si tienen que dirigirse a él, por lo que más quieran: majestad. Nunca alteza. Nunca Príncipe»."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 56: Fuad tiene un 40% de enojarse por el traje del Aga Khan, lo que añade un dado de penalización a las tiradas sociales con él. La bandera fuad_enojado la leen sus ganchos de interpretación."
+  },
+  {
+    "id": "d1_reservado_fuad_carter",
+    "at": "D1 22:15",
+    "until": "D1 22:35",
+    "location": "salon_baile",
+    "actors": [
+      "fuad",
+      "carter",
+      "weder"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_fuad_entra_en_la_fiesta"
+      }
+    ],
+    "witnessText": "El Príncipe se levanta de la mesa real y va derecho al reservado del lado norte, donde Carter bebe con su amigo alemán. Con la guardia real detrás, exige ver las piezas. Weder responde antes que nadie que por supuesto, que no se le puede negar. Carter le mira como se mira a un perro que se ha meado en la alfombra, y acepta: por no montar un escándalo, y por los seis fusiles que hay en la puerta del reservado.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "fuad_quiere_ver_las_piezas"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fuad_sabe_de_las_piezas"
+      }
+    ],
+    "traces": [
+      {
+        "id": "reservado_vacio",
+        "location": "salon_baile",
+        "text": "El reservado del lado norte se ha quedado vacío de golpe: dos copas por la mitad, una silla volcada y el cortinaje descorrido. Un camarero comenta que su majestad ha salido de ahí con los dos ingleses —uno de ellos no es inglés, pero eso el camarero no lo sabe— hacia las cocinas."
+      }
+    ],
+    "tags": [
+      "fiesta",
+      "sotano"
+    ],
+    "note": "Módulo, pág. 57: «En el reservado», 22:15."
+  },
+  {
+    "id": "d1_najir_se_apunta",
+    "at": "D1 22:20",
+    "until": "D1 22:35",
+    "location": "salon_baile",
+    "actors": [
+      "najir"
+    ],
+    "priority": 8,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_reservado_fuad_carter"
+      },
+      {
+        "kind": "npcAlive",
+        "npc": "najir"
+      },
+      {
+        "kind": "chance",
+        "percent": 65
+      }
+    ],
+    "witnessText": "Najir no le ha quitado el ojo a nadie en toda la noche: ni a Carter, ni a Weder, ni al Príncipe. Cuando el grupo se mueve hacia las cocinas, se cuela entre ellos con una frase amable, una reverencia y una mentira excelente, y nadie se molesta en echarle.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "najir_baja_al_sotano"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "najir_se_une_a_la_comitiva"
+      }
+    ],
+    "traces": [
+      {
+        "id": "najir_no_esta",
+        "location": "salon_baile",
+        "text": "El egipcio de la cara quemada ya no está en el salón. Un camarero recuerda haberle visto salir detrás de la comitiva del Príncipe, hablando por encima del hombro y sonriendo con media cara."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 57: «¿Quién se apunta?». Najir acompaña a la comitiva si se lo permiten (Charlatanería 65%). La bandera decide quién queda encerrado a la 01:00."
+  },
+  {
+    "id": "d1_bajada_a_los_sotanos",
+    "at": "D1 22:30",
+    "until": "D1 23:30",
+    "location": "viejo_templo",
+    "actors": [
+      "carter",
+      "weder",
+      "fuad",
+      "mahadni"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_reservado_fuad_carter"
+      }
+    ],
+    "witnessText": "La guardia real se queda en las cocinas asegurándose de que nadie más pase. Al bajar oyen a Dieter aporrear la puerta del frigorífico; «es un loco, ni caso», zanja alguien. Abajo les espera Mahadni, alimentando a los monstruos. El Príncipe observa a los gules con desprecio pero sin miedo, y cuando los hombres rata se le acercan como perrillos falderos y le olisquean los zapatos, ni siquiera retrocede. Después se planta delante del Sarcófago de Basalto, y esa forma asimétrica, colosal y absurda le hace callar por primera vez en toda la noche.",
+    "effects": [
+      {
+        "kind": "sanityLoss",
+        "loss": "0/1D6"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "fuad_en_los_sotanos"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "piezas_negras"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "algo_vive_abajo"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "el_principe_en_el_templo"
+      }
+    ],
+    "traces": [
+      {
+        "id": "guardia_en_la_cocina",
+        "location": "cocina",
+        "teller": "mahadni",
+        "text": "«Seis hombres armados en mi cocina, de pie, dos horas. Sin tocar nada, sin dejar pasar a nadie». Mahadni escupe el cigarro apagado. «Y su majestad abajo, con el inglés y el alemán. Yo he vuelto a mis corderos. Es lo que hay que hacer»."
+      },
+      {
+        "id": "huellas_de_charol",
+        "location": "viejo_templo",
+        "text": "En el polvo, delante del sarcófago, hay unas huellas de zapato de charol excelente que se acercan hasta un metro y ahí se paran, muy juntas, mucho rato. Alrededor, huellas más pequeñas, de pie descalzo y de dedo largo, que rodean las primeras y se retiran."
+      }
+    ],
+    "tags": [
+      "sotano",
+      "horror"
+    ],
+    "note": "Módulo, pág. 57-59: «En los sótanos», 22:30. Ancla de la conversación espiable fuad_en_el_templo."
+  },
+  {
+    "id": "d1_selassie_entra",
+    "at": "D1 22:30",
+    "until": "D1 23:05",
+    "location": "recepcion",
+    "actors": [
+      "selassie"
+    ],
+    "priority": 9,
+    "witnessText": "Solo el acto de subir las escaleras es un espectáculo: hacen falta cuatro personas, dos a los lados sujetándole por los brazos, una delante apartando a la gente que baja y otra detrás por si pierde el equilibrio. Los botones se arrodillan al verle pasar. Abebaberk Selassie, el Gordo Nubio, entra en el Shepheard's rodeado de una procesión de degenerados de ambos sexos y balanceando en la mano derecha un maletín pequeño cuyo contenido todos los presentes conocen perfectamente y esperan con avidez enfermiza.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "selassie_en_el_hotel"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "selassie_en_el_hotel"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "el_gordo_nubio"
+      }
+    ],
+    "traces": [
+      {
+        "id": "escalones_marcados",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«Ha entrado el señor Selassie». Clinton lo dice como quien informa de una gotera. «Con veinte personas detrás y siete habitaciones requisadas esta misma tarde. Murray ha tenido que cambiar los números de las puertas a mano. No me pregunten por qué el señor Behler lo permite, porque llevo cuatro años preguntándomelo yo»."
+      }
+    ],
+    "tags": [
+      "llegadas",
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 59: «El gordo infame». Selassie entra en el hotel a las 22:30."
+  },
+  {
+    "id": "d1_selassie_en_el_salon",
+    "at": "D1 23:00",
+    "until": "D1 23:40",
+    "location": "salon_baile",
+    "actors": [
+      "selassie",
+      "behler"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_selassie_entra"
+      }
+    ],
+    "witnessText": "La corte de Selassie entra en el salón de baile a las once y el impacto no se hace esperar: un murmullo de desaprobación recorre la sala, la orquesta se detiene, silencio. Entonces Behler se acerca, abraza al Gordo Nubio y sellan su amistad con un beso. La orquesta arranca otra vez con un dixie desquiciado que disuelve la tensión, y las flappers empiezan a bailar el charlestón rodeándole como si fuera una antigua divinidad impía.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "selassie_en_la_fiesta"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "behler_y_selassie_son_amigos"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "selassie",
+        "by": 5
+      }
+    ],
+    "traces": [
+      {
+        "id": "orquesta_parada",
+        "location": "salon_baile",
+        "teller": "gasparini",
+        "text": "«La orquesta paró en seco. Cincuenta músicos, y silencio». Gasparini se ríe sin ganas. «Y entonces don Charles va y le da un beso. Un beso, delante de todo El Cairo. Aquí hay cosas que no se explican, amigo mío, se ven y ya está»."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 59: la corte de Selassie llega al salón a las 23:00 y Behler le abraza."
+  },
+  {
+    "id": "d1_esbirros_saquean",
+    "at": "D1 23:00",
+    "until": "D2 06:00",
+    "location": "pasillo_habitaciones",
+    "priority": 7,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_selassie_en_el_salon"
+      }
+    ],
+    "witnessText": "Aprovechando la confusión del recibimiento, media docena de esbirros de Selassie abandonan el salón y se dispersan por los pasillos con paso de quien conoce el edificio. Van a las habitaciones vacías. Y esta noche están vacías casi todas.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "habitaciones_saqueadas"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "esbirros_por_los_pasillos"
+      }
+    ],
+    "traces": [
+      {
+        "id": "puertas_entornadas",
+        "location": "pasillo_habitaciones",
+        "text": "En la segunda planta hay tres puertas entornadas que no deberían estarlo y una cerradura arañada alrededor del bocallave. Del salón de baile sube el jazz, y por encima del jazz, de vez en cuando, el ruido corto de un cajón que se cierra deprisa."
+      }
+    ],
+    "tags": [
+      "fiesta",
+      "oportunidad"
+    ],
+    "note": "Módulo, pág. 59: 1D6 esbirros salen a robar en las habitaciones vacías mientras dura la fiesta. Ventana larga a propósito: el grupo puede cruzarse con ellos en cualquier momento de la noche."
+  },
+  {
+    "id": "d1_olga_y_selassie",
+    "at": "D1 23:00",
+    "until": "D2 01:00",
+    "location": "salon_baile",
+    "actors": [
+      "olga",
+      "selassie"
+    ],
+    "priority": 6,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_selassie_en_el_salon"
+      }
+    ],
+    "witnessText": "Olga, desatada, no espera a que Gasparini se lo presente: se acerca al Gordo Nubio y le saca a bailar. Y baila con él más allá de todo límite, generando un corro enorme de admiradores que aplauden y se suman al ritmo y a la barbarie. Selassie, travestido como una odalisca, se mueve con una ligereza que nadie de ese tamaño debería tener. Gasparini lo ve todo desde la barra improvisada y no abre la boca, el muy cobarde.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "olga_baila_con_selassie"
+      },
+      {
+        "kind": "adjustDisposition",
+        "npc": "gasparini",
+        "by": -5
+      },
+      {
+        "kind": "learnFact",
+        "fact": "olga_y_selassie"
+      }
+    ],
+    "traces": [
+      {
+        "id": "corro_de_admiradores",
+        "location": "salon_baile",
+        "teller": "behler",
+        "text": "«La hija del señor Lounpeen lleva dos horas bailando con Selassie». Behler se seca la frente con el pañuelo bordado. «Y el barman mirando desde la barra con la cara que tiene. Le diré lo que me preocupa de esta noche, y no son los leones»."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 59-60: «La bella y la mole líbrica». Olga se acerca a Selassie a las 23:00 y baila con él hasta la madrugada."
+  },
+  {
+    "id": "d1_daga_de_akhenaton",
+    "at": "D1 23:30",
+    "until": "D2 00:10",
+    "location": "viejo_templo",
+    "actors": [
+      "carter",
+      "weder",
+      "fuad"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_bajada_a_los_sotanos"
+      }
+    ],
+    "witnessText": "Carter y Weder le regalan al Príncipe la Daga del propio Akhenatón: el objeto que le dará poder suficiente para prolongar su reinado catorce años y esquivar una cantidad notable de atentados. La contrapartida se pacta ahí abajo, entre columnas: Fuad salvaguardará con su propia vida el traslado de las piezas a las salas secretas del Museo de El Cairo, y otorgará a Carter el privilegio de excavar donde quiera, cuantas veces quiera, con los medios que necesite. Él será su mecenas. Weder abraza al Príncipe —que no consigue disimular la incomodidad— y le pide otra cosa: que interceda ante los miembros más prestigiosos de la Hermandad para que le consideren, de una vez por todas, el hechicero del reino.",
+    "effects": [
+      {
+        "kind": "moveCustody",
+        "item": "daga_de_akhenaton",
+        "to": "fuad"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "pacto_con_fuad"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "carter_tiene_mecenas"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "weder_pide_la_hermandad"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "daga_de_akhenaton"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "hermandad_faraon_negro"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "traslado_al_museo"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "el_pacto_del_sotano"
+      }
+    ],
+    "traces": [
+      {
+        "id": "hueco_de_la_daga",
+        "location": "viejo_templo",
+        "text": "En la caja labrada que sigue abierta hay un segundo hueco en la tela, más pequeño y alargado, con la forma inconfundible de una hoja curva. Es reciente: los bordes del polvo todavía están limpios."
+      },
+      {
+        "id": "carter_de_otro_humor",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«El señor Carter subió de madrugada y me pidió champán. ¿Champán, él? Dijo que mañana empieza otra vida y que ya no tiene que pedirle dinero a nadie». Clinton frunce el ceño. «Y el otro, el del museo, subió detrás sonriendo. Esos dos han vendido algo esta noche»."
+      }
+    ],
+    "tags": [
+      "custodia",
+      "sotano"
+    ],
+    "note": "Módulo, pág. 59: «La daga de Akhenatón», 23:30. Najir, si ha bajado, pide solo una cosa: ser informado de todos los descubrimientos."
+  },
+  {
+    "id": "d1_esbirros_roban_el_disco",
+    "at": "D1 23:30",
+    "until": "D2 00:30",
+    "location": "hab_lounpeen",
+    "priority": 8,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_esbirros_saquean"
+      },
+      {
+        "kind": "custody",
+        "item": "disco_solar",
+        "holder": "dieter"
+      },
+      {
+        "kind": "chance",
+        "percent": 20
+      }
+    ],
+    "witnessText": "Dos hombres de Selassie entran en la 204 sin forzar nada. Uno se queda en la puerta contando por lo bajo; el otro va derecho a la cama, levanta el colchón sin dudarlo un segundo y saca la caja metálica. No la abren. La meten en un saco de tela con lo demás y se van, y el que contaba no ha llegado ni a cuarenta.",
+    "effects": [
+      {
+        "kind": "moveCustody",
+        "item": "disco_solar",
+        "to": "selassie"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "disco_lo_tiene_selassie"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "disco_bajo_el_colchon",
+        "value": false
+      },
+      {
+        "kind": "learnFact",
+        "fact": "esbirros_robaron_el_disco"
+      }
+    ],
+    "traces": [
+      {
+        "id": "colchon_levantado",
+        "location": "hab_lounpeen",
+        "text": "El colchón de la cama de la izquierda está levantado y apoyado contra la pared, y el somier desnudo tiene un rectángulo limpio en el polvo, del tamaño de una caja de puros grande. Quien se lo llevó sabía exactamente dónde mirar."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 58, recuadro: los esbirros roban el Disco Solar si superan tiradas consecutivas de Sigilo (40%) y Descubrir (50%), lo que da aproximadamente un 20%. Solo puede ocurrir si el disco sigue bajo el colchón: si el grupo se le adelantó, el evento se descarta solo."
+  },
+  {
+    "id": "d1_fuad_sube_de_los_sotanos",
+    "at": "D2 00:00",
+    "until": "D2 00:20",
+    "location": "hab_fuad",
+    "actors": [
+      "fuad"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_daga_de_akhenaton"
+      }
+    ],
+    "witnessText": "A las doce en punto, el Príncipe abandona los sótanos sonriendo, con la daga envuelta en un paño y las manos manchadas de un polvo de tres mil años que no se molesta en sacudirse. Sube a la suite real sin hablar con nadie por el camino, y detrás de él se cierran tres puertas.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "fuad_vuelve_a_la_suite"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fuad_sale_de_los_sotanos"
+      }
+    ],
+    "traces": [
+      {
+        "id": "polvo_en_la_escalera",
+        "location": "cocina",
+        "text": "En los escalones que suben de los sótanos hay huellas de polvo blanquecino que se van borrando peldaño a peldaño, y en la cocina, junto a la puerta del fondo, la marca completa de una mano apoyada en la pared. Es una mano cargada de anillos."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 59: Fuad abandona los sótanos a las 0:00. Es de madrugada, así que en minutos absolutos cae en D2, pero pertenece a la noche de la mascarada del día 1."
+  },
+  {
+    "id": "d1_aga_khan_y_la_pelirroja",
+    "at": "D2 00:00",
+    "until": "D2 01:00",
+    "location": "salon_baile",
+    "actors": [
+      "aga_khan",
+      "olga",
+      "selassie"
+    ],
+    "priority": 6,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_olga_y_selassie"
+      },
+      {
+        "kind": "chance",
+        "percent": 50
+      }
+    ],
+    "witnessText": "El Aga Khan se interesa abiertamente por la indómita pelirroja y no consigue separarla de los brazos del nubio ni ofreciendo lo que ofrece. Selassie le sostiene la mirada, desafiante, y la grasa de su cuerpo se agita cuando se ríe. El multimillonario más rico de Asia y el rey de los bajos fondos de El Cairo se miden delante de doscientas personas por una mujer que no está haciendo caso a ninguno de los dos. Si hay alguien cerca que parezca conocerla, el imán se acercará a preguntar.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "aga_khan_pregunta_por_olga"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "aga_khan_quiere_conocer_a_olga"
+      }
+    ],
+    "traces": [
+      {
+        "id": "corro_del_iman",
+        "location": "salon_baile",
+        "teller": "gasparini",
+        "text": "«Su alteza el Aga Khan preguntando por Olga. Por Olga». Gasparini se ríe con la boca torcida y hay un hilo de sangre en su barbilla, de mordérsela. «Y ella sin enterarse. O enterándose perfectamente, que con ella nunca se sabe cuál de las dos cosas es peor»."
+      }
+    ],
+    "tags": [
+      "fiesta",
+      "oportunidad"
+    ],
+    "note": "Módulo, pág. 60: 50% de que el Aga Khan se acerque a los investigadores si están cerca de Olga. Si median para que ella le «salude», reciben su peso en piedras preciosas 1D6 días después; cualquier interacción con Olga desata la ira de Selassie."
+  },
+  {
+    "id": "d1_fuad_escribe_el_telegrama",
+    "at": "D2 00:20",
+    "until": "D2 00:35",
+    "location": "hab_fuad",
+    "actors": [
+      "fuad"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_fuad_sube_de_los_sotanos"
+      }
+    ],
+    "witnessText": "Nada más llegar a la 415, el Príncipe pide papel y escribe él mismo, sin secretarios, un telegrama dirigido a Omar Shakti. Le informa de la traición de Weder y le pide que venga lo antes posible. Lo lee dos veces, lo dobla y se lo entrega a uno de sus hombres sin decir una palabra más.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "telegrama_escrito"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "shakti_avisado"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fuad_delata_a_weder"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "el_telegrama"
+      }
+    ],
+    "traces": [
+      {
+        "id": "papel_calcado",
+        "location": "hab_fuad",
+        "text": "En el escritorio de la suite real queda el bloc de papel con membrete del que se arrancó la hoja de encima. La presión del lápiz ha dejado marcas legibles a contraluz, y una de las palabras que se distinguen, escrita con mucha fuerza, es un nombre: Shakti."
+      }
+    ],
+    "tags": [
+      "custodia",
+      "conspiracion"
+    ],
+    "note": "Módulo, pág. 59: el Príncipe escribe a Shakti informándole de la traición de Weder. La bandera shakti_avisado es la que dispara su llegada en la agenda del día 2."
+  },
+  {
+    "id": "d1_telegrama_a_correos",
+    "at": "D2 00:35",
+    "until": "D2 01:30",
+    "location": "correos",
+    "actors": [
+      "thornhill"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_fuad_escribe_el_telegrama"
+      }
+    ],
+    "witnessText": "Un esbirro del Príncipe baja el telegrama a la oficina de correos, que esta noche sigue abierta por lo excepcional del evento. Mary Ann Thornhill, que lleva dieciocho horas de servicio y no ha pisado la fiesta, lo recoge sin levantar la vista de su novela y lo deja en la bandeja de salida. El papel se queda ahí, en una bandeja de mimbre, encima de todo, durante casi una hora.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "telegrama_en_correos"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "telegrama_en_la_bandeja"
+      }
+    ],
+    "traces": [
+      {
+        "id": "bandeja_de_salida",
+        "location": "correos",
+        "teller": "thornhill",
+        "text": "«¿Esta noche? Un telegrama de la suite real, sí, me lo bajó uno de los hombres del Príncipe hacia las doce y media». La señorita Thornhill baja la voz aunque no hay nadie. «Salió con el primer turno. Y no, no debería decirles a quién iba dirigido»."
+      }
+    ],
+    "tags": [
+      "oportunidad",
+      "conspiracion"
+    ],
+    "note": "Módulo, pág. 59: «A las 0:30 un esbirro lleva el telegrama a la oficina de correos (L10)... los investigadores pueden interceptarlo». La ventana es de casi una hora a propósito. El detalle telegrama_para_shakti de correos es el que lo permite."
+  },
+  {
+    "id": "d1_carter_y_weder_salen",
+    "at": "D2 01:00",
+    "until": "D2 01:40",
+    "location": "sala_escombros",
+    "actors": [
+      "carter",
+      "weder"
+    ],
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_daga_de_akhenaton"
+      }
+    ],
+    "witnessText": "A la una, Carter y Weder abandonan los sótanos. Suben despacio, hablando de fechas y de barcos, y al llegar a la sala de los escombros uno de los dos se para, mira atrás hacia el corredor lateral y dice algo que el otro tarda un segundo de más en contestar.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "carter_y_weder_suben"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "fecha_traslado"
+      },
+      {
+        "kind": "moveNpc",
+        "npc": "mahadni",
+        "to": "cocina"
+      }
+    ],
+    "traces": [
+      {
+        "id": "cerillas_gastadas",
+        "location": "sala_escombros",
+        "text": "En la sala de los escombros, junto a la puerta del corredor lateral, hay cuatro cerillas gastadas en el suelo y una colilla apagada contra la pared. Alguien estuvo aquí parado un rato, decidiendo algo."
+      }
+    ],
+    "tags": [
+      "sotano"
+    ],
+    "note": "Módulo, pág. 60: «En el Viejo Templo». Carter y Weder salen de los sótanos a la 01:00."
+  },
+  {
+    "id": "d1_najir_encerrado",
+    "at": "D2 01:00",
+    "until": "D2 02:00",
+    "location": "viejo_templo",
+    "actors": [
+      "najir"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_carter_y_weder_salen"
+      },
+      {
+        "kind": "flag",
+        "flag": "najir_baja_al_sotano"
+      },
+      {
+        "kind": "npcAlive",
+        "npc": "najir"
+      }
+    ],
+    "witnessText": "Antes de salir, y porque Najir ha bajado con ellos, Carter y Weder cierran la puerta del corredor que da al Viejo Templo. No lo discuten. No se miran. Simplemente uno de los dos empuja la hoja y el otro echa el pasador, y al otro lado se queda un hombre con una linterna y la mitad de la cara quemada, golpeando la madera y gritando en tres idiomas. Del túnel norte llega, sin ninguna prisa, una respiración pesada.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "najir_encerrado"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "najir_encerrado_abajo"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "najir_al_otro_lado"
+      }
+    ],
+    "traces": [
+      {
+        "id": "golpes_al_otro_lado",
+        "location": "sala_escombros",
+        "text": "La puerta del corredor lateral está cerrada con el pasador echado por fuera, cosa que hasta esta noche no había pasado nunca. Al otro lado se oye golpear la madera, primero con los puños y luego con algo más pesado, y una voz que grita en árabe, en francés y en inglés, por ese orden y cada vez más deprisa."
+      }
+    ],
+    "tags": [
+      "sotano",
+      "horror"
+    ],
+    "note": "Módulo, pág. 60: «Faraz Najir será pasto de los hombres rata en 1D6+4 asaltos a no ser que lo rescaten los investigadores». La ventana es de una hora en vez de un minuto para que el rescate sea jugable; el detalle puerta_del_corredor de la sala de los escombros es la vía."
+  },
+  {
+    "id": "d1_behler_se_retira",
+    "at": "D2 01:30",
+    "until": "D2 01:50",
+    "location": "recepcion",
+    "actors": [
+      "behler"
+    ],
+    "priority": 5,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_mascarada_empieza"
+      }
+    ],
+    "witnessText": "A la una y media Behler decide que ya ha visto bastante por hoy. Cruza el hall en dirección a su despacho con la pajarita deshecha y el pañuelo bordado hecho una bola en el puño, se despide de tres personas —no de las tres que uno esperaría— y sube las escaleras con el paso de un hombre que mañana tiene mucho trabajo y esta noche ha tenido demasiado.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "behler_se_ha_retirado"
+      }
+    ],
+    "traces": [
+      {
+        "id": "sin_director",
+        "location": "salon_baile",
+        "text": "El director del hotel ya no está en el salón. Desde que se fue, la fiesta ha bajado un peldaño más: nadie recoge los cristales rotos y los camareros nubios han dejado de mirar la lista de invitados."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 60: Behler abandona la fiesta a la 1:30. Mañana tiene mucho trabajo."
+  },
+  {
+    "id": "d1_carter_y_weder_se_acuestan",
+    "at": "D2 01:35",
+    "until": "D2 02:10",
+    "location": "pasillo_habitaciones",
+    "actors": [
+      "carter",
+      "weder"
+    ],
+    "priority": 6,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_carter_y_weder_salen"
+      }
+    ],
+    "witnessText": "Los dos suben juntos por la escalera de mármol, esquivando invitados sentados en los escalones. Se despiden en el rellano de la tercera planta con un apretón de manos que dura un segundo más de lo normal. Carter entra en la 362 —y esta noche, por primera vez en semanas, la habitación no huele a nada—. Weder sigue subiendo hasta la cuarta.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "carter_y_weder_acostados"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "carter_se_va_manana"
+      }
+    ],
+    "traces": [
+      {
+        "id": "zapatos_en_el_rellano",
+        "location": "pasillo_habitaciones",
+        "text": "En el rellano de la tercera planta hay un par de zapatos de charol excelentes, abandonados uno junto a otro con las puntas hacia la pared. No son de Carter. Debajo de la puerta de la 362 ya no sale ningún olor, y eso, a estas alturas, es una información."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Cierre de la noche: Carter y Weder vuelven a sus habitaciones. Sin este evento se quedarian plantados en la sala de los escombros hasta el dia siguiente."
+  },
+  {
+    "id": "d1_najir_devorado",
+    "at": "D2 02:00",
+    "until": "D2 02:20",
+    "location": "viejo_templo",
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_najir_encerrado"
+      },
+      {
+        "kind": "not",
+        "of": {
+          "kind": "flag",
+          "flag": "najir_rescatado"
+        }
+      }
+    ],
+    "witnessText": "Los golpes en la puerta paran de golpe. Lo que viene después dura menos de lo que parece que va a durar, y termina con un ruido húmedo y un arrastrar de algo pesado hacia el túnel norte. Faraz Najir no va a salir del Viejo Templo de ibn Tulun.",
+    "effects": [
+      {
+        "kind": "sanityLoss",
+        "loss": "1/1D6"
+      },
+      {
+        "kind": "setNpcStatus",
+        "npc": "najir",
+        "status": "dead"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "najir_muerto"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "najir_devorado"
+      }
+    ],
+    "traces": [
+      {
+        "id": "linterna_de_najir",
+        "location": "viejo_templo",
+        "text": "Junto a la puerta cerrada del corredor hay una linterna encendida, tirada de lado, iluminando una franja de suelo por la que algo fue arrastrado hasta la boca del túnel norte. En el marco de la puerta, a la altura del pecho, quedan las marcas de diez uñas."
+      },
+      {
+        "id": "najir_no_ha_dormido",
+        "location": "recepcion",
+        "teller": "clinton",
+        "text": "«La 487 no ha dormido en su cama». Clinton pasa el dedo por el libro de registro. «Y el señor Najir no ha entregado la llave. Es la primera vez en cuatro años que alguien de este hotel no me devuelve una llave, y no me gusta nada»."
+      }
+    ],
+    "tags": [
+      "sotano",
+      "horror"
+    ],
+    "note": "Módulo, pág. 60: si nadie le rescata, Najir muere. Si le salvan la vida será su aliado para siempre y traducirá el egipcio clásico y demótico que ningún investigador sabe leer."
+  },
+  {
+    "id": "d1_fin_de_la_mascarada",
+    "at": "D2 06:00",
+    "until": "D2 07:00",
+    "location": "salon_baile",
+    "priority": 10,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_mascarada_empieza"
+      }
+    ],
+    "witnessText": "A las seis de la mañana se da por clausurado el evento. Una fila enorme de ebrios tambaleantes invade los pasillos camino de sus habitaciones, y algunos se encuentran una sorpresa triste al abrir la puerta. La mayoría, sin embargo, están en un estado de letargo feliz que hace muy difícil moverse entre ellos: el pasillo entero avanza a la mitad de velocidad, y quien tenga prisa esta mañana va a tener que pedir paso.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "mascarada_terminada"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "mascarada_en_marcha",
+        "value": false
+      },
+      {
+        "kind": "learnFact",
+        "fact": "habitaciones_desvalijadas"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "el_dia_despues"
+      },
+      {
+        "kind": "moveNpc",
+        "npc": "aga_khan",
+        "to": "hab_aga_khan"
+      }
+    ],
+    "traces": [
+      {
+        "id": "pasillos_de_ebrios",
+        "location": "pasillo_habitaciones",
+        "text": "Los pasillos están llenos de invitados que no terminan de llegar a ninguna parte, sentados en el suelo con la espalda contra la pared y los zapatos en la mano. Cada pocos metros, alguien de pie delante de su propia puerta abierta, mirando hacia dentro sin entender del todo lo que ve."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 60: «Vuelta al salón de baile», 6:00. Movimiento y DES a la mitad por la marea de borrachos. Aquí termina la noche de la mascarada; lo que sigue ya es la agenda del día 2."
+  },
+  {
+    "id": "d1_selassie_recibe_el_botin",
+    "at": "D2 06:00",
+    "until": "D2 06:30",
+    "location": "salon_baile",
+    "actors": [
+      "selassie"
+    ],
+    "priority": 9,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_esbirros_saquean"
+      }
+    ],
+    "witnessText": "Los esbirros que salieron a por botín le hacen entrega de lo robado a su amo justo al cruzar la puerta principal del salón de baile, sin ningún disimulo, como quien entrega la recaudación. Relojes, anillos, dos pasaportes, un bolso de piel buena, cajas de todos los tamaños. Selassie no mira lo que le dan: pesa el saco con la mano y sonríe.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "botin_entregado"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "selassie_tiene_el_botin"
+      }
+    ],
+    "traces": [
+      {
+        "id": "saco_de_botin",
+        "location": "salon_baile",
+        "text": "Junto a la puerta principal del salón, en el suelo, hay un tirante de saco roto y un reloj de bolsillo con la cadena arrancada que a nadie le ha parecido oportuno recoger. Sea de quien sea, esta noche ha cambiado de dueño."
+      }
+    ],
+    "tags": [
+      "custodia"
+    ],
+    "note": "Módulo, pág. 60: los esbirros entregan lo robado al cruzar la puerta del salón. Si el Disco Solar acabó en el saco, este es el momento en que el Gordo Nubio se entera de lo que tiene."
+  },
+  {
+    "id": "d1_najir_se_marcha",
+    "at": "D2 06:00",
+    "until": "D2 06:45",
+    "location": "recepcion",
+    "actors": [
+      "najir"
+    ],
+    "priority": 7,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_najir_llega"
+      },
+      {
+        "kind": "npcAlive",
+        "npc": "najir"
+      },
+      {
+        "kind": "not",
+        "of": {
+          "kind": "flag",
+          "flag": "najir_baja_al_sotano"
+        }
+      }
+    ],
+    "witnessText": "Faraz Najir abandona el hotel al amanecer, enfurecido, abriéndose paso entre borrachos alegres e inocentes que le dan palmadas en la espalda y le felicitan por un disfraz que no lleva. No se va a su casa: se queda en su automóvil, frente a la entrada del Shepheard's, con los ojos muy abiertos y sin dormir. No piensa dejar que nada ni nadie se le escape. Quiere ese disco, o cualquier cosa que se pueda sacar de ese sótano infame.",
+    "effects": [
+      {
+        "kind": "moveNpc",
+        "npc": "najir",
+        "to": "fuera_del_hotel"
+      },
+      {
+        "kind": "setFlag",
+        "flag": "najir_vigila_la_entrada"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "najir_espera_fuera"
+      }
+    ],
+    "traces": [
+      {
+        "id": "automovil_en_la_puerta",
+        "location": "recepcion",
+        "teller": "bulatovic",
+        "text": "«Lleva ahí desde las seis, señores». El portero señala con la barbilla un automóvil parado al otro lado de la calle Ibrahim Pachá. «Sin bajarse, sin fumar, sin apartar la vista de esta puerta. Yo he escrito poemas sobre hombres así, y ninguno acababa bien»."
+      }
+    ],
+    "tags": [
+      "llegadas"
+    ],
+    "note": "Módulo, pág. 60: si Najir no bajó a los sótanos, abandona el hotel al amanecer y permanece toda la noche en su automóvil vigilando la entrada."
+  },
+  {
+    "id": "d1_selassie_se_retira_con_olga",
+    "at": "D2 06:30",
+    "until": "D2 07:00",
+    "location": "hab_selassie",
+    "actors": [
+      "selassie",
+      "olga"
+    ],
+    "priority": 8,
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_olga_y_selassie"
+      }
+    ],
+    "witnessText": "El Gordo Nubio se retira a sus aposentos de la tercera planta en compañía de Olga Lounpeen, escoltado por cuatro hombres y por media docena de admiradores que se quedan en la puerta. Gasparini lo ve subir desde el hall y se muerde los labios hasta que le corre un hilo de sangre por la barbilla.",
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "olga_con_selassie"
+      },
+      {
+        "kind": "learnFact",
+        "fact": "olga_sube_con_selassie"
+      },
+      {
+        "kind": "moveNpc",
+        "npc": "gasparini",
+        "to": "recepcion"
+      }
+    ],
+    "traces": [
+      {
+        "id": "puerta_311",
+        "location": "pasillo_habitaciones",
+        "text": "Delante de la 311 hay dos hombres sentados en el suelo del pasillo, jugando a las cartas con la espalda contra la puerta. No dejan pasar y no lo dicen con palabras. Dentro no se oye nada."
+      },
+      {
+        "id": "gasparini_mudo",
+        "location": "recepcion",
+        "teller": "gasparini",
+        "text": "«No quiero hablar de eso». Es todo lo que dice Gasparini, y es la primera vez desde que le conocéis que no encuentra una frase ingeniosa. Tiene el labio partido por dentro y no se lo ha hecho nadie."
+      }
+    ],
+    "tags": [
+      "fiesta"
+    ],
+    "note": "Módulo, pág. 60: Selassie se retira a la L32 en compañía de Olga. Si los investigadores intentan liberarla, sus esbirros atacan sin mediar palabra. La bandera olga_con_selassie la necesita el día 2: Dieter sube a la 204 a las 12:00 y su hija no ha dormido allí."
+  }
+]

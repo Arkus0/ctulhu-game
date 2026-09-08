@@ -1,0 +1,888 @@
+[
+  {
+    "id": "weder_museo",
+    "npc": "weder",
+    "label": "Hablar del Museo Egipcio",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—El museo es un almacén con pretensiones, y yo soy su almacenero. —Sonríe con una modestia perfectamente ensayada—. Cinco mil años de una civilización, amontonados en salas sin ventilación porque a Londres le parece que ya está bien así. —Y entonces habla más deprisa—: Tengo cuarenta mil piezas catalogadas y sitio para doce mil. ¿Saben ustedes lo que se hace con las otras veintiocho mil? Se guardan donde se puede. Donde se puede, señores, y con esa frase se pueden justificar muchísimas cosas.",
+      "facts": [
+        "weder_dirige_el_museo",
+        "el_museo_no_tiene_sitio"
+      ],
+      "unlocks": [
+        "weder_egipto_antiguo"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El museo es un almacén con pretensiones, y yo soy su almacenero. —Sonríe con una modestia perfectamente ensayada—. Cinco mil años de una civilización, amontonados en salas sin ventilación porque a Londres le parece que ya está bien así.",
+      "facts": [
+        "weder_dirige_el_museo"
+      ],
+      "unlocks": [
+        "weder_egipto_antiguo"
+      ]
+    },
+    "onFailure": {
+      "text": "Weder habla durante siete minutos seguidos sobre presupuestos de conservación, con excelente pronunciación y sin decir absolutamente nada. Al terminar, y sin que se haya notado la maniobra, resulta que sabe dónde se alojan ustedes, cuántos son, quién les paga y desde cuándo se conocen entre sí. Han contestado a todo y no les ha preguntado nada.",
+      "facts": [
+        "weder_os_ha_tasado"
+      ],
+      "effects": [
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        }
+      ]
+    },
+    "note": "Pág. 39: «No pierde hilo en la conversación, atento a cualquier detalle»."
+  },
+  {
+    "id": "weder_egipto_antiguo",
+    "npc": "weder",
+    "label": "Dejarle hablar del Egipto antiguo",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "onHard": {
+      "text": "Es un conversador magnífico y lo sabe. Habla del Reino Medio, de la restauración de un sarcófago de Deir el-Bahari, de por qué los egipcios pintaban los ojos de las estatuas los últimos.\n—Y hay puertas. —Lo dice sin cambiar de tono, en mitad de todo lo demás—. En los textos hay puertas, y no son metáforas de la muerte, aunque los ingleses se empeñen. Son puertas. La primera se abre con un nombre. La segunda pide otra cosa. —Se detiene un cuarto de segundo de más—. Perdónenme. Uno se apasiona.",
+      "facts": [
+        "segundo_sello",
+        "weder_habla_de_puertas"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿De verdad quieren oírlo? Nadie quiere oírlo. —Y se le enciende la cara—. Los griegos llegaron a Egipto y encontraron una civilización que ya era antigua para ellos. Cleopatra está más cerca de nosotros que de la construcción de la Gran Pirámide. Piénsenlo un momento. Es una idea que a la mayoría de la gente le resbala y a algunas personas les cambia la vida.",
+      "facts": [
+        "weder_disfruta_hablando_de_egipto"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": 10
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Con mucho gusto, pero mejor otro día y con tiempo. —Y consulta el reloj de la terraza, y al consultarlo se le ve calcular: no cuánto tiempo tiene, sino cuánto falta para las doce. Le falta menos de lo que quisiera y ustedes están sentados delante.",
+      "facts": [
+        "weder_tiene_prisa_a_las_doce"
+      ]
+    },
+    "note": "Pág. 39: «No quiere hablar de política ni de nada que no sea el antiguo Egipto». Es su tema seguro, y por eso mismo es donde se descuida.",
+    "locked": true
+  },
+  {
+    "id": "weder_almacen",
+    "npc": "weder",
+    "label": "«¿Por qué alquila el museo un sótano de hotel?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "weder_alquila_el_templo"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Temperatura constante, humedad constante y ningún funcionario británico bajando a contar cajas. —Y entonces hace algo muy extraño: sonríe de verdad, por una vez, y suelta la frase como quien se quita un peso—. Y le seré franco, porque me caen ustedes bien: no todo lo que hay ahí abajo es del museo. En un almacén del Estado hay un inventario. En un sótano alquilado hay lo que uno decide que hay.",
+      "facts": [
+        "weder_guarda_lo_suyo_abajo",
+        "piezas_en_el_sotano"
+      ]
+    },
+    "onHard": {
+      "text": "—Porque debajo de este hotel hay un templo de ibn Tulun, y debajo de mi museo hay una calle. —Se ríe brevemente—. Cámara de piedra, veinte metros bajo tierra, sin ventanas y sin conserjes. Si a usted le dieran a elegir dónde guardar una estela de basalto de dos toneladas, ¿elegiría un edificio con ventanales a la orilla del Nilo?",
+      "facts": [
+        "weder_alquila_el_templo",
+        "el_templo_bajo_el_hotel"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Espacio. —Contesta antes de que terminen la pregunta—. Es el único problema real de mi oficio y no tiene ninguna solución elegante. El señor Behler me alquila unas ruinas que no le sirven para nada y yo le pago puntualmente. Es el acuerdo más aburrido de El Cairo.",
+      "facts": [
+        "weder_alquila_el_templo"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Alquilar? —La pregunta llega medio segundo tarde, y es un hombre que no llega tarde a nada—. Existe un convenio de depósito temporal entre el museo y el establecimiento, sí. ¿Se lo ha comentado a ustedes el señor Behler personalmente, o lo han oído por ahí? —Y espera la respuesta. La espera de verdad. Es la primera pregunta sincera que le han oído hacer.",
+      "facts": [
+        "weder_quiere_saber_quien_habla"
+      ],
+      "effects": [
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        }
+      ]
+    },
+    "note": "Pág. 18: «Weder le alquila el viejo Templo como almacén» y «en los últimos meses ha guardado muchas más pertenencias de las que reconoce»."
+  },
+  {
+    "id": "weder_carter",
+    "npc": "weder",
+    "label": "Preguntarle por Howard Carter",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "carter_y_weder_juntos"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Howard es un dibujante. —Lo dice con un afecto impecable, y por eso tarda un momento en llegar lo que ha dicho—. Un dibujante excelente, con una mano prodigiosa y una obstinación admirable, al que la fortuna dio la espalda durante veinte años y al que se la devolví yo. —Se recoloca el gemelo—. Los hombres a los que uno devuelve la fortuna nunca terminan de perdonárselo. Es una ley. Yo lo sabía cuando lo hice.",
+      "facts": [
+        "weder_desprecia_a_carter",
+        "weder_maneja_a_carter"
+      ]
+    },
+    "onHard": {
+      "text": "—Nos conocimos en Luxor. Yo tenía ciertos... conocimientos históricos poco convencionales sobre dónde convenía cavar, y él tenía las manos y la paciencia. —Sonríe—. Un buen socio es aquel cuya ambición coincide con la propia durante el tiempo justo.",
+      "facts": [
+        "weder_maneja_a_carter"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un amigo, y probablemente el mejor arqueólogo de campo que hay hoy en Egipto, aunque él jamás se atrevería a decirlo en voz alta. —Se le va la vista un instante a la mesa del rincón—. Discúlpenme un segundo: ¿han hablado ustedes ya con él?",
+      "facts": [
+        "weder_y_carter_se_reunen"
+      ]
+    },
+    "onFailure": {
+      "text": "—El señor Carter y yo compartimos intereses profesionales. —Perfecto. Impecable. Y a continuación, con la misma sonrisa exactamente—: ¿Y ustedes a qué se dedican, si no es indiscreción? Se lo pregunto por curiosidad genuina.\nDiez minutos después él no ha dicho nada y ustedes sí.",
+      "facts": [
+        "weder_os_ha_tasado"
+      ],
+      "effects": [
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        }
+      ]
+    },
+    "note": "Pág. 22 y 38: Weder advierte la «inesperada inocencia» de Carter y las oportunidades que le brindan sus contactos."
+  },
+  {
+    "id": "weder_cucarachas",
+    "npc": "weder",
+    "label": "«Tiene usted algo en los zapatos»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "cucarachas_weder"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 5,
+    "onHard": {
+      "text": "Baja la vista. Hay cinco, y no huyen: suben. Trepan por el charol negro con una determinación que no tiene nada de insecto, se caen, y vuelven a subir.\n—El calor de noviembre. —Y por primera vez en toda la conversación no encuentra la frase siguiente—. Llevan tres semanas. Desde... —Se calla. Cierra la boca de un modo que hace ruido—. Desde hace tres semanas. En el museo también. No en mi despacho: encima de mi mesa.",
+      "facts": [
+        "cucarachas_weder",
+        "las_cucarachas_le_siguen"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "cucarachas"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—El Cairo. —Ni se molesta en mirar hacia abajo—. Uno se acostumbra a compartir la ciudad con seis o siete especies que estaban aquí antes que las pirámides y seguirán cuando no quede nada. Es casi consolador, si se piensa bien.",
+      "facts": [
+        "cucarachas_weder"
+      ]
+    },
+    "onFailure": {
+      "text": "Sin mirar hacia abajo, sin interrumpir la frase que estaba diciendo y sin que se le altere la voz, aplasta una con el tacón. Después arrastra el zapato dos centímetros sobre el mármol, para limpiarlo, y sigue hablando de la temporada de excavación.\nLas otras cuatro se detienen. Todas a la vez. Y ninguna vuelve a moverse mientras ustedes están delante.",
+      "facts": [
+        "cucarachas_weder",
+        "las_cucarachas_se_detuvieron"
+      ]
+    },
+    "note": "Pág. 48: «a sus pies hay 1D6 cucarachas frenéticas por subir a sus zapatos de charol negro». Son la Nueva Gran Raza de Yith (pág. 128). Aplastar una cuesta dos dados de penalización con los señores Bohr."
+  },
+  {
+    "id": "weder_viena",
+    "npc": "weder",
+    "label": "«¿De dónde es usted, señor Weder?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Viena. Mil ochocientos setenta y ocho. —Y entonces ocurre lo que no esperabais: se le va la sonrisa y debajo no hay nada preparado—. En el invierno del noventa y dos mis padres se quemaron vivos en un chalet de los Alpes suizos. Yo tenía catorce años y no estaba allí. Los identificaron por lo que llevaban puesto.\n»Pasé los cinco años siguientes buscando por toda Viena a alguien que pudiera decirme dónde estaban ahora. Médiums, hechiceros, brujos, cualquiera que cobrase. —Se le espesa el acento—. Todos me robaron. Todos. Y todos tenían razón en una cosa: que sí se puede hablar con lo que hay al otro lado. Se equivocaban solo en el precio.",
+      "facts": [
+        "weder_huerfano",
+        "weder_ocultista"
+      ],
+      "unlocks": [
+        "weder_ocultismo",
+        "weder_mujeres"
+      ]
+    },
+    "onHard": {
+      "text": "—Vienés. De familia acomodada, y no seré yo quien finja lo contrario. —Da un sorbo—. Huérfano desde los catorce, eso sí. Un incendio. Le sorprendería a usted cuánto de lo que un hombre hace a los cuarenta se decidió en una sola noche a los catorce años.",
+      "facts": [
+        "weder_huerfano"
+      ],
+      "unlocks": [
+        "weder_mujeres"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Viena, aunque llevo veinticinco años en El Cairo y ya sueño en árabe la mitad de las noches. —Sonríe—. Uno es de donde le entierran, dicen. Yo prefiero pensar que uno es de donde le entienden.",
+      "facts": [
+        "weder_es_vienes"
+      ],
+      "unlocks": [
+        "weder_mujeres"
+      ]
+    },
+    "onFailure": {
+      "text": "—De Austria. —Y devuelve la pregunta antes de que nadie pueda hacer la siguiente—: ¿Y ustedes? Se lo pregunto porque llevo un rato intentando colocar ese acento y no lo consigo, y eso no me pasa nunca.",
+      "facts": [
+        "weder_es_vienes"
+      ]
+    },
+    "note": "Pág. 38: nace en Viena en 1878; sus padres mueren calcinados en el invierno de 1892; se entrega al ocultismo para contactar con ellos y termina manipulado por aprovechados."
+  },
+  {
+    "id": "weder_ocultismo",
+    "npc": "weder",
+    "label": "«¿A qué clase de círculos pertenece usted?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "—Logia masónica. Club Mohamed Alí. Automóvil Club, que es el más aburrido y el más útil. Estudio Francés de Arqueología Oriental. Y miembro fundador de la Aurora Dorada de El Cairo, aunque de eso hace ya mucho y la Aurora Dorada, entre nosotros, es un club de aficionados con velas caras.\n»A los diecinueve años conocí en Viena a un hombre llamado Rudolf von Sebottendorf. —Y aquí, por primera vez, mira alrededor antes de seguir—. Con él vine a Egipto. Con él dejé de leer sobre esto y empecé a hacerlo. Y no, no pienso decirles dónde está ahora ni a qué se dedica.",
+      "facts": [
+        "weder_ocultista",
+        "sebottendorf"
+      ],
+      "unlocks": [
+        "weder_mortlan"
+      ]
+    },
+    "onHard": {
+      "text": "—Media docena. En esta ciudad un hombre solo es un hombre y un hombre con seis carnets es una institución. —Cuenta con los dedos, deprisa—. Logia, Club Mohamed Alí, Automóvil Club, el Estudio Francés... y una o dos más de las que no se habla en una terraza a mediodía.",
+      "facts": [
+        "weder_ocultista"
+      ],
+      "unlocks": [
+        "weder_mortlan"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Los que se esperan de un director de museo: la Logia, el Estudio Francés, el Club Mohamed Alí. —Se encoge de hombros con encanto—. Todo lo que se hace en esta ciudad se hace en un club. Es agotador y es así.",
+      "facts": [
+        "weder_pertenece_a_clubes"
+      ]
+    },
+    "onFailure": {
+      "text": "—Soy un funcionario, señores, no un iniciado. —Y se ríe de su propia broma medio segundo antes que ustedes. Es la primera vez que se le ve escoger una palabra: ha dicho «iniciado», que es una palabra que nadie usa si no tiene un motivo para tenerla a mano.",
+      "facts": [
+        "weder_dijo_iniciado"
+      ]
+    },
+    "note": "Pág. 38: Logia Masónica, Club Mohamed Alí, Automóvil Club, miembro fundador de la Aurora Dorada de El Cairo, Estudio Francés de Arqueología Oriental y, desde hace dos años, la Hermandad del Faraón Negro. Rudolf von Sebottendorf es real y fundó la Sociedad Thule.",
+    "locked": true
+  },
+  {
+    "id": "weder_hermandad",
+    "npc": "weder",
+    "label": "Mencionar la Hermandad del Faraón Negro",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "hermandad_faraon_negro"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "No se sobresalta. Al contrario: se acomoda, cruza las manos y os mira con un interés nuevo, como quien descubre que la conversación por fin ha empezado.\n—Dos años. —Sonríe—. Y les diré algo que no le he dicho a nadie en este hotel: son unos burócratas. Una jerarquía de ancianos que llevan sesenta años esperando permiso para hacer lo que yo he hecho en veinticuatro meses.\n»Ustedes me interesan. Si me ayudan en lo que tengo entre manos estos dos días, hablo por ustedes ante quien hay que hablar y entran. —Extiende la mano—. Piénsenlo despacio, que es de las cosas que solo se aceptan una vez.",
+      "facts": [
+        "hermandad_faraon_negro",
+        "weder_es_de_la_hermandad",
+        "weder_desprecia_la_jerarquia"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "weder_ofrece_hermandad"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "weder_presento_a_shakti"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": 25
+        }
+      ],
+      "unlocks": [
+        "weder_shakti"
+      ]
+    },
+    "onHard": {
+      "text": "—Vaya. —Deja la taza. No hay alarma en su cara: hay cálculo—. Esa es una expresión que en El Cairo se oye tres o cuatro veces en la vida, y siempre en boca de gente que sabe más de lo que conviene. —Junta las manos—. Existe. Es antigua. Tiene miembros en este hotel ahora mismo. Y no, no pienso decirles cuántos ni cuáles.",
+      "facts": [
+        "hermandad_faraon_negro",
+        "hay_sectarios_en_el_hotel"
+      ],
+      "unlocks": [
+        "weder_shakti"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Folclore. —Pero contesta demasiado rápido y con demasiada calma, y en vez de cambiar de tema hace lo contrario—: ¿Dónde han oído ustedes eso? Se lo pregunto sin ninguna malicia. Es que es un nombre precioso y llevo años sin oírlo.",
+      "facts": [
+        "hermandad_faraon_negro"
+      ],
+      "effects": [
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—No me suena en absoluto. —Y a partir de ese instante deja de mirar a quien habla y empieza a miraros de uno en uno, ordenadamente, de izquierda a derecha, calculando cuántos son, quién va armado y quién de ustedes es el que menos aguantaría una conversación a solas.",
+      "facts": [
+        "weder_os_ha_tasado"
+      ],
+      "effects": [
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "weder_alertado"
+        }
+      ]
+    },
+    "note": "Pág. 39: «Si los investigadores le ayudan a alcanzar sus planes ganándose su confianza, intercederá por ellos ante Shakti para que sean admitidos en la Hermandad. Otra cosa es que esto produzca efectos beneficiosos». Poner 'weder_presento_a_shakti' es lo que el gancho de la ficha de Shakti (dos dados de penalización) está esperando."
+  },
+  {
+    "id": "weder_shakti",
+    "npc": "weder",
+    "label": "Preguntarle por Omar Shakti",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "omar_shakti"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Omar Shakti dirige la Hermandad desde antes de que existiera este hotel. —Y algo se le tuerce en la voz, y no es miedo del todo—. Es un hombre de una paciencia geológica. Lleva siglos, y digo siglos con toda la intención, esperando a que las cosas ocurran solas.\n»Yo no tengo siglos. Tengo cuarenta y cuatro años y una salud regular. —Se recompone en el acto, demasiado tarde—. Es una manera de hablar. Las jerarquías antiguas son... conservadoras. Nada más.",
+      "facts": [
+        "omar_shakti",
+        "weder_teme_a_shakti",
+        "weder_quiere_el_puesto_de_shakti"
+      ]
+    },
+    "onHard": {
+      "text": "—Un caballero al que conviene tratar con una cortesía que no se le tiene ni a un rey. —Se le va la mano al gemelo y lo gira dos veces—. Tiene plantaciones de algodón al norte, cuatro hombres que no se separan de él y un gato blanco. El gato es la única cosa de ese conjunto que a mí me quita el sueño.",
+      "facts": [
+        "shakti_negocios_algodon",
+        "weder_teme_a_shakti"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un terrateniente. Algodón, sobre todo. —La respuesta es demasiado corta para un hombre que no da respuestas cortas—. Un mecenas ocasional del museo. ¿Puedo preguntarles dónde han oído ese nombre?",
+      "facts": [
+        "shakti_negocios_algodon"
+      ]
+    },
+    "onFailure": {
+      "text": "—Shakti. —Repite el nombre él solo, en voz baja, para sí mismo, y el acento vienés se le sube a la superficie—. Nein. No me suena.\nY después se queda callado once segundos, que en Garth Weder es un fenómeno tan raro como una nevada en El Cairo.",
+      "facts": [
+        "weder_teme_a_shakti"
+      ]
+    },
+    "note": "Pág. 39: «Shakti siente una repugnancia exquisita hacia Weder. Le gustaría asesinarlo con bisturíes. No lo hace porque sería darle demasiada importancia».",
+    "locked": true
+  },
+  {
+    "id": "weder_mortlan",
+    "npc": "weder",
+    "label": "«¿Qué guarda en la caja fuerte de su habitación?»",
+    "approaches": [
+      "adular",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "extreme"
+    },
+    "minutes": 15,
+    "onSuccess": {
+      "text": "Por una vez tarda en contestar, y cuando contesta lo hace en voz muy baja y muy rápida, como quien se quita de encima algo caliente.\n—Un cristal. Antiguo. De un tal Mortlan, aunque el nombre no le dirá nada a nadie de este continente. —Bebe—. Sirve para mirar hacia atrás. No metafóricamente: hacia atrás. Con él he visto el emplazamiento exacto de una cosa que llevaba tres mil años sin que la mirase nadie, y he tenido que aprender a no usarlo dos noches seguidas. —Sonríe con la boca solamente—. Ahora ustedes saben algo que sabemos tres personas. Espero que se den cuenta de lo que eso significa.",
+      "facts": [
+        "cristal_de_mortlan",
+        "weder_vio_la_tumba_con_el_cristal"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "weder_alertado"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Documentación del museo, correspondencia y unas cuantas libras. —Perfectamente afable. Y a continuación, con el mismo tono cordial y sin dejar de sonreír—: ¿Quién les ha dicho a ustedes que yo tenga una caja fuerte en mi habitación?\nY se queda esperando la respuesta, sonriendo, todo el tiempo que haga falta. Acaban de dejar de ser un incordio y han pasado a ser un asunto.",
+      "facts": [
+        "weder_tiene_caja_fuerte"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "weder_alertado"
+        },
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": -20
+        }
+      ]
+    },
+    "note": "Pág. 22 y 38: «posee el cristal de Mortlan, que guarda en su habitación del Shepheard's». Con él analiza el pasado para localizar la tumba de Tutankhamón.",
+    "locked": true
+  },
+  {
+    "id": "weder_churchill",
+    "npc": "weder",
+    "label": "Ofrecerse a presentarle a alguien que le convenga",
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 10,
+    "onHard": {
+      "text": "Se yergue en la silla. Es un cambio físico y completo: hasta este momento estaba siendo educado con ustedes; a partir de este momento está trabajando.\n—El señor Churchill. —Ni siquiera finge pensárselo—. Está en El Cairo, come en este hotel y no recibe a nadie. Si ustedes pudieran sentarme diez minutos a su mesa, señores, tendrían en mí a alguien que no olvida un favor. —Se inclina—. Y créanme: la lista de las cosas que yo puedo hacer por un amigo es larga y muy poco convencional.",
+      "facts": [
+        "weder_quiere_a_churchill"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "impresionaron_a_weder"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": 25
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Presentarme? —Y ahí se le ve la costura: la sonrisa se le queda medio segundo de más—. ¿A quién, exactamente? Perdonen la brusquedad, es que esa frase, en El Cairo, la dice mucha gente y la cumple muy poca.",
+      "facts": [
+        "weder_quiere_contactos"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "impresionaron_a_weder"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": 10
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Es usted muy amable. —Y esa es toda la respuesta, y con ella se acaba: sigue hablando, sigue sonriendo, sigue siendo encantador, y ni una sola vez en lo que queda de conversación vuelve a dirigirse a ustedes por su nombre. Acaban de ser catalogados y archivados.",
+      "facts": [
+        "weder_os_ha_tasado"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": -5
+        }
+      ]
+    },
+    "note": "Pág. 38: «Le encantaría conocer a Churchill si tiene oportunidad para utilizar semejante contacto en beneficio propio». El éxito fija el flag 'impresionaron_a_weder' que espera el gancho 'posicion' de su ficha: «o no socializa en absoluto o no calla, intentando agradar»."
+  },
+  {
+    "id": "weder_aga_khan",
+    "npc": "weder",
+    "label": "Preguntarle por el Aga Khan",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—No le conozco y me muero por conocerle. —Y por una vez dice la parte que suele callarse, quizá porque le divierte decirla—. El ala de ampliación del Museo Egipcio no existe, señores. No hay planos, no hay presupuesto y no hay intención. Pero existiría maravillosamente en una carpeta de piel, con membrete, delante de un hombre que firma cheques por aburrimiento. —Levanta la copa—. No me miren así. Lo llaman mecenazgo desde hace cuatro mil años.",
+      "facts": [
+        "weder_quiere_sablear_al_aga_khan"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Su Alteza es un mecenas natural de las artes y el museo tiene proyectos que merecerían su atención. —Contesta demasiado deprisa, con toda la frase ya montada de antes—. Si en algún momento se diera la ocasión, yo sabría aprovecharla.",
+      "facts": [
+        "weder_quiere_contactos"
+      ]
+    },
+    "onFailure": {
+      "text": "—No tengo el gusto. —Y a continuación, sin que venga a cuento de nada, comenta que Su Alteza llega esta tarde a las cinco y media, que se aloja en la trescientos ochenta y siete, que viaja con secretario y que su disfraz de faraón para esta noche ha costado más de diez mil libras. No tiene el gusto, pero tiene el horario.",
+      "facts": [
+        "aga_khan_viene",
+        "weder_quiere_contactos"
+      ]
+    },
+    "note": "Pág. 38: «Weder no conoce al Aga Khan, y le encantaría hacerlo porque podría sacarle dinero con la excusa de financiar proyectos de ampliación del museo o cualquier farsa parecida»."
+  },
+  {
+    "id": "weder_dieter",
+    "npc": "weder",
+    "label": "Preguntarle por el señor Lounpeen",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "lounpeen_en_el_hotel"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Rastrero, ambicioso y soberbio. —Lo enumera como quien lee una carta de vinos—. Justo lo que necesito. Un hombre así paga por encima del valor con tal de que se sepa que ha pagado, y luego lo enseña, que es lo importante. Yo no vendo objetos, señores: vendo la noticia de que puedo venderlos. —Consulta el reloj—. Tengo cita con él a las cuatro, por cierto. En mi habitación, que es más discreta que un salón.",
+      "facts": [
+        "weder_vende_las_piezas",
+        "cita_weder_dieter_a_las_cuatro"
+      ]
+    },
+    "onHard": {
+      "text": "—Un coleccionista alemán con muy buen ojo y muy mala reputación, que son dos cosas que suelen ir juntas en este oficio. —Sonríe—. Llegó esta mañana. No ha venido a ver las pirámides, eso se lo garantizo.",
+      "facts": [
+        "dieter_es_mercader",
+        "dos_mercaderes"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un caballero de Múnich con quien he coincidido en alguna subasta. —Se encoge de hombros—. El mundo de las antigüedades es pequeño y se cruza uno siempre con los mismos treinta rostros.",
+      "facts": [
+        "dieter_es_mercader"
+      ]
+    },
+    "onFailure": {
+      "text": "—Lounpeen. —Frunce el ceño con una perplejidad que le sale bastante bien—. No me suena. ¿Se aloja aquí? —Y sin embargo, en toda la mañana, es la única vez que se ha molestado en repetir un apellido en voz alta, que es lo que hace la gente cuando quiere que no se le note que ya lo tenía.",
+      "facts": [
+        "weder_conoce_a_dieter"
+      ]
+    },
+    "note": "Pág. 54: a las 16:00 Weder y Dieter se reúnen en la habitación de Weder para negociar la venta de piezas a espaldas de Carter. «Vender ciertas piezas pequeñas a individuos rastreros, ambiciosos y soberbios como Dieter»."
+  },
+  {
+    "id": "weder_mujeres",
+    "npc": "weder",
+    "label": "«Un hombre como usted, y siempre solo»",
+    "approaches": [
+      "adular",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onCritical": {
+      "text": "Se ríe. Es una risa buena, cálida, absolutamente convincente, y por debajo de ella hay algo que no se mueve en absoluto.\n—Cuatro. —Levanta cuatro dedos, muy despacio—. En veinte años, cuatro. En El Cairo me llamaban «el matador» y yo dejaba que me lo llamaran, porque un hombre del que se dice eso entra en cualquier salón sin llamar a la puerta. —Baja los dedos, uno a uno—. Ninguna de las cuatro llegó a saber gran cosa de mí. Ninguna llegó a decírselo a nadie, tampoco. Y verán ustedes: nada de eso ocurrió porque yo sea un depravado. Ocurrió porque yo tenía una reputación que sostener y ellas estaban en condiciones de desmentirla.\nSe recompone la corbata.\n—Y ahora estoy pensando qué hago con ustedes, que es exactamente lo que se están preguntando en este momento.",
+      "facts": [
+        "weder_el_matador",
+        "weder_mato_a_cuatro_mujeres"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "1/1D4"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "weder_alertado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "weder",
+          "by": -20
+        }
+      ]
+    },
+    "onExtreme": {
+      "text": "—Hubo cuatro. —Lo dice con una tristeza tan bien construida que casi convence—. Ninguna terminó bien, y de dos de ellas se habló mucho en esta ciudad. —Y aquí falla la construcción: llega la vanidad y se le adelanta—. En El Cairo me llamaban «el matador», ¿saben? —Y lo dice con orgullo. Con orgullo puro y limpio de un hombre de cuarenta y cuatro años. Después se da cuenta, y por primera vez en toda la mañana la sonrisa le llega tarde.",
+      "facts": [
+        "weder_el_matador"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "weder_alertado"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Casado con un museo, que es la mujer más cara de Egipto. —Ríe. Todo el mundo ríe—. Además, a mi edad las relaciones son un asunto de logística, y yo tengo la logística ocupada.",
+      "facts": [
+        "weder_evita_el_asunto"
+      ]
+    },
+    "onFailure": {
+      "text": "—Uno viaja mucho. —Y cambia de tema con la elegancia de costumbre, pero al hacerlo se lleva la mano al cuello de la camisa y comprueba que está cerrado. Está cerrado. Lo ha comprobado dos veces desde que se sentaron, y las dos veces exactamente cuando la conversación ha rozado esto.",
+      "facts": [
+        "weder_evita_el_asunto"
+      ]
+    },
+    "note": "Pág. 38: «Weder es virgen. Las cuatro mujeres con las que se supone mantuvo relaciones, a las que asesinó, no llegaron a verle desnudo. El motivo del crimen es evidente: no quería perder su fama de caballero atractivo y carismático, al que apodaban con justicia el matador». Es lo que de verdad no quería decir.",
+    "locked": true
+  },
+  {
+    "id": "weder_alemania",
+    "npc": "weder",
+    "label": "Preguntarle por Alemania",
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Por un instante se le enciende algo detrás de los ojos y habla más deprisa de lo que querría.\n—Hay un movimiento en Múnich. Gente joven, gente seria, que ha entendido por fin que la historia no la escriben los parlamentos. —Se corta en seco y recupera la sonrisa—. Perdónenme. Uno se apasiona con las cosas de casa.",
+      "facts": [
+        "weder_protofascista",
+        "correspondencia_nazi"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "cartas_berlin"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Alemania está mal, y lo saben. Aunque ese hombre de Italia, Mussolini, tiene algunas ideas interesantes. —Se encoge de hombros—. No es alguien de fiar, en cualquier caso.",
+      "facts": [
+        "weder_admira_a_mussolini"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sigo la política. Solo me interesa el Egipto que ya no existe. —Y se acabó el asunto. Pero al decirlo aparta un sobre que había sobre la mesa, boca abajo, y lo aparta lo justo para que no se lea el matasellos; y el matasellos que no se lee es de Berlín.",
+      "facts": [
+        "correspondencia_nazi"
+      ]
+    },
+    "note": "Pág. 39. Weder procura evitar el apasionamiento que le delataría como protofascista."
+  },
+  {
+    "id": "weder_traslado",
+    "npc": "weder",
+    "label": "«El veintidós del veintidós, a las veintidós»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "fecha_traslado"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "No pregunta de dónde lo han sacado. Eso es lo que os hiela: que no lo pregunte.\n—Mañana por la noche. —Y sonríe con un gusto enorme—. Todo lo que hay ahí abajo sube por esas escaleras y entra en las salas cerradas del Museo Egipcio, y a partir de esa hora hay en esta ciudad un hombre que decide quién ve qué. Ese hombre soy yo.\n»Vengan. Lo digo en serio: vengan a verlo. —Se inclina—. Llevo veinticuatro años trabajando para diez minutos, y esos diez minutos no valen nada si no los ve nadie.",
+      "facts": [
+        "fecha_traslado",
+        "weder_quiere_testigos"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "weder_invita_al_traslado"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Es una fecha bonita, ¿verdad? Veintidós del veintidós. —Bebe—. Y sí: mañana por la noche se traslada un depósito del museo. Con permisos, con inventario y con dos hombres de la policía del protectorado en la puerta, no vayan ustedes a imaginarse una novela.",
+      "facts": [
+        "fecha_traslado"
+      ]
+    },
+    "onSuccess": {
+      "text": "—No sé de qué me hablan. —Y en el mismo movimiento, sin transición, mira el reloj de la terraza. Es un hombre que acaba de comprobar cuántas horas le quedan.",
+      "facts": [
+        "fecha_traslado"
+      ]
+    },
+    "onFailure": {
+      "text": "—Una fecha caprichosa. —Sonríe con toda su cara—. ¿Se la ha dicho a ustedes el señor Carter? Se lo pregunto sin ninguna intención. —Y la pregunta se queda ahí colgada, muy amable y muy quieta, hasta que alguien la contesta o hasta que se hace evidente que nadie va a contestarla.",
+      "facts": [
+        "fecha_traslado"
+      ],
+      "effects": [
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        }
+      ]
+    },
+    "note": "Pág. 49, fragmento 2: «Solo quedan dos días y las piezas negras se encontrarán a buen recaudo. —Sí, sí, claro. Recuerda: el 22 del 22, a las 22:00»."
+  },
+  {
+    "id": "weder_la_venta",
+    "npc": "weder",
+    "label": "«Le ha vendido una pieza a Lounpeen»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "disco_vendido"
+      },
+      {
+        "kind": "knows",
+        "fact": "weder_vende_las_piezas"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "enganar",
+      "presionar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Weder deja la sonrisa donde estaba y detrás no hay nada.\n—Cinco mil libras. A dos años, con mil de depósito, porque el señor Lounpeen tiene mucho gusto y poca liquidez. —Se ajusta el gemelo—. Y no, no lo hago por el dinero: tengo el sueldo de un director de museo y las necesidades de un hombre ordenado. Lo hago para que en El Cairo se sepa que las piezas pasan por mis manos. Hay gente a la que quiero impresionar y que no se impresiona con conferencias. Cuando esa gente sepa que yo repartí el tesoro, dejarán de mirarme como a un empleado.",
+      "facts": [
+        "weder_busca_reconocimiento",
+        "hermandad_faraon_negro",
+        "precio_del_disco"
+      ],
+      "unlocks": [
+        "weder_hermandad",
+        "weder_traslado"
+      ]
+    },
+    "onHard": {
+      "text": "—Una pieza menor, de las que se catalogan por duplicado. —Sonríe con toda su excelente pronunciación—. El señor Lounpeen es coleccionista y paga bien. Y antes de que lo pregunten: no, Howard no lo sabe, y les agradecería enormemente que siguiera sin saberlo. Un arqueólogo enfadado es un problema; un arqueólogo enfadado y armado es otra cosa.",
+      "facts": [
+        "weder_vende_las_piezas",
+        "carter_no_lo_sabe"
+      ],
+      "unlocks": [
+        "weder_traslado"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Hago tasaciones. Es parte de mi trabajo y llevo haciéndolas veinte años. —Se ríe—. Si cada vez que un director de museo enseña una pieza a un coleccionista alguien pensara lo que ustedes están pensando, no habría museos.",
+      "facts": [
+        "weder_vende_las_piezas"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sé de dónde sacan eso. —Y lo niega tan bien, con tanta calma y tan buena sintaxis, que solo hay una cosa que desentona: la caja fuerte de detrás del escritorio está entreabierta, y desde donde estáis se ve que dentro no hay nada más que una tela arrugada.",
+      "facts": [
+        "caja_fuerte_vacia"
+      ]
+    },
+    "note": "Módulo, pág. 54: Weder entrega el Disco Solar a cambio de 5.000 libras pagaderas a dos años con un depósito de 1.000. Quiere que la Hermandad le envidie."
+  }
+]

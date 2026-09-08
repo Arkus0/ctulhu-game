@@ -1,0 +1,163 @@
+[
+  {
+    "id": "gaviota_contra_el_cristal",
+    "range": { "min": 1, "max": 5 },
+    "text": "Una gaviota se estrella violentamente contra el cristal de una ventana. La atraviesa y pierde la cabeza. El cuerpo descabezado sigue intentando volar entre las piernas de uno de los investigadores.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D2" }]
+  },
+  {
+    "id": "grieta_en_el_suelo",
+    "range": { "min": 6, "max": 10 },
+    "text": "El suelo se resquebraja. Tirada de DES para no caerse. A través de la grieta surge un olor pestilente. Si algún investigador comete la osadía de agacharse, en el fondo del agujero podrá verse a sí mismo sonriendo. El «otro yo» se gira y, mirándole directamente a los ojos, le susurra: «encuentra el Disco Solar y póntelo. No seas estúpido. Tú eres el elegido. ¿Qué pasa? ¿No te fías de ti?».",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D2" }]
+  },
+  {
+    "id": "los_senores_bohr_de_negro",
+    "range": { "min": 11, "max": 15 },
+    "text": "El investigador con menos POD advierte la presencia de un grupo de personas (1D10+2) vestidas con trajes negros, de espaldas a él. Cuando uno se gira, le mira con una mirada lánguida. Se gira otro, y son iguales. Parecen la misma persona. Hablan entre sí, comentando lo que observan, con cierta superioridad. Se giran todos hacia él: son todos el mismo. Cuando el investigador vuelve a fijarse, desaparecen. Una tirada de Ciencia (Física) o una tirada Difícil de Conocimientos permite identificarles como «copias» de Niels Bohr.",
+    "effects": [
+      { "kind": "sanityLoss", "loss": "0/1D3" },
+      { "kind": "sanityLoss", "loss": "0/1D6" }
+    ],
+    "check": { "skill": "Ciencia (Fisica)" },
+    "onSuccess": [{ "kind": "unlockJournal", "entry": "copias_de_niels_bohr" }],
+    "note": "El libro resta a la segunda perdida (0/1D6) lo que ya se perdio en la primera (0/1D3); aqui se aplican ambas tiradas sin esa resta, asi que el resultado puede ser un poco mas duro que el original. La tirada de identificacion tambien admite Conocimientos (Dificil) como alternativa a Ciencia (Fisica); solo se modela la primera."
+  },
+  {
+    "id": "cucarachas_que_hablan",
+    "range": { "min": 16, "max": 20 },
+    "text": "Uno de los pasillos por los que caminan los investigadores está incomprensiblemente vacío; parece que el tiempo se ha detenido y el vello de la piel se eriza por un extraño efecto electromagnético. Los investigadores contemplan cómo una cucaracha cruza el techo lentamente. Llega otra, se detienen un segundo y se alejan juntas, en paralelo, «como si estuvieran charlando entre sí», comenta sonriendo un camarero que cruza con una bandeja. Las cucarachas se giran hacia él, como si lo hubieran oído, y corren a desaparecer en una esquina. El camarero tira su bandeja y huye, aterrado. Si es la segunda vez que los investigadores se topan con estas «cucarachas» (Las cucarachas de Weder, pág. 44), un éxito en Ciencia (Biología o Zoología) o un éxito Difícil en Saber (Egiptología) hace que los insectos recuerden más a los escarabajos que a las cucarachas; un éxito Extremo en Mitos de Cthulhu puede, a discreción del Guardián, indicar su relación con la Gran Raza de Yith.",
+    "effects": [
+      { "kind": "sanityLoss", "loss": "0/1D3" },
+      { "kind": "unlockJournal", "entry": "cucarachas_no_son_cucarachas" }
+    ],
+    "note": "El libro remite a un suceso ya presenciable en la partida, «Las cucarachas de Weder» (pag. 44); si existe como evento propio en events/day1.json convendria enlazarlo alli en vez de aqui."
+  },
+  {
+    "id": "calor_y_pustulas",
+    "range": { "min": 21, "max": 25 },
+    "text": "Un brusco cambio de temperatura congela los vasos y los cristales cercanos, haciendo que estallen. Hay que tener éxito en una tirada de Suerte para evitar 1D3 puntos de daño. De repente la temperatura cambia radicalmente hasta hacer un calor insoportable: un recipiente con agua (un vaso, unos jarrones, la bandeja de un camarero, una cena dejada frente a una puerta) comienza a hervir delante de los investigadores. Un señor impecable de aspecto británico se afloja la corbata: «qué calor tan espantoso». Descubrimos su cuello infestado de granos hasta un punto inquietante; las úlceras crecen y explotan. Si le preguntan algo se desabotona la camisa: «pues llevo así un par de días». El cuerpo entero está plagado de abscesos que explotan, crecen y disminuyen a ojos vista. «No me atrevo a rascarme. Voy a un hospital, porque cuando empiezo, no puedo parar». Se aleja rascándose, dejando en la alfombra un reguero de fluido blanquecino.",
+    "effects": [
+      { "kind": "sanityLoss", "loss": "0/1D2" },
+      { "kind": "sanityLoss", "loss": "0/1D3" },
+      { "kind": "sanityLoss", "loss": "0/1D3" }
+    ],
+    "check": { "skill": "Suerte" },
+    "onFailure": [{ "kind": "damage", "amount": "1D3" }]
+  },
+  {
+    "id": "mordisco_del_nino",
+    "range": { "min": 26, "max": 30 },
+    "text": "Un grito de un niño americano, con una gorra de colores coronada por una hélice, desgarra el tranquilo ambiente del hotel. Cuando localizan a la víctima, se encuentra en el suelo con la ropa rasgada. En la piel se distinguen marcas de dientes que, con una tirada de Ciencia (Biología o Zoología), resultan ser de algún animal desconocido: el tamaño de la dentadura es el de un ser aberrante.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D3" }]
+  },
+  {
+    "id": "perro_suicida",
+    "range": { "min": 31, "max": 35 },
+    "text": "Un perro callejero se golpea la cabeza saltando una y otra vez contra las paredes que lo rodean, hasta matarse, a no ser que alguien se lo impida.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D3" }]
+  },
+  {
+    "id": "dedos_cortados_de_rolland",
+    "range": { "min": 36, "max": 40 },
+    "text": "Un tumulto (en el restaurante, el jardín o la terraza, según convenga) atrae la atención de los investigadores: una señora se ha cortado los dedos de la mano con un cuchillo de cocina. Michel Rolland grita histérico, dando vueltas sobre sí mismo y agitando las manos. El marido de la señora intenta recoger los dedos del suelo, a cuatro patas, bajo la mesa. La mujer le observa impasible. Cuando le preguntan, no puede explicar por qué lo ha hecho. «Perdón, perdón», repite incesantemente.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D4" }],
+    "note": "Michel Rolland ya existe como PNJ (\"rolland\") en npcs.json."
+  },
+  {
+    "id": "nino_en_la_barandilla",
+    "range": { "min": 41, "max": 45 },
+    "text": "Un niño egipcio camina por la barandilla de un balcón. «Juega conmigo», le dice al que intente salvarle (éxito Difícil de DES para conseguirlo). Si falla, el niño se lanza al vacío y, cuando miran abajo, no hay rastro de él por ninguna parte. Si lo salva, el niño se aleja enojado.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D4" }]
+  },
+  {
+    "id": "tormenta_y_anciana",
+    "range": { "min": 46, "max": 50 },
+    "text": "El cielo se vuelve gris, encapotado por nubes negras. Cae un rayo que parte por la mitad un árbol del jardín posterior. 1D3 asaltos después la tormenta desaparece. Una anciana sentada en una mesita de té, con un caniche en las manos, sentencia: «¿Qué miran? ¡Tan solo es el fin del mundo, señores!».",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D2" }]
+  },
+  {
+    "id": "escarabajo_en_la_garganta",
+    "range": { "min": 51, "max": 55 },
+    "text": "Alguien ha sufrido un percance en el restaurante. Michel Rolland grita histérico, buscando ayuda, sin moverse. Si los investigadores se acercan verán que, en una mesa cercana, una anciana llora desconsoladamente mientras pide auxilio, frente a su marido, postrado en su silla: el hombre no puede respirar. Uno de los camareros busca algo dentro de su boca con una cuchara, apartando la lengua; hay un visible bulto del tamaño de una nuez que se agita en la garganta. Con éxito en Primeros auxilios, el investigador sacará de su interior un insecto parecido a una garrapata enorme o un escarabajo; si los investigadores pretenden observarlo, el camarero lo tirará al suelo y lo aplastará de inmediato. Si la ayuda sanitaria no llega, un hombre con traje negro y aspecto triste se llevará el escarabajo con un esmero preocupante, mientras el viejo sigue tirado en el suelo. Si es la segunda vez que los investigadores se topan con estos insectos (Las cucarachas de Weder, pág. 44), empezarán a hacer preguntas.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D3+1" }]
+  },
+  {
+    "id": "la_risa_del_faquir",
+    "range": { "min": 56, "max": 60 },
+    "text": "Un señor bajito, con traje caqui y un salacot que le queda grande, no para de reír; lleva ya más de cinco minutos así y la gente le rodea, interesada. Un éxito en Medicina o un éxito Difícil en Psicología descubre que las risas son en realidad provocadas por un intenso dolor: las lágrimas le corren por las mejillas. Al intentar incorporarle, los investigadores descubren que el asiento está cubierto de sangre; un éxito en Medicina ayudará a encontrar una púa de faquir clavada en los nervios del coxis, origen de la risa constante. El hombre es trasladado a un hospital de inmediato. Se trata, según los empleados del hotel, de un vulgar turista.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D2" }]
+  },
+  {
+    "id": "la_adivina_del_disco",
+    "range": { "min": 61, "max": 65 },
+    "text": "Una anciana vestida con harapos, el rostro cubierto por un raído velo y los pies descalzos llenos de magulladuras, lee la buenaventura entre los huéspedes del hotel, que se incomodan con su presencia mientras otros ríen desde una prudente distancia. Nadie entiende cómo ha entrado en el hotel. Antes de que los empleados la echen, agarra del brazo a uno de los investigadores (Esquivar para evitarlo): «Ten cuidado. Siento que no te tomas esto en serio, dulce flor de loto. Todavía confías en tu suerte y piensas que te librarás de todo; que las desgracias de este mundo no son para ti. Pronto, mucho antes de lo que tú crees, cambiarás de opinión. Dame unas piastras y te ayudaré a evitarlo». Si el investigador le da todas las monedas que lleve encima, la anciana le susurrará al oído: «Consigue el Disco, desgraciado. Consigue el Disco y dáselo al que lo merece». Si solo le ofrece parte del dinero, o ninguno, la anciana pronunciará: «¡Yo te maldigo, bastardo! El sumo sacerdote no te perdonará esta afrenta. Exterminará a los impíos y tú serás el primero».",
+    "effects": [],
+    "note": "El libro no fija aqui una perdida numerica de Cordura para este suceso concreto."
+  },
+  {
+    "id": "el_libro_de_la_biblioteca",
+    "range": { "min": 66, "max": 70 },
+    "text": "Entra un soldado británico borracho, tambaleándose y tropezando con todo: «¡No estoy borracho, se me ha caído este libro encima, joder! ¡Maldita biblioteca de locos! ¡Dejen de reírse, no soy estúpido!» (elegir uno de la Lista de personajes aleatorios, pág. 130). Suelta el libro, que cae al suelo, o se lo entrega directamente a un investigador si este muestra interés. Si le preguntan, explica que se refiere a la biblioteca del salón Isis. El libro, con cubierta de piel de cordero y cientos de páginas, solo contiene una frase en árabe repetida miles de veces: «un alma traidora robó el cuerpo a la otra. Esta desdichada intentó recuperarlo, pero murió en el intento. Ahora la traidora ha sido liberada y busca más víctimas».",
+    "effects": [],
+    "note": "El libro no fija aqui una perdida numerica de Cordura para este suceso concreto."
+  },
+  {
+    "id": "el_azulejo_que_gira",
+    "range": { "min": 71, "max": 75 },
+    "text": "Al pisar un azulejo, este se mueve. Para levantarlo, el investigador debe superar una tirada de POD; si falla, el dibujo geométrico de la baldosa empezará a girar, mareándole hasta que retire la mirada, presa del pánico, y vomite. Si la supera, siente la sensación pero sin efecto. Debajo, la tierra es negra y húmeda y desprende un olor hediondo; hay un agujero en el centro en el que cabe un puño, y una voz en la cabeza susurra: «¿te atreves a meter la mano?». Si el investigador introduce la mano, deberá enfrentar su POD contra la violenta energía electromagnética que emana el Sarcófago (POD 135). Si gana, recibe información valiosísima a discreción del Guardián (dónde está el Disco Solar, cómo destruir el Sarcófago, cuándo lo sacarán del sótano...). Si pierde, sufre 1D10 puntos de daño: siente cómo una rata del tamaño de un cerdo le arranca la piel con los dientes hasta dejarle la mano en los huesos y, mirando por el agujero, ve unos ojos rojos y un aspecto humanoide.",
+    "effects": [],
+    "check": { "skill": "POD", "difficulty": "extreme" },
+    "onFailure": [
+      { "kind": "damage", "amount": "1D10" },
+      { "kind": "sanityLoss", "loss": "0/1D6" }
+    ],
+    "note": "El libro pide una tirada enfrentada de POD contra el POD 135 del Sarcofago; se aproxima como una tirada Extrema de POD propia, que en la practica exige un POD muy alto para superarse, igual que el original. La \"informacion valiosisima\" del exito queda a discrecion del Guardian, tal y como dice el propio libro."
+  },
+  {
+    "id": "el_monolito_del_pasillo",
+    "range": { "min": 76, "max": 80 },
+    "text": "Al fondo de un largo pasillo aparece un extraño objeto negro de 6 m de largo: el Sarcófago de Basalto (para los investigadores puede que se trate solo de un bloque de piedra enorme), en una imagen que recuerda a una mezcla entre El resplandor y 2001, «el Monolito». Si alguien se acerca a menos de 5 m debe superar una tirada Difícil de POD para controlar su mente, mientras escucha una voz que susurra: «entra conmigo y descansa para siempre». Si falla, el Sarcófago le atrae irremisiblemente, como empujado por una fuerza colosal; al tumbarse ya no podrá levantarse, y al cabo de 1D3 asaltos, a no ser que otro investigador o PNJ tire de él, su cuerpo se desgarrará por dentro (1D20 puntos de daño) y de su interior surgirán las extremidades de la criatura de Yith. En el asalto siguiente todo habrá desaparecido excepto el cuerpo triturado (o herido) del investigador.",
+    "effects": [],
+    "check": { "skill": "POD", "difficulty": "hard" },
+    "onFailure": [
+      { "kind": "damage", "amount": "1D20" },
+      { "kind": "sanityLoss", "loss": "0/1D10" },
+      { "kind": "unlockJournal", "entry": "criatura_de_yith_en_el_sarcofago" }
+    ],
+    "note": "Se simplifica la ventana de rescate del libro (1D3 asaltos para que otro investigador o PNJ tire de la victima antes de que el dano se produzca): aqui el fallo de la tirada de POD aplica el dano directamente."
+  },
+  {
+    "id": "la_gotera_ensordecedora",
+    "range": { "min": 81, "max": 85 },
+    "text": "En el lugar donde se encuentran los investigadores (Descubrir) hay una gotera en el techo. Quien siga pendiente de ella en el siguiente asalto (tirada de POD para evitarlo) oye cómo las gotas caen al suelo con un ruido ensordecedor que taladra los tímpanos y hace sangrar por las orejas (1D6 puntos de daño). En el asalto siguiente, para dejar de escucharlo, hay que superar una tirada Difícil de POD; quien no lo consiga sufre 1D10 puntos de daño, mientras las gotas suenan como cañonazos y la sangre cae a borbotones de nariz y orejas. Un asalto más tarde hace falta una tirada Extrema de POD: quien fracase sufrirá 2D10 puntos de daño, los huesos del cráneo se quebrarán y las cabezas de las víctimas aumentarán de tamaño durante un instante, como si algo quisiera salir desde dentro. Al despertar, el daño no ha sido real, pero la pérdida de Cordura sí.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D6" }],
+    "note": "Es una pesadilla en cadena: cada tirada de POD fallida escala el dano descrito (1D6, luego 1D10, luego 2D10), pero el propio libro aclara que ese dano nunca es real; solo la perdida final de Cordura (0/1D6) se mantiene."
+  },
+  {
+    "id": "el_cuadro_de_pnakotus",
+    "range": { "min": 86, "max": 90 },
+    "text": "En uno de los pasillos, o en una habitación, los investigadores que no superen una tirada de POD se quedarán paralizados contemplando un misterioso cuadro al óleo de 4x6 m del siglo pasado, sin aparente valor artístico: representa las dunas de un desierto y, en el horizonte, las lejanas ruinas de una ciudad con torres de basalto negro (Mitos de Cthulhu: se trata de Pnakotus, la ciudad de la Gran Raza). En 3 asaltos las dunas comienzan a moverse, generando remolinos hipnóticos, y la ciudad del horizonte empieza a acercarse como si los investigadores fuesen atraídos hacia ella. En el segundo asalto deben superar una tirada de POD para dejar de mirar; si no lo consiguen, en la ciudad se aprecia un temblor que derrumba los edificios y miles de almas alienígenas gritan al unísono, engullidas por una funesta tempestad. En el tercer asalto, tirada Difícil de POD: la ciudad se encuentra frente a ellos, con seres fantasmales despedazados bajo enormes superficies megalíticas, y de los agujeros entre los mosaicos octogonales del suelo surgen 1D3 pólipos volantes flotando, inmateriales, sobre los cuerpos destrozados de sus enemigos. El Guardián lanzará un dado para ver a cuál investigador atacan los tentáculos (85% de acierto); la víctima debe superar una tirada de Suerte o el pólipo se la lleva consigo al interior del paisaje para siempre. Tras la visión, el cuadro recupera su aspecto inicial, pero la pérdida de Cordura y el daño provocado permanecen. Rescatar al investigador atrapado exigiría viajar a las ruinas de Pnakotus, en Australia, y celebrar allí un ritual de difícil ejecución; el cristal de Mortlan puede ayudar a averiguar su paradero exacto.",
+    "effects": [
+      { "kind": "sanityLoss", "loss": "0/1D3" },
+      { "kind": "sanityLoss", "loss": "0/1D6" },
+      { "kind": "unlockJournal", "entry": "pnakotus_la_gran_raza" }
+    ],
+    "check": { "skill": "Suerte" },
+    "onFailure": [{ "kind": "setInvestigatorStatus", "who": "random", "status": "fled" }],
+    "note": "Se simplifica la tirada previa del 85% de acierto del polipo volante (aqui la de Suerte decide directamente) y se elige al azar entre los investigadores presentes, que es lo que pide el libro cuando no hay Guardian que lance el dado. Rescatarlo exigiria un viaje a Pnakotus (Australia) que esta partida de dos dias en El Cairo no puede alojar, asi que quien pierde la tirada queda fuera de la partida (estado 'fled') en vez de abrir una subtrama sin contenido detras."
+  },
+  {
+    "id": "el_bebe_muerto",
+    "range": { "min": 91, "max": 95 },
+    "text": "Una mujer atractiva, Erika, hospedada en el hotel, de unos 30 años, rubia y de ojos verdes, da de mamar a su hijo recién nacido, envuelto en mantas. Al otro lado de la mesa, su marido, Victor, apartado de ella, muestra un constante «tic» en la pierna y no para de agitar convulsivamente. Victor se ríe por lo bajo, cubriendo su sonrisa con la palma de la mano; con la otra (Descubrir) escribe algo en un cuaderno que oculta bajo una servilleta. Al acercarse, se lee «está muerto» en alemán, escrito con letra temblorosa, docenas de veces. Con otra tirada de Descubrir se advierte que, efectivamente, el niño que sostiene la madre entre los brazos está muerto desde hace varios días. Tiene un color azulado y, si preguntan por él a la madre (solo habla alemán) y superan una tirada de Charlatanería o Encanto, esta se lo enseña, orgullosa: al retirar las mantas, el olor es espantoso. Victor, tanto si intentan hablar con él como con Erika, saca un cuchillo de debajo de la mesa y se corta las venas (tirada Difícil de DES para evitarlo) o ataca a quien se le acerque a menos de 2 m (Esquivar): Pelea (Cuchillo) 50% (25/10), daño 1D4. En el momento en que Erika y Victor sean reducidos, con o sin ayuda de los camareros, testigos o empleados del hotel, los investigadores (INT) pueden observar al niño con calma; parece (Medicina) haber muerto por asfixia, y se pueden apreciar (Descubrir) marcas de sangre coagulada en su pequeño cuello. Quien lo observe y no supere una tirada Difícil de POD contempla alucinado cómo el bebé abre los ojos, le sonríe y, con voz de adulto y en perfecto inglés, pregunta: «¿Habéis encontrado ya el Disco Solar?». A continuación se descompone ante sus ojos.",
+    "effects": [{ "kind": "sanityLoss", "loss": "0/1D6" }]
+  },
+  {
+    "id": "la_habitacion_de_steve_morales",
+    "range": { "min": 96, "max": 100 },
+    "text": "Cuando los investigadores caminen por un pasillo, ven (con éxito en Descubrir) que una puerta a un lado está entreabierta. Si entran, advierten que la habitación está destrozada: muebles desvencijados, armarios abiertos, ropa revuelta, una bandeja con la cena para dos personas, la botella de vino volcada sobre la cama de matrimonio, las cortinas rasgadas y marcas de manos ensangrentadas en la colcha y la almohada, además de rastros de sangre en paredes y pomos. Tras diez minutos de registro y un éxito en Descubrir, deducen (INT) que la habitación estaba ocupada por dos personas, por cómo está deformado el colchón de plumas; en el cajón de la mesita hallan algo inusual, una fila perfecta de doce recortes de uñas de los pies formando un triángulo. Diez minutos más y un éxito Difícil en Descubrir encuentran un cortaúñas manchado de sangre, introducido en el muslo de pollo de la bandeja, y una caja de cerillas «The Matador» con vello púbico de una mujer morena (Medicina) entre los objetos del neceser. Diez minutos más y una tirada Extrema de Descubrir revelan residuos de sangre coagulada en la superficie de la bañera, una huella dactilar ensangrentada en los azulejos junto al inodoro que solo aparece a partir de la mitad de una baldosa (INT: la baldosa se colocó después de mancharse) que se desprende con facilidad, y tras ella un panel de 55x55 cm; al retirarlo hay tuberías de calefacción y una caja metálica de 50x100x50 cm que apesta a cadáver (FUE 90, resiste 20 puntos de daño; hay que superar una tirada de POD para abrirla o al investigador se le revuelven las tripas). Dentro, separados por compartimentos, están los restos de un hombre cortado en pedacitos minúsculos (INT: con el cortaúñas): huesos escrupulosamente triturados, órganos en bolsas de tela encerada y selladas, y músculos y carne sin una gota de sangre; en una caja de puros aparte, la piel de la cabellera, las axilas y los genitales. Presenciar este horror y examinarlo con detenimiento cuesta 1/1D4+1 puntos de Cordura. La habitación pertenece a Steve Morales, un hombre de negocios de Manchester que perdió la cordura por las pesadillas provocadas por la radiación electromagnética de los objetos yithianos del sótano; una semana antes asesinó a un joven egipcio de 15 años y disecciona su cadáver, en trocitos minúsculos, dentro de la bañera durante 48 horas. Actualmente se encuentra en el barrio de las prostitutas.",
+    "effects": [{ "kind": "sanityLoss", "loss": "1/1D4+1" }],
+    "note": "El libro da tambien una ficha de trasfondo completa para Steve Morales (GC secreto); se resume aqui la parte narrativa relevante para el suceso."
+  }
+]

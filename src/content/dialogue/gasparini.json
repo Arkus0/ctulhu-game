@@ -1,0 +1,788 @@
+[
+  {
+    "id": "gasparini_bar",
+    "npc": "gasparini",
+    "label": "«¿A qué hora abre usted esa barra?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "once": true,
+    "minutes": 5,
+    "always": {
+      "text": "—A las cuatro, amico, y hoy libro, así que a las cuatro y estaré de mal humor hasta las cuatro y diez. —Se aparta el rizo rubio de la frente con dos dedos, un gesto que ha ensayado delante de un cartel de Douglas Fairbanks—. Pero les hago el dry martini que aprendí con Giuseppe, y Giuseppe abrirá algún día un bar en Venecia y será famoso, y yo seguiré aquí, que es donde uno se divierte. Ginebra muy fría, vermú el que se pueda, y la aceituna es una ofensa personal. Sin aceituna.",
+      "facts": [
+        "bar_abre_a_las_cuatro",
+        "gasparini_libra_hoy"
+      ]
+    },
+    "note": "Pág. 26: Gasparini y Giuseppe Cipriani nacen el mismo año; Cipriani abrirá el Harry's Bar de Venecia diez años después. Pág. 52: el bar largo está cerrado hasta las 16:00 y Gasparini libra esa mañana."
+  },
+  {
+    "id": "gasparini_precio",
+    "npc": "gasparini",
+    "label": "«¿Cuánto cuesta lo que usted sabe?»",
+    "approaches": [
+      "sobornar",
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Se ríe con toda la boca. Nadie se lo había preguntado tan a las claras.\n—¡Por fin! —Cuenta con los dedos, deprisa, como quien recita una carta—. Un chisme del hotel, gratis, porque me divierte contarlo. Un chisme de una habitación, una libra. Lo que se dijo dentro de esa habitación, cinco. —Y baja el dedo pequeño—. Y hay una cuarta categoría, amico, que no se paga con dinero. Esa se paga con presentaciones. Yo cobro dos mil piastras al mes y tengo habitación en este hotel: no me hace falta su dinero. Me hace falta su gente.",
+      "facts": [
+        "gasparini_pone_precio",
+        "gasparini_cobra_en_presentaciones"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "gasparini_tarifa"
+        }
+      ],
+      "unlocks": [
+        "gasparini_yana",
+        "gasparini_aventura"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Depende de a quién moleste. —Frota el vaso con el trapo sin mirarlo—. Lo que sabe todo el mundo es gratis. Lo que sabe media docena de personas cuesta una libra. Y lo que sé yo solo, señores, no está en la carta.",
+      "facts": [
+        "gasparini_pone_precio"
+      ],
+      "unlocks": [
+        "gasparini_yana",
+        "gasparini_aventura"
+      ]
+    },
+    "onFailure": {
+      "text": "—¡Yo sirvo copas! —Se lleva la mano al pecho, escandalizadísimo, encantado de estar escandalizado—. ¿Por quién me han tomado? —Y sin dejar de sonreír, y sin que nadie le haya dicho una cifra, añade—: Además, con lo que me ofrecerían ustedes no me llega. Yo con cinco libras ni me molesto en acordarme.\nAcaba de poner precio a una cosa que no ha reconocido tener.",
+      "facts": [
+        "gasparini_pone_precio"
+      ]
+    },
+    "note": "Pág. 26: 2.000 piastras más habitación permanente y manutención; en El Cairo de 1922 es una fortuna. Su moneda no es el dinero: es el acceso."
+  },
+  {
+    "id": "gasparini_olga",
+    "npc": "gasparini",
+    "label": "Preguntarle por la pelirroja",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "sobornar",
+      "adular",
+      "presionar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Olga. —Se le escapa la sonrisa antes de poder guardarla, y esta vez no la guarda—. Olga Lounpeen, de Múnich, veintitrés años y más cabeza que su padre y que yo juntos. Llegó esta mañana buscándome y no lo disimuló ni cinco minutos, cosa que en una mujer de su posición es casi un escándalo y a mí me parece lo mejor que le ha pasado a este hotel en un año.\n»Y ahora hágame un favor y no repita ese nombre en el comedor, que su padre come a la una y media.",
+      "facts": [
+        "gasparini_y_olga",
+        "lounpeen_en_el_hotel"
+      ],
+      "unlocks": [
+        "gasparini_dieter"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Olga. —Se le escapa la sonrisa antes de poder guardarla—. Una mujer notable. Y con un padre que lo es mucho menos, así que agradecería enormemente que esta conversación no saliera de aquí.",
+      "facts": [
+        "gasparini_y_olga"
+      ],
+      "unlocks": [
+        "gasparini_dieter"
+      ]
+    },
+    "onFailure": {
+      "text": "—Aquí hay doscientos huéspedes, señores. Y en mi barra pasan todos. No puedo acordarme de cada cabellera. —Miente estupendamente. Tan estupendamente que tarda un rato en notarse que ha dicho «cabellera», que nadie ha dicho de qué color era el pelo y que él sí.",
+      "facts": [
+        "gasparini_y_olga"
+      ]
+    }
+  },
+  {
+    "id": "gasparini_dieter",
+    "npc": "gasparini",
+    "label": "«¿Y qué le parece el padre?»",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Dieter Lounpeen compra cosas que no debería y esta vez ha venido a comprar algo gordo. —Deja el trapo. Es la primera vez que suelta el trapo—. Lo sé porque me lo ha contado ella esta mañana entre las palmeras, y no me lo ha contado como se cuenta un secreto: me lo ha contado como se cuenta una queja. «Mi padre está nervioso», dice, «y mi padre nunca se pone nervioso por una estatuilla».\n»Y esa frase, amico, en las manos correctas, vale bastante más de cinco libras.",
+      "facts": [
+        "padre_compra_piezas_robadas",
+        "dieter_nervioso",
+        "olga_le_conto"
+      ]
+    },
+    "onHard": {
+      "text": "—Un mercader de arte de los que compran de noche. —Se encoge de hombros—. Le tengo el respeto que se le tiene a un perro grande: ninguno, pero no paso por delante de él sin mirar. Ha venido a hacer una compra. Los que vienen a hacer una compra no traen a la hija de acompañante, la traen de tapadera.",
+      "facts": [
+        "dieter_es_mercader",
+        "padre_compra_piezas_robadas"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Alemán, alto y con cara de haber desayunado vinagre. —Sonríe—. Yo con ese señor no tengo ningún problema, y pienso seguir sin tenerlo mientras él siga sin saber cómo me llamo.",
+      "facts": [
+        "dieter_es_mercader"
+      ]
+    },
+    "onFailure": {
+      "text": "—¡Ah, el padre! Encantador. Encantadorísimo. —Y cambia de tema tan deprisa y con tanta gracia que hacen falta unos segundos para notar que, mientras lo hacía, se ha movido medio metro por detrás de la barra hasta ponerse donde la columna le tapa del arco del restaurante.",
+      "facts": [
+        "gasparini_teme_a_dieter"
+      ]
+    },
+    "note": "Pág. 52: entre besos y arrumacos, Olga le revela que su padre ha llegado hoy «para adquirir una extraña colección de piezas robadas». Es el chivatazo que Gasparini le vende a Najir por un 20%.",
+    "locked": true
+  },
+  {
+    "id": "gasparini_najir",
+    "npc": "gasparini",
+    "label": "«¿A quién ha llamado usted desde la oficina de correos?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "llamada_de_gasparini"
+      }
+    ],
+    "approaches": [
+      "sobornar",
+      "adular",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Se le apaga la sonrisa por primera vez en toda la conversación y por debajo hay un chico de veintidós años.\n—Faraz Najir. El mercader más grande de El Cairo, y con la cara medio quemada, y no pregunten por la cara. —Traga—. Le he vendido un dato: que hay una compra gorda en este hotel y quién la va a hacer. Le pedí el veinte por ciento y me lo discutió hasta el quince y aceptó el veinte, y eso me tendría que haber dado que pensar, porque Najir no acepta nada a la primera.\n»Llega esta tarde. Con maletas vacías. —Se ríe sin ganas—. Yo quería una comisión, señores. Y creo que he abierto una puerta.",
+      "facts": [
+        "faraz_najir",
+        "llamo_a_najir",
+        "najir_llega_esta_tarde",
+        "gasparini_pidio_el_veinte"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "najir_avisado"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—A un socio. Faraz Najir, del casco antiguo. Antigüedades. —Frota el vaso—. Le he pasado un dato y hemos discutido el porcentaje, como se discute siempre. Un veinte. Y sí, ya sé lo que están pensando: que un veinte de algo es mucho dinero. Pues eso mismo pensé yo.",
+      "facts": [
+        "faraz_najir",
+        "llamo_a_najir",
+        "gasparini_pidio_el_veinte"
+      ]
+    },
+    "onSuccess": {
+      "text": "—A un amigo, por un asunto de negocios que no tiene el menor interés. —Y añade demasiado deprisa—: De arte. Antigüedades. Cosas viejas y caras que compra gente aburrida.",
+      "facts": [
+        "llamo_a_najir"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Yo? Yo hoy libro. —Y se pone a hablar del calor, del cambio de la libra y de una bailarina griega que actuó aquí en marzo, todo seguido y todo divertidísimo. Cuando termina, ustedes se dan cuenta de dos cosas: de que llevan seis minutos riéndose y de que él lleva seis minutos sin soltar el trapo, apretándolo.",
+      "facts": [
+        "gasparini_esconde_la_llamada"
+      ]
+    },
+    "note": "Pág. 52: Gasparini llama a Najir a las 13:00 desde la oficina de correos «pidiéndole un porcentaje a cambio del chivatazo»; Thornhill recuerda el nombre, el número y el 20%. Pág. 54: Najir llega a las 17:00 con maletas vacías."
+  },
+  {
+    "id": "gasparini_aga_khan",
+    "npc": "gasparini",
+    "label": "Ofrecerle una presentación al Aga Khan",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "aga_khan_viene"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "onSuccess": {
+      "text": "Gasparini deja el vaso a medio secar y se apoya en la barra con las dos manos.\n—Repítalo. —Y cuando se lo repiten, se pasa la mano por el rizo dos veces seguidas, que en él es lo más parecido a perder la compostura—. Amico. Ese hombre tiene dinero y tiene gente, y son las dos únicas cosas que yo quiero de este mundo, y las quiero en ese orden solo hasta las once de la noche.\n»Muy bien. Trato. —Tiende la mano—. Pregúntenme lo que quieran, hoy y mañana, y no vuelvo a hablarles de tarifas. Y si me fallan, no se preocupen: no me enfadaré. Simplemente contaré a doscientos huéspedes exactamente quiénes son ustedes y a qué han venido, y lo contaré muy bien, porque eso se me da mejor que los cócteles.",
+      "facts": [
+        "gasparini_comprado"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "gasparini_comprado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "gasparini",
+          "by": 60
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Ustedes? —Se ríe, y no es cruel: es incrédulo—. Amico, yo llevo cinco años detrás de ese señor. Cinco. He aprendido a hacer un cóctel persa que no le gusta a nadie más que a él por si un día se sienta en esta barra. —Y entonces deja de reírse y baja la voz—. Pero si lo dicen en serio, vuelvan cuando tengan la presentación arreglada y no cuando tengan la idea. Aquí estaré. No me voy a ninguna parte y llevo cinco años sin irme a ninguna parte.",
+      "facts": [
+        "gasparini_quiere_al_aga_khan"
+      ]
+    },
+    "note": "Pág. 26: «Carlo no conoce al Aga Khan, y mataría por conocerlo, porque le puede proporcionar todo lo que desea: dinero y gente con la que acostarse. Digamos que son almas gemelas»."
+  },
+  {
+    "id": "gasparini_christie",
+    "npc": "gasparini",
+    "label": "«¿Sabe usted quién se aloja aquí esta semana?»",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—La señora Christie, la de las novelas de asesinatos. —Se ilumina—. Le haría a uno mucha gracia conocerla, ¿no creen? Preguntarle cómo se le ocurren. Yo aquí veo tres asesinatos por semana en germen, señores, tres, y no pasan nunca de la primera copa.\n»Y el señor Churchill, que bebe whisky y no le hace ascos a un martini bien hecho, y a ese sí que pienso hacérselo yo. —Baja la voz—. Y luego está el que no se ve. Uno que pidió doce habitaciones y sale a las once de la noche a beber agua caliente. Agua caliente, amico. Se lo pongo yo. Doce habitaciones para beber agua caliente.",
+      "facts": [
+        "agatha_christie_en_el_hotel",
+        "churchill_en_el_hotel",
+        "bohr_bebe_agua_caliente"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Mejor que el conserje. —Cuenta con el trapo—. La señora Christie, que escribe novelas de crímenes y pide té. El señor Churchill, que no pide té. Un conde inglés que llega mañana con hija. Y dos mercaderes de arte que se odian y todavía no lo saben.",
+      "facts": [
+        "agatha_christie_en_el_hotel",
+        "churchill_en_el_hotel",
+        "dos_mercaderes"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo de los huéspedes no hablo. —Silencio de dos segundos, que es todo lo que aguanta—. Bueno. De los que pagan la cuenta no hablo. De los que no la pagan hablo lo que haga falta, y en esa lista hay más gente ilustre de la que ustedes se imaginan.",
+      "facts": [
+        "gasparini_sabe_quien_esta"
+      ]
+    },
+    "note": "Pág. 26: «Le haría gracia conocer a Agatha Christie. También agradecería que los investigadores le presentaran a Churchill por el crédito que representa»."
+  },
+  {
+    "id": "gasparini_carter",
+    "npc": "gasparini",
+    "label": "Preguntarle por el arqueólogo",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Tres semanas invitándole a copas y no ha bebido una. —Se le nota la ofensa profesional—. Ni una, amico. Yo he emborrachado a dos embajadores y a un obispo copto, y ese señor inglés se sienta, pide agua con limón, mira la puerta y se va.\n»Y a mí me interesa muchísimo, ¿saben por qué? Porque un hombre que encuentra cosas en el desierto sabe qué valen, y yo conozco a tres señores en esta ciudad que pagarían por saber qué valen. No hace falta robar nada. Con saberlo antes que nadie, se vive.",
+      "facts": [
+        "gasparini_persigue_a_carter",
+        "gasparini_quiere_revender"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El del Valle de los Reyes. Sí. —Frota el vaso—. Un hombre triste, de los que se sientan de espaldas a la sala. Yo a esos los distingo desde la puerta: no vienen a beber, vienen a que no les hablen.",
+      "facts": [
+        "gasparini_conoce_a_carter"
+      ]
+    },
+    "onFailure": {
+      "text": "—Uno más de los que vienen a cavar. —Y se pone a hablar de otra cosa. Pero mientras habla de otra cosa, coloca en la balda de atrás, delante del todo, una botella de whisky de malta que en esta barra no la pide nadie, y le da la vuelta para que se vea la etiqueta desde el arco del restaurante.",
+      "facts": [
+        "gasparini_persigue_a_carter"
+      ]
+    },
+    "note": "Pág. 26: «Howard Carter es un objetivo para él porque puede proporcionarle información sobre piezas arqueológicas que después él podría revender con beneficios»."
+  },
+  {
+    "id": "gasparini_llave",
+    "npc": "gasparini",
+    "label": "«Los gritos de la ciento veintidós»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "gritos_122"
+      }
+    ],
+    "approaches": [
+      "presionar",
+      "sobornar",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onCritical": {
+      "text": "Gasparini deja de sonreír. Es un cambio total y dura poco.\n—No hubo nada. Nada de lo que están pensando, y saben ustedes perfectamente qué están pensando. Se asustó por una cosa que dije yo y gritó, y yo abrí la puerta y me quedé en el pasillo hasta que salió. —Se pasa el trapo por la cara—. Pero eso no lo puedo demostrar y esto sí.\nAbre el cajón de las servilletas, saca de debajo una llave de latón sin numerar y la deja en la barra.\n—Tómenla. Está copiada de la del señor Clinton hace dos años y abre todas las puertas de las plantas primera y segunda. —Empuja la llave con un dedo—. A cambio, si van a hundirme, háganlo por lo que haya hecho, no por lo que se cuenta en las cocinas. Y no se lo digan al señor Behler. A él no.",
+      "facts": [
+        "gasparini_llave_maestra",
+        "tienen_llave_maestra"
+      ],
+      "effects": [
+        {
+          "kind": "giveItem",
+          "item": "llave_maestra"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "gasparini_comprometido"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "gasparini",
+          "by": 20
+        }
+      ]
+    },
+    "onExtreme": {
+      "text": "—Está bien. —Levanta las dos manos—. Está bien, está bien. La habitación estaba vacía y yo tenía cómo entrar en una habitación vacía. Eso es todo lo que voy a reconocer y ya es demasiado.\n»Y le diré una cosa que no me han preguntado: aquí dentro somos tres los que podemos abrir cualquier puerta a cualquier hora. El señor Clinton, el señor Murray y un servidor. Piensen en eso la próxima vez que se pregunten cómo entró alguien en algún sitio.",
+      "facts": [
+        "gasparini_llave_maestra",
+        "hay_dos_llaves_maestras"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "gasparini_comprometido"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ah, eso. —Se le tensa algo alrededor de la boca—. Una señora se llevó un susto en un pasillo. Pasa. Se apagó una luz, se abrió una puerta, gritó. En un hotel con doscientas habitaciones eso ocurre cada semana. —Pausa—. La habitación estaba vacía, sí. Por eso no hubo denuncia. No había nadie a quien denunciar.",
+      "facts": [
+        "gasparini_estuvo_en_la_122"
+      ]
+    },
+    "onFailure": {
+      "text": "—¡Yo qué sé, amico! —Y se ríe, y les sirve una copa que nadie ha pedido, y les cuenta la historia buenísima de la condesa belga y el loro del salón morisco, que dura cuatro minutos y es realmente graciosa.\nY mientras la cuenta, con la mano izquierda, sin mirar y sin dejar de hablar, empuja hasta el fondo del cajón de las servilletas una llave de latón sin numerar.",
+      "facts": [
+        "gasparini_llave_maestra"
+      ]
+    },
+    "note": "Pág. 46: «los gritos eran reales: Gasparini, el barman miserable, se propasaba con una clienta particularmente atractiva utilizando las habitaciones desocupadas del hotel, gracias a su copia de la llave maestra». Es la vía alternativa a la tirada Extrema de Clinton: aquí no se paga con dados, se paga con un secreto."
+  },
+  {
+    "id": "gasparini_yana",
+    "npc": "gasparini",
+    "label": "«¿Quién limpia las habitaciones de la segunda planta?»",
+    "approaches": [
+      "sobornar",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Yana. Y Yana me lo cuenta todo porque yo la escucho, que aquí no la escucha nadie. —Se inclina sobre la barra—. Hace tres semanas vio un disco. De oro, redondo, del tamaño de un plato de postre, con unos hierros por detrás como para sujetarlo en la frente de alguien. Lo vio envuelto en un trapo podrido en la habitación de un huésped.\n»Y me dijo una cosa rarísima, amico, y por eso me acuerdo: que estaba caliente. Que el trapo estaba frío y el oro estaba caliente.",
+      "facts": [
+        "disco_solar_existe",
+        "disco_solar_visto",
+        "el_disco_estaba_caliente"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "disco_solar"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Yana, una chica del servicio. Polaca. —Frota el vaso—. Y le voy a decir por qué le interesa a usted una mujer que hace camas: porque las camas se hacen en las habitaciones, y en las habitaciones la gente deja las cosas encima de la cama. Yana ha visto en tres semanas más cosas que el detective del hotel en tres años. Entre otras, algo de oro.",
+      "facts": [
+        "disco_solar_existe"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cuatro chicas y ninguna dura más de un año, porque el ala norte da mucho trabajo y encima ahora no quieren entrar solas. —Se encoge de hombros—. Pregúntenle a Yana, la polaca. Y llévenle algo. Cualquier cosa. Aquí no le lleva nada nadie.",
+      "facts": [
+        "el_servicio_no_entra_solo"
+      ]
+    },
+    "onFailure": {
+      "text": "—Ah, del servicio yo no sé nada. —Y en un cuarto de hora de conversación es la única frase que ha dicho sin ningún adorno, sin ninguna broma y sin sonreír. Un hombre que adorna todo lo que dice acaba de dejar una frase desnuda encima de la barra.",
+      "facts": [
+        "gasparini_protege_a_yana"
+      ]
+    },
+    "note": "Pág. 55, fragmento 2 de la conversación del bar: «—¿Un disco de oro? ¿El Disco Solar? —Lo vio Yana, una chica del servicio de limpieza».",
+    "locked": true
+  },
+  {
+    "id": "gasparini_chismes",
+    "npc": "gasparini",
+    "label": "«Cuéntenos algo que no sepa nadie»",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Muy bien. Tres, y la tercera me la van a agradecer. —Deja el trapo sobre el hombro.\n»Uno: hace quince días bajaron algo a este sótano de noche, con poleas atadas al techo y troncos en las escaleras para que no se partiera el mármol. Docenas de hombres. Y no eran del hotel.\n»Dos: el cocinero tiene seis camareros que no cocinan. Fíjense algún día en las manos de esos seis.\n»Y tres. —Baja la voz por primera vez en toda la mañana—. En este hotel hay un nombre que no se dice en voz alta. Omar Shakti. Yo llevo cinco años aquí y he visto a hombres muy valientes bajar la voz para decirlo. Ni siquiera sé por qué. Solo sé que lo he visto.",
+      "facts": [
+        "cajas_de_noche",
+        "mahadni_implicado",
+        "omar_shakti"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Gratis? Está bien, una gratis, que hoy libro. —Se aparta el rizo—. El metre del restaurante lleva dos semanas abriendo los ventanales media hora en pleno servicio porque de la escalera de la cocina sube una peste que no es de cocina. Y no se atreve a decírselo al director. Michel no se atreve a decirle nada a nadie, ese es el drama de Michel.",
+      "facts": [
+        "olor_de_la_cocina"
+      ]
+    },
+    "onFailure": {
+      "text": "—¡Muchas cosas! —Y suelta cinco seguidas, todas buenísimas: el cónsul y la bailarina, el loro que aprendió a insultar en tres idiomas, el pianista que se fue con la caja. Ustedes se ríen los quince minutos enteros.\nDespués, ya en el pasillo, alguno cae en la cuenta: en las cinco historias no había una sola persona que se aloje hoy en el hotel.",
+      "facts": [
+        "gasparini_desvia_con_gracia"
+      ]
+    },
+    "note": "Gasparini tira 1D20 en la Lista de rumores: es el personaje con acceso a los rumores del final de la tabla, los buenos. Aquí es donde el jugador puede oír por primera vez el nombre de Omar Shakti."
+  },
+  {
+    "id": "gasparini_fiestas",
+    "npc": "gasparini",
+    "label": "«¿Dónde se bebe esta noche si no estamos invitados?»",
+    "approaches": [
+      "adular",
+      "directo",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Dos sitios, y en ninguno de los dos hay lista. —Levanta dos dedos—. La doscientos ochenta y cinco: el señor Morrison, un viejo británico encantador que celebra todas las noches lo mismo y no se acuerda de haberlo celebrado ayer. La puerta abierta, los músicos del hotel tocando gratis y comida para cuarenta. Vayan a esa.\n»La ciento tres es del señor Forrester y hay que ponerse un bozal en la puerta. —Se ríe—. No me miren así. He estado. Es lo más aburrido que he visto en mi vida: gente con corsé hablando de la bolsa de Nueva York.",
+      "facts": [
+        "fiestas_alternativas",
+        "habitacion_285_morrison",
+        "habitacion_103_forrester"
+      ]
+    },
+    "onSuccess": {
+      "text": "—En la mascarada del director, si les dejan. Y si no les dejan, en la segunda planta hay una puerta abierta todas las noches y en la primera hay otra donde la entrada cuesta más barata y más rara. —Guiña un ojo—. Pregunten a un botones. Los botones de este hotel saben más que yo, lo que pasa es que no lo cuentan tan bien.",
+      "facts": [
+        "fiestas_alternativas"
+      ]
+    },
+    "onFailure": {
+      "text": "—En mi barra, amico. A las cuatro. —Y como para consolarles, añade—: Y no se apuren tanto por la fiesta del salón de baile: esta noche, a partir de las once, en este hotel habrá tres fiestas y solo en una de ellas piden invitación. Adivinen cuál es la aburrida.",
+      "facts": [
+        "fiestas_alternativas"
+      ]
+    },
+    "note": "Pág. 26: «Conoce las dos fiestas alternativas del hotel, la celebrada por Mervin Morrison y la del excéntrico Richard J. Forrester, pero en ninguna de ellas se precisa presentación para entrar»."
+  },
+  {
+    "id": "gasparini_behler",
+    "npc": "gasparini",
+    "label": "«¿Qué tal jefe es el señor Behler?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Me conoció en un hotel de Italia, después de once dry martinis, y a la mañana siguiente me ofreció dos mil piastras y una habitación en El Cairo. —Se pasa el trapo por la barra, despacio—. Yo tenía diecisiete años y ninguna razón para que un señor así se fijara en mí. No me ha pedido nada nunca. Ni una vez en cinco años.\n»Así que sí: yo por el señor Behler no haría absolutamente nada malo. —Y se queda un segundo con esa frase en la boca, oyéndosela—. Nada malo que él llegue a saber, quiero decir. Que no es lo mismo. Ya lo sé que no es lo mismo.",
+      "facts": [
+        "behler_trajo_a_gasparini",
+        "gasparini_debe_todo_a_behler"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El mejor de Egipto y no hay segundo. —Y por una vez no hay ninguna broma detrás—. Ese hombre me sacó de Verona. Aquí dentro puede pasar de todo, y pasa, pero el día que le hagan daño a él a mí me van a ver a mí en una cosa que no se me ha visto nunca.",
+      "facts": [
+        "gasparini_debe_todo_a_behler"
+      ]
+    },
+    "onFailure": {
+      "text": "—Un santo. Un santo con una libreta. —Se ríe—. Y ahora, si me hacen el favor, cambiemos de tema, que hablar bien de un jefe delante de tres desconocidos es la manera más rápida que conozco de quedarse sin jefe.",
+      "facts": [
+        "gasparini_debe_todo_a_behler"
+      ]
+    },
+    "note": "Pág. 26: Behler conoce a Gasparini en un viaje, «tras una noche de innumerables dry martinis», y se lo trae al Shepheard's con 2.000 piastras, habitación permanente y manutención."
+  },
+  {
+    "id": "gasparini_politica",
+    "npc": "gasparini",
+    "label": "Preguntarle qué se dice del protectorado",
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Suspira, y es el primer gesto cansado que le han visto.\n—Yo tengo veintidós años y soy de Verona. —Frota el vaso—. En marzo hicieron rey a un señor al que nadie llama rey. En esta barra beben ingleses que mandan y egipcios que van a mandar, y a los dos les sirvo la misma ginebra en el mismo vaso, y ese es todo mi programa político y pienso morirme con él. —Levanta la vista—. Y ahora hablemos de otra cosa, se lo pido en serio: el día que me oigan opinar de esto, es que me han echado.",
+      "facts": [
+        "gasparini_no_habla_de_politica",
+        "fuad_es_rey_desde_marzo"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Que hace calor y que hay muchos uniformes. —Sonríe—. Yo de política sé lo que se sabe en una barra: quién paga en libras y quién paga en piastras, y quién de los dos deja mejor propina. Se lo diría, pero se enfadarían ustedes conmigo.",
+      "facts": [
+        "gasparini_no_habla_de_politica"
+      ]
+    },
+    "onFailure": {
+      "text": "Empieza a contestar. Ustedes juran que empieza a contestar.\nY quince minutos más tarde están los tres apoyados en la barra riéndose de la historia del cónsul francés, el camello alquilado y la partida de bridge, y nadie sabría decir en qué momento exacto ha dejado de hablarse de Egipto, ni quién ha cambiado de tema, ni cómo. Es la habilidad más asombrosa de este hombre y la ejerce sin despeinarse.",
+      "facts": [
+        "gasparini_desvia_con_gracia"
+      ]
+    },
+    "note": "Pág. 26: «No quiere hablar de política, ni de la cámara de los lores, ni por supuesto del fanatismo independentista de algunos egipcios, pero tiene una habilidad fascinante para hacer olvidar a su interlocutor la importancia de todo ese embrollo». Su gancho penaliza la aproximación directa."
+  },
+  {
+    "id": "gasparini_aventura",
+    "npc": "gasparini",
+    "label": "Proponerle un trabajo arriesgado",
+    "approaches": [
+      "sobornar",
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "onHard": {
+      "text": "—¿Peligroso peligroso, o peligroso de que me despidan? —Y se ríe de su propia pregunta, pero está esperando la respuesta—. Miren, se lo pongo fácil. Yo entro donde haga falta, distraigo a quien haga falta y hablo con quien haga falta. Se me da bien y me divierte.\n»Lo que no hago es bajar a ese sótano. —Se pone serio de golpe y dura tres segundos—. Yo he visto subir por esas escaleras a los seis camareros del cocinero con las manos limpias a las tres de la mañana, y no he preguntado por qué las llevaban limpias a las tres de la mañana. Y no pienso preguntarlo.\n»Todo lo demás, sí. Y cobro después. Siempre cobro después: es lo que me distingue de un mercenario.",
+      "facts": [
+        "gasparini_se_apunta",
+        "gasparini_no_baja_al_sotano"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "gasparini_se_apunta"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "gasparini",
+          "by": 25
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cuenten conmigo. —Ni lo piensa—. Con dos condiciones: que no me maten y que haya dinero al final. En ese orden, y no siempre en ese orden.",
+      "facts": [
+        "gasparini_se_apunta"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "gasparini_se_apunta"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "gasparini",
+          "by": 15
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Y qué gano yo? —Se apoya en la barra, divertidísimo—. No me malinterpreten, amico: no digo que no. Digo que todavía no me han dicho la parte donde gano yo, y hasta que no lleguen a esa parte yo no me he enterado de nada de lo que me han contado.",
+      "facts": [
+        "gasparini_se_vende_pero_no_gratis"
+      ]
+    },
+    "note": "Pág. 26: «Gasparini aceptará con facilidad cualquier proposición de aventura si es arriesgada pero no mortal y si entiende que comporta beneficios económicos ulteriores».",
+    "locked": true
+  },
+  {
+    "id": "gasparini_sotano",
+    "npc": "gasparini",
+    "label": "«¿Qué esconden en el sótano?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "piezas_en_el_sotano"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "sobornar",
+      "presionar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "—Siete metros. —Lo dice y espera a que cale—. La caja grande medía siete metros y no cabía por la puerta de servicio, así que la arrastraron sobre troncos, como las piedras de las pirámides, con poleas atadas al techo del pasillo. En mil novecientos veintidós, señores. Con troncos.\n»¿Y quién iba delante abriendo paso? El cocinero de este hotel. No el señor Weder, que iba detrás. El cocinero. —Frota el vaso muy despacio—. Piensen ustedes un momento en qué clase de asunto es este, donde el que manda en el pasillo es el que descuartiza los corderos.",
+      "facts": [
+        "piezas_en_el_sotano",
+        "caja_de_siete_metros",
+        "mahadni_implicado",
+        "dos_mercaderes"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "Gasparini deja de secar el vaso.\n—Miren, yo sirvo copas. Pero si alguien me preguntara, cosa que nadie ha hecho, yo diría que hace quince días bajaron a este hotel algo que pesaba como el pecado, y que quien lo bajó no era del hotel. Y diría también que hay dos mercaderes de arte en el edificio, y que ninguno de los dos ha venido por las pirámides.",
+      "facts": [
+        "piezas_en_el_sotano",
+        "faraz_najir",
+        "dos_mercaderes"
+      ]
+    },
+    "onFailure": {
+      "text": "—Sótano hay uno, y es el almacén de la cocina. Si buscan emociones, la carta de cócteles es más interesante. —Y os sirve algo que no habéis pedido. Mientras lo sirve mira dos veces hacia el arco que da a las cocinas, comprobando que no hay nadie de blanco escuchando, y las dos veces lo hace sin volver la cabeza.",
+      "facts": [
+        "gasparini_teme_a_la_cocina"
+      ]
+    }
+  },
+  {
+    "id": "gasparini_visita_de_najir",
+    "npc": "gasparini",
+    "label": "«Su amigo el de las maletas vacías»",
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_najir_gasparini_bar"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Gasparini deja el trapo, se sirve él también y apoya los codos en la barra.\n—Un veinte por ciento. Eso es lo que le pedí, y eso es lo que me va a dar. —Sonríe, y por una vez la sonrisa le llega a los ojos, que es peor—. Yo le he dicho dónde están las piezas y quién las tiene, y él pone el comprador. Lo que no me gusta es lo otro. Cuando le pregunté por qué no habla directamente con el jefe, se puso a mirar por encima del hombro como un conejo. Y cuando dije el nombre en voz alta me llamó imbécil y se señaló la cara. Esa quemadura no se la hizo una sartén, amigo mío.",
+      "facts": [
+        "llamo_a_najir",
+        "omar_shakti",
+        "shakti_quemo_a_najir",
+        "gasparini_pidio_un_veinte"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "la_llamada"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Faraz Najir. Compra y vende. —Gasparini se encoge de hombros con una elegancia estudiada—. Le he pasado una información y le he pedido lo que vale. Es lo que hace todo el mundo en esta ciudad, solo que los demás lo llaman de otra manera y se cobran en favores. Yo prefiero cobrar en libras.",
+      "facts": [
+        "llamo_a_najir",
+        "gasparini_pidio_un_veinte"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un cliente. —Sirve dos dedos de algo que no habéis pedido—. Bebe poco, paga bien y no me hace preguntas. Si todos fueran así yo tendría el mejor trabajo de El Cairo, en vez del segundo mejor.",
+      "facts": [
+        "najir_tiene_un_cliente"
+      ]
+    },
+    "onFailure": {
+      "text": "—Un conocido. —Y cambia de tema tan deprisa que se le nota el salto: se pone a contaros lo del cónsul belga y las dos hermanas, una historia estupenda que ya os contó ayer, palabra por palabra, con las mismas pausas.",
+      "facts": [
+        "gasparini_esconde_algo_de_najir"
+      ]
+    },
+    "note": "Módulo, pág. 51 y 55: Gasparini pide un 20% a Najir por el chivatazo y luego se ven en el bar."
+  },
+  {
+    "id": "gasparini_selassie",
+    "npc": "gasparini",
+    "label": "«Olga y el Gordo Nubio»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "olga_baila_con_selassie"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "Gasparini tiene un hilo de sangre en la barbilla y no se lo ha limpiado.\n—¿Sabe usted lo que es mirar toda la noche y no abrir la boca? —No espera respuesta—. Yo he visto a ese hombre hacer cosas en esta ciudad. Si me acerco a esa pista, mañana aparezco en un armario suyo con la boca cosida y forrada de seda. Así que me quedo aquí, y sirvo copas, y me muerdo el labio. Y si ella sube esta noche a la tercera planta, yo mañana estaré detrás de esta barra a las diez, sonriendo. Eso es exactamente lo que soy.",
+      "facts": [
+        "gasparini_teme_a_selassie",
+        "selassie_es_peligroso"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "gasparini",
+          "by": -5
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Que baile con quien quiera. —Se encoge de hombros y el gesto no le sale—. Olga hace lo que le da la gana desde antes de conocerme y lo seguirá haciendo después. Yo no soy nadie para nada.",
+      "facts": [
+        "gasparini_teme_a_selassie"
+      ]
+    },
+    "onFailure": {
+      "text": "—No quiero hablar de eso. —Es todo lo que dice, y es la primera vez desde que le conocéis que Carlo Gasparini no encuentra una frase ingeniosa. Se pasa la lengua por dentro del labio partido y se va al otro extremo de la barra a secar vasos que ya están secos.",
+      "facts": [
+        "gasparini_teme_a_selassie"
+      ]
+    },
+    "note": "Módulo, pág. 60: «Gasparini lo ve todo, pero no abre la boca, el muy cobarde». Un hilo de sangre le corre por la barbilla."
+  }
+]

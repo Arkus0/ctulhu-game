@@ -1,0 +1,840 @@
+[
+  {
+    "id": "evelyn_padre",
+    "npc": "evelyn",
+    "label": "Preguntarle por su padre",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Mi padre es el hombre más extraordinario que conozco. —Lo dice de corrido, como quien recita, y luego se oye recitarlo y se pone colorada—. Perdón. Eso lo digo siempre. Llevo veintiún años diciéndolo.\nSe alisa la falda.\n—Ha financiado catorce años de excavaciones sin ver nada, señores. Catorce. Cualquier otro habría parado. Eso es admirable y yo lo admiro, de verdad que lo admiro.\nY entonces, muy deprisa y sin mirar a nadie:\n—Y no me ha escrito una carta desde que tengo dieciséis años. Yo le escribo los domingos. Él contesta por el secretario cuando hay algo que firmar.\nSe recompone al instante, con una sonrisa social impecable.\n—En fin. Es un hombre ocupadísimo. Todo el mundo lo entiende. Yo también lo entiendo.",
+      "facts": [
+        "evelyn_adora_a_su_padre",
+        "carnarvon_catorce_anos",
+        "evelyn_esta_sola"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 20
+        }
+      ],
+      "unlocks": [
+        "evelyn_londres",
+        "evelyn_viaje"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Mi padre es el hombre más extraordinario que conozco. —Y sonríe con una lealtad que no admite discusión—. Lleva catorce años financiando a Howard Carter en el Valle de los Reyes sin recibir nada a cambio. Catorce años. Eso dice mucho de un carácter.",
+      "facts": [
+        "evelyn_adora_a_su_padre",
+        "carnarvon_catorce_anos"
+      ],
+      "unlocks": [
+        "evelyn_viaje"
+      ]
+    },
+    "onFailure": {
+      "text": "—Es un hombre muy ocupado. —Sonríe con esa cortesía inglesa que sirve para cerrar puertas.\nY después, mirando hacia la escalera:\n—Está arriba, en su suite, reunido con el señor Carter. Llevan reunidos desde las once y media y no piensan bajar a comer. —Se le escapa un suspiro pequeñísimo—. Yo he desayunado sola, he almorzado sola y me imagino que cenaré sola. Es lo normal cuando se viaja con un hombre que está a punto de conseguir algo.",
+      "facts": [
+        "carter_reunido_con_carnarvon",
+        "evelyn_esta_sola"
+      ]
+    },
+    "note": "Pág. 20: «Adora a su padre, pero es demasiado riguroso con ella». Pág. 61: el día 2 Carter y Carnarvon se encierran en la suite desde las 11:30 hasta las 18:00."
+  },
+  {
+    "id": "evelyn_viaje",
+    "npc": "evelyn",
+    "label": "«¿Cómo consiguió que la trajera?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "Y aquí Lady Evelyn levanta la barbilla, y por debajo de la muchacha educadísima asoma otra cosa.\n—No lo conseguí. Me lo pagué. —Muy claro—. El billete, el tren desde Alejandría y la habitación. Con mi asignación de tres años y vendiendo un collar de mi abuela que a nadie le gustaba.\nSe le escapa media sonrisa, feroz.\n—Se lo comuniqué desde el barco, por telegrama. Cuando ya no se podía hacer nada.\n»Mi padre no me trajo, señores. Mi padre se encontró conmigo en el muelle de Alejandría y dijo: «vaya». Eso dijo. Vaya. —Se le apaga la sonrisa—. Y en el tren estuvo encantador toda la tarde, porque delante de gente siempre está encantador.",
+      "facts": [
+        "evelyn_se_pago_el_viaje",
+        "evelyn_adora_a_su_padre",
+        "evelyn_esta_sola"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 20
+        }
+      ],
+      "unlocks": [
+        "evelyn_prensa",
+        "evelyn_tutankamon"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Me pagué el billete yo. —Lo dice con una satisfacción tranquila—. No es lo habitual, ya lo sé. Pero pedirlo no habría funcionado y hacerlo sí ha funcionado, así que no me arrepiento en absoluto.",
+      "facts": [
+        "evelyn_se_pago_el_viaje"
+      ],
+      "unlocks": [
+        "evelyn_tutankamon"
+      ]
+    },
+    "onFailure": {
+      "text": "—Mi padre quiso que le acompañara. —Y es mentira, y es una mentira que le sale mal, porque baja los ojos al decirla.\nY entonces añade, con una precisión que la delata entera:\n—Aunque el billete lo compré yo, claro. Por adelantarme, nada más. Él estaba muy ocupado con la expedición y esas cosas se olvidan.",
+      "facts": [
+        "evelyn_se_pago_el_viaje"
+      ]
+    },
+    "note": "Pág. 20: «es demasiado riguroso con ella, a tal punto que ella misma se paga su propio billete para viajar a El Cairo». Pág. 21: «emprende la expedición solo con su hija y porque no ha sido capaz de impedirlo»."
+  },
+  {
+    "id": "evelyn_prensa",
+    "npc": "evelyn",
+    "label": "«¿Cuándo supo usted lo del descubrimiento?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Por el periódico. —Y lo dice muy tranquila, que es lo que hace que duela—. El Times, el jueves, en la página siete, entre un anuncio de sombreros y una nota sobre el precio del algodón.\nAbre el bolso y saca el recorte. Lo lleva encima. Está doblado en ocho.\n—Catorce años de excavaciones financiadas por mi familia, señores, y yo me enteré de que había una tumba a la vez que el resto de Inglaterra. —Vuelve a doblarlo con mucho cuidado—. No me quejo. Es lo que hay. Pero desde el jueves no he dormido bien, y el sábado ya tenía el billete.\nLevanta la vista.\n—Y ahora estoy aquí, y él está arriba con el señor Carter, y sigo enterándome de todo por terceros. Solo que ahora los terceros están en el mismo edificio.",
+      "facts": [
+        "evelyn_se_entero_por_la_prensa",
+        "evelyn_esta_sola",
+        "telegrama_carter_carnarvon"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 15
+        }
+      ],
+      "unlocks": [
+        "evelyn_curiosidad"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Por la prensa. —Se encoge de hombros con elegancia—. Como todo el mundo. Mi padre no es hombre de dar explicaciones y yo he aprendido a leer los periódicos con mucha atención.",
+      "facts": [
+        "evelyn_se_entero_por_la_prensa"
+      ],
+      "unlocks": [
+        "evelyn_curiosidad"
+      ]
+    },
+    "onFailure": {
+      "text": "—Hace unos días. Un telegrama. —Y cambia de tema con una destreza de salón que ya quisieran la mitad de los diplomáticos del hotel.\nPero durante el resto de la conversación no suelta el bolso, y dentro del bolso hay un recorte de periódico doblado en ocho, y se le ve la esquina.",
+      "facts": [
+        "evelyn_se_entero_por_la_prensa"
+      ]
+    },
+    "note": "Pág. 20: «se enteró de los descubrimientos arqueológicos financiados por su padre a través de la prensa»."
+  },
+  {
+    "id": "evelyn_curiosidad",
+    "npc": "evelyn",
+    "label": "Reconocerle que es usted igual de curiosa",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "Lady Evelyn se ilumina de una manera que no se le había visto y que le cambia la cara entera.\n—¡Gracias! —Se ríe—. Dios mío, gracias. Llevo veintiún años oyendo que soy «indiscreta», que es la palabra que usa la gente educada para decir que una piensa.\nSe inclina hacia delante.\n—Yo no puedo evitarlo. Entro en una habitación y sé cuántas puertas tiene, quién ha estado sentado dónde y qué se ha llevado alguien de la repisa. Y si algo no encaja, no duermo.\n»Este hotel, por ejemplo. —Baja la voz, encantada de tener con quién—. Llevo aquí tres horas. He visto que el recepcionista tiene doce casilleros tapados con un papel, que el maletero de la mancha no sube a la tercera planta si puede evitarlo, y que hay una escalera de servicio junto a la cocina por la que en tres horas han bajado cuatro personas y no ha subido ninguna.\nSonríe, orgullosísima.\n—¿Me dicen ustedes que eso es indiscreción? Eso es aritmética.",
+      "facts": [
+        "evelyn_lo_ve_todo",
+        "doce_casilleros_tapados",
+        "algo_pasa_en_la_tercera_planta",
+        "nadie_sube_de_la_escalera_de_servicio"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 30
+        }
+      ],
+      "unlocks": [
+        "evelyn_pretendientes",
+        "evelyn_carter"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Es mi peor defecto y mi única virtud. —Se ríe—. Investigo. A la gente, sobre todo. No puedo evitarlo: veo un detalle que no encaja y ya no me deja en paz hasta que sé por qué.",
+      "facts": [
+        "evelyn_lo_ve_todo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 15
+        }
+      ],
+      "unlocks": [
+        "evelyn_pretendientes"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo soy una persona perfectamente discreta. —Muy digna.\nY dos minutos más tarde, sin que nadie le haya preguntado nada, comenta:\n—Por cierto: el caballero alemán que está en el bar no bebe lo que ha pedido. Lleva media hora removiendo la misma copa y mirando la puerta. —Se sonroja—. Perdón. Ya está. No he dicho nada.",
+      "facts": [
+        "evelyn_lo_ve_todo",
+        "dieter_espera_en_el_bar"
+      ]
+    },
+    "note": "Pág. 20: su Descubrir 75% es literalmente «meter la nariz donde no la llaman». Pág. 20: «Desde jovencita estropeaba sus citas por su tremenda curiosidad»."
+  },
+  {
+    "id": "evelyn_pretendientes",
+    "npc": "evelyn",
+    "label": "«¿Y por eso no se ha casado?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Por eso exactamente. —Y se ríe, y es una risa buena, sin pena ninguna—. Cuatro. Cuatro pretendientes en tres años y a los cuatro los investigué.\nCuenta con los dedos, muy satisfecha.\n—El primero tenía deudas de juego en dos clubes. El segundo tenía una mujer en Dublín, cosa que descubrí en una tarde y con una guía de teléfonos. El tercero era encantador y no había leído un libro en su vida, que no es un delito, pero yo lo comprobé y él se enteró de que lo estaba comprobando.\n»Y el cuarto —hace una pausa— era perfectamente decente y se marchó igual. Me dijo que le daba miedo. —Se encoge de hombros—. Que le daba miedo yo, quiero decir.\nY entonces, muy seria:\n—A mí no me da ninguna lástima, señores, por si están pensando en ponerme cara de lástima. Prefiero saber. Siempre. Prefiero saber aunque me quede sola, y me he quedado sola, y sigo prefiriéndolo.",
+      "facts": [
+        "evelyn_investiga_a_todos",
+        "evelyn_esta_sola"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Digamos que mis pretendientes han tenido siempre la mala costumbre de resultar decepcionantes en cuanto una mira debajo. —Sonríe—. Y una mira siempre debajo. Es un defecto incorregible.",
+      "facts": [
+        "evelyn_investiga_a_todos"
+      ]
+    },
+    "onFailure": {
+      "text": "—Eso es una pregunta muy impertinente. —Y lo es, y ella tiene toda la razón, y se queda mirándoles con las cejas levantadas hasta que a ustedes les sube el calor a las orejas.\nDespués se ablanda.\n—Perdonen. Es que me la hacen mucho. Se la hacen a una desde los diecinueve años y siempre con esa misma cara de estar haciendo un favor. —Se alisa la falda—. La respuesta, por si les sirve, es que ninguno resistió que le mirasen de cerca. Ninguno.",
+      "facts": [
+        "evelyn_investiga_a_todos"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": -10
+        }
+      ]
+    },
+    "note": "Pág. 20: «Investigaba a sus pretendientes y, desgraciadamente, descubría cosas que no le gustaban. Al final, todos abandonaban, alarmados por su extraño proceder»."
+  },
+  {
+    "id": "evelyn_psicoanalistas",
+    "npc": "evelyn",
+    "label": "Preguntarle por los médicos que la tratan",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Lady Evelyn se queda muy quieta. Cuando habla, lo hace en voz baja y muy deprisa, como quien tiene poco tiempo.\n—Histeria. —Suelta una risa sin ninguna gracia—. Así se llama. Se lo explico como me lo explicaron a mí a los diecisiete años: una enfermedad del útero que produce trastornos del carácter y que solo padecen las mujeres.\n»Voy dos veces por semana desde hace cuatro años. Me preguntan por mis sueños, me dicen que descanse, que lea menos y que no me altere. Y le mandan un informe a mi padre.\nAprieta el bolso.\n—El informe siempre dice lo mismo: que hay mejoría si se mantienen las restricciones. Las restricciones son no salir sola, no recibir visitas y no tener trato con hombres. —Levanta la vista, y hay una lucidez ahí dentro que corta—. Yo no estoy enferma. Estoy vigilada. Y llevo cuatro años sin poder decirle esto a nadie porque decirlo es exactamente lo que hace una histérica.\nY luego, con una compostura terrible:\n—Les agradezco enormemente que me lo hayan preguntado como se le pregunta a una persona.",
+      "facts": [
+        "evelyn_los_psicoanalistas",
+        "evelyn_esta_vigilada",
+        "carnarvon_la_reprime"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 35
+        }
+      ],
+      "unlocks": [
+        "evelyn_presentacion"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Me tratan de los nervios. —Aparta la vista—. Dos veces por semana, en Londres, unos señores muy amables que le mandan informes a mi padre. Preferiría no entrar en detalles, si no les importa.\nY después de un silencio:\n—Solo les diré que ninguno de esos informes ha dicho nunca nada que mi padre no quisiera leer.",
+      "facts": [
+        "evelyn_los_psicoanalistas",
+        "carnarvon_la_reprime"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sé de dónde han sacado ustedes eso. —Se pone rígida, y las manos se le van al bolso.\nY luego, con una frialdad perfecta:\n—Supongo que de mi padre, que lo cuenta en los almuerzos como si fuera una anécdota divertida. —Se levanta—. Discúlpenme. He recordado que tengo que escribir una carta.\nPero no se va del todo. Se queda a tres pasos, de espaldas, y tarda un rato largo en marcharse de verdad.",
+      "facts": [
+        "evelyn_los_psicoanalistas",
+        "carnarvon_la_reprime"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": -15
+        }
+      ]
+    },
+    "note": "Pág. 20: «Sufre, según los anticuados psicoanalistas que la tratan con asiduidad, de la enfermedad llamada histeria». NOTA PARA EL GUARDIÁN: «El único trastorno de Evelyn es la presencia de su propio padre, que le prohíbe tener cualquier tipo de relación con los hombres. Vive mortificada y reprimida por una mirada reprobatoria constante»."
+  },
+  {
+    "id": "evelyn_londres",
+    "npc": "evelyn",
+    "label": "Preguntarle cómo es su vida en Londres",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Ordenada. —Sonríe sin ganas—. Highclere en verano, Londres en invierno, y una lista de cosas que se pueden hacer que cabe en media cuartilla.\nMira la terraza, las palmeras, los camareros.\n—Esto es lo más lejos que he estado de casa en mi vida. Y llevo desde ayer mirándolo todo con una avidez que me da vergüenza. —Se ríe de sí misma—. Ayer estuve veinte minutos mirando cómo un hombre limpiaba una lámpara. Veinte minutos, señores.\nSe pone seria.\n—Mi padre me dejó en Londres cuando yo era muy pequeña para atender sus negocios. No es un reproche: es un dato. Una crece en una casa de sesenta habitaciones con institutrices que cambian cada dos años y aprende dos cosas: modales y a fijarse mucho en la gente, porque la gente es lo único que se mueve.",
+      "facts": [
+        "evelyn_criada_sola",
+        "evelyn_esta_sola",
+        "evelyn_lo_ve_todo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Tranquila. —Sonríe con educación—. Quizá demasiado. En Highclere se puede pasar una semana entera sin que ocurra nada digno de contarse, y le aseguro que lo he comprobado muchas veces.",
+      "facts": [
+        "evelyn_criada_sola"
+      ]
+    },
+    "onFailure": {
+      "text": "—Muy agradable, gracias. —Sonrisa de salón, puerta cerrada.\nPero al cabo de un momento pregunta ella, y lo pregunta con verdadera hambre:\n—¿Y ustedes? ¿Ustedes viajan siempre así, sin que nadie les diga dónde han de estar a las seis?\nY escucha la respuesta entera, sin interrumpir ni una vez.",
+      "facts": [
+        "evelyn_criada_sola"
+      ]
+    },
+    "note": "Pág. 20: «el Conde la ha abandonado en Londres desde que era pequeña, para atender sus negocios»."
+  },
+  {
+    "id": "evelyn_carter",
+    "npc": "evelyn",
+    "label": "Preguntarle qué opina de Howard Carter",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Al señor Carter le conozco desde los nueve años. —Se le suaviza la cara—. Venía a Highclere dos veces al año a rendir cuentas y se quedaba a cenar, y era el único adulto de esa casa que me hablaba a mí y no por encima de mí.\n»Me enseñó a distinguir la cerámica del Reino Medio de la del Nuevo, en la biblioteca, con unos dibujos suyos preciosos. Dibuja maravillosamente. Nadie lo sabe.\nY entonces frunce un poco el ceño.\n—Aunque el hombre que he visto esta mañana en el vestíbulo no era ese. —Duda—. Le he saludado y ha tardado dos segundos en reconocerme. Dos segundos, señores. Y luego ha sido cortés y ha subido con mi padre y no ha vuelto a bajar.\n»Y huele mal. —Se ruboriza al decirlo—. Perdón. Pero huele mal, y el señor Carter era un hombre pulcrísimo.",
+      "facts": [
+        "carter_aprecia_a_evelyn",
+        "carter_dibuja_en_el_mantel",
+        "carter_huele_mal",
+        "carter_reunido_con_carnarvon"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Le conozco desde niña y le tengo mucho afecto. —Sonríe—. Es un hombre tímido al que le cuesta la gente, y lleva catorce años trabajando para mi padre sin quejarse ni una vez. Eso, en un hombre, me parece admirable.",
+      "facts": [
+        "carter_aprecia_a_evelyn"
+      ]
+    },
+    "onFailure": {
+      "text": "—Es el arqueólogo de mi padre. —Cortés, breve, y cambia de tema.\nPero antes de cambiarlo del todo añade, medio en broma:\n—Aunque hoy está muy raro. Le he preguntado por la tumba y me ha contestado por el tiempo. Un hombre que ha esperado catorce años y no quiere hablar de lo que ha encontrado es un hombre al que le pasa algo.",
+      "facts": [
+        "carter_esquiva_lo_de_evelyn"
+      ]
+    },
+    "note": "Pág. 20: Evelyn «puede presentar a Lord Carnarvon o a Howard Carter a los investigadores». Pág. 61: el día 2 Carter sube a la suite del conde a las 11:30 y no baja hasta las 18:00."
+  },
+  {
+    "id": "evelyn_presentacion",
+    "npc": "evelyn",
+    "label": "Pedirle que les presente",
+    "requires": [
+      {
+        "kind": "disposition",
+        "npc": "evelyn",
+        "op": ">=",
+        "value": 45
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onHard": {
+      "text": "Lady Evelyn lo piensa un momento y luego asiente con mucha decisión.\n—A los dos. —Se levanta y se alisa la falda—. A mi padre y al señor Carter.\n»Con mi padre no hablen de política, ni de la cámara de los lores, ni de Egipto, aunque él saque los tres temas; los saca para que ustedes hablen y él pueda no escuchar. Háblenle de la tumba y no le interrumpan. Puede tardar dos minutos en terminar una frase y hay que dejarle terminarla.\n»Y otra cosa: pónganse a su derecha. Oye mal del izquierdo y no lo reconoce, y si se ponen a la izquierda dirá que sí a todo sin haberse enterado, y luego se enfadará con ustedes por algo que él mismo aceptó.\nCoge el bolso.\n—Con el señor Carter no hace falta nada. Solo tienen que dejarle hablar de dibujo.",
+      "facts": [
+        "evelyn_os_presenta",
+        "carnarvon_es_sordo",
+        "carnarvon_finge_escuchar"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_os_presenta"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 20
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Por supuesto. —Se levanta—. A mi padre esta tarde, cuando baje. Y les advierto de una cosa por su bien: háblenle de la tumba y de nada más. De nada más, ¿me entienden? Es el único tema del que no se aburre.",
+      "facts": [
+        "evelyn_os_presenta"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_os_presenta"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 10
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Mi padre no recibe. —Muy cortés y muy firme—. No es cosa mía: es que no recibe. Está a punto de conseguir lo que lleva persiguiendo catorce años y ahora mismo no existe nadie más en el mundo.\nY luego, con una simpatía que la honra:\n—Prueben ustedes a las seis y media, en recepción. Salen mañana temprano para Luxor y bajará a comprobar el equipaje él mismo, porque no se fía. Ahí lo tendrán quieto cinco minutos.",
+      "facts": [
+        "carnarvon_baja_a_las_seis_y_media",
+        "carnarvon_se_va_a_luxor"
+      ]
+    },
+    "note": "Pág. 20: «Evelyn puede presentar a Lord Carnarvon o a Howard Carter a los investigadores, si ellos le proporcionan lo que nunca ha vivido: una relación emocional estable». Pág. 61: a las 18:30 padre e hija se reúnen en recepción para dejar el hotel."
+  },
+  {
+    "id": "evelyn_tutankamon",
+    "npc": "evelyn",
+    "label": "Ofrecerle ayudarla a entrar la primera en la tumba",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Lady Evelyn se queda sin palabras, cosa que no le pasa nunca.\n—¿Ustedes… ustedes me ayudarían a eso? —Y se le llenan los ojos, y se enfada consigo misma por que se le llenen—. Perdón. Perdón. Es que llevo cuatro días pensándolo y no me atrevía a decirlo en voz alta porque suena a capricho de niña.\nSe seca los ojos con el guante.\n—No es un capricho. Escúchenme. Van a abrir esa cámara y van a entrar mi padre, el señor Carter y un inspector del Servicio de Antigüedades, y en los periódicos saldrán tres nombres y ninguno será el mío, y dentro de cien años nadie sabrá que hubo una mujer allí.\n»Yo quiero entrar la primera. La primera. No por la fama: porque quiero ver algo antes de que me lo cuenten. Una sola cosa en toda mi vida, antes que nadie.\nLes tiende la mano, y se la estrechan, y aprieta con una fuerza que no se le suponía.\n—Si me ayudan a conseguirlo, tienen ustedes lo que quieran de mí mientras yo viva. Y no lo digo por cortesía: lo digo como se dice una deuda.",
+      "facts": [
+        "evelyn_quiere_ser_la_primera",
+        "evelyn_os_debe_todo"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_confia"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 50
+        }
+      ],
+      "unlocks": [
+        "evelyn_presentacion"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Es lo único que quiero en el mundo. —Lo dice muy en serio, sin ninguna coquetería—. Ser la primera en entrar. Que no me lo cuenten después.\nY les mira con una gratitud incómoda de sostener.\n—Si ustedes pueden hacer algo por eso, cuenten conmigo para lo que sea. Y hablo en serio, señores: para lo que sea.",
+      "facts": [
+        "evelyn_quiere_ser_la_primera"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_confia"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 30
+        }
+      ],
+      "unlocks": [
+        "evelyn_presentacion"
+      ]
+    },
+    "onFailure": {
+      "text": "—Eso no está en su mano ni en la mía. —Sonríe con tristeza—. Está en la de mi padre, y mi padre decidirá lo que decida sin consultarme, como siempre.\nY después, más bajo, casi para sí:\n—Aunque he pensado una cosa. Si yo estuviera allí cuando abran, tendrían que dejarme pasar, porque echarme delante del inspector sería un escándalo. —Levanta la vista, alarmada de sí misma—. No repitan eso, por favor.",
+      "facts": [
+        "evelyn_quiere_ser_la_primera",
+        "evelyn_hara_lo_que_haga_falta"
+      ]
+    },
+    "note": "Pág. 20: «Evelyn tiene un sueño: ser la primera en entrar en la tumba de Tutankhamón. El hombre que la ayude a lograrlo tendrá garantizados su respeto y agradecimiento». Semanas después lo conseguirá, y para entonces habrá dejado de tener miedo a nada."
+  },
+  {
+    "id": "evelyn_seduccion",
+    "npc": "evelyn",
+    "label": "Insinuarse",
+    "approaches": [
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "once": true,
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Lady Evelyn se pone de pie.\nNo grita. Es peor: baja la voz.\n—Voy a hacer como que no he entendido eso, y lo voy a hacer por usted, no por mí. —Está muy pálida y perfectamente serena—. Lo he entendido. Lo entiendo siempre. Llevo entendiéndolo desde los quince años y siempre viene de hombres que creen que están siendo encantadores.\nRecoge el bolso.\n—Que no vuelva a ocurrir y podemos seguir hablando. Si vuelve a ocurrir, no volverán a hablar conmigo en su vida, y les advierto de que le contaré a mi padre exactamente lo que han dicho, con las palabras que han usado. Mi padre es sordo, pero para esto oye perfectamente.\nSe sienta otra vez. Muy recta. A un palmo más de distancia que antes.",
+      "facts": [
+        "evelyn_no_admite_insinuaciones"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": -20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "Lady Evelyn se pone de pie y no grita, que es peor.\n—Voy a hacer como que no he entendido eso. —Muy pálida, muy serena—. Una sola vez. No hay una segunda.\nY se sienta otra vez, muy recta, a un palmo más de distancia que antes.",
+      "facts": [
+        "evelyn_no_admite_insinuaciones"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": -30
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "Se queda mirándoles cinco segundos enteros, sin pestañear, con una expresión que no es de ofensa: es de reconocimiento. Como quien ve por cuarta vez la misma obra de teatro.\n—Ah. —Y asiente despacio—. Claro. Ya está. Ya hemos llegado.\nSe levanta.\n—Le diré lo que va a pasar ahora, porque ya sé cómo termina esto: usted va a explicarme que me ha malinterpretado, yo voy a decir que no pasa nada, y los dos vamos a fingir durante el resto de la semana. Pues no. Esta vez no.\n»Buenas tardes.\nY se marcha por el salón sin correr y sin volverse. Al pasar junto al mostrador de recepción le dice tres palabras a Clinton, y Clinton mira hacia ustedes.",
+      "facts": [
+        "evelyn_no_admite_insinuaciones",
+        "evelyn_os_ha_cerrado_la_puerta"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": -50
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": -20
+        },
+        {
+          "kind": "setFlag",
+          "flag": "fichados_por_recepcion"
+        }
+      ]
+    },
+    "note": "Pág. 20: «No soportará cualquier intento de seducción. Quien pruebe suerte requerirá una tirada Difícil de Encanto y sufrirá un dado de penalización». Aquí ni el mejor resultado posible es un éxito: lo máximo que se consigue es que no cueste la relación entera."
+  },
+  {
+    "id": "evelyn_lounpeen",
+    "npc": "evelyn",
+    "label": "Preguntarle qué le ha dicho el alemán del bar",
+    "requires": [
+      {
+        "kind": "any",
+        "of": [
+          {
+            "kind": "knows",
+            "fact": "evelyn_sabe_lo_de_carter"
+          },
+          {
+            "kind": "timeAfter",
+            "minute": 2130
+          }
+        ]
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Lady Evelyn tiene los ojos rojos y no lo disimula, que es lo peor de todo.\n—Un caballero alemán. Lounpeen, creo. —Le tiembla la voz y la sujeta como puede—. Se ha sentado a mi lado en el bar, se ha presentado con muchísima educación y me ha contado, con todo detalle, cómo Howard Carter lleva años engañando a mi padre.\n»Con fechas, señores. Con cifras. Con el nombre del hombre que le pasa a Carter los sitios donde tiene que cavar.\nSe agarra las manos.\n—Y lo peor no es que lo haya dicho. Lo peor es que encajaba. Yo llevo desde niña oyendo hablar de esas excavaciones y todo lo que ese hombre me ha contado encajaba en los huecos.\nLevanta la cara.\n—Y dice que la prueba está abajo. Que hay piezas en el sótano de este hotel. En este hotel, señores.",
+      "facts": [
+        "evelyn_sabe_lo_de_carter",
+        "carter_debe_su_suerte_a_weder",
+        "piezas_en_el_sotano",
+        "evelyn_quiere_comprobarlo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 15
+        }
+      ],
+      "unlocks": [
+        "evelyn_sotano",
+        "evelyn_acompanarla"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Nada. —Se seca los ojos con el guante—. Una impertinencia sobre el señor Carter. Los alemanes odian a mi padre desde lo de Nefertiti y no pienso darle importancia.\nPero le tiembla la barbilla y no ha soltado el bolso.\n—Aunque ha dicho una cosa que sí me ha llamado la atención. Ha dicho que la prueba está abajo, en el sótano de este hotel. ¿Qué clase de hombre dice una cosa así y se marcha?",
+      "facts": [
+        "evelyn_sabe_lo_de_carter",
+        "piezas_en_el_sotano",
+        "evelyn_quiere_comprobarlo"
+      ],
+      "unlocks": [
+        "evelyn_sotano",
+        "evelyn_acompanarla"
+      ]
+    },
+    "onFailure": {
+      "text": "—No es asunto de nadie. —Se levanta muy deprisa—. Discúlpenme.\nY se va hacia el fondo del salón, y no va hacia la escalera de las habitaciones: va hacia el pasillo que lleva al restaurante y a la cocina, andando muy rápido, con el bolso apretado contra el pecho.",
+      "facts": [
+        "evelyn_sabe_lo_de_carter",
+        "evelyn_quiere_comprobarlo"
+      ],
+      "unlocks": [
+        "evelyn_sotano",
+        "evelyn_acompanarla"
+      ]
+    },
+    "note": "Pág. 61: a las 11:30 del día 2, Dieter «le cuenta a Evelyn con todo detalle cómo Howard Carter engañó a Lord Carnarvon y a ella se le saltan las lágrimas. Evelyn abandona el bar llorando». A las 12:00 baja al sótano sola. La condición `timeAfter 2130` es una aproximación mientras la agenda del día 2 no exista: cuando exista, cámbiese por `eventFired` del evento correspondiente."
+  },
+  {
+    "id": "evelyn_sotano",
+    "npc": "evelyn",
+    "label": "Suplicarle que no baje ahí",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard",
+      "skill": "Persuasion"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Lady Evelyn escucha entero, sin interrumpir una sola vez.\n—Ustedes lo han visto —dice al final—. Ustedes han estado abajo o han hablado con alguien que ha estado abajo, y no me lo están contando para asustarme. Se les nota en que no me están mirando mientras me lo cuentan.\nSe queda un rato callada.\n—Está bien. —Muy despacio—. No bajo.\n»Y voy a decirles por qué les hago caso, para que sepan lo que acaban de conseguir: porque me lo han pedido a mí. No se lo han dicho a mi padre para que me lo prohíba, que es lo que habría hecho cualquiera en este hotel. Me lo han pedido a mí, como se le pide algo a una persona mayor de edad.\nAbre el bolso, saca el recorte del Times y se lo queda mirando.\n—Llevo veintiún años obedeciendo órdenes y esta es la primera vez que decido yo. Qué cosa más rara. —Y se le escapa una risa temblorosa—. Prométanme una cosa: que bajarán ustedes y me contarán qué hay. Aunque sea horrible. Sobre todo si es horrible.",
+      "facts": [
+        "evelyn_no_baja",
+        "evelyn_os_debe_todo"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_no_baja"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 40
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "Lady Evelyn se queda mirando el suelo mucho rato.\n—Está bien. —Muy bajo—. No bajo.\n»Pero no porque tengan ustedes razón, sino porque me lo han pedido con educación, y a mí la educación me desarma, que es la cosa más ridícula que puede decir una mujer de mi edad.\nSe guarda el bolso bajo el brazo.\n—Averígüenlo ustedes, entonces. Y cuéntenmelo. Yo estaré en el salón Isis toda la tarde, sin bajar a ningún sitio, portándome maravillosamente bien.",
+      "facts": [
+        "evelyn_no_baja"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_no_baja"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 25
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—No.\nLo dice sin levantar la voz y sin ninguna duda, y es la primera vez que la oyen decir que no a alguien.\n—Llevo veintiún años haciendo lo que me dicen hombres que me quieren mucho y que están segurísimos de tener razón. Mi padre. Los médicos. Ustedes ahora. —Se pone los guantes—. Y todos, absolutamente todos, me han dicho lo mismo: que no lo entendería, que me haría daño, que me quedara aquí sentada.\n»Hay una prueba abajo de que han estado engañando a mi padre catorce años. Voy a bajar a verla con mis propios ojos y voy a subir y voy a decírselo.\nSe levanta.\n—Y si quieren impedírmelo, tendrán que sujetarme delante de todo el salón. Háganlo, si se atreven. Pero luego expliquen ustedes por qué.",
+      "facts": [
+        "evelyn_va_a_bajar",
+        "evelyn_quiere_comprobarlo"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_va_a_bajar"
+        }
+      ],
+      "unlocks": [
+        "evelyn_acompanarla"
+      ]
+    },
+    "note": "Pág. 20: «Evelyn quiere bajar a toda costa al Viejo Templo, después de su conversación con Lounpeen. Si los investigadores pretenden impedirlo, o al menos desean acompañarla, necesitarán un éxito Difícil en Persuasión y sufrirán un dado de penalización. La idea de intentarlo en grupo puede favorecer el éxito». La bandera `evelyn_no_baja` es lo que la agenda del día 2 (tarea 1.3) debe leer para cancelar `evelyn_devorada` y toda la cascada que cuelga de ella."
+  },
+  {
+    "id": "evelyn_acompanarla",
+    "npc": "evelyn",
+    "label": "Ofrecerle bajar con ella",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard",
+      "skill": "Persuasion"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "—¿Conmigo? —Y se le abre la cara entera—. ¿Bajar conmigo?\nSe lleva la mano a la boca.\n—Nadie me ha ofrecido nunca acompañarme a ninguna parte. A ninguna, señores. Siempre es «no vayas» o «ya iré yo». Nunca «vamos».\nSe pone los guantes con una determinación tremenda.\n—Entonces vamos. Ahora, mientras el cocinero está arriba con el pedido; lo he estado mirando y baja a las seis, así que tenemos hasta las seis.\nY antes de echar a andar se vuelve, y por un momento vuelve a ser una chica de veintiún años.\n—Vayan ustedes delante, si no les importa. No por miedo. —Traga—. Bueno. Sí. Por miedo.",
+      "facts": [
+        "evelyn_acompanada",
+        "evelyn_os_debe_todo",
+        "mahadni_baja_todos_los_dias"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_acompanada"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 40
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Vendrían ustedes conmigo? —Y hay en esa pregunta un alivio que casi da vergüenza oír—. Sí. Sí, por favor.\nSe pone los guantes.\n—Vamos ahora, antes de que baje mi padre y me pregunte adónde voy. Y si nos encuentran, yo digo que me he perdido buscando el jardín. A mí me creerán: siempre me creen. Es la única ventaja de que todo el mundo piense que una es tonta.",
+      "facts": [
+        "evelyn_acompanada"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_acompanada"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 25
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Se lo agradezco muchísimo, pero no. —Y sonríe, y la sonrisa es de las buenas, y por eso es tan mala noticia—. Esto tengo que hacerlo yo.\n»Si bajo con ustedes, mañana mi padre dirá que unos desconocidos me llevaron a un sótano. Si bajo sola, tendrá que discutir conmigo. —Se ajusta el sombrero—. Es la diferencia entre que me crean y que me cuiden, y llevo toda la vida esperando que alguien me crea.\nY se va.\nAl fondo del salón, la puerta que da al pasillo de servicio se cierra despacio detrás de ella.",
+      "facts": [
+        "evelyn_va_a_bajar",
+        "evelyn_baja_sola"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "evelyn_va_a_bajar"
+        }
+      ]
+    },
+    "note": "Pág. 20: «Con tal de que uno de los investigadores lo logre, Evelyn aceptará su oferta de compañía o evitará bajar al sótano si esa es la intención de los investigadores». Pág. 62: «Los investigadores pueden evitar toda esa serie de hechos fatídicos si impiden que Evelyn baje a los sótanos o si la acompañan, defendiéndola de lo que se oculta en las sombras»."
+  },
+  {
+    "id": "evelyn_madre",
+    "npc": "evelyn",
+    "label": "Preguntarle por su madre",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Mi madre está en Highclere. —Y sonríe con auténtico cariño—. Lady Almina. No viaja: dice que Egipto es polvo con moscas y que ya lo vio una vez.\n»Ella montó un hospital en la casa durante la guerra, ¿sabían? En el salón de baile. Con quirófano. Ochenta camas. —Se le nota el orgullo—. Mi padre estuvo cinco años quejándose del ruido.\nY luego, con una sequedad muy inglesa:\n—Cuando le dije que me venía a El Cairo, mi madre me dio doscientas libras y me hizo una sola pregunta: si mi padre lo sabía. Le dije que no. Y me dijo: «entonces date prisa».",
+      "facts": [
+        "lady_almina",
+        "evelyn_se_pago_el_viaje",
+        "evelyn_adora_a_su_padre"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "evelyn",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—En Inglaterra. —Sonríe—. Mi madre no viaja con mi padre desde hace años. Dice que él viaja para no estar y que ella se queda por lo mismo. Lo dice en broma. Creo.",
+      "facts": [
+        "lady_almina"
+      ]
+    },
+    "onFailure": {
+      "text": "—Muy bien, gracias. —Cortesía de manual.\nY luego, arreglándose un guante:\n—Es curioso que lo pregunten. En dos días de hotel es la primera vez que alguien menciona a mi madre. Todo el mundo pregunta por mi padre. Todo el mundo pregunta siempre por mi padre.",
+      "facts": [
+        "lady_almina",
+        "evelyn_esta_sola"
+      ]
+    },
+    "note": "Pág. 21: «Suele viajar también con su mujer, pero en este caso no lo hace (es un engorro)». Lady Almina Herbert convirtió Highclere en hospital militar durante la Gran Guerra."
+  }
+]

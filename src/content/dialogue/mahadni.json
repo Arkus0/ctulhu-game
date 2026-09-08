@@ -1,0 +1,848 @@
+[
+  {
+    "id": "mahadni_cocina",
+    "npc": "mahadni",
+    "label": "Elogiar su cocina",
+    "approaches": [
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Mahadni deja el cuchillo. Es la primera vez que le veis dejar el cuchillo.\n—El cordero hay que abrirlo por la articulación, no por el hueso. —Lo demuestra, y es rápido y limpio y exacto—. Todo el mundo corta hueso. Por eso todo el mundo hace mal cordero.\nSe limpia las manos en el delantal y os mira por primera vez a la cara.\n—Cuarenta años. Empecé a los diecisiete en una casa de Assiut donde se cocinaba para sesenta y no había hielo. —Habla en francés, despacio, escogiendo—. Aquí cocino para ciento sesenta y tengo hielo, y sigo siendo el único que sabe abrir un animal sin romperlo. Un animal se abre por donde ya está abierto. Siempre. Solo hay que saber mirar dónde.\nY sonríe. No es una sonrisa amable, pero es una sonrisa.",
+      "facts": [
+        "mahadni_orgulloso",
+        "mahadni_habla_frances"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": 30
+        }
+      ],
+      "unlocks": [
+        "mahadni_provisiones",
+        "mahadni_picante"
+      ]
+    },
+    "onSuccess": {
+      "text": "Mahadni deja el cuchillo. Es la primera vez que le veis dejar el cuchillo.\n—El cordero hay que abrirlo por la articulación, no por el hueso. —Lo demuestra, y es rápido y limpio y exacto—. Todo el mundo corta hueso. Por eso todo el mundo hace mal cordero.",
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": 15
+        }
+      ],
+      "facts": [
+        "mahadni_orgulloso"
+      ],
+      "unlocks": [
+        "mahadni_provisiones"
+      ]
+    },
+    "onFailure": {
+      "text": "Os mira, mira el cordero abierto en canal sobre la mesa, y vuelve al cordero.\nPero antes de volver dice tres palabras en árabe, sin levantar la voz, y en algún punto de la cocina que no alcanzáis a ver, seis hombres dejan de hacer lo que estaban haciendo. No se acercan. Solo dejan de hacerlo. Y cuando Mahadni corta el segundo cuarto, vuelven a empezar todos a la vez.",
+      "facts": [
+        "los_seis_camareros"
+      ]
+    },
+    "note": "Pág. 134: «Le enorgullece su trabajo». Su gancho `cocina` es una aproximación virtual y no aporta dados: lo que abre a este hombre es el tema, no la tirada."
+  },
+  {
+    "id": "mahadni_picante",
+    "npc": "mahadni",
+    "label": "«¿Por qué pica tanto todo lo que sale de aquí?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 5,
+    "locked": true,
+    "onHard": {
+      "text": "—Porque a los europeos les hace daño. —Y lo dice con una satisfacción tan tranquila que tardáis un momento en creer que lo ha dicho.\n»No es una broma. Es una prueba. El que se come mi comida dos veces es un hombre que aguanta algo, y con ese hombre yo puedo hablar. Los otros se van al tercer día a comer al Semíramis y no vuelvo a verlos.\nSeñala con el mentón hacia la puerta de servicio.\n—Los tres suizos de las maletas llevan un año viniendo. Uno se agarra la tripa cada tarde y sigue viniendo. Ese hombre me cae bien.",
+      "facts": [
+        "mahadni_prueba_a_la_gente",
+        "sven_come_en_la_cocina"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Porque así se cocina. —Sigue picando—. En este hotel hay ciento sesenta personas que quieren comida francesa y catorce que quieren comida. Yo hago las dos y solo me interesa una.",
+      "facts": [
+        "mahadni_orgulloso"
+      ]
+    },
+    "onFailure": {
+      "text": "No contesta. Coge del banco una vaina roja pequeña y arrugada y os la ofrece en la palma de la mano, abierta, como se le da azúcar a un caballo.\nEsperando.",
+      "facts": [
+        "mahadni_prueba_a_la_gente"
+      ]
+    },
+    "note": "GC pág. 24: Sven Meyer «se lleva la mano al estómago varias veces; le duele la tripa, probablemente por el gusto del cocinero Mahadni por el picante»."
+  },
+  {
+    "id": "mahadni_cordero",
+    "npc": "mahadni",
+    "label": "Preguntarle por la comida de la fiesta",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Nueve corderos, catorce ensaladas y cuatro mesas de repostería. —Recita sin dejar de trabajar—. Empecé a las cinco de esta mañana y termino a las nueve de esta noche, y a las nueve y cuarto todo eso estará en el salón de baile y nadie se acordará de mí.\n»Es lo correcto. Un cocinero al que se recuerda es un cocinero que ha hecho algo mal.\nCorta. El golpe suena una sola vez.\n—Del salón de baile me ocupo yo. De las mesas grandes, los camareros del hotel. De la mesa del Príncipe, mis hombres. Nadie más se acerca a esa mesa.",
+      "facts": [
+        "mahadni_prepara_la_mascarada",
+        "los_seis_camareros",
+        "mesa_del_principe_custodiada"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cordero. —Señala con el cuchillo la mesa larga, donde hay más carne de la que cabe en una mesa larga—. Y lo demás. Estará a su hora.",
+      "facts": [
+        "mahadni_prepara_la_mascarada"
+      ]
+    },
+    "onFailure": {
+      "text": "—Estará listo. —Y sigue.\nAl cabo de un minuto, sin que nadie haya dicho nada más, añade sin levantar la cabeza:\n—Ustedes no están invitados a esa fiesta. —No es una pregunta y no es una amenaza. Es un hombre que sabe la lista de invitados de memoria porque él cuenta los platos.",
+      "facts": [
+        "mahadni_sabe_la_lista"
+      ]
+    },
+    "note": "Pág. 55: en el salón de baile «las mesas supletorias se encuentran repletas de delicioso cordero asado (el que descuartizaba Mahadni)»."
+  },
+  {
+    "id": "mahadni_provisiones",
+    "npc": "mahadni",
+    "label": "«¿Todo lo que entra en el hotel pasa por usted?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "—Todo. —Y sigue trabajando—. El detergente de la lavandería. La bollería del desayuno. El carbón. Las sábanas. Los uniformes de los botones. La carne, el hielo, el aceite y las velas de esta noche.\n»Y el personal. Yo contrato a las mujeres de la limpieza, a los botones y a los mozos, y yo los despido. —Deja el cuchillo, esta vez despacio—. El señor Behler firma los papeles. Los papeles se los llevo yo.\nOs mira.\n—Piensen ustedes un momento en lo que acaban de oír. En este edificio hay un hombre que sabe qué entra, qué sale, quién limpia cada planta y a qué hora. Y ese hombre lleva delantal, así que nadie le pregunta nunca nada.\nRecoge el cuchillo.\n—Ustedes acaban de preguntar.",
+      "facts": [
+        "mahadni_gerente_de_facto",
+        "mahadni_contrata_al_personal",
+        "behler_delega_en_mahadni"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -10
+        }
+      ],
+      "unlocks": [
+        "mahadni_camareros"
+      ]
+    },
+    "onHard": {
+      "text": "—Todo. Detergente, carbón, carne, hielo, sábanas. —Encoge un hombro enorme—. Y el personal de abajo: limpieza, botones, mozos. Los contrato yo. El director firma.\nEs la frase más larga que le habéis oído y la ha dicho sin ninguna vanidad, como quien lee un inventario.",
+      "facts": [
+        "mahadni_gerente_de_facto",
+        "mahadni_contrata_al_personal"
+      ],
+      "unlocks": [
+        "mahadni_camareros"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Lo que se come y lo que se limpia. —Sigue cortando—. Lo demás es del director.",
+      "facts": [
+        "mahadni_gerente_de_facto"
+      ]
+    },
+    "onFailure": {
+      "text": "—Soy el cocinero. —Tres palabras y vuelve al trabajo.\nPero en ese momento entra un mozo con un albarán, y no va a la oficina de dirección: viene aquí, a la mesa de despiece, y espera de pie a que Mahadni termine el corte. Y Mahadni firma sin mirar, con el cuchillo todavía en la otra mano.",
+      "facts": [
+        "mahadni_gerente_de_facto"
+      ]
+    },
+    "note": "Pág. 135: «Mahadni es el director del submundo; el hombre que se encarga de la contratación de los empleados de más bajo nivel, el jefe del personal de limpieza, de los botones y el abastecimiento general […] Todas las mercancías pasan por su directa supervisión»."
+  },
+  {
+    "id": "mahadni_behler",
+    "npc": "mahadni",
+    "label": "«El señor Behler confía mucho en usted»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Mahadni se detiene medio segundo.\n—El señor Behler es un buen hombre. —Y lo dice de una manera rarísima: como se habla de un enfermo—. Da fiestas. Se le da bien. Le quiere todo el mundo y no ha hecho daño a nadie en su vida.\n»Y no baja a mi cocina. Nunca. En once años ha bajado dos veces, y las dos veces se puso a hablar con los pinches de sus familias y se fue tarde y feliz.\nCorta.\n—Esa es la clase de hombre que es. Uno de los pocos que no ha entendido nada de esta casa. —Levanta la vista un instante—. Y eso, señores, es lo mejor que le puede pasar a un hombre aquí. Déjenlo así.",
+      "facts": [
+        "behler_delega_en_mahadni",
+        "behler_no_baja_a_la_cocina",
+        "mahadni_protege_a_behler"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Firma lo que le llevo. —Corta—. Es un buen director. Los directores buenos delegan y los malos vigilan, y a mí me da igual, porque yo trabajo lo mismo con los dos.",
+      "facts": [
+        "behler_delega_en_mahadni"
+      ]
+    },
+    "onFailure": {
+      "text": "—Sí.\nY nada más. Pero cuando ya os vais, dice a vuestras espaldas, sin subir la voz:\n—Al señor Behler no se le molesta con las cosas de abajo. Se lo digo por él.",
+      "facts": [
+        "mahadni_protege_a_behler"
+      ]
+    },
+    "note": "Pág. 135: «El culpable de este trasvase de funciones es el mismo Behler que, dedicado por entero a las relaciones sociales, deposita en Mahadni toda su confianza, desatendiendo peligrosamente sus deberes»."
+  },
+  {
+    "id": "mahadni_rolland",
+    "npc": "mahadni",
+    "label": "Preguntarle por el metre del restaurante",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Ese hombre no entra aquí. —Sin dramatismo ninguno—. No es un castigo. Es que se pondría a llorar y yo tengo nueve corderos.\n»Ha ido al director tres veces. Tres. Y las tres el director me ha dado la razón a mí, y las tres he tenido que oírle explicarme que el pobre Michel tiene problemas de nervios. —Corta—. Yo no le he pedido nunca nada al señor Behler. Ni una vez. Y me da la razón siempre. Piensen en por qué.\nY luego, casi con desprecio:\n—Rolland no me odia. Rolland tiene miedo. Es distinto, y es peor, porque el que odia acaba haciendo algo.",
+      "facts": [
+        "rolland_no_entra_en_la_cocina",
+        "behler_defiende_a_mahadni",
+        "rolland_teme_a_mahadni"
+      ]
+    },
+    "onSuccess": {
+      "text": "—No tiene permiso para entrar en esta cocina. —Corta—. Se lo dije yo y el director lo confirmó. No hay más que hablar.",
+      "facts": [
+        "rolland_no_entra_en_la_cocina",
+        "behler_defiende_a_mahadni"
+      ]
+    },
+    "onFailure": {
+      "text": "Mahadni no contesta. Señala con el cuchillo, sin mirar, la puerta de vaivén que da al restaurante: hay un cristal redondo a la altura de la cara y, detrás del cristal, medio segundo, la cara de Michel Rolland, que desaparece.\n—Todos los días —dice Mahadni—. Cuatro o cinco veces al día. Nunca empuja.",
+      "facts": [
+        "rolland_teme_a_mahadni",
+        "rolland_no_entra_en_la_cocina"
+      ]
+    },
+    "note": "Pág. 136: «Su relación con Mustafá ibn Mahadni es tensa, ya que Rolland no tiene permiso para entrar en esas dependencias […] Ha intentado hablar con Behler del asunto, pero este es tajante: defiende a Mahadni y le considera su mejor adquisición»."
+  },
+  {
+    "id": "mahadni_olor",
+    "npc": "mahadni",
+    "label": "«¿De dónde sale ese olor?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "olor_de_la_cocina"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Mahadni no se ofende. Es peor: se interesa.\n—¿Lo notan? —Ladea la cabeza—. Casi nadie lo nota. El metre lo nota, y por eso abre los ventanales, y cree que es la basura.\nSe limpia las manos.\n—Es la despensa vieja. Debajo hay un pozo que se selló hace cuarenta años, y el aire de ahí abajo sube cuando cambia la presión, antes de llover. Sube y huele a lo que huelen los sitios cerrados.\nY entonces añade, con una amabilidad perfecta:\n—No es peligroso. Solo hay que no abrir la puerta cuando huele. Cuando huele es que hay algo respirando ahí abajo, y conviene dejarlo respirar.\nY vuelve al cordero como si acabara de explicar una receta.",
+      "facts": [
+        "olor_de_la_cocina",
+        "algo_respira_abajo",
+        "mahadni_lo_dice_en_serio"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—De la despensa vieja. —Ni parpadea—. Es un hotel de mil ochocientos cuarenta y uno construido encima de una ciudad de hace mil años. Huele. Todo El Cairo huele. Si buscan un sitio que no huela, vayan a Suiza.",
+      "facts": [
+        "olor_de_la_cocina"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no huelo nada. —Y es verdad, y esa es la parte fea: no está mintiendo. Lleva tanto tiempo bajando ahí que ya no lo huele.\nDetrás de él, uno de los pinches sí lo ha olido, y se ha tapado la boca con el antebrazo, y ha mirado a Mahadni por si le ha visto.",
+      "facts": [
+        "olor_de_la_cocina",
+        "mahadni_baja_todos_los_dias"
+      ]
+    },
+    "note": "Pág. 135: «Alimenta a los monstruos del sótano, que viven allí desde hace décadas»."
+  },
+  {
+    "id": "mahadni_pinche",
+    "npc": "mahadni",
+    "label": "Preguntar por el pinche que se cayó",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "el_pinche_que_desaparecio"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Se llamaba Tewfik. —Y sigue cortando, y esa es la parte insoportable: sigue cortando—. Diecinueve años, de Minya, buenas manos. Le dije tres veces que no bajara al almacén después de cerrar. Tres veces. La tercera se lo dije delante de todos, para que le diera vergüenza.\n»Bajó. —Un golpe seco del cuchillo—. Su madre vino en enero. Le di el sueldo de dos meses y le dije que su hijo se había vuelto a Minya con una mujer, porque una madre puede vivir con un hijo desagradecido y no puede vivir con lo otro.\nLevanta la vista, y por primera vez hay algo debajo, y no es bondad: es cansancio.\n—Yo no le hice nada a ese chico. Eso también es verdad. Las dos cosas son verdad, y ustedes van a tener que decidir cuál se creen.",
+      "facts": [
+        "el_pinche_que_desaparecio",
+        "mahadni_mintio_a_la_madre",
+        "algo_custodia_las_piezas"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Se cayó por las escaleras del almacén y estuvo dos meses sin andar. —Corta—. Después se fue del hotel. Es lo que hace la gente joven cuando se lleva un susto.",
+      "facts": [
+        "el_pinche_que_desaparecio",
+        "mahadni_advierte"
+      ]
+    },
+    "onFailure": {
+      "text": "Mahadni deja de cortar.\nNo dice nada durante seis o siete segundos, que son muchos segundos. Después mira, uno por uno, a los pinches de la cocina, y los cinco agachan la cabeza a la vez, como si les hubieran empujado.\n—Aquí no se ha caído nadie —dice—. Pregúntenselo a ellos.\nY ninguno de los cinco levanta la vista.",
+      "facts": [
+        "el_pinche_que_desaparecio",
+        "la_cocina_tiene_miedo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -15
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "note": "El accidente del pinche es la coartada que el propio Mahadni ofrece en `mahadni_sotano` para que nadie baje. Aquí se la devuelven."
+  },
+  {
+    "id": "mahadni_carter",
+    "npc": "mahadni",
+    "label": "«¿Qué llevaba el inglés en ese saco?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "saco_de_carter"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Le ofrecí ayuda. —Y ahora sí deja el cuchillo, y lo deja del todo—. Le pregunté si quería que le echara una mano. Y el señor Carter, que es un hombre educado, se rió y me dijo: «ya llevo varias».\nSilencio.\n—Eso lo dijo él. Yo no lo he dicho. —Se limpia las manos muy despacio, dedo por dedo—. Y bajó por mi escalera con su saco al hombro, y yo le abrí la puerta, porque para eso estoy.\nOs mira.\n—Ahora ustedes van a preguntarme qué había en el saco, y yo les voy a decir que no lo sé, y va a ser mentira, y los dos vamos a saber que es mentira, y aun así va a ser lo mejor que les pase a ustedes hoy.",
+      "facts": [
+        "saco_de_carter",
+        "ya_llevo_varias",
+        "mahadni_le_abre_la_puerta_a_carter",
+        "algo_custodia_las_piezas"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "saco_carter"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cosas de arqueólogo. —Encoge un hombro—. Bajó por la escalera de servicio, sí. Baja mucha gente por la escalera de servicio: es la que no tiene alfombra.",
+      "facts": [
+        "saco_de_carter",
+        "mahadni_le_abre_la_puerta_a_carter"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no miro lo que llevan los huéspedes.\nY es una frase perfectamente razonable, dicha por un hombre que acaba de recitar sin pestañear el peso exacto de los nueve corderos que le entraron esta mañana.",
+      "facts": [
+        "mahadni_le_abre_la_puerta_a_carter"
+      ]
+    },
+    "note": "Pág. 54: Carter «cruza por la cocina, donde saluda a Mahadni. Este le pregunta si quiere que le eche una mano y Carter niega con la cabeza, bromeando \"ya llevo varias\", mientras baja las escaleras»."
+  },
+  {
+    "id": "mahadni_weder",
+    "npc": "mahadni",
+    "label": "«El señor del museo baja mucho por aquí»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "weder_baja_al_sotano"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Mahadni se queda quieto. Completamente quieto, con el cuchillo apoyado en la tabla, durante lo que parece mucho tiempo.\n—El señor Weder es un invitado del hotel.\nY luego, en voz muy baja y en francés, como si estuviera enseñando algo importante a un aprendiz:\n—Escúchenme bien, porque no voy a repetirlo y no se lo voy a decir de otra manera. En esta casa hay hombres que dan órdenes y hombres que las cumplen, y ustedes llevan dos días intentando averiguar cuáles son cuáles. Están equivocándose.\n»Yo bajo delante. Él baja detrás. —Coge el cuchillo—. Piensen en eso esta noche, cuando no puedan dormir.",
+      "facts": [
+        "weder_baja_al_sotano",
+        "mahadni_baja_delante",
+        "mahadni_manda_abajo",
+        "hay_sectarios_en_el_hotel"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -20
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—El señor Weder tiene autorización del director para acceder al almacén. —Corta—. Guarda ahí material del museo. Es un acuerdo antiguo y no es asunto mío.",
+      "facts": [
+        "weder_guarda_lo_suyo_abajo"
+      ]
+    },
+    "onFailure": {
+      "text": "Mahadni no responde.\nSe da la vuelta hacia la mesa larga, y al darse la vuelta uno de los seis camareros que no cocinan aparece en el vano de la puerta de servicio. No dice nada. No hace nada. Se queda ahí, secándose las manos con un paño, hasta que salís de la cocina.\nDetrás de él, en la penumbra del pasillo, hay otros dos.",
+      "facts": [
+        "los_seis_camareros",
+        "mahadni_manda_abajo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -20
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "note": "Pág. 135: «Mahadni es un sectario temible, mano derecha de Garth Weder y del mismísimo Shakti». Pág. 55, fragmento del bar: en el traslado de las cajas «el jefe de cocina iba delante abriendo paso»."
+  },
+  {
+    "id": "mahadni_camareros",
+    "npc": "mahadni",
+    "label": "«¿Quiénes son esos seis que no cocinan?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "—Son míos.\nDos palabras, y no añade nada durante un rato largo. Después, como quien concede una cortesía:\n—No los contrató el hotel. Los traje yo. No hablan con el personal, no comen con el personal y no duermen aquí. Sirven en la mesa del Príncipe esta noche porque yo lo he dispuesto y porque nadie más va a acercarse a esa mesa.\nY entonces hace una cosa muy fea: llama a uno.\nEl hombre se acerca, se queda a dos pasos y os mira. Tiene las manos impecables. No hay una sola marca de cocina en esas manos: ni un corte, ni una quemadura, ni un callo de cuchillo. Manos de un hombre que lleva años en una cocina sin haber cocinado nunca.\n—Ya está —dice Mahadni, y el hombre se va—. Ya lo han visto. Ahora ya no hace falta que lo pregunten más.",
+      "facts": [
+        "los_seis_camareros",
+        "las_manos_limpias",
+        "hay_sectarios_en_el_hotel",
+        "mesa_del_principe_custodiada"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -20
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Camareros de la casa. —Sigue cortando—. Seis. Sirven en los eventos grandes. No entran en el turno del restaurante porque no son del restaurante: son míos.",
+      "facts": [
+        "los_seis_camareros"
+      ]
+    },
+    "onFailure": {
+      "text": "Mahadni levanta el cuchillo y señala con él, sin ninguna prisa, hacia el fondo de la cocina.\nY los seis, que estaban repartidos por la sala haciendo seis cosas distintas, se vuelven a la vez. A la vez exactamente. Y os miran.\nNadie dice nada. Al cabo de unos segundos Mahadni baja el cuchillo y los seis vuelven a lo suyo, y el ruido de la cocina vuelve de golpe, y es entonces cuando os dais cuenta de que había parado.",
+      "facts": [
+        "los_seis_camareros",
+        "la_hermandad_os_ha_visto"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -25
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "note": "Pág. 135: Mahadni es miembro menor de la Hermandad y tiene seis camareros a sus órdenes. Las manos limpias son el detalle que Gasparini menciona en `gasparini_chismes` («fíjense algún día en las manos de esos seis»)."
+  },
+  {
+    "id": "mahadni_sotano",
+    "npc": "mahadni",
+    "label": "Preguntarle qué hay en el sótano",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Provisiones. —No parpadea—. Harina, arroz, vino. Ratas, también, como en todas partes. —Coge el cuchillo otra vez—. No bajen. El suelo está lleno de grasa y las escaleras son de piedra. El año pasado se cayó un pinche y estuvo dos meses sin andar.\nY después de una pausa muy medida, sin cambiar de tono:\n—Y hay tres puertas. La primera la abre cualquiera. La segunda la abro yo. La tercera no la abre nadie, y llevo once años en esta casa sin haber preguntado por qué.\nSe vuelve hacia la mesa.\n—Eso es lo único que voy a darles, y se lo doy porque me han caído bien y porque no va a servirles de nada.",
+      "facts": [
+        "mahadni_advierte",
+        "el_pinche_que_desaparecio",
+        "tres_puertas_en_el_sotano",
+        "piezas_en_el_sotano"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Provisiones. —No parpadea—. Harina, arroz, vino. Ratas, también, como en todas partes. —Coge el cuchillo otra vez—. No bajen. El suelo está lleno de grasa y las escaleras son de piedra. El año pasado se cayó un pinche y estuvo dos meses sin andar.",
+      "facts": [
+        "mahadni_advierte",
+        "el_pinche_que_desaparecio"
+      ]
+    },
+    "onFailure": {
+      "text": "Mahadni no contesta.\nSe queda mirándoos con el cuchillo en la mano y una calma absoluta, hasta que sois vosotros los que apartáis la vista. No ha pestañeado ni una vez. No ha cambiado de postura. Sigue exactamente igual que estaba y, sin embargo, la cocina entera se ha quedado en silencio: los seis camareros se han detenido a la vez, sin mirarle a él y sin miraros a vosotros. Esperando.\nCuando por fin volvéis a levantar la cabeza, Mahadni ha vuelto al cordero. Los seis siguen quietos un momento más. Después vuelven a moverse.\nEsta noche, alguien sabrá que preguntasteis.",
+      "facts": [
+        "mahadni_advierte",
+        "los_seis_camareros",
+        "la_hermandad_os_ha_visto"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -25
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "note": "Pág. 135: Mahadni es miembro de la Hermandad del Faraón Negro y alimenta a lo que vive abajo. Preguntarle por el sótano le convierte en piedra: la rama de fallo deja `mahadni_alertado` y el hecho `la_hermandad_os_ha_visto` para que la agenda del día 2 pueda leerlos."
+  },
+  {
+    "id": "mahadni_hermandad",
+    "npc": "mahadni",
+    "label": "Nombrarle a la Hermandad del Faraón Negro",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "hermandad_faraon_negro"
+      }
+    ],
+    "approaches": [
+      "directo"
+    ],
+    "check": {
+      "difficulty": "extreme"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Mustafá ibn Mahadni deja el cuchillo en la tabla, se seca las manos y se apoya con las dos palmas en la mesa de despiece.\n—¿Saben ustedes quién friega esta cocina a las tres de la mañana? —Habla en francés, muy tranquilo—. Yo. Cuarenta años cocinando y sigo fregando yo, porque hay noches en las que no puede entrar nadie más.\n»No soy un hombre importante. Los hombres importantes están arriba, en la terraza, tomando el té con el Príncipe. Yo soy el que sabe a qué hora se cierran las puertas.\nSe endereza.\n—Eso es todo lo que soy, y es más de lo que ustedes van a averiguar de nadie en esta casa. Y ahora salgan de mi cocina y no vuelvan a decir ese nombre aquí dentro. No por mí: aquí dentro hay seis hombres que no son míos del todo.",
+      "facts": [
+        "hermandad_faraon_negro",
+        "mahadni_es_de_la_hermandad",
+        "los_seis_camareros",
+        "mahadni_friega_de_madrugada"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -20
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "No pasa nada.\nMahadni sigue cortando exactamente al mismo ritmo, ni más deprisa ni más despacio, y no levanta la cabeza, y no contesta, y a los diez segundos está claro que no va a contestar nunca.\nLo que pasa es lo otro: uno de los seis sale de la cocina por la puerta de servicio. No corre. Cierra la puerta con cuidado. Y os quedáis ahí de pie, en una cocina en la que ya solo se oye el cuchillo, sabiendo perfectamente adónde ha ido, y a decirle qué, y a quién.",
+      "facts": [
+        "la_hermandad_os_ha_visto",
+        "los_seis_camareros"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -30
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "weder_alertado"
+        }
+      ]
+    },
+    "note": "Pág. 135: «Mahadni es un sectario temible, mano derecha de Garth Weder y del mismísimo Shakti. Es capaz de cometer cualquier tipo de atrocidad con tal de cumplir los deseos de sus idolatrados superiores». El fallo enciende también `weder_alertado`."
+  },
+  {
+    "id": "mahadni_shakti",
+    "npc": "mahadni",
+    "label": "Pronunciar delante de él el nombre de Omar Shakti",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "omar_shakti"
+      }
+    ],
+    "approaches": [
+      "directo"
+    ],
+    "check": {
+      "difficulty": "extreme"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Por primera vez en toda la conversación, Mustafá ibn Mahadni tiene miedo. Dura un segundo y no es miedo de vosotros.\n—Aquí no. —Baja la voz hasta un punto en que hay que acercarse para oírle, y acercarse a ese hombre cuesta—. Aquí no y hoy no.\n»Ese señor llega mañana a mediodía. Lo sé porque me han pedido dulces para la trescientos cuatro, que lleva un año vacía, y porque hay que subirlos todos los días a las siete de la tarde aunque no haya nadie.\nCoge el cuchillo; no para amenazar, sino para tener las manos ocupadas.\n—Váyanse. Y háganme un favor: cuando llegue, no le miren a la cara. Yo llevo once años sin mirarle a la cara y por eso sigo aquí.",
+      "facts": [
+        "omar_shakti",
+        "shakti_llega_manana",
+        "hab_shakti_304",
+        "shakti_pide_dulces"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "Mahadni suelta el cuchillo.\nNo lo deja: lo suelta, y el cuchillo cae de canto sobre la tabla y hace un ruido que en esta cocina no había hecho nada hasta ahora. Y entonces se vuelve hacia vosotros y no dice absolutamente nada, y descubrís en ese momento lo que quiere decir de verdad que un hombre te mire.\nDura muy poco. Recoge el cuchillo. Vuelve al cordero.\nPero cuando salís al pasillo de servicio, los seis están fuera. Los seis. Y ninguno os cierra el paso, y ninguno se aparta.",
+      "facts": [
+        "los_seis_camareros",
+        "la_hermandad_os_ha_visto",
+        "mahadni_teme_a_shakti"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "1/1D4"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "mahadni",
+          "by": -40
+        },
+        {
+          "kind": "setFlag",
+          "flag": "mahadni_alertado"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "weder_alertado"
+        }
+      ]
+    },
+    "note": "Pág. 62: Shakti llega el día 2 a las 12:30 y se hospeda en la 304. Pág. 55: «¡No pronuncies su nombre en público, imbécil!», le dice Najir a Gasparini. Es la pregunta más cara del hotel."
+  },
+  {
+    "id": "mahadni_frigorifico",
+    "npc": "mahadni",
+    "label": "«Hay un hombre encerrado en su cámara»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "dieter_encerrado"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "presionar",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "Mahadni deja el cuchillo sobre la mesa de despiece, muy despacio, y por primera vez os mira a los ojos.\n—Lo bajaron los soldados del Príncipe a las diez. Lo metieron ahí y echaron el candado, y el candado lo trajeron ellos. —Se limpia las manos en el delantal—. Yo no abro esa puerta. Y ustedes tampoco deberían: el hombre que está ahí dentro lleva dos horas repitiendo nombres en alemán, y ninguno es el suyo. Cuando alguien hace una lista a oscuras y con frío, la lista se cumple.",
+      "facts": [
+        "dieter_en_el_frigorifico",
+        "dieter_hace_una_lista",
+        "soldados_encerraron_a_dieter"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ahí dentro. —Señala con el mentón la puerta metálica del fondo, de la que salen golpes espaciados y regulares—. El alemán de la doscientos cuatro. Lo bajaron los soldados. Yo no tengo la llave y no pienso buscarla. Mañana alguien abrirá.",
+      "facts": [
+        "dieter_en_el_frigorifico"
+      ]
+    },
+    "onFailure": {
+      "text": "—Aquí solo hay corderos. —Y sigue despiezando. Pero los golpes del fondo no paran, y Mahadni ha empezado a cortar exactamente al ritmo de los golpes, sin darse cuenta de que lo hace.",
+      "facts": [
+        "dieter_en_el_frigorifico"
+      ]
+    },
+    "note": "Módulo, pág. 57: los soldados de Fuad encierran a Dieter en el almacén frigorífico. Los camareros le liberan a las 11:30 del día 2, si nadie se adelanta."
+  },
+  {
+    "id": "mahadni_la_comitiva",
+    "npc": "mahadni",
+    "label": "«¿Qué hacía el Rey en su cocina?»",
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_bajada_a_los_sotanos"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "presionar",
+      "adular"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "—Bajé con ellos. —Lo dice sin ninguna emoción, como quien dice que ha bajado a por sal—. Su majestad, el inglés, el alemán y el egipcio de la cara. Yo iba delante con la carne, porque abajo hay que llegar dando de comer o no se llega. El Rey miró a los míos como se mira a un perro sarnoso, y a los pequeños les dio igual: se le acercaron y le olieron los zapatos como perrillos falderos. —Coge otra vez el cuchillo—. Y luego vio la caja negra. Y se calló. Todos se callan cuando la ven, y todos creen que son los primeros.",
+      "facts": [
+        "fuad_bajo_al_templo",
+        "mahadni_alimenta_a_las_criaturas",
+        "sarcofago_visto"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "el_principe_en_el_templo"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Seis hombres armados en mi cocina, dos horas, de pie, sin tocar nada. —Escupe el cigarro apagado—. Y su majestad abajo, con el inglés y el alemán. Bajaron a enseñarle algo. Yo bajé delante con la carne, porque ahí abajo hay que llegar dando de comer.",
+      "facts": [
+        "fuad_bajo_al_templo",
+        "mahadni_alimenta_a_las_criaturas"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Pasaron por aquí. Bajaron. Subieron. —Se encoge de hombros—. En esta cocina pasa mucha gente y yo abro muchas puertas. Es mi trabajo.",
+      "facts": [
+        "fuad_bajo_al_templo"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no vi a nadie. —Pero mientras lo dice está retirando de la mesa de despiece una bandeja grande, vacía, en la que había carne hace un rato y que nadie ha servido en ninguna mesa del restaurante esta noche.",
+      "facts": [
+        "mahadni_alimenta_a_las_criaturas"
+      ]
+    },
+    "note": "Módulo, pág. 58-59: «Abajo les está esperando ansioso Mahadni, alimentando a los monstruos»."
+  }
+]

@@ -1,0 +1,19 @@
+# Despliegue en Netlify. Sirve para "netlify deploy" y para arrastrar la carpeta
+# dist/ a la web de Netlify, que es la via mas rapida si no quieres instalar nada.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/art/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

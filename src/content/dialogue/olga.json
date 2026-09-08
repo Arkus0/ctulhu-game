@@ -1,0 +1,743 @@
+[
+  {
+    "id": "olga_padre",
+    "npc": "olga",
+    "label": "Preguntarle a qué ha venido su padre",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "adular",
+      "directo",
+      "presionar"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Olga se ríe con la cabeza echada hacia atrás, y tarda en dejar de reírse.\n—A comprar, ¿a qué va a venir? Mi padre lleva treinta años comprando cosas que no debería. Compra la tercera semana de cada mes, como quien va al dentista. —Se le apaga la risa de golpe—. Solo que esta vez está nervioso, y mi padre nunca se pone nervioso por una estatuilla. Lleva dos días haciendo cuentas en voz alta y ha sacado del banco mil libras en efectivo, que es una cantidad muy rara: demasiado para un capricho y muy poco para una colección.\n»Es una señal. Mil libras es lo que se deja alguien cuando le van a dejar meter la mano.",
+      "facts": [
+        "padre_compra_piezas_robadas",
+        "dieter_nervioso",
+        "dieter_es_mercader",
+        "deposito_de_mil_libras"
+      ],
+      "unlocks": [
+        "olga_disco"
+      ]
+    },
+    "onHard": {
+      "text": "Olga se ríe con la cabeza echada hacia atrás.\n—A comprar, ¿a qué va a venir? Mi padre lleva treinta años comprando cosas que no debería. —Se le apaga un poco la risa—. Solo que esta vez está muy nervioso, y mi padre nunca se pone nervioso por una estatuilla.",
+      "facts": [
+        "padre_compra_piezas_robadas",
+        "dieter_nervioso",
+        "dieter_es_mercader"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Negocios. Siempre negocios. —Enciende un cigarrillo con el anterior todavía encendido y se da cuenta a mitad de camino, y le da igual—. Yo vengo de acompañante decorativa, que es mi oficio desde los diecisiete y se me da francamente bien. Sonrío en el desayuno, sonrío en la cena y por la noche me dejan en paz.",
+      "facts": [
+        "dieter_es_mercader",
+        "lounpeen_en_el_hotel"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Y a ustedes qué les importa? —Lo dice sin acritud, casi con curiosidad, y se va a buscar otra copa.\nVuelve con dos, se sienta otra vez y les tiende una.\n—Miren, se lo pongo así: mi padre tiene sesenta años de mal humor y una sola alegría al mes, y esa alegría llega en un cajón con serrín. Deduzcan ustedes a qué hemos venido a El Cairo. No hace falta que yo se lo diga y a mí me deja mejor no habérselo dicho.",
+      "facts": [
+        "dieter_es_mercader",
+        "padre_compra_piezas_robadas"
+      ]
+    },
+    "note": "Pág. 28: Lounpeen «compra mercancía la tercera semana de cada mes». Pág. 54: Weder le vende el Disco Solar por 5.000 libras a dos años, con un depósito de 1.000."
+  },
+  {
+    "id": "olga_dinero",
+    "npc": "olga",
+    "label": "«¿De qué vive una mujer como usted?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Mil libras al mes. —Lo dice como quien da la hora—. Me duran una semana, y las otras tres se las voy sacando a mi padre de la cartera mientras duerme. Todos los días un poco. Él lo sabe.\n»Y eso es lo que ustedes no entienden de nosotros dos: que él lo sabe y lo consiente. —Da una calada—. Un hombre que grita por un tenedor mal puesto y me deja robarle a diario. Piensen en eso un rato y sabrán de mi padre más de lo que van a sacarle a él en dos días.",
+      "facts": [
+        "olga_asignacion",
+        "olga_roba_a_su_padre",
+        "dieter_consiente_a_su_hija"
+      ]
+    },
+    "onSuccess": {
+      "text": "—De mi padre. —Sonríe con una dulzura perfectamente fabricada—. Como todas las hijas decentes de Berlín. La diferencia es que a mí no me da vergüenza decirlo y a ellas sí.",
+      "facts": [
+        "olga_asignacion"
+      ]
+    },
+    "onFailure": {
+      "text": "—De la caridad de un anciano. —Y cambia de tema hablando de un sombrero.\nPero al levantarse a por otra copa, el bolso se le queda abierto encima de la mesa, y dentro hay un fajo de billetes ingleses que no es el fajo de nadie que reciba una asignación: está sin doblar, sin sobre y sin orden, como el dinero que se coge deprisa de otro sitio.",
+      "facts": [
+        "olga_roba_a_su_padre"
+      ]
+    },
+    "note": "Pág. 30: «Olga le roba dinero a su padre de la cartera todos los días y él lo consiente. Tiene una asignación mensual de 1.000 libras que le dura una semana»."
+  },
+  {
+    "id": "olga_cigarrillo",
+    "npc": "olga",
+    "label": "Ofrecerle fuego",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "once": true,
+    "minutes": 5,
+    "always": {
+      "text": "Se inclina hacia la cerilla sin tocarla, tarda más de lo necesario y levanta los ojos a mitad de camino para comprobar quién está mirando. Están mirando todos. Es exactamente lo que quería.\n—Gracias. —Se recuesta—. Fumo cuarenta al día y tomo otras cosas que no se fuman, antes de que me lo pregunten con esa cara de médico. No es un drama. Los dramas se tienen en casa, y yo en mi casa lo que tengo son ciento cuarenta sarcófagos.\nY entonces se ríe, y por un segundo es una risa de verdad.",
+      "facts": [
+        "olga_fuma_y_se_droga",
+        "olga_odia_los_sarcofagos"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 10
+        }
+      ],
+      "unlocks": [
+        "olga_berlin",
+        "olga_arqueologos"
+      ]
+    },
+    "note": "Pág. 30: «Fuma compulsivamente y juguetea con todo tipo de drogas». El gesto más barato del hotel para abrirle la puerta."
+  },
+  {
+    "id": "olga_berlin",
+    "npc": "olga",
+    "label": "«¿Cómo es la casa de Berlín?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Grande, oscura y llena de muertos. —No sonríe—. Mi padre tiene docenas de sarcófagos en el pasillo de arriba. Docenas. De pequeña me daban igual; a los quince empecé a contarlos y a los veinte dejé de dormir en esa planta.\n»La gente cree que colecciona porque le apasiona Egipto. No le apasiona nada. Empezó porque un cuñado suyo, el de las salchichas, tenía anjs en la casa de verano y se reía de él delante de mi madre. —Apaga el cigarrillo—. Todo esto, El Cairo, ustedes, yo sentada aquí: todo esto existe porque un señor gordo se rió de mi padre en 1908.",
+      "facts": [
+        "olga_odia_los_sarcofagos",
+        "dieter_colecciona_por_envidia",
+        "sarcofagos_en_berlin"
+      ],
+      "unlocks": [
+        "olga_sotano",
+        "olga_madre"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Fría. —Se encoge de hombros—. Y con más egipcios muertos que vivos hay en esta terraza. Mi padre los guarda arriba, en el pasillo. Yo duermo abajo.",
+      "facts": [
+        "olga_odia_los_sarcofagos",
+        "sarcofagos_en_berlin"
+      ],
+      "unlocks": [
+        "olga_sotano"
+      ]
+    },
+    "onFailure": {
+      "text": "—Preciosa. Salió en una revista. —Y se pone a describirles la escalera, que es de mármol de Carrara, y el invernadero, que tiene orquídeas, y el salón azul, que es azul.\nDescribe la casa entera, habitación por habitación, durante cuatro minutos largos, y en los cuatro minutos no menciona ni una sola vez la planta de arriba.",
+      "facts": [
+        "olga_odia_los_sarcofagos"
+      ]
+    },
+    "note": "Pág. 28: Dieter «comienza a coleccionar por envidia» de su cuñado, el de la empresa cárnica Drei Ferkel, que se burlaba de él delante de su hermana. Pág. 30: a Olga «le repugna su casa de Berlín porque está atiborrada de sarcófagos»."
+  },
+  {
+    "id": "olga_madre",
+    "npc": "olga",
+    "label": "Preguntarle por su madre",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "Olga tarda en contestar y, cuando contesta, lo hace sin ninguna de sus voces.\n—Murió hace tres años. Y les voy a decir una cosa fea: mi padre la quería. La quería de verdad, a su manera espantosa, porque ella le ordenaba por dentro. Le decía cuándo estaba enfadado y por qué, y él la creía, y así podía seguir funcionando.\n»Desde que se murió no funciona. Va dando tumbos por el mundo comprando cajas de muertos y gritándole a los camareros. —Se enciende otro cigarrillo—. Y a mí no me mira. Nunca me ha mirado. Yo he sido guapa desde los catorce años para que alguien me mirara y ha mirado todo el mundo menos él.\nY entonces se ríe, para tapar la frase, y llama al camarero.",
+      "facts": [
+        "olga_madre_muerta",
+        "dieter_perdido_sin_su_mujer",
+        "olga_quiere_ser_amada"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Muerta. Hace tres años. —Da una calada larga—. Era la única persona de esa casa capaz de decirle a mi padre lo que sentía, porque él no lo sabe solo. Desde entonces anda perdido y compra el doble.",
+      "facts": [
+        "olga_madre_muerta",
+        "dieter_perdido_sin_su_mujer"
+      ]
+    },
+    "onFailure": {
+      "text": "—Ah, no. —Levanta una mano, muy amable, muy firme—. De eso no.\nY es la única vez en toda la conversación que dice que no a algo. Una mujer que ha contado sin pestañear que le roba a su padre y que se acuesta con el barman levanta la mano cuando le nombran a su madre.",
+      "facts": [
+        "olga_madre_muerta"
+      ]
+    },
+    "note": "Pág. 28: «Amaba a su mujer porque le ayudaba a gestionar sus carencias emocionales. Desde que ha muerto se encuentra perdido». Pág. 30: Olga «quiere ser amada porque en su hogar no halló ese amor verdadero y desinteresado, ni siquiera cuando era niña»."
+  },
+  {
+    "id": "olga_gasparini",
+    "npc": "olga",
+    "label": "«¿Qué hay entre usted y el barman?»",
+    "approaches": [
+      "adular",
+      "directo",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—¿Carlo? —Se ríe, y no es una risa amable—. Carlo es un patán con un rizo. Guapísimo, eso sí, y muy trabajador, y absolutamente convencido de que esto le está pasando a él.\n»No hay nada entre nosotros dos, señores. Hay algo entre yo y una semana en El Cairo, y él está ahí en medio. —Da una calada—. Le utilizo como una servilleta. Se lo digo sin ninguna crueldad: le utilizo como una servilleta y él está encantado y los dos sabemos cómo termina esto.\n»Lo único que le pido es que no se lo cuenten a mi padre. No por mí. Por él.",
+      "facts": [
+        "gasparini_y_olga",
+        "olga_desprecia_a_gasparini",
+        "dieter_no_sabe_lo_de_gasparini"
+      ],
+      "unlocks": [
+        "olga_delacion"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Nada que le interese a nadie. —Sonríe con toda la boca—. Y desde luego nada que le interese a mi padre, que come a la una y media y tiene mucha imaginación.",
+      "facts": [
+        "gasparini_y_olga",
+        "dieter_no_sabe_lo_de_gasparini"
+      ],
+      "unlocks": [
+        "olga_delacion"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿El del bar? —Frunce el ceño con un esfuerzo de memoria que no engaña a nadie—. Ah, sí. Simpático.\nY sigue hablando de otra cosa. Pero cada vez que un camarero cruza la terraza con una bandeja, se le van los ojos un cuarto de segundo, y no a la bandeja: al arco que da al bar largo.",
+      "facts": [
+        "gasparini_y_olga"
+      ]
+    },
+    "note": "Pág. 30: «Su relación con Gasparini es exclusivamente sexual, por ambas partes. En realidad le parece un patán, como todos los hombres. Le utiliza como si fuese una servilleta»."
+  },
+  {
+    "id": "olga_delacion",
+    "npc": "olga",
+    "label": "Advertirle de que Gasparini la está usando",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "llamo_a_najir"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "once": true,
+    "onExtreme": {
+      "text": "Olga escucha entero, sin interrumpir, y eso ya es raro.\n—Le ha vendido a un mercader lo que yo le conté entre las palmeras. —No pregunta si es verdad. Va directa a la consecuencia y la voz le sale plana—. Yo le conté que mi padre estaba nervioso. Eso es todo lo que le conté. Y él lo ha convertido en dinero.\nSe queda mirando el cenicero un rato largo.\n—Bien. Muy bien. —Aplasta el cigarrillo con más fuerza de la necesaria—. Entonces esta noche, cuando esté suficientemente bebida, se lo cuento yo a mi padre. Todo. Con nombres. Y que arda el hotel entero.\nY lo dice con una calma que da más miedo que si lo gritara.",
+      "facts": [
+        "olga_sabe_de_la_venta",
+        "olga_delatara_a_gasparini"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "olga_delatara_a_gasparini"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ya. —Se enciende otro cigarrillo con mucho cuidado—. Todos usan a todos, cariño. Yo le uso a él, él me usa a mí, mi padre nos usa a los dos para no pensar. Esto es un hotel, no un convento.\nPero se ha quedado la información. Se le nota en que ha dejado de mirarles a ustedes y ha empezado a mirar hacia el bar.",
+      "facts": [
+        "olga_sabe_de_la_venta"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Y ustedes por qué me cuentan esto? —Los mira uno a uno, muy despacio, y de repente no hay nada de frívolo en esa cara—. ¿Para protegerme? Los hombres que quieren protegerme siempre quieren la misma cosa, y no es protegerme.\nSe levanta. Pero antes de irse se vuelve.\n—De todas formas: si Carlo ha hablado con alguien de fuera del hotel, se le nota. Cuando le pagan por algo se lava las manos tres veces seguidas. Fíjense.",
+      "facts": [
+        "olga_desconfia_de_vosotros",
+        "gasparini_se_lava_las_manos"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": -10
+        }
+      ]
+    },
+    "note": "Pág. 55: a las 21:30, en la mascarada, «Olga se acerca a su padre y le cuenta que Gasparini trama algo con Faraz Najir». Aquí el grupo puede adelantar esa delación, o ganársela."
+  },
+  {
+    "id": "olga_sotano",
+    "npc": "olga",
+    "label": "«¿Sabe usted qué guardan en el sótano?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Cajas. —Bosteza sin disimular—. Se lo digo con toda la sinceridad de la que soy capaz a esta hora: me da exactamente igual. He crecido rodeada de piedras robadas y no he visto que ninguna hiciera feliz a nadie.\n»Pero le he oído decir una cosa a mi padre por teléfono y se la regalo, porque a mí no me sirve para nada. Dijo: «no es una pieza, es el juego entero». —Se encoge de hombros—. Yo qué sé qué significa. Sonaba a que estaba asustado y contento a la vez, que en él es lo mismo.",
+      "facts": [
+        "piezas_en_el_sotano",
+        "olga_no_le_interesa_el_sotano",
+        "es_el_juego_entero"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ni idea, y no piensen que me hago la interesante: es que de verdad no me interesa. —Estira las piernas—. Si quieren saber qué compra mi padre, pregúntenle a mi padre. Le encantará. Es lo único de lo que sabe hablar.",
+      "facts": [
+        "olga_no_le_interesa_el_sotano"
+      ]
+    },
+    "onFailure": {
+      "text": "—¡Ay, por Dios! —Se ríe con ganas—. ¿Ustedes también? Este hotel entero está lleno de gente que susurra la palabra sótano como si fuera el nombre de una amante.\nY se queda un segundo, con el cigarrillo a medio camino.\n—Aunque es verdad que son muchos. El del museo, el cocinero, el barman, mi padre. Cuatro hombres que no se hablan entre ellos y los cuatro con el mismo tema.",
+      "facts": [
+        "piezas_en_el_sotano",
+        "cuatro_hombres_y_un_sotano"
+      ]
+    },
+    "note": "Pág. 30: «No le interesan las piezas del sótano». Su indiferencia es la vía más limpia para que el grupo oiga a Dieter sin filtro."
+  },
+  {
+    "id": "olga_disco",
+    "npc": "olga",
+    "label": "«¿Qué guarda su padre debajo del colchón?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Olga deja la copa.\n—Una caja de metal, gris, hecha a medida, del tamaño de un plato de postre. La compró en Berlín antes de salir, sin saber todavía qué iba a meter dentro. —Habla despacio, porque se está dando cuenta mientras lo dice—. Encargó la caja antes de tener la pieza. ¿Entienden lo que significa eso? Sabía exactamente lo que venía a comprar y sabía exactamente qué forma tenía.\n»Y anoche, cuando volvió, tenía la mano derecha vendada. Se la quemó, dijo. Con una lámpara. —Se ríe sin ganas—. Mi padre no ha encendido una lámpara en su vida. Para eso estoy yo, o el servicio, o cualquiera.",
+      "facts": [
+        "disco_solar_existe",
+        "disco_bajo_el_colchon",
+        "olga_vio_la_caja_metalica",
+        "dieter_se_quemo_la_mano"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "disco_solar"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Una caja. —Frunce el ceño—. Metálica, pequeña, y la mete debajo del colchón como un niño, todas las noches, en todos los hoteles de Europa. Esta vez la caja es nueva.",
+      "facts": [
+        "disco_bajo_el_colchon",
+        "olga_vio_la_caja_metalica"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Debajo del colchón? —Enarca una ceja—. Qué imaginación tienen ustedes. Mi padre guarda las cosas en la caja fuerte del hotel, como todo el mundo.\nY es mentira, y es una mentira floja, porque acto seguido añade sin que nadie se lo pregunte:\n—Además, esa habitación la limpian todas las mañanas a las diez. Si hubiera algo, lo habrían visto las chicas. —Que es una manera muy larga de decir la hora a la que la habitación está vacía.",
+      "facts": [
+        "hab_lounpeen_vacia_a_las_diez"
+      ]
+    },
+    "note": "Pág. 54: a las 17:00 Dieter «guarda el artefacto en una caja metálica a medida y la esconde bajo el colchón de su cama». Al tocar el Disco recibe una descarga eléctrica que lo tira al suelo."
+  },
+  {
+    "id": "olga_najir",
+    "npc": "olga",
+    "label": "Preguntarle por el mercader egipcio",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "faraz_najir"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Najir. —Se le tuerce la boca—. La pesadilla de mi padre. Se lleva las mejores piezas de todas las subastas del Mediterráneo y compra joyas a los viejos de Khan el Khalili por una décima parte de lo que valen, y mi padre lleva diez años perdiendo contra él y llamándolo ladrón, que es lo que dicen los ladrones lentos de los ladrones rápidos.\n»Si ese hombre ha puesto un pie en este hotel, mi padre se va a enterar. Y cuando se entere, no va a comprar nada: va a comprar deprisa, que es peor.",
+      "facts": [
+        "faraz_najir",
+        "najir_pesadilla_de_dieter",
+        "dieter_comprara_deprisa"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El de la cara. —Arruga la nariz—. Un mercader del casco antiguo al que mi padre odia con una constancia que en él es casi un hobby. Compiten. Mi padre pierde.",
+      "facts": [
+        "najir_pesadilla_de_dieter"
+      ]
+    },
+    "onFailure": {
+      "text": "—No conozco a ningún egipcio, cariño. Conozco a tres o cuatro. —Sonríe—. Ninguno vendía nada.\nPero al decirlo se ha tocado la mejilla izquierda, sin darse cuenta, en el sitio exacto en el que Faraz Najir no tiene cara.",
+      "facts": [
+        "olga_conoce_a_najir_de_vista"
+      ]
+    },
+    "note": "Pág. 55: «Najir es la pesadilla de su padre, ese sucio mercader egipcio que se hace con las mejores piezas en las subastas y roba joyas a los ancianos de Khan el Khalili»."
+  },
+  {
+    "id": "olga_politica",
+    "npc": "olga",
+    "label": "Sacarle la cámara de los lores",
+    "approaches": [
+      "adular",
+      "directo",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "onHard": {
+      "text": "Y aquí Olga se enciende de verdad, y es un espectáculo.\nHabla veinte minutos seguidos de la cámara de los lores. Nombres, votaciones, quién bebe, quién debe dinero, quién no le habla a quién desde el verano del veinte. Lo hace con una precisión que no se aprende leyendo el Times, y a los cinco minutos queda claro por qué.\n—A ese lo conozco carnalmente —dice, sin bajar la voz, señalando una fotografía del periódico—. Y a ese. Y al de la izquierda no, pero lo intentó en un tren.\n»El protectorado es un negocio entre catorce señores que se odian por cosas de 1904, señores. Todo lo demás son banderas.",
+      "facts": [
+        "olga_conoce_a_los_lores",
+        "fuad_es_rey_desde_marzo",
+        "el_protectorado_son_catorce_senores"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Encantada. —Se acomoda—. Es de lo único que se puede hablar en este hotel sin que a uno le den la razón. Pregúnteme lo que quiera de Londres: la mitad de esa cámara ha pasado por Berlín y la otra mitad tiene deudas allí.",
+      "facts": [
+        "olga_conoce_a_los_lores"
+      ]
+    },
+    "onFailure": {
+      "text": "Empieza espléndidamente. A los tres minutos ha dejado de mirarles y está mirando por encima del hombro de ustedes, hacia la puerta, y sigue asintiendo en los sitios correctos y diciendo «desde luego» sin haber escuchado nada.\nCuando por fin vuelve en sí, dice:\n—Perdón. ¿De qué hablábamos? De Egipto no, espero. Lo de los nacionalistas me aburre hasta la náusea y llevo dos días fingiendo que no.",
+      "facts": [
+        "olga_finge_que_escucha",
+        "olga_se_aburre_del_nacionalismo"
+      ]
+    },
+    "note": "Pág. 30: «Le encanta hablar de la situación política y la cámara de los lores y normalmente lo hace con soltura, porque a algunos los conoce carnalmente. No se siente muy atraída por el conflicto del nacionalismo egipcio, pero disfruta fingiendo un rato, hasta que se aburre»."
+  },
+  {
+    "id": "olga_christie",
+    "npc": "olga",
+    "label": "Ofrecerle presentarle a Agatha Christie",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "agatha_christie_en_el_hotel"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "onSuccess": {
+      "text": "Olga se yergue en la silla, y es la primera postura honesta que le han visto.\n—¿Está aquí? ¿En este hotel? —Y por un momento no hay ni pose ni cigarrillo—. La he leído entera. Entre las sábanas, con una linterna, como una idiota de quince años. Escribe fatal y le da igual, y eso me parece lo más valiente que he visto hacer a una mujer.\n»Preséntenmela y les debo una. Y yo pago mis deudas, que es más de lo que puede decir mi padre.",
+      "facts": [
+        "olga_quiere_a_christie"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "olga_debe_un_favor"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 30
+        }
+      ],
+      "unlocks": [
+        "olga_aventura"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿La de las novelas? —Se ríe—. Ay, no me hagan eso. La conocería encantada y luego no sabría qué decirle, y me pasaría el resto del viaje acordándome. Prefiero seguir imaginándomela.\nY sin embargo, un cuarto de hora después, cuando creen que ya no viene a cuento, pregunta como quien no quiere la cosa:\n—¿Y en qué habitación está?",
+      "facts": [
+        "olga_quiere_a_christie"
+      ]
+    },
+    "note": "Pág. 30: «Alguna vez ha leído, entre las sábanas, una novela de Agatha Christie y la valora por su independencia y su talento. Le encantaría charlar con ella un rato»."
+  },
+  {
+    "id": "olga_churchill",
+    "npc": "olga",
+    "label": "Mencionarle a Churchill",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "churchill_en_el_hotel"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onSuccess": {
+      "text": "—¡Ay, el señor Churchill! —Junta las manos, encantada—. Es un peluche. Un peluche gordo y furioso que anda como si le doliera el mundo. Le adoro.\n»Preséntenmelo y le hago reír, que es lo único que quiere ese hombre y nadie se atreve a intentarlo porque acaban de operarle. —Sonríe—. A los hombres muy importantes solo hay que hacerles dos cosas: reír y esperar.",
+      "facts": [
+        "churchill_en_el_hotel",
+        "olga_quiere_a_churchill"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 15
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Sí, sí, he oído que anda por aquí. —Da una calada—. Todos los hombres importantes de este año andan por aquí y ninguno es interesante después de la segunda copa.\nY se queda pensando, y añade:\n—Aunque a ese le tengo cariño. No me pregunten por qué. Los ingleses gordos que pierden elecciones me dan una ternura enorme.",
+      "facts": [
+        "olga_quiere_a_churchill"
+      ]
+    },
+    "note": "Pág. 30: «Agradecería que los investigadores le presentaran a Churchill, porque para ella es un peluche»."
+  },
+  {
+    "id": "olga_aga_khan",
+    "npc": "olga",
+    "label": "Ofrecerle presentarle al Aga Khan",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "aga_khan_viene"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—No, gracias. —Ni lo piensa—. Un hombre con cien mil libras en un maletín y un secretario que se las lleva. Ya sé cómo va esa conversación: me cuenta lo que tiene, yo pongo cara, y a la tercera copa me explica los caballos.\n»Los engreídos me aburren muchísimo, y ese señor lleva engreído desde los ocho años porque le nombraron imán a los ocho años. No es culpa suya. Pero yo no pienso pagarlo.\n—Y sin embargo… —añade, divertida— si él pregunta por mí, no me lo cuenten. Que pregunte otro rato.",
+      "facts": [
+        "olga_desprecia_al_aga_khan",
+        "aga_khan_viene"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Paso. —Sonríe con dulzura—. No me interesan los hombres que ya saben lo que valen. Con esos no hay nada que hacer, ya está hecho todo.",
+      "facts": [
+        "olga_desprecia_al_aga_khan"
+      ]
+    },
+    "onFailure": {
+      "text": "—Ustedes no me escuchan. —Suspira, y por primera vez suena cansada de verdad—. Llevo media hora contándoles a quién desprecio y me traen justo a ese.\nSe levanta a por otra copa. Al pasar, sin volverse, deja caer:\n—Si de verdad quieren caerme bien, tráiganme un arqueólogo. Uno de los que no levantan la cabeza del papel. Esos sí.",
+      "facts": [
+        "olga_desprecia_al_aga_khan",
+        "olga_prefiere_arqueologos"
+      ],
+      "unlocks": [
+        "olga_arqueologos"
+      ]
+    },
+    "note": "Pág. 30: «Olga no conoce al Aga Khan, y no le interesa demasiado porque desprecia a los engreídos». Pág. 55: en la mascarada el Aga Khan preguntará a los investigadores quién es esa «divinidad pelirroja»."
+  },
+  {
+    "id": "olga_arqueologos",
+    "npc": "olga",
+    "label": "Hablarle del arqueólogo inglés",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Adorables. —Lo dice con una convicción que no ha puesto en nada más en toda la tarde—. Un hombre que lleva catorce años cavando en el mismo agujero por si acaso. Eso es fe, señores, y en mi mundo no hay nada de eso.\n»Se sienta de espaldas a la sala. ¿Lo han visto? De espaldas, en un hotel lleno de mujeres, para que no le hablen. —Se ríe—. Le he mirado dos veces y no se ha enterado ninguna de las dos. Es lo más halagador que me ha pasado este año.\n»Y algo le pasa. Un hombre que no mira a nadie y de repente mira a la puerta cada cuatro minutos es un hombre que espera a alguien o que huye de alguien.",
+      "facts": [
+        "olga_prefiere_arqueologos",
+        "carter_se_sienta_de_espaldas",
+        "carter_mira_a_la_puerta"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ese me gusta. —Sonríe de lado—. No por guapo, que no lo es. Por distraído. Los hombres distraídos son los únicos que no vienen a por algo.",
+      "facts": [
+        "olga_prefiere_arqueologos"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿El inglés triste? —Se encoge de hombros—. No he cruzado dos palabras con él.\nY es verdad, y por eso lo siguiente tiene su gracia:\n—Aunque huele fatal, eso se lo digo yo. A cerrado y a otra cosa. Y yo he olido muchas cosas, y esa la conozco: es olor de sótano.",
+      "facts": [
+        "carter_huele_mal"
+      ]
+    },
+    "note": "Pág. 30: «Los arqueólogos le resultan particularmente adorables y los políticos, una monada»."
+  },
+  {
+    "id": "olga_aventura",
+    "npc": "olga",
+    "label": "Proponerle entrar donde no les llaman",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Olga se inclina hacia delante con los codos en la mesa y esa es toda la respuesta.\n—Cuenten. Despacio. Y no me expliquen por qué está mal, que eso ya lo sé.\nEscucha el plan entero. Cuando terminan, señala tres cosas que no habían pensado.\n—Uno: yo puedo entrar en la habitación de mi padre a cualquier hora del día o de la noche y nadie va a preguntarme nada, porque soy la hija. Dos: si me ven salir de una habitación que no es la mía, este hotel entero sabe explicarlo sin ayuda de nadie, y esa explicación no incluye un robo. —Se ríe—. Tres: si esto sale mal, yo lloro. Se me da fatal, pero lloro, y funciona.\n»Ahora bien. Cuando esto se ponga feo de verdad, y se va a poner, yo me voy. Se lo digo ahora para que no se lleven un disgusto después.",
+      "facts": [
+        "olga_se_apunta",
+        "olga_entra_en_la_habitacion",
+        "olga_huira_si_se_pone_serio"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "olga_se_apunta"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 30
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿A robar? —Se le ilumina la cara—. Ay, por fin alguien que no me invita a un té.\nCuenten conmigo. Y no me den las gracias, que llevo tres días en este hotel muriéndome de aburrimiento.",
+      "facts": [
+        "olga_se_apunta"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "olga_se_apunta"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 20
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—A ver si lo he entendido. —Cuenta con los dedos—. Ustedes quieren que yo, que no les conozco de nada, entre en una habitación ajena mientras ustedes vigilan la puerta.\nSilencio. Y entonces se ríe.\n—No digo que no. Digo que lo han planteado ustedes fatal. A una mujer no se le pide que robe: se le pide que distraiga, y luego roba igual porque es lo divertido. Vuelvan cuando lo hayan pensado mejor.",
+      "facts": [
+        "olga_no_dice_que_no"
+      ]
+    },
+    "note": "Pág. 30: «Le atrae la aventura, con lo que es posible empujarla a cualquier allanamiento de habitación, robo o secuestro; al menos, hasta que la cosa se ponga seria e intente escapar»."
+  },
+  {
+    "id": "olga_selassie",
+    "npc": "olga",
+    "label": "«Sabes perfectamente con quién estás bailando»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "olga_baila_con_selassie"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Olga se ríe con la cabeza echada hacia atrás y luego para de golpe, y sobria no está pero tonta tampoco.\n—Claro que lo sé. Todo el mundo me lo ha explicado esta noche, tres veces, y todos me lo han explicado igual: bajito y mirando al suelo. —Se recoge el pelo con una mano—. Mi padre me prohíbe ver a un barman. El barman me pide que me aparte de su mesa. Y el único hombre de esta sala al que nadie se atreve a decirle nada me ha sacado a bailar. ¿A ti qué te parece que voy a hacer? —Se acerca—. Y si el imán ese quiere que le presenten, que venga él. Está a ocho metros. Lleva ahí una hora.",
+      "facts": [
+        "olga_sabe_lo_que_hace",
+        "aga_khan_quiere_conocer_a_olga",
+        "selassie_es_peligroso"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "olga",
+          "by": 10
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Bailo con quien me da la gana. —Le brillan los ojos de una manera que no es solo la ginebra—. Y esta noche me da la gana bailar con el hombre que más miedo da de El Cairo, precisamente porque a mi padre le va a dar algo y porque cierto barman va a tener que mirar sin abrir la boca. Los dos se lo han ganado a pulso.",
+      "facts": [
+        "olga_sabe_lo_que_hace"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Baila bien. —Se encoge de hombros y no se le mueve casi nada, porque el disfraz no da para más—. Es lo único que me importa de un hombre a las once de la noche.",
+      "facts": [
+        "olga_baila_con_selassie"
+      ]
+    },
+    "onFailure": {
+      "text": "—Ay, no me sermoneéis vosotros también. —Y se va bailando de espaldas hacia el corro, pero al llegar mira un segundo hacia la barra, hacia donde está Gasparini, y comprueba que la está viendo. Es lo único que comprueba en toda la noche.",
+      "facts": [
+        "olga_lo_hace_por_gasparini"
+      ]
+    },
+    "note": "Módulo, pág. 59-60: Olga se acerca a Selassie sin esperar a que Gasparini se lo presente y baila con él hasta el amanecer."
+  }
+]

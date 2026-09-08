@@ -1,0 +1,274 @@
+[
+  {
+    "id": "carter_weder_terraza",
+    "location": "terraza",
+    "event": "d1_terraza_carter_weder",
+    "participants": [
+      "carter",
+      "weder"
+    ],
+    "ambient": "El ruido de la terraza se lo come todo: cucharillas, carcajadas, un ventilador que chirría. Llegan palabras sueltas sin hilo entre ellas.",
+    "fragments": [
+      {
+        "id": "f1_fellahin",
+        "text": "—Se trata de un descubrimiento sin precedentes. Tus amigos deben de estar contentos.\n—No se lo he dicho a nadie. Solo lo sabemos tú y yo.\n—Bueno, ¿y los fellahin que nos ayudaron a sacarlo de allí?\n—Ya me encargué de ellos.",
+        "facts": [
+          "fellahin_desaparecidos"
+        ]
+      },
+      {
+        "id": "f2_fecha",
+        "text": "—Solo quedan dos días y las piezas negras se encontrarán a buen recaudo. Al menos, eso me prometiste.\n—Sí, sí, claro. Recuerda: el 22 del 22, a las 22:00.",
+        "facts": [
+          "fecha_traslado",
+          "piezas_negras"
+        ]
+      },
+      {
+        "id": "f3_conde",
+        "text": "—Yo ya no estaré aquí.\n—Eso espero. El Conde no puede saberlo. El traslado debe efectuarse después de que te lo lleves a Luxor. ¿Estás seguro de que él no se quedará más tiempo?",
+        "facts": [
+          "carnarvon_no_debe_saberlo"
+        ]
+      },
+      {
+        "id": "f4_hija",
+        "text": "—¿Estás loco? Bajo ninguna circunstancia. Aunque su hija sea devorada por las ratas de las cocinas y la arrastren al infierno. ¡Se muere por abrir el Segundo Sello!",
+        "facts": [
+          "segundo_sello",
+          "presagio_evelyn"
+        ]
+      },
+      {
+        "id": "f5_ratas",
+        "text": "—Gracias a las ratas de las cocinas, querido Carter, tu tesoro está más protegido que nunca. Reconoce que las piezas se encuentran excepcionalmente custodiadas.",
+        "facts": [
+          "algo_custodia_las_piezas"
+        ]
+      },
+      {
+        "id": "f6_cadaver",
+        "text": "—No lo olvido. De hecho, no puedo olvidarlo. Tengo mi habitación apestada por ello. ¿Tú sabes lo que es dormir con un cadáver putrefacto bajo la cama?",
+        "facts": [
+          "saco_de_carter"
+        ]
+      }
+    ],
+    "stealth": "ninguno",
+    "listenPenalty": 1
+  },
+  {
+    "id": "gasparini_olga_jardin",
+    "location": "salon_isis",
+    "event": "d1_gasparini_olga",
+    "participants": [
+      "gasparini",
+      "olga"
+    ],
+    "ambient": "Entre las palmeras solo se distinguen risas ahogadas y el roce de la tela. Nada aprovechable.",
+    "fragments": [
+      {
+        "id": "g1_negocios",
+        "text": "—¿Y a qué ha venido tu padre, entonces? Porque a ver las pirámides no, desde luego.\n—A lo de siempre. A comprar. Solo que esta vez es una colección entera, y está robada.",
+        "facts": [
+          "padre_compra_piezas_robadas"
+        ]
+      },
+      {
+        "id": "g2_sotano",
+        "text": "—Las tienen aquí. En este hotel, debajo de nosotros. Se lo oí decir por teléfono antes de salir de Alejandría.",
+        "facts": [
+          "piezas_en_el_sotano"
+        ]
+      },
+      {
+        "id": "g3_precio",
+        "text": "—Cinco mil libras, Carlo. Cinco mil por una sola pieza. ¿Tú te haces una idea de lo que es eso?",
+        "facts": [
+          "precio_del_disco"
+        ]
+      },
+      {
+        "id": "g4_disco",
+        "text": "—Un disco, dice. Un disco de oro. Y que quien se lo ponga en la cabeza ve lo que quiere ver.",
+        "facts": [
+          "disco_solar_existe"
+        ]
+      },
+      {
+        "id": "g5_alemanes",
+        "text": "—El que se lo vende es el del museo. El guapo. Ese que sonríe siempre y no le llega la sonrisa a los ojos.",
+        "facts": [
+          "weder_vende_las_piezas"
+        ]
+      }
+    ],
+    "stealth": "normal"
+  },
+  {
+    "id": "gasparini_najir_bar",
+    "location": "bar_largo",
+    "event": "d1_najir_gasparini_bar",
+    "participants": [
+      "gasparini",
+      "najir"
+    ],
+    "ambient": "Entre el hielo de la coctelera, el ventilador y las risas de la barra solo llegan pedazos. Los dos hombres se inclinan sobre la mesa cada vez que dicen algo que importa.",
+    "fragments": [
+      {
+        "id": "n1_reunion",
+        "text": "—Se han reunido: Weder y Lounpeen. Han estado en su habitación y ahora han ido al sótano —dice Gasparini, sin dejar de secar un vaso.",
+        "facts": [
+          "weder_baja_al_sotano",
+          "dieter_tiene_el_disco"
+        ]
+      },
+      {
+        "id": "n2_disco",
+        "text": "—(...) ¿Un disco de oro? ¿El Disco Solar? —pregunta Najir, con una sorpresa que le sale un segundo tarde.\n—(...) Lo vio Yana, una chica del servicio de limpieza —comenta Gasparini.",
+        "facts": [
+          "disco_solar_existe",
+          "yana_la_camarera"
+        ]
+      },
+      {
+        "id": "n3_caja_enorme",
+        "text": "—(...) tiene que haber mucho más, algo grande. Hace quince días les vieron transportar algo muy pesado por la noche. Eran docenas de hombres con poleas agarradas al techo y troncos de madera colocados en las escaleras para que no partiera el mármol, moviendo una caja enorme —explica Gasparini—. Te estoy diciendo algo de siete metros, no sé si me entiendes.",
+        "facts": [
+          "algo_grande_en_el_sotano",
+          "piezas_en_el_sotano"
+        ]
+      },
+      {
+        "id": "n4_carlyle",
+        "text": "—Mi cliente se va a poner muy contento —confirma Najir.\n—Por cierto, ¿Carlyle no había muerto? —pregunta Gasparini.\n—Eso es lo que dicen, pero en Kenia no encontraron...",
+        "facts": [
+          "carlyle_no_murio",
+          "najir_tiene_un_cliente"
+        ]
+      },
+      {
+        "id": "n5_el_jefe",
+        "text": "—¿Por qué no hablas directamente con el jefe? —pregunta Gasparini, extrañado.\n—Mejor cambiemos de tema... —responde Najir, mirando nervioso a su alrededor.",
+        "facts": [
+          "najir_teme_a_alguien"
+        ]
+      },
+      {
+        "id": "n6_shakti",
+        "text": "—¿Por qué? Shakti es el que dirige todo —insiste Gasparini. Najir le responde susurrando:\n—¡No pronuncies su nombre en público, imbécil! —y, señalándose la cara, añade—: ¿Quieres que te lo explique? —Faraz se toca la mitad quemada con las dos manos—. Esto me lo hizo hace más de dos años y todavía me duele.",
+        "facts": [
+          "omar_shakti",
+          "shakti_quemo_a_najir",
+          "hermandad_faraon_negro"
+        ]
+      }
+    ],
+    "stealth": "normal",
+    "listenPenalty": 1
+  },
+  {
+    "id": "dieter_najir_fiesta",
+    "location": "salon_baile",
+    "event": "d1_discusion_mercaderes",
+    "participants": [
+      "dieter",
+      "najir"
+    ],
+    "ambient": "Cincuenta músicos de jazz tapan casi todo. De la columna llegan dos voces que suben de tono y vuelven a bajar cada vez que pasa alguien disfrazado.",
+    "fragments": [
+      {
+        "id": "m1_te_lo_has_puesto",
+        "text": "—No sabes controlar el Disco —comenta Faraz Najir, acalorado—. ¿Te lo has puesto, quizá, insensato?",
+        "facts": [
+          "disco_se_lleva_en_la_cabeza",
+          "dieter_tiene_el_disco"
+        ]
+      },
+      {
+        "id": "m2_es_mio",
+        "text": "—Es mío, lo he pagado y por tanto hago lo que quiera con él —le responde Dieter, también con enfado.",
+        "facts": [
+          "dieter_compro_el_disco"
+        ]
+      },
+      {
+        "id": "m3_te_usa",
+        "text": "—Weder te está utilizando. Vende los objetos para que se sepa que él tiene el poder.",
+        "facts": [
+          "weder_busca_reconocimiento",
+          "weder_vende_las_piezas"
+        ]
+      },
+      {
+        "id": "m4_patranas",
+        "text": "—No creo en vuestras patrañas. Compraré las piezas negras —sentencia Dieter.",
+        "facts": [
+          "piezas_negras",
+          "dieter_quiere_la_coleccion"
+        ]
+      },
+      {
+        "id": "m5_pueden_matarte",
+        "text": "—No sabes lo que dices... Pueden matarte.",
+        "facts": [
+          "la_hermandad_mata"
+        ]
+      }
+    ],
+    "stealth": "normal",
+    "listenPenalty": 1
+  },
+  {
+    "id": "fuad_en_el_templo",
+    "location": "viejo_templo",
+    "event": "d1_bajada_a_los_sotanos",
+    "participants": [
+      "carter",
+      "weder",
+      "fuad"
+    ],
+    "ambient": "Las voces rebotan en las columnas y vuelven dobladas, así que se oye todo y no se entiende casi nada. Alguien está muy enfadado y alguien está muy asustado, y no son la misma persona.",
+    "fragments": [
+      {
+        "id": "t1_que_diablos",
+        "text": "—Pero, ¿qué diablos...? —susurra Fuad, enfurecido y confuso. Pretende mover la cubierta de piedra del sarcófago, pero Weder le detiene.",
+        "facts": [
+          "sarcofago_visto",
+          "fuad_toca_el_sarcofago"
+        ]
+      },
+      {
+        "id": "t2_no_lo_haga",
+        "text": "—Majestad, no lo haga, se lo suplico.\nFuad observa a Weder como si fuese un insecto, sin molestarse en disimular la repugnancia.\n—No se te ocurra decirme lo que tengo que hacer.",
+        "facts": [
+          "fuad_desprecia_a_weder"
+        ]
+      },
+      {
+        "id": "t3_tres_mil_anos",
+        "text": "El Príncipe recorre el resto de las piezas, estupefacto. Se detiene delante del cubo de cobre labrado.\n—¿Qué... significa esto? Esto... es imposible. Quiero decir... ¿este objeto tiene tres mil años?",
+        "facts": [
+          "cubo_de_estasis",
+          "piezas_negras"
+        ]
+      },
+      {
+        "id": "t4_viajar_al_futuro",
+        "text": "—Sí, majestad. Y más. Sé que puede sonar chocante, pero sirve para viajar al futuro.\nTodos sonríen. Ninguno como si fuera una broma.",
+        "facts": [
+          "cubo_viaja_al_futuro"
+        ]
+      },
+      {
+        "id": "t5_callese",
+        "text": "—¿Qué ha dicho? —pregunta Fuad—. Cállese. No diga usted tonterías.\nCarter mira al que ha hablado con un desprecio que no se molesta en esconder.",
+        "facts": [
+          "carter_desprecia_a_los_mercaderes"
+        ]
+      }
+    ],
+    "stealth": "normal",
+    "listenBonus": 1
+  }
+]

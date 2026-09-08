@@ -1,0 +1,724 @@
+[
+  {
+    "id": "clinton_extranno",
+    "npc": "clinton",
+    "label": "«¿Ha pasado algo raro últimamente en el hotel?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onSuccess": {
+      "text": "—Raro, raro... —Se rasca cerca de la oreja izquierda, donde el pelo no crece—. Hace dos días oí gritos en la ciento veintidós. Gritos de mujer. Y la ciento veintidós estaba vacía, señores. Vacía y cerrada con llave.",
+      "facts": [
+        "gritos_122"
+      ],
+      "unlocks": [
+        "clinton_bohr",
+        "clinton_bala"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Raro? Esto es El Cairo y esto es el Shepheard's. Aquí lo raro sería que no pasara nada raro. —Y sigue ordenando papeles que ya estaban ordenados, y se rasca un punto de la cabeza, cerca de la oreja izquierda, donde el pelo no le crece.",
+      "unlocks": [
+        "clinton_bala"
+      ]
+    },
+    "note": "Pág. 46. Los gritos eran reales: Gasparini se propasaba con una clienta en una habitación desocupada."
+  },
+  {
+    "id": "clinton_bohr",
+    "npc": "clinton",
+    "label": "Insistir: «algo que no tenga explicación»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "gritos_122"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "once": true,
+    "minutes": 15,
+    "onSuccess": {
+      "text": "Clinton mira a un lado y a otro del hall y se inclina sobre el mostrador.\n—Hace una semana se registró un individuo de aspecto triste, pálido, sin ningún rasgo destacable. El señor Bohr, de Copenhague. Pidió doce habitaciones contiguas. Pues bien: yo solo he visto a una persona. No sé quién ocupa las otras once. Las señoras de la limpieza me juran que allí duerme gente, pero cada vez que vemos a alguien dentro de cualquiera de esas habitaciones... es el señor Bohr.",
+      "facts": [
+        "senor_bohr_doce_habitaciones",
+        "doce_habitaciones_bohr"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "senor_bohr"
+        }
+      ],
+      "unlocks": [
+        "clinton_bohr_numeros",
+        "clinton_registro"
+      ]
+    },
+    "onFailure": {
+      "text": "—Nada que no pueda explicar un mal vino o un mal sueño. —Sonríe, y la sonrisa no le llega a los ojos. Está nervioso y lo disimula mal: mientras habla, con la mano izquierda y sin darse cuenta, va tapando una fila de casilleros del tablero de llaves. Doce casilleros seguidos. Todos con la llave puesta.",
+      "facts": [
+        "doce_casilleros_tapados"
+      ],
+      "unlocks": [
+        "clinton_registro",
+        "clinton_bohr_numeros"
+      ]
+    },
+    "note": "Pág. 46: EL SEÑOR BOHR. La pista más importante del primer día.",
+    "locked": true
+  },
+  {
+    "id": "clinton_bohr_numeros",
+    "npc": "clinton",
+    "label": "«¿Qué doce habitaciones son?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Doscientos cincuenta y uno a doscientos sesenta y cinco, los impares. —Y entonces baja tanto la voz que hay que inclinarse—. Yana, del servicio, entró el jueves a hacer la doscientos cincuenta y siete. Salió al minuto. Dice que el señor Bohr estaba dentro, sentado en la cama, mirando la pared. Y dice que cuando cerró la puerta y fue a la siguiente, el señor Bohr también estaba dentro de la siguiente. Sentado en la cama. Mirando la pared. —Traga saliva—. Ahora las hacen de dos en dos. Y no entran solas.",
+      "facts": [
+        "habitaciones_bohr_numeradas",
+        "yana_vio_a_bohr_dos_veces"
+      ]
+    },
+    "onHard": {
+      "text": "Gira el libro de registro sin soltarlo.\n—Doce entradas. Doce. Firmadas el mismo día, a la misma hora. —Pasa el dedo por la columna de firmas—. Mírelas usted mismo, señor. No es que las doce firmas se parezcan. Es que las doce firmas son idénticas. Como si alguien hubiera puesto un sello.",
+      "facts": [
+        "habitaciones_bohr_numeradas",
+        "doce_firmas_identicas",
+        "senor_bohr_doce_habitaciones"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "senor_bohr"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Segunda planta, ala norte. Un bloque entero. —Señala con la barbilla el tablero de llaves—. Y ahí tiene usted otra cosa que no me explico: nunca se llevan las llaves. Ni una vez en una semana. Entran y salen y las doce llaves siguen colgadas donde están.",
+      "facts": [
+        "habitaciones_bohr_numeradas",
+        "bohr_no_usa_llaves"
+      ]
+    },
+    "onFailure": {
+      "text": "—Eso es información del establecimiento, señor. —Y como para compensar la negativa, añade lo que no le han preguntado—: Pero le diré una cosa que no es información del establecimiento: yo llevo la puerta ocho horas al día. Por esa puerta no ha entrado ese hombre doce veces. Ha entrado una.",
+      "facts": [
+        "bohr_entro_una_sola_vez"
+      ]
+    },
+    "note": "Pág. 46 y pág. 27 del índice del capítulo 4: las habitaciones 251-265 son «los señores Bohr». Son yithianos renegados.",
+    "locked": true
+  },
+  {
+    "id": "clinton_registro",
+    "npc": "clinton",
+    "label": "Pedirle ver el libro de registro",
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Clinton mira el reloj del hall, hace una cuenta y empuja el libro entero por el mostrador.\n—Tengo cuatro minutos hasta el relevo. Doscientos cuatro, los Lounpeen, padre e hija, llegados esta mañana. Veinticuatro, el señor Weder, permanente desde hace dos años. Trescientos sesenta y dos, el señor Carter, permanente desde hace meses. —Se detiene—. Y esa última no la diga usted en voz alta delante de él. El señor Carter paga esa habitación para que nadie sepa que la tiene.",
+      "facts": [
+        "registro_del_hotel",
+        "lounpeen_en_el_hotel",
+        "carter_oculta_su_habitacion"
+      ],
+      "unlocks": [
+        "clinton_carter_habitacion"
+      ]
+    },
+    "onSuccess": {
+      "text": "Lo gira sobre el mostrador, sin soltarlo, y va señalando con el índice.\n—Los Lounpeen, en la doscientos cuatro, esta misma mañana. El señor Weder tiene habitación fija. El señor Carter también. Y aquí —el dedo se detiene— un caballero egipcio, el señor Najir, que reservó ayer por teléfono y todavía no ha llegado.",
+      "facts": [
+        "registro_del_hotel",
+        "lounpeen_en_el_hotel",
+        "faraz_najir"
+      ],
+      "unlocks": [
+        "clinton_carter_habitacion"
+      ]
+    },
+    "onFailure": {
+      "text": "—El libro no sale del mostrador, señor. —Y lo cierra. Pero lo cierra tarde, y en el segundo que tarda ustedes alcanzan a ver que en la página de esta semana hay una docena de renglones escritos con la misma letra apretada, todos seguidos, y que esa letra no es la de Clinton.",
+      "facts": [
+        "doce_firmas_identicas"
+      ]
+    },
+    "note": "Pág. 92: Clinton es amable y discreto. Pág. 99: «Excepto a la recepción, a Behler y a Weder, Carter intenta ocultar que se hospeda regularmente aquí».",
+    "locked": true
+  },
+  {
+    "id": "clinton_carter_habitacion",
+    "npc": "clinton",
+    "label": "«¿Por qué esconde el señor Carter que se hospeda aquí?»",
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—La tiene alquilada por meses, no por noches, y paga por adelantado. Dice que es por el ruido de Luxor. —Baja la voz—. Lo saben cuatro personas: yo, el señor Behler, el señor Weder y quien limpia esa planta. Y desde hace dos semanas quien limpia esa planta ha pedido el cambio a otra. Dos veces. Sin dar motivo.",
+      "facts": [
+        "carter_oculta_su_habitacion",
+        "nadie_quiere_limpiar_la_362"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Yo no sé por qué, señor. Solo sé que cuando llega, llega por la puerta de servicio, y que cuando pregunta alguien por él en el mostrador, la respuesta es que el señor Carter no se hospeda en el Shepheard's. —Se encoge de hombros con incomodidad de sargento—. Esa respuesta la dio él, no yo.",
+      "facts": [
+        "carter_oculta_su_habitacion"
+      ]
+    },
+    "onFailure": {
+      "text": "—El señor Carter no se hospeda en el Shepheard's. —Lo suelta medio segundo antes de tiempo, como el que responde a la pregunta que llevaba semanas esperando, y con la mano derecha todavía encima del libro donde está escrito lo contrario.",
+      "facts": [
+        "carter_oculta_su_habitacion"
+      ]
+    },
+    "note": "Pág. 99, habitación 362.",
+    "locked": true
+  },
+  {
+    "id": "clinton_selassie",
+    "npc": "clinton",
+    "label": "«¿Por qué está cambiando de sitio a los huéspedes?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Seis habitaciones comunicadas para Su Majestad, siete para el señor Selassie y las siete tienen que estar comunicadas también. —Se pasa la manga por la frente—. Yo no tengo trece habitaciones comunicadas, señor. Nadie tiene trece habitaciones comunicadas. Así que hemos trasladado a once huéspedes esta mañana sin darles ninguna explicación, y Murray está en el pasillo del ala sur destornillando los números de las puertas y volviéndolos a poner en otro orden. —Silencio—. Es lo que hay. Al señor Selassie no se le dice que no se le ha dado lo que se le prometió.",
+      "facts": [
+        "selassie_viene",
+        "fuad_viene",
+        "murray_cambia_los_numeros"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Hoy llega mucha gente, señor, y toda quiere lo mismo: habitaciones comunicadas. —Consulta el plano de plantas, lo gira, lo vuelve a girar—. El Príncipe pide seis. Otro caballero pide siete. Y yo tengo el mismo hotel que tenía ayer.",
+      "facts": [
+        "fuad_viene"
+      ]
+    },
+    "onFailure": {
+      "text": "—Reajustes de ocupación. —Y en ese momento pasa por detrás Abraham Murray con un destornillador, una escalera de mano y tres números de latón en la mano izquierda: un 3, un 1 y un 1. Clinton no se vuelve. Clinton lleva un rato entero sin volverse.",
+      "facts": [
+        "murray_cambia_los_numeros"
+      ]
+    },
+    "note": "Pág. 103: la mañana del 21, Clinton traslada huéspedes para las seis habitaciones del Aga Khan; esa noche tendrá que repetirlo con las siete de Selassie, y Murray cambia físicamente los números de las puertas."
+  },
+  {
+    "id": "clinton_murray",
+    "npc": "clinton",
+    "label": "Preguntar por el conserje",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 5,
+    "onHard": {
+      "text": "—Abraham Murray. Cuarenta y ocho años, y no ha llegado tarde ni un día. —Y entonces dice, como quien confiesa una infidelidad—: Hay dos llaves maestras en esta casa. La mía y la suya. Están las dos contadas y las dos cerradas bajo llave. —Pausa—. Digo que están las dos. Yo la mía la veo todos los días.",
+      "facts": [
+        "murray_tiene_llave_maestra",
+        "hay_dos_llaves_maestras"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El señor Murray no tiene tiempo, señor. Es lo único que se puede decir de él y es todo un elogio. —Señala el mostrador de enfrente—. Recibe, informa, sube el equipaje y vuelve a bajar. Menos mal que los hermanos Meyer le echan una mano, que si no.",
+      "facts": [
+        "murray_no_tiene_tiempo"
+      ]
+    },
+    "onFailure": {
+      "text": "—El señor Murray está muy ocupado. —Y de golpe deja de mirarles y se queda mirando un punto fijo por encima de sus cabezas, quieto, durante cuatro segundos largos, con la pluma parada en el aire. Después parpadea y sigue como si no hubiera pasado nada—. ¿Decían?",
+      "facts": [
+        "clinton_se_queda_en_blanco"
+      ]
+    },
+    "note": "Pág. 92: «El conserje principal, Abraham Murray, guarda una copia de la llave maestra del señor Clinton». Pág. 18: Murray y Clinton son los dos únicos que saben lo de los señores Bohr."
+  },
+  {
+    "id": "clinton_dragoman",
+    "npc": "clinton",
+    "label": "«Necesitamos un guía que hable árabe»",
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "once": true,
+    "minutes": 10,
+    "always": {
+      "text": "Clinton se anima visiblemente. Esto sí es su trabajo.\n—Abdul Crutta. Cuarenta piastras al día y no regatee, que las vale. Habla inglés mejor que yo, conoce a quien hay que conocer y es honrado, que en un dragomán es más raro que en un obispo. —Escribe una nota y la desliza—. Le reconocerán en cuanto le vean: le falta medio meñique de la mano izquierda. Se lo comió un babuino. Y no le pregunten por el collar de plata con la ese, porque se lo regaló quien se lo regaló y él no habla del asunto.",
+      "facts": [
+        "dragoman_abdul_crutta"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "dragoman_recomendado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "clinton",
+          "by": 5
+        }
+      ]
+    },
+    "note": "Pág. 45: Clinton es el primero de la lista de quienes pueden recomendar un dragomán de confianza. Abdul Crutta, 40 piastras al día; el collar con la «S» se lo regaló Selassie."
+  },
+  {
+    "id": "clinton_bala",
+    "npc": "clinton",
+    "label": "«Esa cicatriz de la cabeza»",
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "once": true,
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Clinton mira los dos extremos del hall, comprueba que no hay nadie y se inclina.\n—Aquí dentro, señor. —Se toca la calva de encima de la oreja—. No me la sacaron. Dijeron que sacarla era peor. —Se encoge de hombros—. No siento nada en esta mitad de la cabeza. Puedo darme con el canto del mostrador y no enterarme. A veces se me va el hilo un segundo y vuelvo y ustedes ya están hablando de otra cosa. —Baja aún más la voz—. Y desde hace dos semanas me pasa más. Bastante más. Yo no digo que sea la bala.\n»Cuando volví no me quería nadie. Un recepcionista que se queda mirando la pared no sirve para un hotel, es de sentido común. El señor Behler me dio el mostrador principal. El principal, señor. El del hall.",
+      "facts": [
+        "clinton_bala_en_el_craneo",
+        "clinton_se_queda_en_blanco",
+        "behler_le_dio_trabajo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "clinton",
+          "by": 40
+        },
+        {
+          "kind": "setFlag",
+          "flag": "clinton_aliado"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Sargento del ejército de Su Majestad, señor. Catorce años. —Se toca el punto donde no le crece el pelo, casi con cariño—. Y una bala que sigue ahí donde la ve, porque los médicos decidieron que quitarla salía más caro que dejarla. No me duele. No me duele nada, que es lo raro.",
+      "facts": [
+        "clinton_bala_en_el_craneo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "clinton",
+          "by": 15
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Un accidente antiguo, señor, nada que merezca la pena. —Y se pone a alinear el tampón, el secante y la pluma en una línea recta perfecta, con la precisión de quien lleva catorce años formando a otros hombres en fila, hasta que se da cuenta de lo que está haciendo y para.",
+      "facts": [
+        "clinton_fue_militar"
+      ]
+    },
+    "note": "Pág. 92: antiguo sargento con una bala incrustada en el cráneo; con Descubrir se distingue una calva cerca de la oreja izquierda. Pelea (cabezazo) 60%: «no siente nada en la cabeza». Pág. 46: Behler le dio trabajo después de la guerra, cuando nadie contaba con él.",
+    "locked": true
+  },
+  {
+    "id": "clinton_behler",
+    "npc": "clinton",
+    "label": "«¿Qué clase de hombre es su director?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Vive en Sharia Kamil, cincuenta y cinco. A cinco minutos andando. —Lo dice como quien recita una dirección aprendida por si acaso—. Si en este hotel pasa algo a las tres de la madrugada, a las tres y cinco el señor Behler está en ese hall. Andando. Nunca en coche, porque dice que el coche es para los que llegan tarde. —Y luego, con una lealtad que no admite discusión—: Ese hombre da de comer a media calle. Media calle, señor. Y no lo sabe nadie porque él no lo cuenta.",
+      "facts": [
+        "behler_vive_cerca",
+        "behler_da_limosna"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El mejor jefe que he tenido, y he tenido varios con galones. —Y hay algo definitivo en cómo lo dice—. Yo por el señor Behler hago lo que haga falta. Lo que haga falta, señor. No hace falta que me lo pidan dos veces.",
+      "facts": [
+        "clinton_leal_a_behler"
+      ]
+    },
+    "onFailure": {
+      "text": "Clinton deja la pluma sobre el secante con mucho cuidado y se yergue medio centímetro.\n—El señor Behler es el director de este establecimiento. —Cada palabra ocupa exactamente el sitio que le toca—. ¿Deseaban alguna otra cosa?",
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "clinton",
+          "by": -10
+        }
+      ],
+      "facts": [
+        "clinton_leal_a_behler"
+      ]
+    },
+    "note": "Pág. 46: «Cleveland aprecia a Behler, su gran amigo y confidente, que le dio trabajo después de la guerra». Su gancho 'criticar_behler' penaliza con dos dados."
+  },
+  {
+    "id": "clinton_telefono",
+    "npc": "clinton",
+    "label": "«¿Quién ha pedido teléfono esta mañana?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 5,
+    "onHard": {
+      "text": "—Las conferencias no pasan por mí, señor, pasan por la centralita. —Señala con la barbilla el pasillo de la oficina de correos—. Pero por el mostrador sí pasan, y esta mañana ha pasado el señor Gasparini, que libra hoy y que no tenía por qué cruzar el hall para nada. Iba deprisa. El señor Gasparini nunca va deprisa a ningún sitio salvo cuando le conviene mucho llegar.",
+      "facts": [
+        "gasparini_fue_a_correos"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Yo no llevo el teléfono, señor. Eso es la señorita Thornhill, en la oficina de correos y telégrafos. —Y añade, bajando un poco la voz, con la torpeza del hombre bueno que intenta hacer un favor—: Pregúntenle a ella. Y pregúntenle bien, quiero decir... con tiempo. Nadie le pregunta nunca nada a esa mujer.",
+      "facts": [
+        "thornhill_lleva_la_centralita"
+      ]
+    },
+    "onFailure": {
+      "text": "—El secreto de las comunicaciones, señor. —Y en el mismo movimiento con el que lo dice, empuja hacia ustedes, sin mirarlo, el plano del hotel abierto por la página donde pone «10. Oficina de Correos y Telégrafos».",
+      "facts": [
+        "thornhill_lleva_la_centralita"
+      ]
+    },
+    "note": "Pág. 52: la operadora Mary Ann Thornhill recuerda el nombre, el número y el 20% de la llamada de Gasparini a Najir."
+  },
+  {
+    "id": "clinton_gritos_llave",
+    "npc": "clinton",
+    "label": "«¿Quién tenía llave de la ciento veintidós?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "gritos_122"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Clinton mira los dos extremos del hall. Después mira la puerta del despacho de Behler, que está cerrada.\n—Hay tres llaves de esa puerta, señor. La mía, la de Murray y la que se hizo alguien sin permiso. —Traga saliva—. El señor Gasparini usa las habitaciones vacías. Lo sé desde la primavera. Y no lo he dicho, y llevo desde la primavera sin dormir bien por no haberlo dicho, porque decirlo es un escándalo, y un escándalo en esta casa se lo come el señor Behler, no se lo come Gasparini. —Se endereza—. Ahora ya lo he dicho. Hagan ustedes lo que tengan que hacer.",
+      "facts": [
+        "gasparini_llave_maestra",
+        "clinton_calla_por_behler"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "clinton",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—De las habitaciones vacías solo hay llave en el tablero y llave maestra, señor. Y el tablero lo veo yo. —Se le tensa la mandíbula—. Así que alguien de esta casa tiene una maestra que no está contada. Es lo único que puedo decirle sin acusar a nadie por su nombre.",
+      "facts": [
+        "hay_una_maestra_sin_contar"
+      ]
+    },
+    "onFailure": {
+      "text": "—Estaría cerrada con llave, señor, esa es la cuestión, y por eso digo que fue raro. —Y se rasca la oreja izquierda mientras lo dice, y no vuelve a mirar hacia el pasillo del bar largo en toda la conversación. No mirar hacia el bar largo le está costando un trabajo visible.",
+      "facts": [
+        "hay_una_maestra_sin_contar"
+      ]
+    },
+    "note": "Pág. 46: «los gritos eran reales: Gasparini, el barman miserable, se propasaba con una clienta particularmente atractiva utilizando las habitaciones desocupadas del hotel, gracias a su copia de la llave maestra»."
+  },
+  {
+    "id": "clinton_fuad",
+    "npc": "clinton",
+    "label": "Preguntar por el Príncipe Fuad",
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 5,
+    "onHard": {
+      "text": "—Ha llamado hace un momento confirmando que viene. —Traga saliva—. Es temible, ¿me entiende? Su comportamiento es voluble, como el de una adolescente. Puede estar con usted o contra usted en cuestión de segundos. Y quiere seis habitaciones comunicadas. Seis. —Y baja la voz—. Y una cosa más, señor, que se la digo porque me cae usted bien: desde marzo es Rey. Rey, no Príncipe. Aquí no lo llama Rey nadie porque el protectorado sigue en pie. Él sí. Él se lo llama a sí mismo todos los días.",
+      "facts": [
+        "fuad_viene",
+        "fuad_es_voluble",
+        "fuad_es_rey_desde_marzo"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ha llamado hace un momento confirmando que viene. —Traga saliva—. Es temible, ¿me entiende? Su comportamiento es voluble, como el de una adolescente. Puede estar con usted o contra usted en cuestión de segundos. Y quiere seis habitaciones comunicadas. Seis.",
+      "facts": [
+        "fuad_viene",
+        "fuad_es_voluble"
+      ]
+    },
+    "onFailure": {
+      "text": "—Su Majestad es un cliente distinguido del establecimiento. —Lo dice como quien recita, y no añade una palabra más. Pero ha dicho Majestad. En todo el hotel, hoy, nadie más ha dicho Majestad.",
+      "facts": [
+        "fuad_es_rey_desde_marzo"
+      ]
+    },
+    "note": "Pág. 45 y pág. 53: desde el 15 de marzo el Príncipe es Rey, pero nadie toma su nombramiento en serio. Llamarle «Príncipe» a la cara puede acabar en arresto."
+  },
+  {
+    "id": "clinton_fiesta",
+    "npc": "clinton",
+    "label": "Pedirle entradas para la fiesta",
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Es una fiesta de rigurosa invitación, y yo no las reparto. —Se compadece un poco—. Hablen con el director del hotel. Con él tienen alguna posibilidad; conmigo, ninguna. —Y añade, en voz más baja—: Y háblenle antes de las dos. A partir de las dos tendrá encima a Su Majestad y no habrá quien le saque nada. Ahora está sentado en la terraza y de buen humor. Ahora.",
+      "facts": [
+        "fiesta_es_exclusiva",
+        "behler_esta_en_la_terraza"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Es una fiesta de rigurosa invitación, y yo no las reparto. —Se compadece un poco—. Hablen con el director del hotel. Con él tienen alguna posibilidad; conmigo, ninguna.",
+      "facts": [
+        "fiesta_es_exclusiva"
+      ]
+    },
+    "onFailure": {
+      "text": "—Rigurosa invitación —repite, y esta vez ni levanta la vista del libro. Pero mientras lo dice va tachando nombres de una lista de tres folios, y en la cabecera de esa lista, del revés y a media distancia, se lee «SALÓN DE BAILE — 21 NOV — ENTRADA POR EL NORTE».",
+      "facts": [
+        "fiesta_es_exclusiva",
+        "mascarada_entrada_norte"
+      ]
+    }
+  },
+  {
+    "id": "clinton_llave_maestra",
+    "npc": "clinton",
+    "label": "Pedirle prestada la llave maestra",
+    "check": {
+      "difficulty": "extreme"
+    },
+    "approaches": [
+      "enganar",
+      "sobornar",
+      "presionar"
+    ],
+    "minutes": 10,
+    "onSuccess": {
+      "text": "Clinton os mira largamente. Luego mira hacia la puerta del despacho de Behler. Luego abre un cajón, saca una llave de latón y la desliza por el mostrador sin soltarla del todo.\n—Una hora. Y si alguien pregunta, yo no les he visto en mi vida.",
+      "effects": [
+        {
+          "kind": "giveItem",
+          "item": "llave_maestra"
+        }
+      ],
+      "facts": [
+        "tienen_llave_maestra"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Perdón? —Y por primera vez el sargento asoma bajo el recepcionista—. Le voy a hacer el favor de fingir que no le he oído.",
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "clinton",
+          "by": -10
+        }
+      ],
+      "facts": [
+        "hay_dos_llaves_maestras"
+      ]
+    },
+    "onFumble": {
+      "text": "Clinton se yergue, y de golpe se ve al hombre que fue.\n—Señor Murray. —El conserje asoma—. Estos señores se van a la terraza a tomar el aire. Acompáñelos. —Os quedáis fichados.",
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "clinton",
+          "by": -30
+        },
+        {
+          "kind": "setFlag",
+          "flag": "fichados_por_recepcion"
+        }
+      ]
+    }
+  },
+  {
+    "id": "clinton_najir",
+    "npc": "clinton",
+    "label": "«Ese hombre de la cara quemada»",
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_najir_llega"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Faraz Najir. Cuatro noventa y siete. —Clinton no baja la voz porque Clinton nunca baja la voz—. Y ahora le voy a decir por qué no me gusta, y no es por la cara, que conste. Ese hombre ha subido cuatro maletas vacías. Vacías. Yo llevo veinte años detrás de un mostrador y le puedo decir cuánto pesa la ropa de un hombre por cómo anda el botones. Y le voy a decir otra cosa: no ha preguntado por ninguna habitación, ni por ningún huésped, ni por el restaurante. Ha preguntado por el bar. Nada más entrar.",
+      "facts": [
+        "najir_maletas_vacias",
+        "najir_pregunto_por_el_bar"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El señor Najir, cuatro noventa y siete. Mercader de obras de arte, dice la ficha. —Clinton cierra el libro con la palma—. Yo de esa gente no opino, señores, pero le he puesto en la cuarta planta a propósito, que está lejos de todo y se oye subir el ascensor.",
+      "facts": [
+        "najir_maletas_vacias"
+      ]
+    },
+    "onFailure": {
+      "text": "—No comento a los huéspedes. —Y se queda mirando por encima de vuestro hombro hacia el arco del bar, tanto rato que os dais la vuelta a ver qué mira. No mira nada: mira por dónde se ha ido el egipcio.",
+      "facts": [
+        "clinton_vigila_a_najir"
+      ]
+    },
+    "note": "Módulo, pág. 54: «Su rostro desfigurado llama la atención de Cleveland Clinton, que no le pierde de vista». Se abre con la llegada de las 17:00."
+  },
+  {
+    "id": "clinton_quien_es_selassie",
+    "npc": "clinton",
+    "label": "«¿Y ese hombre al que se arrodillan los botones?»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "selassie_en_el_hotel"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Clinton se toca la sien, ahí donde tiene la bala.\n—Abebaberk Selassie. Siete habitaciones requisadas esta tarde con dos horas de aviso; Murray ha tenido que cambiar los números de las puertas a mano, y Murray no se queja nunca. Le voy a contar lo que no se cuenta: hace dos años, un huésped se rió de él en el salón Isis. Al huésped no le pasó nada. Al hijo del huésped sí. Y el señor Behler le abraza. Le abraza, señores. Yo he dejado de intentar entenderlo, pero no he dejado de contar los cubiertos.",
+      "facts": [
+        "selassie_es_peligroso",
+        "behler_y_selassie_son_amigos",
+        "selassie_siete_habitaciones"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "el_gordo_nubio"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—El señor Selassie. —Clinton pone la cara de quien informa de una gotera—. Siete habitaciones en la tercera planta, requisadas esta misma tarde. Es amigo personal del director, así que aquí no hay nada más que hablar. Y no, no le pregunte a qué se dedica.",
+      "facts": [
+        "selassie_siete_habitaciones"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sé de qué me habla. —Pero mientras lo dice ha cogido el libro de registro y lo ha girado hacia él, y no ha girado el libro por la página de hoy: lo ha girado por la de las habitaciones de la tercera planta, que ahora tiene siete tachones a lápiz seguidos.",
+      "facts": [
+        "selassie_siete_habitaciones"
+      ]
+    },
+    "note": "Módulo, pág. 59: Selassie entra en el hotel a las 22:30. Murray tuvo que cambiar los números de las puertas a mano."
+  },
+  {
+    "id": "clinton_saqueos",
+    "npc": "clinton",
+    "label": "«Han desvalijado media segunda planta»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "habitaciones_saqueadas"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "presionar",
+      "adular"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Once denuncias llevo. Once, y no son ni las siete. —Clinton tiene la voz de un hombre que lleva veintidós horas de pie—. Y le voy a decir lo que no voy a decirle a ninguno de los once: no forzaron ni una cerradura. Ni una. En este hotel hay tres llaves maestras: la mía, la de Murray y la que el señor Behler tiene en un cajón que no cierra. Haga usted la cuenta, que yo llevo toda la noche haciéndola.",
+      "facts": [
+        "saqueo_sin_forzar",
+        "tres_llaves_maestras"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Han entrado en las habitaciones vacías mientras todo el mundo bailaba. —Se frota los ojos—. Relojes, dinero, un bolso de piel. Nada que el hotel vaya a poder devolver. Y todos los que faltaban de sus cuartos estaban en la misma fiesta, fíjese qué casualidad tan bien organizada.",
+      "facts": [
+        "saqueo_durante_la_fiesta"
+      ]
+    },
+    "onFailure": {
+      "text": "—El hotel no se hace responsable de los objetos que no se depositen en recepción. —Lo recita de carrerilla, y por debajo del mostrador, sin darse cuenta, va contando con el pulgar sobre los otros dedos. Va por once.",
+      "facts": [
+        "saqueo_durante_la_fiesta"
+      ]
+    },
+    "note": "Módulo, pág. 60: al clausurarse la fiesta, los invitados descubren sus habitaciones saqueadas. Enlaza con la llave maestra de Clinton."
+  }
+]

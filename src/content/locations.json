@@ -1,0 +1,1762 @@
+[
+  {
+    "id": "terraza",
+    "ref": "L1",
+    "name": "La terraza",
+    "floor": "terraza",
+    "art": "terraza",
+    "description": "Donde todo se cuece. Las mesas de hierro se tocan unas con otras y las conversaciones se mezclan: expediciones al desierto, transacciones millonarias, infidelidades y espionaje, todo aliñado con sonrisas forzadas y martinis demasiado secos. Son las primeras horas y el termómetro ya pasa de treinta grados. No corre una brizna de aire. Las moscas se pegan a la piel empapada, y el polvo de la calle se condensa con el humo de los puros en algo difícil de respirar.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Entrar al hall"
+      },
+      {
+        "to": "jardin_exterior",
+        "minutes": 4,
+        "label": "Bajar al jardín"
+      }
+    ],
+    "features": [
+      {
+        "id": "prensa",
+        "name": "La prensa del día",
+        "description": "Sobre una mesa auxiliar se amontonan los periódicos. El Egyptian Gazette de hoy, 21 de noviembre, tiene una sección de chismes.",
+        "minutes": 5,
+        "successText": "En la sección de sociedad: «Según fuentes fidedignas, George Edward Stanhope Molyneux Herbert, conde de Carnarvon, llegará mañana a El Cairo proveniente de Alejandría. Al parecer, Howard Carter, que trabaja en la excavación financiada por el Conde, no quería comenzar sin la presencia de este. Todo un detalle por parte del brillante arqueólogo». Debajo, una nota menor anuncia a la encantadora hija del Conde, Lady Evelyn.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "carnarvon_llega_manana"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "gazette_21"
+          }
+        ]
+      },
+      {
+        "id": "cucarachas",
+        "name": "Los pies de Weder",
+        "description": "Hay algo raro a los pies del alemán de la mesa de al lado.",
+        "requires": [
+          {
+            "kind": "eventFired",
+            "event": "d1_terraza_carter_weder"
+          }
+        ],
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "A los pies de Weder, media docena de cucarachas se afanan por trepar a sus zapatos de charol. No huyen de él: van hacia él. Y no terminan de moverse como cucarachas.",
+        "failureText": "Hay algo oscuro moviéndose bajo la mesa del alemán, pero un camarero se cruza y lo pierdes de vista.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "cucarachas_weder"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "cucarachas"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "recepcion",
+    "ref": "L2",
+    "name": "Recepción y hall de entrada",
+    "floor": "baja",
+    "art": "recepcion",
+    "description": "El colosal hall que da fama al Shepheard's, con sus fabulosas columnas de mármol. No hace falta ser experto para sospechar que nada de esto tiene cien años. Las alfombras, cuidadas con esmero, huelen a camello. Tras el mostrador reina Cleveland Clinton, antiguo sargento de Su Majestad, con una bala incrustada en el cráneo y una llave maestra en el bolsillo.",
+    "exits": [
+      {
+        "to": "terraza",
+        "minutes": 2,
+        "label": "Salir a la terraza"
+      },
+      {
+        "to": "conserjeria",
+        "minutes": 1,
+        "label": "Conserjería"
+      },
+      {
+        "to": "salon_isis",
+        "minutes": 3,
+        "label": "Salón Isis"
+      },
+      {
+        "to": "correos",
+        "minutes": 2,
+        "label": "Oficina de correos"
+      },
+      {
+        "to": "bar_largo",
+        "minutes": 3,
+        "label": "The Long Bar"
+      },
+      {
+        "to": "restaurante",
+        "minutes": 3,
+        "label": "Restaurante"
+      },
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 4,
+        "label": "Subir a las habitaciones"
+      },
+      {
+        "to": "tienda_moda_caballeros",
+        "minutes": 2,
+        "label": "Tienda Lords"
+      },
+      {
+        "to": "tienda_cigarros",
+        "minutes": 2,
+        "label": "Estanco Sandoval"
+      },
+      {
+        "to": "tienda_suvenires",
+        "minutes": 2,
+        "label": "Tienda de suvenires"
+      },
+      {
+        "to": "tienda_moda_mujer",
+        "minutes": 2,
+        "label": "Le Petit France"
+      },
+      {
+        "to": "tienda_relojes",
+        "minutes": 2,
+        "label": "Relojería Sechat"
+      },
+      {
+        "to": "oficina_direccion",
+        "minutes": 2,
+        "label": "Oficina de dirección"
+      },
+      {
+        "to": "administracion",
+        "minutes": 3,
+        "label": "Administración"
+      },
+      {
+        "to": "hab_fiesta_forrester",
+        "minutes": 3,
+        "label": "Habitación 103"
+      }
+    ],
+    "features": [
+      {
+        "id": "registro",
+        "name": "El libro de registro",
+        "description": "El libro abierto sobre el mostrador, con la caligrafía apretada de Clinton.",
+        "check": {
+          "skill": "Descubrir",
+          "difficulty": "hard"
+        },
+        "minutes": 5,
+        "successText": "Doce habitaciones contiguas de la segunda planta, de la 251 a la 265, a nombre de un mismo huésped: «Sr. Bohr, Copenhague». Una sola firma para doce llaves, y la misma letra doce veces, idéntica hasta el temblor.",
+        "failureText": "Clinton posa la mano sobre el libro sin dejar de sonreír y lo gira hacia él.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "doce_habitaciones_bohr"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "senor_bohr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "conserjeria",
+    "ref": "L3",
+    "name": "Conserjería",
+    "floor": "baja",
+    "art": "recepcion",
+    "description": "Abraham Murray, cuarenta y ocho años y ni un minuto libre, guarda la segunda copia de la llave maestra. Los hermanos Meyer entran y salen con maletas ajenas. Sven se lleva la mano al estómago cada poco rato; Hans tiene media cara cubierta por una mancha marrón y es encantador; Lars, el pequeño, abre cualquier cerradura con un alambre que lleva veinte años perfeccionando.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 1,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "salon_isis",
+    "ref": "L13",
+    "name": "El salón Isis y su jardín",
+    "floor": "baja",
+    "art": "salon_isis",
+    "description": "Un octógono irregular dentro de otro octógono; en el pasillo que queda entre ambos vive la biblioteca. Arcos ojivales sobre columnas, mobiliario art déco, y al fondo una balconada que da al jardín interior, donde palmeras y sauces gigantes dejan caer una sombra espesa. Cinco mil volúmenes sobre el antiguo Egipto y ni uno solo de ocultismo, por mucho que se busque.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 3,
+        "label": "Volver al hall"
+      },
+      {
+        "to": "restaurante",
+        "minutes": 2,
+        "label": "Restaurante"
+      },
+      {
+        "to": "salon_morisco",
+        "minutes": 1,
+        "label": "Salón morisco"
+      }
+    ],
+    "features": [
+      {
+        "id": "biblioteca",
+        "name": "La biblioteca",
+        "description": "Cinco mil volúmenes sobre Egipto, ilustrados con grabados formidables.",
+        "check": {
+          "skill": "Buscar libros"
+        },
+        "minutes": 20,
+        "successText": "Nada de ocultismo, como era de esperar. Pero en un estante alto, entre tratados de arqueología, hay una versión árabe decimonónica del Libro de los muertos. Contiene hechizos y encantamientos, y una de sus páginas describe un rito de contacto con criaturas que devoran cadáveres.",
+        "failureText": "Horas de lomos polvorientos y ni una sola línea aprovechable.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "libro_de_los_muertos"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "libro_muertos"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "salon_morisco",
+    "ref": "L14",
+    "name": "El salón morisco",
+    "floor": "baja",
+    "art": "salon_isis",
+    "description": "Prolongación del salón Isis, con ornamentos árabes y cierto aire modernista. Aquí se fuma en narguile, tabaco y hachís, ambos perfectamente legales. El humo cuelga del techo como un bizcocho.",
+    "exits": [
+      {
+        "to": "salon_isis",
+        "minutes": 1,
+        "label": "Salón Isis"
+      }
+    ],
+    "features": [
+      {
+        "id": "armario_espejo",
+        "name": "El armario del espejo",
+        "description": "Un armario bajo con espejo, junto al sofá Victoriano central.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "Una bolsita de hachís en el armario. Y bajo un cojín del sofá, una cajita de marfil con dos inyecciones cargadas de un líquido claro: morfina, casi seguro recetada a algún cliente.",
+        "failureText": "Cojines, ceniza y nada más.",
+        "onSuccess": [
+          {
+            "kind": "giveItem",
+            "item": "morfina"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "restaurante",
+    "ref": "L15",
+    "name": "El restaurante",
+    "floor": "baja",
+    "art": "restaurante",
+    "description": "Cuarenta mesas para cuatro, gobernadas sin demasiado convencimiento por Michel Rolland, el metre francés. Comida francesa, y comida árabe de mucha mejor calidad. Rolland da vueltas de mesa en mesa sin saber qué hacer con las vaharadas de olor pestilente que suben de vez en cuando por las escaleras de la cocina, ni con las ratas que asoman en las esquinas.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 3,
+        "label": "Volver al hall"
+      },
+      {
+        "to": "salon_isis",
+        "minutes": 2,
+        "label": "Salón Isis"
+      },
+      {
+        "to": "cocina",
+        "minutes": 2,
+        "label": "Entrar en las cocinas"
+      },
+      {
+        "to": "tienda_joyas",
+        "minutes": 3,
+        "label": "Joyas Merryweather"
+      },
+      {
+        "to": "salon_baile",
+        "minutes": 2,
+        "label": "Salón de baile"
+      },
+      {
+        "to": "servicio_restaurante",
+        "minutes": 2,
+        "label": "El office del servicio"
+      }
+    ]
+  },
+  {
+    "id": "cocina",
+    "ref": "L20",
+    "name": "La cocina",
+    "floor": "baja",
+    "art": "cocina",
+    "description": "Funciona las veinticuatro horas. El suelo es cerámico rojo que se vuelve negro alrededor de las mesas. Está limpia en el sentido histórico de la palabra: una pátina de años de podredumbre lo cubre todo y le da un aspecto honorable, imposible de fregar. Nada tiene aristas; los golpes las han redondeado todas. En el centro, la mesa de despiece tiene un hueco excavado por cientos de miles de cuchillazos. Al fondo, una puerta y unas escaleras que bajan.",
+    "exits": [
+      {
+        "to": "restaurante",
+        "minutes": 2,
+        "label": "Volver al restaurante"
+      },
+      {
+        "to": "almacen_sotano",
+        "minutes": 8,
+        "label": "Bajar las escaleras del sótano"
+      }
+    ],
+    "features": [
+      {
+        "id": "mesa_despiece",
+        "name": "La mesa de despiece",
+        "description": "Mahadni descuartiza corderos sobre ella, separando las patas de las costillas.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "Entre los corderos hay huesos que no son de cordero. Un fragmento largo, limpio de carne, con una articulación que solo puede describirse como un codo.",
+        "failureText": "Carne, sangre y moscas. Nada que un cocinero no pudiera explicar.",
+        "onSuccess": [
+          {
+            "kind": "sanityLoss",
+            "loss": "0/1D3"
+          }
+        ]
+      },
+      {
+        "id": "almacen_frigorifico",
+        "name": "El almacén frigorífico",
+        "description": "Una puerta metálica al fondo de la cocina, cerrada con un pestillo exterior y un candado que los soldados del Príncipe cerraron a las diez de la noche. De dentro salen golpes espaciados y regulares, y una voz alemana que ya no grita: solo insiste.",
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "dieter_encerrado"
+          }
+        ],
+        "check": {
+          "skill": "Cerrajeria"
+        },
+        "minutes": 10,
+        "successText": "El candado es bueno pero la escarcha lo ha vuelto torpe. Dieter Lounpeen sale de ahí dentro morado, temblando y con los labios de un color que no está en ninguna carta de colores, y se agarra a vosotros para no caerse. Tarda un minuto entero en entender que no sois camareros. Después os mira de otra manera: es un hombre rencoroso y estúpido, pero sabe perfectamente quién le ha sacado de una nevera.",
+        "failureText": "El candado no cede y los golpes de dentro se van espaciando hasta que paran del todo. Alguien viene por el pasillo del restaurante. Al retiraros, oís una última frase apagada al otro lado del metal, en alemán, que no es una petición de auxilio sino una lista de nombres.",
+        "onSuccess": [
+          {
+            "kind": "setNpcStatus",
+            "npc": "dieter",
+            "status": "ok"
+          },
+          {
+            "kind": "moveNpc",
+            "npc": "dieter",
+            "to": "cocina"
+          },
+          {
+            "kind": "setFlag",
+            "flag": "dieter_encerrado",
+            "value": false
+          },
+          {
+            "kind": "setFlag",
+            "flag": "dieter_liberado_por_el_grupo"
+          },
+          {
+            "kind": "adjustDisposition",
+            "npc": "dieter",
+            "by": 40
+          },
+          {
+            "kind": "learnFact",
+            "fact": "dieter_nos_debe_una"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "learnFact",
+            "fact": "dieter_en_el_frigorifico"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "dieter_hace_una_lista"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bar_largo",
+    "ref": "L18",
+    "name": "The Long Bar",
+    "floor": "baja",
+    "art": "bar_largo",
+    "description": "No se llama largo por estrecho, sino por lo cargados que vienen los tragos. «Siempre por exceso, nunca por defecto», se lee en la pared de la entrada. Behler mandó pintar encima de los cientos de firmas que los soldados ingleses grabaron a navaja durante la guerra, para no convertir el bar en una taberna vulgar. Gasparini es el rey de este sitio.",
+    "variants": [
+      {
+        "requires": [
+          {
+            "kind": "timeBefore",
+            "minute": 960
+          }
+        ],
+        "description": "La puerta acristalada está cerrada con llave. Al otro lado se ven las botellas alineadas y los taburetes subidos sobre la barra. El bar no abre hasta las cuatro de la tarde, y Gasparini libra esta mañana."
+      }
+    ],
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 3,
+        "label": "Volver al hall"
+      },
+      {
+        "to": "hab_gasparini",
+        "minutes": 2,
+        "label": "La habitación de Gasparini"
+      }
+    ]
+  },
+  {
+    "id": "correos",
+    "ref": "L10",
+    "name": "Oficina de Correos y Telégrafos",
+    "floor": "baja",
+    "art": "correos",
+    "description": "Abierta de nueve a cinco, con centralita. Mary Ann Thornhill atiende con una amabilidad que no se cansa nunca. Bajo el mostrador esconde una colección inabarcable de novelas románticas. Daría un brazo por que la invitaran a una de las fiestas de Behler; nadie se acuerda de ella.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Volver al hall"
+      }
+    ],
+    "features": [
+      {
+        "id": "telegrama_para_shakti",
+        "name": "La bandeja de salida",
+        "description": "Sobre el mostrador, una bandeja de mimbre con la correspondencia pendiente del primer turno. Encima de todo, un impreso de telegrama doblado en dos con el membrete de la suite real.",
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "telegrama_en_correos"
+          }
+        ],
+        "check": {
+          "skill": "Charlateria"
+        },
+        "minutes": 10,
+        "successText": "La señorita Thornhill se da la vuelta cuarenta segundos para buscar un impreso que no existe. Es tiempo de sobra. «A OMAR SHAKTI, HACIENDA DE ALGODÓN, GIZA. WEDER HA VENDIDO UNA PIEZA A UN MERCADER ALEMÁN. HAY MÁS COMPRADORES. VENGA USTED INMEDIATAMENTE. F.» El telegrama vuelve a la bandeja tal y como estaba, y a las cinco de la mañana saldrá igualmente. Pero ahora vosotros también sabéis quién viene.",
+        "failureText": "La señorita Thornhill posa la mano sobre la bandeja sin dejar de sonreír y la desliza treinta centímetros hacia su lado del mostrador. «El correo ajeno, no. Eso sí que no». Alcanzáis a leer una sola palabra del encabezado antes de que la tape: un nombre, Shakti.",
+        "onSuccess": [
+          {
+            "kind": "setFlag",
+            "flag": "telegrama_interceptado"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "telegrama_a_shakti"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "omar_shakti"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "fuad_delata_a_weder"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "el_telegrama"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "learnFact",
+            "fact": "omar_shakti"
+          },
+          {
+            "kind": "adjustDisposition",
+            "npc": "thornhill",
+            "by": -10
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jardin_exterior",
+    "ref": "L19",
+    "name": "El jardín exterior",
+    "floor": "terraza",
+    "art": "jardin",
+    "description": "Más apartado y más solo que el del salón Isis. Mandrágoras, margaritas, crisantemos y anémonas entre higueras, sicómoros y palmeras que dan una sombra casi continua. Filas de bancos vacíos. En el centro, el quiosco de la banda: todos los días a las doce hay concierto, con una selección de Brahms y Chopin.",
+    "exits": [
+      {
+        "to": "terraza",
+        "minutes": 4,
+        "label": "Subir a la terraza"
+      }
+    ]
+  },
+  {
+    "id": "pasillo_habitaciones",
+    "name": "Pasillos y escaleras",
+    "floor": "1",
+    "art": "pasillo",
+    "description": "Trescientas cincuenta habitaciones repartidas en cuatro plantas, unidas por escaleras de mármol y un ascensor de rejilla que sube con una lentitud humillante. Las alfombras ahogan los pasos. Cada pocos metros, un ventilador de techo remueve el aire caliente sin llegar a moverlo.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 4,
+        "label": "Bajar al hall"
+      },
+      {
+        "to": "hab_investigadores",
+        "minutes": 2,
+        "label": "Vuestra habitación"
+      },
+      {
+        "to": "hab_carter",
+        "minutes": 3,
+        "label": "Habitación 362"
+      },
+      {
+        "to": "hab_weder",
+        "minutes": 4,
+        "label": "Habitación 407"
+      },
+      {
+        "to": "hab_lounpeen",
+        "minutes": 2,
+        "label": "Habitación 204"
+      },
+      {
+        "to": "hab_fuad",
+        "minutes": 4,
+        "label": "Habitación 415"
+      },
+      {
+        "to": "hab_carnarvon",
+        "minutes": 2,
+        "label": "Habitación 250"
+      },
+      {
+        "to": "hab_shakti",
+        "minutes": 3,
+        "label": "Habitación 304"
+      },
+      {
+        "to": "hab_najir",
+        "minutes": 4,
+        "label": "Habitación 487"
+      },
+      {
+        "to": "hab_aga_khan",
+        "minutes": 3,
+        "label": "Habitación 387"
+      },
+      {
+        "to": "hab_fiesta_morrison",
+        "minutes": 2,
+        "label": "Habitación 285"
+      },
+      {
+        "to": "hab_selassie",
+        "minutes": 3,
+        "label": "Habitación 311"
+      },
+      {
+        "to": "habs_bohr",
+        "minutes": 2,
+        "label": "Habitaciones 251 a 265"
+      }
+    ]
+  },
+  {
+    "id": "hab_investigadores",
+    "name": "Vuestra habitación",
+    "floor": "2",
+    "art": "habitacion",
+    "description": "Dos camas, un armario, una mesita con jofaina y un ventilador que gira con desgana. Por la ventana entra el ruido de la calle Ibrahim Pachá y un olor a fritanga y polvo. Sobre la cómoda, el pequeño mapa del hotel que os dieron en recepción.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 2,
+        "label": "Salir al pasillo"
+      }
+    ]
+  },
+  {
+    "id": "hab_carter",
+    "ref": "L23",
+    "name": "Habitación 362 · Howard Carter",
+    "floor": "3",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Una habitación individual sorprendentemente austera para un hombre a punto de ser famoso. Cuadernos de campo, acuarelas a medio terminar, ropa sin doblar. Y un olor que no se va: dulzón, denso, con fondo de carne pasada. Viene de debajo de la cama.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 3,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "saco",
+        "name": "Debajo de la cama",
+        "description": "El olor sale de ahí abajo.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 10,
+        "successText": "Un saco de arpillera, atado con cuerda de esparto y manchado de un óxido que no es óxido. Dentro hay miembros humanos en distintos estados de descomposición. Están cortados con método, no con saña: alguien los está racionando.",
+        "failureText": "El olor es insoportable y no consigues localizar de dónde sale exactamente. Alguien viene por el pasillo.",
+        "onSuccess": [
+          {
+            "kind": "sanityLoss",
+            "loss": "1/1D6"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "saco_de_carter"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "saco_carter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hab_weder",
+    "ref": "L24",
+    "name": "Habitación 407 · Garth Weder",
+    "floor": "4",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Ordenada hasta la incomodidad. La correspondencia está apilada por fechas, toda con matasellos de Berlín y remite a un apartado de correos. Hay una caja fuerte pequeña empotrada junto al escritorio, y sobre la mesilla, envuelto en un paño, algo del tamaño de un puño que no llegas a ver bien.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 4,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "caja_fuerte",
+        "name": "La caja fuerte",
+        "description": "Pequeña, empotrada, con cerradura de combinación.",
+        "check": {
+          "skill": "Cerrajeria",
+          "difficulty": "hard"
+        },
+        "minutes": 20,
+        "successText": "Dentro, envuelto en una tela deshilachada, un disco de oro de unos treinta centímetros con refuerzos de metal cubiertos de piedras preciosas, dispuestos para sostenerlo recto sobre una frente. Bajo las prolongaciones se distinguen puntos metálicos conectados por hilos de cobre. Parecen electrodos, y eso es imposible.",
+        "failureText": "La combinación no cede, y llevas demasiado tiempo aquí dentro.",
+        "onSuccess": [
+          {
+            "kind": "moveCustody",
+            "item": "disco_solar",
+            "to": "player"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "disco_solar_visto"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "disco_solar"
+          }
+        ],
+        "requires": [
+          {
+            "kind": "custody",
+            "item": "disco_solar",
+            "holder": "weder"
+          }
+        ]
+      },
+      {
+        "id": "caja_fuerte_vacia",
+        "name": "La caja fuerte",
+        "description": "Pequeña, empotrada junto al escritorio, con cerradura de combinación.",
+        "requires": [
+          {
+            "kind": "not",
+            "of": {
+              "kind": "custody",
+              "item": "disco_solar",
+              "holder": "weder"
+            }
+          }
+        ],
+        "check": {
+          "skill": "Cerrajeria",
+          "difficulty": "hard"
+        },
+        "minutes": 20,
+        "successText": "La combinación cede al cabo de un rato largo y dentro no hay nada: una tela deshilachada arrugada en el fondo, con la huella redonda de algo de unos treinta centímetros que ya no está, y un papel doblado con dos firmas y una cifra. Sea lo que sea lo que Weder guardaba aquí, ha salido de esta habitación.",
+        "failureText": "La combinación no cede, y llevas demasiado tiempo aquí dentro.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "caja_fuerte_vacia"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "falta_una_pieza"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "learnFact",
+            "fact": "weder_tiene_caja_fuerte"
+          }
+        ]
+      },
+      {
+        "id": "correspondencia",
+        "name": "La correspondencia de Berlín",
+        "description": "Cartas apiladas por fecha, todas con matasellos alemán.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 15,
+        "successText": "Un año entero de cartas. Se habla de un partido político emergente en Múnich, de aportaciones económicas y de «el trabajo que solo puede hacerse desde dentro». Firma un tal Glauer, desde Estambul. En la última, alguien pregunta por «los avances en la cuestión de la sangre y la raza».",
+        "failureText": "Papeles de negocios y facturas del museo. Nada que llame la atención.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "correspondencia_nazi"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "cartas_berlin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hab_lounpeen",
+    "ref": "L22",
+    "name": "Habitación 204 · Los Lounpeen",
+    "floor": "2",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Dos camas separadas por un biombo. La de la izquierda está deshecha con violencia; la de la derecha, intacta. Vestidos caros tirados por el suelo, un cenicero rebosante y una botella de ginebra vacía rodando bajo la ventana. Huele a perfume y a alcohol rancio.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 2,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "caja_bajo_el_colchon",
+        "name": "Debajo del colchón",
+        "description": "La cama de la izquierda está mal hecha y el colchón, visiblemente descentrado sobre el somier. Hay una arruga dura en mitad del embozo.",
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "disco_bajo_el_colchon"
+          }
+        ],
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 10,
+        "successText": "Bajo el colchón hay una caja metálica plana, hecha a medida y forrada por dentro de fieltro. Dentro, envuelto en una tela deshilachada, un disco de oro de unos treinta centímetros con refuerzos de metal cubiertos de piedras preciosas, dispuestos para sostenerlo recto sobre una frente. Bajo las prolongaciones se distinguen puntos metálicos conectados por hilos de cobre. Al levantarlo, un chispazo os recorre el brazo hasta el codo.",
+        "failureText": "Levantáis el colchón, palpáis el somier y no encontráis nada, y en ese momento se oyen pasos en el pasillo y una llave en otra puerta. Mejor dejarlo como estaba.",
+        "onSuccess": [
+          {
+            "kind": "moveCustody",
+            "item": "disco_solar",
+            "to": "player"
+          },
+          {
+            "kind": "setFlag",
+            "flag": "disco_bajo_el_colchon",
+            "value": false
+          },
+          {
+            "kind": "learnFact",
+            "fact": "disco_solar_visto"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "electrodos_del_disco"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "disco_solar"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "learnFact",
+            "fact": "dieter_esconde_algo_en_la_204"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "almacen_sotano",
+    "name": "El almacén de la cocina",
+    "floor": "sotano",
+    "art": "sotano_almacen",
+    "description": "Veinte metros de peldaños ennegrecidos por una capa espesa de grasa y desperdicios os han dejado aquí. Estanterías de madera de más de cien años, comidas por la carcoma, con sacos de harina, arroz, especias, salazones y cajas de champán. Bajo las estanterías hay un charco permanente de lodo, poso de vegetales triturados. Con el calor de la tarde, ese charco burbujea.",
+    "exits": [
+      {
+        "to": "cocina",
+        "minutes": 8,
+        "label": "Subir a la cocina"
+      },
+      {
+        "to": "pasillo_intermedio",
+        "minutes": 3,
+        "label": "La puerta del fondo"
+      }
+    ]
+  },
+  {
+    "id": "pasillo_intermedio",
+    "name": "Pasillo intermedio",
+    "floor": "sotano",
+    "art": "sotano_pasillo",
+    "description": "Nadie suele pasar de aquí. El techo baja, las paredes sudan y el aire tiene un sabor mineral. En mitad del paso hay una alcantarilla con la rejilla levantada, y de ella salen unas escaleras de hierro que descienden doce metros más y brillan de humedad.",
+    "exits": [
+      {
+        "to": "almacen_sotano",
+        "minutes": 3,
+        "label": "Volver al almacén"
+      },
+      {
+        "to": "salon_ali_bey",
+        "minutes": 5,
+        "label": "Seguir bajando"
+      }
+    ]
+  },
+  {
+    "id": "salon_ali_bey",
+    "name": "Salón de Alí Bey al-Kabir",
+    "floor": "sotano",
+    "art": "sotano_palacio",
+    "description": "Lo que queda del palacio que había aquí antes de que existiera el hotel, construido en 1750 sobre otro palacio más pequeño y sobre un templo del año ochocientos. Columnas papiriformes de capitel cerrado dan entrada a la sala. Hay toneles sellados, un armario bajo de ébano y dos mesas damasquinadas. Al este, unas escalinatas. Al sur, la boca negra de un corredor.",
+    "exits": [
+      {
+        "to": "pasillo_intermedio",
+        "minutes": 5,
+        "label": "Volver arriba"
+      },
+      {
+        "to": "sala_escombros",
+        "minutes": 4,
+        "label": "Las escalinatas del este"
+      }
+    ],
+    "features": [
+      {
+        "id": "armario_ebano",
+        "name": "El armario de ébano",
+        "description": "Cuatro departamentos. El cuarto está vacío: faltan los doce cajones que deberían estar ahí.",
+        "check": {
+          "skill": "Descubrir",
+          "difficulty": "hard"
+        },
+        "minutes": 15,
+        "successText": "En la parte superior del cuarto departamento hay un compartimento secreto. Dentro, una daga con la palabra fardí, «único», labrada en el mango. El mango es de hueso, y la hoja curva está muy deteriorada por el uso.",
+        "failureText": "Telas apolillada, papeles con números en árabe y cajones llenos de polvo.",
+        "onSuccess": [
+          {
+            "kind": "giveItem",
+            "item": "daga_fardi"
+          }
+        ]
+      },
+      {
+        "id": "pozo",
+        "name": "El pozo",
+        "description": "Si nadie mira dónde pisa, este agujero pestilente no se ve hasta que es tarde.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "Un pozo abierto en el suelo, sin brocal, de boca ancha. Abajo hay líquido, y del líquido sube un olor que no es de agua estancada. Con una linterna se distinguen cosas flotando.",
+        "failureText": "El suelo parece firme por todas partes."
+      }
+    ]
+  },
+  {
+    "id": "sala_escombros",
+    "name": "La sala de los escombros",
+    "floor": "templo",
+    "art": "sotano_escombros",
+    "description": "Sillería derrumbada y siglos de cascotes. El hedor que llega desde el corredor lateral puede tumbar a un espíritu sensible: no es olor a podrido, es más antiguo que eso. Es el olor denso del tiempo. Del fondo llegan unos quejidos que no son humanos.",
+    "exits": [
+      {
+        "to": "salon_ali_bey",
+        "minutes": 4,
+        "label": "Volver al salón"
+      },
+      {
+        "to": "viejo_templo",
+        "minutes": 3,
+        "label": "El corredor lateral"
+      }
+    ],
+    "features": [
+      {
+        "id": "puerta_del_corredor",
+        "name": "La puerta del corredor lateral",
+        "description": "La puerta que da paso al Viejo Templo está cerrada con el pasador echado por fuera. Al otro lado alguien golpea la madera y grita en tres idiomas, cada vez más deprisa.",
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "najir_encerrado"
+          }
+        ],
+        "check": {
+          "skill": "Pelea"
+        },
+        "minutes": 5,
+        "successText": "El pasador está atrancado y hay que sacarlo a golpes de hombro. Cuando la puerta cede, Faraz Najir sale disparado hacia vosotros, se agarra a la primera solapa que encuentra y no la suelta hasta el almacén de la cocina. Detrás de él, algo que venía por el corredor se para en seco al ver la luz y retrocede sin ruido. Najir tarda diez minutos en poder hablar, y lo primero que dice es que os debe la vida, que no lo va a olvidar y que a partir de ahora lo que necesitéis. Y sabe leer egipcio clásico y demótico, que es una rareza que muy pocos vivos comparten.",
+        "failureText": "El pasador no cede. Golpeáis, hacéis palanca, os despellejáis los nudillos, y al otro lado los gritos cambian de tono: dejan de ser gritos de auxilio y pasan a ser otra cosa. Cuando la puerta se abre por fin, dentro no hay nadie a quien salvar; solo una linterna encendida, tirada de lado, iluminando una franja de suelo por la que arrastraron algo hacia el túnel norte.",
+        "onSuccess": [
+          {
+            "kind": "setFlag",
+            "flag": "najir_rescatado"
+          },
+          {
+            "kind": "setFlag",
+            "flag": "najir_aliado"
+          },
+          {
+            "kind": "setNpcStatus",
+            "npc": "najir",
+            "status": "ok"
+          },
+          {
+            "kind": "moveNpc",
+            "npc": "najir",
+            "to": "cocina"
+          },
+          {
+            "kind": "adjustDisposition",
+            "npc": "najir",
+            "by": 90
+          },
+          {
+            "kind": "learnFact",
+            "fact": "najir_nos_debe_la_vida"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "najir_lee_egipcio_clasico"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "najir_rescatado"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "damage",
+            "amount": "1D3"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "najir_devorado"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "viejo_templo",
+    "name": "El Viejo Templo de ibn Tulun",
+    "floor": "templo",
+    "art": "viejo_templo",
+    "restricted": true,
+    "description": "Docenas de columnas sostienen una oscuridad que la linterna no llega a morder. Del túnel norte, negro y pestilente, sale una respiración pesada. En la esquina noreste, sobre el polvo de mil años, hay un sarcófago de basalto negro de seis metros: forma cónica, alargada, con prolongaciones laterales asimétricas que ninguna geometría humana explica. A su alrededor, un pedestal, un cubo de cobre labrado y dos grandes cajas de madera recubiertas de oro.",
+    "exits": [
+      {
+        "to": "sala_escombros",
+        "minutes": 3,
+        "label": "Salir por el corredor"
+      }
+    ],
+    "features": [
+      {
+        "id": "sarcofago",
+        "name": "El Sarcófago de Basalto",
+        "description": "Seis metros de roca negra. Mirarlo de frente cuesta trabajo.",
+        "minutes": 10,
+        "successText": "Dos mil trescientos kilos de basalto. La tapa está tallada con una precisión imposible para la época, y las prolongaciones laterales no son adornos: son huecos, pensados para alojar algo que tenía esa forma. Cuanto más lo miras, menos sentido tiene que exista.",
+        "onSuccess": [
+          {
+            "kind": "sanityLoss",
+            "loss": "0/1D6"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "sarcofago_visto"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "sarcofago"
+          }
+        ]
+      },
+      {
+        "id": "cajas",
+        "name": "Las cajas de madera labrada",
+        "description": "Dos cajones recubiertos de pan de oro, con los sellos rotos.",
+        "check": {
+          "skill": "Arqueologia"
+        },
+        "minutes": 15,
+        "successText": "Una de las cajas ha sido manipulada hace poco, y sin ningún cuidado. Dentro quedan un collar de cuentas, un amuleto de jade con forma de tráquea y corazón, un pilar policromado de unos quince centímetros y un manojo de cincuenta y tres llaves de materiales imposibles: hierro, madera, jade, cristal, plata negra, obsidiana y tres aleaciones que no reconoces. Falta algo: hay un hueco redondo en la tela, de unos treinta centímetros.",
+        "failureText": "Objetos antiguos amontonados sin orden. Cualquiera de ellos valdría una fortuna, y ninguno te dice nada.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "falta_una_pieza"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "piezas_negras"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tienda_joyas",
+    "ref": "L4",
+    "name": "Tienda de joyas Merryweather",
+    "floor": "baja",
+    "art": "tienda_joyas",
+    "description": "Tras un mostrador de cristal, Eleanor Merryweather atiende con una desgana elegante a quien busca un regalo de última hora: brazaletes chapados en oro, cobre repujado de Siria y la India, vendido como típico de El Cairo aunque no lo sea. En el centro de la tienda, bajo llave en una vitrina, un anj de oro con incrustaciones de piedras preciosas brilla más que el resto de la mercancía. No hay vigilante ni sistema de seguridad: solo el cristal y la mirada cansada de Merryweather.",
+    "exits": [
+      {
+        "to": "restaurante",
+        "minutes": 3,
+        "label": "Volver al restaurante"
+      }
+    ]
+  },
+  {
+    "id": "tienda_moda_caballeros",
+    "ref": "L5",
+    "name": "Tienda de moda de caballeros Lords",
+    "floor": "baja",
+    "art": "tienda_moda_caballeros",
+    "description": "Frente al mostrador de madera labrada, John Murphy recibe con entusiasmo a los caballeros que quieren parecer exploradores curtidos sin haber pisado el desierto. Perdió un brazo en la guerra y lo ha sustituido por una prótesis de madera; a los desconocidos les gasta siempre la misma broma, tenderles la mano equivocada. Los maniquíes lucen esmóquines y trajes de lino al doble de lo que costarían en Londres, y una fila de salacots espera a su próximo dueño. Murphy es un admirador declarado de Howard Carter, aunque no recuerda que el arqueólogo haya encontrado nunca nada de valor. «Ya verán, su suerte va a cambiar, lo presiento», repite.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "tienda_cigarros",
+    "ref": "L6",
+    "name": "Tienda de cigarros Sandoval",
+    "floor": "baja",
+    "art": "tienda_cigarros",
+    "description": "Martín Sandoval, cubano afincado en El Cairo desde hace veinte años, vende los únicos habanos del Shepheard's: los trae él mismo cada Navidad, en dos baúles. Churchill se hospeda en este hotel en parte por su amistad con Sandoval. También hay tumbak, tabaco persa fuerte para narguile. Cuando Sandoval y Churchill coinciden, el humo se acumula bajo el techo como un bizcocho, y Gasparini ha tenido que pedirles más de una vez, con mucha educación, que salgan al jardín.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "tienda_suvenires",
+    "ref": "L7",
+    "name": "Tienda de suvenires",
+    "floor": "baja",
+    "art": "tienda_suvenires",
+    "description": "Gatos de latón, escarabajos, amuletos, papiros de imitación, réplicas de las pirámides y jambiyas con piedras falsas en el mango se amontonan sin ningún orden clasificable entre pañuelos, chilabas de todos los colores y colmillos de elefante labrados a mano. Docenas de lámparas cuelgan del techo. Gina Fontanarrosa, la dueña, italiana, inestable y alegre, atiende con una cortesía desbordante a quien muestre interés de verdad por la mercancía. Behler la protege desde hace cinco años, y corre el rumor de que en otro tiempo fueron algo más que amigos.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "tienda_moda_mujer",
+    "ref": "L8",
+    "name": "Tienda de moda de mujer Le Petit France",
+    "floor": "baja",
+    "art": "tienda_moda_mujer",
+    "description": "Todo lo que se vende en Le Petit France es occidental: nada de moda egipcia. Juliette Belanger, elegante y respetada, dirige la tienda y es muy amiga de Olga Lounpeen. Apenas hay género en las perchas porque casi todo se hace a medida. Pierre de la Fontaine, el sastre, no soporta el mal gusto y se ríe a una distancia imprudente de cualquiera cuya chaqueta y pantalón no compartan hechura; es difícil salir de aquí con las manos vacías si él se empeña en convencerte.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "tienda_relojes",
+    "ref": "L9",
+    "name": "Tienda de relojes de lujo Sechat",
+    "floor": "baja",
+    "art": "tienda_relojes",
+    "description": "Minerva, Montblanc, Piguet, Vacheron Constantin: Ismael Lardinne despliega sobre el mostrador de Sechat más lujo suizo del que la mayoría de sus clientes sabrá apreciar. Habla deprisa y dice sandeces con tanta seguridad que casi nadie repara en que lo son. En una vitrina aparte guarda, celosamente, un Cartier Tank de 1919: solo existen seis ejemplares en el mundo, y no lo venderá por menos de diez mil libras esterlinas. El Aga Khan pasa a menudo por aquí a pagar al contado.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "oficina_direccion",
+    "ref": "L11",
+    "name": "Oficina de dirección",
+    "floor": "baja",
+    "art": "correos",
+    "description": "Aquí debería ejercer Charles Behler, pero casi nunca está: entre la fiesta de disfraces de esta noche y el estreno de Haxan mañana, lleva tres fiestas organizadas solo este mes. Su secretario, Ronald Frisby, un hombrecillo desbordado por cualquier imprevisto, sostiene la oficina a base de listas y nervios. En la práctica, la sala funciona como cuartel general improvisado para quien tenga autoridad suficiente para usarla: los hombres del Príncipe Fuad, un detective de Scotland Yard, el propio detective del hotel o el jefe de policía de El Cairo, cuando hace falta un sitio discreto para un interrogatorio.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 2,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "administracion",
+    "ref": "L12",
+    "name": "Administración y agencia de viajes",
+    "floor": "baja",
+    "art": "correos",
+    "description": "Aquí, un puñado de administrativos gestiona la llegada de los huéspedes desde Alejandría y Port Said: los recogen en el puerto, los acompañan al tren y se aseguran de que el equipaje llegue a las habitaciones sin percances. También tramitan visados y billetes de vuelta. Trabajo de oficina puro, mecanografiado y aburrido, muy lejos del glamour del vestíbulo.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 3,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "servicio_restaurante",
+    "ref": "L16",
+    "name": "Servicio del restaurante",
+    "floor": "baja",
+    "art": "cocina",
+    "description": "Aquí se prepara lo que luego brilla en el comedor: la cubertería de plata, las flores, la cristalería de Sevres, los cientos de detalles que visten cada noche las mesas del restaurante. Un armario en la esquina guarda vendas y desinfectante para los primeros auxilios de cualquier percance en la sala, y hay un rincón entero dedicado a velas de todos los tamaños y docenas de candelabros. Michel Rolland se pasa por aquí una o dos veces al día para comprobar que todo está en orden, aunque en realidad no tiene ni idea de dónde va cada cosa.",
+    "exits": [
+      {
+        "to": "restaurante",
+        "minutes": 2,
+        "label": "Volver al restaurante"
+      }
+    ],
+    "features": [
+      {
+        "id": "primeros_auxilios",
+        "name": "El armario de primeros auxilios",
+        "description": "Vendas, alcohol y una tablilla, guardados sin mucho orden en la esquina.",
+        "minutes": 3,
+        "successText": "Lo justo para curar un corte o entablillar un esguince. Te lo guardas.",
+        "onSuccess": [
+          {
+            "kind": "giveItem",
+            "item": "botiquin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "salon_baile",
+    "ref": "L17",
+    "name": "El salón de baile",
+    "floor": "baja",
+    "art": "salon_baile",
+    "description": "El espacio pensado para las grandes fiestas del Shepheard's: una nave principal y dos reservados en el lado norte para las autoridades, cada uno con su propio servicio de camareros. Se construyó hace menos de cinco años, cuando las fiestas de Behler empezaron a hacerse célebres fuera de Egipto. Esta semana, con el Aga Khan, el Príncipe Fuad y Churchill bajo el mismo techo, el salón está a punto de vivir sus dos noches más comentadas.",
+    "exits": [
+      {
+        "to": "restaurante",
+        "minutes": 2,
+        "label": "Volver al restaurante"
+      }
+    ],
+    "features": [
+      {
+        "id": "control_de_invitados",
+        "name": "El control de los camareros nubios",
+        "description": "Dos camareros nubios enormes, de uniforme blanco bordado en oro y con jambias del Yemen al cinto, sostienen la lista de invitados en la puerta. No hay manera de entrar sin figurar en ella y sin un documento que lo acredite.",
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "mascarada_en_marcha"
+          },
+          {
+            "kind": "not",
+            "of": {
+              "kind": "flag",
+              "flag": "invitados_mascarada"
+            }
+          }
+        ],
+        "check": {
+          "skill": "Credito"
+        },
+        "minutes": 15,
+        "successText": "El nubio de la izquierda os mira de arriba abajo, mide el corte del traje, la calidad de los zapatos y el aplomo, y decide que este asunto le queda grande. Va a buscar a Behler. El director aparece sudando, escucha la excusa, mira al techo, resopla y termina cediendo: «Que pasen, y por lo que más quieran, no me monten nada». No lo dice contento, pero lo dice.",
+        "failureText": "El nubio no aparta la vista de la lista mientras habláis, y cuando termináis vuelve a mirar la lista otra vez, por si acaso. «Sus nombres no están». Y da un paso a la derecha, que es exactamente el paso que hay que dar para tapar una puerta.",
+        "onSuccess": [
+          {
+            "kind": "setFlag",
+            "flag": "invitados_mascarada"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "fiesta_es_exclusiva"
+          },
+          {
+            "kind": "adjustDisposition",
+            "npc": "behler",
+            "by": -5
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "learnFact",
+            "fact": "fiesta_es_exclusiva"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "hay_que_estar_en_la_lista"
+          }
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "mascarada_en_marcha"
+          }
+        ],
+        "description": "Doscientas personas disfrazadas, cincuenta músicos de jazz tocando dixie sobre un escenario montado para la ocasión y miles de velas ardiendo en candelabros de cobre sobre alfombras persas. De la lámpara central bajan cientos de lianas por las que se balancean monos de ocho especies distintas; de los brazos de los candelabros cuelgan serpientes vivas, loros y papagayos. A ambos lados de la mesa real, dos leones encadenados que llevan un buen rato de pie. En la puerta, dos camareros nubios enormes con la lista de invitados. Aquí dentro se puede oír cualquier cosa y no se puede oír nada."
+      },
+      {
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "mascarada_terminada"
+          }
+        ],
+        "description": "El salón a las seis de la mañana: cinco mil velas consumidas, sillas doradas patas arriba, cristal por el suelo y una cadena de eslabones gruesos cortada limpiamente junto a la mesa real. Los músicos recogen sin hablarse. Queda un olor difícil de nombrar, mezcla de cera, animal y perfume caro, y por las lianas todavía se mueve algo ahí arriba, en la oscuridad del techo."
+      },
+      {
+        "requires": [
+          {
+            "kind": "flag",
+            "flag": "salon_preparado"
+          }
+        ],
+        "description": "El salón está montado y vacío, que es cuando más impresiona: cinco mil velas sin encender, un escenario para cincuenta músicos, mesas supletorias con cordero asado y repostería árabe, jaulas cubiertas con paños y, junto a la mesa principal, dos argollas de hierro atornilladas al suelo con cadenas del grosor de un brazo. Sea lo que sea lo que va atado ahí, todavía no ha llegado."
+      }
+    ]
+  },
+  {
+    "id": "hab_fuad",
+    "ref": "L21",
+    "name": "Habitación 415 (suite real) · Príncipe Fuad",
+    "floor": "4",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "La suite real, protegida por tres guardias apostados en el pasillo mientras el Príncipe está dentro. Nueve habitaciones en total: tres de uso exclusivo de Fuad, donde no entra ni el servicio de limpieza y que mantiene solo su guardia personal; tres para la escolta, con sus pertenencias en las mesitas de noche; una para los secretarios, sin comunicación directa con las del Príncipe; dos para los soldados de descanso. Nadie llega hasta el propio Fuad sin que antes le den el visto bueno sus secretarios, y estos no mueven un dedo sin que lo autoricen los guardias.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 4,
+        "label": "Salir al pasillo"
+      }
+    ]
+  },
+  {
+    "id": "hab_carnarvon",
+    "ref": "L25",
+    "name": "Habitación 250 (suite de honor) · Los Carnarvon",
+    "floor": "2",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "La suite de honor tiene cuatro estancias: un recibidor de mármol y caoba con plantas exóticas traídas del oasis de Bahariya, un gran salón con muebles art déco de Paul Follot, y dos dormitorios con las maletas todavía sin abrir. En el de Lady Evelyn, sobre la cama, su último cambio de ropa y un albornoz. En el del Conde, un bolso de mano en piel.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 2,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "bolso_carnarvon",
+        "name": "El bolso de mano de Lord Carnarvon",
+        "description": "Piel buena, sobre la cama, sin ninguna precaución.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "Dos pasaportes -el suyo y el de su hija, que se lo entregó porque el Conde no se fía de ella-, cien libras esterlinas, quinientos dólares, una pluma Montblanc de oro de dieciocho quilates, el plan de viaje y una invitación al estreno de Haxan a la que no piensan ir. Y un telegrama de Howard Carter, fechado hace días, anunciando el hallazgo.",
+        "failureText": "Documentos y ropa de viaje. Nada que llame la atención a primera vista.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "telegrama_carter_carnarvon"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "telegrama_carter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hab_shakti",
+    "ref": "L26",
+    "name": "Habitación 304 (suite de invierno) · Omar Shakti",
+    "floor": "3",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Tres habitaciones, dos comunicadas entre sí. El dormitorio de Shakti no tiene nada llamativo salvo una caja blindada junto a la cama y un revólver del calibre 38 en la mesita de noche, que el brujo casi nunca usa. En el salón, sobre la mesa, un libro infantil fuera de lugar: El maravilloso mago de Oz, primera edición de 1900. La tercera habitación es de Hetep, el gato de Shakti, con una cama de arena de cuatro por tres metros y medio traída expresamente del desierto de Dashur. Si el gato está solo y alguien entra sin permiso, deja de comportarse como un gato.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 3,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "caja_blindada",
+        "name": "La caja blindada",
+        "description": "Junto a la cama, cerrada. Resistiría un intento de forzarla a base de fuerza bruta, pero también se puede intentar con ganzúas.",
+        "check": {
+          "skill": "Cerrajeria",
+          "difficulty": "hard"
+        },
+        "minutes": 15,
+        "successText": "Documentos personales sin relación con los Mitos, quinientas libras egipcias y varios libros de cuentas: las transacciones de la plantación de algodón de Shakti, anotadas con método. En un cajón interior, cerrado con una llave que Shakti lleva siempre al cuello, se adivina algo más.",
+        "failureText": "La caja no cede, y se acaba el tiempo prudente para seguir intentándolo.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "shakti_negocios_algodon"
+          }
+        ]
+      },
+      {
+        "id": "cuaderno_notas_shakti",
+        "name": "El cajón con llave",
+        "description": "Dentro de la caja blindada, un cajón más pequeño, también cerrado, cuya llave Shakti no se quita ni para dormir.",
+        "check": {
+          "skill": "Cerrajeria",
+          "difficulty": "extreme"
+        },
+        "minutes": 10,
+        "successText": "Un cuaderno de tapas gastadas, lleno de correcciones a mano: notas de Shakti sobre errores de traducción y matices de ejecución en algunos hechizos del Necronomicón. Leer solo dos páginas ya deja claro que Shakti entiende ese libro mejor que nadie vivo.",
+        "failureText": "El cajón no cede sin la llave, y forzarlo a lo bruto llamaría demasiado la atención.",
+        "onSuccess": [
+          {
+            "kind": "sanityLoss",
+            "loss": "0/1D4"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "notas_shakti_necronomicon"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "notas_shakti"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hab_gasparini",
+    "ref": "L27",
+    "name": "Habitación 127 · Gasparini",
+    "floor": "baja",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Una habitación pequeña que no esconde ningún misterio a primera vista: una cama individual -Gasparini nunca trae a nadie aquí, prefiere usar la de otros-, un armario, una mesita, una lámpara de pie y dos sillones. Vive justo detrás de su propia barra, y se nota: huele un poco a Long Bar incluso con la puerta cerrada.",
+    "exits": [
+      {
+        "to": "bar_largo",
+        "minutes": 2,
+        "label": "Volver al bar"
+      }
+    ],
+    "features": [
+      {
+        "id": "armario_gasparini",
+        "name": "El armario",
+        "description": "Ropa colgada sin mucho cuidado.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "Un bolso de cuero pequeño con mil quinientas libras egipcias, escondido entre las camisas.",
+        "failureText": "Camisas, un par de zapatos de más y nada interesante."
+      },
+      {
+        "id": "mesita_gasparini",
+        "name": "La mesita de noche",
+        "description": "Una novela con una dedicatoria escrita a mano en la portadilla.",
+        "minutes": 3,
+        "successText": "The Return of Clubfoot, de Valentine Williams. Dedicada: «Para Gasparini, de su gran amigo Valentine, en recuerdo de todas esas noches inolvidables».",
+        "onSuccess": [
+          {
+            "kind": "unlockJournal",
+            "entry": "novela_gasparini"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hab_najir",
+    "ref": "L28",
+    "name": "Habitación 487 · Faraz Najir",
+    "floor": "4",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Una habitación humilde para pasar un par de noches. Los objetos personales de Faraz Najir están todos en la maleta, tirada sobre el suelo: un par de chaquetas, camisas, un neceser con crema para sus quemaduras.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 4,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "maleta_doble_fondo",
+        "name": "El doble fondo de la maleta",
+        "description": "La maleta parece más pesada de lo que su contenido explica.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 10,
+        "successText": "Un doble fondo, y dentro dos cuadernos voluminosos llenos de notas: nombres, direcciones, apuntes sobre casi cualquiera que se hospede en el Shepheard's o tenga algo que ver con El Cairo. Fragmentarios y personales, pero útiles si se sabe qué buscar. En el segundo cuaderno, fotografías del anverso y el reverso de un disco de oro, junto con fotos de otros objetos religiosos egipcios sin conexión aparente. Robar estos cuadernos es una ofensa que Najir no perdona: jurará encontrar al culpable.",
+        "failureText": "Ropa y un neceser. Nada que llame la atención bajo una inspección rápida.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "cuadernos_najir"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "fotos_disco_solar"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "cuadernos_najir"
+          }
+        ]
+      },
+      {
+        "id": "carta_najir",
+        "name": "La carta a medio escribir",
+        "description": "Hojas con membrete del hotel sobre la mesita de noche. La de encima parece en blanco.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "No está en blanco: hay marcas de lo que se escribió en la hoja de encima, ahora desaparecida. Frotando un lápiz de lado sobre el papel, el texto emerge. Está en francés.",
+        "failureText": "Un membrete del hotel y nada más, a simple vista.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "carta_najir_marcas"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "carta_najir"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hab_aga_khan",
+    "ref": "L29",
+    "name": "Habitación 387 · Aga Khan y su séquito",
+    "floor": "3",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Seis habitaciones para el Aga Khan y su séquito. La primera es de sus hombres, sin nada de valor salvo las armas. La segunda es de Alí, su secretario y guardaespaldas, el más fuerte de todos. El resto son de uso personal de Mahomed Shah.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 3,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "maleta_ali",
+        "name": "La maleta bajo la cama de Alí",
+        "description": "Una maleta de cuero, empujada hasta el fondo, bajo la cama de Alí.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 10,
+        "successText": "Cien mil libras del imán, en fajos ordenados. Alí daría la vida antes de dejar que alguien se acercara a esta maleta sin su permiso.",
+        "failureText": "El espacio bajo la cama parece vacío a simple vista.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "maleta_cien_mil_libras"
+          }
+        ]
+      },
+      {
+        "id": "medalla_aga_khan",
+        "name": "La medalla de Caballero Comendador",
+        "description": "En una cajita junto a la cama de Mahomed Shah, una condecoración de la Orden del Imperio de la India.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 5,
+        "successText": "Una pieza única, sin precio real. Robarla marcaría para siempre la vida de quien lo intentase: no es el tipo de objeto que alguien como el Aga Khan olvide ni perdone.",
+        "failureText": "Una cajita cerrada, sin nada que indique lo que guarda.",
+        "onSuccess": [
+          {
+            "kind": "giveItem",
+            "item": "medalla_caballero_comendador"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hab_fiesta_forrester",
+    "ref": "L30",
+    "name": "Habitación 103 · Fiesta privada",
+    "floor": "baja",
+    "art": "habitacion",
+    "description": "Todas las noches, en esta pequeña habitación, Richard J. Forrester organiza una fiesta. El neoyorquino, excéntrico y aficionado a las emociones fuertes, ha llenado la estancia de potros de tortura, cadenas, grilletes colgados de la pared, máscaras de cuero y corsés apretados hasta lo absurdo. El único requisito para entrar es llevar un bozal. A pesar de la puesta en escena, nada peligroso ocurre aquí: no hay alcohol, la música suena a un volumen razonable y la comida en las bandejas recuerda más a un cumpleaños infantil que a una bacanal. Las conversaciones nunca suben de tono -son solo cotilleos de la alta burguesía cairota-, y de vez en cuando alguien azota a otra persona sin ninguna intención de hacerle daño de verdad.",
+    "exits": [
+      {
+        "to": "recepcion",
+        "minutes": 3,
+        "label": "Volver al hall"
+      }
+    ]
+  },
+  {
+    "id": "hab_fiesta_morrison",
+    "ref": "L31",
+    "name": "Habitación 285 · Otra fiesta privada",
+    "floor": "2",
+    "art": "habitacion",
+    "description": "Todas las noches, y muchas más, hay fiesta en esta habitación. Su huésped, Mervin Morrison, un anciano británico de setenta y cinco años, lleva cinco de celebración ininterrumpida desde que su mujer murió en 1917. El Alzheimer le hace despertar cada mañana convencido de que acaba de perderla, y cada mañana decide que hay que celebrar su vida otra vez. Pide servicio de habitaciones sin parar porque olvida que ya se lo han traído. La puerta está siempre abierta, y deja pasar a cualquiera pensando que es la primera vez que lo visita: sus abrazos son imposibles de rechazar. El Dixieland más ruidoso del hotel suena aquí día y noche -los músicos tocan gratis, encantados con él-, y Ellen Grant, su enfermera, cuida de que la fiesta no le pase factura. «Queremos ser Mervin» es el grito de guerra de sus invitados.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 2,
+        "label": "Salir al pasillo"
+      }
+    ]
+  },
+  {
+    "id": "hab_selassie",
+    "ref": "L32",
+    "name": "Habitación 311 · Abebaberk Selassie",
+    "floor": "3",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "El inesperado séquito de Abebaberk Selassie ocupa siete habitaciones comunicadas, requisadas la noche del 21 con tan poca antelación que Abraham Murray tuvo que cambiar a mano los números de las puertas. En el salón principal, los esbirros de Selassie juegan a las cartas y beben whisky bajo las contraventanas cerradas: hay dos dedos índice cortados sobre la mesa, recuerdo de la última vez que alguien hizo trampas, y manchas de sangre secas en el sofá. El aire está cargado de tabaco y sudor. En su propio dormitorio, si Selassie está ahí, suele encontrársele en la cama, absorto en una partida de senet con un puñado de niños.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 3,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "vestidor_selassie",
+        "name": "El vestidor",
+        "description": "Dos armarios grandes, uno a cada lado.",
+        "minutes": 5,
+        "successText": "Bajo una tela húmeda y apolillada, en el armario de la izquierda hay diez cabezas humanas a las que se ha operado para que la boca quede abierta para siempre, forrada de seda acolchada, sin dientes. Están maquilladas, con pestañas postizas y algunas pelucas: alguien las ha preparado para el consuelo sexual de otro alguien. En el armario de la derecha, entre miembros cortados y resecos, una persona pequeña, atada de pies y manos, en cuclillas. No es un huésped: lleva meses aquí. Si se le libera, no sale del armario y solo grita «¡Cierra la puerta!» en árabe, una y otra vez.",
+        "onSuccess": [
+          {
+            "kind": "sanityLoss",
+            "loss": "1/1D4+1"
+          },
+          {
+            "kind": "learnFact",
+            "fact": "vestidor_selassie"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "vestidor_selassie"
+          }
+        ]
+      },
+      {
+        "id": "comoda_selassie",
+        "name": "La cómoda de Selassie",
+        "description": "Un maletín de piel en el fondo del segundo cajón.",
+        "check": {
+          "skill": "Cerrajeria",
+          "difficulty": "hard"
+        },
+        "minutes": 10,
+        "successText": "Bolsitas de cuero con dosis de cocaína, heroína líquida y opio. Dos mil dólares, quinientas libras esterlinas y mil libras egipcias en monedas de oro. Al fondo de otro cajón, una caja de metal con una biblia pequeña, humedecida por un fluido viscoso, con pelos de pubis retorcidos entre las páginas.",
+        "failureText": "El maletín no cede, y hurgar más tiempo en la cómoda de un hombre como Selassie no parece buena idea.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "comoda_selassie"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "comoda_selassie"
+          }
+        ]
+      },
+      {
+        "id": "saco_del_botin",
+        "name": "El saco del botín",
+        "description": "En el salón de las habitaciones requisadas, junto a la mesa de las cartas, hay un saco de tela abierto con lo que los esbirros trajeron esta noche: relojes, anillos, dos pasaportes, un bolso de piel y cajas de todos los tamaños.",
+        "requires": [
+          {
+            "kind": "custody",
+            "item": "disco_solar",
+            "holder": "selassie"
+          }
+        ],
+        "check": {
+          "skill": "Cerrajeria",
+          "difficulty": "hard"
+        },
+        "minutes": 20,
+        "successText": "Entre el botín hay una caja metálica plana, hecha a medida, que nadie se ha molestado en abrir todavía. Dentro, envuelto en una tela deshilachada, un disco de oro de unos treinta centímetros con refuerzos cubiertos de piedras preciosas y unos puntos metálicos unidos por hilos de cobre. Selassie no sabe lo que tiene. Todavía.",
+        "failureText": "Los dos hombres que juegan a las cartas dejan de jugar a las cartas. No dicen nada, no se levantan, no sacan nada del cinto: solo se quedan mirando y esperan a ver qué hacéis. Sobre la mesa, entre los naipes, hay dos dedos índice cortados que ayudan bastante a decidirse.",
+        "onSuccess": [
+          {
+            "kind": "moveCustody",
+            "item": "disco_solar",
+            "to": "player"
+          },
+          {
+            "kind": "setFlag",
+            "flag": "disco_lo_tiene_selassie",
+            "value": false
+          },
+          {
+            "kind": "learnFact",
+            "fact": "disco_solar_visto"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "disco_solar"
+          }
+        ],
+        "onFailure": [
+          {
+            "kind": "learnFact",
+            "fact": "selassie_tiene_el_botin"
+          },
+          {
+            "kind": "adjustDisposition",
+            "npc": "selassie",
+            "by": -25
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "habs_bohr",
+    "ref": "L33-L34",
+    "name": "Habitaciones 251-265 · Los señores Bohr",
+    "floor": "2",
+    "art": "habitacion",
+    "restricted": true,
+    "description": "Doce habitaciones (de la 251 a la 265, salteando algunos números, más la 264) exactamente iguales entre sí, salvo una. En todas: sobre la mesita de noche, un neceser con cepillo de dientes, dentífrico, un peine y tapones para los oídos. En el armario, un traje negro completo -pantalón, chaqueta, corbata, chaleco gris, zapatos negros- y, debajo, una maleta negra vacía. Sobre la cama, el número de octubre de la revista Argosy, colocado con una precisión que incomoda: parece medido para quedar exactamente paralelo a los bordes del colchón.",
+    "exits": [
+      {
+        "to": "pasillo_habitaciones",
+        "minutes": 2,
+        "label": "Salir al pasillo"
+      }
+    ],
+    "features": [
+      {
+        "id": "cuaderno_264",
+        "name": "La 264",
+        "description": "De las doce habitaciones, esta es la única distinta: sobre la mesita de noche, donde en las demás solo hay un neceser, hay también un cuaderno de tapas manuscritas.",
+        "check": {
+          "skill": "Descubrir"
+        },
+        "minutes": 10,
+        "successText": "Notas manuscritas, apretadas y metódicas, de una letra que ya resulta familiar por el registro de recepción. No hay forma de leerlas por encima: hay que llevárselas para entenderlas con calma.",
+        "failureText": "Una habitación exactamente igual a las otras once, hasta donde alcanza una inspección rápida.",
+        "onSuccess": [
+          {
+            "kind": "learnFact",
+            "fact": "cuaderno_bohr"
+          },
+          {
+            "kind": "unlockJournal",
+            "entry": "cuaderno_bohr"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,836 @@
+[
+  {
+    "id": "carter_excavacion",
+    "npc": "carter",
+    "label": "Preguntarle por sus excavaciones",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Por un momento deja de temblarle la pierna.\n—Catorce años. Cinco de ellos en el Valle de los Reyes, cavando donde todo el mundo decía que ya no quedaba nada. —Y entonces sonríe, y no es una sonrisa agradable—. Todo el mundo se equivocaba.",
+      "facts": [
+        "carter_ha_encontrado_algo"
+      ],
+      "unlocks": [
+        "carter_valle_de_los_reyes"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Trabajo. Se cava, se cataloga, se vuelve a cavar. No tiene el menor interés para un profano. —Mira por encima de vuestro hombro mientras habla. No os mira a los ojos ni una vez.",
+      "unlocks": [
+        "carter_valle_de_los_reyes"
+      ]
+    },
+    "onFailure": {
+      "text": "—Discúlpenme, tengo prisa. —No la tiene. Simplemente quiere irse, y eso le pasa en todas las conversaciones. Se levanta, coge el sombrero, y con el sombrero ya en la mano se queda de pie tres segundos sin irse a ninguna parte, porque tampoco tiene adónde ir. Luego se sienta otra vez.",
+      "facts": [
+        "carter_siempre_quiere_irse"
+      ]
+    }
+  },
+  {
+    "id": "carter_egiptologia",
+    "npc": "carter",
+    "label": "Pedirle que os explique algo de egiptología",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "onHard": {
+      "text": "Habla veinte minutos. Es la primera vez en toda la conversación que no mira la puerta.\n—Amarna. Navidades del noventa y uno, yo tenía diecisiete años. La capital de un faraón que borró a todos los dioses de un plumazo y puso uno solo, y al que después borraron a él de las listas de reyes con la misma minuciosidad. —Dibuja un cartucho en el mantel con la uña—. Se puede raspar el nombre de un hombre de todas las piedras de un imperio, señores. Se ha hecho. Lo que no se puede es raspar el sitio donde estaba el nombre.",
+      "facts": [
+        "carter_habla_de_amarna",
+        "carter_dibuja_en_el_mantel"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿De verdad les interesa? —Y hay tanta sospecha en la pregunta como esperanza—. Bien. Un cartucho no es un adorno: es un lazo de cuerda alrededor de un nombre, para que el nombre no se salga y para que nadie de fuera pueda entrar a tocarlo. Los egipcios no escribían nombres. Los encerraban.",
+      "facts": [
+        "carter_habla_de_egiptologia"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": 10
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Hay libros. —Y lo dice con un desprecio tan puro y tan bien destilado que casi es admirable—. La Baedeker de mil novecientos catorce se vende en cualquier hotel de esta calle y les contará lo mismo que yo, con la ventaja de que a un libro no hay que darle conversación.",
+      "facts": [
+        "carter_desprecia_a_los_profanos"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": -5
+        }
+      ]
+    },
+    "note": "Pág. 22: «Solo muestra cierto interés si el tema de conversación versa sobre egiptología». Es la palanca del personaje: aquí es donde se le compra la disposición para todo lo demás."
+  },
+  {
+    "id": "carter_valle_de_los_reyes",
+    "npc": "carter",
+    "label": "«Cinco años sin encontrar nada»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "La pierna se para del todo. Es lo más quieto que le habéis visto.\n—Yo entré en esto pintando escenas de caza para los Amherst. Con quince años, con mi padre, decorando salones de gente que tenía la mayor colección de papiros de Inglaterra colgada en un pasillo por el que pasaban sin mirarla. —Sonríe hacia el mantel—. Petrie me enseñó a excavar. Newberry me llevó al Nilo. Y después, catorce años cavando para un conde, cinco de ellos en un valle que ya habían vaciado, delante de todo El Cairo, año tras año. ¿Saben ustedes lo que es que le tengan a uno lástima en un comedor entero? —Levanta la vista por primera vez, medio segundo—. Ya no. Eso se acabó el mes pasado.",
+      "facts": [
+        "carter_ha_encontrado_algo",
+        "carter_quiere_ascender_de_clase"
+      ],
+      "unlocks": [
+        "carter_el_descubrimiento"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cinco. Y antes de esos cinco, otros nueve en Tebas. —Se le va la mirada a la puerta—. La arqueología británica es una lista de apellidos, señores, y el mío no está en ella. Todavía.",
+      "facts": [
+        "carter_quiere_ascender_de_clase"
+      ],
+      "unlocks": [
+        "carter_el_descubrimiento"
+      ]
+    },
+    "onFailure": {
+      "text": "—El Valle está agotado. Lo dicen los mejores. —Consulta el reloj, un reloj que ya ha consultado dos veces en esta misma conversación—. Y ahora, si me disculpan, tengo una cita. —No hay ninguna cita. Lleva desde las once sentado en esta terraza esperando a que se le pase la mañana.",
+      "facts": [
+        "carter_siempre_quiere_irse"
+      ]
+    },
+    "note": "Pág. 22: los Amherst, Percy Newberry, Flinders Petrie, Amarna en 1891. «Mataría por lograr un éxito que le ascienda de clase, colocándole en el lugar que considera suyo por mérito propio».",
+    "locked": true
+  },
+  {
+    "id": "carter_el_descubrimiento",
+    "npc": "carter",
+    "label": "«¿Qué han encontrado exactamente?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Mira a los lados. Baja la voz hasta un sitio donde no cabe la mentira.\n—Escalones. Dieciséis escalones bajo una casa de obreros que llevaba tres mil años tapando una puerta sellada, y el sello estaba intacto. Intacto, señores. —Y aquí le tiembla algo que no es la pierna—. Y detrás de esa puerta hay cosas que no estaban en el inventario de ninguna tumba de ningún faraón, porque no son de ningún faraón. Eso es lo que hemos encontrado. Y no, no pienso decirles más, y ya les he dicho el doble de lo que le he dicho a mi patrocinador.",
+      "facts": [
+        "piezas_negras",
+        "tumba_profanada"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "piezas_negras"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Una tumba. —La palabra se le escapa con demasiado gusto y se da cuenta a medio camino—. Una posible tumba. Sin abrir, sin catalogar y sin anunciar, así que le agradecería enormemente que esa palabra no saliera de esta mesa.",
+      "facts": [
+        "tumba_profanada"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Nada. —Y a los diez segundos, porque no puede evitarlo—: Nada que se pueda contar todavía. Hay una diferencia enorme entre las dos frases y ustedes acaban de oírla.",
+      "facts": [
+        "carter_ha_encontrado_algo"
+      ]
+    },
+    "onFailure": {
+      "text": "—No hemos encontrado nada. Lleven ustedes cuidado con lo que repiten en las terrazas de esta ciudad. —Y en cuanto lo dice, empieza a mirar, uno por uno, a los ocupantes de las cuatro mesas más próximas, comprobando quién ha podido oírles. Tarda casi un minuto entero en hacerlo. Después vuelve, y no ha oído nada de lo que le hayan dicho entretanto.",
+      "facts": [
+        "carter_es_paranoico"
+      ]
+    },
+    "locked": true
+  },
+  {
+    "id": "carter_carnarvon",
+    "npc": "carter",
+    "label": "Preguntarle por Lord Carnarvon",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "carter_ha_encontrado_algo"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Catorce años. Le he dado catorce años a ese hombre. —Y por una vez no baja la voz, que es peor—. Llega mañana desde Alejandría y lo primero que hará será poner su nombre en el telegrama que salga a Londres. El descubrimiento del conde de Carnarvon. Y dentro de cien años, en los libros, será suyo, porque el dinero era suyo. —Se calla de golpe—. Discúlpenme. El calor.",
+      "facts": [
+        "carnarvon_llega_manana",
+        "carter_resiente_a_carnarvon"
+      ],
+      "unlocks": [
+        "carter_evelyn"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Mi patrocinador. Llega mañana por la mañana desde Alejandría. —Consulta el reloj—. He telegrafiado yo mismo para que no empiece nada sin él. Es lo correcto.",
+      "facts": [
+        "carnarvon_llega_manana",
+        "telegrama_carter_carnarvon"
+      ],
+      "unlocks": [
+        "carter_evelyn"
+      ]
+    },
+    "onFailure": {
+      "text": "—Su Señoría es un caballero de una generosidad ejemplar. —Lo recita como quien paga una deuda en público, sin un gramo de calor dentro, y a continuación aparta la vista y se pone a doblar la esquina del mantel en triángulos cada vez más pequeños.",
+      "facts": [
+        "carter_resiente_a_carnarvon"
+      ]
+    },
+    "note": "Pág. 22 y Ayuda de juego 3: «Carter no quería comenzar las excavaciones de su descubrimiento sin la presencia de este»."
+  },
+  {
+    "id": "carter_evelyn",
+    "npc": "carter",
+    "label": "«¿Y la hija del conde?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Lady Evelyn. La conozco desde que llevaba trenzas y me llamaba «señor Carter» con retintín. —Y aquí ocurre algo raro: se le ablanda la cara y acto seguido se le apaga, como si hubiera abierto una puerta y hubiera visto lo que había detrás—. Es la única persona de esa familia que me ha preguntado alguna vez qué estaba buscando. No qué había encontrado. Qué estaba buscando. —Se levanta a medias—. Mañana llega. Sí. Ya lo sé.",
+      "facts": [
+        "evelyn_llega_manana",
+        "carter_aprecia_a_evelyn"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Viene con él. Siempre viene con él. —Se encoge de hombros—. Es amable conmigo, cosa que en esa casa no abunda.",
+      "facts": [
+        "evelyn_llega_manana"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sabría decirles. —Y de golpe, sin transición ninguna, se pone a hablar de la humedad relativa de las tumbas del Valle en noviembre, un asunto por el que nadie ha mostrado el menor interés, durante cuatro minutos seguidos.",
+      "facts": [
+        "carter_esquiva_lo_de_evelyn"
+      ]
+    },
+    "note": "Pág. 61-62: mañana, Dieter le contará a Evelyn cómo Carter engañó a su padre, y ella bajará al sótano a comprobarlo.",
+    "locked": true
+  },
+  {
+    "id": "carter_fellahin",
+    "npc": "carter",
+    "label": "«¿Y los obreros que lo sacaron de allí?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "fellahin_desaparecidos"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onCritical": {
+      "text": "—Eran once. —No aparta la vista del mantel—. Once hombres de una aldea a doce kilómetros del Valle, y ninguno de ellos sabía leer, y todos vieron exactamente lo mismo que vi yo. —Silencio—. Yo no hice nada. Se lo dije a Weder, y Weder dijo «yo me encargo», y yo me fui a cenar. Eso es lo que hice: irme a cenar. —Levanta la vista, y por una vez os mira a los ojos, y es mucho peor que cuando no lo hacía—. ¿Saben ustedes lo barato que es no hacer nada?",
+      "facts": [
+        "fellahin_desaparecidos",
+        "carter_consintio",
+        "weder_se_encargo_de_los_fellahin"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "los_fellahin"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—De eso se encargó otra persona. —Lo dice sin ninguna inflexión, exactamente con el mismo tono con el que ha pedido el té, y sigue mirando por encima de vuestro hombro—. Yo excavo. La logística de una expedición no es asunto del arqueólogo.",
+      "facts": [
+        "carter_consintio",
+        "weder_se_encargo_de_los_fellahin"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cobraron y volvieron a su aldea. —Pausa de un segundo de más—. Es lo que hacen los fellahin. Cobran y vuelven a su aldea.",
+      "facts": [
+        "carter_miente_sobre_los_fellahin"
+      ]
+    },
+    "onFailure": {
+      "text": "—Los fellahin cobran y se van. No llevo yo la nómina. —Y en ese instante la pierna deja de temblarle. Llevaba temblándole desde que se sentaron. Se para en seco, y se queda parada el resto de la conversación, y eso es infinitamente peor que si temblara más.",
+      "facts": [
+        "carter_miente_sobre_los_fellahin"
+      ]
+    },
+    "note": "Pág. 49, fragmento 1 de la conversación de la terraza: «—Bueno, ¿y los fellahin que nos ayudaron a sacarlo de allí? —Ya me encargué de ellos»."
+  },
+  {
+    "id": "carter_weder",
+    "npc": "carter",
+    "label": "Preguntarle por su amigo el austriaco",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "carter_y_weder_juntos"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Garth me abrió una puerta cuando llevaba nueve años cavando arena. Le debo lo que soy. —Y a continuación, sin cambiar de tono, dice esto—: Y ha vendido dos piezas. Dos. A espaldas mías y por su propio beneficio, para que en cierto círculo de esta ciudad se sepa que él tiene acceso a lo que tiene acceso. —Se le pone blanca la mano sobre el mantel—. Eso no va a volver a ocurrir. Si vuelve a ocurrir, no habrá conversación.",
+      "facts": [
+        "weder_vende_las_piezas",
+        "carter_desconfia_de_weder"
+      ]
+    },
+    "onHard": {
+      "text": "—Nos conocimos en Luxor. Él sabía cosas que yo no sabía y me las enseñó. —Mira la puerta—. Y desde entonces mi suerte ha cambiado, que es la palabra que emplean los demás, y a mí la palabra suerte me parece una grosería.",
+      "facts": [
+        "carter_debe_su_suerte_a_weder"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El director del Museo Egipcio. Un colega. —Consulta el reloj—. Un hombre muy útil. No sé qué más quieren que les diga de un hombre útil.",
+      "facts": [
+        "carter_debe_su_suerte_a_weder"
+      ]
+    },
+    "onFailure": {
+      "text": "—Un conocido. —Y en el rato que dura la palabra, se le va la vista a la mesa del rincón donde hace media hora estaba sentado Weder, y comprueba que ya no está, y comprueba también, por si acaso, quién ocupa ahora esa mesa.",
+      "facts": [
+        "carter_es_paranoico"
+      ]
+    },
+    "note": "Pág. 22 (Weder invita a Carter a la reunión bajo la Esfinge en 1921, y el cristal de Mortlan) y pág. 23 («Weder ha desperdiciado dos piezas para su propio beneficio. Eso no puede volver a ocurrir»)."
+  },
+  {
+    "id": "carter_hedor",
+    "npc": "carter",
+    "label": "«Huele usted a algo, señor Carter»",
+    "approaches": [
+      "directo",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Se queda muy quieto. Después, y esto es lo que no esperabais, se ríe: dos golpes de aire, secos, sin nada dentro.\n—Hay cosas que hay que alimentar, señores. —Se levanta y coge el sombrero—. Todas las custodias tienen su precio y unas se pagan en libras y otras se pagan en otra cosa. Si vuelven a olerlo, háganme el favor de no comentarlo en el comedor.",
+      "facts": [
+        "saco_de_carter",
+        "algo_custodia_las_piezas"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "saco_carter"
+        }
+      ],
+      "unlocks": [
+        "carter_habitacion"
+      ]
+    },
+    "onHard": {
+      "text": "—Es mi habitación. —Aprieta los dientes—. Llevo dos semanas durmiendo con la ventana abierta y el pañuelo en la cara, y no pienso pedir que la limpien, y no pienso explicar por qué no pienso pedir que la limpien.",
+      "facts": [
+        "saco_de_carter"
+      ],
+      "unlocks": [
+        "carter_habitacion"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un desagüe de la tercera planta. Lleva así dos semanas. —Y sin darse cuenta se aparta un poco de ustedes, como quien intenta que no le lleguen sus propias ropas.",
+      "facts": [
+        "carter_huele_mal"
+      ]
+    },
+    "onFailure": {
+      "text": "—Las cocinas de este hotel. —Y saca del bolsillo un pañuelo francamente sucio, se lo lleva a la nariz un segundo, y vuelve a guardarlo. Es el gesto de alguien que lleva días haciéndolo. Nadie se tapa la nariz de un olor que viene de otro sitio.",
+      "facts": [
+        "carter_huele_mal"
+      ]
+    },
+    "note": "Pág. 53: «No es capaz de volver a su habitación (L23): el hedor que desprende el saco que guarda allí es insoportable». A las 16:00 baja con él al hombro."
+  },
+  {
+    "id": "carter_habitacion",
+    "npc": "carter",
+    "label": "Pedirle ver su habitación y sus mapas",
+    "approaches": [
+      "adular",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "extreme"
+    },
+    "minutes": 15,
+    "onSuccess": {
+      "text": "Tarda tanto en contestar que ustedes dan la pregunta por perdida.\n—La Description de l'Égypte. Veintitrés tomos originales, novecientos grabados. —Y ahí está la grieta: la vanidad—. No hay tres colecciones así en este continente y aquí no la ve nadie más que yo. —Se levanta—. Media hora. Y no toquen nada de debajo del sofá.",
+      "facts": [
+        "carter_invita_a_su_cuarto"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "carter_invita_a_su_cuarto"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": 15
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no me hospedo en el Shepheard's. —Y en cuanto lo ha dicho comprende que ustedes saben que es mentira, y en vez de arreglarlo se recoloca el sombrero y añade—: Y si me hospedara, tampoco.",
+      "facts": [
+        "carter_oculta_su_habitacion"
+      ]
+    },
+    "note": "Pág. 99, habitación 362: los 408 National Geographic, la Description de l'Égypte, la Baedeker de 1914 y, hasta las 16:00 del día 21, un saco de arpillera con restos humanos bajo el sofá.",
+    "locked": true
+  },
+  {
+    "id": "carter_proteger_las_piezas",
+    "npc": "carter",
+    "label": "Ofrecerse a proteger las piezas",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "piezas_en_el_sotano"
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "onHard": {
+      "text": "Carter os mira. A los ojos. Cinco segundos enteros, que en él es una eternidad.\n—Ustedes son los primeros que me ofrecen algo sin pedirme nada. —Se le quiebra la voz medio tono y lo tapa carraspeando—. Muy bien. Muy bien. Si alguien mueve una sola de esas piezas antes de mañana a las diez de la noche, vengan a buscarme a donde sea y a la hora que sea. Y si no me encuentran, disparen ustedes.",
+      "facts": [
+        "fecha_traslado",
+        "carter_confia_en_vosotros"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": 45
+        },
+        {
+          "kind": "setFlag",
+          "flag": "carter_aliado"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Protegerlas. Ustedes. —Lo dice sin signo de interrogación, que es peor. Pero no se levanta, y llevaba media conversación queriendo levantarse—. Está bien. Si oyen algo, dígamelo a mí. A mí, no al señor Weder. A mí.",
+      "facts": [
+        "carter_confia_en_vosotros"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": 25
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Están perfectamente custodiadas. —Y se le escapa media sonrisa por la que asoma algo que no es humor—. Excepcionalmente custodiadas, de hecho. Es lo único de este asunto que me deja dormir por las noches, y créanme si les digo que no querrían ustedes saber por qué.",
+      "facts": [
+        "algo_custodia_las_piezas"
+      ]
+    },
+    "note": "Pág. 23: «Si algo (o alguien) intenta robar las piezas, morirá en el intento. Se sentirá profundamente agradecido con quien le ayude a proteger las piezas»."
+  },
+  {
+    "id": "carter_luxor",
+    "npc": "carter",
+    "label": "«¿Cuánto tiempo se queda en El Cairo?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 5,
+    "onHard": {
+      "text": "—Mañana por la tarde salgo para Luxor con el conde. —Y luego, más para sí mismo que para ustedes—: Y no pienso estar en este edificio pasado mañana por la noche. Ni pasado mañana por la noche, ni pasado mañana a ninguna hora.",
+      "facts": [
+        "carter_se_va_manana",
+        "fecha_traslado"
+      ],
+      "unlocks": [
+        "carter_pistola"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Lo justo. —Se palpa el bolsillo interior de la chaqueta, comprueba algo que hay dentro y aparta la mano deprisa—. Mi residencia está en Luxor. Esto es una parada.",
+      "facts": [
+        "carter_se_va_manana"
+      ],
+      "unlocks": [
+        "carter_pistola"
+      ]
+    },
+    "onFailure": {
+      "text": "—No lo sé. Depende. —De qué, no lo dice. Y mientras no lo dice, se palpa el bolsillo interior de la chaqueta, comprueba que sigue ahí lo que hay dentro, y aparta la mano como si le hubiera quemado.",
+      "unlocks": [
+        "carter_pistola"
+      ]
+    },
+    "note": "Pág. 49, fragmento 3: «—Yo ya no estaré aquí —aclara Carter». Fragmento 2: «Recuerda: el 22 del 22, a las 22:00»."
+  },
+  {
+    "id": "carter_pistola",
+    "npc": "carter",
+    "label": "«¿Qué lleva ahí, en la chaqueta?»",
+    "approaches": [
+      "directo",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 5,
+    "onExtreme": {
+      "text": "Abre la chaqueta lo justo. Es una automática del treinta y dos, y está limpia, y es evidente que la limpia a menudo alguien que no disfruta limpiándola.\n—Catorce años cavando en el desierto le enseñan a uno a llevar esto y a no usarlo nunca. —Cierra la chaqueta—. Y hace tres semanas aprendí para qué la llevaba. Si alguien toca una sola de esas piezas, le pego un tiro donde esté. En una terraza, en un salón de baile o en la iglesia de su madre. No es una manera de hablar, señores. Es un plan.",
+      "facts": [
+        "carter_va_armado",
+        "carter_matara_por_las_piezas"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Una pistola. —Ni la enseña ni la niega—. En Egipto va armado todo el mundo que tiene algo que perder, y lo raro no es que yo la lleve, señores. Lo raro es que ustedes no.",
+      "facts": [
+        "carter_va_armado"
+      ]
+    },
+    "onFailure": {
+      "text": "—Tabaco. —Y se cambia de sitio en la silla, poniendo ese costado contra la pared, que es exactamente lo que hace un hombre que no lleva tabaco en ese bolsillo.",
+      "facts": [
+        "carter_va_armado"
+      ]
+    },
+    "note": "Ficha, pág. 23: Pistola .32 al 55%.",
+    "locked": true
+  },
+  {
+    "id": "carter_dinero",
+    "npc": "carter",
+    "label": "Ofrecerle dinero por lo que sabe",
+    "approaches": [
+      "sobornar",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "extreme"
+    },
+    "minutes": 10,
+    "onSuccess": {
+      "text": "Mira el dinero. Mira la mano que lo sostiene. No lo coge.\n—Guárdeselo y le digo una cosa que vale más: mañana a las diez y media llega de Alejandría un hombre con más libras de las que usted verá en su vida, y ese hombre me tiene comprado desde hace catorce años. —Se levanta—. No estoy en venta porque ya estoy vendido. Es distinto y es peor.",
+      "facts": [
+        "carter_no_se_vende",
+        "carnarvon_llega_manana"
+      ]
+    },
+    "onFailure": {
+      "text": "Carter mira el dinero sobre el mantel el tiempo justo para que quede claro que lo ha visto.\n—Yo no quiero dinero. —Y por primera vez en toda la mañana la frase le sale entera, sin mirar la puerta, sin consultar el reloj y sin que le tiemble nada—. Quiero que dentro de cien años, en Inglaterra, un señor que no me habría dado la mano me nombre en una conferencia. Eso es lo que quiero. Y usted acaba de decirme, poniéndome unos billetes delante, exactamente qué clase de persona cree usted que soy.\nRecoge el sombrero. Esta vez sí se va.",
+      "facts": [
+        "carter_quiere_ascender_de_clase",
+        "carter_no_se_vende"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": -25
+        }
+      ]
+    },
+    "note": "Pág. 22: «Mataría por lograr un éxito en el mundo de la arqueología británica que le ascienda de clase». Ofrecerle dinero es el insulto exacto: le confirma en el sitio del que lleva toda la vida intentando salir."
+  },
+  {
+    "id": "carter_mediocres",
+    "npc": "carter",
+    "label": "«¿Qué le parece la clientela de este hotel?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Un rey que no sabe leer un cartucho, un multimillonario que se disfraza de faraón para una fiesta, una novelista de misterio y un barman que lleva tres semanas invitándome a copas que no me bebo. —Ni se molesta en bajar la voz—. No conozco a ninguno, no quiero conocer a ninguno y les agradecería que no me presentaran a ninguno. —Pausa—. Al señor Weder sí lo conozco. Es el único de este edificio que sabe de qué está hablando cuando habla.",
+      "facts": [
+        "carter_desprecia_a_todos",
+        "carter_solo_respeta_a_weder",
+        "gasparini_persigue_a_carter"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Gente que ha venido a que le vean venir. —Se encoge de hombros—. Trescientas personas en una terraza, y ni una sola sabría distinguir una estela de la dinastía dieciocho de una lápida de cementerio inglés. Yo, con quince años, ya sabía.",
+      "facts": [
+        "carter_desprecia_a_todos"
+      ]
+    },
+    "onFailure": {
+      "text": "—No me fijo. —Y a los pocos segundos, sin que venga a cuento, y con una precisión que solo tiene quien lleva la cuenta—: Aunque el italiano del bar lleva tres semanas invitándome a copas. Tres semanas. Yo no bebo, y él lo sabe desde la primera.",
+      "facts": [
+        "gasparini_persigue_a_carter"
+      ]
+    },
+    "note": "Pág. 22: «Odia la mediocridad de la gente. Es tremendamente arrogante, aunque lo disimule». «No conoce al Aga Khan, ni a Churchill, ni a Agatha Christie, ni quiere conocerlos». Pág. 26: Gasparini ve en Carter una fuente de información sobre piezas que revender."
+  },
+  {
+    "id": "carter_hermandad",
+    "npc": "carter",
+    "label": "Mencionar la Hermandad del Faraón Negro",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "hermandad_faraon_negro"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onSuccess": {
+      "text": "Carter se queda muy quieto. Luego se ríe, tres golpes de aire sin ninguna alegría dentro.\n—No sé de qué me hablan. —Se levanta—. Y les recomiendo encarecidamente que ustedes tampoco lo sepan.",
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "carter_sospecha"
+        },
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": -25
+        }
+      ],
+      "facts": [
+        "carter_reacciono_mal"
+      ]
+    },
+    "onFailure": {
+      "text": "La pierna deja de temblarle de golpe, que es mucho peor que si temblara más.\n—¿Quién les ha hablado de eso? —No espera respuesta. Recoge su sombrero y se va directo a las escaleras. Va a contárselo a alguien.",
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "carter_sospecha"
+        },
+        {
+          "kind": "setFlag",
+          "flag": "carter_avisa_a_weder"
+        },
+        {
+          "kind": "npcLearnsFact",
+          "npc": "weder",
+          "fact": "investigadores_preguntan"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carter",
+          "by": -40
+        }
+      ],
+      "facts": [
+        "carter_reacciono_mal"
+      ]
+    },
+    "note": "Pág. 22: «Es tremendamente paranoico y es posible que intente buscar una manera de deshacerse de ellos. Desde luego, informará a Weder»."
+  },
+  {
+    "id": "carter_la_bronca",
+    "npc": "carter",
+    "label": "«Le he oído amenazar de muerte a un hombre»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "bronca_en_el_templo"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Carter os mira un rato largo antes de decidir que sí.\n—Llevo treinta años en este país sacando cosas de la arena para que acaben en una vitrina con mi nombre debajo, y me he acostumbrado a esa hipocresía. Pero lo que hay ahí abajo no va a acabar en ninguna vitrina: va a acabar repartido en doce salones privados de cinco continentes, y dentro de veinte años nadie sabrá que fueron un conjunto. —Se le tensa la mandíbula—. Weder es de una hermandad. Yo desprecio a los sectarios, pero respeto lo que pueden hacer, y por eso llevo un mes tragando. A los mercaderes no los respeto. A ese hombre le pego un tiro si vuelve a bajar, y no lo digo por decir.",
+      "facts": [
+        "carter_prohibe_la_venta",
+        "hermandad_faraon_negro",
+        "carter_lleva_pistola"
+      ],
+      "unlocks": [
+        "carter_pistola",
+        "carter_hermandad"
+      ]
+    },
+    "onHard": {
+      "text": "—Ese hombre es un mercader. —Lo dice como quien nombra una enfermedad—. Weder me prometió que las piezas se trasladaban enteras, en bloque, a un sitio donde puedan estudiarse. Y me lo prometió mientras le enseñaba mi hallazgo a un tratante de Alejandría. Así que sí: le he dicho lo que le he dicho, y lo mantengo delante de quien haga falta.",
+      "facts": [
+        "carter_prohibe_la_venta"
+      ],
+      "unlocks": [
+        "carter_pistola"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Una discusión entre socios. —Se sacude el polvo de la manga con dos golpes secos—. Ocurre en todas las excavaciones y no significa nada. Y ahora, si me disculpan, tengo que escribir a Luxor.",
+      "facts": [
+        "carter_prohibe_la_venta"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sé de qué me hablan. —Y se le va la mano al bolsillo interior de la chaqueta, ese gesto de comprobar que algo sigue ahí que hace la gente que lleva encima algo que pesa. No es una petaca.",
+      "facts": [
+        "carter_lleva_pistola"
+      ],
+      "unlocks": [
+        "carter_pistola"
+      ]
+    },
+    "note": "Módulo, pág. 54: «Que lo devuelva inmediatamente o le pego un tiro aquí mismo». Carter desprecia a los mercaderes y respeta el poder de los sectarios."
+  },
+  {
+    "id": "carter_mecenas",
+    "npc": "carter",
+    "label": "«Ha cambiado usted de mecenas esta noche»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "carter_tiene_mecenas"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "directo",
+      "enganar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Por primera vez desde que le conocéis, Howard Carter parece un hombre feliz, y da bastante miedo.\n—Su majestad me ha concedido permiso para excavar donde quiera, cuando quiera y con los medios que necesite. ¿Entienden lo que significa eso? Se acabó pedir. Se acabó esperar a que un conde con gota decida si este año hay campaña o no. —Baja la voz—. A cambio, él protege el traslado con su propia vida. Le hemos dado una daga y me ha dado Egipto entero. Y el Conde llega mañana a las diez y media sin saber una palabra de esto, y no se la voy a decir yo.",
+      "facts": [
+        "pacto_con_fuad",
+        "carnarvon_no_debe_saberlo",
+        "traslado_al_museo"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "el_pacto_del_sotano"
+        }
+      ],
+      "unlocks": [
+        "carter_carnarvon"
+      ]
+    },
+    "onHard": {
+      "text": "—Digamos que a partir de mañana mi trabajo va a ser más sencillo. —Se permite media sonrisa—. He encontrado un patrocinador con más medios y menos preguntas que el anterior. En este oficio eso no se rechaza, señores, aunque cueste alguna cosa.",
+      "facts": [
+        "pacto_con_fuad"
+      ],
+      "unlocks": [
+        "carter_carnarvon"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Anoche se cerraron algunos acuerdos, sí. —Se pone el sombrero—. Los acuerdos de un arqueólogo son papeleo aburrido y permisos de excavación, no les vayan a dar más importancia de la que tienen.",
+      "facts": [
+        "pacto_con_fuad"
+      ]
+    },
+    "onFailure": {
+      "text": "—Acuerdos, permisos, aduanas. Papeleo. —Y se ríe, cosa que no le habéis visto hacer nunca. Después mira hacia el hall, hacia la puerta por la que mañana entrará Lord Carnarvon, y deja de reírse de golpe.",
+      "facts": [
+        "carnarvon_no_debe_saberlo"
+      ]
+    },
+    "note": "Módulo, pág. 59: el Príncipe otorga a Carter el privilegio de excavar donde quiera. Carnarvon llega a las 10:30 del día 2 sin saber nada."
+  }
+]

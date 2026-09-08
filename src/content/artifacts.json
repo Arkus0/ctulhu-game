@@ -1,0 +1,124 @@
+[
+  {
+    "id": "amuleto_de_nefer",
+    "name": "Amuleto de Nefer",
+    "usedBy": "Cualquiera",
+    "location": "viejo_templo",
+    "description": "«Nefer» significa «belleza» (Nefertiti es «Nfr-u-itn», «bendito Atón, la belleza está aquí»). Es uno de los talismanes más frecuentes del Egipto clásico; esclavos, hombres libres, vasallos, nobles y sacerdotes lo identificaban con la felicidad, la vitalidad y la amistad. Este ejemplar es único, diseñado personalmente por Sakhatakh para defender al faraón de los poderes oscuros.",
+    "powers": "Desvía el daño mágico y físico recibido por el portador hacia quienes se encuentran a su alrededor. Akhenatón invocó al dios en el desierto ante su corte; murió en el acto y su hijo Tutankhamón quedó malherido y cojo. El resto de los testigos huyeron atropellándose; las teas que portaban para la ceremonia prendieron fuego a las alfombras del desierto y murieron incinerados. No fue culpa del amuleto: el daño provenía en exclusiva de su interior."
+  },
+  {
+    "id": "amuletos_magicos",
+    "name": "Amuletos mágicos",
+    "usedBy": "Cualquiera",
+    "location": "viejo_templo",
+    "description": "Once amuletos hechos de diferentes materiales (marfil, jade, diorita...), como los que empleaban los egipcios tanto para los vivos como para los muertos: incluidos en el ajuar, introducidos en el cuerpo, entre las vendas de las momias o en su boca. Algunos llevan cuerdas para colgarlos del cuello, guardados en pequeños relicarios.",
+    "powers": "Cada uno proporciona 1D6 puntos de magia adicionales y un +5% a las tiradas de Suerte (que no se pueden emplear para la regla opcional Gastar suerte, MG pág. 103)."
+  },
+  {
+    "id": "armas_lanzarrayos",
+    "name": "Armas lanzarrayos, modelo B",
+    "usedBy": "Yithianos",
+    "description": "Dos armas creadas en la prehistoria para acabar con los pólipos volantes; su efectividad radica en lanzar devastadores chorros de energía eléctrica. Existen muchas versiones; estos ejemplares son de los más poderosos, el «modelo B» (MN, pág. 231). No hace falta una tirada de INT para descubrir que son armas, pero el Guardián puede exigirla si lo considera necesario; la única manera de averiguar cómo funcionan es usándolas, cogiéndolas con las dos manos y probando posiciones con los dedos, como si fuese una guitarra. Las cargas están integradas en su interior y no se recargan de la misma forma que una ametralladora humana; es imposible recargarlas, aunque no hace falta que los investigadores lo sepan. Se necesitan ambas manos para dispararla, aunque el proceso no es complicado y el aprendizaje no lleva mucho tiempo (1D6 asaltos).",
+    "powers": "Si el investigador falla su tirada de Suerte al usar el arma, se equivoca y sufre 8D6 puntos de daño. Tamaño 85 cm. Probabilidad base 35%. Daño 8D6/4D6/1D6 a 50/100/200 m (no puede empalar). Alcance 100 m. Usos 1. Cargas 1D20+3. FD 99."
+  },
+  {
+    "id": "brasero_de_laton",
+    "name": "Brasero de latón",
+    "usedBy": "Cualquiera",
+    "description": "Vasija ancha de unos 30 cm de diámetro, con cuatro patas en forma de garra de león. El brasero de Weder es moderno, una reproducción de un ejemplar del siglo IV; con una tirada de Ciencias ocultas podrá establecerse que «alguien en algún momento pensó que era mágico» (ver la aventura El Mauritania, MOR).",
+    "powers": "Es imprescindible para usar el hechizo Conjurar cristal de Mortlan."
+  },
+  {
+    "id": "cetros_de_shakti",
+    "name": "Cetros de poder de Shakti",
+    "usedBy": "Omar Shakti",
+    "description": "Siempre los lleva ocultos. Se trata de un juego de dos cetros que «miden unos 30 cm cada uno y han sido fundidos o fabricados en algún extraño metal inidentificable» (MN, pág. 84). Uno de ellos acaba en forma de gancho y el otro en el anj de la Hermandad del Faraón Negro.",
+    "powers": "Proporcionan 5D20 puntos de magia que puede utilizar para ejecutar hechizos. Mientras los tenga a la vista puede hacer que acudan a sus manos, y solo él puede utilizarlos. Dado que están vinculados a su fuerza vital, si muere se convierten en polvo."
+  },
+  {
+    "id": "collar_de_menat",
+    "name": "Collar de Menat",
+    "usedBy": "Cualquiera",
+    "location": "viejo_templo",
+    "description": "La menat era en realidad un plato pequeño que se llevaba en el pecho, atado a un contrapeso a la espalda. Solía ser de cuero o bronce, y de oro en el caso de los faraones; se trataba de un amuleto de protección contra los demonios, que también proporcionaba fortuna y buenos augurios en esta vida y después de la muerte, por eso las momias siempre tenían la suya. Al mismo tiempo desarrollaba la fecundidad en las mujeres y la virilidad en los hombres. El de esta colección fue un regalo personal de Akhenatón a Nefertiti; está pintado de negro para evitar que el resto del brillo del Disco Solar del faraón le reste protagonismo.",
+    "powers": "El portador es trasladado a las Tierras del Sueño en el mismo instante en que sea atacado por una fuerza que sobrepase sus posibilidades de supervivencia. El amuleto lo pierde: cae al suelo y permanece a este lado de la realidad. Por esta razón es (según Khephnés) por la que Nefertiti vive en Celefaís con el rey Kuranes, bajo una identidad oculta."
+  },
+  {
+    "id": "comunicador_temporal",
+    "name": "Comunicador temporal",
+    "usedBy": "Yithianos",
+    "description": "No es un comunicador yithiano habitual (MG, pág. 280). Este tiene 35 cm de altura y es de cobre y bronce, con tallas complejísimas de lo que se supone son constelaciones, pero que no coinciden con las nuestras, como indica una tirada de Ciencia (Astronomía).",
+    "powers": "En lo alto de la parte superior tiene una joya roja, sintonizada con un yithiano en particular. Una vez activa, la joya comienza a brillar y se pone en contacto con él. Si se sabe manejar (Mitos de Cthulhu), existe la posibilidad de contactar con la mente del yithiano, o bien con la mente que «ocupa» su organismo; para este cambio, la joya debe colocarse en posición inversa. El aparato proyecta, en ese caso, un «holograma del yithiano» y facilita que este pueda ver lo que sucede en el tiempo y el espacio en el que se encuentra la máquina, así como comunicarse con aquellos que se han puesto en contacto con él, traduciendo los mensajes a uno u otro lado con un mecanismo sintetizador de sonidos."
+  },
+  {
+    "id": "cristal_de_mortlan",
+    "name": "Cristal de Mortlan",
+    "usedBy": "Cualquiera",
+    "description": "Un objeto sin una forma específica, de 45x50 cm. Se trata de un conjunto de lentes de diferentes tamaños y grosores, colocados de una manera concreta pero controlable al milímetro gracias a unas varillas de hierro con engranajes, con una serie de muelles y resortes que permiten infinidad de posiciones.",
+    "powers": "Si se observan cuidadosamente las formas que las lentes proyectan en la pared a través del humo de un brasero encantado, pueden adivinarse imágenes del pasado. Esto cuesta 1D8 de Cordura al ejecutante y 1D6 a los observadores (Conjurar cristal de Mortlan, pág. 110), a lo que habrá que añadir la pérdida de Cordura que provoque la visión en sí misma. El ejecutante debe gastar 6 puntos de magia cada vez que intenta ver algo, con una probabilidad equivalente a su porcentaje de Mitos de Cthulhu (el hechizo Signo de conjuración puede contribuir a incrementar estas probabilidades). Si los investigadores superan su tirada de Mitos de Cthulhu, serán capaces de ver y entender las escenas del pasado que pretendan observar, relacionadas con sus intereses y preocupaciones; pueden investigar lugares y momentos concretos, cuantas veces quieran, moviendo las lentes. Para ello deberán formular una petición clara, que será valorada por el Guardián: si la petición es lo más clara y concisa posible, el Guardián es libre de aumentar hasta un 10% sus probabilidades de éxito."
+  },
+  {
+    "id": "cubo_de_estasis",
+    "name": "Cubo de estasis",
+    "usedBy": "Yithianos",
+    "location": "viejo_templo",
+    "description": "Se trata de un cubo yithiano robado por Sakhatakh de una tienda de curiosidades de Carcosa, junto al lago de Hali, en Aldebarán. Podríamos definirlo como una especie de «reloj cuántico», pues al entrar en él se «ralentiza» el tiempo. El cubo de cobre mide 1,5 m de lado y está decorado con jeroglíficos (grabados sobre el bronce en la época «dinástica» de Sakhatakh) e incrustaciones en hierro negro de una antigüedad mucho mayor. Es difícil de imaginar cómo un miembro de la Gran Raza lograría entrar en el cubo, dado su gran tamaño; es posible que su cuerpo pudiera «encogerse» o «plegarse» para introducirse en él, o quizá contaran con una tecnología desconocida que permitiera «estructurar y desestructurar» su composición molecular al entrar y salir.",
+    "powers": "Básicamente, un segundo de tiempo dentro del cubo equivale a mil años en el exterior. Algunos estudiosos de la cultura de la Gran Raza, como el reverendo Arthur Brooke Winters-Hall, afirman que el cubo está diseñado «para el almacenamiento y la conservación de libros»; otros, como Henry Olcott, aseguran que los cubos pequeños son para que los yithianos, ya cambiado previamente su cuerpo físico por el de otro ser vivo más pequeño, como un ser humano, y en su viaje desean mantenerlo. Si esta teoría es cierta, la mente de Sakhatakh viajaría al futuro para escoger el cuerpo de Khephnés (a través de la propiedad para viajar en el tiempo propia de la Gran Raza) y la mente de Khephnés sería trasladada a Pnakotus mediante un proceso tecnológico desconocido; una vez hecho el cambio, y eliminado su viejo cuerpo, Sakhatakh utilizaría este cubo para avanzar en el tiempo con el físico de Khephnés."
+  },
+  {
+    "id": "daga_de_akhenaton",
+    "name": "Daga de Akhenatón",
+    "usedBy": "Cualquiera",
+    "description": "Se trata de un regalo del sumo sacerdote de Atón al faraón. Es una reproducción fiel de la Daga de Thoth, pero con algunas diferencias. Mide unos 35 cm, con un mango de unos 15 y una hoja de plata de unos 20; el filo es terriblemente cortante y la hoja es muy fina. Tiene una inscripción jeroglífica en uno de los lados. El mango es de marfil, aunque no lo parece, como indica una tirada de Ciencia (Biología o Zoología); tiene forma de cabeza de Ibis. El cuello forma directamente la empuñadura; la cabeza es el talón y el pico del Ibis forma una protección. Con una tirada de Egipcio (Jeroglíficos), la inscripción viene a decir algo como «si quieres conocer a tu dios, permíteme que entre en tu cuerpo».",
+    "powers": "La Daga de Akhenatón resta 3D20 puntos de daño a cualquier ataque mágico o físico proveniente de criaturas relacionadas con los Mitos, tan solo por ser su portador. Además tiene el poder mágico de trasladarte directamente frente a Yog-Sothoth, que según algunos estudiosos se oculta bajo el monte Sinaí (o al menos fue así hasta que Moisés lo liberó, siendo Yahvé en realidad un avatar de ese dios exterior). Solo hay que cumplir un requisito: el portador debe cortarse el cuello y, antes de morir, sacarse el corazón. Lo complicado es realizar los dos movimientos con la rapidez suficiente para no morir antes de finalizar el sacrificio. Si el ritual es un éxito, el alma de la persona que muera de esta manera «viajará» al monte Sinaí y presenciará los misterios de los Todos-en-Uno. Eso sí, «después de varias eternidades», podrá volver como un esclavo «no totalmente humano» de Yog-Sothoth en la Tierra (ver la aventura La daga de Thoth, MC)."
+  },
+  {
+    "id": "disco_solar",
+    "name": "Disco Solar",
+    "usedBy": "Cualquiera",
+    "location": "viejo_templo",
+    "description": "Se trata de una de las piezas que encontró Carter y que más le llamó la atención. Se halla junto al Pilar Dyed (antes de que se lo lleven, si se lo llevan), dentro de una de las cajas. Durante las ceremonias se coloca sobre un pedestal de madera labrado meticulosamente con vivos colores, con el nombre de Akhenatón escrito en oro y el jeroglífico «Iog-So-Thoth» en el borde.",
+    "powers": "Es una especie de «magnetoscopio mental», un complejísimo grabador de ondas electromagnéticas que recoge imágenes del inconsciente a través de pequeños electrodos y las proyecta preferentemente sobre un espacio cerrado, aunque también puede hacerlo en uno abierto. Importante: el disco no invoca nada, tan solo reproduce lo que el portador tiene en su mente. El Disco Solar no tiene efecto alguno de la regla de «toma de conciencia» (MG, pág. 163), salvo en los casos más extremos (como ser un hechicero de más de 3.000 años que ya lo ha visto prácticamente todo). Y un apunte interesante para investigadores desquiciados: el disco también graba esas imágenes mentales. Si alguien que posea un 90% en Electrónica decide investigar el disco minuciosamente, puede conseguir reproducir proyecciones previas; sería capaz, por ejemplo, de presenciar la muerte del mismo faraón. Nota para el Guardián: en otras aventuras el Disco Solar puede ser usado para propósitos totalmente diferentes."
+  },
+  {
+    "id": "ladrillos_magicos",
+    "name": "Ladrillos mágicos",
+    "usedBy": "Cualquiera",
+    "description": "Estos 4 ladrillos están compuestos de una arcilla virgen, manipulada por adolescentes, que se mezclaba con incienso y semen para amplificar su poder. Incluyen una inscripción en hierático que indica su carga de energía, exactamente como si se tratase de una batería.",
+    "powers": "Amplifican el POD del sujeto portador en 3D6 puntos. En el capítulo 151 del Libro de los muertos se explica su utilización. Los 4 ladrillos juntos pueden proteger una habitación de cualquier ataque mágico proveniente de los Mitos."
+  },
+  {
+    "id": "manojo_de_llaves",
+    "name": "Manojo de Llaves",
+    "usedBy": "Cualquiera",
+    "location": "viejo_templo",
+    "description": "Quizá sea el objeto más alucinante y poderoso de la aventura, y que Dios se apiade de los investigadores si alguno de ellos se atreve a pensar en poseerlo. Se trata de cincuenta y tres llaves de diferentes materiales, fundamentalmente hierro y madera, aunque también las hay de cobre, jade, cristal, oro, plata negra, topacio, lapislázuli, ámbar, obsidiana, granito y tres aleaciones desconocidas. Las formas también varían: algunas son alteraciones de la cruz ansada, aunque también hay formas parecidas a las llaves medievales y otras totalmente absurdas. En total, el manojo pesa más de 2 kg y las llaves van de los 5 a los 25 cm. Estas se encuentran unidas por un eslabón que parece orgánico, probablemente esculpido a partir de un hueso de un animal desconocido, como indica una tirada de Ciencia (Biología o Zoología), pero es de una sola pieza y sin aparentes fisuras. Se distinguen unas minúsculas inscripciones en el lado interior, que una tirada de Egipcio (Jeroglíficos) interpreta como «Todos-en-Uno», o «la Totalidad en la Unidad». Estas llaves pertenecieron a Sakhatakh, que las fue recopilando a lo largo de sus viajes multidimensionales, robándoselas a personajes considerablemente ilustres (una perteneció a Alhazred, otra a Herodoto), y se las regaló al faraón como ofrenda de amistad.",
+    "powers": "Cada puerta abre un mundo, una época, una dimensión distinta, como por ejemplo (se lanza 1D10): (1) puedes aparecer en el mismo lugar en el que te encuentras, pero dentro de un millón de años; (2) puedes aparecer cayendo al vacío desde una altura inimaginable, para terminar estrellándote en una superficie marmórea octogonal, mientras tus ojos te muestran cómo unos gigantescos conos rugosos se acercan hacia ti para socorrerte, cuando es demasiado tarde; (3) puedes aparecer en la corte de Enrique VIII, junto al Embajador de Portugal, justo antes de ser recibido por el rey; (4) puedes aparecer en Saturno, y allí no hay oxígeno; (5) puedes aparecer en el interior del estómago de Chaugnar Faugn; (6) puedes entrar en el palacio de Sinh Angh Baal, en Kumari Khandam, donde todo está construido de diamante, hay fuentes de hidromiel y no se conoce el sufrimiento; (7) puedes aparecer dentro de ti mismo, haces escasos segundos e implosionar, muriendo al instante; (8) puedes aparecer en el dormitorio de Josefina, ella está acostada en la cama, se oye la voz de Napoleón tras la puerta; (9) puedes aparecer en una cueva donde un grupo de hombres prehistóricos dibujan figuras de animales con sus propias heces; (10) puedes aparecer en los Jardines Colgantes de Babilonia, y frente a ti, Nabucodonosor II y su mujer Amitis, amables, preparados para responder a cualquier pregunta. No hay manera de calcular tiempos y espacios, pero cada llave transporta a un lugar específico, y siempre al mismo. Para que el viaje sea un éxito solo es necesario «mover» la llave en el aire en dirección al sol poniente, girándola nueve veces. Quien lo intenta pierde 1D10 puntos de Cordura y 5 de POD. El viaje de regreso funciona exactamente igual, pero nadie garantiza que vuelvas al lugar de origen (normalmente así ocurre, si se tiene éxito en una tirada de Suerte)."
+  },
+  {
+    "id": "pilar_dyed",
+    "name": "Pilar Dyed",
+    "usedBy": "Cualquiera",
+    "location": "viejo_templo",
+    "description": "También «Djed». Simbolizaba la columna vertebral de Osiris, un falo o el árbol del conocimiento. Puede aparecer acompañado del cetro was (o uas), una vara coronada con la cabeza de una criatura desconocida y el extremo inferior formando una horquilla. Representaba el poder, la fuerza y el dominio. Algunos egiptólogos argumentan que el Pilar Dyed era un fetiche prehistórico de orígenes desconocidos. A veces se le unían unos brazos que portaban el Disco Solar.",
+    "powers": "Es un amuleto poderosísimo. Resta 1D20 puntos de daño a cualquier ataque mágico o físico proveniente de cualquier criatura relacionada con los Mitos. Además, multiplica por 1D10 los puntos de magia originales de su portador. El Dyed, usado como arma, aumenta su peso de manera sobrenatural al golpear con él, con un daño equivalente a un mazo o una porra."
+  },
+  {
+    "id": "sarcofago_de_basalto",
+    "name": "Sarcófago de Basalto",
+    "usedBy": "Yithianos",
+    "location": "viejo_templo",
+    "description": "Es macizo, de basalto negro. Pesa más de 2.300 kg y mide 1,60 m de alto, por 1,55 de ancho y 6 de largo. Su estado de conservación es excelente. El rostro que se adivina al final del cono no es humano; se trata de una especie de «elipse con ojos», rodeada por flores de loto, que representa la cabeza de un miembro de la Gran Raza. Su forma es cónica, pero en la parte más estrecha presenta unas protuberancias para alojar los miembros de la criatura. La maldición del sarcófago: en el centro de la cubierta se encuentra grabado un esquema complejo que recuerda al principal símbolo del zoroastrismo, el faravahar; también se asemeja, dentro de la mitología egipcia, al símbolo de Ra, el atón, el Disco Celestial o Solar, representado como un globo alado. Con un éxito en Egipcio (Jeroglíficos) se puede leer a uno de los lados: «A todo noble, escriba, administrador o funcionario que cometa la osadía de abrir este sarcófago, su brazo será cortado como el de este toro, su cuello será torcido como el de un pájaro, su casa no existirá, ni su hijo, ni su mujer tendrán alimentos, su tumba será profanada exactamente igual que esta en la necrópolis, su dios lo olvidará, su carne se pudrirá, sus niños morirán quemados, su cadáver no será enterrado y perseguiré su alma por todos los tiempos y todos los lugares tanto en la vida como en la muerte».",
+    "powers": "En la base interior del Sarcófago hay un mecanismo electromagnético conectado a una placa de carbono puro, que sirve de «levitador». Gracias a él, en su época el transporte del Sarcófago pesaba tan solo 200 kg, por el «efecto antigravitatorio» de las baterías de carbono. Ahora ese efecto se ha reducido, pero aun así el sarcófago pesa tan solo 500 kg si se activa el mecanismo con una palanca oculta (Descubrir). Este mecanismo, junto con el Disco Solar y el Cubo de estasis, genera una serie de radiaciones electromagnéticas de alta frecuencia que pueden llegar a alterar la realidad circundante, provocando que se oxiden los cubiertos, se agrieten las estructuras o se enfríen o calienten zonas del hotel como si estuvieran dentro de un gigantesco microondas. En sí mismo, el Sarcófago funciona como un potente escudo en presencia de cualquier Primigenio o ser relacionado con los Mitos, en el caso de que este sea convocado: resta 1D100 a los puntos de daño de cualquier ataque que provenga del exterior (tirada de INT para darse cuenta). Dentro del Sarcófago es difícil que te ocurra algo, salvo que mueras de asfixia o envenenado por las emanaciones tóxicas de la momia (el Guardián aplicará las reglas de asfixia, MG pág. 128). Dentro del Sarcófago, además de la momia que ocupa Khephnés, caben dos personas que, si se acomodan de manera inteligente, pueden cerrar la cubierta sobre ellos."
+  },
+  {
+    "id": "maquina_fotocopiadora",
+    "name": "Máquina fotocopiadora de seres humanos",
+    "usedBy": "Yithianos",
+    "extra": true,
+    "note": "El propio libro advierte que este artefacto no aparece en ninguna secuencia de la aventura (se cita de pasada en el Libro de notas del señor Bohr, pág. 120, y en el Apéndice \"El señor Bohr y la Cofradía Oscura\", pág. 124); lo incluyen \"por si le resulta útil al Guardián en posibles aventuras demenciales donde los investigadores se multipliquen por docenas\". No cuenta como una de las piezas negras encontradas en la tumba.",
+    "description": "Dispositivo que Sakhatakh construyó en Copenhague en 1916 para generar «habitáculos» con apariencia humana donde ubicar las mentes de sus congéneres, miembros de la Gran Raza afines a su disidencia, renegados del gobierno de Pnakotus. Durante casi cuatro años, miembros de la Cofradía Oscura reunieron todos los elementos necesarios para generar una radiación electromagnética de longitud de onda violeta entre 3.800 y 4.200 ángstroms; con esta tecnología eran capaces de recrear la apariencia de un sujeto, con texturas similares a la piel y la carne humanas, a partir de una copia cristalizada del original. Al mismo tiempo se reproducían copias de todos los objetos que entraran con él dentro de la caja de cristal: ropa, monedas en el bolsillo, etc. Componentes: dos grandes bloques de cristal, unidos por maquinaria, cables y tuberías yithianas. Sobre uno de ellos, una caja de cristal que en principio parece «levitar» sobre el otro gracias a un campo electromagnético que contiene la mente extraterrestre. El tercer elemento es la enorme dinamo, un poderoso generador eléctrico que transforma el flujo magnético en electricidad mediante inducción electromagnética, la característica principal de la tecnología de la Gran Raza. Requisitos: el sujeto original debe encontrarse inconsciente, y la mente yithiana necesita 1D6 horas para acomodarse a la caja de cristal. Poner en funcionamiento la dinamo requiere una tirada Difícil de Ciencia (Física) o Electricidad, o Extrema de INT. A su vez, el investigador que inicie el proceso deberá gastar tantos puntos de magia como la quinta parte del POD del sujeto humano (redondeando a la baja) para que la fusión cuerpo/mente se produzca de la manera adecuada; el proceso dura 1D6 horas más, provocando una pérdida de 0/1D3 puntos de Cordura. Después de la primera operación, no se perderá más Cordura.",
+    "powers": "Cuando las enormes dinamos de la maquinaria se ponen en funcionamiento, se produce la reproducción del cuerpo original. A partir del material cristalino (o supuestamente cristalino) que «absorbe la radiación violeta de la mente yithiana», se genera una copia exacta en la otra caja de cristal paralela. El sujeto humano vuelve a su vida cotidiana (sin recordar el secuestro, salvo en pesadillas) y la copia se utiliza como «nuevo original» de las reproducciones subsiguientes; quizá por esa razón arrastran un aspecto pálido y cerúleo."
+  }
+]

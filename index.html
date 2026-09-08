@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="La Broma Macabra — dos días de locura en el Hotel Shepheard's. Aventura conversacional." />
+    <meta name="theme-color" content="#000000" />
+    <title>La Broma Macabra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/ui/style.css" />
+  </head>
+  <body>
+    <div id="crt">
+      <main id="game" aria-live="polite">
+        <header id="hud">
+          <div class="hud-status">
+            <span id="hud-time">21 de noviembre, 09:00</span>
+            <span id="hud-place">Recepción</span>
+          </div>
+          <nav class="hud-tools" aria-label="Herramientas">
+            <button id="hud-map" type="button">Mapa</button>
+            <button id="hud-case" type="button">Caso</button>
+            <button id="hud-team" type="button">Equipo</button>
+            <button id="hud-save" type="button">Guardar</button>
+            <button id="hud-log" type="button">Historial</button>
+          </nav>
+        </header>
+
+        <section id="objective" aria-label="Objetivo actual">
+          <span>OBJETIVO</span>
+          <p id="objective-text"></p>
+        </section>
+
+        <section id="scene" aria-label="Escena">
+          <canvas id="art" width="320" height="152"></canvas>
+          <div id="scene-title"></div>
+        </section>
+
+        <section id="log" aria-label="Narración" tabindex="0"></section>
+
+        <nav id="choices" aria-label="Acciones disponibles"></nav>
+      </main>
+
+      <aside id="panel" hidden>
+        <button id="panel-close" type="button" aria-label="Cerrar">×</button>
+        <div id="panel-body"></div>
+      </aside>
+    </div>
+
+    <noscript>
+      <p style="color: #aaa; font-family: monospace; padding: 2rem">
+        La Broma Macabra necesita JavaScript. Actívalo y vuelve a cargar.
+      </p>
+    </noscript>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

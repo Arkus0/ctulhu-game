@@ -1,0 +1,644 @@
+[
+  {
+    "id": "rolland_mesas",
+    "npc": "rolland",
+    "label": "Pedirle una buena mesa",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Michel Rolland se transforma. Se estira dos centímetros, junta los talones y se convierte, por un momento, en el hombre que cree ser.\n—Déjenlo en mis manos. —Coge el plano de sala como un general coge un mapa—. Cuarenta y dos mesas, cuatro cubiertos cada una, ciento sesenta comensales y ni un solo error en dos años.\nBaja el lápiz sobre el plano.\n—La once no. En la once no oirán nada porque está bajo el ventilador. La veintitrés tampoco: da a la puerta de la cocina y por ahí sale un olor que… —Se corta—. La buena es la treinta y uno. Se ve la sala entera y está a dos metros del reservado.\n»Y les diré quién come dónde, porque para eso soy el metre y porque nadie me lo pregunta nunca. El señor Lounpeen come a la una y media, siempre solo, siempre la misma mesa, siempre pescado. El arqueólogo inglés se sienta de espaldas a la sala, en la nueve, y no ha terminado un plato en tres semanas. Y la señorita pelirroja se sienta donde le da la gana.",
+      "facts": [
+        "mesa_31_se_ve_todo",
+        "almuerzo_lounpeen_una_y_media",
+        "carter_se_sienta_de_espaldas",
+        "olor_de_la_cocina"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 25
+        }
+      ],
+      "unlocks": [
+        "rolland_olor",
+        "rolland_olga"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Naturellement. —Coge cuatro cartas de un golpe seco y les guía por la sala como si fueran un cortejo—. La treinta y uno. Se ve la sala entera desde ahí, cosa que a mucha gente le importa más que la comida.\nY añade, muy digno:\n—El señor Lounpeen almuerza a la una y media. Por si les interesa. A mí no me interesa, pero a la gente le interesa.",
+      "facts": [
+        "mesa_31_se_ve_todo",
+        "almuerzo_lounpeen_una_y_media"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 10
+        }
+      ],
+      "unlocks": [
+        "rolland_olor",
+        "rolland_olga"
+      ]
+    },
+    "onFailure": {
+      "text": "—Sin reserva no puedo. —Se le agudiza la voz—. No puedo, señores. Ciento sesenta comensales. Si empiezo a hacer excepciones esto se convierte en un merendero.\nY se aleja arreglando cubiertos que ya estaban rectos. Pero les sienta. Les sienta en la veintitrés, que es la peor mesa del restaurante, pegada a la puerta de la cocina, y desde ahí, cada vez que la puerta se abre, entra una vaharada que no es de comida.",
+      "facts": [
+        "olor_de_la_cocina"
+      ],
+      "unlocks": [
+        "rolland_olor",
+        "rolland_olga"
+      ]
+    },
+    "note": "Pág. 96: «Michel Rolland, el metre francés gobierna sin demasiado convencimiento este complicado mundo de desayunos, comidas y cenas para más de 160 personas, organizadas con eficiencia por 1D6+4 camareros. Son más de cuarenta mesas». Pág. 52: Lounpeen almuerza a las 13:30."
+  },
+  {
+    "id": "rolland_olor",
+    "npc": "rolland",
+    "label": "Preguntar por el olor de la cocina",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "El metre se pone rojo hasta las orejas.\n—¡No es mi cocina! Mi cocina es impecable. Es lo de más abajo. —Baja la voz y el acento se le vuelve más francés—. Hay algo debajo de este hotel, señores, y cada tanto respira. Se abre la puerta y sube esa vaharada, y tengo que abrir los ventanales de par en par media hora. Media hora, con el servicio puesto.\nMira a los lados. Se acerca más.\n—Y no es el olor lo peor. Lo peor es que va a horas. —Cuenta con los dedos, y le tiemblan—. A las siete y media de la mañana. A las doce y media. Y a las seis de la tarde. Todos los días. Yo lo apunté. Aquí, detrás de la comanda.\nLes enseña un papelito arrugado con tres horas escritas.\n—Los animales comen a horas, señores. Las cañerías no.",
+      "facts": [
+        "olor_de_la_cocina",
+        "algo_respira_abajo",
+        "el_olor_va_a_horas",
+        "mahadni_baja_todos_los_dias"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        }
+      ],
+      "unlocks": [
+        "rolland_mahadni"
+      ]
+    },
+    "onSuccess": {
+      "text": "El metre se pone rojo hasta las orejas.\n—¡No es mi cocina! Mi cocina es impecable. Es lo de más abajo. —Baja la voz y el acento se le vuelve más francés—. Hay algo debajo de este hotel, señores, y cada tanto respira. Se abre la puerta y sube esa vaharada, y tengo que abrir los ventanales de par en par media hora. Media hora, con el servicio puesto.",
+      "facts": [
+        "olor_de_la_cocina",
+        "algo_respira_abajo"
+      ],
+      "unlocks": [
+        "rolland_mahadni"
+      ]
+    },
+    "onFailure": {
+      "text": "—No sé de qué olor me hablan. —Y se aleja arreglando cubiertos que ya estaban rectos.\nPero antes de llegar al aparador se detiene, vuelve sobre sus pasos, y con una voz que se le rompe un poco por arriba:\n—Y si lo notan ustedes, háganme el favor de decírselo al director. A mí no me cree. Llevo dos semanas abriendo los ventanales en pleno servicio y el director cree que es cosa de mis nervios.",
+      "facts": [
+        "olor_de_la_cocina",
+        "behler_no_cree_a_rolland"
+      ]
+    },
+    "note": "Pág. 136: Rolland «no tiene permiso para entrar» en la cocina y «Behler defiende a Mahadni». Las tres horas del olor son las tres bajadas de Mahadni a dar de comer a lo del sótano."
+  },
+  {
+    "id": "rolland_mahadni",
+    "npc": "rolland",
+    "label": "Sacarle lo que piensa del cocinero",
+    "approaches": [
+      "adular",
+      "directo",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Michel Rolland mira hacia la puerta de vaivén. Comprueba que el cristal redondo está vacío. Solo entonces habla, y una vez que empieza no hay quien lo pare.\n—Ese hombre no es el jefe de cocina. —Susurra a toda velocidad—. El jefe de cocina hace de comer. Ese hombre contrata, despide, firma albaranes, decide quién limpia qué planta y a qué hora y tiene seis camareros que no han fregado un plato en su vida.\n»¡Y a mí me tienen prohibido entrar! ¡A mí, al metre! —Se le quiebra la voz—. Cincuenta y dos años tiene este restaurante y yo soy el primer metre que no puede entrar en su propia cocina.\nSe seca los ojos con la servilleta de servicio, sin ninguna vergüenza.\n—Y de noche baja. Todas las noches. Con dos de esos seis y con una cesta cubierta con un paño. Yo cierro a las once y media y le he visto tres veces, y las tres veces él se ha parado en mitad del pasillo, se ha vuelto y me ha dado las buenas noches.\nSe agarra a la mesa.\n—Con mucha educación, señores. Todas las veces. Y yo desde entonces cierro a las once y cuarto.",
+      "facts": [
+        "mahadni_gerente_de_facto",
+        "los_seis_camareros",
+        "rolland_no_entra_en_la_cocina",
+        "mahadni_baja_de_noche",
+        "rolland_teme_a_mahadni"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 20
+        }
+      ],
+      "unlocks": [
+        "rolland_alianza",
+        "rolland_camareros",
+        "rolland_cocina"
+      ]
+    },
+    "onHard": {
+      "text": "—¿Que qué pienso? —Se le ilumina la cara de puro rencor—. Pienso que ese hombre no es un cocinero. Contrata, despide y firma albaranes. Un cocinero no firma albaranes, señores: un cocinero cocina.\n»Y a mí me tienen prohibido entrar en la cocina. A mí. He ido tres veces al director y las tres me ha dicho que Mustafá es su mejor adquisición. —Se estira la chaqueta—. Su mejor adquisición. A un metre con doce años de oficio.",
+      "facts": [
+        "mahadni_gerente_de_facto",
+        "rolland_no_entra_en_la_cocina",
+        "behler_defiende_a_mahadni"
+      ],
+      "unlocks": [
+        "rolland_alianza",
+        "rolland_camareros"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Prefiero no opinar sobre el personal. —Y a los dos segundos, incapaz de sostenerlo—: Aunque le diré que no me dejan entrar en la cocina de mi propio restaurante, y que eso, en la profesión, es una humillación que no se le hace ni a un aprendiz.",
+      "facts": [
+        "rolland_no_entra_en_la_cocina"
+      ],
+      "unlocks": [
+        "rolland_alianza"
+      ]
+    },
+    "onFailure": {
+      "text": "—El señor Mahadni es un profesional excelente. —Lo dice mirando la puerta de la cocina, muy alto y muy claro, como quien habla para que le oigan desde el otro lado.\nY después, en voz normal y con una sonrisa espantosa:\n—Pregúntenle a cualquiera de mis camareros. Le dirán lo mismo que yo. Aquí todos decimos lo mismo.",
+      "facts": [
+        "rolland_teme_a_mahadni"
+      ]
+    },
+    "note": "Pág. 136: «Desprecia a Mahadni, por lo que hablará pestes de él y ayudará a los investigadores en lo que pueda si demuestran que van contra él, pero también le tiene un miedo atroz»."
+  },
+  {
+    "id": "rolland_camareros",
+    "npc": "rolland",
+    "label": "«¿Y esos seis camareros suyos?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—No son míos. Ese es exactamente el problema. —Cuenta con los dedos, indignado—. Yo tengo diez camareros: los contrata el hotel, los formo yo, comen en el office a las cuatro y les pago el uniforme.\n»Esos seis no. Esos seis no están en mi nómina, no comen aquí y no duermen aquí. Aparecen para los eventos grandes, sirven la mesa principal y desaparecen. —Baja la voz—. Y sirven mal, señores. Sirven fatal. Sostienen la bandeja como quien sostiene una bandeja por primera vez.\n»Una vez se lo dije a uno. Le corregí la postura del brazo, que es mi obligación. —Se le va el color—. Y me miró. Nada más. Me miró, y yo llevo treinta y cinco años en el mundo y no me habían mirado así nunca.",
+      "facts": [
+        "los_seis_camareros",
+        "las_manos_limpias",
+        "hay_sectarios_en_el_hotel"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—No son camareros. —Corta—. Llevan chaqueta de camarero. Son cosas distintas y en mi oficio se nota a diez metros. Los trajo el señor Mahadni y responden solo ante él.",
+      "facts": [
+        "los_seis_camareros"
+      ]
+    },
+    "onFailure": {
+      "text": "—Personal de refuerzo para los eventos. —Y se pone a contar copas.\nCuenta las mismas copas tres veces. A la tercera se da cuenta de que las está contando tres veces, deja la bandeja y dice, sin mirar a nadie:\n—No los cuento a ellos entre mi gente. Que conste. Si alguna vez pasa algo en este restaurante, que conste que no son mi gente.",
+      "facts": [
+        "los_seis_camareros",
+        "rolland_teme_a_mahadni"
+      ]
+    },
+    "note": "Pág. 135: Mahadni «tiene seis camareros a sus órdenes». Rolland es el único empleado del hotel con criterio profesional para notar que no saben servir."
+  },
+  {
+    "id": "rolland_cocina",
+    "npc": "rolland",
+    "label": "Pedirle que les acompañe a la cocina",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "locked": true,
+    "once": true,
+    "onExtreme": {
+      "text": "Michel Rolland se pone blanco y después, muy despacio, hace algo heroico: asiente.\n—Una vez. —Le tiembla la mano en el picaporte—. Una sola vez, y entro yo delante, porque si entro detrás de ustedes parecerá que me escondo, y me estoy escondiendo, pero no quiero que lo parezca.\nEmpuja la puerta.\nY lo hace. Cruza la cocina entera con las orejas rojas y la barbilla alta, saludando a un Mahadni que no le contesta, y les lleva hasta la puerta del almacén, y allí se para, con la mano en el pomo, temblando de arriba abajo.\n—Hasta aquí. —Traga—. Hasta aquí puedo. Está sin llave, ¿lo ven? Sin llave. En un hotel donde el armario de las cucharas tiene candado.",
+      "facts": [
+        "rolland_os_mete_en_la_cocina",
+        "almacen_sin_llave"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "rolland_aliado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 30
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—No.\nY luego, avergonzado de su propio no, les acompaña hasta la puerta de vaivén y se queda a un metro, señalando con la barbilla.\n—Por ahí. Yo les espero aquí. Si el señor Mahadni pregunta, ustedes se han perdido buscando los servicios. —Se retuerce las manos—. Y por favor, no le digan que les he traído yo.",
+      "facts": [
+        "rolland_no_entra_en_la_cocina"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 10
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—¡No! —Y es un grito. Un grito de verdad, agudo, en mitad del comedor, que vuelve doce cabezas.\nSe tapa la boca con las dos manos. Está temblando.\n—Perdón. Perdón, señores, yo… —Se recompone como puede, blanco como el mantel—. Yo no entro ahí. No es una cuestión de reglamento. Es que no puedo. He intentado entrar dos veces por mi cuenta y me he quedado en la puerta, y la segunda vez me oriné, señores, con treinta y cinco años, en el pasillo de servicio de mi propio restaurante.\nY se va al office y no sale en un buen rato.",
+      "facts": [
+        "rolland_es_un_cobarde",
+        "rolland_teme_a_mahadni"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": -10
+        }
+      ]
+    },
+    "note": "Pág. 136: «Michel Rolland es tremendamente cobarde, le aterra todo lo que implique desorden, ruido y confusión. La cocina le da miedo, y gritaría si alguien le obligase a entrar»."
+  },
+  {
+    "id": "rolland_alianza",
+    "npc": "rolland",
+    "label": "Decirle que van a por el cocinero",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onHard": {
+      "text": "Michel Rolland se queda mirándoles como si le hubieran ofrecido agua en el desierto.\n—¿Van ustedes contra él? —Y se le llenan los ojos, y esta vez no le da ninguna vergüenza—. Díganmelo otra vez. Díganmelo mirándome.\nSe lo dicen. Coge una servilleta y se seca la cara con una dignidad enorme y ridícula.\n—Entonces cuenten conmigo para todo lo que se haga en esta planta. —Recobra el porte de golpe, y por un momento es formidable—. Yo sé a qué hora entra y sale cada empleado de este edificio, porque todos pasan por mi puerta a las cuatro para comer. Sé qué se pide en cocina y qué no aparece nunca en la comanda. Y tengo llave del office, que comunica con el pasillo de servicio por detrás de la cámara fría.\n»Lo único que les pido —y aquí le vuelve a temblar la voz— es que cuando llegue el momento, yo no esté delante. No sirvo para eso. Nunca he servido para eso.",
+      "facts": [
+        "rolland_os_ayuda",
+        "office_comunica_con_servicio",
+        "rolland_conoce_los_turnos"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "rolland_aliado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 40
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿De verdad? —Mira a los lados dos veces—. Está bien. Está bien. Si ustedes van en serio, yo les digo lo que sé. Pero no aquí, y no ahora, y por Dios no delante de mis camareros: la mitad le cuenta todo.",
+      "facts": [
+        "rolland_os_ayuda"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "rolland_aliado"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 20
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no voy contra nadie. —Se aparta un paso—. Yo tengo un puesto de trabajo y una madre en Lyon.\nY entonces, sin venir a cuento, muy deprisa y muy bajo:\n—Cuando lo hagan, no lo hagan de día. De día hay seis. De noche baja con dos.\nY se marcha a la otra punta del comedor a colocar una silla que estaba perfectamente colocada.",
+      "facts": [
+        "mahadni_baja_de_noche",
+        "los_seis_camareros"
+      ]
+    },
+    "note": "Pág. 136: «hablará pestes de él y ayudará a los investigadores en lo que pueda si demuestran que van contra él»."
+  },
+  {
+    "id": "rolland_behler",
+    "npc": "rolland",
+    "label": "«¿Y el director qué dice de todo esto?»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Tres veces he subido a esa oficina. —Levanta tres dedos—. Y las tres veces el señor Behler me ha escuchado enteramente, con muchísima amabilidad, ofreciéndome un café, y las tres veces ha terminado explicándome que Mustafá es su mejor adquisición.\nSe queda pensando.\n—Y aquí está lo que no entiendo, señores, y llevo dos años sin entenderlo. El señor Behler es un hombre justo. Lo es. Le he visto pagarle un médico a un botones. —Se le tuerce la boca—. Pero cuando se le nombra al cocinero se le pone una cara rara. Como si le hubieran preguntado por una deuda.\nY baja la voz.\n—Yo creo que el director le tiene miedo. Y si el director le tiene miedo, ¿qué hago yo aquí?",
+      "facts": [
+        "behler_defiende_a_mahadni",
+        "behler_delega_en_mahadni",
+        "behler_teme_a_mahadni",
+        "behler_aprecia_al_personal"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El señor Behler defiende al señor Mahadni. Siempre. —Se encoge de hombros con amargura—. Es tajante. Y yo no soy quién para discutir con la dirección, aunque tenga razón, que la tengo.",
+      "facts": [
+        "behler_defiende_a_mahadni"
+      ]
+    },
+    "onFailure": {
+      "text": "—El director está muy ocupado con las fiestas. —Y lo dice sin ninguna acritud, que es lo triste—. Este mes lleva tres. Es un hombre encantador. A mí me saluda por mi nombre.\nY se queda un momento callado, doblando una servilleta.\n—Por mi nombre de pila, quiero decir. Michel. Nunca «señor Rolland». Al señor Mahadni le llama «señor Mahadni».",
+      "facts": [
+        "behler_defiende_a_mahadni"
+      ]
+    },
+    "note": "Pág. 136: «Ha intentado hablar con Behler del asunto, pero este es tajante: defiende a Mahadni y le considera su mejor adquisición»."
+  },
+  {
+    "id": "rolland_savoy",
+    "npc": "rolland",
+    "label": "«¿Por qué no se marcha usted de aquí?»",
+    "approaches": [
+      "adular",
+      "directo",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Tengo dos ofertas. —Y las dice como quien enseña dos cartas de amor—. El Savoy y el Semíramis. Los dos me quieren de metre, los dos con sala propia y sin cocinero que me diga por dónde puedo andar.\nDeja la bandeja.\n—Y aquí pagan el doble. —Se queda mirando el comedor lleno—. El doble, señores. Con eso mando a mi madre ciento veinte francos al mes y todavía me sobra.\n»Así que llevo un año diciéndome que me voy en primavera. Y llegó la primavera. Y llegó el verano. —Sonríe con una tristeza espantosa—. Un hombre que aguanta una humillación por dinero se convierte, con el tiempo, en un hombre que se merece la humillación. Eso lo pienso todas las noches y luego cobro igual.",
+      "facts": [
+        "rolland_tiene_ofertas",
+        "aqui_pagan_el_doble",
+        "rolland_no_se_ira"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Tengo ofertas del Savoy y del Semíramis. —Se estira los puños—. Ambas excelentes. Pero aquí pagan el doble, y uno tiene obligaciones.",
+      "facts": [
+        "rolland_tiene_ofertas",
+        "aqui_pagan_el_doble"
+      ]
+    },
+    "onFailure": {
+      "text": "—Este es el mejor hotel de Egipto. —Muy tieso—. Nadie se va del mejor hotel de Egipto.\nY sin embargo, un minuto después, mientras les retira los platos:\n—¿Han comido ustedes en el Semíramis? Dicen que la sala es más pequeña. Más manejable. Cuarenta cubiertos. —Suspira—. Cuarenta cubiertos deben de ser una vida entera de tranquilidad.",
+      "facts": [
+        "rolland_tiene_ofertas"
+      ]
+    },
+    "note": "Pág. 136: «Rolland quiere dejar este hotel y ha recibido ofertas del Savoy y del Semíramis, pero aquí pagan el doble, cuestión que termina pesando más que los posibles inconvenientes»."
+  },
+  {
+    "id": "rolland_ratas",
+    "npc": "rolland",
+    "label": "Preguntarle por las ratas",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Aquí no hay ratas. —Y luego, al borde del llanto—: Aquí hay otra cosa.\nSe sienta. Un metre no se sienta en su comedor, y él se sienta.\n—Una rata mide esto. —Separa las manos veinte centímetros—. Corre pegada a la pared, come lo que encuentra y huye de la luz. Yo he trabajado en tres cocinas de puerto: sé lo que es una rata.\nSepara las manos mucho más.\n—Lo que cruzó el pasillo de servicio el martes por la noche medía esto. Y no huía. Se paró. —Le castañetean los dientes y no puede evitarlo—. Se paró debajo de la lámpara, señores, y se quedó ahí, y luego se fue andando. Andando, no corriendo. Como quien vuelve a su casa.\nSe levanta de golpe.\n—Y por la mañana puse una trampa y por la tarde la trampa no estaba. No estaba rota: no estaba. Una trampa de hierro de dos kilos.",
+      "facts": [
+        "ratas_en_el_restaurante",
+        "los_hombres_rata",
+        "algo_custodia_las_piezas"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ratas. —Aprieta los dientes—. En el pasillo de servicio, de noche. Enormes. Yo pongo trampas y el señor Mahadni las quita, dice que asustan al personal. Asustan al personal. —Resopla—. Lo que asusta al personal son las ratas.",
+      "facts": [
+        "ratas_en_el_restaurante"
+      ]
+    },
+    "onFailure": {
+      "text": "—¡En mi restaurante no hay ratas! —Casi grita, y mira alrededor por si alguien lo ha oído—. Ni una. Jamás. Que conste.\nY después, más calmado, ordenando las servilletas con manos que no van del todo bien:\n—En el pasillo de servicio no me consta. El pasillo de servicio no es mi restaurante. El pasillo de servicio es de él.",
+      "facts": [
+        "ratas_en_el_restaurante"
+      ]
+    },
+    "note": "Su ficha en `npcs.json` le da el hecho `ratas_en_el_restaurante`. Los hombres rata del Viejo Templo (pág. 62) suben por el pasillo de servicio; Rolland es el único que los ha visto y sigue vivo."
+  },
+  {
+    "id": "rolland_olga",
+    "npc": "rolland",
+    "label": "Preguntarle por la alemana pelirroja",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "Y aquí Michel Rolland se ablanda entero.\n—La señorita Lounpeen. —Sonríe de verdad, por primera vez—. Come conmigo. Bueno, come en mi sala y me habla, que en este oficio es lo mismo.\n»Me pregunta cosas. Por mi madre, por Lyon, por qué hago aquí. Nadie me pregunta esas cosas, señores. Los huéspedes hablan con el metre para pedir una mesa. —Ordena un cubierto—. Ella se queda hasta que se vacía el comedor y luego se va al bar, y siempre se despide igual: «Michel, no se muera usted en este sitio».\nLa sonrisa se le apaga un poco.\n—Lo dice en broma. Yo lo apunto.",
+      "facts": [
+        "olga_habla_con_rolland",
+        "olga_se_va_al_bar_a_las_cuatro"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Almuerza aquí todos los días y se queda hasta las cuatro. —Se encoge de hombros con afecto—. Luego se va al bar. Es la única persona de este hotel que me da conversación, y me temo que lo hace por aburrimiento, pero la agradezco igual.",
+      "facts": [
+        "olga_se_va_al_bar_a_las_cuatro"
+      ]
+    },
+    "onFailure": {
+      "text": "—De los huéspedes no hablo. —Muy digno.\nY al momento, sin poder contenerse:\n—Aunque le diré que come sola porque su padre come a la una y media y ella baja a las dos y cuarto para no coincidir. Todos los días. Eso no lo hace una hija que se lleva bien con su padre. Eso lo hace una hija que ha calculado.",
+      "facts": [
+        "almuerzo_lounpeen_una_y_media",
+        "olga_evita_a_su_padre"
+      ]
+    },
+    "note": "Pág. 55: «(16:00 h) Olga Lounpeen se despide de Michel Rolland, abandona el restaurante y se encamina al bar»."
+  },
+  {
+    "id": "rolland_miedo",
+    "npc": "rolland",
+    "label": "Preguntarle de qué tiene tanto miedo",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Michel Rolland deja lo que tiene en las manos.\n—Del ruido. —Y lo dice sin ninguna pose, lo cual en él es asombroso—. Del ruido, del desorden y de que pasen dos cosas a la vez. Desde los quince años. En mi casa pasaban tres cosas a la vez, siempre, y a mí me duraba el temblor hasta el día siguiente.\n»Por eso hago esto. —Señala el comedor—. Cuarenta y dos mesas, ciento sesenta personas, y todo ocurre a la hora que yo digo. Un restaurante bien llevado es el único sitio del mundo donde no pasa nada inesperado.\nMira hacia la puerta de la cocina.\n—Y por eso lo de ahí dentro me está matando, señores. Porque ahí dentro pasan cosas a horas que yo no he decidido, y yo no puedo entrar a poner el reloj en hora, y de noche sueño con eso.",
+      "facts": [
+        "rolland_es_un_cobarde",
+        "rolland_familia_dificil",
+        "el_olor_va_a_horas"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "rolland",
+          "by": 25
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Yo no tengo miedo. Tengo los nervios delicados, que es distinto. —Se estira la chaqueta—. Me molestan el ruido y el desorden. Cualquier profesional serio de la restauración le dirá lo mismo.",
+      "facts": [
+        "rolland_es_un_cobarde"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Miedo yo? —Se le sube el tono dos octavas—. ¡Yo dirijo un comedor de ciento sesenta cubiertos!\nY en ese preciso instante un camarero deja caer una bandeja al otro lado de la sala. El estrépito dura dos segundos.\nMichel Rolland se ha agarrado al respaldo de una silla con las dos manos y tiene los ojos cerrados.",
+      "facts": [
+        "rolland_es_un_cobarde"
+      ]
+    },
+    "note": "Pág. 136: «Proveniente de una familia disfuncional, desde los quince años tiene serios problemas de adaptación al medio […] le aterra todo lo que implique desorden, ruido y confusión»."
+  },
+  {
+    "id": "rolland_sotano",
+    "npc": "rolland",
+    "label": "«¿Ha bajado usted alguna vez?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "piezas_en_el_sotano"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Una vez. —Muy bajo—. Hace quince días, la noche que bajaron las cajas.\nSe sienta otra vez. Ya ni disimula.\n—Yo cerraba la sala. Oí ruido en el pasillo de servicio y salí porque pensé que era un accidente. Y había docenas de hombres, señores, docenas, y no eran del hotel, y estaban pasando troncos por debajo de una caja para que no se partiera el mármol de las escaleras.\n»Y delante iba el señor Mahadni. Y detrás iba el austriaco del museo, muy nervioso, mirando el techo cada dos pasos.\nSe agarra las manos para que no le tiemblen.\n—Yo me quedé en la puerta. Nadie me dijo nada. Ni «apártese», ni «buenas noches», ni nada. Pasaron por delante de mí como se pasa por delante de una silla. —Levanta la vista—. Eso fue lo peor. Que no les importó que yo lo viera.",
+      "facts": [
+        "cajas_de_noche",
+        "caja_de_siete_metros",
+        "mahadni_baja_delante",
+        "weder_baja_al_sotano",
+        "piezas_en_el_sotano"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Nunca. —Rotundo—. Y no pienso. Pero oí lo de hace quince días: bajaron algo por el pasillo de servicio de madrugada, con mucha gente, y no era gente del hotel. Se lo digo porque el ruido duró tres horas y a mí el ruido me quita el sueño.",
+      "facts": [
+        "cajas_de_noche"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo no bajo a los sótanos. Yo dirijo un restaurante. —Y se pone a alinear los saleros.\nLos alinea todos. Los cuarenta y dos. Y cuando termina dice, sin volverse:\n—Pregúntenle a los maleteros suizos. Ellos sí bajan. A ellos les mandan bajar.",
+      "facts": [
+        "cajas_de_noche"
+      ]
+    },
+    "note": "Pág. 55: el traslado nocturno de las cajas, «docenas de hombres con poleas agarradas al techo y troncos de madera colocados en las escaleras para que no partiera el mármol». Rolland cierra la sala a las 23:30: es el único testigo con horario fijo."
+  },
+  {
+    "id": "rolland_carter_come_solo",
+    "npc": "rolland",
+    "label": "«El señor Carter no ha tocado el plato»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "carter_evita_su_habitacion"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "Rolland se lleva las dos manos a la cara, encantado de que por fin alguien pregunte.\n—¡Dos horas, monsieur! Dos horas con un plato de verduras que no ha tocado, y sin subir a su habitación. Y no es la primera vez. Lleva una semana comiendo aquí abajo a horas imposibles y subiendo lo más tarde que puede. —Baja la voz—. Yo he estado en el pasillo de la tercera. Hay un olor. Y el señor Carter huele a ese olor. Lo trae encima. Se lo digo yo, que llevo veinte años oliendo a la gente antes de sentarla.",
+      "facts": [
+        "carter_evita_su_habitacion",
+        "carter_huele_mal",
+        "olor_en_la_tercera_planta"
+      ],
+      "unlocks": [
+        "rolland_olor"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El señor Carter come solo, siempre en la mesa quince, siempre lo mismo, y últimamente no sube a su habitación entre horas. —Se ajusta el chaleco—. Yo no juzgo, monsieur. Yo sirvo. Pero un hombre que no quiere ir a su cuarto es un hombre que tiene algo en su cuarto.",
+      "facts": [
+        "carter_evita_su_habitacion"
+      ]
+    },
+    "onFailure": {
+      "text": "—Los ingleses comen mal y punto. —Se aleja dos pasos y vuelve inmediatamente, porque en realidad se muere por hablar—. Aunque, ya que insisten: si les cambio de mesa, no les pongo en la quince. Por nada en concreto. Por el aire.",
+      "facts": [
+        "carter_evita_su_habitacion"
+      ]
+    },
+    "note": "Módulo, pág. 51: Carter come solo hasta las 15:45 porque no soporta el hedor del saco de su habitación."
+  }
+]

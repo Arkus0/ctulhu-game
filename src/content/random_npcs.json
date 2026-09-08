@@ -1,0 +1,238 @@
+{
+  "genericStatBlock": {
+    "label": "Persona normal absurda",
+    "tagline": "cuarentona (como poco)",
+    "chars": { "FUE": 30, "CON": 30, "TAM": 45, "DES": 45, "INT": 45, "APA": 60, "POD": 35, "EDU": 45 },
+    "hp": 7,
+    "damageBonus": "-1",
+    "build": -1,
+    "move": 7,
+    "mp": 7,
+    "combat": ["Pelea 25% (12/5), daño 1D3-1.", "Esquivar 22% (11/4)."],
+    "skills": {
+      "Charlateria": "25%",
+      "Credito": "20%",
+      "Encanto o Intimidar": "20%",
+      "Persuasion (Hablar de tonterías sin interés alguno)": "25%"
+    },
+    "languages": { "Ingles (Propio)": "75%" }
+  },
+  "masterTable": [
+    {
+      "range": { "min": 1, "max": 5 },
+      "categories": ["personaje_secundario"]
+    },
+    {
+      "range": { "min": 6, "max": 8 },
+      "categories": ["soldados_borrachos"]
+    },
+    {
+      "range": { "min": 9, "max": 9 },
+      "categories": ["ancianas_excentricas"]
+    },
+    {
+      "range": { "min": 10, "max": 11 },
+      "categories": ["egiptologos_diletantes"]
+    },
+    {
+      "range": { "min": 12, "max": 12 },
+      "categories": ["independentistas_hostiles"]
+    },
+    {
+      "range": { "min": 13, "max": 13 },
+      "categories": ["coleccionistas_de_arte"]
+    },
+    {
+      "range": { "min": 14, "max": 16 },
+      "categories": ["turistas_americanos"]
+    },
+    {
+      "range": { "min": 17, "max": 18 },
+      "categories": ["turistas_ingleses"]
+    },
+    {
+      "range": { "min": 19, "max": 19 },
+      "categories": ["hombres_de_negocios"]
+    },
+    {
+      "range": { "min": 20, "max": 20 },
+      "categories": ["prostitutas_misteriosas", "delincuentes_peligrosos"],
+      "note": "Entrada 20 del libro: lanzar despues 1D6; con 1-3 sale «Prostitutas misteriosas», con 4-6 «Delincuentes peligrosos»."
+    }
+  ],
+  "categories": [
+    {
+      "id": "personaje_secundario",
+      "label": "Personaje secundario",
+      "memberDie": 14,
+      "desc": "El Guardián puede además usar la Lista de rumores (pág. 142) para dotar a cada personaje de una historia que ayude a los investigadores a avanzar en sus pesquisas.",
+      "note": "El libro fija 1D20 en la Lista de rumores para toda esta categoria (pag. 132: «Personajes Secundarios. Lanzan 1D20 en la Lista de rumores»), asi que los doce personajes del libro comparten rumorDie:20 en npcs.json, y todos tienen ya ficha completa (tarea 1.2 de TAREAS-SONNET.md cerrada). Los hermanos Meyer se separaron en tres fichas independientes (sven/hans/lars) en vez de una conjunta, asi que esta categoria tiene 14 miembros (memberDie:14) aunque el libro solo liste doce personajes — no corresponde a un dado fisico real, pero la seleccion aleatoria la hace el motor, no un jugador tirando dados de mesa.",
+      "members": [
+        { "name": "Abu Al Fallah", "bookRef": "pág. 132", "npc": "al_fallah" },
+        { "name": "Ibrahim Ben Alí", "bookRef": "pág. 132", "npc": "ibrahim" },
+        { "name": "Scott Brown", "bookRef": "pág. 132", "npc": "scott_brown" },
+        { "name": "Mihailo Bulatovic", "bookRef": "pág. 133", "npc": "bulatovic" },
+        { "name": "Agatha Christie", "bookRef": "pág. 133", "npc": "christie" },
+        { "name": "Winston Churchill", "bookRef": "pág. 134", "npc": "churchill" },
+        { "name": "Mustafá ibn Mahadni", "bookRef": "pág. 134", "npc": "mahadni" },
+        { "name": "Randolph Mayer", "bookRef": "pág. 135", "npc": "mayer" },
+        { "name": "Sven Meyer", "bookRef": "pág. 135", "npc": "sven" },
+        { "name": "Hans Meyer", "bookRef": "pág. 135", "npc": "hans" },
+        { "name": "Lars Meyer", "bookRef": "pág. 135", "npc": "lars" },
+        { "name": "Michel Rolland", "bookRef": "pág. 135", "npc": "rolland" },
+        { "name": "Mohamed Sha (Aga Khan III)", "bookRef": "pág. 136", "npc": "aga_khan" },
+        { "name": "Valentine Williams", "bookRef": "pág. 136", "npc": "williams" }
+      ]
+    },
+    {
+      "id": "soldados_borrachos",
+      "label": "Grupo de soldados británicos borrachos",
+      "memberDie": 12,
+      "rumorDie": 6,
+      "desc": "Insoportables, pendencieros e impertinentes. Solo suponen una molesta distracción para los investigadores (exceptuando los rumores que puedan contar). Todos portan armas, aunque solo recurren a ellas en caso de extrema necesidad; sin embargo, hay un 45% de que entren a saco en una pelea por la más mínima tontería.",
+      "members": [
+        { "name": "Donald Aniston", "note": "Pelirrojo con pecas, muy violento. Pelea 30% (15/6); Revólver .38 30% (15/6), daño 1D10." },
+        { "name": "Wilson Bramson", "note": "Orejas enormes, pesado. Pelea (Cabezazo) 30% (15/6); Revólver .32 35% (17/7), daño 1D8." },
+        { "name": "Bartholomew Cranston", "note": "Un bigote que se une a las patillas, simpático. Pelea 50% (25/10); Revólver .32 45% (22/9), daño 1D8." },
+        { "name": "Walter Evanson", "note": "Uniforme impecable pero come como un cerdo, vanidoso. Pelea 55% (27/11); Revólver .32 50% (25/10), daño 1D8." },
+        { "name": "Arnie Fleming", "note": "Le falta el ojo izquierdo, honesto. Pelea 25% (12/5); Revólver .32 20% (10/4), daño 1D8." },
+        { "name": "Arnold Gates", "note": "Le falta la pierna derecha, «la tienen los alemanes», dice. Inquieto. Mov 4. Pelea 70% (35/14); Revólver .32 65% (32/13), daño 1D8." },
+        { "name": "Dexter Jennings", "note": "Un diente de oro, muy divertido. Póker 45%. Pelea 40% (20/8); Revólver .32 25% (12/5), daño 1D8." },
+        { "name": "Forrest Kendall", "note": "Le sudan las manos, solo habla de tópicos. Conducir automóvil 80%. Pelea 40% (20/8); Revólver .32 35% (17/7), daño 1D8." },
+        { "name": "Pierce Mathews", "note": "Termina todas las frases con un «¿me entiendes?». Le encanta Basil Rathbone. Pelea 60% (30/12); Revólver .32 55% (27/11), daño 1D8." },
+        { "name": "Clarence Mayer", "note": "Habla constantemente de cricket, sincero. Pelea 45% (22/9); Revólver .38 40% (20/8), daño 1D10." },
+        { "name": "Julius Morrison", "note": "La gente se aparta porque le hiede el aliento, hipócrita. Pelea (Cabezazo) 40% (20/8); Revólver .38 60% (30/12), daño 1D10." },
+        { "name": "Marshall O'Sullivan", "note": "No para de toser, cobarde. Pelea 35% (17/7); Revólver .38 40% (20/8), daño 1D10." }
+      ]
+    },
+    {
+      "id": "ancianas_excentricas",
+      "label": "Ancianas británicas excéntricas",
+      "memberDie": 6,
+      "rumorDie": 10,
+      "desc": "Pesadas, locas, maravillosas.",
+      "members": [
+        { "name": "Dora Albertson", "note": "Lleva una pamela excesivamente grande; asegura ser médium. Muy simple. Charlatanería 40%, Establecer contacto (con espíritus) 0%." },
+        { "name": "Susan Black", "note": "Ha visitado las pirámides quince veces. Encanto (Ser encantadora) 40%." },
+        { "name": "Elisabeth Hamill", "note": "Tiene una pistola Derringer de su difunto marido en el bolso, sin engrasar. Desconfiada. Derringer 20% (10/2), daño 1D6 (FD: 60)." },
+        { "name": "Mary Jennings", "note": "Solo habla de sus cinco hijos: un taxista en el Soho, un traficante de alcohol en Chicago, un corredor de apuestas en el Derby de Epsom, un sacerdote episcopaliano en Manchester, y la niña, que vive en un apartamento espléndido cerca de Picadilly y no se sabe bien en qué trabaja. Despistada." },
+        { "name": "Greta Michaelson", "note": "Intenta esconderse de su marido, que la persigue por todo el mundo. Aterrada. Sigilo (Pasar absolutamente desapercibida) 75%." },
+        { "name": "Joan Washington", "note": "Quiere casarse con el Aga Khan. Tiene 75 años, muy perdida. Charlatanería 55%." }
+      ]
+    },
+    {
+      "id": "egiptologos_diletantes",
+      "label": "Egiptólogos diletantes",
+      "memberDie": 6,
+      "rumorDie": 12,
+      "desc": "Neuróticos, vanidosos.",
+      "members": [
+        { "name": "Ben Battle", "note": "Odia El Cairo, a los egipcios y a las personas bronceadas por el sol, pero tiene que visitarlo por sus investigaciones. Quiere trasladar todo el arte egipcio al Museo Británico. Profundamente xenófobo; fascina a Garth Weder. Si los investigadores hablan demasiado, se lo contará a Weder. Charlatanería (Sacar de quicio a cualquiera) 45%." },
+        { "name": "Alexander Jones", "note": "Intenta conseguir dinero del Aga Khan para excavar bajo la esfinge y le sigue a todas partes con su maletín de apuntes. Erudito auténtico. Conocimientos 85%, Egipcio (Clásico; solo leer y escribir) 60%, Egipcio (Demótico; solo leer y escribir) 60%, Persuasión (Aburrir hasta las piedras) 50%, Saber (Egiptología) 65%." },
+        { "name": "Philip Kane", "note": "Quiere comprar Abu-Simbel y trasladar el templo a Londres. Sabe más de lo que aparenta, pero no distingue lo real de lo inventado. Tonto pero no mala persona. Charlatanería (Parecer un cretino) 45%, Saber (Egiptología) 30%." },
+        { "name": "Fredrick Pemberton", "note": "Compró un terreno en Luxor hace tres años y no encuentra nada; su madre paga las costosísimas excavaciones. Edad mental de 8 años. Saber (Egiptología) 25%, Saber (Hablar constantemente de su madre) 45%." },
+        { "name": "Andrew Walsh", "note": "Odia a Howard Carter porque cree que le roba las ideas: hace un par de años oyó a Carter hablar en una cena del emplazamiento de la cueva KV62 y de sus cámaras («hay por lo menos tres», «no solo está Tutankhamón, está también la familia por parte de padre»), y lo copió todo en un cuaderno con «Tutankhamón» en la portada. Humilde, destrozado por la envidia. Egipcio (Clásico; solo leer y escribir) 25%, Egipcio (Demótico; solo leer y escribir) 25%, Saber (Egiptología) 30%." },
+        { "name": "Alton Willis", "note": "Enseña pequeñas figuritas y pergaminos falsos que lleva en los bolsillos. En Londres le desprecian; por eso vive en El Cairo. Un imbécil profundo. Charlatanería (Hacerte perder el tiempo sin que lo adviertas) 45%, Conocimientos 5%." }
+      ]
+    },
+    {
+      "id": "independentistas_hostiles",
+      "label": "Independentistas egipcios hostiles",
+      "memberDie": 6,
+      "rumorDie": 10,
+      "members": [
+        { "name": "Moswen Abugarade", "note": "Lleva un cinturón hecho con cartuchos de dinamita. Sus hermanos se ríen de él porque le consideran un pobre hombre; es cobarde, pero por remediarlo podría cometer cualquier locura. Amigo de Abubakar Farran. Charlatanería (Ponerse nervioso con extraños tics) 35%. Pistola Luger 35% (17/7), daño 1D10." },
+        { "name": "Hanbal Buneder", "note": "Lleva dos pistolas en los bolsillos del pantalón, muy evidentes. Asesino de verdad, tremendamente peligroso; ha matado a muchos ingleses y le encanta hacerlo. Odia a muerte a Zaid Mahmoud. (2) Pistolas automáticas .32 35% (17/7), daño 1D10 cada una." },
+        { "name": "Maskini Chocair", "note": "Bajo la chaqueta esconde una auténtica colección de cuchillos. Quiere, honestamente, librar a Egipto del yugo británico. Impredecible. Cuchillos de carnicero 55% (27/11), daño 1D6+1D4." },
+        { "name": "Abubakar Farran", "note": "Educado en Cambridge, asesina a un británico cada mes y abandona su cadáver en el desierto, a merced de los chacales. Un encanto, entre los de su raza. Pelea (Cabezazo) 60% (30/12); Pelea (Clavarte un cuchillo sonriendo sin que nadie lo note) 60% (30/12), daño 1D4+2+1D4; Revólver .32 80% (40/16), daño 1D8." },
+        { "name": "Tarik Habibeh", "note": "Quiere matar al Príncipe Fuad; no por patriotismo, sino porque es «un farsante y un traidor» que «ha vendido Egipto a los ingleses». Peligrosísimo, muy mala persona. Intimidar (Dar mucho miedo sin que se sepa por qué) 55%. Pistola automática .32 60% (30/12), daño 1D8." },
+        { "name": "Zaid Mahmoud", "note": "Amigo íntimo de Saad Zaglul Pachá, líder de la oposición en el exilio; es su confidente y le informa a diario por carta de todo lo que ocurre en el hotel. No deja títere con cabeza. Conoce a Shakti, a Najir y a Weder, pero no le interesan sus propósitos porque no van dirigidos contra el pueblo egipcio. El más peligroso de todos, frío como un témpano: hay un 65% de que decida matar a alguien por mera precaución. Pistola Luger 65% (32/13), daño 1D10." }
+      ]
+    },
+    {
+      "id": "coleccionistas_de_arte",
+      "label": "Coleccionistas compulsivos de obras de arte",
+      "memberDie": 6,
+      "rumorDie": 20,
+      "desc": "Desequilibrados, carentes de moral.",
+      "members": [
+        { "name": "Aasim Al Rahman", "age": 49, "note": "Árabe alto y elegante, de manos y dedos inusualmente alargados. Le interesa todo lo relacionado con Akhenatón; ya sospechaba de la tumba antes de que la encontrara Carter. Uno de los esbirros de Carter le reveló que los ingleses sacaron piezas de una tumba próxima a la de Akhenatón —una pieza negra, enorme y alargada que parecía una columna de basalto, y otras de oro «como nunca antes había visto». Su informador se ha vuelto loco y ha huido al desierto." },
+        { "name": "Horatio Nelson Cook", "age": 82, "note": "Barba blanca hasta la cintura. Especializado en objetos de la cuarta dinastía; un verdadero erudito, solo le interesa especular. Egipcio (Clásico; solo leer y escribir) 45%, Egipcio (Demótico; solo leer y escribir) 45%, Saber (Egiptología) 35%, Saber (No interesarle nada más que su propio trabajo) 75%." },
+        { "name": "Neil Donaldson", "age": 42, "note": "Sucio mercachifle que disfruta comprando y vendiendo cualquier cosa. Sabe mucho, pero solo quiere dinero, que intenta adquirir de la manera que sea posible (sin incluir el robo, según él). Descubrir (Encontrar cualquier objeto robado) 70%, Revólver .32 80% (40/8), daño 1D8." },
+        { "name": "Pasha Gayer-Anderson", "age": 54, "note": "Retirado del ejército en 1919, ahora Inspector del Ministerio del Interior egipcio. Colecciona figuras de gatos y viaja con ellos; su habitación apesta lo suficiente como para que estén a punto de echarle del hotel. Tiene una pieza única, una efigie de cobre de la diosa Bastet con piedras preciosas. Conoció a Omar Shakti por su gato y ha acariciado en secreto al de Shakti (Hetep), sin saber el peligro que corría. Charlatanería (Sacarte información subrepticiamente) 45%, Saber (Egiptología) 30%." },
+        { "name": "Moe Lennon", "age": 55, "note": "Compra cualquier cosa que parezca antigua sin tener ni idea. Dueño de un rancho en Texas con forma de pirámide; lleva en la cartera una foto raída de la pirámide de Keops. Saber (Hablar de diferentes tipos de carne de buey) 45%. Pistola automática .32 25% (12/5), daño 1D10." },
+        { "name": "Christian Miller", "age": 65, "note": "Colecciona momias; tiene más de treinta en un «cottage» de Yorkshire, incluida una que guarda recostada sobre la cama de su habitación del hotel. Su mujer duerme en el sofá; no comprende su afición, pero la permite. Saber (Egiptología) 30%." }
+      ]
+    },
+    {
+      "id": "turistas_americanos",
+      "label": "Turistas americanos estúpidos",
+      "memberDie": 6,
+      "rumorDie": 6,
+      "members": [
+        { "name": "Monty Abrahams", "age": 28, "note": "Le han atracado y golpeado varias veces por visitar la ciudad sin guías ni protección. Obeso mórbido pero aventurero; una manía compulsiva de la infancia puede llegar a matarle, come azúcar a cucharadas. Buen hombre." },
+        { "name": "Sheldon Burrell", "note": "Está en el hotel por las prostitutas, pero todavía no ha identificado a ninguna. Pregunta a todas las mujeres por su precio. Están a punto de echarle." },
+        { "name": "Koby Derricks", "note": "Escribe cuentos de terror para revistas americanas tipo Weird Tales. Quiere pasar una noche dentro de una pirámide a ver qué pasa. Persona límite. Charlatanería (Decir tonterías hasta agotar la paciencia) 45%." },
+        { "name": "Stuart Griffin", "note": "Viene por las fiestas, el alcohol y las drogas. Conoce al Gordo Nubio. No piensa volver jamás a Nueva York; ni siquiera ha pisado las pirámides ni ha salido del hotel. Solo bebe ginebra." },
+        { "name": "Randall Howard", "note": "Su mujer le dejó por un hombre de aspecto indio o árabe durante una fiesta en la embajada británica en Washington, hace casi un año. Viajó a El Cairo con la esperanza de encontrarles y reparar su reputación mancillada; ya no recuerda bien el aspecto de su mujer, pero guarda una foto suya por si acaso. Persuasión (Obsesionarse compulsivamente con cualquiera que no sea yanqui) 65%." },
+        { "name": "Trevor Simpson", "note": "Quiere apoyar la independencia de Egipto porque odia a los ingleses y su «repugnante cultura colonialista». Quiere reunirse con terroristas radicales pero no sabe cómo identificarlos. Le expulsaron del club de remo de Cambridge; de ahí su odio desmedido. Saber (Hablar de Cambridge sin parar, odiándolo a muerte) 45%. Pistola automática .32 35% (17/7), daño 1D10." }
+      ]
+    },
+    {
+      "id": "turistas_ingleses",
+      "label": "Turistas ingleses pedantes",
+      "memberDie": 6,
+      "rumorDie": 10,
+      "members": [
+        { "name": "John Cox", "note": "Convencido de que la salvación de Europa pasa por personas como Benito Mussolini, el primer ministro italiano. Fascista cretino. Pistola automática .22 corto 25% (12/5), daño 1D6." },
+        { "name": "Sylvester Cranston", "note": "Lleva el pecho lleno de medallas de la Gran Guerra. Dice que el hotel está lleno de terroristas (y tiene razón). Héroe de guerra, persona intrépida y de fuertes convicciones conservadoras; gran ayuda para los investigadores si son capaces de no ofenderle. Guarda en su habitación una maleta de hierro cargada de armas, a discreción del Guardián. Revólver .32 85% (42/17), daño 1D8." },
+        { "name": "Steve Kellogg", "note": "Quiere comercializar unos cereales para el consumo masivo, pero un producto americano parecido le hace la competencia con el mismo nombre. Suerte 5%." },
+        { "name": "Lord Pemberton", "note": "Quiere conocer a Churchill y le persigue sistemáticamente allá donde va; dice que tiene algo muy importante que decirle. Mequetrefe analfabeto; Randolph Mayer le tiene controlado pero le considera inofensivo." },
+        { "name": "Jeremy Right", "note": "Dice que es íntimo amigo del Aga Khan y que puede presentárselo a cualquiera. No conoce a nadie. Trabaja en una carnicería en Sussex. Saber (Saberlo todo sobre las vacas) 80%." },
+        { "name": "William Sheeran", "note": "Quiere organizar una expedición a una pirámide de Keops para descubrir un pasadizo que le conduzca a la cámara funeraria oculta del faraón. Gran egiptólogo menospreciado por la profesión, debido a lo aventurado de sus investigaciones; su fortuna proviene de la fábrica de galletas de su mujer. Auténtico erudito. Egipcio (Clásico; solo leer y escribir) 20%, Egipcio (Demótico; solo leer y escribir) 20%, Saber (Egiptología) 55%." }
+      ]
+    },
+    {
+      "id": "hombres_de_negocios",
+      "label": "Hombres de negocios egipcios sospechosos",
+      "memberDie": 6,
+      "rumorDie": 12,
+      "members": [
+        { "name": "Queb Jadur", "age": 30, "note": "Constructor. Quiere quemar el hotel, comprar el terreno y construir apartamentos; lo logrará en 1952. Siniestro y juguetón, lleva una bolsita de cocaína que se acerca a la nariz cada cierto tiempo, frenético. Charlatanería (No conseguir que se entienda nada de lo que dice) 40%." },
+        { "name": "Apophis Kahwagi", "note": "Uno de los 246 profesores de la Universidad de Al Azhar; se encarga de solventar las necesidades de los 4.800 alumnos, lo que le da un holgado tren de vida. Experto en textos árabes de los siglos X-XII; ayudará a los investigadores que superen una tirada de Crédito. Árabe 95%, Conocimientos (Te explico cualquier cosa, menos Mitos) 85%, Egipcio (Clásico; solo leer y escribir) 40%, Egipcio (Demótico; solo leer y escribir) 40%, Saber (Egiptología) 75%." },
+        { "name": "Amsu Kumar", "note": "Soluciona problemas para la embajada americana; pasaportes y personas desaparecidas son prontamente hallados gracias a sus contactos. Muy útil para investigadores que se metan en líos. Crédito 65%, Descubrir (Encontrar cualquier objeto robado) 70%, Revólver .32 80% (40/8), daño 1D8." },
+        { "name": "Funsani Musleh", "note": "Posee caravanas de camellos que cruzan el desierto; en Suq-El Gamal entrena y alquila camellos para los turistas. Lleva las apuestas de la pista de carreras. Conoce al Príncipe Fuad, aficionado a ellas; le falta un dedo en cada mano, se los comieron los camellos. Ir acompañado por él a presentar respetos al Príncipe otorga un dado de bonificación al Crédito personal." },
+        { "name": "Baba Sabbag", "note": "Vende un extraño ungüento para quitar el dolor de espalda, que lleva en el bolsillo y administra si tiene ocasión. Completamente imbécil, pero parece que oculta algo; cosa que, si se profundiza, no es cierta. Charlatanería (Hacerte perder el tiempo) 40%." },
+        { "name": "Kafele Said", "note": "Posee importantes terrenos al sur de El Cairo y docenas de qahwahs. Experto jugador de mancala y dominó; su risa, un chillido gangoso, es insoportable. Muy valioso para los investigadores. Saber (Guardar información sobre cualquiera que se le pregunte) 75%, Suerte 75%." }
+      ]
+    },
+    {
+      "id": "prostitutas_misteriosas",
+      "label": "Prostitutas misteriosas",
+      "memberDie": 6,
+      "rumorDie": 20,
+      "members": [
+        { "name": "Ife Abu-Khali", "note": "Dice que es un hombre, pero poco importa cuando te rodea con sus brazos. Si los investigadores no la desprecian, puede resultar tremendamente útil. Encanto (Hacer que todo te parezca bien) 55%." },
+        { "name": "Marlene Dufresne", "note": "Aristócrata francesa venida a menos; no podía pagar su habitación en el hotel y buscó soluciones. Necesita el dinero como el agua, se lo da igual a todos. Todos los sábados actúa como cantante en el salón Isis. Muy amiga de Juliette Belanger (pág. 90), que le presta ropa a cambio de conversación. Revólver .32 25% (12/5), daño 1D8." },
+        { "name": "Jennifer Hendricks", "note": "Una flapper, hija de un millonario, que abandonó a su familia hace dos años durante unas vacaciones; vive sola y le da igual todo. Cada mes recibe 1.000 dólares en su cuenta. Charlatanería (Reírse a carcajadas de cualquier desgracia, incluso las suyas) 55%. Pistola automática .22 corto 25% (12/5), daño 1D6." },
+        { "name": "Shalina Sarras", "note": "Asombrosamente atractiva; disfruta enormemente con el sexo y no lo oculta. La más preciada de las prostitutas que frecuentan el hotel. Encanto (Volverte loco en la cama) 75%. Sus hermanos Ahmed y Jerom la defienden de cualquier peligro: si se siente amenazada lanzará un grito agudo y aparecerán en 1D6 asaltos. Pelea (Cuchillo) 80% (40/16), daño 1D4+2+1D4." },
+        { "name": "Yanara Yakich", "note": "Le falta el pecho izquierdo. Una inspección de la cicatriz (Descubrir), más una tirada de Ciencia (Biología o Zoología) o Difícil de Conocimientos, revela que los dientes marcados en su piel no corresponden a un animal conocido: la mordió un hombre rata del hotel mientras dormía. Hará lo que sea por los investigadores si estos deciden pagarlo." },
+        { "name": "Olabisi Zamur", "note": "Huyó de casa de sus padres en Alejandría; estos todavía la buscan, desesperados. Si los investigadores ayudan a su familia les estarán eternamente agradecidos, facilitándoles el acceso a los barrios bajos o información sobre el submundo de El Cairo. Abebaberk Selassie, que ignora el paradero de la muchacha, es íntimo de sus padres y hará lo que le pidan los investigadores, facilitándoles protección constante en El Cairo para el resto de sus días." }
+      ]
+    },
+    {
+      "id": "delincuentes_peligrosos",
+      "label": "Delincuentes peligrosos",
+      "memberDie": 6,
+      "rumorDie": 10,
+      "members": [
+        { "name": "Freddie Beckett", "note": "Vicioso. Encanto 20%, Persuasión 35%, Psicología 15%, Saber (Inquietante conversación sobre el mundo de la lencería) 45%." },
+        { "name": "Jerome Brown", "note": "Sórdido traficante de drogas; guarda en su raída chaqueta opio, láudano, hachís, heroína y cocaína, en dosis pequeñas. Si le piden más cantidad, en 1D6 horas puede traer todo cuanto deseen. Charlatanería 55%, Encanto 20%, Persuasión 35%." },
+        { "name": "Dakarai El Gohari", "note": "Muy atractivo; asesino de viejecitas millonarias. Mala persona. Charlatanería 75%, Encanto 80%, Persuasión 25%. Revólver .32 25% (12/5), daño 1D8." },
+        { "name": "Khalid Mostafa", "note": "Carterista profesional. Charlatanería (Reírse de ti a la cara mientras te roba) 65%, Encanto 50%, Juego de manos (Quitarte la cartera a alguien elegido por los investigadores) 65%/85% (con ayuda de distracción), Sigilo 35%." },
+        { "name": "Hasani Nasser", "note": "Siniestro mafioso egipcio, mudo (no tiene lengua, habla por gestos). El Gordo Nubio es su socio y le aporta un dado de bonificación en habilidades Sociales al contactar con Selassie o sus esbirros. Charlatanería (A base de gestos) 25%. Pistola automática .22 corto 45% (22/9), daño 1D6." },
+        { "name": "Jack Tailor", "note": "Ladrón de joyas de guante blanco. Si los investigadores consiguen llevarse bien con él (Crédito o habilidades Sociales, menos Intimidar), puede abrirles la puerta de cualquier habitación y, por una suma razonable, robar él mismo cualquier objeto. Cerrajería (abrir puertas con sus utensilios) 75%/95% (en segundos/en media hora)." }
+      ]
+    }
+  ]
+}

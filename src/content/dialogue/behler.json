@@ -1,0 +1,813 @@
+[
+  {
+    "id": "behler_encargo",
+    "npc": "behler",
+    "label": "«¿Para qué nos ha hecho venir exactamente?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "once": true,
+    "minutes": 10,
+    "always": {
+      "text": "—Queridos amigos, los clientes sufren pesadillas horribles. Algunos sueñan, sobre todo la gente de edad, con una masa burbujeante que invade su habitación, como globos de feria, y les aplasta y les engulle. Durante el desayuno descubrimos que la vajilla se oxida al tocarla, y se deshace delante de nuestros ojos. Las columnas se quiebran y presentan grietas a lo largo de toda su estructura. Los clientes vuelven a sus cuartos y ven las ratas salir de las cloacas y correr por los pasillos. Al abrir la puerta, la habitación está congelada y les castañetean los dientes, con treinta grados fuera. ¡Tienen que ayudarme!",
+      "facts": [
+        "fenomenos_inexplicables",
+        "pesadillas_globos"
+      ],
+      "unlocks": [
+        "behler_desde_cuando",
+        "behler_pago",
+        "behler_invitacion",
+        "behler_vajilla",
+        "behler_pesadillas"
+      ]
+    },
+    "note": "Módulo, pág. 48. Los globos iridiscentes de las pesadillas son Yog-Sothoth filtrándose."
+  },
+  {
+    "id": "behler_desde_cuando",
+    "npc": "behler",
+    "label": "«¿Desde cuándo ocurre?»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "reunion_behler"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 5,
+    "onHard": {
+      "text": "Saca del bolsillo interior una libreta de incidencias con las tapas gastadas y va hacia atrás, mojándose el pulgar.\n—Siete de noviembre, catorce platos. Nueve de noviembre, veintidós platos y la columna del ala este. —Pasa una hoja más y se queda quieto—. Cinco de noviembre. Aquí. «Cuatro de la madrugada: el segundo cocinero se queja de ruido en las escaleras de la bodega». No lo relacioné. ¿Por qué iba a relacionarlo?",
+      "facts": [
+        "empezo_el_5_de_noviembre",
+        "ruido_en_las_escaleras_el_5"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Desde el siete de noviembre. Lo tengo anotado porque ese día se rompieron catorce platos de la vajilla buena y tuve que dar explicaciones. —Se queda pensando—. No, miento. Empezó un par de días antes. El cinco.",
+      "facts": [
+        "empezo_el_5_de_noviembre"
+      ]
+    },
+    "onFailure": {
+      "text": "—Hace días. Semanas, quizá. Discúlpenme, llevo tres fiestas este mes y he perdido la cuenta de todo lo que no sea el catering. —Y sin embargo se lleva la mano al bolsillo interior, donde hay una libreta con tapas de hule, y decide no sacarla.",
+      "facts": [
+        "behler_lleva_una_libreta"
+      ]
+    },
+    "note": "El 5 de noviembre es la madrugada en que Carter metió las piezas en el sótano.",
+    "locked": true
+  },
+  {
+    "id": "behler_vajilla",
+    "npc": "behler",
+    "label": "«Enséñenos uno de esos platos»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "reunion_behler"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "once": true,
+    "minutes": 15,
+    "onHard": {
+      "text": "Lo lleva encima. Envuelto en una servilleta del hotel, en el bolsillo de la chaqueta, desde hace tres días.\n—Limoges. Encargada en mil novecientos once, ciento veinte cubiertos. —Lo desenvuelve sobre el mármol de la mesa—. Y ahora miren dónde está la herrumbre. Solo donde se coge. El borde está impecable, señores. La porcelana se oxida por donde la toca una mano y solo por donde la toca una mano.",
+      "facts": [
+        "vajilla_oxidada",
+        "la_herrumbre_sigue_al_tacto"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "la_vajilla"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "Behler mira a un lado y a otro de la terraza y saca del bolsillo algo envuelto en una servilleta. Es medio plato. La porcelana está tomada por un óxido rojizo que una porcelana no tiene manera de criar.\n—Se lo enseño a ustedes y no se lo enseño a nadie más. Ni al proveedor, que ya me ha jurado por su madre que la partida salió perfecta de Alejandría.",
+      "facts": [
+        "vajilla_oxidada"
+      ]
+    },
+    "onFailure": {
+      "text": "—Una partida defectuosa del proveedor de Alejandría. Ya está reclamada. —Lo dice de corrido, como quien ha ensayado la frase delante de un espejo, y mientras la dice se palpa el bolsillo de la chaqueta, donde lleva algo envuelto en una servilleta desde hace tres días.",
+      "facts": [
+        "behler_esconde_un_plato"
+      ]
+    },
+    "note": "Pág. 48: «la vajilla del restaurante se oxida al tocarla, haciéndose pedazos delante de nuestros ojos».",
+    "locked": true
+  },
+  {
+    "id": "behler_pesadillas",
+    "npc": "behler",
+    "label": "«¿Quiénes han tenido esas pesadillas?»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "reunion_behler"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Behler deja de doblar la servilleta.\n—Yo vivo en Sharia Kamil, a cinco minutos andando. No duermo en el hotel. —Se toma su tiempo—. La noche del once me quedé, porque teníamos banquete. Y sí. Yo también. Globos, señores. Como los de la feria de Ginebra cuando yo era niño, iridiscentes, hermosísimos, subiendo por la pared. Y cuando uno me rozó supe, con toda la claridad del mundo, que llevaba esperándome desde antes de que existiera el hotel. —Se seca la frente—. No lo había dicho en voz alta hasta ahora.",
+      "facts": [
+        "pesadillas_globos",
+        "pesadillas_mismo_pasillo",
+        "behler_tambien_suena"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "behler",
+          "by": 15
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Once quejas. Las tengo en el libro. —Y entonces se le ocurre algo mientras lo está diciendo, y se le ve ocurrírsele—. Las once en el mismo pasillo. Segunda planta, ala este. Y ese pasillo, señores, cae justo encima de las escaleras de la cocina.",
+      "facts": [
+        "pesadillas_globos",
+        "pesadillas_mismo_pasillo"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Gente mayor, sobre todo. Un matrimonio de Boston, un canónigo irlandés, la viuda del cónsul portugués. Todos por encima de los sesenta. —Baja la voz—. Y todos me lo cuentan con las mismas palabras. Eso es lo que no me deja dormir a mí: que lo cuenten con las mismas palabras.",
+      "facts": [
+        "pesadillas_globos"
+      ]
+    },
+    "onFailure": {
+      "text": "—Doscientos huéspedes, queridos amigos. Siempre hay quien sueña, siempre hay quien bebe y siempre hay quien confunde una cosa con la otra. —Y entonces, sin que nadie se lo haya preguntado, en un tono que pretende ser casual y no lo consigue—: ¿Ustedes han dormido bien esta noche?",
+      "facts": [
+        "behler_pregunta_por_los_suenos"
+      ]
+    },
+    "note": "Pág. 48. La masa burbujeante como globos de feria es Yog-Sothoth filtrándose por la grieta que han abierto las piezas negras.",
+    "locked": true
+  },
+  {
+    "id": "behler_pago",
+    "npc": "behler",
+    "label": "Negociar los honorarios",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "reunion_behler"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "once": true,
+    "minutes": 10,
+    "onHard": {
+      "text": "—Cien libras egipcias a cada uno por adelantado, y otras doscientas si esto se acaba. —Se seca la frente—. Y alojamiento y comida, por supuesto. Lo que no entra es la cuenta del bar largo. Con Gasparini nadie tiene crédito.",
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "behler",
+          "by": 5
+        }
+      ],
+      "facts": [
+        "pago_generoso"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cien libras egipcias a cada uno, y otras cien si veo resultados. Alojamiento y comida incluidos. El bar largo no entra; lo siento, pero con Gasparini nadie tiene crédito.",
+      "facts": [
+        "pago_acordado"
+      ]
+    },
+    "onFailure": {
+      "text": "—Cien libras a cada uno si esto se resuelve. —Sonríe sin ganas—. Comprenderán que no puedo pagar por adelantado un trabajo cuyo objeto ni siquiera sé describir. —Y añade, con una amargura que no pensaba enseñar—: Yo llevaba maletas a los quince años. Sé exactamente lo que es que a uno le paguen tarde.",
+      "facts": [
+        "pago_acordado",
+        "behler_empezo_de_botones"
+      ]
+    },
+    "locked": true
+  },
+  {
+    "id": "behler_invitacion",
+    "npc": "behler",
+    "label": "Pedir invitaciones para la mascarada de esta noche",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "reunion_behler"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "once": true,
+    "minutes": 10,
+    "onSuccess": {
+      "text": "—¿Esta noche? —Duda un segundo y luego se encoge de hombros—. Está bien. Diré en la puerta que están en la lista. Pero por lo que más quieran: disfraz, compostura y nada de escándalos. Va a venir gente que no conviene decepcionar.",
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "invitados_mascarada"
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "mascarada"
+        }
+      ],
+      "facts": [
+        "invitacion_mascarada"
+      ],
+      "unlocks": [
+        "behler_aga_khan",
+        "behler_fiestas_privadas"
+      ]
+    },
+    "onFailure": {
+      "text": "—Imposible. Rigurosa invitación. —Y por primera vez esta mañana parece verdaderamente incómodo—. Esta noche vienen personas cuya presencia ni siquiera debería estar comentando con ustedes.",
+      "facts": [
+        "fiesta_es_exclusiva"
+      ],
+      "unlocks": [
+        "behler_aga_khan",
+        "behler_fiestas_privadas"
+      ]
+    },
+    "note": "Pág. 48: conseguirlo ahora es más fácil que intentarlo en la puerta. Fuad y el Aga Khan alteran los ánimos de Behler.",
+    "locked": true
+  },
+  {
+    "id": "behler_aga_khan",
+    "npc": "behler",
+    "label": "«¿Y quién es la gente que no conviene decepcionar?»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "reunion_behler"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—Su Alteza el Aga Khan. —Lo dice y le cambia la cara, y por un momento no es el director de nada: es un hombre hablando de su amigo—. Llega esta tarde. Se hospeda aquí desde antes de que yo fuera director, y sospecho que soy director en parte por él, aunque eso no se lo he preguntado nunca ni pienso preguntárselo. —Se lo piensa dos segundos largos—. Está bien. Esta noche se lo presento. Con una condición, y no es negociable: nada de escándalos.",
+      "facts": [
+        "aga_khan_viene",
+        "aga_khan_amigo_de_behler"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "behler_presenta_aga_khan"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "behler",
+          "by": 10
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Su Majestad, para empezar. —Cuenta con los dedos y se detiene en el segundo—. Y Su Alteza el Aga Khan, que llega a las cinco y media y que es, permítanme la vanidad, amigo mío desde hace treinta años. Treinta. Yo llevaba maletas cuando le conocí y él ya era él.",
+      "facts": [
+        "aga_khan_viene",
+        "aga_khan_amigo_de_behler"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Gente. —Se seca la frente—. Un rey, para empezar, y un rey al que todavía nadie llama rey. Y detrás de él, media docena de personas ante las cuales este hotel tiene que estar a la altura. No me hagan decir nombres en una terraza.",
+      "facts": [
+        "fuad_viene"
+      ]
+    },
+    "onFailure": {
+      "text": "—No hablo de mis amigos con desconocidos. —Y lo dice con tanto afecto que la frase se le vuelve en contra: acaba de confirmar que quien viene esta noche no es un cliente distinguido. Es un amigo.",
+      "facts": [
+        "aga_khan_amigo_de_behler"
+      ]
+    },
+    "note": "Pág. 18: el Aga Khan es amigo íntimo de Behler y probablemente intercedió para que ascendiera a director. Pág. 55: llega a las 17:30.",
+    "locked": true
+  },
+  {
+    "id": "behler_fiestas_privadas",
+    "npc": "behler",
+    "label": "«¿Dónde se puede beber esta noche sin estar en ninguna lista?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Doscientos ochenta y cinco. Mervin Morrison, setenta y cinco años, británico. Su mujer murió en el diecisiete y él lleva cinco años celebrándolo, porque cada mañana se levanta creyendo que ha muerto anoche. —Y aquí a Behler se le pone una cara rarísima, a medio camino entre la ternura y el espanto—. La puerta está siempre abierta porque cree que ustedes son los primeros en llegar. Los músicos del hotel le tocan gratis. Yo no le paro esa fiesta ni aunque me lo pida el gobernador.\n»La otra es la ciento tres. El señor Forrester, de Nueva York. Para entrar hay que ponerse un bozal. —Se encoge de hombros—. Llevo dos años esperando a que ocurra algo grave ahí dentro, y lo más grave que ha ocurrido es que se les acabó la limonada.",
+      "facts": [
+        "fiestas_alternativas",
+        "habitacion_285_morrison",
+        "habitacion_103_forrester"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Hay dos habitaciones en esta casa donde hay fiesta todas las noches y nadie pide invitación en la puerta. —Se seca la frente—. No me pregunten cuáles a mí. Pregúnteselo a un botones y díganle que se lo he dicho yo, que para eso les pago a ellos y no a mí.",
+      "facts": [
+        "fiestas_alternativas"
+      ]
+    },
+    "onFailure": {
+      "text": "—En el Hotel Shepheard's no se celebran fiestas privadas. —Silencio de tres segundos exactos—. Y si se celebraran, mientras nadie se queje y nadie salga en el periódico, no serían asunto mío.",
+      "facts": [
+        "fiestas_alternativas"
+      ]
+    },
+    "note": "Pág. 103: habitaciones 103 (Richard J. Forrester) y 285 (Mervin Morrison). En ninguna de las dos se precisa presentación para entrar.",
+    "locked": true
+  },
+  {
+    "id": "behler_descubrimiento",
+    "npc": "behler",
+    "label": "«¿Qué se cuenta del Valle de los Reyes?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Que han encontrado algo. Lo chismorrea El Cairo entero desde hace una semana, y en El Cairo el chismorreo llega siempre antes que el telegrama. —Da un golpecito al periódico doblado sobre la mesa—. Lord Carnarvon llega mañana desde Alejandría, con su hija. Y dicen que el señor Carter no ha querido abrir nada sin él, lo cual, si me permiten la impertinencia, es un detalle exquisito o una coartada exquisita.",
+      "facts": [
+        "carnarvon_llega_manana",
+        "carter_ha_encontrado_algo"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "gazette_21"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Que han encontrado algo grande. —Sonríe—. Aquí encuentran algo grande cada dos meses, y cada dos meses el hotel se llena de caballeros que quieren pagar la cuenta con una promesa. Esta vez, en cambio, no ha venido nadie a pedirme crédito. Eso sí que es raro.",
+      "facts": [
+        "carter_ha_encontrado_algo"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo de arqueología sé lo justo para no quedar mal en una mesa de doce. —Y acto seguido recita, palabra por palabra y sin equivocarse en una coma, el párrafo de la Gazette de esta mañana. Se lo ha leído tres veces.",
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "gazette_21"
+        }
+      ],
+      "facts": [
+        "carnarvon_llega_manana"
+      ]
+    },
+    "note": "Pág. 18: «Es perfectamente consciente del descubrimiento arqueológico que, como todo el mundo chismorrea, ha tenido lugar en el Valle de los Reyes». Ayuda de juego 3: la Egyptian Gazette del 21."
+  },
+  {
+    "id": "behler_carter_weder",
+    "npc": "behler",
+    "label": "«¿Y esos dos de la otra mesa?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "carter_y_weder_juntos"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—El señor Weder me pidió hace medio año una llave de la puerta de servicio del ala norte. Para entrar y salir sin cruzar el hall, dijo, porque las visitas oficiales le roban la mañana. —Se queda mirando su propia taza—. Se la di yo. Con mi mano. Y no había vuelto a pensar en ello hasta este preciso instante.",
+      "facts": [
+        "weder_y_carter_se_reunen",
+        "weder_tiene_llave_de_servicio"
+      ],
+      "unlocks": [
+        "behler_cartas_berlin"
+      ]
+    },
+    "onHard": {
+      "text": "—Se reúnen aquí todos los días a la misma hora. El señor Weder reserva la mesa por teléfono la víspera, y siempre pide la misma: la del rincón, la que no tiene nadie detrás. —Se encoge de hombros, incómodo—. Yo estas cosas las noto porque llevo cuarenta años poniendo mesas, no porque desconfíe de un huésped.",
+      "facts": [
+        "weder_y_carter_se_reunen"
+      ],
+      "unlocks": [
+        "behler_cartas_berlin"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El señor Carter, el arqueólogo. Y el señor Weder, que dirige el Museo Egipcio. Son amigos. Se les ve mucho juntos últimamente. —Da un sorbo—. Procuro no fijarme en cuánto se ven mis huéspedes entre sí. Es la primera regla del oficio.",
+      "facts": [
+        "weder_y_carter_se_reunen"
+      ]
+    },
+    "onFailure": {
+      "text": "—Dos caballeros desayunando. —Pausa—. El señor Weder dirige el Museo Egipcio, que es una institución respetabilísima, y viene a esta casa desde hace años, y jamás ha dado un solo problema. —Nadie ha dicho lo contrario. Nadie lo ha insinuado siquiera.",
+      "facts": [
+        "behler_defiende_a_weder"
+      ]
+    },
+    "note": "Pág. 18: «Behler desconoce las maquinaciones de Weder, pero sabe que se reúne asiduamente con Howard Carter»."
+  },
+  {
+    "id": "behler_cartas_berlin",
+    "npc": "behler",
+    "label": "«¿Recibe mucho correo el señor Weder?»",
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "—Llevamos un registro de entrada, por las certificadas. —Baja la voz hasta casi nada—. Berlín. Casi todo Berlín, y casi siempre el mismo remitente. Y hay un detalle que a mí me chirría desde hace meses y que no había sabido decir hasta hoy: da la dirección del hotel, no la del museo. Un hombre que dirige un museo nacional recibe su correspondencia en el museo, señores. Salvo la que no quiere que llegue al museo.",
+      "facts": [
+        "correspondencia_nazi"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "cartas_berlin"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Muchísimo, y casi todo de Alemania. —Se seca la frente—. No me malinterpreten: aquí hay huéspedes que reciben más correo que el consulado. Pero el del señor Weder es constante. Semanal. Como quien rinde cuentas a alguien.",
+      "facts": [
+        "correspondencia_nazi"
+      ]
+    },
+    "onFailure": {
+      "text": "—El correo de un huésped es sagrado. —Lo dice mirando los casilleros del fondo del hall, uno por uno, hasta detenerse en el veinticuatro. Ha mirado. No hace falta que lo diga: acaba de decirlo.",
+      "facts": [
+        "behler_ha_mirado_el_correo"
+      ]
+    },
+    "note": "Pág. 18: «advierte que mantiene una constante relación epistolar con residentes en Berlín (Weder proporciona siempre la dirección del hotel)».",
+    "locked": true
+  },
+  {
+    "id": "behler_sotano",
+    "npc": "behler",
+    "label": "«¿Qué hay en los sótanos del hotel?»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Almacén de cocina, y por debajo, ruinas. Este edificio se levantó sobre el palacio de Alí Bey al-Kabir, y ese sobre un templo de ibn Tulun. —Baja la voz—. El señor Weder me alquila la parte del templo como almacén. Lleva meses guardando allí más cosas de las que reconoce, y a mí me viene bien el dinero. Hace quince días bajaron cajas de noche. Muchas. Y una que no era una caja.",
+      "facts": [
+        "weder_alquila_el_templo",
+        "cajas_de_noche",
+        "viejo_templo_existe"
+      ],
+      "unlocks": [
+        "behler_bajar_juntos"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El almacén de la cocina. Y debajo, ruinas viejas que no usa nadie. —Se remueve en la silla—. Bueno. El señor Weder guarda allí material del museo. Con mi permiso, claro está.",
+      "facts": [
+        "weder_alquila_el_templo"
+      ]
+    },
+    "onFailure": {
+      "text": "—Nada que les interese. Provisiones, vino, ratas. —Y cambia de tema con una habilidad que solo dan treinta años de hostelería. Tres frases después están hablando del noviembre ginebrino y ninguno de ustedes sabría explicar cómo han llegado hasta ahí.",
+      "facts": [
+        "behler_esquiva_el_sotano"
+      ]
+    }
+  },
+  {
+    "id": "behler_bajar_juntos",
+    "npc": "behler",
+    "label": "Pedirle que os acompañe al Viejo Templo",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "viejo_templo_existe"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "—Está bien. Pero no bajamos solos. —Descuelga el teléfono—. Llamaré a la policía del protectorado y bajamos con ellos. Si hay algo ahí abajo, que lo vea alguien con uniforme.",
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "behler_baja_con_policia"
+        }
+      ],
+      "facts": [
+        "behler_acepta_bajar"
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Yo? —Se ríe sin ganas—. Miren, yo llevo maletas desde los quince años y he subido a este hotel desde abajo. Bajar es otra cosa. Pero si insisten... está bien. Les acompaño.",
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "behler_baja"
+        }
+      ],
+      "facts": [
+        "behler_acepta_bajar"
+      ]
+    },
+    "onFailure": {
+      "text": "—Ni hablar. Tengo dos eventos en dos días y un rey llegando a la hora del almuerzo. Bajen ustedes, que para eso les pago. —Y entonces, ya de espaldas, sin volverse—: Y pidan en conserjería la linterna grande. Abajo no hay luz a partir del segundo tramo.",
+      "facts": [
+        "behler_sabe_que_no_hay_luz_abajo"
+      ]
+    },
+    "note": "Pág. 18: un dado de penalización a las tiradas sociales. Con éxito extremo baja con la policía.",
+    "locked": true
+  },
+  {
+    "id": "behler_personal",
+    "npc": "behler",
+    "label": "«Háblenos de su gente»",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Los Meyer son de Berna y entraron por recomendación mía; yo también llevé maletas y sé lo que pesan. Michel es entusiasta. Muy entusiasta. —Deja una pausa cortés justo donde otro habría dicho otra cosa—. Y el señor Mahadni lleva la cocina desde hace tres años. Vino recomendado. —Frunce el ceño, como si acabara de oírse a sí mismo—. Por el señor Weder, ahora que lo dicen ustedes. Y desde entonces yo no he vuelto a bajar esas escaleras. Cuatro años sin pisar mi propia cocina, y hasta este momento me parecía normal.",
+      "facts": [
+        "mahadni_recomendado_por_weder",
+        "behler_no_baja_a_la_cocina"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Los mejores de El Cairo, y lo digo sin exagerar. Clinton es incapaz de mentir, lo que en un recepcionista es casi un defecto profesional. Los hermanos Meyer son suizos, como yo. La señorita Thornhill lleva once años en la centralita y no le he oído una queja en once años, lo cual me hace sospechar que llevo once años sin preguntarle nada.",
+      "facts": [
+        "behler_aprecia_al_personal"
+      ]
+    },
+    "onFailure": {
+      "text": "—Mi personal es excelente. —Punto. Y a continuación, sin que nadie haya insinuado absolutamente nada—: Sea lo que sea lo que está ocurriendo en esta casa, no lo ha traído nadie que cobre de mí. De eso respondo yo.",
+      "facts": [
+        "behler_protege_al_personal"
+      ]
+    },
+    "note": "Pág. 18 (el cariño a los Meyer, también suizos, que entraron por su recomendación) y pág. 52 (Mahadni y sus hombres en la cocina)."
+  },
+  {
+    "id": "behler_los_bohr",
+    "npc": "behler",
+    "label": "«Un huésped suyo ha alquilado doce habitaciones»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "senor_bohr_doce_habitaciones"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "minutes": 15,
+    "onHard": {
+      "text": "Behler se queda con la taza a medio camino.\n—¿Doce? —Y hace la cuenta en voz alta, y le sale mal dos veces—. Doce contiguas son media segunda planta. Eso no lo aprueba recepción. Eso lo aprueba el director. Eso lo apruebo yo. —Se levanta y llama a Clinton con un gesto que no le habéis visto hacer en toda la mañana—. Discúlpenme. Voy a averiguar en mi propio hotel una cosa que debería saber desde hace una semana.",
+      "facts": [
+        "senor_bohr_doce_habitaciones",
+        "behler_no_sabia_de_bohr"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "behler_investiga_bohr"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "behler",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Doce? —Parpadea—. Doce habitaciones son... —y no termina la frase, porque la única manera honesta de terminarla es «doce habitaciones son un problema mío que yo no sabía que existía».",
+      "facts": [
+        "behler_no_sabia_de_bohr"
+      ]
+    },
+    "onFailure": {
+      "text": "—Doce habitaciones son doce facturas, queridos amigos, y las doce están pagadas por adelantado y en libras esterlinas. —Sonríe con un alivio absolutamente sincero y se sirve más café—. ¿Alguna cosa más?",
+      "facts": [
+        "behler_no_sabia_de_bohr"
+      ]
+    },
+    "note": "Pág. 18: «Behler no ha sido informado de la presencia de los Señores Bohr en el hotel. Es algo que solo conocen Cleveland Clinton y Abraham Murray». El director no sabe que doce de sus habitaciones las ocupa el mismo hombre."
+  },
+  {
+    "id": "behler_shakti",
+    "npc": "behler",
+    "label": "Preguntar por Omar Shakti",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "omar_shakti"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Behler deja la taza y aparta la silla unos centímetros, como si necesitara más sitio entre él y la mesa.\n—En el noventa y ocho, cuando yo era metre, ese hombre cenó aquí una noche. Recuerdo el menú. Recuerdo dónde se sentó. Y recuerdo que el pinche que le sirvió no vino a trabajar al día siguiente, ni al otro, ni nunca, y que nadie preguntó por él. Nadie. —Se seca la frente—. Detrás de ese nombre hay una hermandad. La del Faraón Negro. Yo llevo veinticuatro años procurando no acercarme a menos de una calle. Háganme el favor de imitarme.",
+      "facts": [
+        "behler_teme_a_shakti",
+        "hermandad_faraon_negro",
+        "el_pinche_que_desaparecio"
+      ]
+    },
+    "onSuccess": {
+      "text": "Behler deja la taza en el plato con mucho cuidado, como si le pesara. —No. No en mi terraza y no a la hora del desayuno. —Mira a los lados—. Ese hombre existe, es un caballero de modales impecables, tiene plantaciones de algodón al norte y yo he procurado no cruzarme con él en veinte años. Hagan lo mismo.",
+      "facts": [
+        "behler_teme_a_shakti",
+        "hermandad_faraon_negro"
+      ]
+    },
+    "onFailure": {
+      "text": "—No conozco a ese señor. —Es la primera mentira que le oís, y la dice fatal: demasiado deprisa, demasiado entera y con el pañuelo ya en la frente antes de que hiciera ninguna falta.",
+      "facts": [
+        "behler_miente_sobre_shakti"
+      ]
+    }
+  },
+  {
+    "id": "behler_selassie",
+    "npc": "behler",
+    "label": "«Le ha dado usted un beso a ese hombre»",
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_selassie_en_el_salon"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "directo",
+      "adular",
+      "enganar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Behler se seca la frente con el pañuelo bordado y tarda mucho en contestar.\n—En el veinte tuvimos un problema en este hotel. Un problema del que ustedes no han oído hablar y del que nadie ha oído hablar, y esa es exactamente la cuestión. —Dobla el pañuelo en cuatro—. Lo resolvió él. En una noche. No pregunté cómo y no lo voy a preguntar nunca. Desde entonces, Abebaberk Selassie entra en mi salón cuando quiere y yo le abrazo delante de todo El Cairo, porque un hotel es una promesa: usted duerme aquí y no le pasa nada. Yo mantengo esa promesa. El precio de mantenerla es ese beso.",
+      "facts": [
+        "behler_y_selassie_son_amigos",
+        "behler_debe_un_favor_a_selassie"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "behler",
+          "by": -5
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Es un cliente antiguo y un amigo antiguo, y las dos cosas por separado. —Behler sonríe sin ganas—. Sé lo que se dice de él. Sé que casi todo es verdad. Y sé que este hotel duerme mejor con él dentro que con él fuera, cosa que no espero que entiendan y que a mí me costó cinco años entender.",
+      "facts": [
+        "behler_y_selassie_son_amigos"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Los amigos no se eligen por su reputación, se eligen por lo que hacen cuando hace falta. —Y ahí se acaba la frase, colocada con tanto oficio que uno tarda un rato en darse cuenta de que no ha contestado a nada.",
+      "facts": [
+        "behler_y_selassie_son_amigos"
+      ]
+    },
+    "onFailure": {
+      "text": "—Esta noche hay doscientos invitados y dos leones sueltos, señores. —Se aleja tres pasos y se vuelve—. Cuando esto acabe, si de verdad les interesa, pregúntenle a Clinton por el otoño del veinte. Pero no se lo pregunten delante de mí.",
+      "facts": [
+        "behler_y_selassie_son_amigos"
+      ],
+      "unlocks": [
+        "behler_fiestas_privadas"
+      ]
+    },
+    "note": "Módulo, pág. 59: Behler se acerca a Selassie, le abraza y sellan su amistad con un beso, delante de toda la alta sociedad cairota."
+  },
+  {
+    "id": "behler_leones",
+    "npc": "behler",
+    "label": "«Los leones se han soltado»",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "leones_sueltos"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "directo",
+      "presionar",
+      "adular"
+    ],
+    "minutes": 10,
+    "onHard": {
+      "text": "—Están entrenados. Los monos están entrenados, los leones están entrenados, las serpientes están dormidas y el domador cobra una fortuna. —Behler habla muy deprisa y muy bajo—. Lo que no está entrenado son doscientos borrachos disfrazados de Napoleón. La cadena no se rompió: alguien la soltó en el revuelo, y no fue un león. Y cuando mañana venga el señor del seguro le voy a contar exactamente lo contrario de lo que le acabo de contar a ustedes.",
+      "facts": [
+        "cadena_soltada_a_proposito",
+        "leones_sueltos_en_la_fiesta"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "behler",
+          "by": -5
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un accidente. Un accidente desagradable en mitad de una pelea igual de desagradable. —Se seca la frente—. Mis operarios y los soldados del Príncipe los tendrán controlados en un minuto. Por favor, no corran: correr es exactamente lo peor que se puede hacer.",
+      "facts": [
+        "leones_sueltos_en_la_fiesta"
+      ]
+    },
+    "onFailure": {
+      "text": "—Todo está bajo control. —Lo dice con la voz de director de hotel, la buena, la que convence a cualquiera. Y a continuación se da la vuelta y le pregunta a un camarero, en un susurro que sí oís, dónde demonios está el domador y por qué nadie le ha visto desde las nueve.",
+      "facts": [
+        "leones_sueltos_en_la_fiesta",
+        "el_domador_ha_desaparecido"
+      ]
+    },
+    "note": "Módulo, pág. 57: el revuelo de la pelea permite a los leones de Fuad soltarse de sus cadenas."
+  }
+]

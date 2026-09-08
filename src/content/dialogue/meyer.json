@@ -1,0 +1,684 @@
+[
+  {
+    "id": "meyer_chismes",
+    "npc": "lars",
+    "label": "Sonsacar a los portamaletas",
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "sobornar",
+      "adular",
+      "directo"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Lars, el pequeño, se guarda la propina y habla por los tres.\n—Hace quince días. De noche. Bajaron cajas por el pasillo de servicio, docenas de hombres, y no eran del hotel. Una de las cajas no cabía por la puerta: la arrastraron sobre troncos, como las piedras de las pirámides. Siete metros, señor. Siete. Y el jefe de cocina iba delante abriendo paso.\nHans y Sven se han quedado muy quietos. Lars sigue.\n—Y nos llamaron a nosotros. A las dos de la mañana. Cuatro horas cargando y nos pagaron el triple, en libras esterlinas, en mano, sin firmar nada. —Se encoge de hombros—. Nosotros somos maleteros. Cargamos lo que nos digan.\n»Pero la caja de siete metros pesaba lo que pesan doce hombres, señor, y la movíamos treinta. Treinta hombres para doce. —Mira a sus hermanos—. Eso quiere decir que dentro no había piedra. Dentro había algo que se sujetaba a las paredes.",
+      "facts": [
+        "cajas_de_noche",
+        "caja_de_siete_metros",
+        "mahadni_implicado",
+        "les_pagaron_el_triple",
+        "la_caja_no_pesaba_lo_que_debia"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ],
+      "unlocks": [
+        "lars_llaves",
+        "sven_escaleras"
+      ]
+    },
+    "onHard": {
+      "text": "Lars, el pequeño, se guarda la propina y habla por los tres.\n—Hace quince días. De noche. Bajaron cajas por el pasillo de servicio, docenas de hombres, y no eran del hotel. Una de las cajas no cabía por la puerta: la arrastraron sobre troncos, como las piedras de las pirámides. Siete metros, señor. Siete. Y el jefe de cocina iba delante abriendo paso.",
+      "facts": [
+        "cajas_de_noche",
+        "caja_de_siete_metros",
+        "mahadni_implicado"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        }
+      ],
+      "unlocks": [
+        "lars_llaves",
+        "sven_escaleras"
+      ]
+    },
+    "onSuccess": {
+      "text": "Hans se ríe, y la mancha marrón de la cara se le arruga entera.\n—Aquí baja gente al sótano que no tiene nada que hacer en un sótano. El señor Weder, del museo, sin ir más lejos. Y siempre acompañado del cocinero, que es un hombre con el que uno no querría quedarse a solas.",
+      "facts": [
+        "weder_baja_al_sotano"
+      ],
+      "unlocks": [
+        "lars_llaves"
+      ]
+    },
+    "onFailure": {
+      "text": "Sven se lleva la mano al estómago y pone cara de circunstancias.\n—Perdonen. El picante del señor Mahadni. —Y se marcha medio doblado, y los otros dos detrás.\nPero Hans, el de la mancha, se queda un paso rezagado y dice, sin volverse del todo:\n—Nosotros no hablamos del sótano en el vestíbulo, señor. Búsquennos en el patio de equipajes, junto a la puerta norte. Ahí no hay nadie a estas horas.",
+      "facts": [
+        "sven_come_en_la_cocina",
+        "los_meyer_hablan_en_el_patio"
+      ]
+    },
+    "note": "Pág. 46, «el trío infernal». Pág. 55: el traslado nocturno, con poleas al techo y troncos en las escaleras. Lars abre cualquier puerta: Cerrajería 85%."
+  },
+  {
+    "id": "meyer_abrir_puerta",
+    "npc": "lars",
+    "label": "Pedirle a Lars que abra una puerta",
+    "requires": [
+      {
+        "kind": "disposition",
+        "npc": "lars",
+        "op": ">=",
+        "value": 20
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "sobornar",
+      "adular"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "Lars saca un alambre del forro de la chaqueta, lo mira con cariño y se encoge de hombros.\n—Veinte años perfeccionándolo. Empecé con el armario de mi padre y he terminado con las cajas fuertes de los ingleses, que son peores que el armario de mi padre.\nSe lo guarda.\n—Todas las de este hotel menos tres. La caja fuerte de recepción, que es americana. La despensa grande de abajo, que no tiene cerradura sino cerrojo por dentro, y eso no lo abre nadie sin estar dentro.\nY se calla un segundo.\n—Y la tercera la abrí una vez y no volveré a abrirla. Eso es todo lo que voy a decir de la tercera.\nLevanta el pulgar.\n—Cuando quieran. Ustedes me dicen dónde y yo llego solo, porque tres suizos juntos en un pasillo llaman más la atención que un incendio.",
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "lars_ayuda"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "lars",
+          "by": 20
+        }
+      ],
+      "facts": [
+        "lars_abre_puertas",
+        "la_despensa_se_cierra_por_dentro",
+        "hay_una_puerta_que_lars_no_abre"
+      ],
+      "unlocks": [
+        "lars_llaves"
+      ]
+    },
+    "onSuccess": {
+      "text": "Lars saca un alambre del forro de la chaqueta, lo mira con cariño y se encoge de hombros.\n—Veinte años perfeccionándolo. Pero una sola vez, y ustedes no me han visto.",
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "lars_ayuda"
+        }
+      ],
+      "facts": [
+        "lars_abre_puertas"
+      ]
+    },
+    "onFailure": {
+      "text": "—Nosotros llevamos maletas, señor. —Y por el modo en que lo dice, se nota que no es la primera vez que se lo piden.\nHans le pone una mano en el hombro a su hermano y contesta por él, con mucha suavidad:\n—Lo que quiere decir Lars es que sí, pero no por dinero. Nosotros hemos hecho cosas por el señor Behler que no haríamos por el rey de Inglaterra. —Sonríe, y la mancha se le arruga—. Convénzannos de que esto es por él y hablamos otra vez.",
+      "facts": [
+        "lars_abre_puertas",
+        "los_meyer_solo_por_behler"
+      ],
+      "unlocks": [
+        "hans_behler"
+      ]
+    },
+    "note": "Pág. 135: «Pueden ser de gran ayuda para los investigadores si saben tratarlos con educación y pagarles una astronómica cantidad de dinero. Abren todas las puertas». Pero GC pág. 24 dice que son amigos íntimos de Behler «por quien serían capaces de matar»: esa es la palanca de verdad."
+  },
+  {
+    "id": "lars_llaves",
+    "npc": "lars",
+    "label": "«¿Cuántas llaves maestras hay en este hotel?»",
+    "approaches": [
+      "sobornar",
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "Lars levanta la mano y va bajando dedos.\n—Oficialmente, dos. La del señor Clinton, en recepción, atada con una cadena al cajón. Y la del señor Murray, en conserjería, que la lleva encima porque no se fía de nadie.\nBaja un tercer dedo.\n—Extraoficialmente, tres. El barman tiene una copia. La hizo hace dos años en una cerrajería de la calle Kamel y la lleva en el cajón de las servilletas, debajo del todo. —Se encoge de hombros—. Yo no le he dicho nada. Cada uno tiene su oficio.\nY baja un cuarto.\n—Y luego está el cocinero, que no tiene llave maestra porque no le hace falta. Al señor Mahadni le abren las puertas los demás.",
+      "facts": [
+        "hay_dos_llaves_maestras",
+        "gasparini_llave_maestra",
+        "murray_tiene_llave_maestra",
+        "hay_una_maestra_sin_contar"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Dos. Recepción y conserjería. —Se rasca la nuca—. Y una que no cuenta nadie, porque quien la tiene no debería tenerla y todos hacemos como que no.",
+      "facts": [
+        "hay_dos_llaves_maestras",
+        "hay_una_maestra_sin_contar"
+      ]
+    },
+    "onFailure": {
+      "text": "—De llaves no sé nada, señor. —Y sonríe con una cara de inocencia perfecta.\nHans, detrás, suspira.\n—Lars, por Dios. —Y a ustedes—: Mi hermano lleva sin necesitar una llave desde los once años. Es como preguntarle a un pájaro cuántas escaleras hay en el hotel.",
+      "facts": [
+        "lars_abre_puertas"
+      ]
+    },
+    "note": "Enlaza con `hay_dos_llaves_maestras` de `gasparini.json` y `murray_tiene_llave_maestra` de `clinton.json`: los maleteros son el único sitio del hotel donde se cuentan todas juntas."
+  },
+  {
+    "id": "lars_precio",
+    "npc": "lars",
+    "label": "«¿Cuánto costaría contar con ustedes?»",
+    "approaches": [
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Lars mira a sus hermanos. Hans asiente. Sven se encoge de hombros y se aprieta el estómago.\n—Una cantidad astronómica, señor. —Lo dice sin pizca de ironía—. Es la expresión que usamos entre nosotros. Cuando alguien nos pide algo que no es llevar maletas, el precio es una cantidad astronómica, y así nadie nos lo pide dos veces.\nSe apoya en un baúl.\n—Cincuenta libras esterlinas por los tres, y por un solo trabajo, y no de noche. Sesenta si es de noche. Y ochenta si hay que bajar por la escalera de servicio más allá de la cocina.\nHans le corrige, en voz baja y en alemán, y Lars rectifica:\n—Perdón. Ahí abajo no bajamos. Ni por ochenta ni por ochocientas. Eso lo hicimos una vez y nos pagaron el triple, y a Sven todavía le pasa lo del estómago, y no es por el picante.",
+      "facts": [
+        "los_meyer_tienen_precio",
+        "los_meyer_no_bajan_al_sotano",
+        "les_pagaron_el_triple"
+      ],
+      "unlocks": [
+        "sven_tripa",
+        "sven_escaleras"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Cincuenta libras. Por los tres y por un trabajo. —Ni pestañea—. Ya sé lo que está pensando, señor: que es una barbaridad. Lo es. Por eso lo decimos: para que solo nos lo pida quien lo necesite de verdad.",
+      "facts": [
+        "los_meyer_tienen_precio"
+      ]
+    },
+    "onFailure": {
+      "text": "—Nosotros no cobramos aparte, señor. Somos empleados del hotel. —Muy correcto, muy suizo.\nY entonces Hans, que no ha abierto la boca, dice:\n—Salvo por el señor Behler. Por el señor Behler trabajamos gratis y a cualquier hora. —Y lo dice tan serio que se queda un silencio raro entre los cuatro.",
+      "facts": [
+        "los_meyer_solo_por_behler"
+      ],
+      "unlocks": [
+        "hans_behler"
+      ]
+    },
+    "note": "Pág. 135: hay que «tratarlos con educación y pagarles una astronómica cantidad de dinero»."
+  },
+  {
+    "id": "lars_maletas_najir",
+    "npc": "lars",
+    "label": "Preguntar por el equipaje del egipcio de la cara quemada",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "faraz_najir"
+      }
+    ],
+    "approaches": [
+      "sobornar",
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Lars se ríe por la nariz.\n—Cuatro maletas y un baúl, señor. Y no pesaban nada.\n»Yo llevo maletas desde los catorce años y sé el peso de todo. Una maleta de un caballero que viene una semana pesa doce kilos. Una de un caballero que viene un mes, veinte. Las de ese señor pesaban tres. —Levanta tres dedos—. Tres kilos. Es el peso de la maleta y nada más.\n»Vacías. Cuatro maletas vacías y un baúl vacío, traídas a mano desde el casco antiguo en un coche de alquiler.\nSe encoge de hombros.\n—Un hombre no trae equipaje vacío a un hotel, señor. Un hombre trae equipaje vacío a un sitio de donde piensa sacar algo.",
+      "facts": [
+        "najir_trae_maletas_vacias",
+        "faraz_najir"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ligerísimo. —Lars arruga la nariz—. Cuatro maletas y un baúl que subí yo solo de dos viajes. Eso no lo hace un caballero que trae ropa.",
+      "facts": [
+        "najir_trae_maletas_vacias"
+      ]
+    },
+    "onFailure": {
+      "text": "—Del equipaje de los huéspedes no hablamos, señor. —Y esta vez lo dice de verdad, sin sonreír.\nPero Sven, que no ha entendido bien la pregunta porque su inglés es el peor de los tres, contesta a la vez que su hermano, encantado de ayudar:\n—¡Nada! No pesaban nada.\nY se hace un silencio muy corto y muy incómodo entre los tres hermanos.",
+      "facts": [
+        "najir_trae_maletas_vacias"
+      ]
+    },
+    "note": "Pág. 54: Najir llega a las 17:00 «cargado de maletas vacías para poder transportar objetos sin levantar sospechas»."
+  },
+  {
+    "id": "hans_cara",
+    "npc": "hans",
+    "label": "Preguntarle por la mancha de la cara",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Hans Meyer sonríe de oreja a oreja, y la mancha marrón que le cubre media cara se le arruga entera.\n—¡Por fin! —Y se ríe con toda la boca—. Llevo aquí catorce meses y usted es la cuarta persona que me lo pregunta. La cuarta, señor. Y las otras tres eran niños.\nSe da un golpecito en la mejilla.\n—Queratosis. No se contagia, no duele y no se quita. La tengo desde los seis años. Mi madre me llevó a Zúrich, a Basilea y a un curandero de Appenzell que me puso barro, y ninguno de los tres me la quitó, pero el de Appenzell me dijo una cosa que valía el viaje: que iba a saber siempre quién era buena gente.\nLe brillan los ojos.\n—Y es verdad, señor. Lo sé al segundo. La gente decente me mira la cara. La gente incómoda me mira las manos. Y hay unos pocos —y aquí deja de sonreír por primera vez— que no me miran nada, que miran a través, como se mira un perchero. Esos son los peores. En este hotel hay siete personas que me miran así y las tengo contadas.",
+      "facts": [
+        "hans_queratosis",
+        "hans_cuenta_a_los_que_no_le_miran",
+        "hans_es_buen_juez"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "hans",
+          "by": 35
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "lars",
+          "by": 15
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "sven",
+          "by": 15
+        }
+      ],
+      "unlocks": [
+        "hans_invisible"
+      ]
+    },
+    "onSuccess": {
+      "text": "Hans se toca la mejilla sin ninguna incomodidad.\n—Queratosis, señor. Desde los seis años. No se contagia y no duele. —Sonríe—. Asusta a los niños y a los ingleses, y a mí me viene bien: la gente aparta la vista y así puedo mirarla yo a gusto.",
+      "facts": [
+        "hans_queratosis"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "hans",
+          "by": 20
+        }
+      ],
+      "unlocks": [
+        "hans_invisible"
+      ]
+    },
+    "onFailure": {
+      "text": "Hans no se ofende. Al contrario: se le suaviza la cara, como si le diera pena que ustedes lo hayan preguntado tan mal.\n—No es nada, señor. De nacimiento. —Y coge las maletas—. ¿Necesitan algo? ¿De verdad, quiero decir? Porque si necesitan algo, se lo consigo.\nY lo pregunta con una sinceridad tan absoluta que resulta desarmante.",
+      "facts": [
+        "hans_queratosis",
+        "los_meyer_preguntan_de_verdad"
+      ]
+    },
+    "note": "GC pág. 24: Hans «sufre de queratosis dérmica: una enorme mancha marrón le cubre media cara. Su aspecto sobrecoge, pero es encantador». Su Encanto 50% es literalmente «preguntar con sinceridad si el personaje con el que habla necesita algo»."
+  },
+  {
+    "id": "hans_invisible",
+    "npc": "hans",
+    "label": "«¿Qué ve usted que no ve nadie?»",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Hans deja la maleta en el suelo y se sienta encima, cosa que un maletero no hace nunca.\n—Yo entro en las habitaciones, señor. Todos los días, en veinte o treinta. Y la gente, cuando entro yo, no se calla. —Se toca la mejilla—. Con Lars se callan. Con Sven se callan. Conmigo siguen hablando, porque para callarse delante de alguien primero hay que verlo.\nCuenta con los dedos, despacio.\n—El austriaco del museo tiene una caja fuerte de viaje debajo de la cama y la abre de espaldas a la puerta aunque no haya nadie. El arqueólogo inglés duerme con la ropa puesta; lo sé porque la cama está deshecha solo por un lado y no hay pijama en el armario, y llevo tres semanas así.\n»El caballero de las doce habitaciones no ha dormido en ninguna de las doce. Doce camas, catorce días, ninguna deshecha. Y los ceniceros vacíos y las toallas dobladas, y aun así todas las mañanas la puerta está cerrada por dentro.\nSe levanta y recoge la maleta.\n—Yo eso no se lo cuento a nadie, señor, porque nadie me pregunta. Pero lo veo todos los días y me lo llevo a la cama.",
+      "facts": [
+        "weder_tiene_caja_fuerte",
+        "carter_duerme_vestido",
+        "bohr_no_duerme",
+        "doce_habitaciones_bohr",
+        "bohr_no_usa_llaves"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "senor_bohr"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ],
+      "unlocks": [
+        "hans_bohr"
+      ]
+    },
+    "onHard": {
+      "text": "—Muchas cosas, señor, y ninguna es asunto mío. —Baja la voz—. El del museo guarda una caja fuerte pequeña bajo la cama. El inglés del Valle de los Reyes duerme vestido. Y hay un caballero en la tercera planta con doce habitaciones y ninguna cama deshecha.\nSe encoge de hombros.\n—Yo entro, dejo el equipaje y salgo. Pero entro en treinta habitaciones al día, señor. Al final del año uno sabe cómo duerme el hotel entero.",
+      "facts": [
+        "weder_tiene_caja_fuerte",
+        "carter_duerme_vestido",
+        "bohr_no_duerme"
+      ],
+      "unlocks": [
+        "hans_bohr"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Que la gente miente sobre cuánto tiempo se queda. —Sonríe—. Se lo dice el equipaje, señor: el que dice que se va el jueves y trae baúl, se queda un mes. Y el que dice que se queda un mes y trae una maleta, se va esta noche.",
+      "facts": [
+        "hans_es_buen_juez"
+      ]
+    },
+    "onFailure": {
+      "text": "—Yo llevo maletas, señor. —Y sonríe, y coge la de ustedes, y la sube.\nPero al llegar arriba, mientras la deja en el portaequipajes, comenta como quien no dice nada:\n—Ustedes están en la primera planta. Está bien. Yo, si pudiera elegir, no dormiría en la tercera. —Y se va antes de que nadie pueda preguntarle por qué.",
+      "facts": [
+        "algo_pasa_en_la_tercera_planta"
+      ]
+    },
+    "note": "Encanto 50% con la especialidad «preguntar con sinceridad si el personaje con el que habla necesita algo». El maletero al que nadie mira es el mejor observador del Shepheard's, y es un hallazgo del propio libro: son «amigos íntimos de Behler» y están en todas partes."
+  },
+  {
+    "id": "hans_bohr",
+    "npc": "hans",
+    "label": "«¿Y el señor de las doce habitaciones?»",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "Hans se pone serio, y en él eso da más miedo que en otro hombre porque en él no es habitual.\n—Le subí el equipaje el día que llegó. Un baúl. Uno solo, para doce habitaciones.\n»Pesaba ochenta kilos y lo subí yo solo sin sudar, señor, y yo peso setenta y dos. —Se mira las manos—. Eso no se puede. Llevo desde ese día dándole vueltas y no se puede. O el baúl no pesaba lo que marcaba la báscula, o yo no lo subí.\nTraga.\n—Y él es de los siete que no me miran. Fue el primero de los siete. Me dio la propina en la mano y me miró a través, y yo me quedé en el pasillo un rato sin saber qué estaba haciendo allí.\n»Y desde entonces, cuando paso por delante de esas doce puertas, todas las tardes a la misma hora, oigo dentro a un niño pequeño. En las doce.",
+      "facts": [
+        "doce_habitaciones_bohr",
+        "bohr_no_duerme",
+        "el_bulto_de_bohr",
+        "se_oye_un_nino_en_las_doce"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "senor_bohr"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "1/1D4"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Doce habitaciones y un baúl. —Hans arruga la nariz—. Ninguna cama deshecha en dos semanas y las puertas cerradas por dentro todas las mañanas. Yo lo puse en el parte y en el parte no pasó nada.",
+      "facts": [
+        "doce_habitaciones_bohr",
+        "bohr_no_duerme",
+        "bohr_no_usa_llaves"
+      ]
+    },
+    "onFailure": {
+      "text": "—De ese señor no. —Y se le va la sonrisa por primera vez desde que le conocen.\nSe queda mirando el suelo un momento y luego dice, en voz muy baja:\n—Le pido una cosa, señor. Si suben a la tercera planta, suban de día. —Y coge las maletas—. No sé explicarle por qué y llevo dos semanas intentándolo.",
+      "facts": [
+        "algo_pasa_en_la_tercera_planta",
+        "doce_habitaciones_bohr"
+      ]
+    },
+    "note": "Enlaza con `doce_casilleros_tapados` y `doce_firmas_identicas` (`clinton.json`) y con `yana_vio_a_bohr_dos_veces` (`gasparini.json`)."
+  },
+  {
+    "id": "hans_behler",
+    "npc": "hans",
+    "label": "Preguntarles qué les debe el director",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "Los tres hermanos se miran. Contesta Hans.\n—No nos debe nada, señor. Es al revés.\n»Nosotros estábamos en Trieste hace cuatro años, sin trabajo y sin papeles, durmiendo en el puerto. Tres suizos: uno con la cara así, otro con el estómago roto y el pequeño con una fama. —Señala a Lars con el pulgar—. Nadie nos cogía. Ni de estibadores.\n»Y llegó un señor con un traje bueno que había perdido el tren, nos pagó la cena porque sí, se sentó con nosotros dos horas y a la mañana siguiente nos puso a los tres en un barco a Alejandría con un contrato firmado.\nSe encoge de hombros con una sencillez que corta.\n—Cuatro años. No nos ha pedido nada nunca. Ni una vez. —Y luego, sin ningún énfasis, como quien informa del tiempo—: Si alguien le hace daño al señor Behler, nosotros lo mataremos. Los tres. Se lo digo ahora para que no haya malentendidos después.",
+      "facts": [
+        "los_meyer_solo_por_behler",
+        "behler_les_dio_trabajo",
+        "behler_aprecia_al_personal"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "hans",
+          "by": 20
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "lars",
+          "by": 20
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "sven",
+          "by": 20
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Todo. —Hans lo dice sin dramatismo—. Nos sacó de un puerto y nos trajo aquí. Por el señor Behler hacemos cualquier cosa, señor, y no es una manera de hablar.",
+      "facts": [
+        "los_meyer_solo_por_behler",
+        "behler_les_dio_trabajo"
+      ]
+    },
+    "onFailure": {
+      "text": "—Es nuestro jefe. —Y Hans cambia de tema con mucha educación y muy poca gracia, hablando del calor.\nPero Sven, que no sigue del todo la conversación en inglés, ha entendido el nombre y solo el nombre, y dice con una sonrisa enorme:\n—¡Herr Behler! —Y se lleva la mano al pecho.\nLos tres se llevan la mano al pecho. No se han mirado para hacerlo.",
+      "facts": [
+        "los_meyer_solo_por_behler"
+      ]
+    },
+    "note": "GC pág. 24: «Amigos íntimos de Behler, por quien serían capaces de matar». Es la única palanca que mueve a los tres sin dinero de por medio."
+  },
+  {
+    "id": "sven_tripa",
+    "npc": "sven",
+    "label": "Preguntarle a Sven por su estómago",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "Sven Meyer se aprieta el estómago con la palma abierta y pone una cara de mártir espléndida.\n—El picante del señor Mahadni. —Su inglés es el peor de los tres y por eso habla despacio, lo cual le da a todo un aire de confesión—. Todos los días. Como en la cocina con el personal, a las cuatro, y todos los días hay una cosa roja en el arroz, y todos los días me la como porque si no me la como se ríen.\nHans dice algo en alemán. Sven le contesta y se vuelve hacia ustedes, más serio.\n—Dice mi hermano que no es el picante. —Se encoge de hombros—. Empezó hace quince días. La noche que bajamos las cajas. Yo antes comía esa cosa roja y no me pasaba nada.",
+      "facts": [
+        "sven_come_en_la_cocina",
+        "sven_enfermo_desde_las_cajas",
+        "cajas_de_noche"
+      ],
+      "unlocks": [
+        "sven_cocina",
+        "sven_escaleras"
+      ]
+    },
+    "onSuccess": {
+      "text": "—El picante del señor Mahadni. —Se aprieta la tripa—. Como con el personal a las cuatro, en la cocina, y hay que comérselo todo. Es lo que hay.",
+      "facts": [
+        "sven_come_en_la_cocina"
+      ],
+      "unlocks": [
+        "sven_cocina"
+      ]
+    },
+    "onFailure": {
+      "text": "—No es nada, señor. —Y se pone recto y aguanta el tipo, que es lo que hace siempre.\nPero cuando se agacha a coger el baúl se le escapa un gesto, y Hans le quita el baúl de las manos sin decir nada y lo carga él. Es evidente que llevan quince días haciendo exactamente eso.",
+      "facts": [
+        "sven_enfermo_desde_las_cajas"
+      ]
+    },
+    "note": "GC pág. 24: Sven «se lleva la mano al estómago varias veces; le duele la tripa, probablemente por el gusto del cocinero Mahadni por el picante». El libro dice «probablemente»."
+  },
+  {
+    "id": "sven_cocina",
+    "npc": "sven",
+    "label": "«¿Qué se ve desde la mesa del personal?»",
+    "approaches": [
+      "adular",
+      "sobornar",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onExtreme": {
+      "text": "Sven se lo piensa mucho. Piensa en alemán y traduce despacio, y por eso lo que dice sale limpio de adornos.\n—La mesa del personal está al fondo, junto a la puerta del almacén. Comemos catorce. Los seis camareros del señor Mahadni no comen con nosotros: comen antes, a las tres y media, y se van.\n»Y a las seis de la tarde el señor Mahadni baja al almacén. Todos los días. Con una cesta tapada con un paño blanco.\nSe aprieta el estómago.\n—Y sube el paño doblado. Doblado y limpio, señor, encima de la cesta vacía. —Traga—. Yo eso lo he visto quince veces. Un hombre que baja comida a un almacén sube el paño sucio. Este lo dobla.\nMira a sus hermanos.\n—Y una vez, una sola, tardó mucho en subir y arriba se oyó una cosa. Como cuando se arrastra un saco mojado por un suelo de piedra. Los catorce lo oímos y los catorce seguimos comiendo.",
+      "facts": [
+        "mahadni_baja_todos_los_dias",
+        "los_seis_camareros",
+        "el_pano_doblado",
+        "algo_custodia_las_piezas",
+        "el_olor_va_a_horas"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—La puerta del almacén. —Sven señala con el mentón—. Y al señor Mahadni bajando por ella todas las tardes a las seis con una cesta. Nadie le acompaña y nadie le pregunta.",
+      "facts": [
+        "mahadni_baja_todos_los_dias"
+      ]
+    },
+    "onFailure": {
+      "text": "—Se ve el arroz, señor. —Se ríe él solo de su chiste, y se le nota que lo tenía preparado.\nDespués se pone serio.\n—Y se ve quién no habla. En una mesa de catorce, en una cocina, siempre hay ruido. En la nuestra hay seis que no dicen nada nunca, y por eso comen antes: para no tener que no decir nada delante de nosotros.",
+      "facts": [
+        "los_seis_camareros"
+      ]
+    },
+    "note": "Pág. 135: Mahadni «alimenta a los monstruos del sótano». El personal de cocina come a las cuatro; los seis, a las tres y media."
+  },
+  {
+    "id": "sven_escaleras",
+    "npc": "sven",
+    "label": "«¿Hasta dónde bajaron ustedes esa noche?»",
+    "approaches": [
+      "adular",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Sven Meyer mira a Lars. Lars mira al suelo. Contesta Sven.\n—Hasta la tercera puerta.\n»Bajamos la caja grande por las escaleras de piedra sobre troncos, treinta hombres, cuatro horas. Al final del pasillo largo había una puerta y detrás otra sala, y al final de esa sala había una tercera puerta abierta.\nSe pasa la lengua por los labios.\n—Y de esa tercera puerta salía aire caliente. Caliente, señor, en un sótano, en noviembre. Y el suelo de ahí para adentro no era suelo de hotel: era suelo de piedra vieja, con dibujos.\n»Yo me asomé un segundo. —Se aprieta el estómago con las dos manos—. Yo me asomé un segundo y vi que había columnas, muchas, y que entre las columnas había algo que se apartó de la luz.\nSilencio.\n—El señor Mahadni me puso una mano en el hombro y me dijo, muy educado, que ya podíamos subir. Y subimos. Y en la puerta de la cocina nos dio a cada uno el triple de la paga y las buenas noches.",
+      "facts": [
+        "el_templo_bajo_el_hotel",
+        "tres_puertas_en_el_sotano",
+        "caja_de_siete_metros",
+        "algo_custodia_las_piezas",
+        "les_pagaron_el_triple"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D4"
+        },
+        {
+          "kind": "unlockJournal",
+          "entry": "las_cajas"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Abajo del todo. —Sven habla despacio—. Más abajo del almacén hay un pasillo largo y otra sala, y al final otra puerta. Nosotros llegamos hasta ahí y no pasamos.\n»Hacía calor, señor. Mucho calor, ahí abajo, de noche, en noviembre. Y olía a lo que huele el restaurante cuando el metre abre los ventanales.",
+      "facts": [
+        "tres_puertas_en_el_sotano",
+        "olor_de_la_cocina",
+        "algo_respira_abajo"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "Sven abre la boca y Lars le pone dos dedos en el brazo.\n—Hasta donde nos dijeron, señor —contesta Lars por él—. Y cobramos y nos fuimos a dormir.\nY luego, en un tono completamente distinto, sin ninguna sonrisa:\n—Mi hermano no ha vuelto a comer bien desde esa noche y no es por el picante. Ustedes hagan lo que quieran, pero a nosotros no nos vuelvan a llevar ahí abajo.",
+      "facts": [
+        "sven_enfermo_desde_las_cajas",
+        "los_meyer_no_bajan_al_sotano"
+      ]
+    },
+    "note": "Pág. 55: «Te estoy diciendo algo de siete metros, no sé si me entiendes». El Viejo Templo de ibn Tulun (pág. 106) está al final de esa bajada; los Meyer son los únicos testigos vivos que llegaron a asomarse."
+  },
+  {
+    "id": "sven_nubios",
+    "npc": "sven",
+    "label": "Preguntar quién controla la puerta de la fiesta",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "fiesta_es_exclusiva"
+      }
+    ],
+    "approaches": [
+      "sobornar",
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Los nubios grandes. —Sven abre mucho los brazos para dar la medida y no le llegan—. Con uniforme blanco bordado en oro y un cinturón de cuero con una jambia de verdad. No de adorno, señor: de verdad. Se la he visto sacar a uno para cortar una cuerda.\n»Tienen la lista en la mano y piden papeles. Papeles, en una fiesta de disfraces. —Se encoge de hombros—. Si no está usted en la lista no entra ni el rey.\nLars completa, más bajo:\n—Pero la lista la lleva la puerta principal. Y por la puerta norte, la del patio de equipajes, entramos nosotros con las bandejas cada cuatro minutos toda la noche, y ahí no hay lista: hay un cocinero contando bandejas.",
+      "facts": [
+        "fiesta_es_exclusiva",
+        "mascarada_entrada_norte",
+        "los_nubios_van_armados"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "sven",
+          "by": 10
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Camareros nubios enormes, con la lista en la mano. —Sven niega con la cabeza—. Piden documento. No entra nadie que no esté escrito.",
+      "facts": [
+        "fiesta_es_exclusiva"
+      ]
+    },
+    "onFailure": {
+      "text": "—Nosotros no entramos en la fiesta, señor. Nosotros llevamos las bandejas. —Y lo dice sin ninguna amargura, y ahí está justamente el dato.\nSe queda pensando.\n—Toda la noche. De la cocina al salón, por el patio, cada cuatro minutos, los tres. Con chaqueta blanca.",
+      "facts": [
+        "mascarada_entrada_norte"
+      ]
+    },
+    "note": "Pág. 55: «los numerosos invitados, recibidos por enormes camareros nubios […] La lista de invitados está en su poder y el control es exhaustivo». La chaqueta blanca de las bandejas es la puerta trasera."
+  }
+]

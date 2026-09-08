@@ -1,0 +1,654 @@
+[
+  {
+    "id": "thornhill_precio",
+    "npc": "thornhill",
+    "label": "«¿Cuánto cuesta una conferencia a Londres?»",
+    "approaches": [
+      "directo"
+    ],
+    "once": true,
+    "minutes": 5,
+    "always": {
+      "text": "La señorita Thornhill se endereza detrás del mostrador como si le hubieran dado una orden militar. Es evidente que llevaba esperando la pregunta desde antes de que ustedes nacieran.\n—Diez libras egipcias de media, señor, a Londres o a Nueva York, según la hora y el tiempo que dure. La centralita abre a las nueve y cierra a las cinco, ocho horas justas, todos los días del año, incluidos los domingos y el día de Navidad, que ese lo hago yo sola porque las chicas tienen familia.\nRespira.\n—Telegramas y correo, lo mismo. Y si quieren mandar algo urgente al puerto de Alejandría se lo pongo en el tren de las siete.\nY se queda mirándoles, encantada, esperando la siguiente pregunta. Cualquiera. La que sea.",
+      "facts": [
+        "centralita_horario",
+        "thornhill_lleva_la_centralita"
+      ]
+    },
+    "note": "Pág. 95: «Una conferencia a Londres o Nueva York cuesta una media de 10 libras egipcias. El servicio de telegramas y correos está completamente operativo las 8 horas (9:00-17:00 h) que permanece abierto, todos los días»."
+  },
+  {
+    "id": "thornhill_novelas",
+    "npc": "thornhill",
+    "label": "Preguntarle qué está leyendo",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "Mary Ann Thornhill se pone del color de una amapola y saca de debajo del mostrador un volumen con las esquinas blandas de tanto pasarlas.\n—No debería. En horas de servicio, quiero decir. —Baja la voz—. Pero es que aquí no llama nadie entre las dos y las cuatro, y una no puede estar ocho horas mirando un cuadro de clavijas.\nDebajo del primero hay otros nueve. Y debajo, una pila de revistas americanas.\n—True Story. Esa es la buena. —Se le ilumina la cara—. Historias verdaderas, escritas por la gente a la que le pasaron. Mujeres normales, señor. Mecanógrafas, viudas, una telefonista de Chicago. —Y añade, sin darse cuenta de lo que está diciendo—: A veces pienso que si alguien me preguntara, yo tendría una.",
+      "facts": [
+        "thornhill_lee_novelas",
+        "thornhill_esta_sola"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "thornhill",
+          "by": 25
+        }
+      ],
+      "unlocks": [
+        "thornhill_fiestas"
+      ]
+    },
+    "onSuccess": {
+      "text": "—¡Nada, nada! —Empuja algo con el codo hacia el fondo del mostrador—. Cosas de mujeres. Novelas. Una tontería para pasar la tarde.\nY sonríe, halagada hasta las orejas de que alguien haya reparado en que estaba haciendo algo.",
+      "facts": [
+        "thornhill_lee_novelas"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "thornhill",
+          "by": 15
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Trabajando, señor. —Y esconde el libro con un movimiento de una eficacia asombrosa, de alguien que lo ha hecho mil veces.\nPero se ha ruborizado, y mientras se recompone dice, un poco a la defensiva y sin que venga a cuento:\n—Aquí una se entera de todo y no habla con nadie. Once años. No es lo mismo.",
+      "facts": [
+        "thornhill_esta_sola"
+      ],
+      "unlocks": [
+        "thornhill_fiestas"
+      ]
+    },
+    "note": "Pág. 95: «La colección de novelas románticas de la señorita Thornhill es inabarcable, y la esconde, oculta tras el mostrador. True Story (magazine) es su revista favorita»."
+  },
+  {
+    "id": "thornhill_fiestas",
+    "npc": "thornhill",
+    "label": "Preguntarle si va a la fiesta de esta noche",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "minutes": 5,
+    "locked": true,
+    "once": true,
+    "always": {
+      "text": "—¿Yo? —Y se ríe, con una risa breve que se le tuerce a mitad—. No, no. Yo cierro a las cinco y me voy a mi habitación, que la tengo en el ala de servicio, y desde allí se oye la orquesta divinamente. Divinamente. La del mes pasado, la veneciana, la oí entera.\nOrdena unos papeles que ya estaban ordenados.\n—El señor Behler da las mejores fiestas del Mediterráneo. Eso lo dice todo el mundo y es verdad. He puesto conferencias a Roma y a París solo para confirmar la asistencia de gente que sale en los periódicos.\nY entonces, muy deprisa, como quien retira una mano de un fuego:\n—En fin. Ustedes dirán qué necesitaban.",
+      "facts": [
+        "thornhill_quiere_ir_a_la_fiesta",
+        "thornhill_esta_sola"
+      ]
+    },
+    "note": "Pág. 95: «Daría un brazo por asistir a las fiestas de Behler, pero nadie la invita. No se acuerdan de ella». Este tema es el que pone la idea delante del jugador."
+  },
+  {
+    "id": "thornhill_invitar",
+    "npc": "thornhill",
+    "label": "Invitarla a la fiesta de esta noche",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "invitados_mascarada"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "once": true,
+    "minutes": 5,
+    "always": {
+      "text": "Se queda muy quieta. Luego se lleva una mano a la boca y se le humedecen los ojos.\n—¿A mí? —Y después de un momento, muy bajito—: Llevo once años en esta oficina.\nMira el cuadro de clavijas. Mira la puerta. Vuelve a mirarles a ustedes.\n—Yo he oído en once años todas las cosas que se dicen en este hotel. Todas. Los divorcios, las deudas, las tres veces que se ha muerto alguien y ha llamado el hijo desde Manchester. —Se seca los ojos con el puño de la blusa, con rabia, como si le molestara hacerlo—. Y no me lo ha preguntado nunca nadie. Nadie. Ni una vez. Porque para preguntarme algo primero hay que verme.\nSe endereza. Se coloca bien las horquillas.\n—Pregúntenme lo que quieran. Lo que quieran. Y no vuelvan a llamar a la puerta: entren.",
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "thornhill",
+          "by": 60
+        },
+        {
+          "kind": "setFlag",
+          "flag": "thornhill_aliada"
+        }
+      ],
+      "facts": [
+        "thornhill_es_vuestra"
+      ],
+      "unlocks": [
+        "thornhill_dieter",
+        "thornhill_bohr",
+        "thornhill_najir",
+        "thornhill_hoy"
+      ]
+    },
+    "note": "Pág. 95: «Daría un brazo por asistir a las fiestas de Behler, pero nadie la invita. No se acuerdan de ella». Es la aliada más barata del hotel: a partir de aquí, sus temas no suben de dificultad, pierden la tirada."
+  },
+  {
+    "id": "thornhill_secreto",
+    "npc": "thornhill",
+    "label": "Pedirle que les cuente lo que oye",
+    "approaches": [
+      "adular",
+      "directo",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—El secreto de las comunicaciones, señor. —Y lo dice con verdadera pena, mirando de reojo el cuadro—. Es lo primero que le enseñan a una. Si yo repitiera lo que oigo me despedirían en una tarde, y a mi edad y con mi cara no me coge ni el Semíramis.\nY sin embargo se inclina un poco sobre el mostrador.\n—Ahora bien. Yo no repito conversaciones. Pero decir a qué número ha llamado un caballero, o a qué hora, o cuánto ha durado… eso está en el libro de registro, y el libro de registro lo puede consultar la dirección cuando quiera. —Se encoge de hombros con una inocencia perfecta—. Yo no soy la dirección. Pero el libro está aquí encima.",
+      "facts": [
+        "thornhill_lleva_la_centralita",
+        "hay_libro_de_registro"
+      ],
+      "unlocks": [
+        "thornhill_llamada"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Ay, no puedo. —Lo dice con verdadera pena, mirando de reojo la novela que esconde bajo el mostrador—. El secreto de las comunicaciones. Es lo primero que le enseñan a una.\nPero mientras lo dice, no aparta la mano del libro de registro.",
+      "facts": [
+        "hay_libro_de_registro"
+      ],
+      "unlocks": [
+        "thornhill_llamada"
+      ]
+    },
+    "onFailure": {
+      "text": "—El secreto de las comunicaciones. —Se pone recta y muy digna—. Y le agradecería que no volviera a pedírmelo, señor, porque una tiene su palabra.\nY entonces, en el silencio incómodo que viene después, la centralita zumba y ella conecta una clavija y dice «un momento, señor Weder, le paso con Viena», y se le nota en la cara que se ha dado cuenta un segundo tarde de que lo ha dicho en voz alta delante de ustedes.",
+      "facts": [
+        "weder_llama_a_viena"
+      ],
+      "unlocks": [
+        "thornhill_weder"
+      ]
+    },
+    "note": "Pág. 95: Thornhill «es amable y servicial», con Saber (Contar lo que sabe acerca de todo el mundo) 25%. Su resistencia es profesional, no personal: cede por el registro antes que por la conversación."
+  },
+  {
+    "id": "thornhill_llamada",
+    "npc": "thornhill",
+    "label": "Preguntar por las conferencias de esta mañana",
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_gasparini_llama"
+      }
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "minutes": 10,
+    "onExtreme": {
+      "text": "La señorita Thornhill se ilumina. Nadie le pregunta nunca nada.\n—El señor Gasparini, el del bar. La una y siete minutos, cuatro minutos y medio de conferencia a un número del casco antiguo, el cuatro-siete-dos. —Lo recita sin mirar el libro; lo mira después, para confirmar lo que ya ha dicho—. Discutieron por un veinte por ciento, imagínense. Él pedía el veinte, el otro caballero ofrecía el quince, y al final aceptó el veinte y colgó encantado.\n»El otro caballero se llamaba Faraz. Faraz Najir. Vende antigüedades, creo. —Baja la voz—. Y le diré una cosa que me llamó la atención, señor, porque llevo once años oyendo a gente cerrar tratos: cuando uno acepta a la primera lo que le piden, es que ya ha decidido no pagarlo.\nY añade, apuntando con el lápiz:\n—Ah, y preguntó si el hotel tenía servicio de consigna para equipaje voluminoso. Vacío, dijo. Equipaje voluminoso vacío.",
+      "facts": [
+        "llamada_de_gasparini",
+        "faraz_najir",
+        "gasparini_pidio_el_veinte",
+        "najir_llega_esta_tarde",
+        "najir_trae_maletas_vacias"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "la_llamada"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "La señorita Thornhill se ilumina. Nadie le pregunta nunca nada.\n—El señor Gasparini, el del bar. Una conferencia a un número del casco antiguo, a la una y siete. Discutieron por un veinte por ciento, imagínense, y él parecía encantado al colgar.\n»El otro caballero se llamaba Faraz. Faraz Najir. Vende antigüedades, creo. Y dijo que vendría esta misma tarde.",
+      "facts": [
+        "llamada_de_gasparini",
+        "faraz_najir",
+        "gasparini_pidio_el_veinte",
+        "najir_llega_esta_tarde"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "la_llamada"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "La señorita Thornhill se ilumina. Nadie le pregunta nunca nada.\n—El señor Gasparini, el del bar. Una conferencia a un número del casco antiguo. Discutieron por un porcentaje y él parecía encantado al colgar. El otro caballero se llamaba Faraz. Faraz Najir. Vende antigüedades, creo.",
+      "facts": [
+        "llamada_de_gasparini",
+        "faraz_najir"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "la_llamada"
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Ay, no puedo. El secreto de las comunicaciones. —Lo dice con verdadera pena, mirando de reojo la novela que esconde bajo el mostrador.\nY entonces, para compensar, y porque no soporta dejar a nadie sin nada, ofrece lo único que en su cabeza no es un secreto:\n—Lo que sí le digo es que esta mañana solo ha habido dos conferencias, y una era del propio hotel al puerto. Total: un caballero. Uno solo. —Y sonríe, tan satisfecha de haber ayudado, sin darse cuenta de que acaba de reducir el mundo a una sola persona.",
+      "facts": [
+        "solo_hubo_una_llamada",
+        "hay_libro_de_registro"
+      ]
+    },
+    "note": "Pág. 52: Gasparini llama a Najir a las 13:00 desde la oficina de correos «pidiéndole un porcentaje a cambio del chivatazo». Pág. 54: Najir llega a las 17:00 «cargado de maletas vacías para poder transportar objetos sin levantar sospechas»."
+  },
+  {
+    "id": "thornhill_weder",
+    "npc": "thornhill",
+    "label": "«¿A quién llama el señor del museo?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "weder_dirige_el_museo"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—El señor Weder es mi mejor cliente. —Pasa hojas del registro con el dedo—. Viena, Viena, Múnich, Viena. Y Berlín tres veces esta semana, siempre al mismo número y siempre a la misma hora, las nueve y cinco de la mañana, que en Alemania son las ocho y cinco.\nSe detiene en una línea.\n—Y le voy a decir una cosa rara, señor, porque a mí me pareció rara y la apunté. Las conferencias a Viena las paga el museo. La de Berlín la paga él, en efectivo, y me pide que no la anote en la cuenta de la habitación.\nCierra el libro.\n—Yo la anoto igual. En otro sitio.",
+      "facts": [
+        "weder_llama_a_viena",
+        "weder_llama_a_berlin",
+        "correspondencia_nazi",
+        "weder_paga_en_efectivo"
+      ]
+    },
+    "onHard": {
+      "text": "—A Viena, casi siempre. Al museo. —Consulta el registro—. Y a Berlín, alguna vez, a un número particular, siempre a primera hora. Es un caballero muy educado y siempre da las gracias, cosa que no hace ni la mitad de esta clientela.",
+      "facts": [
+        "weder_llama_a_viena",
+        "weder_llama_a_berlin"
+      ]
+    },
+    "onSuccess": {
+      "text": "—A Austria. —Sonríe—. Es del museo de allí, ¿sabe? Llama muchísimo. Yo creo que ese hombre trabaja más de vacaciones que en su despacho.",
+      "facts": [
+        "weder_llama_a_viena"
+      ]
+    },
+    "onFailure": {
+      "text": "—No puedo decirle eso, señor. —Firme—. Además, el señor Weder es una persona muy considerada: siempre me pregunta si me ha molestado la clavija.\nY luego, bajando un poco la voz, medio en broma:\n—Aunque, entre nosotros, si yo tuviera que adivinar el idioma de un caballero por cómo suena al otro lado, diría que en este hotel se habla mucho más alemán del que parece.",
+      "facts": [
+        "weder_llama_a_viena"
+      ]
+    },
+    "note": "Pág. 95: «Recuerda nombres, números y cifras discutidas». La correspondencia de Weder con Berlín es el hilo que ya aparece en `weder.json` (`correspondencia_nazi`, Sebottendorf)."
+  },
+  {
+    "id": "thornhill_carter",
+    "npc": "thornhill",
+    "label": "«¿Ha puesto algún telegrama el arqueólogo?»",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "carter_se_va_manana"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "enganar",
+      "sobornar"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "—El señor Carter. —Y se pone seria de golpe—. Sí. Uno. A Highclere, a Lord Carnarvon, hace once días, y no lo he olvidado porque me hizo escribirlo tres veces.\nBusca la copia. La tiene.\n—«Al fin hemos hecho un descubrimiento maravilloso en el valle. Una magnífica tumba con los sellos intactos. He vuelto a cubrirla hasta su llegada. Enhorabuena.» —Levanta la vista—. Eso fue el día seis.\n»Y aquí está lo que a mí me dejó pensando, señor. Antes de mandar ese, escribió otro y lo rompió. Yo lo saqué de la papelera porque hay que anotar el papel gastado. —Deja el trozo en el mostrador—. Ponía lo mismo, pero con una palabra más al final. Ponía: «vuelva pronto».\nY se encoge de hombros.\n—Un hombre que ha esperado catorce años tacha «vuelva pronto» de un telegrama. Yo no entiendo de arqueología, pero de esperar entiendo un poco.",
+      "facts": [
+        "telegrama_carter_carnarvon",
+        "empezo_el_5_de_noviembre",
+        "carter_no_queria_que_viniera",
+        "tumba_profanada"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "gazette_21"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Uno, a Inglaterra, hace once días. A Lord Carnarvon, a Highclere. —Baja la voz—. Anunciaba un descubrimiento en el valle: una tumba con los sellos intactos, que la había vuelto a cubrir hasta su llegada. Lo recuerdo palabra por palabra porque me lo hizo repetir tres veces y porque me temblaba el pulso escribiéndolo.",
+      "facts": [
+        "telegrama_carter_carnarvon",
+        "empezo_el_5_de_noviembre"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un telegrama a Inglaterra, a primeros de mes. —Asiente—. A su patrocinador. Buenas noticias, por el tono. Y desde entonces, nada: ese caballero no llama a nadie nunca.",
+      "facts": [
+        "telegrama_carter_carnarvon"
+      ]
+    },
+    "onFailure": {
+      "text": "—No puedo hablarle de la correspondencia de los huéspedes, señor.\nY entonces, porque no puede evitarlo:\n—Aunque le diré que si un huésped no recibe ni una carta ni una llamada en tres semanas, no es que no tenga a nadie. Es que no quiere que le encuentren. Eso lo aprende una en esta silla.",
+      "facts": [
+        "carter_no_recibe_correo"
+      ]
+    },
+    "note": "Pág. 61: Carnarvon llega el día 22 avisado por el telegrama de Carter. La tumba se descubre el 5 de noviembre (hecho `empezo_el_5_de_noviembre`, ya en circulación desde `carter.json`)."
+  },
+  {
+    "id": "thornhill_behler",
+    "npc": "thornhill",
+    "label": "Preguntarle por el director",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—El señor Behler es el mejor hombre que he conocido. —Y lo dice sin ninguna ironía, que en este hotel es casi una rareza—. Me contrató él. Yo venía de Alejandría con una carta de recomendación de un hotel que había cerrado, o sea, con nada, y él la leyó entera. Entera, señor. Delante de mí. Nadie lee esas cartas.\nOrdena las clavijas.\n—Y sube a felicitarme por Navidad. A esta oficina. Con una caja de dulces del salón morisco. Once años, once cajas. —Y luego, más bajo—: También sube el señor Mahadni con el pedido, pero ese no felicita.",
+      "facts": [
+        "behler_aprecia_al_personal",
+        "thornhill_adora_a_behler",
+        "mahadni_gerente_de_facto"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un caballero. —Se le suaviza la cara—. De los de verdad, no de los que lo ponen en la tarjeta. Aquí dentro no hablará mal de él ni el que le robe.",
+      "facts": [
+        "thornhill_adora_a_behler"
+      ]
+    },
+    "onFailure": {
+      "text": "—Del señor Behler no se habla, se trabaja para él. —Muy firme.\nY después, arreglando unos papeles:\n—Aunque últimamente sube menos por aquí. Antes bajaba a la centralita dos veces por semana a preguntar cómo iba todo. Este mes no ha bajado ni una. Está con las fiestas, claro. Está siempre con las fiestas.",
+      "facts": [
+        "behler_delega_en_mahadni"
+      ]
+    },
+    "note": "Pág. 95: es una empleada veterana y devota. Su adoración por Behler es la vía limpia para que el grupo entienda cuánto ha delegado el director sin darse cuenta."
+  },
+  {
+    "id": "thornhill_hoy",
+    "npc": "thornhill",
+    "label": "«¿Quién ha llamado hoy?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "requires": [
+      {
+        "kind": "any",
+        "of": [
+          {
+            "kind": "flag",
+            "flag": "thornhill_aliada"
+          },
+          {
+            "kind": "disposition",
+            "npc": "thornhill",
+            "op": ">=",
+            "value": 60
+          }
+        ]
+      }
+    ],
+    "minutes": 10,
+    "always": {
+      "text": "Abre el libro de registro y lo gira hacia ustedes sin que se lo pidan. Es un gesto pequeño y es absolutamente ilegal.\n—Cinco conferencias y cuatro telegramas. —Va bajando el dedo—. El hotel al puerto, por el equipaje del conde que llega mañana. El señor Weder a Viena, once minutos. El señor Gasparini al casco antiguo, cuatro y medio, discutiendo un porcentaje. La habitación doscientos cuatro a Berlín, un caballero alemán, dos minutos y muy seco. Y una desde fuera, sin identificar, preguntando si se hospeda aquí un señor Najir.\nLevanta la vista.\n—Esa última es de esta mañana temprano, señor. Antes de que el señor Gasparini llamara a nadie.\nY se queda esperando a que ustedes entiendan lo que acaba de decirles.",
+      "facts": [
+        "llamada_de_gasparini",
+        "weder_llama_a_viena",
+        "faraz_najir",
+        "preguntaron_por_najir_antes",
+        "hay_libro_de_registro"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "la_llamada"
+        }
+      ]
+    },
+    "note": "Tema de aliada: sin tirada. Pág. 95: «Recuerda nombres, números y cifras discutidas». La llamada anterior a la de Gasparini es la señal de que alguien más ya vigilaba a Najir."
+  },
+  {
+    "id": "thornhill_dieter",
+    "npc": "thornhill",
+    "label": "«¿Y el alemán de la doscientos cuatro?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "requires": [
+      {
+        "kind": "any",
+        "of": [
+          {
+            "kind": "flag",
+            "flag": "thornhill_aliada"
+          },
+          {
+            "kind": "disposition",
+            "npc": "thornhill",
+            "op": ">=",
+            "value": 60
+          }
+        ]
+      }
+    ],
+    "minutes": 10,
+    "always": {
+      "text": "—El señor Lounpeen. —Arruga la nariz un milímetro, que en ella es un insulto—. Ese caballero no habla por teléfono: dicta. Y siempre a un banco.\nBusca la página.\n—Tres conferencias a Berlín en dos días, todas al Dresdner Bank, y todas para lo mismo: transferencias. La de ayer era de mil libras esterlinas, a disponer en efectivo en El Cairo. Y esta mañana ha puesto un telegrama a sus abogados que decía, y perdonen que lo lea tal cual, «formalizar compraventa objeto único, garantía a dos años, no consultar con la señorita».\nCierra el libro con cuidado.\n—La señorita es su hija. Lo sé porque he tenido que preguntárselo para la factura y me contestó de muy malos modos.",
+      "facts": [
+        "deposito_de_mil_libras",
+        "dieter_compra_el_disco",
+        "padre_compra_piezas_robadas",
+        "dieter_oculta_la_compra_a_olga"
+      ]
+    },
+    "note": "Tema de aliada: sin tirada. Pág. 54: el trato son 5.000 libras a dos años con 1.000 de depósito. Thornhill es la única vía del hotel para saber la cifra antes de que se cierre la venta."
+  },
+  {
+    "id": "thornhill_najir",
+    "npc": "thornhill",
+    "label": "«¿Qué número era el del casco antiguo?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "requires": [
+      {
+        "kind": "any",
+        "of": [
+          {
+            "kind": "flag",
+            "flag": "thornhill_aliada"
+          },
+          {
+            "kind": "disposition",
+            "npc": "thornhill",
+            "op": ">=",
+            "value": 60
+          }
+        ]
+      }
+    ],
+    "minutes": 10,
+    "always": {
+      "text": "—Cuatro-siete-dos. Calle de los Chacales. —No necesita mirarlo—. Y ahí tienen ustedes algo curioso, porque yo ese número lo he marcado antes.\nPasa páginas hacia atrás. Muchas páginas.\n—Marzo del año pasado. Alguien de este hotel llamó a ese mismo número para decir, textualmente, que la tienda ya no existía. —Levanta la vista, y por una vez no está disfrutando—. Yo le pregunté al caballero si quería que buscara otro número y me dijo que no hacía falta, que solo quería asegurarse de que no contestaba nadie.\n»Y esta mañana ha contestado. —Se ajusta las horquillas—. A mí eso me ha tenido inquieta todo el día, señor, y no tenía a quién contárselo.",
+      "facts": [
+        "faraz_najir",
+        "calle_de_los_chacales",
+        "la_tienda_de_najir_ardio",
+        "alguien_comprobo_que_najir_no_existia"
+      ]
+    },
+    "note": "Tema de aliada: sin tirada. Pág. 31: Najir «desafió a Shakti y este arrasó su tienda de la calle de los Chacales». La llamada de marzo de 1921 es de quien quiso confirmar que el trabajo estaba hecho."
+  },
+  {
+    "id": "thornhill_bohr",
+    "npc": "thornhill",
+    "label": "«¿Y el señor de las doce habitaciones?»",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "requires": [
+      {
+        "kind": "any",
+        "of": [
+          {
+            "kind": "flag",
+            "flag": "thornhill_aliada"
+          },
+          {
+            "kind": "disposition",
+            "npc": "thornhill",
+            "op": ">=",
+            "value": 60
+          }
+        ]
+      }
+    ],
+    "minutes": 10,
+    "always": {
+      "text": "La señorita Thornhill se queda callada, y es la primera vez que se queda callada.\n—Ese señor no llama. —Muy despacio—. Once años en esta silla, señor. Todo el mundo llama. Los que están solos llaman más. Los ricos llaman muchísimo, para que les oigan llamar.\n»El señor Bohr tiene doce habitaciones y no ha usado el teléfono ni una sola vez. Ni recibe. Ni telegramas. Nada. —Se abraza los codos—. Y hay otra cosa. En las doce habitaciones hay teléfono, y los doce están descolgados. Los doce. Desde el día que llegó.\nY añade, en voz muy baja:\n—Yo lo veo aquí, en el cuadro. Doce clavijas abiertas todo el día y toda la noche. Es como tener doce bocas abiertas delante de una, sin hablar, durante tres semanas.",
+      "facts": [
+        "doce_habitaciones_bohr",
+        "bohr_no_usa_el_telefono",
+        "doce_telefonos_descolgados"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "senor_bohr"
+        },
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "note": "Tema de aliada: sin tirada. Enlaza con `doce_casilleros_tapados` y `doce_firmas_identicas` de `clinton.json`: cada empleado del hotel ve una esquina distinta de lo mismo."
+  },
+  {
+    "id": "thornhill_shakti",
+    "npc": "thornhill",
+    "label": "Preguntarle si ese nombre le suena",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "omar_shakti"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Mary Ann Thornhill mira el cuadro de clavijas antes de contestar, y eso ya es una respuesta.\n—Hay una línea que no está en el cuadro. —Muy bajo—. Es una clavija suelta, con la etiqueta arrancada, y no da a ninguna habitación: va abajo. La instalaron antes de que yo llegara y en el manual no viene.\n»Suena tres o cuatro veces al año. Y cuando suena, yo no la conecto: se conecta sola. —Se le nota que lleva once años sin poder decir esto en voz alta—. Yo la oigo, señor. Se oye una respiración, y a veces una voz que no habla inglés ni árabe, y después se corta.\n»La primera vez fui a decírselo al señor Behler. Y a la mañana siguiente el señor Mahadni subió a esta oficina, que no había subido nunca, y me preguntó muy amablemente si dormía bien.\nSe endereza.\n—Duermo bien. Se lo dije. Duermo perfectamente.",
+      "facts": [
+        "omar_shakti",
+        "la_linea_que_no_esta_en_el_cuadro",
+        "mahadni_amenazo_a_thornhill",
+        "el_templo_bajo_el_hotel"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1D3"
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—No, señor. —Y baja los ojos—. Ese nombre no está en el registro. En once años no está ni una vez.\nPausa.\n—Y en este hotel hay huéspedes que no salen del cuarto y aparecen tres veces al día en el registro. Que un nombre no esté nunca es más raro que estar mucho.",
+      "facts": [
+        "shakti_no_esta_en_ningun_registro"
+      ]
+    },
+    "onFailure": {
+      "text": "—No me suena.\nLo dice deprisa, y se pone a ordenar unas fichas que no necesitan orden, y no vuelve a levantar la cabeza. Al cabo de un momento se da cuenta de que ustedes siguen ahí y añade, con la voz un poco más aguda de lo normal:\n—¿Necesitaban poner una conferencia? Porque si no, tengo mucho trabajo.\nY en la oficina de correos de un hotel, a las cuatro de la tarde, no hay absolutamente nada de trabajo.",
+      "facts": [
+        "thornhill_tiene_miedo_de_ese_nombre"
+      ]
+    },
+    "note": "Pág. 55: «¡No pronuncies su nombre en público!». Hasta la empleada más habladora del Shepheard's se cierra con este nombre; el fallo no es un muro porque el propio miedo es la información."
+  },
+  {
+    "id": "thornhill_telegrama",
+    "npc": "thornhill",
+    "label": "«El telegrama de la suite real»",
+    "requires": [
+      {
+        "kind": "eventFired",
+        "event": "d1_telegrama_a_correos"
+      }
+    ],
+    "check": {
+      "difficulty": "hard"
+    },
+    "approaches": [
+      "adular",
+      "directo",
+      "sobornar"
+    ],
+    "minutes": 15,
+    "onExtreme": {
+      "text": "La señorita Thornhill mira la puerta, mira el reloj de pared y baja la voz hasta el susurro.\n—Me lo bajó un hombre del Príncipe a las doce y media. Me lo sé de memoria porque lo leí tres veces mientras lo transcribía, y porque es el telegrama más raro que he tramitado en seis años. Iba a una hacienda de algodón en Giza, a nombre de Omar Shakti. Decía que el señor del museo ha vendido una pieza a un mercader alemán, que hay más compradores y que venga inmediatamente. Y firmaba con una sola letra. —Cierra la novela que tenía abierta bajo el mostrador—. Yo no sé quién es ese señor Shakti. Pero el que escribió eso estaba asustado, y ese hombre no se asusta de nada.",
+      "facts": [
+        "telegrama_a_shakti",
+        "omar_shakti",
+        "fuad_delata_a_weder",
+        "shakti_vive_en_giza"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "el_telegrama"
+        }
+      ]
+    },
+    "onHard": {
+      "text": "—Un telegrama de la suite real, sí, hacia las doce y media. —Se ajusta las gafas—. Iba a una hacienda de Giza, a nombre de un tal Shakti. No debería decirles esto, y no me pregunten qué decía, porque eso sí que no. Solo les diré que era corto y que la última palabra era «inmediatamente».",
+      "facts": [
+        "telegrama_a_shakti",
+        "omar_shakti"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Sí que bajó un telegrama de arriba anoche, con lo excepcional del evento tuvimos que quedarnos abiertos. —Sonríe con toda su amabilidad inagotable—. Del contenido no puedo hablarles. Del destinatario tampoco. Pero pueden ustedes deducir que a las doce y media de la noche nadie escribe a nadie para dar los buenos días.",
+      "facts": [
+        "telegrama_en_la_bandeja"
+      ]
+    },
+    "onFailure": {
+      "text": "—El secreto de las comunicaciones, señores. —Y aprieta los labios, orgullosa de sí misma, durante casi tres segundos enteros—. Aunque le diré una cosa que no es secreto de nadie: hacía dos años que no tramitábamos nada para esa dirección de Giza. Dos años. Y ahora, todo esto.",
+      "facts": [
+        "telegrama_en_la_bandeja",
+        "shakti_vive_en_giza"
+      ]
+    },
+    "note": "Módulo, pág. 59: el telegrama a Shakti pasa por la oficina de correos de madrugada. Esta es la vía alternativa si el grupo no llegó a interceptarlo en la bandeja."
+  }
+]

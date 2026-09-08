@@ -1,0 +1,12 @@
+node_modules/
+dist/
+art/raw/
+art/*.png
+public/art/*.png
+!public/art/README.md
+*.pdf
+.claude/
+artifacts/
+.codex-test/
+*.local
+.DS_Store

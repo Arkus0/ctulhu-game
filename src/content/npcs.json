@@ -1,0 +1,1219 @@
+[
+  {
+    "id": "behler",
+    "name": "Charles Behler",
+    "age": 50,
+    "title": "director del hotel, bellísima persona",
+    "portrait": "behler",
+    "chars": { "FUE": 40, "CON": 30, "TAM": 50, "DES": 40, "INT": 65, "APA": 90, "POD": 50, "EDU": 80 },
+    "hp": 8,
+    "disposition": 30,
+    "skills": {
+      "Arqueologia": 35,
+      "Credito": 40,
+      "Encanto": 30,
+      "Equitacion": 50,
+      "Persuasion": 60,
+      "Psicologia": 20,
+      "Descubrir": 25,
+      "Escuchar": 30
+    },
+    "knows": ["fenomenos_inexplicables", "cajas_de_noche", "weder_y_carter_se_reunen"],
+    "rumorDie": 10,
+    "hooks": [
+      {
+        "id": "discrecion",
+        "approach": "discrecion",
+        "bonus": 1,
+        "note": "Prometerle discreción le desarma: lo único que pide a la vida es un gin-tonic y que no haya escándalos."
+      },
+      {
+        "id": "escandalo",
+        "approach": "amenazar",
+        "penalty": 2,
+        "note": "Amenazar con montar un escándalo es tocarle justo donde más le duele. «No quiero líos»."
+      }
+    ],
+    "notes": "Suizo, empezó llevando maletas. No oculta nada: de verdad no sabe qué hay en su sótano. Vive en Sharia Kamil 55 y llega andando en cinco minutos."
+  },
+  {
+    "id": "clinton",
+    "name": "Cleveland Clinton",
+    "age": 35,
+    "title": "recepcionista con la cabeza dura",
+    "portrait": "clinton",
+    "chars": { "FUE": 30, "CON": 75, "TAM": 45, "DES": 45, "INT": 55, "APA": 60, "POD": 35, "EDU": 45 },
+    "hp": 12,
+    "disposition": 10,
+    "skills": {
+      "Charlateria": 25,
+      "Credito": 20,
+      "Juego de manos": 25,
+      "Persuasion": 30,
+      "Psicologia": 20,
+      "Descubrir": 40,
+      "Escuchar": 45
+    },
+    "knows": ["gritos_122", "senor_bohr_doce_habitaciones", "fuad_viene"],
+    "rumorDie": 6,
+    "hooks": [
+      {
+        "id": "educacion",
+        "approach": "cortesia",
+        "bonus": 1,
+        "note": "Tratarle con educación abre más puertas que cualquier soborno. Le dieron trabajo cuando nadie contaba con él."
+      },
+      {
+        "id": "hablar_mal_de_behler",
+        "approach": "criticar_behler",
+        "penalty": 2,
+        "note": "Behler es su gran amigo y confidente. Hablar mal de él cierra la conversación en seco."
+      }
+    ],
+    "notes": "Antiguo sargento con una bala incrustada en el cráneo; a veces se queda mirando a un punto fijo. Tiene una llave maestra."
+  },
+  {
+    "id": "murray",
+    "name": "Abraham Murray",
+    "age": 48,
+    "title": "conserje solícito y desbordado",
+    "portrait": "murray",
+    "chars": { "FUE": 40, "CON": 50, "TAM": 60, "DES": 45, "INT": 55, "APA": 60, "POD": 35, "EDU": 45 },
+    "hp": 11,
+    "disposition": 5,
+    "skills": {
+      "Charlateria": 20,
+      "Credito": 15,
+      "Encanto": 20,
+      "Persuasion": 30,
+      "Psicologia": 15,
+      "Descubrir": 30,
+      "Escuchar": 30
+    },
+    "rumorDie": 6,
+    "notes": "Guarda la segunda copia de la llave maestra. Nunca tiene tiempo; menos mal que los hermanos Meyer le echan una mano."
+  },
+  {
+    "id": "carter",
+    "name": "Howard Carter",
+    "age": 48,
+    "title": "explorador, el arqueólogo más famoso de todos los tiempos",
+    "portrait": "carter",
+    "chars": { "FUE": 55, "CON": 65, "TAM": 65, "DES": 55, "INT": 75, "APA": 65, "POD": 75, "EDU": 60 },
+    "hp": 13,
+    "disposition": -10,
+    "skills": {
+      "Arqueologia": 80,
+      "Buscar libros": 55,
+      "Credito": 60,
+      "Derecho": 15,
+      "Descubrir": 35,
+      "Historia": 60,
+      "Mitos de Cthulhu": 15,
+      "Orientarse": 60,
+      "Persuasion": 40,
+      "Psicologia": 25,
+      "Tasacion": 50,
+      "Escuchar": 30
+    },
+    "knows": ["tumba_profanada", "piezas_en_el_sotano", "fecha_traslado", "hermandad_faraon_negro"],
+    "rumorDie": 6,
+    "hooks": [
+      {
+        "id": "adular",
+        "approach": "adular",
+        "skills": ["Charlateria", "Encanto"],
+        "bonus": 1,
+        "note": "Odia la mediocridad ajena y es tremendamente arrogante, aunque lo disimule. La adulación descarada funciona con él."
+      },
+      {
+        "id": "egiptologia",
+        "approach": "egiptologia",
+        "bonus": 1,
+        "note": "Solo se interesa de verdad si se habla de egiptología. Cualquier otro asunto le parece superfluo."
+      },
+      {
+        "id": "hermandad",
+        "approach": "hermandad",
+        "penalty": 2,
+        "note": "Mencionar la Hermandad del Faraón Negro le hace pensar que sospechan de él. Es paranoico, y avisará a Weder."
+      }
+    ],
+    "notes": "Las piernas le tiemblan por un tic nervioso. Nunca mira a los ojos: siempre está queriendo irse. Abrió la tumba el 5 de noviembre y se llevó las piezas de los Mitos."
+  },
+  {
+    "id": "weder",
+    "name": "Garth Weder",
+    "age": 44,
+    "title": "director del Museo Egipcio, seductor y mentiroso",
+    "portrait": "weder",
+    "chars": { "FUE": 65, "CON": 70, "TAM": 65, "DES": 50, "INT": 80, "APA": 85, "POD": 75, "EDU": 80 },
+    "hp": 13,
+    "disposition": -20,
+    "skills": {
+      "Arqueologia": 80,
+      "Buscar libros": 75,
+      "Charlateria": 80,
+      "Ciencias ocultas": 50,
+      "Credito": 65,
+      "Descubrir": 35,
+      "Encanto": 60,
+      "Historia": 60,
+      "Mitos de Cthulhu": 40,
+      "Persuasion": 40,
+      "Psicologia": 25,
+      "Escuchar": 35
+    },
+    "knows": [
+      "tumba_profanada",
+      "piezas_en_el_sotano",
+      "fecha_traslado",
+      "hermandad_faraon_negro",
+      "disco_solar_existe",
+      "correspondencia_nazi"
+    ],
+    "rumorDie": 6,
+    "hooks": [
+      {
+        "id": "credito",
+        "approach": "posicion",
+        "bonus": 1,
+        "requires": [{ "kind": "flag", "flag": "impresionaron_a_weder" }],
+        "note": "O no socializa en absoluto, o no calla intentando agradar. Depende por completo de si le pareces alguien."
+      },
+      {
+        "id": "politica",
+        "approach": "politica",
+        "penalty": 1,
+        "note": "No quiere hablar de política ni de nada que no sea el antiguo Egipto. Solo le distraen las noticias de Alemania."
+      }
+    ],
+    "notes": "Vienés, huérfano desde los catorce. Miembro de la Hermandad del Faraón Negro desde hace dos años. Tiene el cristal de Mortlan en su habitación y ha vendido el Disco Solar a espaldas de Carter."
+  },
+  {
+    "id": "gasparini",
+    "name": "Carlo Gasparini",
+    "age": 22,
+    "title": "barman del hotel, seductor y sinvergüenza",
+    "portrait": "gasparini",
+    "chars": { "FUE": 55, "CON": 55, "TAM": 70, "DES": 60, "INT": 70, "APA": 60, "POD": 60, "EDU": 55 },
+    "hp": 12,
+    "disposition": 0,
+    "skills": {
+      "Charlateria": 65,
+      "Contabilidad": 35,
+      "Credito": 25,
+      "Encanto": 80,
+      "Escuchar": 45,
+      "Psicologia": 45,
+      "Saber (Egiptologia)": 15,
+      "Tasacion": 15
+    },
+    "knows": ["piezas_en_el_sotano", "olga_le_conto", "llamo_a_najir"],
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "seduccion",
+        "approach": "adular",
+        "skills": ["Encanto"],
+        "bonus": 1,
+        "note": "Es un adicto al sexo que tira los trastos a cualquiera, sin distinción de edad o condición. Intentar seducirle con Encanto es sorprendentemente fácil."
+      },
+      {
+        "id": "politica",
+        "approach": "directo",
+        "penalty": 1,
+        "note": "No quiere hablar de política, de la cámara de los lores ni del independentismo egipcio, y tiene un don para desviar la conversación sin que se note."
+      }
+    ],
+    "notes": "Veronés, cinco años en el Shepheard's gracias a Behler. Sueldo de 2.000 piastras y habitación permanente. Gran amigo de Giuseppe Cipriani (futuro Harry's Bar de Venecia). No conoce al Aga Khan y mataría por hacerlo; ve en Carter una fuente de información sobre piezas que revender. Usa las habitaciones vacías del hotel con su copia de la llave maestra."
+  },
+  {
+    "id": "olga",
+    "name": "Olga Lounpeen",
+    "age": 27,
+    "title": "hija de Dieter, muy peligrosa",
+    "portrait": "olga",
+    "chars": { "FUE": 25, "CON": 25, "TAM": 40, "DES": 45, "INT": 70, "APA": 80, "POD": 60, "EDU": 50 },
+    "hp": 6,
+    "disposition": 0,
+    "skills": {
+      "Charlateria": 40,
+      "Conducir automovil": 30,
+      "Credito": 50,
+      "Derecho": 20,
+      "Encanto": 85,
+      "Equitacion": 20,
+      "Historia": 25,
+      "Psicologia": 55
+    },
+    "knows": ["padre_compra_piezas_robadas"],
+    "rumorDie": 10,
+    "hooks": [
+      {
+        "id": "sumision",
+        "approach": "adular",
+        "skills": ["Encanto"],
+        "bonus": 1,
+        "note": "Se divierte humillando a quien se cree superior. Un hombre tímido y dócil, sin pretensiones, la desarma con facilidad."
+      },
+      {
+        "id": "desprecio",
+        "approach": "presionar",
+        "penalty": 2,
+        "note": "No soporta a los hombres que se creen superiores a ella; sermonearla o tratarla con condescendencia la convierte en enemiga."
+      },
+      {
+        "id": "aventura",
+        "approach": "directo",
+        "bonus": 1,
+        "note": "Le atrae la aventura: es fácil empujarla a un allanamiento, un robo o un secuestro, al menos hasta que la cosa se pone seria y decide escapar."
+      }
+    ],
+    "notes": "Fuma y consume drogas compulsivamente; le roba dinero a su padre a diario y él lo consiente. Desprecia a Gasparini, con quien solo tiene relación sexual (\"le utiliza como si fuese una servilleta\"). Le encantaría charlar con Agatha Christie; Churchill le parece \"un peluche\"; el Aga Khan no le interesa. Le repugna la colección de sarcófagos de su padre en Berlín."
+  },
+  {
+    "id": "dieter",
+    "name": "Dieter Lounpeen",
+    "age": 55,
+    "title": "traficante de obras de arte, bastante estúpido y muy celoso de sus cosas",
+    "portrait": "dieter",
+    "chars": { "FUE": 45, "CON": 45, "TAM": 65, "DES": 35, "INT": 65, "APA": 30, "POD": 50, "EDU": 75 },
+    "hp": 11,
+    "disposition": -10,
+    "skills": {
+      "Arqueologia (Egipcia)": 60,
+      "Buscar libros": 35,
+      "Charlateria": 20,
+      "Conducir automovil": 30,
+      "Contabilidad": 30,
+      "Credito": 60,
+      "Derecho": 30,
+      "Historia": 40,
+      "Intimidar": 45,
+      "Mitos de Cthulhu": 5,
+      "Orientarse": 20,
+      "Psicologia": 40,
+      "Tasacion": 55
+    },
+    "knows": ["viene_por_negocios"],
+    "rumorDie": 10,
+    "hooks": [
+      {
+        "id": "acento_aleman",
+        "approach": "directo",
+        "penalty": 1,
+        "note": "Su inglés con acento germánico y su insistencia en que todos deberían hablar alemán resultan agotadores. La política británica le parece un antro de corrupción."
+      },
+      {
+        "id": "por_escrito",
+        "approach": "directo",
+        "penalty": 1,
+        "note": "No quiere hablar con nadie: prefiere que le resuelvan los problemas por escrito. Conversar con él cara a cara es una batalla perdida de antemano."
+      },
+      {
+        "id": "su_hija",
+        "approach": "directo",
+        "penalty": 2,
+        "note": "Cualquier insinuación sobre la conducta de su hija —o pillarles simplemente charlando con ella— le pone fuera de sí y os convierte en «gente non grata»."
+      },
+      {
+        "id": "complacerle",
+        "approach": "adular",
+        "skills": ["Charlateria", "Encanto", "Persuasion"],
+        "bonus": 2,
+        "note": "Solo respeta a quien logra que las cosas sean exactamente como él quiere — incluida su hija. El libro excluye explícitamente Intimidar de este dado de bonificación."
+      }
+    ],
+    "notes": "Empezó a coleccionar por envidia hacia su cuñado. Conserva docenas de sarcófagos en su mansión de Berlín; casi consigue el busto de Nefertiti. Viene a comprar el Disco Solar por 5.000 libras (1.000 de depósito) y no sabe nada de la relación de Olga con Gasparini. Posee un 5% en Mitos de Cthulhu por su fallido intento de activar «la cabeza descarada», una escultura germánica del siglo XIII que estuvo a punto de despertar hirviéndola en su propia sangre."
+  },
+  {
+    "id": "mahadni",
+    "name": "Mustafá ibn Mahadni",
+    "age": 57,
+    "title": "siniestro jefe de cocina",
+    "portrait": "mahadni",
+    "chars": { "FUE": 75, "CON": 75, "TAM": 75, "DES": 45, "INT": 50, "APA": 45, "POD": 45, "EDU": 45 },
+    "hp": 15,
+    "disposition": -30,
+    "skills": {
+      "Charlateria": 50,
+      "Credito": 20,
+      "Intimidar": 75,
+      "Psicologia": 25
+    },
+    "knows": ["piezas_en_el_sotano", "alimenta_a_las_bestias", "hermandad_faraon_negro"],
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "cocina",
+        "approach": "cocina",
+        "bonus": 1,
+        "note": "Le enorgullece su trabajo y el picante que nadie más aguanta. Es lo único de lo que habla de buena gana."
+      },
+      {
+        "id": "sotano",
+        "approach": "sotano",
+        "penalty": 2,
+        "note": "Preguntar por el sótano le convierte en piedra. Miembro menor de la Hermandad; tiene seis camareros a sus órdenes."
+      }
+    ],
+    "notes": "Gerente de facto del hotel y miembro de la Hermandad del Faraón Negro, aunque su puesto oficial es jefe de cocina. Behler delega en él mucho más de lo que debería: contratación de personal de bajo nivel, limpieza, botones y abastecimiento general pasan por su supervisión. Mano derecha de Weder y del propio Shakti. Baja todos los días a echar de comer a lo que vive en el sótano. Lleva trozos de gente en el bolsillo de la chilaba."
+  },
+  {
+    "id": "thornhill",
+    "name": "Mary Ann Thornhill",
+    "age": 47,
+    "title": "operadora servicial y chismosa",
+    "portrait": "thornhill",
+    "chars": { "FUE": 30, "CON": 70, "TAM": 50, "DES": 55, "INT": 50, "APA": 50, "POD": 35, "EDU": 50 },
+    "hp": 7,
+    "disposition": 20,
+    "skills": {
+      "Credito": 15,
+      "Persuasion": 35,
+      "Psicologia": 30,
+      "Escuchar": 65,
+      "Descubrir": 35,
+      "Saber": 25
+    },
+    "knows": ["llamada_de_gasparini"],
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "invitarla",
+        "approach": "invitar",
+        "bonus": 2,
+        "note": "Daría un brazo por que la invitaran a una fiesta de Behler. Nadie se acuerda nunca de ella. Nadie."
+      }
+    ],
+    "notes": "Escucha todas las conferencias. Recuerda nombres, números y cifras discutidas."
+  },
+  {
+    "id": "rolland",
+    "name": "Michel Rolland",
+    "age": 35,
+    "title": "metre del restaurante del hotel, neurasténico y profundamente inútil",
+    "portrait": "rolland",
+    "chars": { "FUE": 40, "CON": 60, "TAM": 50, "DES": 45, "INT": 45, "APA": 60, "POD": 35, "EDU": 45 },
+    "hp": 11,
+    "disposition": -5,
+    "skills": {
+      "Charlateria": 65,
+      "Credito": 20,
+      "Intimidar": 50,
+      "Persuasion": 15,
+      "Psicologia": 25
+    },
+    "knows": ["olor_de_la_cocina", "ratas_en_el_restaurante"],
+    "rumorDie": 20,
+    "notes": "De familia disfuncional, con serios problemas de adaptación desde los quince años. Su relación con Mustafá ibn Mahadni, el jefe de cocina, es tensa: no tiene permiso para entrar en la cocina, y Behler siempre defiende a Mahadni cuando se queja. Quiere dejar el hotel — ha recibido ofertas del Savoy y del Semíramis, pero aquí pagan el doble. Desprecia a Mahadni y hablará pestes de él, ayudando a los investigadores si demuestran que van contra él, aunque también le tiene un miedo atroz. Tremendamente cobarde: le aterran el desorden, el ruido y la confusión, y la cocina le da pánico. Vive fuera del hotel, en un apartamento al otro lado de Ezbekiya. Nota para el Guardián (pág. 132): es raro que salga del restaurante — en un encuentro aleatorio, tirar 1D6: con 1-3 es Rolland, dirigiéndose precisamente al restaurante; con 4-6, volver a tirar."
+  },
+  {
+    "id": "fuad",
+    "name": "Príncipe Fuad",
+    "age": 54,
+    "title": "rey de Egipto, mezquino y traicionero",
+    "portrait": "fuad",
+    "chars": { "FUE": 50, "CON": 75, "TAM": 45, "DES": 60, "INT": 80, "APA": 65, "POD": 95, "EDU": 90 },
+    "hp": 12,
+    "disposition": -20,
+    "skills": {
+      "Arqueologia": 15,
+      "Charlateria": 35,
+      "Credito": 65,
+      "Derecho": 35,
+      "Descubrir": 75,
+      "Intimidar": 35,
+      "Mitos de Cthulhu": 20,
+      "Persuasion": 25,
+      "Psicologia": 20,
+      "Escuchar": 40
+    },
+    "knows": ["hermandad_faraon_negro", "quiere_la_daga"],
+    "rumorDie": 6,
+    "hooks": [
+      {
+        "id": "halagar",
+        "approach": "adular",
+        "skills": ["Charlateria"],
+        "bonus": 1,
+        "note": "Piensa el treinta por ciento del tiempo en sexo y el otro setenta en sí mismo, pero en el fondo es lo mismo. Halagarle desmesuradamente funciona siempre."
+      },
+      {
+        "id": "principe",
+        "approach": "llamarle_principe",
+        "penalty": 3,
+        "note": "Desde el 15 de marzo es Rey. Llamarle «Príncipe» puede acabar con vosotros detenidos en el acto."
+      }
+    ],
+    "notes": "Llega a las 13:30 con 1D6 soldados, 1D10 guardias personales y 1D3 secretarios. Sube a la suite 415 a las 14:00 y no sale hasta la fiesta."
+  },
+  {
+    "id": "sven",
+    "name": "Sven Meyer",
+    "title": "maletero suizo, treintañero",
+    "portrait": "sven",
+    "chars": { "FUE": 50, "CON": 60, "TAM": 50, "DES": 45, "INT": 45, "APA": 60, "POD": 35, "EDU": 45 },
+    "hp": 11,
+    "disposition": 15,
+    "skills": {
+      "Charlateria": 15,
+      "Credito": 15,
+      "Encanto": 50,
+      "Persuasion": 25,
+      "Psicologia": 15
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "propina",
+        "approach": "sobornar",
+        "bonus": 2,
+        "note": "Una buena propina y chismorrean sobre todo lo que pasa en el hotel."
+      }
+    ],
+    "notes": "Se lleva la mano al estómago varias veces; le duele la tripa, probablemente por el gusto del cocinero Mahadni por el picante. Siempre junto a Hans y Lars; amigos íntimos de Behler (GC, pág. 24), por quien serían capaces de matar."
+  },
+  {
+    "id": "hans",
+    "name": "Hans Meyer",
+    "title": "maletero suizo, treintañero",
+    "portrait": "hans",
+    "chars": { "FUE": 50, "CON": 60, "TAM": 50, "DES": 45, "INT": 45, "APA": 60, "POD": 35, "EDU": 45 },
+    "hp": 11,
+    "disposition": 15,
+    "skills": {
+      "Charlateria": 15,
+      "Credito": 15,
+      "Encanto": 50,
+      "Persuasion": 25,
+      "Psicologia": 15
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "propina",
+        "approach": "sobornar",
+        "bonus": 2,
+        "note": "Una buena propina y chismorrean sobre todo lo que pasa en el hotel."
+      }
+    ],
+    "notes": "Sufre de queratosis dérmica: una enorme mancha marrón le cubre media cara. Su aspecto sobrecoge, pero es encantador. Siempre junto a Sven y Lars; amigos íntimos de Behler (GC, pág. 24), por quien serían capaces de matar."
+  },
+  {
+    "id": "lars",
+    "name": "Lars Meyer",
+    "title": "maletero suizo, el más joven y astuto de los tres hermanos",
+    "portrait": "lars",
+    "chars": { "FUE": 50, "CON": 60, "TAM": 50, "DES": 45, "INT": 45, "APA": 60, "POD": 35, "EDU": 45 },
+    "hp": 11,
+    "disposition": 15,
+    "skills": {
+      "Charlateria": 15,
+      "Cerrajeria": 85,
+      "Credito": 15,
+      "Encanto": 50,
+      "Persuasion": 25,
+      "Psicologia": 15
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "propina",
+        "approach": "sobornar",
+        "bonus": 2,
+        "note": "Una buena propina y chismorrean sobre todo lo que pasa en el hotel."
+      }
+    ],
+    "notes": "Menor que sus hermanos, pero más astuto: abre cualquier puerta con un alambre perfeccionado con los años (Cerrajería 85%). Siempre junto a Sven y Hans; amigos íntimos de Behler (GC, pág. 24), por quien serían capaces de matar."
+  },
+  {
+    "id": "evelyn",
+    "name": "Evelyn Carnarvon",
+    "age": 21,
+    "title": "hija de Lord Carnarvon",
+    "portrait": "evelyn",
+    "chars": { "FUE": 30, "CON": 30, "TAM": 40, "DES": 45, "INT": 70, "APA": 60, "POD": 35, "EDU": 60 },
+    "hp": 7,
+    "disposition": 15,
+    "skills": {
+      "Charlateria": 30,
+      "Conducir automovil": 30,
+      "Credito": 85,
+      "Derecho": 50,
+      "Descubrir": 75,
+      "Encanto": 65,
+      "Equitacion": 50,
+      "Historia": 45,
+      "Persuasion": 65,
+      "Psicologia": 25
+    },
+    "hooks": [
+      {
+        "id": "educacion",
+        "approach": "educacion",
+        "bonus": 1,
+        "note": "Sigue fielmente los consejos de quien la trate con educación: es lo único que nunca ha recibido de su padre."
+      },
+      {
+        "id": "seduccion",
+        "approach": "seduccion",
+        "skills": ["Encanto"],
+        "penalty": 1,
+        "note": "No soporta ningún intento de seducción. El libro exige además una tirada Difícil de Encanto, no solo el dado de penalización."
+      },
+      {
+        "id": "viejo_templo",
+        "approach": "presionar",
+        "penalty": 1,
+        "note": "Quiere bajar a toda costa al Viejo Templo. Impedírselo o acompañarla exige un éxito Difícil en Persuasión; si un investigador lo logra, ella acepta compañía o desiste, según convenga."
+      },
+      {
+        "id": "tumba_tutankamon",
+        "approach": "adular",
+        "bonus": 1,
+        "note": "Sueña con ser la primera en entrar en la tumba de Tutankhamón. Quien la ayude a lograrlo se gana su respeto y agradecimiento para siempre."
+      }
+    ],
+    "notes": "Lady Evelyn Leonora Almina Herbert. Su padre la ha tenido apartada en Londres y la mantiene reprimida; ella se costeó su propio billete a El Cairo. Puede presentar a Lord Carnarvon o a Howard Carter si alguien le ofrece la relación emocional estable que nunca ha tenido. El libro describe su Descubrir como \"meter la nariz donde no la llaman\"."
+  },
+  {
+    "id": "carnarvon",
+    "name": "Lord Carnarvon",
+    "age": 56,
+    "title": "millonario obstinado y malhumorado",
+    "portrait": "carnarvon",
+    "chars": { "FUE": 60, "CON": 75, "TAM": 60, "DES": 45, "INT": 60, "APA": 75, "POD": 50, "EDU": 70 },
+    "hp": 13,
+    "disposition": -5,
+    "skills": {
+      "Arqueologia": 55,
+      "Ciencias ocultas": 15,
+      "Credito": 85,
+      "Descubrir": 15,
+      "Escuchar": 40,
+      "Intimidar": 80,
+      "Juego de manos": 30,
+      "Persuasion": 90,
+      "Psicologia": 45,
+      "Sigilo": 80
+    },
+    "hooks": [
+      {
+        "id": "sordo_engano",
+        "approach": "enganar",
+        "skills": ["Charlateria"],
+        "bonus": 1,
+        "note": "Es duro de oído y, sin lentes, apenas ve de cerca; de lejos, nada. Hacerse pasar por otra persona delante de él es fácil."
+      },
+      {
+        "id": "sordo_presionar",
+        "approach": "presionar",
+        "skills": ["Intimidar"],
+        "bonus": 1,
+        "note": "Su sordera y su mala vista también facilitan intimidarle sin que llegue a percatarse del todo de la amenaza."
+      },
+      {
+        "id": "hablar_de_el",
+        "approach": "adular",
+        "bonus": 1,
+        "note": "No quiere hablar: quiere que hablen de él y de su inminente triunfo arqueológico. Dejarle protagonizar la charla funciona de maravilla."
+      },
+      {
+        "id": "camino_a_luxor",
+        "approach": "directo",
+        "bonus": 1,
+        "note": "Si algo se interpone en su viaje a Luxor se pone furioso; quien le ayude a apartar el obstáculo se gana su agradecimiento. Viajará sin Evelyn si hace falta."
+      }
+    ],
+    "notes": "George Edward Stanhope Molyneux Herbert, Conde de Carnarvon. Financia a Carter desde 1908; catorce años sin resultados hasta ahora. El libro anota junto a su Descubrir (15%) la coleta \"ve menos que un gato de escayola\". Viaja excepcionalmente sin su mujer, solo con Evelyn (que se ha costeado el viaje ella misma)."
+  },
+  {
+    "id": "najir",
+    "name": "Faraz Najir",
+    "age": 42,
+    "title": "traficante de obras de arte, tremendamente astuto",
+    "portrait": "najir",
+    "chars": { "FUE": 35, "CON": 80, "TAM": 45, "DES": 45, "INT": 70, "APA": 20, "POD": 65, "EDU": 40 },
+    "hp": 12,
+    "disposition": 10,
+    "skills": {
+      "Arqueologia": 30,
+      "Charlateria": 65,
+      "Ciencias ocultas": 25,
+      "Contabilidad": 50,
+      "Credito": 20,
+      "Derecho": 15,
+      "Descubrir": 65,
+      "Escuchar": 55,
+      "Historia (Egipcia)": 60,
+      "Mitos de Cthulhu": 10,
+      "Persuasion": 45,
+      "Psicologia": 30,
+      "Sigilo": 55,
+      "Tasacion": 75
+    },
+    "hooks": [
+      {
+        "id": "hombre_de_shakti",
+        "approach": "enganar",
+        "skills": ["Charlateria"],
+        "bonus": 1,
+        "note": "Hacerse pasar por alguien enviado por Shakti le pone nervioso y dócil: es su pesadilla recurrente desde que le traicionó robándole piezas."
+      },
+      {
+        "id": "miedo_a_shakti",
+        "approach": "presionar",
+        "skills": ["Intimidar"],
+        "bonus": 1,
+        "note": "Invocar la presencia o la ira de Shakti para intimidarle funciona de maravilla: huyó de él una vez y no quiere repetirlo."
+      }
+    ],
+    "notes": "Media cara quemada por un vampiro de fuego. Perdió el oído izquierdo y quedó casi tuerto, pero no se le escapa nada. No pertenece a la Hermandad pero trafica con ella. Entiende egipcio clásico y demótico (no lee ni escribe) por las pesadillas en las que Shakti le maldice desde que le robó piezas y se las vendió a Warren Besart. Habla un inglés muy deficiente; es mejor dirigirse a él en una mezcla de francés e inglés (el libro pide una tirada combinada de ambas con un dado de bonificación, algo que el esquema de hooks no puede expresar directamente). Si se le ayuda a bajar al sótano y a protegerse de Shakti, es un aliado fiel a corto plazo — luego intentará robarles las piezas negras."
+  },
+  {
+    "id": "selassie",
+    "name": "Abebaberk Selassie",
+    "age": 48,
+    "title": "«el Gordo Nubio», rey de los bajos fondos",
+    "portrait": "selassie",
+    "chars": { "FUE": 60, "CON": 65, "TAM": 90, "DES": 50, "INT": 75, "APA": 55, "POD": 35, "EDU": 80 },
+    "hp": 15,
+    "disposition": -10,
+    "skills": {
+      "Arqueologia": 35,
+      "Buscar libros": 60,
+      "Ciencias ocultas": 10,
+      "Credito": 30,
+      "Historia": 35,
+      "Intimidar": 75,
+      "Mitos de Cthulhu": 5,
+      "Persuasion": 35,
+      "Psicologia": 20,
+      "Saber (Egiptologia)": 40
+    },
+    "hooks": [
+      {
+        "id": "respeto",
+        "approach": "directo",
+        "bonus": 1,
+        "note": "Sueña con ser respetado como una persona decente. Un trato respetuoso, sin evidenciar sus carencias ni burlarse de su aspecto, es bien recibido."
+      }
+    ],
+    "notes": "Controla el crimen, la prostitución y la mendicidad del noreste de Abbasiya (el Wasa). Se rumorea que su dieta incluye carne humana. Shakti le trata casi como a un hermano — una de las pocas personas a las que respeta en Egipto — y por eso tanto Fuad como el Aga Khan le temen y tratan de \"usted\". Su palacio en la Sharia Abd el Jaliq guarda una excelente colección de arte antiguo, turistas secuestrados y víctimas para sacrificios rituales. Intelectual con formación sólida pero esencialmente miserable: disfruta del conflicto y la contradicción. AVISO DE CALIDAD DE DATOS: la segunda viñeta de \"Datos y pistas\" del libro (sobre su postura política, su superstición y una madre de 93 años en el manicomio de Ibn Tulun) está dañada en la capa de texto del PDF, confirmado con dos motores de extracción distintos; no la transcribo por no poder garantizar su literalidad — revisar visualmente la página impresa 29 si hace falta ese dato."
+  },
+  {
+    "id": "sakhatakh",
+    "name": "Sakhatakh",
+    "title": "milenario renegado de la Gran Raza de Yith",
+    "portrait": "sakhatakh",
+    "chars": { "FUE": 60, "CON": 45, "TAM": 55, "DES": 45, "INT": 100, "APA": 50, "POD": 90, "EDU": 100 },
+    "hp": 20,
+    "disposition": 0,
+    "skills": {
+      "Arqueologia": 95,
+      "Charlateria": 90,
+      "Ciencia (Farmacologia)": 95,
+      "Ciencias ocultas": 95,
+      "Contabilidad": 65,
+      "Derecho": 65,
+      "Descubrir": 90,
+      "Escuchar": 70,
+      "Historia": 95,
+      "Juego de manos": 50,
+      "Mitos de Cthulhu": 95,
+      "Orientarse": 80,
+      "Persuasion": 95,
+      "Psicologia": 80,
+      "Sigilo": 95,
+      "Tasacion": 95
+    },
+    "hooks": [
+      {
+        "id": "nimiedades",
+        "approach": "directo",
+        "bonus": 1,
+        "note": "Lo sabe todo sobre el pasado y el futuro, así que solo las nimiedades de la vida cotidiana (cómo se asa un pollo, el nombre de un actor) despiertan su curiosidad genuina."
+      },
+      {
+        "id": "propuestas",
+        "approach": "sobornar",
+        "penalty": 2,
+        "note": "No acepta proposiciones de ningún tipo. Es un viajero del tiempo hastiado: probablemente ya ha vivido esta misma escena muchas veces."
+      }
+    ],
+    "notes": "Yithiano renegado. Intercambió su mente con Khephnés, sumo sacerdote egipcio de la dinastía XIV, y se quedó con su cuerpo al vencer el plazo de cinco años. Fue sumo sacerdote de Atón para Akhenatón; el Disco Solar mató al faraón al conectarle con Yog-Sothoth. El sarcófago cónico de los sótanos del Shepheard's es el féretro real de Khephnés (con cuerpo yithiano). Sakhatakh viaja disfrazado entre la «Cofradía Oscura»: doce cuerpos idénticos de Niels Bohr, el astrofísico, cada uno con la mente de un yithiano renegado distinto — Sakhatakh es el señor Bohr número doce (ver ficha separada 'bohr'). No le hace ascos a mezclar magia de los Mitos con tecnología yithiana. El libro da un único bloque de características para \"el señor Bohr\", que Sakhatakh comparte por ser uno de ellos; el PV 20 lleva un asterisco en el libro sin nota a pie localizada (no es el resultado de la fórmula estándar CON+TAM/10, que daría 10 — se respeta el valor impreso). No tiene edad conocida: es un ser milenario, así que se omite el campo."
+  },
+  {
+    "id": "bohr",
+    "name": "El señor Bohr",
+    "title": "uno de los doce clones idénticos de Niels Bohr que acompañan a Sakhatakh",
+    "portrait": "bohr",
+    "chars": { "FUE": 60, "CON": 45, "TAM": 55, "DES": 45, "INT": 100, "APA": 50, "POD": 90, "EDU": 100 },
+    "hp": 20,
+    "disposition": 0,
+    "skills": {
+      "Arqueologia": 95,
+      "Charlateria": 90,
+      "Ciencia (Farmacologia)": 95,
+      "Ciencias ocultas": 95,
+      "Contabilidad": 65,
+      "Derecho": 65,
+      "Descubrir": 90,
+      "Escuchar": 70,
+      "Historia": 95,
+      "Juego de manos": 50,
+      "Mitos de Cthulhu": 95,
+      "Orientarse": 80,
+      "Persuasion": 95,
+      "Psicologia": 80,
+      "Sigilo": 95,
+      "Tasacion": 95
+    },
+    "hooks": [
+      {
+        "id": "frases_cortas",
+        "approach": "directo",
+        "penalty": 2,
+        "note": "Solo habla en frases cortas (sujeto, verbo, predicado): toda conversación es lenta y farragosa. El libro añade que cualquier tirada Social con un señor Bohr es, además, de dificultad Extrema."
+      },
+      {
+        "id": "maternidad",
+        "approach": "adular",
+        "bonus": 1,
+        "note": "Comprende el proceso biológico de la maternidad pero no sus emociones: es su punto débil. Sacar el tema lo desconcierta."
+      }
+    ],
+    "notes": "Hay doce «señores Bohr» idénticos registrados en el hotel, cuerpos inertes con mentes de otros tantos yithianos renegados reclutados por Sakhatakh a lo largo de los siglos (que es, él mismo, el señor Bohr número doce — ver ficha 'sakhatakh'). Andan despacio y les cuesta girar; sus movimientos, aunque no están sincronizados, lo parecen. Ver a un señor Bohr no supone pérdida de Cordura, pero ver a dos o más juntos y comprender que son exactamente iguales cuesta 0/1D6. El libro no localiza nota a pie para el asterisco de PV 20, y la habilidad Esquivar aparece con el formato \"(45/18)\" pero sin el número base antes del paréntesis en la capa de texto extraída — matemáticamente equivale a un 90% base, pero no se incluye en las habilidades por no ser una cifra literalmente leída, solo deducida."
+  },
+  {
+    "id": "shakti",
+    "name": "Omar Shakti",
+    "title": "milenario, líder de la Hermandad del Faraón Negro",
+    "portrait": "shakti",
+    "chars": { "FUE": 65, "CON": 125, "TAM": 50, "DES": 85, "INT": 100, "APA": 80, "POD": 165, "EDU": 60 },
+    "hp": 17,
+    "disposition": -50,
+    "skills": {
+      "Arqueologia": 80,
+      "Ciencia (Farmacologia)": 95,
+      "Ciencias ocultas": 95,
+      "Contabilidad": 65,
+      "Credito": 75,
+      "Derecho": 65,
+      "Descubrir": 90,
+      "Escuchar": 70,
+      "Historia": 85,
+      "Intimidar": 70,
+      "Mitos de Cthulhu": 95,
+      "Persuasion": 95,
+      "Psicologia": 90,
+      "Sigilo": 75,
+      "Trato con animales": 50
+    },
+    "hooks": [
+      {
+        "id": "dulces",
+        "approach": "adular",
+        "bonus": 1,
+        "requires": [{ "kind": "flag", "flag": "shakti_dulce_descubierto" }],
+        "note": "Adora los dulces sin motivo aparente. Quien lo haya descubierto (Difícil de Descubrir o Psicología) puede aprovecharlo, pero si Shakti se siente observado mientras come, la integridad física de quien mire corre serio peligro."
+      },
+      {
+        "id": "weder_repugnancia_directo",
+        "approach": "directo",
+        "skills": ["Persuasion"],
+        "penalty": 2,
+        "requires": [{ "kind": "flag", "flag": "weder_presento_a_shakti" }],
+        "note": "Shakti siente una repugnancia exquisita hacia Weder. Si fue él quien os presentó, dos dados de penalización a cualquier tirada social con Shakti."
+      },
+      {
+        "id": "weder_repugnancia_adular",
+        "approach": "adular",
+        "skills": ["Encanto"],
+        "penalty": 2,
+        "requires": [{ "kind": "flag", "flag": "weder_presento_a_shakti" }],
+        "note": "Shakti siente una repugnancia exquisita hacia Weder. Si fue él quien os presentó, dos dados de penalización a cualquier tirada social con Shakti."
+      },
+      {
+        "id": "weder_repugnancia_enganar",
+        "approach": "enganar",
+        "skills": ["Charlateria"],
+        "penalty": 2,
+        "requires": [{ "kind": "flag", "flag": "weder_presento_a_shakti" }],
+        "note": "Shakti siente una repugnancia exquisita hacia Weder. Si fue él quien os presentó, dos dados de penalización a cualquier tirada social con Shakti."
+      },
+      {
+        "id": "weder_repugnancia_presionar",
+        "approach": "presionar",
+        "skills": ["Intimidar"],
+        "penalty": 2,
+        "requires": [{ "kind": "flag", "flag": "weder_presento_a_shakti" }],
+        "note": "Shakti siente una repugnancia exquisita hacia Weder. Si fue él quien os presentó, dos dados de penalización a cualquier tirada social con Shakti."
+      }
+    ],
+    "notes": "Hechicero real de Fuad, milenario, capaz de rivalizar con Sakhatakh. Su mirada exige una tirada de POD: si se falla, el investigador queda obnubilado mirándole durante horas (efecto sobrenatural que el esquema de hooks no modela; queda documentado aquí para quien dirija la escena). Lleva ocultos dos cetros egipcios que le dan 5D20 puntos de magia adicionales y absorben 1D10 de daño mágico cada uno si está armado con ambos cruzados. Su mascota Hetep, un gato blanco aparentemente inofensivo, es en realidad un demonio peligrosísimo. Conoce todos los hechizos de las reglas más «Alcanzar espectral (intensificado)». Quiere las piezas negras para investigarlas, no poseerlas. Desprecia a Fuad pero mantiene la relación por sus siervos. El gancho 'weder_presento_a_shakti' usa un flag que aún no pone ningún evento — hay que fijarlo cuando se escriba la escena de presentación (tarea 1.3/1.4), igual que ya ocurre con el flag 'impresionaron_a_weder' de la ficha de Weder."
+  },
+  {
+    "id": "aga_khan",
+    "name": "El Aga Khan (Mahomed Sha, Aga Khan III)",
+    "age": 45,
+    "title": "48.º Imán ismaelita, presidente de la Liga Musulmana Pan-india y de la Liga de las Naciones, multimillonario",
+    "portrait": "aga_khan",
+    "chars": { "FUE": 50, "CON": 40, "TAM": 40, "DES": 45, "INT": 60, "APA": 60, "POD": 55, "EDU": 60 },
+    "hp": 8,
+    "disposition": 15,
+    "skills": {},
+    "rumorDie": 20,
+    "notes": "No tiene ficha propia en el capítulo 2: su único bloque de características está en el capítulo 5 (\"Personajes secundarios\", pág. impresa 136), con formato abreviado. El libro NO da habilidades, idiomas, \"Datos y pistas\" ni \"Ganchos de interpretación\" para él — confirmado con dos extracciones independientes, no es un hueco de la transcripción. Solo pretende pasarlo bien y le disgusta que le hablen de problemas; agradece que le hagan reír. Su secretario Alí lleva un maletín con 100.000 libras esterlinas por si hacen falta. El libro dice literalmente que \"hablar con cualquiera en su compañía aporta un dado de bonificación al Crédito personal del investigador\" — es un efecto de estatus social general, no una tirada contra él, así que no encaja como gancho de interpretación (que modifica tiradas de diálogo con el propio PNJ); queda documentado aquí por si el futuro sistema de eventos/efectos quiere modelarlo."
+  },
+  {
+    "id": "al_fallah",
+    "name": "Abu Al Fallah",
+    "age": 48,
+    "title": "jefe de policía de El Cairo, hombre hastiado",
+    "portrait": "al_fallah",
+    "chars": { "FUE": 50, "CON": 70, "TAM": 60, "DES": 45, "INT": 80, "APA": 60, "POD": 60, "EDU": 70 },
+    "hp": 11,
+    "disposition": 0,
+    "skills": {
+      "Charlateria": 30,
+      "Credito": 75,
+      "Persuasion": 30,
+      "Psicologia": 35
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "cultura_occidental",
+        "approach": "cultura_occidental",
+        "skills": ["Charlateria", "Encanto", "Persuasion"],
+        "bonus": 1,
+        "note": "Reconocer su cultura occidental y su herencia londinense es su punto débil: da un dado de bonificación."
+      }
+    ],
+    "notes": "No cree en nada, ni siquiera en Dios; pocas personas más quemadas e ingratas conocerán los investigadores en El Cairo. Nunca se opone a una decisión tomada por el Príncipe o por el Aga Khan. Le acompañan dos podencos que atacan a su orden y, normalmente, 1D3 ayudantes. Muy bueno con la pistola. Sueña con volver algún día a su amado Londres, donde estudió de joven."
+  },
+  {
+    "id": "ibrahim",
+    "name": "Ibrahim Ben Alí",
+    "age": 45,
+    "title": "secretario y guardaespaldas del Aga Khan, con demasiadas cargas familiares",
+    "portrait": "ibrahim",
+    "chars": { "FUE": 90, "CON": 75, "TAM": 75, "DES": 50, "INT": 45, "APA": 45, "POD": 50, "EDU": 25 },
+    "hp": 15,
+    "disposition": 0,
+    "skills": {
+      "Charlateria": 10,
+      "Credito": 50,
+      "Persuasion": 30,
+      "Psicologia": 25
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "soborno",
+        "approach": "sobornar",
+        "skills": ["Charlateria", "Encanto", "Persuasion"],
+        "bonus": 1,
+        "note": "Ofrecerle una cantidad respetable (1D10 + 10 libras esterlinas mínimo) da un dado de bonificación — pero nunca a Intimidar: es un muro de piedra ante las amenazas."
+      }
+    ],
+    "notes": "Secretario personal y encargado de la seguridad del Aga Khan. Su bigote emula el de su jefe, a quien en el fondo odia, pero le paga tan bien que se le olvida. De él dependen cinco familias — las tres hermanas de su mujer con sus hijos, sus ancianos padres, y sus dos hermanos con sus mujeres y cinco criaturas cada una —, y el sueldo es claramente insuficiente. Su punto débil es el dinero. Su puñetazo es demoledor: si reduce a un enemigo a 0 puntos de vida lo mata en el acto, por hemorragia cerebral, aunque no hubiera herida grave previa."
+  },
+  {
+    "id": "scott_brown",
+    "name": "Scott Brown",
+    "age": 52,
+    "title": "detective del hotel, inepto integral",
+    "portrait": "scott_brown",
+    "chars": { "FUE": 45, "CON": 30, "TAM": 55, "DES": 45, "INT": 40, "APA": 45, "POD": 35, "EDU": 40 },
+    "hp": 8,
+    "disposition": -10,
+    "skills": {
+      "Charlateria": 65,
+      "Credito": 25,
+      "Persuasion": 25,
+      "Psicologia": 25
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "debilidades",
+        "approach": "debilidades",
+        "skills": ["Charlateria", "Encanto", "Persuasion"],
+        "bonus": 1,
+        "note": "Tiene muchos puntos débiles: dinero (1D10 + 20 libras esterlinas mínimo), sexo o comida — adora las ostras frescas. Satisfacer cualquiera da un dado de bonificación."
+      }
+    ],
+    "notes": "Calvo, pequeño y gordo, con un bigote ridículo. Un auténtico cretino que no se entera de nada salvo el día que llega su nómina; puede ser una molestia considerable para los investigadores, deteniendo al inocente o soltando al culpable de forma absurda, y retener a alguien horas en las oficinas de Behler. Lo mejor que podría pasarle es que lo devorara un gul. Dice «caramba» como respuesta a todo."
+  },
+  {
+    "id": "bulatovic",
+    "name": "Mihailo Bulatovic",
+    "age": 32,
+    "title": "portero del hotel, poeta montenegrino",
+    "portrait": "bulatovic",
+    "chars": { "FUE": 90, "CON": 90, "TAM": 90, "DES": 50, "INT": 45, "APA": 60, "POD": 60, "EDU": 60 },
+    "hp": 18,
+    "disposition": 20,
+    "skills": {
+      "Charlateria": 15,
+      "Credito": 25,
+      "Persuasion": 55,
+      "Psicologia": 35,
+      "Saber (Personas y lugares del hotel)": 45
+    },
+    "rumorDie": 20,
+    "notes": "Un auténtico armario de más de dos metros, pero también una persona sensible y encantadora. Sabe quién entra y quién sale del hotel en todo momento. Estudió literatura en la universidad de Al Azhar gracias a su amigo Ibrahim Amin, quien le presentó al profesor Khalil Karim; una vez por semana pasa por la biblioteca a escoger un libro, que devuelve la semana siguiente. Íntimo también de Saad Zaglul Pachá, líder de la oposición independentista al Príncipe Fuad. Nota de transcripción: en el libro (pág. 133) su bloque de Habilidades quedaba adyacente en la columna a otro bloque sin nombre claro, que aquí se ha atribuido a Scott Brown por consistencia mecánica — ese bloque ambiguo da daño de Pelea «1D3» sin bonificación, lo que solo cuadra con la Bonificación al daño 0 de Scott Brown (FUE 45 + TAM 55 = 100); Bulatovic, con FUE 90 + TAM 90 = 180, tiene Bonificación +1D6 y ya lleva su propio «Pelea 1D3+1D6» en un bloque inequívoco. Confianza alta, no absoluta: fuente OCR de un escaneado."
+  },
+  {
+    "id": "christie",
+    "name": "Agatha Christie",
+    "age": 32,
+    "title": "novelista",
+    "portrait": "christie",
+    "chars": { "FUE": 30, "CON": 30, "TAM": 40, "DES": 45, "INT": 80, "APA": 60, "POD": 35, "EDU": 75 },
+    "hp": 7,
+    "disposition": 5,
+    "skills": {
+      "Charlateria": 60,
+      "Credito": 40,
+      "Intimidar": 40,
+      "Persuasion": 60,
+      "Psicologia": 65
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "dificil_directo",
+        "approach": "directo",
+        "penalty": 1,
+        "note": "Tiene un 65% en Psicología y detecta cualquier intento de sonsacarla: hace falta un éxito Difícil (aquí, un dado de penalización). Si falláis, se os «pega como una lapa» sedienta de historias truculentas."
+      },
+      {
+        "id": "dificil_adular",
+        "approach": "adular",
+        "penalty": 1,
+        "note": "Tiene un 65% en Psicología y detecta cualquier intento de sonsacarla: hace falta un éxito Difícil (aquí, un dado de penalización). Si falláis, se os «pega como una lapa» sedienta de historias truculentas."
+      },
+      {
+        "id": "dificil_enganar",
+        "approach": "enganar",
+        "penalty": 1,
+        "note": "Tiene un 65% en Psicología y detecta cualquier intento de sonsacarla: hace falta un éxito Difícil (aquí, un dado de penalización). Si falláis, se os «pega como una lapa» sedienta de historias truculentas."
+      }
+    ],
+    "notes": "Tremendamente curiosa y cotilla: todo le interesa. Muy reservada con desconocidos, salvo que la conversación le atraiga; desprecia a los idiotas. Amiga íntima de Gina Fontanarrosa. Reside en el hotel con su marido Archibald, aunque su hotel preferido es el Mena House (sin habitaciones libres en temporada alta). Por alguna razón oculta siempre su estancia en El Cairo estos días de noviembre — de hecho, sus propias memorias narrarán paso a paso sus movimientos por el mundo dejando claro dónde estaba en todo momento, así que estos días jamás existirán para la historia... aunque varios testigos jurarán haberla visto en el Shepheard's. Cuatro años después, en 1926, desaparecerá misteriosamente durante once días, supuestamente por una depresión provocada por pesadillas; su coche aparecerá abandonado con restos de un «inidentificable limo viscoso»."
+  },
+  {
+    "id": "churchill",
+    "name": "Winston Churchill",
+    "age": 48,
+    "title": "Secretario de Estado para la Guerra y las Colonias",
+    "portrait": "churchill",
+    "chars": { "FUE": 30, "CON": 80, "TAM": 60, "DES": 45, "INT": 90, "APA": 45, "POD": 75, "EDU": 90 },
+    "hp": 14,
+    "disposition": 20,
+    "skills": {
+      "Credito": 85,
+      "Intimidar": 75,
+      "Persuasion": 85,
+      "Psicologia": 75,
+      "Saber (Whiskies escoceses)": 75
+    },
+    "rumorDie": 20,
+    "notes": "Recién operado de apendicitis y acaba de perder las elecciones: está todo el rato cabreado. Le duele todo al andar, pero no lleva bastón por orgullo — solo está a gusto sentado. Amigo íntimo de Martín Sandoval, que le provee sus mejores habanos. Antes de la audiencia real del 28 de noviembre para ser investido Companion of Honour, hace un viaje relámpago a El Cairo para el cumpleaños de su amigo Behler, a quien debe muchos favores: es de los que no falla a sus colegas. No le interesa lo sobrenatural en sí mismo, pero sí sus aplicaciones prácticas — se dejaría aconsejar por un brujo que le garantizase pleno éxito en su carrera (pasados los años, Crowley será su hechicero oficial, salvo que los investigadores le hagan cambiar de opinión). Habla compulsivamente de whiskies escoceses. El libro dice literalmente que hablar con cualquiera en su compañía aporta dos dados de bonificación al Crédito personal del investigador — como con el Aga Khan, es un efecto de estatus social general, no una tirada contra él, así que no encaja como gancho de interpretación (que modifica tiradas de diálogo con el propio PNJ); queda documentado aquí."
+  },
+  {
+    "id": "mayer",
+    "name": "Randolph Mayer",
+    "age": 52,
+    "title": "policía de Scotland Yard, escolta de Churchill",
+    "portrait": "mayer",
+    "chars": { "FUE": 45, "CON": 45, "TAM": 45, "DES": 45, "INT": 45, "APA": 50, "POD": 40, "EDU": 45 },
+    "hp": 9,
+    "disposition": 10,
+    "skills": {
+      "Credito": 65,
+      "Persuasion": 45,
+      "Psicologia": 35,
+      "Saber (Whiskies escoceses)": 25
+    },
+    "rumorDie": 20,
+    "hooks": [
+      {
+        "id": "invitar_copa",
+        "approach": "invitar_copa",
+        "skills": ["Persuasion"],
+        "bonus": 2,
+        "note": "Una copa (mejor, una botella) de whisky puro de malta da dos dados de bonificación a Persuasión, pero requiere tiempo: al menos 1D20 + 10 minutos de conversación."
+      }
+    ],
+    "notes": "Encargado de la seguridad de Winston Churchill, al que se le escapa con frecuencia. Frecuenta mucho el bar del hotel. Si Randolph llega a hablar bien de los investigadores con Churchill, estos pueden tener prácticamente todo a su alcance."
+  },
+  {
+    "id": "williams",
+    "name": "Valentine Williams",
+    "age": 39,
+    "title": "corresponsal de The Times en El Cairo",
+    "portrait": "williams",
+    "chars": { "FUE": 40, "CON": 55, "TAM": 45, "DES": 45, "INT": 80, "APA": 60, "POD": 75, "EDU": 75 },
+    "hp": 10,
+    "disposition": 25,
+    "skills": {
+      "Charlateria": 55,
+      "Conducir automovil": 40,
+      "Credito": 75,
+      "Persuasion": 85,
+      "Psicologia": 80,
+      "Saber (Sociedad cairota)": 80
+    },
+    "rumorDie": 20,
+    "notes": "Antiguo editor jefe de la agencia Reuters, una de las personas mejor informadas del planeta; también novelista. Gran ayuda para los investigadores: conoce a todo el mundo, tanto dentro del hotel como fuera. El libro dice literalmente que hablar con cualquiera en su compañía aporta un dado de bonificación al Crédito personal del investigador — igual que con el Aga Khan y con Churchill, es un efecto de estatus social general, no una tirada contra él, así que no encaja como gancho de interpretación; queda documentado aquí. A diferencia de Al Fallah, Ben Alí o Scott Brown, el libro no le da ningún punto débil explotable."
+  },
+  {
+    "id": "crutta",
+    "name": "Abdul Crutta",
+    "age": 35,
+    "title": "dragomán atractivo y honesto",
+    "portrait": "crutta",
+    "chars": { "FUE": 50, "CON": 70, "TAM": 45, "DES": 80, "INT": 75, "APA": 75, "POD": 60, "EDU": 70 },
+    "hp": 11,
+    "disposition": 20,
+    "skills": {
+      "Arqueologia": 30,
+      "Buscar libros": 15,
+      "Charlateria": 75,
+      "Conducir automovil": 30,
+      "Credito": 30,
+      "Derecho": 15,
+      "Descubrir": 35,
+      "Encanto": 40,
+      "Historia": 60,
+      "Persuasion": 30,
+      "Psicologia": 25
+    },
+    "rumorDie": 10,
+    "notes": "Dragomán estándar (cap. 3, pág. 41 — fuera del rango 132-141, no de la tabla de \"Personajes Secundarios\"): contratable en recepción por 40 piastras al día para resolver prácticamente cualquier necesidad del grupo. rumorDie asignado por criterio de rol, no por categoría del libro (el libro no lo incluye en la Lista de personajes aleatorios): guía culto y bien relacionado, pero no personal del hotel que oiga sus chismes. Huele bien, y le falta medio dedo meñique de la mano izquierda — se lo comió un babuino. Lleva un collar de plata con una «S», regalo de Selassie. Le gustan las novelas de misterio; si los investigadores le presentan a Agatha Christie, se sentirá en deuda con ellos para toda la vida. Habla alemán, árabe (propio), francés e inglés."
+  },
+  {
+    "id": "merryweather",
+    "name": "Eleanor Merryweather",
+    "age": 40,
+    "title": "joyera de la tienda Merryweather, elegante y agotada de vivir",
+    "portrait": "merryweather",
+    "chars": { "FUE": 25, "CON": 45, "TAM": 50, "DES": 45, "INT": 55, "APA": 65, "POD": 35, "EDU": 45 },
+    "hp": 9,
+    "disposition": 0,
+    "skills": {
+      "Charlateria": 25,
+      "Credito": 25,
+      "Encanto": 80,
+      "Persuasion": 20,
+      "Psicologia": 15,
+      "Sigilo": 30
+    },
+    "rumorDie": 10,
+    "notes": "Cap. 4, pág. 88 — fuera del rango 132-141; rumorDie asignado por criterio de rol (dependienta de tienda, no personal del rango de \"Personajes Secundarios\"). Nota de transcripción: en el libro su bloque de Habilidades es idéntico, palabra por palabra, al de Martín Sandoval (pág. 90), incluyendo un nativo «Español» que no encaja con su apellido inglés — huele más a artefacto de extracción del escaneado a dos columnas que a coincidencia real. Se mantiene tal cual por no inventar un dato mejor, pero queda marcado como dudoso."
+  },
+  {
+    "id": "murphy",
+    "name": "John Murphy",
+    "age": 45,
+    "title": "sastre de la tienda Lords, mutilado de guerra",
+    "portrait": "murphy",
+    "chars": { "FUE": 50, "CON": 40, "TAM": 50, "DES": 50, "INT": 60, "APA": 45, "POD": 75, "EDU": 50 },
+    "hp": 9,
+    "disposition": 0,
+    "skills": {
+      "Charlateria": 15,
+      "Conducir automovil": 25,
+      "Credito": 20,
+      "Encanto": 35,
+      "Persuasion": 20,
+      "Psicologia": 20
+    },
+    "rumorDie": 10,
+    "notes": "Cap. 4, pág. 89 — fuera del rango 132-141; rumorDie asignado por criterio de rol (dependiente de tienda, no de la tabla de \"Personajes Secundarios\"). Sastre sofisticado de la tienda de moda de caballeros Lords, mutilado de guerra."
+  },
+  {
+    "id": "sandoval",
+    "name": "Martín Sandoval",
+    "age": 52,
+    "title": "estanquero de la tienda Sandoval, excesivamente afable",
+    "portrait": "sandoval",
+    "chars": { "FUE": 50, "CON": 45, "TAM": 55, "DES": 45, "INT": 60, "APA": 50, "POD": 60, "EDU": 40 },
+    "hp": 9,
+    "disposition": 20,
+    "skills": {
+      "Charlateria": 25,
+      "Credito": 25,
+      "Encanto": 80,
+      "Persuasion": 20,
+      "Psicologia": 15,
+      "Sigilo": 30
+    },
+    "rumorDie": 20,
+    "notes": "Cap. 4, pág. 90 — fuera del rango 132-141; rumorDie asignado por criterio de rol: muy afable y amigo íntimo de Winston Churchill, al que provee sus mejores habanos cubanos, así que oye y cuenta más que la media del personal de tiendas. Se ríe demasiado y a carcajadas."
+  },
+  {
+    "id": "fontanarrosa",
+    "name": "Gina Fontanarrosa",
+    "age": 40,
+    "title": "dependienta de la tienda de suvenires, verborreica y chismosa",
+    "portrait": "fontanarrosa",
+    "chars": { "FUE": 35, "CON": 70, "TAM": 45, "DES": 45, "INT": 55, "APA": 65, "POD": 50, "EDU": 50 },
+    "hp": 11,
+    "disposition": 15,
+    "skills": {
+      "Charlateria": 35,
+      "Credito": 20,
+      "Encanto": 60,
+      "Persuasion": 30,
+      "Psicologia": 25
+    },
+    "rumorDie": 20,
+    "notes": "Cap. 4, pág. 90 — fuera del rango 132-141; rumorDie asignado por criterio de rol: literalmente descrita como verborreica y chismosa, de las que más oyen y cuentan del personal de tiendas. Dueña italiana de la tienda de suvenires, amiga íntima de Agatha Christie. Tiende a embaucar y a seducir a los hombres que considera seducibles."
+  },
+  {
+    "id": "belanger",
+    "name": "Juliette Belanger",
+    "age": 37,
+    "title": "encargada de la boutique Le Petit France, elegante y sofisticada",
+    "portrait": "belanger",
+    "chars": { "FUE": 30, "CON": 50, "TAM": 40, "DES": 50, "INT": 75, "APA": 75, "POD": 55, "EDU": 50 },
+    "hp": 9,
+    "disposition": 10,
+    "skills": {},
+    "rumorDie": 10,
+    "notes": "Cap. 4, pág. 90 — fuera del rango 132-141; rumorDie asignado por criterio de rol (dependienta de tienda, no de la tabla de \"Personajes Secundarios\"). El libro no da una lista de Habilidades para ella en el extracto disponible (solo características y PV): se deja `skills` vacío en vez de estimarlo, igual que ya hace la ficha de `aga_khan` cuando el libro no da esa información."
+  },
+  {
+    "id": "de_la_fontaine",
+    "name": "Pierre de la Fontaine",
+    "age": 39,
+    "title": "sastre de Le Petit France, estirado y burlón",
+    "portrait": "de_la_fontaine",
+    "chars": { "FUE": 45, "CON": 45, "TAM": 50, "DES": 45, "INT": 60, "APA": 55, "POD": 30, "EDU": 50 },
+    "hp": 9,
+    "disposition": -10,
+    "skills": {},
+    "rumorDie": 6,
+    "notes": "Cap. 4, pág. 90 — fuera del rango 132-141; rumorDie asignado por criterio de rol: estirado y burlón, el menos abierto del personal de tiendas. El libro no da una lista de Habilidades para él en el extracto disponible (solo características y PV): se deja `skills` vacío en vez de estimarlo, igual que ya hace la ficha de `aga_khan` cuando el libro no da esa información."
+  },
+  {
+    "id": "lardinne",
+    "name": "Ismael Lardinne",
+    "age": 57,
+    "title": "vendedor de relojes de la tienda Sechat, aficionado a decir sandeces",
+    "portrait": "lardinne",
+    "chars": { "FUE": 45, "CON": 45, "TAM": 50, "DES": 45, "INT": 65, "APA": 50, "POD": 40, "EDU": 50 },
+    "hp": 9,
+    "disposition": 5,
+    "skills": {},
+    "rumorDie": 10,
+    "notes": "Cap. 4, pág. 91 — fuera del rango 132-141; rumorDie asignado por criterio de rol (dependiente de tienda, no de la tabla de \"Personajes Secundarios\"). El libro no da una lista de Habilidades para él en el extracto disponible (solo características, PV y Combate: Pelea 25%, Revólver .38 35%, Esquivar 22%): se deja `skills` vacío en vez de estimarlo."
+  }
+]

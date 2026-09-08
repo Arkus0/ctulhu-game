@@ -1,0 +1,599 @@
+[
+  {
+    "id": "carnarvon_luxor",
+    "npc": "carnarvon",
+    "label": "Preguntarle por la expedición",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "onHard": {
+      "text": "Lord Carnarvon se coloca las lentes, mira a un punto situado aproximadamente medio metro a la izquierda de ustedes y empieza a hablar.\n—Partimos… mañana. —Larguísima pausa. Nadie sabe si la frase ha terminado—. Temprano. El tren de Luxor. He mandado por delante el equipaje pesado, cosa que no hace nadie y que todo el mundo debería hacer.\nOtra pausa.\n—Hay una tumba. Con los sellos intactos. —Y aquí se le enciende algo por dentro y de pronto habla de corrido y muy deprisa—: ¿Saben ustedes lo que significa «con los sellos intactos»? Significa que nadie ha entrado. Nadie. En tres mil años. Todas las tumbas del Valle están saqueadas desde la antigüedad, todas, y a mí me ha tocado la única que no.\nSe recompone al instante y vuelve a la voz de antes.\n—En fin. Ya veremos. Estas cosas… suelen ser… menos de lo que parecen.\nY es evidente que no cree una palabra de eso y que lleva once días sin dormir.",
+      "facts": [
+        "carnarvon_se_va_a_luxor",
+        "tumba_con_sellos_intactos",
+        "telegrama_carter_carnarvon"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 20
+        }
+      ],
+      "unlocks": [
+        "carnarvon_catorce",
+        "carnarvon_obstaculo"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Partimos mañana temprano. —Se coloca las lentes—. Al Valle de los Reyes. Hay… noticias. Buenas noticias. No diré más porque no está confirmado, y porque llevo catorce años diciendo cosas que luego no eran.",
+      "facts": [
+        "carnarvon_se_va_a_luxor"
+      ],
+      "unlocks": [
+        "carnarvon_catorce",
+        "carnarvon_obstaculo"
+      ]
+    },
+    "onFailure": {
+      "text": "—Sí. —Asiente con mucha convicción—. Sí, desde luego. Absolutamente.\nY se hace evidente, por la manera en que asiente, que no ha oído la pregunta. Al cabo de un momento añade, mirando a la escalera:\n—Perdonen. ¿Han visto ustedes al señor Carter? Debía bajar a las seis y media y son las seis y media.\nY consulta el reloj cuatro veces en dos minutos.",
+      "facts": [
+        "carnarvon_es_sordo",
+        "carnarvon_baja_a_las_seis_y_media"
+      ],
+      "unlocks": [
+        "carnarvon_catorce",
+        "carnarvon_obstaculo"
+      ]
+    },
+    "note": "Pág. 21: «Carnarvon está tan ansioso en el Shepheard's que no la espera». Pág. 61: parten hacia el Valle de los Reyes el día 22; a las 18:30 se reúnen en recepción para dejar el hotel."
+  },
+  {
+    "id": "carnarvon_catorce",
+    "npc": "carnarvon",
+    "label": "«Catorce años son muchos años»",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "locked": true,
+    "onExtreme": {
+      "text": "Lord Carnarvon se queda callado un rato muy largo. Es la primera vez que su silencio parece un silencio y no una avería.\n—Catorce. —Asiente—. Cinco de ellos en el Valle. Y este año… —Se pasa la mano por la boca—. Este año iba a ser el último. Ya se lo había dicho a Carter en junio, por carta. Una sola temporada más y se acabó.\nSe endereza.\n—Y no por el dinero, que lo tengo. Por otra cosa peor. Porque uno llega a una edad en la que empieza a sospechar que ha dedicado su vida a algo que no era nada, y esa sospecha, señores, es lo único que no se compra ni se quita.\nY entonces, con una franqueza brutal:\n—Yo no soy arqueólogo. Soy un hombre que se aburría. Me rompí la cabeza en un automóvil en el noventa y ocho, me dijeron que me buscara un clima seco y una afición, y me busqué las dos cosas aquí.\n»Y ahora resulta que la afición ha salido bien. —Se le tuerce la boca—. Que Dios me perdone, pero es lo primero que me sale bien en cincuenta y seis años.",
+      "facts": [
+        "carnarvon_catorce_anos",
+        "carnarvon_iba_a_abandonar",
+        "carnarvon_necesita_esto"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 30
+        }
+      ],
+      "unlocks": [
+        "carnarvon_carter",
+        "carnarvon_dinero"
+      ]
+    },
+    "onHard": {
+      "text": "—Catorce. —Asiente despacio—. Y este iba a ser el último. Se lo había comunicado a Carter en junio: una temporada más y se cierra la concesión.\nSe coloca las lentes.\n—Uno no puede pasarse la vida financiando un agujero. Aunque, mírenme: eso es exactamente lo que he hecho.",
+      "facts": [
+        "carnarvon_catorce_anos",
+        "carnarvon_iba_a_abandonar"
+      ],
+      "unlocks": [
+        "carnarvon_carter",
+        "carnarvon_dinero"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Muchos. —Y se queda mirando el jardín—. Muchos años, sí. Pero yo tengo mucha paciencia y muy poco carácter para dejar las cosas a medias, que es una combinación cara pero honrada.",
+      "facts": [
+        "carnarvon_catorce_anos"
+      ],
+      "unlocks": [
+        "carnarvon_carter",
+        "carnarvon_dinero"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Cómo dice? —Se inclina hacia el lado bueno—. Ah. Sí. Muchos.\nY entonces empieza a contar, con un detalle infinito y sin que nadie se lo haya pedido, la historia de su accidente de automóvil en Alemania en 1898, los huesos que se rompió, los médicos que le atendieron y por qué le mandaron a Egipto.\nDura once minutos. En los once minutos no menciona una sola vez una excavación.",
+      "facts": [
+        "carnarvon_es_sordo",
+        "carnarvon_habla_de_si_mismo"
+      ],
+      "unlocks": [
+        "carnarvon_carter",
+        "carnarvon_dinero"
+      ]
+    },
+    "note": "Pág. 21: «Estuvo a punto de abandonar las excavaciones en Luxor ese mismo año debido a que no veía resultados». Pág. 22: Carnarvon financia a Carter desde 1908."
+  },
+  {
+    "id": "carnarvon_carter",
+    "npc": "carnarvon",
+    "label": "Preguntarle qué clase de hombre es Carter",
+    "approaches": [
+      "adular",
+      "directo",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Howard es… —Busca la palabra durante un tiempo incómodo— …un empleado excelente.\nSe da cuenta de lo que ha dicho y no lo corrige.\n—Es un dibujante de Norfolk sin estudios que sabe más de Egipto que todo el British Museum junto, y eso les molesta enormemente a todos, cosa que a mí me divierte.\nSe ajusta las lentes.\n—No es simpático. No pretende serlo. Lleva catorce años trabajando para mí y no hemos tenido una conversación que no fuera de trabajo, ni una, y a mí eso me parece perfecto. He tenido muchos amigos y ninguno me ha encontrado una tumba.\nY después, mucho más bajo:\n—Aunque estos dos últimos años ha cambiado. Tiene una… suerte… nueva. Encuentra lo que busca. Antes no encontraba nunca nada y ahora encuentra siempre. —Se encoge de hombros—. Supongo que así funciona esto. Uno cava treinta años en el sitio equivocado y luego cava un metro en el correcto.",
+      "facts": [
+        "carter_debe_su_suerte_a_weder",
+        "carnarvon_confia_en_carter",
+        "carter_cambio_hace_dos_anos"
+      ],
+      "unlocks": [
+        "carnarvon_advertirle"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Competente. —Asiente—. Muy competente. Un poco huraño, pero eso en un profesional no es un defecto: es casi una garantía. Yo pago para que excave, no para que me haga compañía.",
+      "facts": [
+        "carnarvon_confia_en_carter"
+      ],
+      "unlocks": [
+        "carnarvon_advertirle"
+      ]
+    },
+    "onFailure": {
+      "text": "—Excelente persona. Excelente. —Y cambia de tema hacia sí mismo con una habilidad que no parece deliberada, sino puramente gravitatoria.\nHabla nueve minutos de la concesión, de lo que le costó conseguirla, de los funcionarios que se la negaron y del día que se la dieron. En los nueve minutos, el nombre de Carter aparece dos veces y siempre en la misma posición gramatical: como complemento.",
+      "facts": [
+        "carnarvon_habla_de_si_mismo",
+        "carnarvon_confia_en_carter"
+      ]
+    },
+    "note": "Pág. 22: Weder «advierte su inesperada inocencia» y, desde 1921, le propone «lugares aún no profanados». Pág. 21: «Carnarvon viaja feliz a Luxor ignorando por completo las insanas estrategias que Carter ha utilizado para hallar la tumba del faraón»."
+  },
+  {
+    "id": "carnarvon_advertirle",
+    "npc": "carnarvon",
+    "label": "Advertirle de con quién trabaja Carter",
+    "approaches": [
+      "directo",
+      "adular",
+      "presionar"
+    ],
+    "check": {
+      "difficulty": "extreme"
+    },
+    "minutes": 15,
+    "locked": true,
+    "once": true,
+    "onExtreme": {
+      "text": "Lord Carnarvon escucha. Escucha de verdad, que en él es un acontecimiento: se quita las lentes, se inclina hacia el lado bueno y no interrumpe ni una vez.\nCuando terminan, tarda mucho en contestar.\n—Ustedes me están diciendo que llevo dos años pagando excavaciones que alguien le señala a Howard en un mapa. —Muy despacio—. Y que ese alguien no es arqueólogo.\nSe frota los ojos.\n—Miren. Yo no soy un hombre inteligente, pero sé sumar. Y llevo dos años sumando yo solo por qué un hombre que no encontraba nada empezó de repente a encontrarlo todo. —Levanta la vista—. Lo que pasa es que la suma daba un resultado que no me convenía, así que la dejé a medias. Eso lo he hecho toda mi vida.\nSe pone las lentes.\n—Voy a hablar con él esta noche. Antes del tren. —Y añade, con una amargura enorme—: Y si es verdad, iré a Luxor de todos modos, señores, porque a mi edad uno ya sabe lo que es capaz de perdonarse a sí mismo. Pero iré sabiéndolo. Eso ya es algo.",
+      "facts": [
+        "carnarvon_sospecha_de_carter",
+        "carnarvon_hablara_con_carter",
+        "carter_debe_su_suerte_a_weder"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "carnarvon_advertido"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 25
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "Lord Carnarvon escucha con la cabeza ladeada y una expresión de interés absoluto.\nAsiente en los sitios correctos. Dice «ya veo» dos veces y «qué curioso» una. Cuando ustedes terminan, hay un silencio de tres segundos y entonces dice:\n—Desde luego. Desde luego. —Y se coloca las lentes—. Y díganme una cosa, ya que están: ¿han visto ustedes alguna vez una tumba con los sellos intactos?\nNo ha oído nada. No una sola palabra. Y lo peor es que no es solo la sordera: es que dentro de su cabeza no hay sitio para otra cosa, y no lo habrá hasta que abra esa cámara.\nDentro de dos días, en el tren a Luxor, mirará a su hija con esa misma cara y le dirá que la encuentra desmejorada.",
+      "facts": [
+        "carnarvon_no_escucha",
+        "carnarvon_finge_escuchar"
+      ],
+      "effects": [
+        {
+          "kind": "sanityLoss",
+          "loss": "0/1"
+        }
+      ]
+    },
+    "note": "Pág. 21: «Disfruta fingiendo que escucha, pero en realidad no lo hace en absoluto; desconecta y piensa en otra cosa». Y: «El Conde ni lo comenta, imbuido por la enfermiza ansiedad del inminente descubrimiento arqueológico». Advertirle es, literalmente, la tirada más difícil del hotel."
+  },
+  {
+    "id": "carnarvon_evelyn",
+    "npc": "carnarvon",
+    "label": "Preguntarle por su hija",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Evelyn. Sí. —Como quien recuerda un encargo—. Se ha empeñado en venir. Se pagó el billete ella misma, ¿saben?, lo cual demuestra una determinación que en un hijo varón habría celebrado.\nSe ajusta las lentes.\n—Es una buena chica. Un poco… —hace un gesto vago con la mano— …nerviosa. Los médicos de Londres lo llevan. Hay que tenerla ocupada y no dejar que se le llene la cabeza.\nY luego, sin ninguna maldad, que es lo que lo hace insoportable:\n—Mañana salimos a las siete. Si a las siete no ha bajado, salgo igual. No es rigor: es que el tren no espera y ella lo sabe. Ya nos alcanzará.\nY vuelve a mirar la escalera por si baja Carter.",
+      "facts": [
+        "carnarvon_la_reprime",
+        "evelyn_se_pago_el_viaje",
+        "carnarvon_viajara_sin_ella"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Está por ahí. —Mira vagamente hacia el salón—. En alguna parte. Es una chica sensata dentro de lo que cabe, aunque tiene la costumbre de hacer preguntas, cosa que en una mujer joven no conviene fomentar.",
+      "facts": [
+        "carnarvon_la_reprime"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Mi hija? —Frunce el ceño—. Sí. Ha venido conmigo.\nY se queda esperando la siguiente pregunta, sin añadir nada más, porque para él eso era la respuesta completa.\nAl cabo de un momento, como si acabara de acordarse de un detalle administrativo:\n—Estará en el salón. Le he dicho que no salga del hotel.",
+      "facts": [
+        "carnarvon_la_reprime"
+      ]
+    },
+    "note": "Pág. 21: «Evelyn no será un impedimento en cualquier caso; viajará sin ella si es necesario». Pág. 20, nota para el Guardián: «El único trastorno de Evelyn es la presencia de su propio padre»."
+  },
+  {
+    "id": "carnarvon_hija",
+    "npc": "carnarvon",
+    "label": "Preguntarle si sabe dónde está Evelyn",
+    "requires": [
+      {
+        "kind": "all",
+        "of": [
+          {
+            "kind": "timeAfter",
+            "minute": 2190
+          },
+          {
+            "kind": "not",
+            "of": {
+              "kind": "flag",
+              "flag": "evelyn_no_baja"
+            }
+          }
+        ]
+      }
+    ],
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—¿Evelyn? —Y por primera vez desconecta de lo suyo—. Pues… no. No la he visto desde el desayuno.\nMira alrededor. Se coloca las lentes. Vuelve a mirar, y esta vez con los ojos entrecerrados, que es como mira un hombre que no ve.\n—Habrá salido al jardín. —Pausa—. Le tengo dicho que no salga del hotel sola, pero es que además no puede: no sabe una palabra de árabe y no lleva dinero encima porque yo se lo llevo.\nSe queda pensando, y algo empieza a moverse muy despacio detrás de esa cara.\n—Aunque a las once y media estaba en el bar. Eso lo sé porque bajó el camarero a decirme que la señorita se había marchado disgustada, y yo estaba con Howard y no bajé. —Traga—. No bajé.\nY se levanta.\n—¿Ustedes la han visto? Contéstenme despacio y de frente, hagan el favor. Yo oigo mal.",
+      "facts": [
+        "carnarvon_no_sabe_donde_esta",
+        "evelyn_salio_disgustada",
+        "carnarvon_no_bajo"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 15
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—En el salón, supongo. —Vagamente—. O en el jardín. Le he dicho que no salga del hotel.\nY después, con una pequeña arruga entre las cejas que no estaba antes:\n—Aunque llevo desde el desayuno sin verla, ahora que lo dicen.",
+      "facts": [
+        "carnarvon_no_sabe_donde_esta"
+      ]
+    },
+    "onFailure": {
+      "text": "—Estará donde tenga que estar. —Y consulta el reloj—. ¿Han visto ustedes al señor Carter? Teníamos que revisar unas listas y son casi las seis.\nY se pone a hablar del equipaje, y del tren, y de un cajón de material fotográfico que no ha llegado de Alejandría, y en ningún momento vuelve sobre su hija.\nMientras habla, en el otro extremo del salón, la puerta del pasillo de servicio sigue cerrada.",
+      "facts": [
+        "carnarvon_no_sabe_donde_esta",
+        "carnarvon_no_escucha"
+      ]
+    },
+    "note": "Pág. 62: a las 12:00 del día 2 Evelyn baja al sótano «sin avisar a Lord Carnarvon». El tema no aparece si el grupo ha conseguido que no baje (`evelyn_no_baja`). Cuando exista la agenda del día 2, esta condición temporal debería sustituirse por el evento correspondiente."
+  },
+  {
+    "id": "carnarvon_obstaculo",
+    "npc": "carnarvon",
+    "label": "Ofrecerse a apartar lo que le estorbe",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 15,
+    "locked": true,
+    "onHard": {
+      "text": "Lord Carnarvon se vuelve entero hacia ustedes, y por primera vez les mira a la cara.\n—¿Lo dicen ustedes en serio? —Y de pronto habla deprisa y sin pausas—. Porque tengo tres. Tres obstáculos, y llevo dos días con ellos y nadie en este hotel mueve un dedo.\nLevanta el pulgar.\n—Uno: un cajón de material fotográfico retenido en la aduana de Alejandría por un funcionario que quiere un sello que nadie sabe dónde se pide. Dos: el Servicio de Antigüedades me ha mandado un inspector que llega el jueves y yo quiero abrir el miércoles. Y tres —y aquí baja la voz— hay un periodista del Times en este hotel que sabe algo y que va a estropearlo todo antes de que yo llegue.\nSe endereza.\n—Resuélvanme uno cualquiera de los tres y tendrán en mí un amigo. Y les advierto de que yo tengo pocos amigos y muchísimo dinero, de modo que la oferta es mejor de lo que suena.",
+      "facts": [
+        "carnarvon_tiene_tres_obstaculos",
+        "inspector_de_antiguedades",
+        "hay_un_periodista_del_times"
+      ],
+      "effects": [
+        {
+          "kind": "setFlag",
+          "flag": "carnarvon_os_debe_un_favor"
+        },
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 35
+        }
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un cajón. —Sin dudarlo—. Material fotográfico retenido en la aduana de Alejandría por un funcionario con un sello. Si consiguen ustedes que ese cajón esté en Luxor el jueves, quedaré profundamente agradecido y lo demostraré.",
+      "facts": [
+        "carnarvon_tiene_tres_obstaculos"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 20
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—Muy amable. —Sonríe sin mirarles—. Muy amable, gracias. Pero no necesito nada.\nY dos frases después, hablando de otra cosa, deja caer con una furia perfectamente contenida:\n—…y si un funcionario de aduanas de Alejandría vuelve a retenerme un cajón, haré que le trasladen a Asuán. Estas cosas se arreglan con una carta y con la carta correcta.\nEstá furioso. Lo ha estado toda la conversación. Simplemente lo dice con la misma voz con la que pide el té.",
+      "facts": [
+        "carnarvon_tiene_tres_obstaculos"
+      ]
+    },
+    "note": "Pág. 21: «Si algo (o alguien) se interpone en su camino a Luxor, Carnarvon se pondrá furioso y procurará evitarlo por todos los medios imaginables. Se sentirá profundamente agradecido con quien le ayude a apartar el obstáculo». Su gancho `camino_a_luxor` bonifica la aproximación directa."
+  },
+  {
+    "id": "carnarvon_dinero",
+    "npc": "carnarvon",
+    "label": "«¿Cuánto lleva gastado en todo esto?»",
+    "approaches": [
+      "adular",
+      "directo",
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "locked": true,
+    "onHard": {
+      "text": "—Cincuenta mil libras. —Lo dice sin ningún énfasis, que es la única manera elegante de decirlo—. Poco más o menos. Desde mil novecientos ocho.\nSe coloca las lentes.\n—La gente cree que eso es una fortuna y no lo es: es una casa en Belgravia. Lo que sí es una fortuna es lo otro. —Levanta un dedo—. Catorce años de temporadas, de concesiones, de cuadrillas de doscientos hombres tres meses al año, de sobornos que aquí se llaman «gratificaciones»…\nY entonces, casi de pasada, deja caer la frase más útil de la tarde:\n—Y de comprar. Porque también se compra, señores, no se engañen. La mitad de las colecciones de Europa han salido de un fellah con una cesta y un intermediario en un café. Yo no lo hago, pero se hace, y aquí en El Cairo hay dos o tres caballeros que viven exactamente de eso y esta semana están todos en este hotel.",
+      "facts": [
+        "carnarvon_ha_gastado_cincuenta_mil",
+        "dos_mercaderes",
+        "el_mercado_negro_de_antiguedades"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Mucho. —Sonríe sin ganas—. Lo suficiente para que en Londres se hayan reído de mí en tres clubes distintos. Espero cobrármelo la semana que viene, con intereses.",
+      "facts": [
+        "carnarvon_ha_gastado_cincuenta_mil"
+      ]
+    },
+    "onFailure": {
+      "text": "—Un caballero no discute cifras. —Muy seco.\nY entonces, contradiciéndose de la manera más aristocrática posible:\n—Aunque le diré que llevo catorce años pagando sin ver nada y que este año, por primera vez, un anticuario de esta ciudad se ha ofrecido a comprarme la concesión. A comprármela a mí. —Resopla—. Un anticuario. Con la cara quemada. Le dije que se marchara.",
+      "facts": [
+        "faraz_najir",
+        "najir_quiso_la_concesion"
+      ]
+    },
+    "note": "Pág. 21: «es el clásico hombre de negocios obsesionado con su fortuna». La oferta del anticuario de la cara quemada es Faraz Najir haciendo lo que hace siempre: comprar antes que nadie."
+  },
+  {
+    "id": "carnarvon_politica",
+    "npc": "carnarvon",
+    "label": "Sacarle la situación política",
+    "approaches": [
+      "directo",
+      "adular"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 15,
+    "onHard": {
+      "text": "—¡Ah, la situación! —Se acomoda con una expresión del máximo interés—. Sí. Sí, es un asunto delicadísimo. Complejo. Muy complejo.\nY se calla, esperando que hablen ustedes.\nY hablan ustedes. Y él asiente. Y dice «ya veo» y «desde luego» y «ahí ha dado usted en el clavo», y se inclina hacia delante en los momentos oportunos, y todo es tan convincente que hacen falta unos minutos para notar que en veinte minutos de conversación política Lord Carnarvon no ha emitido ni una sola opinión.\nCuando ustedes terminan, dice:\n—Fascinante. Verdaderamente fascinante. —Y consulta el reloj—. ¿Han visto ustedes al señor Carter?",
+      "facts": [
+        "carnarvon_finge_escuchar",
+        "carnarvon_no_opina_de_politica"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Un asunto complejo. —Asiente con gravedad—. Complejísimo. Yo tengo una posición al respecto, naturalmente, pero no la expreso fuera de la cámara.\nNo tiene ninguna posición al respecto y no ha pisado la cámara en dos años.",
+      "facts": [
+        "carnarvon_no_opina_de_politica"
+      ]
+    },
+    "onFailure": {
+      "text": "—Discúlpenme. —Se lleva la mano a la oreja—. Este salón tiene un eco endemoniado.\nY es mentira: el salón no tiene ningún eco. Lo que tiene Lord Carnarvon es una manera muy trabajada de no oír lo que no le apetece, que consiste en oír mal exactamente cuando le conviene.\nDe hecho, cuando dos mesas más allá alguien menciona la palabra «Luxor», se vuelve inmediatamente.",
+      "facts": [
+        "carnarvon_es_sordo",
+        "carnarvon_finge_escuchar"
+      ]
+    },
+    "note": "Pág. 21: «No quiere hablar de la situación política vigente, ni de la cámara de los lores y ni mucho menos de Egipto y su fanatismo independentista, pero disfruta enormemente fingiendo que sí son temas de su interés»."
+  },
+  {
+    "id": "carnarvon_confusion",
+    "npc": "carnarvon",
+    "label": "Dejar que les confunda con otras personas",
+    "approaches": [
+      "enganar"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onExtreme": {
+      "text": "Lord Carnarvon les mira sin lentes, entrecerrando los ojos, y decide por su cuenta quiénes son.\n—¡Ah, del Servicio de Antigüedades! —Se levanta a estrecharles la mano—. Muy bien. Muy bien. Les esperaba el jueves.\nY a partir de ahí no hay quien le saque de ahí, y es una mina.\n—Miren, se lo digo francamente porque ustedes son funcionarios y esto es un trámite: la concesión está en regla desde el catorce y la tengo renovada hasta el año que viene. El hallazgo se comunicó el día seis por telegrama. Lo tengo aquí.\nSaca del bolsillo interior una libreta y la abre encima de la mesa.\n—Aquí está todo. Fechas, cuadrillas, gastos y lo que Howard me ha ido comunicando desde el cinco de noviembre. —Pasa páginas con el dedo—. Y aquí, miren: estas tres entradas del año pasado son las que no cuadran, y se lo digo yo antes de que me lo pregunten ustedes. Tres yacimientos que Howard localizó sin prospección previa. Sin prospección. Yo pagué y no pregunté.\nSe encoge de hombros.\n—Pónganlo en su informe si quieren. A estas alturas me da igual.",
+      "facts": [
+        "la_libreta_de_carnarvon",
+        "empezo_el_5_de_noviembre",
+        "carter_debe_su_suerte_a_weder",
+        "tres_yacimientos_sin_prospeccion"
+      ],
+      "effects": [
+        {
+          "kind": "unlockJournal",
+          "entry": "gazette_21"
+        }
+      ],
+      "unlocks": [
+        "carnarvon_advertirle"
+      ]
+    },
+    "onSuccess": {
+      "text": "—¿Del Times? —Se vuelve a medias, sin lentes—. No hago declaraciones. No las hago y no las haré hasta que la cámara esté abierta y verificada.\nY sin embargo, en los diez minutos siguientes, hace exactamente cuatro declaraciones: la fecha del hallazgo, el estado de los sellos, el nombre de la concesión y la hora del tren de mañana.",
+      "facts": [
+        "empezo_el_5_de_noviembre",
+        "tumba_con_sellos_intactos",
+        "carnarvon_se_va_a_luxor"
+      ]
+    },
+    "onFailure": {
+      "text": "Se coloca las lentes.\nY es como ver bajar una persiana: la cara se le vuelve cortés y opaca a la vez.\n—Perdonen. Sin las lentes no distingo a nadie a más de un metro. —Sonríe con una frialdad perfecta—. Y ustedes no son quienes yo pensaba.\nSe levanta.\n—Buenas tardes, señores. —Y en el camino hacia la escalera se detiene un momento junto al mostrador y le dice algo a Clinton, señalando con el mentón hacia la mesa de ustedes.",
+      "facts": [
+        "carnarvon_es_sordo",
+        "carnarvon_desconfia"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": -20
+        },
+        {
+          "kind": "setFlag",
+          "flag": "fichados_por_recepcion"
+        }
+      ]
+    },
+    "note": "Pág. 21: «Lord Carnarvon es duro de oído y sin sus lentes no ve de cerca prácticamente nada. De lejos no ve bien de ninguna de las maneras. El Guardián es libre de proporcionar un dado de bonificación a los investigadores que usen con él Charlatanería (intentando engañarle, haciéndose pasar por alguien) o Intimidar». Su gancho `sordo_engano` es el único de este PNJ que se dispara con una aproximación real."
+  },
+  {
+    "id": "carnarvon_ocultismo",
+    "npc": "carnarvon",
+    "label": "Mencionarle las maldiciones de las tumbas",
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onHard": {
+      "text": "—Supersticiones de fellahin. —Resopla—. Cada vez que abrimos un pozo aparece un capataz explicando que hay que sacrificar una cabra. Yo pago la cabra, señores, porque una cabra son dos chelines y una cuadrilla asustada son tres semanas.\nY entonces se queda pensando, y baja el tono.\n—Aunque le diré una cosa que no digo en Londres. El año pasado, en el Valle, tres hombres de la cuadrilla se negaron a seguir cavando en un sitio. No pidieron dinero, que es lo que se pide siempre. Se marcharon andando y dejaron la paga.\nSe ajusta las lentes.\n—Un hombre que deja la paga encima de una piedra y se va andando por el desierto no está siendo supersticioso. Está asustado. Y yo no supe nunca de qué, porque no pregunté, porque a mí lo que me interesaba era el pozo.",
+      "facts": [
+        "carnarvon_no_cree_en_maldiciones",
+        "fellahin_desaparecidos",
+        "los_obreros_dejaron_la_paga"
+      ]
+    },
+    "onSuccess": {
+      "text": "—Tonterías para el Daily Mail. —Se ajusta las lentes—. Llevo catorce años levantando piedras en ese valle y lo único que me ha caído encima ha sido polvo y facturas.",
+      "facts": [
+        "carnarvon_no_cree_en_maldiciones"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Maldiciones? —Se ríe con ganas, la primera risa de toda la conversación—. Mi querido amigo, si las tumbas estuvieran malditas yo llevaría catorce años muerto y me habría ahorrado un dineral.\nY después, secándose los ojos:\n—Pregúntenselo a Howard, que de eso sabe. A Howard le he oído decir cosas rarísimas después del segundo whisky, y eso que Howard no bebe.",
+      "facts": [
+        "carnarvon_no_cree_en_maldiciones",
+        "carter_dice_cosas_raras"
+      ]
+    },
+    "note": "Pág. 21: Ciencias ocultas 15%. Su incredulidad es total y es exactamente lo que le mata: no es capaz de oír una advertencia ni cuando se la ponen delante."
+  },
+  {
+    "id": "carnarvon_churchill",
+    "npc": "carnarvon",
+    "label": "Ofrecerle una presentación a Churchill",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "churchill_en_el_hotel"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "once": true,
+    "minutes": 10,
+    "onSuccess": {
+      "text": "—¿Winston? ¿Aquí? —Se endereza—. Eso sí me interesa.\nY por una vez es sincero, y hasta se le nota una punta de nervio.\n—Coincidimos en dos comités y no creo que se acuerde de mí, cosa que dice más de él que de mí. —Se ajusta la corbata—. Preséntenmelo, hagan el favor. Y díganle, si tienen ocasión, que el asunto del Valle de los Reyes va a dar que hablar la semana que viene.\nSe queda muy quieto un momento.\n—Eso. Díganle exactamente eso. Que va a dar que hablar.\nY se le ve en la cara que lleva catorce años ensayando esa frase.",
+      "facts": [
+        "carnarvon_quiere_a_churchill",
+        "churchill_en_el_hotel"
+      ],
+      "effects": [
+        {
+          "kind": "adjustDisposition",
+          "npc": "carnarvon",
+          "by": 30
+        }
+      ]
+    },
+    "onFailure": {
+      "text": "—No hace falta. —Muy digno—. Winston y yo nos conocemos.\nY luego, un minuto más tarde, mirando hacia el salón y sin dirigirse a nadie en particular:\n—Aunque no estaría de más saludarle. Uno no debería marcharse de un hotel sin saludar. —Y se atusa el bigote—. ¿Dónde han dicho ustedes que se sienta?",
+      "facts": [
+        "carnarvon_quiere_a_churchill"
+      ]
+    },
+    "note": "Pág. 21: «Lord Carnarvon no conoce al Aga Khan, y su desinterés es mutuo […] Sin embargo sí agradecería que los investigadores le presentaran a Churchill, aunque este no tiene particular interés en conocerle»."
+  },
+  {
+    "id": "carnarvon_aga_khan",
+    "npc": "carnarvon",
+    "label": "Ofrecerle una presentación al Aga Khan",
+    "requires": [
+      {
+        "kind": "knows",
+        "fact": "aga_khan_viene"
+      }
+    ],
+    "approaches": [
+      "adular",
+      "directo"
+    ],
+    "check": {
+      "difficulty": "regular"
+    },
+    "minutes": 10,
+    "onSuccess": {
+      "text": "—No, gracias. —Ni lo piensa—. He coincidido con esa clase de caballero en Deauville y en Newmarket y no tenemos absolutamente nada que decirnos. Él quiere divertirse y yo no me divierto desde mil ochocientos noventa y ocho.\nSe coloca las lentes.\n—Además, ese señor colecciona. Y a un coleccionista con dinero no se le presenta a un hombre que está a punto de desenterrar algo. Eso lo sabe cualquiera que haya vendido un caballo.",
+      "facts": [
+        "carnarvon_no_quiere_al_aga_khan",
+        "aga_khan_colecciona"
+      ]
+    },
+    "onFailure": {
+      "text": "—¿Quién? —Se inclina hacia el lado bueno—. Ah. No, no.\nY vuelve al periódico. Pero un momento después, sin levantar la vista:\n—¿Y ese caballero compra antigüedades egipcias?\nY cuando le contestan que sí, hace un ruido con la garganta y no dice nada más en un buen rato.",
+      "facts": [
+        "aga_khan_colecciona"
+      ]
+    },
+    "note": "Pág. 21: «Lord Carnarvon no conoce al Aga Khan, y su desinterés es mutuo, porque Carnarvon no es un tipo divertido, de entrada, ni pretende socializar»."
+  }
+]
