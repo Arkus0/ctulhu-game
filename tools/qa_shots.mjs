@@ -108,7 +108,10 @@ async function capturar(nombre) {
   console.log(`  ${nombre.padEnd(22)} ${s.time} · ${s.location}${s.scene ? ` · escena: ${s.scene}` : ''}`)
 }
 
-await pagina.goto(URL_BASE, { waitUntil: 'networkidle' })
+// `skipIntro=1` entra directo a la partida: la portada y la introduccion tienen
+// su propio recorrido y aqui lo que se comprueba son las laminas del juego.
+const separador = URL_BASE.includes('?') ? '&' : '?'
+await pagina.goto(`${URL_BASE}${separador}skipIntro=1`, { waitUntil: 'networkidle' })
 await pagina.waitForSelector('#choices button')
 
 // 1. Hall con la escena de llegada abierta.

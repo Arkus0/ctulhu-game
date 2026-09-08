@@ -446,8 +446,8 @@ button { font-family: inherit; }
  * siguiente y el boton de volver— sin que haya que descubrir que el panel rueda.
  */
 #choices {
-  flex: 0 0 min(48%, 360px);
-  max-height: 54%;
+  flex: 0 0 min(34%, 260px);
+  max-height: 43%;
   overflow-y: auto;
   padding: 0.45rem;
   border-top: 2px solid var(--gray);
@@ -460,13 +460,19 @@ button { font-family: inherit; }
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
+/*
+ * Una opcion es una linea: la etiqueta y lo que cuesta. Al no arrastrar
+ * habilidad, riesgo ni consecuencia, el boton no necesita alto de parrafo, y esos
+ * milimetros son los que permiten ver la lista entera sin robarle sitio ni a la
+ * lamina ni a la caja de texto.
+ */
 #choices > button {
   display: grid;
   grid-template-columns: 2rem 1fr auto;
   gap: 0.4rem;
   align-items: center;
   width: 100%;
-  min-height: 42px;
+  min-height: 36px;
   margin: 2px 0;
   padding: 0.28rem 0.55rem;
   border: 1px solid #151515;
@@ -493,6 +499,29 @@ button { font-family: inherit; }
   color: var(--gray);
 }
 #choices > button.urgent { border-left: 4px solid var(--magenta); }
+
+/* Navegacion de la lista: comparte una linea y no compite con las decisiones. */
+.choice-nav {
+  display: flex;
+  gap: 2px;
+  margin-top: 2px;
+}
+.choice-nav button {
+  flex: 1 1 0;
+  min-height: 30px;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #151515;
+  background: var(--black);
+  color: var(--gray);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.choice-nav button:hover,
+.choice-nav button:focus-visible {
+  border-color: var(--bright-cyan);
+  color: var(--bright-cyan);
+  outline: 0;
+}
 .key { color: var(--yellow); font-weight: bold; }
 .choice-copy { display: flex; flex-direction: column; min-width: 0; }
 .choice-copy strong { color: inherit; font-size: 0.91rem; font-weight: normal; }
@@ -657,8 +686,8 @@ button { font-family: inherit; }
   #scene { flex-basis: 27%; min-height: 92px; }
   #scene-summary { top: 1.25rem; font-size: 0.68rem; max-height: calc(100% - 2.2rem); overflow-y: auto; }
   #log { min-height: 96px; padding: 0.55rem 0.7rem 0.3rem; }
-  #choices { flex-basis: min(52%, 340px); max-height: 58%; }
-  #choices > button { min-height: 46px; }
+  #choices { flex-basis: min(38%, 260px); max-height: 45%; }
+  #choices > button { min-height: 40px; }
   .choice-copy small { font-size: 0.69rem; }
   #panel { inset: 0; width: 100%; height: 100%; border: 0; box-shadow: none; padding: 1rem 0.85rem 2rem; }
 }

@@ -133,6 +133,10 @@ const SOCIAL_COST: Record<string, number> = {
 /** Orden de desempate: a igualdad de números, la manera más limpia. */
 const APPROACH_PREFERENCE = ['directo', 'adular', 'sobornar', 'enganar', 'presionar']
 
+/** Lo que cuesta una pregunta que no declara su tiempo. El reloj es el antagonista:
+ * ninguna opción puede ocultar lo que vale. */
+export const DEFAULT_TOPIC_MINUTES = 10
+
 /** Un dado de bonificación vale, a habilidad media, unos quince puntos de éxito. */
 const DIE_WORTH = 15
 
@@ -425,7 +429,7 @@ export class DialogueEngine {
       response,
       hooksApplied: applied,
       dispositionDelta: delta,
-      minutes: topic.minutes ?? 10,
+      minutes: topic.minutes ?? DEFAULT_TOPIC_MINUTES,
       deferred,
     }
   }

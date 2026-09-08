@@ -1,6 +1,6 @@
 import { loadContent, ContentError } from './content/index'
 import { Game, type GameSnapshot, type Line, type Turn } from './engine/game'
-import type { DialogueTopic } from './engine/dialogue'
+import { DEFAULT_TOPIC_MINUTES, type DialogueTopic } from './engine/dialogue'
 import type { GuidedAction } from './engine/adventure'
 import { DIFFICULTY_LABEL, threshold } from './engine/rules'
 import { ArtRenderer, type TimeOfDay } from './ui/art'
@@ -14,10 +14,12 @@ type Mode =
   | { kind: 'end' }
 
 /**
- * Cuantas opciones caben en una pantalla sin que haya que releerla. Tres obligaba
- * a paginar tres veces para agotar a un personaje que tiene nueve temas abiertos.
+ * Cuantas opciones caben sin robarle sitio a la lamina ni a la caja de texto.
+ * Con tres hacian falta tres paginas para agotar a un personaje que tiene nueve
+ * temas abiertos; con la fila compacta de navegacion caben cuatro y todavia se ve
+ * el boton de volver sin rodar el panel.
  */
-const PER_PAGE = 5
+const PER_PAGE = 4
 
 type AppPhase = 'title' | 'intro' | 'playing' | 'ending'
 
@@ -461,17 +463,19 @@ class UI {
       const topics = all.slice(start, start + PER_PAGE)
       this.heading(page > 0 ? `Otros temas: página ${page}` : this.game.npcName(this.mode.npc))
       for (const topic of topics) this.topicButton(topic)
-      if (start + PER_PAGE < all.length) {
-        const npc = this.mode.npc
-        this.button(page === 0 ? `Otros temas (${all.length - PER_PAGE})` : 'Más temas', () => {
-          this.mode = { kind: 'topics', npc, page: page + 1 }
-          this.renderChoices()
-        })
-      }
       const npc = this.mode.npc
-      this.back(() => {
-        this.mode = page > 0 ? { kind: 'topics', npc, page: page - 1 } : { kind: 'talk' }
-      })
+      const nav: [string, () => void][] = []
+      if (start + PER_PAGE < all.length) {
+        nav.push([
+          page === 0 ? `Otros temas (${all.length - PER_PAGE})` : 'Más temas',
+          () => { this.mode = { kind: 'topics', npc, page: page + 1 } },
+        ])
+      }
+      nav.push([
+        'Volver',
+        () => { this.mode = page > 0 ? { kind: 'topics', npc, page: page - 1 } : { kind: 'talk' } },
+      ])
+      this.navRow(nav)
       return
     }
     this.heading(view.scene ? view.scene.title : '¿Qué hace Edith?')
@@ -490,7 +494,7 @@ class UI {
         : 'public'
     const investigationOpen =
       !underground &&
-      (view.pendingRoll != null || this.mode.kind === 'topics' || this.mode.kind === 'approach')
+      (view.pendingRoll != null || this.mode.kind === 'topics')
     this.audio.setBaseMusicState(baseState)
     this.audio.setInvestigationActive(investigationOpen)
     this.audio.noteLocation(view.location.id, zone)
@@ -539,7 +543,7 @@ class UI {
     this.button(
       topic.label,
       () => void this.act(() => this.game.ask(topic.id), { investigation: true }),
-      topic.minutes,
+      topic.minutes ?? DEFAULT_TOPIC_MINUTES,
       '',
       this.game.hasAskedTopic(topic.id) ? 'Ya lo habéis preguntado.' : '',
     )
@@ -620,6 +624,28 @@ class UI {
       onClick()
     })
     this.choices.append(button)
+  }
+
+  /**
+   * Paginacion y vuelta atras en una sola linea.
+   *
+   * Son navegacion, no decisiones: ocupando cada una un boton entero empujaban la
+   * ultima opcion fuera de la pantalla, que es justo la que hace falta para salir.
+   */
+  private navRow(entries: [string, () => void][]): void {
+    const row = document.createElement('div')
+    row.className = 'choice-nav'
+    for (const [label, change] of entries) {
+      const button = document.createElement('button')
+      button.type = 'button'
+      button.textContent = label
+      button.addEventListener('click', () => {
+        change()
+        this.renderChoices()
+      })
+      row.append(button)
+    }
+    this.choices.append(row)
   }
 
   private back(change?: () => void): void {

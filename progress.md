@@ -197,3 +197,85 @@ The public repository must exclude the source PDF and current cropped module ill
 - [x] La interfaz muestra por separado tirada, umbral requerido, habilidad base, dificultad y veredicto de la prueba.
 - [x] El estado textual estructurado expone `required` y `success` durante una tirada pendiente.
 - [x] Añadida una regresión explícita para el caso comunicado: 67 contra 55 es una prueba fallida.
+
+## Conversación de un clic y diálogos al nivel del resto (8 de septiembre de 2026)
+
+### Preguntar
+
+- [x] La pantalla «¿cómo?» desaparece. La aproximación la elige `chooseApproach`
+  puntuando habilidad del hablante, dados que aportan los ganchos del PNJ y coste
+  social de cada registro (`presionar` 12, `enganar` 8, `sobornar` 4, `directo` y
+  `adular` 0); a igualdad manda el orden `directo > adular > sobornar > enganar >
+  presionar`. `ask(topicId)` sin aproximación entra en modo automático y la firma
+  antigua sigue valiendo para las escenas guiadas y las pruebas.
+- [x] Se cuenta lo que antes se elegía: quién lleva la voz, en qué registro y qué
+  gancho ha saltado, delante de la línea de tirada. Sin eso, un dado automático
+  parece arbitrario.
+- [x] Entrevista completa a Behler: de 4 clics por pregunta a 2. La lista pasa de
+  tres temas a cuatro por página, lo ya preguntado cae al final marcado como tal, y
+  paginación y «Volver» comparten una fila compacta.
+- [x] Las tiradas de diálogo siguen resolviéndose enteras. La tarjeta con apuesta y
+  gasto de Suerte se reserva para las tiradas de escena, que son las caras.
+
+### Ganchos de carácter
+
+- [x] Quince de los cincuenta y un ganchos no saltaban nunca: usaban el vocabulario
+  del libro (`amenazar`, `cortesia`, `egiptologia`, `hermandad`, `cocina`, `sotano`,
+  `posicion`, `politica`, `discrecion`, `invitar`…) y el motor solo comparaba contra
+  las cinco aproximaciones. Afectaba a Behler, Clinton, Weder, Mahadni y Thornhill,
+  los cinco centrales de la demo.
+- [x] Se rescatan por dos vías: `APPROACH_ALIASES` para los que son sinónimos de tono
+  y `tags` de tema para los que dependen del asunto. `criticar_behler` era en realidad
+  una penalización por apretar a Clinton y se corrige en la ficha.
+- [x] `validate` rechaza desde ahora cualquier gancho que no pueda saltar. Los PNJ sin
+  temas escritos quedan exentos: su ficha va por delante de su diálogo.
+
+### Legibilidad de las opciones
+
+- [x] Fuera del botón la habilidad, el riesgo y la consecuencia. Reaparecen con la
+  tirada, que es cuando el jugador puede aceptarla o comprarla con Suerte. Solo la
+  opción desactivada explica qué le falta.
+- [x] Los rótulos de `scenes.json` cargan ahora con la intención entera, porque el
+  botón ya no la explica.
+- [x] Ninguna opción oculta su coste: un tema sin `minutes` mostraba el botón sin
+  tiempo aunque el motor le cobrase diez.
+- [x] Medido en 1440×900, 1024×768 y 390×844: la lista completa cabe sin rodar el
+  panel y sin quitarle un píxel ni a la lámina ni a la caja de texto.
+
+### Rutas del mapa
+
+- [x] `travelTo` enlazaba los `label` de las salidas, que son rótulos de botón en
+  infinitivo, y producía «Recorréis Volver al hall, Salir a la terraza». Ahora
+  `shortestRoute` devuelve las salas atravesadas y la frase se construye de manera
+  que no pueda quedar mal: «De la terraza a la cocina, pasando por Recepción y hall
+  de entrada y el restaurante».
+
+### Texto
+
+- [x] Reescritos los diecisiete intercambios del equipo, que eran el mismo aforismo
+  partido en dos y sin voz propia. Ahora son veintiséis con variantes según quién
+  esté delante, de dos a cuatro líneas, y con `requires` opcional.
+- [x] Corregido un fallo real: `exchange` solo comprobaba que hubiera dos
+  investigadores en la sala y luego daba la réplica a quien tocara. Vance contestaba
+  al informe de Nadia desde la cocina, dos plantas más abajo.
+- [x] Reescritos los ocho informes de Nadia y Vance: se pintan como `dialogo` y
+  estaban escritos en tercera persona.
+- [x] Repasados los seis cuerpos de escena y la prosa de desenlace de `game.ts`, y
+  corregidas las cadenas sin tildes que llegaban a pantalla («Dejais correr el
+  reloj», «retazos mas», «poner ideas en comun»).
+
+### Comprobación
+
+- [x] `npm test`: 229 pruebas en 11 ficheros. `test/dialogue.test.ts` es nuevo y sus
+  doce casos fallan contra el código anterior, comprobado con `git stash`.
+- [x] `npm run build` limpio salvo el aviso conocido del paquete JavaScript.
+- [x] `tools/qa_shots.mjs` recorre la demo entera hasta el Disco Solar de las 12:30.
+  Entra con `skipIntro=1` y usa el Chromium de `/opt/pw-browsers` cuando existe. Los
+  dos errores de consola que quedan son del entorno: la hoja de Google Fonts la corta
+  el proxy de red.
+
+### Pendiente
+
+- [ ] Acordar con el usuario el reparto definitivo entre lámina, caja de texto y
+  lista de opciones: este pase conserva las proporciones del arte nuevo y hace caber
+  la lista acortando el botón, pero no se ha contrastado jugando.
