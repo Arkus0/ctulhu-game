@@ -2,7 +2,24 @@ node_modules/
 dist/
 art/raw/
 art/*.png
-public/art/*.png
+# Temporary derivatives kept only as local replacement references.
+public/art/viejo_templo.png
+public/art/terraza.png
+public/art/sotano_pasillo.png
+public/art/sotano_palacio.png
+public/art/sotano_escombros.png
+public/art/sotano_almacen.png
+public/art/salon_isis.png
+public/art/restaurante.png
+public/art/recepcion.png
+public/art/pasillo.png
+public/art/mapa_sotanos.png
+public/art/mapa_plantas.png
+public/art/jardin.png
+public/art/habitacion.png
+public/art/correos.png
+public/art/cocina.png
+public/art/bar_largo.png
 !public/art/README.md
 *.pdf
 .claude/

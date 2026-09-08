@@ -37,6 +37,7 @@ Original prompt: Implement the proposed plan for rebuilding La Broma Macabra as 
 - [x] Published the clean source tree to `Arkus0/ctulhu-game` on branch `main`.
 - [x] Verified a fresh clone with `npm ci`, 180 tests, a production build and a browser smoke test.
 - [x] Upgraded Vitest to 3.2.7; `npm audit` now reports zero known vulnerabilities.
+- [x] Added `CLAUDE.md` and a local-reference manifest so future sessions verify the ignored PDF and temporary art before relying on them.
 
 ## Next recommended milestone
 

@@ -35,6 +35,7 @@ Estado actual: 180 pruebas automatizadas y compilación de producción verificad
 - [Dirección de diseño](docs/DIRECCION-DE-DISENO.md)
 - [Prompt para afilar la demo](docs/PROMPT-AFILAR-DEMO.md)
 - [Prompt para crear arte original](docs/PROMPT-ARTE-ORIGINAL.md)
+- [Referencias locales necesarias](docs/REFERENCIAS-LOCALES.md)
 - [Estado y traspaso entre sesiones](progress.md)
 
 La prioridad es pulir este arco de cuatro horas antes de ampliar la historia. El objetivo no es trasladar más páginas del módulo, sino conseguir que cada sistema produzca decisiones, escenas y consecuencias.
@@ -62,6 +63,8 @@ La interfaz expone `window.render_game_to_text()` y `window.advanceTime(ms)` par
 ## Arte y derechos
 
 El PDF original y sus ilustraciones no forman parte del repositorio público. Cuando falta una imagen, el juego genera un fondo EGA procedimental para que el flujo siga siendo jugable.
+
+Las sesiones ejecutadas sobre la carpeta local completa sí pueden consultarlos. `CLAUDE.md` y [el manifiesto de referencias](docs/REFERENCIAS-LOCALES.md) indican las rutas exactas y obligan a comprobar su disponibilidad; un clon de GitHub por sí solo no contiene ese material.
 
 El paquete definitivo debe estar compuesto por ilustraciones originales. Su biblia, inventario y proceso de sustitución se describen en [el prompt de arte](docs/PROMPT-ARTE-ORIGINAL.md).
 

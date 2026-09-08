@@ -7,9 +7,12 @@ Trabaja en el proyecto local «La Broma Macabra». Tu objetivo no es ampliar tod
 
 Antes de tocar archivos, lee completos:
 - docs/DIRECCION-DE-DISENO.md
+- docs/REFERENCIAS-LOCALES.md
 - progress.md
 - README.md
-- el PDF original únicamente para comprobar hechos, tono y cronología
+- el PDF local `pdfcoffee.com_la-broma-macabra-5-pdf-free.pdf` únicamente para comprobar hechos, tono y cronología
+
+Haz primero la comprobación previa indicada en `docs/REFERENCIAS-LOCALES.md`. Si el PDF no está disponible, dilo expresamente en la entrega y no afirmes que has contrastado la adaptación con el módulo. Puedes continuar con mejoras que no dependan de esa consulta.
 
 Respeta estas decisiones: Edith Harker es la líder fija; Nadia y Vance reciben encargos; sus conocimientos no se comparten hasta reunirse; la raíz ofrece un máximo de cinco acciones; el mapa contiene el movimiento; el texto literario existente se conserva íntegro; la agenda canónica sigue ocurriendo, pero las acciones del jugador pueden ramificarla; las tiradas son visibles y permiten gastar Suerte; hay tres guardados manuales y no hay rebobinado.
 

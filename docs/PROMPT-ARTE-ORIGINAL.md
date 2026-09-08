@@ -7,13 +7,22 @@ Sustituye el arte temporal de «La Broma Macabra» por un paquete visual complet
 
 Usa la skill imagegen para generar y editar imágenes. Antes de generar nada, lee completos:
 - docs/DIRECCION-DE-DISENO.md
+- docs/REFERENCIAS-LOCALES.md
 - progress.md
 - src/ui/art.ts
 - src/content/locations.json
 - src/content/events/day1.json
 - tools/crops.csv únicamente como inventario de nombres antiguos
 
-Puedes consultar el PDF para hechos históricos, vestuario, arquitectura, personajes y tono narrativo. No calques, recortes, recompongas ni imites de cerca sus ilustraciones. No reutilices sus encuadres, poses o diseños reconocibles. El resultado debe ser una interpretación nueva del Hotel Shepheard’s y del Cairo de 1922.
+Haz primero la comprobación previa de `docs/REFERENCIAS-LOCALES.md`. Para auditar la sustitución necesitas que estén disponibles localmente:
+- `pdfcoffee.com_la-broma-macabra-5-pdf-free.pdf`;
+- `art/raw/*.png`;
+- `public/art/*.png`;
+- `art/contacto.png` y `art/ega_preview.png`.
+
+Si falta el paquete local, no declares completa la auditoría ni borres referencias. Puedes preparar la biblia, el manifiesto y generar propuestas desde las descripciones versionadas, pero deja la comparación y aprobación en estado pendiente.
+
+Consulta el PDF para hechos históricos, vestuario, arquitectura, personajes y tono narrativo. Usa las imágenes temporales para identificar cobertura, función y gramática visual general, no como composiciones que reproducir. No calques, recortes, recompongas ni imites de cerca sus ilustraciones. No reutilices sus encuadres, poses o diseños reconocibles. El resultado debe ser una interpretación nueva del Hotel Shepheard’s y del Cairo de 1922.
 
 Dirección artística:
 - aventura gráfica de PC de finales de los años ochenta;
