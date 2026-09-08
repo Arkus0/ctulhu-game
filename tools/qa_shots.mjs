@@ -103,6 +103,10 @@ async function resolverTirada() {
 
 async function capturar(nombre) {
   await pagina.waitForTimeout(260)
+  // `advanceTime` termina de golpe el efecto de maquina de escribir. Sin esto la
+  // captura sale a medio teclear y parece un cuadro de texto vacio.
+  await pagina.evaluate(() => window.advanceTime(0))
+  await pagina.waitForTimeout(120)
   const s = await estado()
   await pagina.screenshot({ path: join(SALIDA, `${nombre}.png`) })
   console.log(`  ${nombre.padEnd(22)} ${s.time} · ${s.location}${s.scene ? ` · escena: ${s.scene}` : ''}`)

@@ -284,6 +284,12 @@ export function validate(c: RawContent): string[] {
     if (sceneIds.has(scene.id)) problems.push(`Escena duplicada: "${scene.id}"`)
     sceneIds.add(scene.id)
     if (!scene.title || !scene.body) problems.push(`La escena "${scene.id}" no tiene título o cuerpo`)
+    // El objetivo va en una barra de una linea encima de la lamina: si crece,
+    // le come alto de pantalla al arte. La descripcion larga es `body`.
+    if (!scene.objective) problems.push(`La escena "${scene.id}" no declara objetivo`)
+    else if (scene.objective.length > 90) {
+      problems.push(`El objetivo de "${scene.id}" tiene ${scene.objective.length} caracteres; el máximo es 90`)
+    }
     const actionIds = new Set<string>()
     for (const action of scene.actions) {
       if (actionIds.has(action.id)) problems.push(`Acción duplicada "${action.id}" en la escena "${scene.id}"`)

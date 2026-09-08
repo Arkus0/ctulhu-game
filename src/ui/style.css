@@ -302,19 +302,12 @@ button { font-family: inherit; }
   border-bottom: 2px solid var(--gray);
   background: var(--black);
 }
+/*
+ * Una escena abierta se marca con el borde y nada mas. El rotulo «DECISIÓN
+ * CRÍTICA» salia en las seis escenas de la demo, o sea siempre, y un aviso que
+ * sale siempre deja de avisar: todas las decisiones importan.
+ */
 #scene.scene-alert { border-color: var(--bright-magenta); }
-#scene.scene-alert::before {
-  content: 'DECISIÓN CRÍTICA';
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  padding: 0.18rem 0.55rem;
-  background: var(--magenta);
-  color: var(--white);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-}
 #art {
   display: block;
   height: 100%;
@@ -396,7 +389,7 @@ button { font-family: inherit; }
   flex: 1 1 auto;
   min-height: 112px;
   overflow-y: auto;
-  padding: 0.7rem 1rem 0.45rem;
+  padding: 0.5rem 1rem 0.4rem;
 }
 #log p {
   max-width: 68ch;
@@ -434,13 +427,15 @@ button { font-family: inherit; }
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.25rem 0.25rem 0.7rem;
+  padding: 0.1rem 0.25rem 0.6rem;
   background: var(--black);
 }
 .log-pagination button {
+  padding: 0.05rem 0.4rem;
   border: 1px solid var(--gray);
   background: var(--black);
   color: var(--bright-cyan);
+  font-size: 0.78rem;
   cursor: pointer;
 }
 .log-pagination button:disabled { opacity: 0.35; cursor: default; }

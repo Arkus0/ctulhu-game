@@ -310,7 +310,7 @@ export class Game {
       scene,
       pendingRoll: this.pendingRollView(),
       objective: scene
-        ? scene.body
+        ? scene.objective
         : sliceFinished
           ? 'La primera mañana ha cerrado su arco. Sus consecuencias quedan fijadas.'
           : leads.find((lead) => lead.status === 'active')?.detail ??
@@ -517,7 +517,7 @@ export class Game {
         }
         return copy
       })
-    return { id: def.id, title: def.title, body: def.body, art: def.art, actions }
+    return { id: def.id, title: def.title, objective: def.objective, body: def.body, art: def.art, actions }
   }
 
   /**

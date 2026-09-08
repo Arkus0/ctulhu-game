@@ -225,6 +225,24 @@ describe('guardado y audio', () => {
 })
 
 describe('contratos de contenido', () => {
+  it('el objetivo cabe en su barra y la descripción vive aparte', () => {
+    for (const scene of content.scenes.values()) {
+      // La barra OBJETIVO es un rotulo de una linea encima de la lamina: si
+      // crece, le come alto de pantalla al arte. La prosa va en `body`.
+      expect(scene.objective.length).toBeLessThanOrEqual(90)
+      expect(scene.objective).not.toBe(scene.body)
+      expect(scene.body.length).toBeGreaterThan(scene.objective.length)
+    }
+  })
+
+  it('la barra enseña el objetivo corto, no la descripción', () => {
+    const game = new Game(content, 'objetivo-corto')
+    const view = game.view()
+    expect(view.scene?.id).toBe('arrival_checkin')
+    expect(view.objective).toBe(view.scene!.objective)
+    expect(view.objective).not.toBe(view.scene!.body)
+  })
+
   it('las seis escenas tienen entre dos y cuatro consecuencias persistentes', () => {
     expect(content.scenes.size).toBe(6)
     for (const scene of content.scenes.values()) {

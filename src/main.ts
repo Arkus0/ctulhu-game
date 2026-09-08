@@ -21,6 +21,9 @@ type Mode =
  */
 const PER_PAGE = 4
 
+/** Alto que reserva la barra de paginacion dentro del cuadro de narracion. */
+const PAGINATION_HEIGHT = 30
+
 type AppPhase = 'title' | 'intro' | 'playing' | 'ending'
 
 interface IntroFrame {
@@ -89,6 +92,8 @@ const $ = <T extends HTMLElement>(id: string): T => {
 
 class UI {
   private phase: AppPhase = 'title'
+  /** Ultima escena cuya descripcion se narro, para no repetirla en cada turno. */
+  private narratedScene: string | null = null
   private mode: Mode = { kind: 'root' }
   private game: Game
   private readonly content: ReturnType<typeof loadContent>
@@ -175,6 +180,7 @@ class UI {
   private async startFreshGame(): Promise<void> {
     this.cancelIntroTimer()
     this.game = this.newGame()
+    this.narratedScene = null
     this.history = []
     this.pages = []
     this.pageIndex = 0
@@ -196,7 +202,10 @@ class UI {
         text: 'Caso reúne lo descubierto; Mapa mueve; Equipo coordina. Un compañero separado conserva lo que sabe hasta volver a reunirse.',
       },
       { kind: 'titular', text: view.location.name },
-      { kind: 'narracion', text: view.description },
+      // Con una escena abierta, su descripcion y la de la sala cuentan lo mismo
+      // dos veces y obligan a pasar dos paginas antes de la primera decision.
+      ...(view.scene ? [] : [{ kind: 'narracion' as const, text: view.description }]),
+      ...this.sceneOpeningLines(),
     ])
     await this.paint()
   }
@@ -669,10 +678,26 @@ class UI {
     this.closePanel()
     this.mode = turn.over ? { kind: 'end' } : { kind: 'root' }
     this.presentationArt = turn.presentationArt ?? null
-    if (turn.lines.length > 0) this.write(turn.lines)
+    const lines = [...turn.lines, ...this.sceneOpeningLines()]
+    if (lines.length > 0) this.write(lines)
     this.feedback(turn.feedback)
     this.audioForTurn(turn, sanityBefore, audioIntent)
     await this.paint()
+  }
+
+  /**
+   * La descripcion de una escena recien abierta.
+   *
+   * La barra OBJETIVO se queda con la linea corta —es un rotulo y compite con la
+   * lamina por el alto de pantalla— y la prosa baja al cuadro de texto, que es
+   * donde se lee todo lo demas y donde puede pasar de una linea sin estorbar.
+   */
+  private sceneOpeningLines(): Line[] {
+    const scene = this.game.view().scene
+    const id = scene?.id ?? null
+    if (id === this.narratedScene) return []
+    this.narratedScene = id
+    return scene ? [{ kind: 'narracion', text: scene.body }] : []
   }
 
   private totalSanity(): number {
@@ -714,35 +739,78 @@ class UI {
     this.renderPage()
   }
 
+  /**
+   * Reparte el texto en paginas que quepan enteras en el cuadro.
+   *
+   * Se mide en el navegador en vez de calcularse: el ajuste por palabras desperdicia
+   * el final de cada linea, y cuanto mas estrecha es la columna mas desperdicia, asi
+   * que cualquier cuenta de caracteres falla justo donde importa. Un presupuesto mal
+   * calculado o desborda —y entonces hay que rodar el cuadro *y* pasar de pagina, que
+   * es lo peor de las dos cosas— o deja paginas de una sola linea.
+   */
   private paginate(lines: Line[]): Line[][] {
-    const expanded = lines.flatMap((line) => {
-      const chunks = line.text.split(/\n+/).flatMap((paragraph) => {
-        if (paragraph.length <= 720) return [paragraph]
-        const sentences = paragraph.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g) ?? [paragraph]
-        const out: string[] = []
-        let current = ''
-        for (const sentence of sentences) {
-          if (current && current.length + sentence.length > 720) { out.push(current.trim()); current = '' }
-          current += sentence
+    const flat = lines.flatMap((line) =>
+      line.text
+        .split(/\n+/)
+        .map((text) => text.trim())
+        .filter(Boolean)
+        .map((text) => ({ ...line, text })),
+    )
+    if (flat.length === 0) return [[]]
+
+    const styles = getComputedStyle(this.log)
+    const padY = Number.parseFloat(styles.paddingTop) + Number.parseFloat(styles.paddingBottom)
+    const padX = Number.parseFloat(styles.paddingLeft) + Number.parseFloat(styles.paddingRight)
+    const budget = Math.max(1, this.log.clientHeight - padY - PAGINATION_HEIGHT)
+
+    const probe = document.createElement('div')
+    probe.style.cssText = `position:absolute;visibility:hidden;top:0;left:0;width:${this.log.clientWidth - padX}px`
+    this.log.append(probe)
+
+    const measure = (candidate: Line[]): number => {
+      probe.replaceChildren()
+      for (const line of candidate) {
+        const paragraph = document.createElement('p')
+        paragraph.className = line.kind
+        paragraph.textContent = line.text
+        probe.append(paragraph)
+      }
+      return probe.scrollHeight
+    }
+
+    // Primero se parte lo que no cabria ni estando solo, por frases y sin cortar
+    // ninguna. Asi el reparto siguiente nunca tiene que aceptar un desbordamiento.
+    const pieces = flat.flatMap((line) => {
+      if (measure([line]) <= budget) return [line]
+      const sentences = line.text.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g) ?? [line.text]
+      const out: Line[] = []
+      let current = ''
+      for (const sentence of sentences) {
+        if (current && measure([{ ...line, text: current + sentence }]) > budget) {
+          out.push({ ...line, text: current.trim() })
+          current = ''
         }
-        if (current.trim()) out.push(current.trim())
-        return out
-      })
-      return chunks.filter(Boolean).map((text) => ({ ...line, text }))
+        current += sentence
+      }
+      if (current.trim()) out.push({ ...line, text: current.trim() })
+      return out
     })
+
     const pages: Line[][] = []
     let page: Line[] = []
-    let size = 0
-    for (const line of expanded) {
-      if (page.length > 0 && (size + line.text.length > 760 || page.length >= 4)) {
-        pages.push(page)
-        page = []
-        size = 0
+    for (const line of pieces) {
+      // Un titular no puede quedarse solo en una pagina: es un rotulo, no un
+      // pasaje, y deja el cuadro en blanco debajo de tres palabras.
+      const mustStay = page.length === 0 || page.every((item) => item.kind === 'titular')
+      if (mustStay || measure([...page, line]) <= budget) {
+        page.push(line)
+        continue
       }
-      page.push(line)
-      size += line.text.length
+      pages.push(page)
+      page = [line]
     }
     if (page.length > 0) pages.push(page)
+    probe.remove()
     return pages.length > 0 ? pages : [[]]
   }
 
@@ -1066,6 +1134,7 @@ class UI {
   private async loadSave(save: SaveEnvelope): Promise<void> {
     this.game.restore(save.game)
     this.history = save.history.map((entry) => ({ time: entry.time, lines: entry.lines.map((line) => ({ ...line })) }))
+    this.narratedScene = this.game.view().scene?.id ?? null
     this.mode = { kind: 'root' }
     this.presentationArt = null
     this.closePanel()

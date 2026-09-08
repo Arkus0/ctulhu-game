@@ -3,70 +3,76 @@
     "id": "arrival_checkin",
     "art": "escena_llegada_hall",
     "title": "Llegada al Shepheard’s",
+    "objective": "Registraos y decidid quién se queda con el libro.",
     "body": "Cleveland Clinton lleva medio minuto con la pluma en el aire, esperando un nombre. A vuestra espalda el hall se traga maletas, saludos y un ventilador de techo que gira más despacio de lo que debería. Son las nueve de la mañana y ya hace treinta grados.",
     "actions": [
-      { "id": "arrival_telegram", "kind": "act", "label": "Enseñarle el telegrama de Behler", "hint": "Registro discreto y confirmación de la cita.", "minutes": 10, "consequence": "Clinton os reconoce como invitados de Behler." },
-      { "id": "arrival_question_clinton", "kind": "act", "label": "Sonsacar a Clinton mientras escribe vuestros nombres", "hint": "Descubrir · Normal. Fallar incomodará al recepcionista.", "minutes": 15, "skill": "Descubrir", "difficulty": "regular", "risk": "Clinton recordará la intromisión.", "consequence": "Podéis detectar una anomalía en el registro antes de separaros." },
-      { "id": "arrival_nadia_registry", "kind": "act", "label": "Dejar a Nadia con el libro de registro", "hint": "Descubrir · Normal. Informe en 35 min; lo sabréis al reuniros.", "minutes": 5, "consequence": "Nadia empieza un encargo privado." },
-      { "id": "arrival_vance_service", "kind": "act", "label": "Mandar a Vance a reconocer las puertas de servicio", "hint": "Cerrajería · Normal. Informe en 40 min; puede alertar a cocina.", "minutes": 5, "consequence": "Vance empieza un encargo privado." }
+      {"id": "arrival_telegram", "kind": "act", "label": "Enseñarle el telegrama de Behler", "hint": "Registro discreto y confirmación de la cita.", "minutes": 10, "consequence": "Clinton os reconoce como invitados de Behler."},
+      {"id": "arrival_question_clinton", "kind": "act", "label": "Sonsacar a Clinton mientras escribe vuestros nombres", "hint": "Descubrir · Normal. Fallar incomodará al recepcionista.", "minutes": 15, "skill": "Descubrir", "difficulty": "regular", "risk": "Clinton recordará la intromisión.", "consequence": "Podéis detectar una anomalía en el registro antes de separaros."},
+      {"id": "arrival_nadia_registry", "kind": "act", "label": "Dejar a Nadia con el libro de registro", "hint": "Descubrir · Normal. Informe en 35 min; lo sabréis al reuniros.", "minutes": 5, "consequence": "Nadia empieza un encargo privado."},
+      {"id": "arrival_vance_service", "kind": "act", "label": "Mandar a Vance a reconocer las puertas de servicio", "hint": "Cerrajería · Normal. Informe en 40 min; puede alertar a cocina.", "minutes": 5, "consequence": "Vance empieza un encargo privado."}
     ]
   },
   {
     "id": "behler_encargo",
     "art": "escena_behler",
     "title": "La reunión de Behler",
+    "objective": "Sacadle a Behler qué teme y qué está dispuesto a firmar.",
     "body": "Behler ocupa la cuarta silla de una mesa para cuatro y se seca la frente con un pañuelo bordado con las siglas del hotel. Lleva toda la mañana ensayando cómo contarlo y todavía no ha encontrado la manera de que no suene a locura.",
     "actions": [
-      { "id": "behler_listen", "kind": "talk", "label": "Dejarle contarlo entero, sin interrumpirle", "hint": "Conservar toda la explicación de Behler.", "minutes": 10, "consequence": "El caso queda formalmente abierto." },
-      { "id": "behler_basement", "kind": "talk", "label": "Preguntarle qué guarda en los sótanos del hotel", "hint": "Persuasión · Normal mediante el diálogo existente.", "minutes": 10, "consequence": "Behler puede relacionar a Weder con las ruinas." },
-      { "id": "behler_authority", "kind": "act", "label": "Pedirle que os dé autoridad por escrito", "hint": "Persuasión · Normal. Un fallo enfría la relación.", "minutes": 10, "skill": "Persuasion", "difficulty": "regular", "consequence": "La firma permitirá intervenir en zonas privadas." },
-      { "id": "behler_watch_table", "kind": "listen", "label": "Escucharle sin quitarle ojo a la mesa del fondo", "hint": "Cuesta atención que Behler notará.", "minutes": 5, "consequence": "Identificáis a Carter y Weder, pero Behler se siente relegado." }
+      {"id": "behler_listen", "kind": "talk", "label": "Dejarle contarlo entero, sin interrumpirle", "hint": "Conservar toda la explicación de Behler.", "minutes": 10, "consequence": "El caso queda formalmente abierto."},
+      {"id": "behler_basement", "kind": "talk", "label": "Preguntarle qué guarda en los sótanos del hotel", "hint": "Persuasión · Normal mediante el diálogo existente.", "minutes": 10, "consequence": "Behler puede relacionar a Weder con las ruinas."},
+      {"id": "behler_authority", "kind": "act", "label": "Pedirle que os dé autoridad por escrito", "hint": "Persuasión · Normal. Un fallo enfría la relación.", "minutes": 10, "skill": "Persuasion", "difficulty": "regular", "consequence": "La firma permitirá intervenir en zonas privadas."},
+      {"id": "behler_watch_table", "kind": "listen", "label": "Escucharle sin quitarle ojo a la mesa del fondo", "hint": "Cuesta atención que Behler notará.", "minutes": 5, "consequence": "Identificáis a Carter y Weder, pero Behler se siente relegado."}
     ]
   },
   {
     "id": "terrace_conflict",
     "art": "escena_carter_weder",
     "title": "Dos conversaciones a la vez",
+    "objective": "Behler o la mesa del fondo: no caben los dos.",
     "body": "Behler baja la voz justo cuando los dos hombres de la mesa del fondo juntan las cabezas. Están a nueve metros y hablan en un idioma que entendéis. No se puede escuchar a los dos.",
     "actions": [
-      { "id": "attention_behler", "kind": "talk", "label": "Quedarse con Behler y cerrar el encargo", "hint": "Consolidar el encargo y su confianza.", "minutes": 10, "consequence": "Behler os dará margen; la conversación del fondo seguirá sin Edith." },
-      { "id": "attention_listen", "kind": "listen", "label": "Acercarse a la mesa del fondo a oír lo que dicen", "hint": "Escuchar · Difícil. Pueden advertir la maniobra.", "minutes": 10, "skill": "Escuchar", "difficulty": "hard", "risk": "Weder puede quedar alertado.", "consequence": "Una frase bastará para relacionar el trato con el sótano." },
-      { "id": "attention_divide", "kind": "act", "label": "Mandar a Vance detrás del alemán", "hint": "Vance trabajará separado hasta preparar su informe.", "minutes": 5, "consequence": "Edith conserva a Behler y Vance cubre la mesa." },
-      { "id": "attention_interrupt", "kind": "act", "label": "Plantarse en su mesa y obligar a Weder a contestar", "hint": "Persuasión · Difícil. Es la opción más visible.", "minutes": 10, "skill": "Persuasion", "difficulty": "hard", "risk": "Weder sabrá que le investigáis.", "consequence": "Puede revelar su vínculo con Mahadni o cerrar filas." }
+      {"id": "attention_behler", "kind": "talk", "label": "Quedarse con Behler y cerrar el encargo", "hint": "Consolidar el encargo y su confianza.", "minutes": 10, "consequence": "Behler os dará margen; la conversación del fondo seguirá sin Edith."},
+      {"id": "attention_listen", "kind": "listen", "label": "Acercarse a la mesa del fondo a oír lo que dicen", "hint": "Escuchar · Difícil. Pueden advertir la maniobra.", "minutes": 10, "skill": "Escuchar", "difficulty": "hard", "risk": "Weder puede quedar alertado.", "consequence": "Una frase bastará para relacionar el trato con el sótano."},
+      {"id": "attention_divide", "kind": "act", "label": "Mandar a Vance detrás del alemán", "hint": "Vance trabajará separado hasta preparar su informe.", "minutes": 5, "consequence": "Edith conserva a Behler y Vance cubre la mesa."},
+      {"id": "attention_interrupt", "kind": "act", "label": "Plantarse en su mesa y obligar a Weder a contestar", "hint": "Persuasión · Difícil. Es la opción más visible.", "minutes": 10, "skill": "Persuasion", "difficulty": "hard", "risk": "Weder sabrá que le investigáis.", "consequence": "Puede revelar su vínculo con Mahadni o cerrar filas."}
     ]
   },
   {
     "id": "basement_threshold",
     "art": "escena_umbral_sotano",
     "title": "El umbral del sótano",
+    "objective": "Bajar tras Weder, y decidir cómo se cruza esa puerta.",
     "body": "La puerta de servicio todavía oscila. Detrás hay doce escalones con luz y, a partir del decimotercero, nada. En la mesa de despiece esperan media docena de corderos abiertos y cuatro pinches que han decidido, todos a la vez, no veros.",
     "actions": [
-      { "id": "threshold_follow", "kind": "act", "label": "Seguirlos escaleras abajo, a distancia", "hint": "Sigilo · Normal; Difícil si Weder está alertado.", "minutes": 10, "skill": "Sigilo", "difficulty": "regular", "risk": "Un fallo confirma que los vigiláis.", "consequence": "Llegaréis a las galerías con o sin ventaja." },
-      { "id": "threshold_authority", "kind": "act", "label": "Bajar de frente, enseñando la firma de Behler", "hint": "Requiere la firma de Behler.", "minutes": 10, "consequence": "Entráis abiertamente y Mahadni no puede expulsaros." },
-      { "id": "threshold_service", "kind": "act", "label": "Entrar por la ruta de servicio que reconoció Vance", "hint": "Requiere conocer el acceso de servicio.", "minutes": 10, "consequence": "Evitáis la cocina y alcanzáis las galerías." },
-      { "id": "threshold_retreat", "kind": "act", "label": "Retroceder antes de que alguien levante la cabeza", "hint": "Conservar la cobertura y buscar otra fuente.", "minutes": 5, "consequence": "La oportunidad directa continúa sin vosotros." }
+      {"id": "threshold_follow", "kind": "act", "label": "Seguirlos escaleras abajo, a distancia", "hint": "Sigilo · Normal; Difícil si Weder está alertado.", "minutes": 10, "skill": "Sigilo", "difficulty": "regular", "risk": "Un fallo confirma que los vigiláis.", "consequence": "Llegaréis a las galerías con o sin ventaja."},
+      {"id": "threshold_authority", "kind": "act", "label": "Bajar de frente, enseñando la firma de Behler", "hint": "Requiere la firma de Behler.", "minutes": 10, "consequence": "Entráis abiertamente y Mahadni no puede expulsaros."},
+      {"id": "threshold_service", "kind": "act", "label": "Entrar por la ruta de servicio que reconoció Vance", "hint": "Requiere conocer el acceso de servicio.", "minutes": 10, "consequence": "Evitáis la cocina y alcanzáis las galerías."},
+      {"id": "threshold_retreat", "kind": "act", "label": "Retroceder antes de que alguien levante la cabeza", "hint": "Conservar la cobertura y buscar otra fuente.", "minutes": 5, "consequence": "La oportunidad directa continúa sin vosotros."}
     ]
   },
   {
     "id": "ears",
     "art": "escena_orejas",
     "title": "Las orejas",
+    "objective": "Mirar cuesta Cordura. Decidid quién mira.",
     "body": "Del túnel del fondo llegan unos quejidos que no salen de una garganta humana. Mahadni saca del bolsillo de la chilaba un par de orejas y las tira a la oscuridad. Unas garras peludas las recogen con un esmero casi delicado y se retiran. No llegáis a verle la cara a lo que se las lleva.",
     "actions": [
-      { "id": "ears_examine", "kind": "inspect", "label": "Mirar hasta entender qué hay ahí dentro", "hint": "Cordura 0/1D3; confirma qué clase de peligro guarda el túnel.", "minutes": 5, "risk": "La imagen no se podrá olvidar.", "consequence": "Obtenéis la pista completa y asumís la pérdida de Cordura." },
-      { "id": "ears_protect", "kind": "act", "label": "Ponerse delante de Nadia y de Vance", "hint": "Edith soporta la visión para proteger al equipo.", "minutes": 5, "consequence": "Mejora la relación del grupo, pero la observación será parcial." },
-      { "id": "ears_hurry", "kind": "act", "label": "Apartar la vista y seguir hacia el templo", "hint": "Renunciar a la pista para no perder la ventana del templo.", "minutes": 5, "consequence": "Evitáis el horror y llegáis antes, sin entender qué vive detrás." }
+      {"id": "ears_examine", "kind": "inspect", "label": "Mirar hasta entender qué hay ahí dentro", "hint": "Cordura 0/1D3; confirma qué clase de peligro guarda el túnel.", "minutes": 5, "risk": "La imagen no se podrá olvidar.", "consequence": "Obtenéis la pista completa y asumís la pérdida de Cordura."},
+      {"id": "ears_protect", "kind": "act", "label": "Ponerse delante de Nadia y de Vance", "hint": "Edith soporta la visión para proteger al equipo.", "minutes": 5, "consequence": "Mejora la relación del grupo, pero la observación será parcial."},
+      {"id": "ears_hurry", "kind": "act", "label": "Apartar la vista y seguir hacia el templo", "hint": "Renunciar a la pista para no perder la ventana del templo.", "minutes": 5, "consequence": "Evitáis el horror y llegáis antes, sin entender qué vive detrás."}
     ]
   },
   {
     "id": "solar_disk",
-    "title": "El Disco Solar",
     "art": "escena_disco_solar",
+    "title": "El Disco Solar",
+    "objective": "El disco está a la vista. Decidid qué hacéis antes de que se lo lleven.",
     "body": "Weder aparta la tela deshilachada y el metal se bebe la luz de la linterna en lugar de devolverla. Mahadni vigila el corredor de espaldas. Todavía no os han visto, y eso dura lo que tarde la linterna en apuntar a otro sitio.",
     "actions": [
-      { "id": "disk_observe", "kind": "act", "label": "Quedarse quietos y grabarse cada detalle", "hint": "No revelar vuestra presencia.", "minutes": 5, "consequence": "Weder se llevará el disco, pero conoceréis su destino." },
-      { "id": "disk_authority", "kind": "act", "label": "Salir de la sombra e invocar la autoridad de Behler", "hint": "Persuasión · Difícil; requiere autorización y un testigo.", "minutes": 5, "skill": "Persuasion", "difficulty": "hard", "consequence": "Un éxito retrasa a Weder; un fallo lo pone sobre aviso." },
-      { "id": "disk_snatch", "kind": "act", "label": "Arrancarle el disco de las manos", "hint": "Pelea · Difícil. Weder responderá con violencia.", "minutes": 5, "skill": "Pelea", "difficulty": "hard", "risk": "Edith puede sufrir daño.", "consequence": "Un éxito cambia la custodia; un fallo causa daño y hostilidad." }
+      {"id": "disk_observe", "kind": "act", "label": "Quedarse quietos y grabarse cada detalle", "hint": "No revelar vuestra presencia.", "minutes": 5, "consequence": "Weder se llevará el disco, pero conoceréis su destino."},
+      {"id": "disk_authority", "kind": "act", "label": "Salir de la sombra e invocar la autoridad de Behler", "hint": "Persuasión · Difícil; requiere autorización y un testigo.", "minutes": 5, "skill": "Persuasion", "difficulty": "hard", "consequence": "Un éxito retrasa a Weder; un fallo lo pone sobre aviso."},
+      {"id": "disk_snatch", "kind": "act", "label": "Arrancarle el disco de las manos", "hint": "Pelea · Difícil. Weder responderá con violencia.", "minutes": 5, "skill": "Pelea", "difficulty": "hard", "risk": "Edith puede sufrir daño.", "consequence": "Un éxito cambia la custodia; un fallo causa daño y hostilidad."}
     ]
   }
 ]

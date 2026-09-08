@@ -35,6 +35,16 @@ export interface SceneActionDef extends GuidedAction {
 export interface SceneDef {
   id: string
   title: string
+  /**
+   * La linea de la barra OBJETIVO: que hay que decidir aqui, en una frase.
+   * Es un rotulo de interfaz y compite con la lamina por el alto de pantalla,
+   * asi que no admite prosa. La prosa es `body`.
+   */
+  objective: string
+  /**
+   * La descripcion de la escena, que se narra en el cuadro de texto cuando la
+   * escena se abre. Ahi puede respirar: es donde se lee todo lo demas.
+   */
   body: string
   /**
    * Lamina propia de la escena, sin extension. Mientras la escena esta abierta
@@ -48,6 +58,7 @@ export interface SceneDef {
 export interface SceneView {
   id: string
   title: string
+  objective: string
   body: string
   art?: string
   actions: SceneActionDef[]
