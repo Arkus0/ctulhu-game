@@ -26,6 +26,28 @@ function gameWithRoll(
   throw new Error('No se encontro una semilla apropiada')
 }
 
+describe('lamina de la escena', () => {
+  it('una escena abierta sustituye el fondo de la localizacion', () => {
+    const game = atDisk('lamina')
+    const view = game.view()
+    // El Viejo Templo tiene su propio fondo, pero mientras Weder sostiene el
+    // disco lo que hay que mirar es la escena, no la sala.
+    expect(view.location.art).toBe('viejo_templo')
+    expect(view.scene?.art).toBe('escena_disco_solar')
+    expect(view.art).toBe('escena_disco_solar')
+  })
+
+  it('sin escena abierta manda el fondo de la localizacion', () => {
+    const game = new Game(content, 'lamina-sala')
+    // En recepcion arranca la escena de llegada, asi que hay que salirse de
+    // ella para comprobar el caso normal.
+    game.party.moveTogether('jardin_exterior')
+    const view = game.view()
+    expect(view.scene).toBeNull()
+    expect(view.art).toBe('jardin')
+  })
+})
+
 describe('director de investigacion', () => {
   it('nunca ofrece mas de cinco acciones contextuales', () => {
     const game = new Game(content, 'acciones')
@@ -75,7 +97,10 @@ describe('escena del Disco Solar', () => {
   it('marca la oportunidad como perdida si el jugador no estuvo alli', () => {
     const game = new Game(content, 'disco-perdido')
     game.advanceTime(parseTime('D1 13:00') - game.clock.now)
-    expect(game.view().leads.find((lead) => lead.id === 'disco')?.status).toBe('missed')
+    const missed = game.view().leads.find((lead) => lead.id === 'missed_disco')
+    expect(missed?.status).toBe('missed')
+    expect(missed?.title).toBe('Oportunidad perdida')
+    expect(JSON.stringify(missed)).not.toContain('Disco Solar')
     expect(game.world.holderOf('disco_solar')).toBe('weder')
   })
 

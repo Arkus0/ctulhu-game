@@ -1,0 +1,94 @@
+<!--
+  Retrato de Edith Harker, corresponsal de prensa. 288x384 = 4x de 72x96.
+
+  Hoja de personaje (fijar y no cambiar entre escenas):
+    pelo castaño oscuro a lo garçon, raya al lado, corto por encima del hombro;
+    cara alargada, cejas rectas, mandíbula marcada;
+    chaqueta azul de viaje sobre blusa blanca con lazada granate;
+    cuaderno de notas en la mano, siempre a la vista.
+  Luz teatral desde la izquierda, sombra dura a la derecha: es el mismo esquema
+  de todos los retratos, para que las diez fichas parezcan de la misma serie.
+-->
+<svg width="288" height="384" viewBox="0 0 288 384" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fondoRetrato" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00aaaa"/>
+      <stop offset="0.6" stop-color="#0000aa"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <linearGradient id="piel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.42" stop-color="#ffff55"/>
+      <stop offset="1" stop-color="#aa5500"/>
+    </linearGradient>
+    <linearGradient id="chaqueta" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5555ff"/>
+      <stop offset="0.35" stop-color="#0000aa"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo de estudio, tramado de arriba abajo. -->
+  <rect x="0" y="0" width="288" height="384" fill="url(#fondoRetrato)"/>
+  <!-- Sombra proyectada a la derecha: sitúa la figura en un espacio. -->
+  <path d="M288 384 L288 150 q-70 30 -96 234 z" fill="#000000" opacity="0.45"/>
+
+  <!-- Hombros y chaqueta de viaje. -->
+  <path d="M28 384 q10 -110 116 -122 q106 12 116 122 z" fill="url(#chaqueta)"/>
+  <!-- Solapas. -->
+  <path d="M112 268 L144 322 L108 384 L74 384 q-4 -70 38 -116 z" fill="#000000" opacity="0.55"/>
+  <path d="M176 268 L144 322 L180 384 L214 384 q4 -70 -38 -116 z" fill="#000000" opacity="0.35"/>
+  <!-- Blusa blanca y lazada granate. -->
+  <path d="M120 262 L144 320 L168 262 L156 250 h-24 z" fill="#ffffff"/>
+  <path d="M144 296 l16 26 l-16 22 l-16 -22 z" fill="#aa0000"/>
+
+  <!-- Cuello. -->
+  <path d="M124 232 h40 v34 q-20 14 -40 0 z" fill="#aa5500"/>
+  <path d="M124 232 h20 v40 q-12 2 -20 -6 z" fill="#ffff55"/>
+
+  <!-- Cabeza. -->
+  <ellipse cx="144" cy="152" rx="66" ry="82" fill="url(#piel)"/>
+  <!-- Sombra dura del lado derecho. -->
+  <path d="M144 70 a66 82 0 0 1 0 164 q30 -82 0 -164 z" fill="#aa5500" opacity="0.75"/>
+
+  <!-- Pelo a lo garçon: casco corto, raya a la izquierda, punta sobre la oreja. -->
+  <path d="M78 152 q-8 -104 66 -104 q74 0 66 104 q-6 -56 -34 -66 q-46 26 -84 8 q-10 20 -14 58 z" fill="#000000"/>
+  <path d="M78 150 q-4 66 22 92 q-24 -46 -14 -92 z" fill="#000000"/>
+  <path d="M210 150 q4 66 -22 92 q24 -46 14 -92 z" fill="#000000"/>
+  <!-- Brillo del pelo, del lado iluminado. -->
+  <path d="M96 96 q26 -34 58 -32 q-38 12 -50 44 z" fill="#555555"/>
+
+  <!-- Cejas rectas. -->
+  <rect x="98" y="136" width="34" height="8" fill="#000000"/>
+  <rect x="158" y="136" width="34" height="8" fill="#000000"/>
+
+  <!-- Ojos. -->
+  <g>
+    <ellipse cx="115" cy="158" rx="15" ry="10" fill="#ffffff"/>
+    <ellipse cx="175" cy="158" rx="15" ry="10" fill="#ffffff"/>
+    <circle cx="117" cy="158" r="7" fill="#aa5500"/>
+    <circle cx="177" cy="158" r="7" fill="#aa5500"/>
+    <circle cx="117" cy="158" r="4" fill="#000000"/>
+    <circle cx="177" cy="158" r="4" fill="#000000"/>
+    <rect x="100" y="148" width="30" height="5" fill="#000000"/>
+    <rect x="160" y="148" width="30" height="5" fill="#000000"/>
+  </g>
+
+  <!-- Nariz y boca: dos golpes, ni uno más. -->
+  <path d="M140 168 l-10 26 h22 z" fill="#aa5500"/>
+  <path d="M124 212 q20 12 40 0 q-20 20 -40 0 z" fill="#aa0000"/>
+  <rect x="126" y="210" width="36" height="4" fill="#000000" opacity="0.6"/>
+
+  <!-- Cuaderno de notas en la mano, esquina inferior izquierda: su oficio. -->
+  <g>
+    <path d="M10 384 L10 306 L86 292 L92 384 Z" fill="#ffffff"/>
+    <g fill="#aaaaaa">
+      <rect x="20" y="316" width="56" height="5"/>
+      <rect x="20" y="332" width="56" height="5"/>
+      <rect x="20" y="348" width="40" height="5"/>
+    </g>
+    <path d="M10 306 L86 292 L88 306 L10 320 Z" fill="#aa5500"/>
+    <!-- Dedos sosteniéndolo. -->
+    <path d="M60 384 q14 -30 44 -34 l6 34 z" fill="#ffff55"/>
+  </g>
+</svg>

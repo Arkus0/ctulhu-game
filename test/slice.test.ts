@@ -97,6 +97,8 @@ describe('tres caminos, tres partidas distintas', () => {
     g.moveTo('pasillo_intermedio')
     g.moveTo('salon_ali_bey')
     g.moveTo('sala_escombros')
+    waitUntil(g, 'D1 12:15')
+    if (g.view().scene?.id === 'ears') g.performAction('ears_examine')
     waitUntil(g, 'D1 14:00')
     return g
   }

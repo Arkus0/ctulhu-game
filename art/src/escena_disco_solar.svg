@@ -1,0 +1,189 @@
+<!--
+  Escena: el Disco Solar. Viejo Templo de ibn Tulun, 12:30 del día 21.
+
+  Composición original, en tres lecturas de izquierda a derecha:
+    escondite (borde de columna en primer término, y zona tranquila de rótulos),
+    salida (el corredor por el que se ha entrado, con luz fría),
+    acción (Weder saca el disco de la caja y lo sostiene ante sí; el disco es la
+      única fuente cálida y le ilumina la cara desde abajo),
+    amenaza (Mahadni entra por la derecha con el cuchillo, recortado por el marco).
+  El sarcófago de basalto queda detrás, como masa negra que no explica ninguna
+  geometría humana.
+-->
+<svg width="1280" height="608" viewBox="0 0 1280 608" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="disco" cx="0.42" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.38" stop-color="#ffff55"/>
+      <stop offset="0.82" stop-color="#aa5500"/>
+      <stop offset="1" stop-color="#aa5500"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffff55"/>
+      <stop offset="0.4" stop-color="#aa5500"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="piedraFria" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000"/>
+      <stop offset="0.55" stop-color="#0000aa"/>
+      <stop offset="1" stop-color="#555555"/>
+    </linearGradient>
+    <linearGradient id="sueloTemplo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#555555"/>
+      <stop offset="0.4" stop-color="#aa5500"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <linearGradient id="salida" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#55ffff"/>
+      <stop offset="0.5" stop-color="#00aaaa"/>
+      <stop offset="1" stop-color="#0000aa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Oscuridad del templo en azul y gris. El negro se guarda para huecos. -->
+  <rect x="0" y="0" width="1280" height="608" fill="url(#piedraFria)"/>
+
+  <!-- 2. Bosque de columnas al fondo. -->
+  <g fill="#0000aa" opacity="0.6">
+    <rect x="400" y="40" width="76" height="380"/>
+    <rect x="596" y="66" width="60" height="354"/>
+    <rect x="740" y="52" width="66" height="368"/>
+  </g>
+  <g fill="#555555" opacity="0.4">
+    <rect x="400" y="40" width="18" height="380"/>
+    <rect x="596" y="66" width="14" height="354"/>
+    <rect x="740" y="52" width="16" height="368"/>
+  </g>
+
+  <!-- 3. SALIDA: el corredor de vuelta, luz fría, visible y despejado. -->
+  <g>
+    <path d="M186 420 L330 420 L330 160 q-72 -42 -144 0 Z" fill="#000000"/>
+    <path d="M216 420 L300 420 L300 200 q-42 -24 -84 0 Z" fill="url(#salida)" opacity="0.75"/>
+    <path d="M186 420 L330 420 L330 160 q-72 -42 -144 0 Z" fill="none" stroke="#555555" stroke-width="7"/>
+    <!-- Reflejo del corredor en el polvo del suelo. -->
+    <ellipse cx="258" cy="440" rx="60" ry="16" fill="#00aaaa" opacity="0.3"/>
+  </g>
+
+  <!-- 4. Sarcófago de basalto: cono de seis metros, con prolongaciones
+       laterales asimétricas. Se lee como masa, no como detalle. -->
+  <g>
+    <path d="M840 412 L1230 412 L1200 250 L884 288 Z" fill="#000000"/>
+    <path d="M884 288 L1200 250 L1194 224 L900 268 Z" fill="#555555" opacity="0.45"/>
+    <path d="M884 300 L802 330 L818 368 L890 344 Z" fill="#000000"/>
+    <path d="M884 300 L802 330 L808 344 L886 316 Z" fill="#555555" opacity="0.35"/>
+    <path d="M1200 250 L1258 286 L1240 316 L1196 282 Z" fill="#000000"/>
+  </g>
+
+  <!-- 5. Suelo, con el charco de luz del disco. -->
+  <rect x="0" y="412" width="1280" height="196" fill="url(#sueloTemplo)"/>
+  <ellipse cx="700" cy="486" rx="400" ry="112" fill="url(#halo)" opacity="0.4"/>
+  <g stroke="#000000" stroke-width="3" opacity="0.35">
+    <line x1="0" y1="462" x2="1280" y2="462"/>
+    <line x1="0" y1="524" x2="1280" y2="524"/>
+    <line x1="420" y1="412" x2="392" y2="608"/>
+    <line x1="780" y1="412" x2="812" y2="608"/>
+  </g>
+
+  <!-- 6. Las dos cajas doradas, con los sellos rotos y una tapa en el suelo. -->
+  <g>
+    <path d="M404 486 L560 486 L550 546 L414 546 Z" fill="#aa5500"/>
+    <path d="M404 486 L560 486 L556 502 L408 502 Z" fill="#ffff55" opacity="0.75"/>
+    <path d="M414 546 L550 546 L546 562 L418 562 Z" fill="#000000" opacity="0.5"/>
+    <path d="M352 566 L456 546 L466 570 L362 590 Z" fill="#aa5500"/>
+    <!-- El hueco redondo en la tela: de ahí ha salido el disco. -->
+    <ellipse cx="482" cy="512" rx="34" ry="12" fill="#000000" opacity="0.55"/>
+  </g>
+
+  <!-- 7. Garth Weder, de tres cuartos, sacando el disco de la caja y
+       sosteniéndolo ante sí a la altura del pecho. -->
+  <g>
+    <!-- Sombra proyectada hacia atrás por la luz del disco. -->
+    <ellipse cx="644" cy="586" rx="120" ry="22" fill="#000000" opacity="0.5"/>
+    <!-- Piernas. -->
+    <path d="M598 608 L604 470 h84 l10 138 z" fill="#000000"/>
+    <path d="M604 470 h84 l4 60 h-92 z" fill="#0000aa"/>
+    <!-- Torso, ligeramente girado hacia el disco. -->
+    <path d="M592 474 q54 -26 108 0 l-12 -96 q-42 -20 -84 0 z" fill="#0000aa"/>
+    <path d="M628 384 h34 l8 90 h-46 z" fill="#ffffff"/>
+    <rect x="638" y="390" width="14" height="56" fill="#aa0000"/>
+    <!-- Brazos asimétricos: uno sostiene, el otro acaba de soltar la tela. -->
+    <path d="M600 400 q-40 40 -18 96" stroke="#0000aa" stroke-width="30" fill="none"/>
+    <path d="M694 396 q52 12 66 62" stroke="#0000aa" stroke-width="30" fill="none"/>
+    <ellipse cx="586" cy="500" rx="20" ry="16" fill="#ffff55"/>
+    <ellipse cx="762" cy="462" rx="20" ry="16" fill="#ffff55"/>
+    <!-- Cabeza, iluminada desde abajo por el disco: frente en sombra. -->
+    <ellipse cx="646" cy="330" rx="40" ry="44" fill="#aa5500"/>
+    <path d="M606 336 a40 44 0 0 0 80 0 z" fill="#ffff55"/>
+    <path d="M606 322 q40 -42 80 0 l-6 -34 q-34 -22 -68 0 z" fill="#ffffff"/>
+    <!-- Gafas redondas: dos aros que devuelven la luz del disco. -->
+    <g fill="none" stroke="#000000" stroke-width="6">
+      <circle cx="628" cy="334" r="13"/>
+      <circle cx="666" cy="334" r="13"/>
+      <line x1="641" y1="334" x2="653" y2="334"/>
+    </g>
+    <g fill="#ffff55" opacity="0.8">
+      <circle cx="628" cy="338" r="6"/>
+      <circle cx="666" cy="338" r="6"/>
+    </g>
+    <path d="M634 360 q14 10 28 0" stroke="#000000" stroke-width="5" fill="none"/>
+  </g>
+
+  <!-- 8. EL DISCO. Sostenido a la altura del pecho, algo escorado: es un
+       objeto en unas manos, no una aureola sobre una cabeza. -->
+  <g>
+    <ellipse cx="742" cy="452" rx="230" ry="200" fill="url(#halo)" opacity="0.45"/>
+    <circle cx="742" cy="452" r="76" fill="url(#disco)"/>
+    <circle cx="742" cy="452" r="76" fill="none" stroke="#ffffff" stroke-width="5"/>
+    <g fill="#ffffff">
+      <rect x="732" y="368" width="20" height="24"/>
+      <rect x="732" y="512" width="20" height="24"/>
+      <rect x="658" y="442" width="24" height="20"/>
+      <rect x="802" y="442" width="24" height="20"/>
+    </g>
+    <!-- Electrodos unidos por hilos de cobre. -->
+    <g stroke="#aa0000" stroke-width="4" fill="none" opacity="0.85">
+      <path d="M702 414 q40 26 80 0"/>
+      <path d="M702 490 q40 -26 80 0"/>
+    </g>
+    <circle cx="742" cy="452" r="24" fill="#ffffff"/>
+  </g>
+
+  <!-- 9. Mustafá ibn Mahadni entra por la derecha, cuchillo abajo, recortado
+       por el marco: la amenaza que aún no os ha visto. -->
+  <g>
+    <path d="M1150 608 L1146 440 q60 -28 122 0 l8 168 z" fill="#aaaaaa"/>
+    <path d="M1146 440 q60 -28 122 0 l-8 -56 q-54 -22 -108 0 z" fill="#555555"/>
+    <g fill="#aa0000" opacity="0.75">
+      <path d="M1168 476 q24 -12 38 6 q-20 20 -38 -6 z"/>
+      <rect x="1196" y="548" width="30" height="14"/>
+    </g>
+    <ellipse cx="1206" cy="344" rx="40" ry="44" fill="#aa5500"/>
+    <path d="M1206 300 a40 44 0 0 0 0 88 z" fill="#000000" opacity="0.45"/>
+    <path d="M1166 330 q40 -32 80 -6 l-4 -22 q-36 -22 -74 4 z" fill="#000000"/>
+    <rect x="1188" y="344" width="11" height="8" fill="#000000"/>
+    <rect x="1218" y="344" width="11" height="8" fill="#000000"/>
+    <!-- Brazo y cuchillo de carnicero, recortados contra el suelo iluminado. -->
+    <path d="M1150 462 q-46 30 -54 92" stroke="#aa5500" stroke-width="28" fill="none"/>
+    <g>
+      <rect x="1078" y="548" width="16" height="44" fill="#000000"/>
+      <path d="M1046 592 L1116 592 L1106 552 L1058 552 Z" fill="#aaaaaa"/>
+      <path d="M1046 592 L1116 592 L1114 582 L1048 582 Z" fill="#ffffff"/>
+    </g>
+  </g>
+
+  <!-- 10. Escondite: borde de columna estrecho en el primer término izquierdo.
+       Marco y, a la vez, zona tranquila para los rótulos. -->
+  <g>
+    <path d="M0 0 L118 0 L142 608 L0 608 Z" fill="#000000"/>
+    <path d="M118 0 L142 608 L124 608 L102 0 Z" fill="#0000aa" opacity="0.55"/>
+    <path d="M126 300 L136 500 L142 500 L132 300 Z" fill="#aa5500" opacity="0.5"/>
+  </g>
+
+  <!-- 11. Polvo suspendido en la luz. -->
+  <g fill="#ffff55" opacity="0.6">
+    <rect x="560" y="400" width="5" height="5"/>
+    <rect x="880" y="430" width="5" height="5"/>
+    <rect x="828" y="360" width="4" height="4"/>
+    <rect x="640" y="530" width="4" height="4"/>
+  </g>
+</svg>

@@ -28,6 +28,7 @@
             <button id="hud-team" type="button">Equipo</button>
             <button id="hud-save" type="button">Guardar</button>
             <button id="hud-log" type="button">Historial</button>
+            <button id="hud-audio" type="button" aria-pressed="false">Sonido</button>
           </nav>
         </header>
 
@@ -38,7 +39,12 @@
 
         <section id="scene" aria-label="Escena">
           <canvas id="art" width="320" height="152"></canvas>
+          <figure id="portrait" hidden>
+            <img id="portrait-img" alt="" />
+            <figcaption id="portrait-name"></figcaption>
+          </figure>
           <div id="scene-title"></div>
+          <p id="scene-summary"></p>
         </section>
 
         <section id="log" aria-label="Narración" tabindex="0"></section>

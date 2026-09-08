@@ -51,6 +51,8 @@ export interface InvestigatorDef {
   name: string
   occupation: string
   blurb: string
+  /** Retrato en `public/art/retratos`, sin extension. */
+  portrait?: string
   chars: Characteristics
   skills: Record<SkillId, number>
   /** Cordura inicial; por defecto POD. */

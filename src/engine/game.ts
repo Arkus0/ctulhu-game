@@ -20,13 +20,13 @@ import {
   type TailResult,
 } from './perception'
 import { Rng } from './rng'
-import { luckCost, OUTCOME_LABEL, spendLuck as applyLuck, type RollResult } from './rules'
+import { luckCost, OUTCOME_LABEL, spendLuck as applyLuck, type Difficulty, type RollResult } from './rules'
 import { sanityCheck } from './sanity'
 import { Scheduler, type SchedulerSnapshot, type TickReport, type TraceDef } from './scheduler'
 import { WorldState, type WorldSnapshot } from './worldstate'
 import { rollDice } from './rng'
 import type { Content } from '../content/index'
-import type { Investigator, LocationDef, LocationFeature, NpcState } from './types'
+import type { Investigator, LocationDef, LocationFeature, NpcId, NpcState } from './types'
 import {
   ASSIGNMENTS,
   type AssignmentState,
@@ -49,6 +49,12 @@ export interface Turn {
   minutes: number
   /** Verdadero si la partida ha terminado. */
   over: boolean
+  feedback: FeedbackCue[]
+}
+
+export interface FeedbackCue {
+  kind: 'location' | 'clue' | 'report' | 'roll' | 'damage' | 'sanity' | 'scene' | 'luck' | 'clock' | 'door'
+  id?: string
 }
 
 export interface ExitView {
@@ -85,7 +91,7 @@ export interface GameView {
 }
 
 export interface GameSnapshot {
-  version: 1
+  version: 1 | 2
   clock: number
   rng: number
   party: PartySnapshot
@@ -98,6 +104,9 @@ export interface GameSnapshot {
   assignments: AssignmentState[]
   completedAssignments: string[]
   pendingRoll: PendingRollState | null
+  resolvedScenes?: string[]
+  firedExchanges?: string[]
+  emptyWaits?: number
 }
 
 /**
@@ -127,6 +136,9 @@ export class Game {
   private assignments = new Map<string, AssignmentState>()
   private completedAssignments = new Set<string>()
   private pendingRoll: PendingRollState | null = null
+  private resolvedScenes = new Set<string>()
+  private firedExchanges = new Set<string>()
+  private emptyWaits = 0
 
   constructor(content: Content, seed: string | number = Date.now()) {
     this.content = content
@@ -223,6 +235,9 @@ export class Game {
 
     // El Disco Solar empieza en su caja, en el Viejo Templo, sin dueno.
     this.world.setHolder('disco_solar', 'nobody')
+    // Activa las escenas que empiezan exactamente a las nueve sin hacer que el
+    // jugador tenga que gastar primero una acción vacía.
+    this.scheduler.advance(0)
   }
 
   /* ---------------------------------------------------------------- *
@@ -235,14 +250,19 @@ export class Game {
 
     const scene = this.currentScene()
     const leads = this.leads()
-    const sliceFinished = this.clock.now >= 13 * 60 && scene == null && this.pendingRoll == null
+    const sliceFinished =
+      (this.world.getFlag('disco_decision_jugador') || this.clock.now >= 13 * 60) &&
+      scene == null &&
+      this.pendingRoll == null
     return {
       time: formatFull(this.clock.now),
       timeOfDay: timeOfDay(this.clock.now),
       day: this.clock.day,
       location: loc,
       description: variant?.description ?? loc.description,
-      art: variant?.art ?? loc.art ?? 'placeholder',
+      // Lo que se ve manda sobre donde se esta: una escena abierta sustituye el
+      // fondo, y un suceso en curso lo sustituye tambien mientras dura.
+      art: scene?.art ?? this.ongoingArt() ?? variant?.art ?? loc.art ?? 'placeholder',
       exits: loc.exits
         .filter((e) => this.world.testAll(e.requires))
         .map((e) => ({
@@ -272,9 +292,12 @@ export class Game {
       companions: this.companionViews(),
       scene,
       pendingRoll: this.pendingRollView(),
-      objective:
-        leads.find((lead) => lead.status === 'active')?.detail ??
-        'La mañana ha terminado. El hotel ya está reaccionando a vuestras decisiones.',
+      objective: scene
+        ? scene.body
+        : sliceFinished
+          ? 'La primera mañana ha cerrado su arco. Sus consecuencias quedan fijadas.'
+          : leads.find((lead) => lead.status === 'active')?.detail ??
+            'Buscar una nueva vía antes de que cambie la agenda del hotel.',
       sliceFinished,
       finished: sliceFinished || this.clock.finished || this.party.wipedOut,
     }
@@ -299,6 +322,11 @@ export class Game {
 
   npcName(id: string): string {
     return this.content.npcs.get(id)?.name ?? id
+  }
+
+  /** Nombre de la lamina de retrato de un PNJ, si su ficha declara una. */
+  npcPortrait(id: NpcId): string | undefined {
+    return this.content.npcs.get(id)?.portrait
   }
 
   topicsFor(npc: string): DialogueTopic[] {
@@ -410,82 +438,75 @@ export class Game {
       })
     }
 
-    const toMeeting = here === 'terraza' && this.clock.now < 11 * 60
     const waitMinutes = Math.min(15, this.clock.minutesToNextSequence || 15)
     v.push({
-      id: toMeeting ? 'wait_for_behler' : 'wait',
+      id: 'wait',
       kind: 'act',
-      label: toMeeting ? 'Esperar la cita de las once' : 'Dejar correr el reloj',
-      hint: toMeeting
-        ? 'Behler llegará a esta mesa a las once en punto.'
-        : `Esperar hasta las ${formatClock(this.clock.now + waitMinutes)}.`,
-      minutes: toMeeting ? 11 * 60 - this.clock.now : waitMinutes,
+      label: 'Dejar correr el reloj',
+      hint: `Esperar hasta las ${formatClock(this.clock.now + waitMinutes)}.`,
+      minutes: waitMinutes,
     })
 
     return v.slice(0, 5)
   }
 
   private currentScene(): SceneView | null {
-    const scheduledScene = this.scheduler
+    const event = this.scheduler
       .ongoingAt(this.party.focus.location)
-      .find((event) => event.scene === 'solar_disk')
-    const open =
-      scheduledScene != null &&
-      this.world.getFlag('disco_scene_open') &&
-      !this.world.getFlag('disco_resuelto') &&
-      this.world.holderOf('disco_solar') === 'nobody' &&
-      this.clock.now < 13 * 60 &&
-      this.party.focus.location === 'viejo_templo'
-    if (!open) return null
+      .find((candidate) => candidate.scene && !this.resolvedScenes.has(candidate.scene))
+    if (!event?.scene) return null
+    if (event.scene === 'solar_disk' && (this.world.getFlag('disco_resuelto') || this.world.holderOf('disco_solar') !== 'nobody')) return null
+    const def = this.content.scenes.get(event.scene)
+    if (!def) return null
+    const allowed = new Set(event.interruptibleBy ?? def.actions.map((action) => action.id))
+    const actions = def.actions
+      .filter((action) => allowed.has(action.id))
+      .map((action) => {
+        const copy = { ...action }
+        if (action.id === 'threshold_authority' && !this.world.getFlag('autorizacion_behler')) {
+          copy.disabled = true
+          copy.hint = 'No tenéis una autorización firmada por Behler.'
+        }
+        if (action.id === 'threshold_service' && !this.world.knows('ruta_servicio_al_sotano')) {
+          copy.disabled = true
+          copy.hint = 'Aún no habéis descubierto una ruta de servicio.'
+        }
+        if (action.id === 'disk_authority' && (!this.world.getFlag('autorizacion_behler') || this.party.at('viejo_templo').length < 2)) {
+          copy.disabled = true
+          copy.hint = 'Requiere la autorización escrita y dos investigadores presentes.'
+        }
+        if ((action.id === 'attention_divide' || action.id === 'arrival_vance_service') && this.companionBusy('vance')) {
+          copy.disabled = true
+          copy.hint = 'Vance ya está ocupado con otro encargo.'
+        }
+        if (action.id === 'arrival_nadia_registry' && this.companionBusy('nadia')) copy.disabled = true
+        if (action.id === 'threshold_follow' && this.world.getFlag('weder_alertado')) {
+          copy.difficulty = 'hard'
+          copy.hint = 'Sigilo · Difícil. Weder ya conoce vuestra vigilancia.'
+        }
+        return copy
+      })
+    return { id: def.id, title: def.title, body: def.body, art: def.art, actions }
+  }
 
-    const together = this.party.at('viejo_templo').length
-    const hasAuthority = this.world.getFlag('autorizacion_behler')
-    const actions: SceneView['actions'] = [
-      {
-        id: 'disk_observe',
-        kind: 'act',
-        label: 'Observar y recordar cada detalle',
-        hint: 'No revelar vuestra presencia. Weder conservará la iniciativa.',
-        consequence: 'Obtendréis una descripción precisa, pero Weder se llevará el disco.',
-        minutes: 5,
-      },
-      {
-        id: 'disk_authority',
-        kind: 'act',
-        label: 'Invocar la autoridad de Behler',
-        hint:
-          hasAuthority && together >= 2
-            ? 'La autorización y un testigo respaldan a Edith. Tirada difícil de Persuasión.'
-            : 'Requiere la autorización escrita de Behler y dos investigadores presentes.',
-        consequence: 'Un éxito obliga a Weder a retirarse hasta las 15:00. Un fallo le pone sobre aviso.',
-        minutes: 5,
-        urgent: true,
-      },
-      {
-        id: 'disk_snatch',
-        kind: 'act',
-        label: 'Arrebatarle el disco',
-        hint: 'Una acción física difícil. Si sale mal, Weder responderá con violencia.',
-        consequence: 'Un éxito cambia la custodia del disco. Un fallo causa daño y hostilidad.',
-        minutes: 5,
-        urgent: true,
-      },
-    ]
-    const allowed = new Set(scheduledScene?.interruptibleBy ?? [])
-    return {
-      id: 'solar_disk',
-      title: 'El Disco Solar',
-      body:
-        'Weder aparta la tela deshilachada. El metal parece beberse la luz de la linterna. Mahadni vigila el corredor y aún no os han visto. Tenéis segundos para decidir.',
-      actions: actions.filter((action) => allowed.has(action.id)),
-    }
+  /**
+   * Lamina del suceso que se esta presenciando aqui, si lo hay.
+   *
+   * Es el equivalente de `SceneDef.art` para los sucesos que no abren escena
+   * interactiva pero si merecen imagen propia mientras duran. Se ignoran los
+   * eventos con escena: de esos ya se ocupa `currentScene`.
+   */
+  private ongoingArt(): string | undefined {
+    return this.scheduler
+      .ongoingAt(this.party.focus.location)
+      .find((event) => event.art && !event.scene)?.art
   }
 
   leads(): LeadView[] {
     const now = this.clock.now
     const done = (yes: boolean, missed: boolean): LeadView['status'] =>
       yes ? 'completed' : missed ? 'missed' : 'active'
-    return [
+    const visible: LeadView[] = [
       {
         id: 'behler',
         title: 'El encargo de Behler',
@@ -493,36 +514,46 @@ export class Game {
         deadline: '11:00 a 12:00',
         status: done(this.world.getFlag('reunion_behler'), now >= 12 * 60),
       },
-      {
+    ]
+
+    const conspiratorsKnown =
+      this.world.knows('carter_y_weder_juntos') ||
+      this.world.knows('weder_y_carter_se_reunen') ||
+      this.conversations.coverage(
+        this.content.conversations.get('carter_weder_terraza') ?? {
+          id: '', location: '', participants: [], fragments: [],
+        },
+      ) > 0
+    if (conspiratorsKnown) visible.push({
         id: 'conspiradores',
         title: 'La mesa del fondo',
         detail: 'Identificar el trato entre Carter y Weder sin perder de vista a Behler.',
         deadline: 'Antes de las 12:00',
-        status: done(
-          this.world.knows('carter_y_weder_juntos') ||
-            this.conversations.coverage(
-              this.content.conversations.get('carter_weder_terraza') ?? {
-                id: '', location: '', participants: [], fragments: [],
-              },
-            ) > 0,
-          now >= 12 * 60,
-        ),
-      },
-      {
+        status: 'completed',
+      })
+    else if (now >= 12 * 60) visible.push(this.anonymousMissed('conspiradores'))
+
+    const basementSuspected =
+      this.world.knows('ruta_servicio_al_sotano') ||
+      this.world.knows('weder_baja_al_sotano') ||
+      this.world.knows('weder_alquila_el_templo') ||
+      this.world.knows('viejo_templo_existe')
+    if (basementSuspected) visible.push({
         id: 'sotano',
         title: 'La ruta de servicio',
         detail: 'Descubrir qué conecta la cocina con las galerías bajo el hotel.',
         deadline: 'Antes de las 12:30',
-        status:
-          now < 10 * 60
-            ? 'locked'
-            : done(
-                this.world.knows('ruta_servicio_al_sotano') ||
-                  this.world.knows('weder_baja_al_sotano'),
-                now >= 12 * 60 + 30,
-              ),
-      },
-      {
+        status: done(
+          this.world.knows('ruta_servicio_al_sotano') || this.world.knows('weder_baja_al_sotano'),
+          now >= 12 * 60 + 30,
+        ),
+      })
+    else if (now >= 12 * 60 + 30) visible.push(this.anonymousMissed('sotano'))
+
+    const diskKnown =
+      this.world.knows('disco_solar_existe') ||
+      (this.world.getFlag('disco_scene_open') && this.party.focus.location === 'viejo_templo')
+    if (diskKnown) visible.push({
         id: 'disco',
         title: 'El objeto de la caja',
         detail: 'Decidir quién sale del Viejo Templo con el Disco Solar.',
@@ -531,13 +562,20 @@ export class Game {
           ? 'completed'
           : now >= 13 * 60
             ? 'missed'
-            : (this.world.getFlag('disco_scene_open') &&
-                  this.party.focus.location === 'viejo_templo') ||
-                this.world.knows('disco_solar_existe')
-              ? 'active'
-              : 'locked',
-      },
-    ]
+            : 'active',
+      })
+    else if (now >= 13 * 60) visible.push(this.anonymousMissed('disco'))
+    return visible
+  }
+
+  private anonymousMissed(id: string): LeadView {
+    return {
+      id: `missed_${id}`,
+      title: 'Oportunidad perdida',
+      detail: 'Algo ocurrió en el hotel sin que el equipo reuniera información suficiente para identificarlo.',
+      status: 'missed',
+      anonymous: true,
+    }
   }
 
   private pendingRollView(): PendingRollView | null {
@@ -587,6 +625,28 @@ export class Game {
     })
   }
 
+  private companionBusy(id: 'nadia' | 'vance'): boolean {
+    return [...this.assignments.values()].some((state) => state.investigator === id && !state.collected)
+  }
+
+  private completeScene(id: string): void {
+    this.resolvedScenes.add(id)
+  }
+
+  private exchange(trigger: string, allowSeparated = false): Line[] {
+    // Un intercambio solo necesita dos voces en la misma estancia. Exigir al
+    // grupo entero silenciaba los informes mientras el tercer investigador
+    // seguia cumpliendo otro encargo.
+    if (!allowSeparated && this.party.at(this.party.focus.location).length < 2) return []
+    const def = this.content.partyExchanges.find(
+      (candidate) => candidate.trigger === trigger && !this.firedExchanges.has(candidate.id),
+    )
+    if (!def) return []
+    this.firedExchanges.add(def.id)
+    const names = { edith: 'Edith', nadia: 'Nadia', vance: 'Vance' }
+    return def.lines.map((line) => ({ kind: 'dialogo', text: `${names[line.speaker]} —${line.text}` }))
+  }
+
   /* ---------------------------------------------------------------- *
    * Acciones
    * ---------------------------------------------------------------- */
@@ -594,6 +654,112 @@ export class Game {
   performAction(id: string): Turn {
     if (this.pendingRoll) {
       return this.instant([{ kind: 'sistema', text: 'Primero hay que resolver la tirada pendiente.' }])
+    }
+    const scene = this.currentScene()
+    if (scene) {
+      const action = scene.actions.find((candidate) => candidate.id === id)
+      if (!action) return this.instant([{ kind: 'sistema', text: 'Esa acción no puede interrumpir la escena actual.' }])
+      if (action.disabled) return this.instant([{ kind: 'sistema', text: action.hint }])
+    }
+
+    if (id === 'arrival_telegram') {
+      this.completeScene('arrival_checkin')
+      this.world.setFlag('investigadores_registrados')
+      this.world.unlockJournal('cita_con_behler')
+      return this.resolve([
+        { kind: 'dialogo', text: 'Clinton encuentra vuestros nombres bajo una nota de tinta violeta. «El señor Behler les espera a las once en la terraza. Ha subrayado discreción dos veces».' },
+        { kind: 'sistema', text: 'Caso actualizado: cita con Behler, terraza, 11:00.' },
+      ], 10, [{ kind: 'clue', id: 'behler' }])
+    }
+    if (id === 'arrival_question_clinton') {
+      return this.beginSceneRoll(id, 'Una línea fuera de sitio', 'harker', 'Descubrir', 'regular', 'Éxito: detectas una anomalía. Fallo: Clinton se incomoda, pero deja una pista parcial.')
+    }
+    if (id === 'arrival_nadia_registry' || id === 'arrival_vance_service') {
+      this.completeScene('arrival_checkin')
+      this.world.setFlag('investigadores_registrados')
+      this.world.unlockJournal('cita_con_behler')
+      const assignment = id === 'arrival_nadia_registry' ? 'nadia_registro' : 'vance_servicio'
+      const who = id === 'arrival_nadia_registry' ? 'nadia' : 'vance'
+      const dispatched = this.assign(assignment)
+      return this.resolve([...dispatched.lines, ...this.exchange(`separation:${who}`, true)], 5, [{ kind: 'scene', id: 'arrival_checkin' }])
+    }
+    if (id === 'behler_listen' || id === 'behler_basement') {
+      this.completeScene('behler_encargo')
+      this.world.setFlag('reunion_behler')
+      return this.ask(id === 'behler_listen' ? 'behler_encargo' : 'behler_sotano', 'directo')
+    }
+    if (id === 'behler_authority') {
+      return this.beginSceneRoll(id, 'La firma de Behler', 'harker', 'Persuasion', 'regular', 'Éxito: Behler firma. Fallo: niega el papel y pierde confianza.')
+    }
+    if (id === 'behler_watch_table') {
+      this.completeScene('behler_encargo')
+      this.world.learnFact('carter_y_weder_juntos')
+      this.world.adjustDisposition('behler', -5)
+      return this.resolve([
+        { kind: 'narracion', text: 'Edith deja hablar a Behler mientras memoriza la mesa del fondo: Howard Carter frente a Heinrich Weder, demasiado cerca y demasiado atentos al reloj.' },
+        ...this.exchange('weder:suspicion'),
+      ], 5, [{ kind: 'clue', id: 'conspiradores' }])
+    }
+    if (id === 'attention_behler') {
+      this.completeScene('terrace_conflict')
+      this.world.adjustDisposition('behler', 5)
+      const topic = this.topicsFor('behler').find((candidate) => candidate.id === 'behler_encargo')
+      return topic
+        ? this.ask('behler_encargo', 'directo')
+        : this.resolve([{ kind: 'narracion', text: 'Edith mantiene los ojos en Behler. La mesa del fondo se dispersa sin regalarle una frase más.' }], 10)
+    }
+    if (id === 'attention_listen') {
+      return this.beginSceneRoll(id, 'La mesa del fondo', 'harker', 'Escuchar', 'hard', 'Éxito: oyes el vínculo con Mahadni y el sótano. Fallo: Weder reconoce la maniobra.')
+    }
+    if (id === 'attention_interrupt') {
+      return this.beginSceneRoll(id, 'Una pregunta demasiado pública', 'harker', 'Persuasion', 'hard', 'Éxito: Weder revela a quién busca. Fallo: cierra filas y queda alertado.')
+    }
+    if (id === 'attention_divide') {
+      this.completeScene('terrace_conflict')
+      const dispatched = this.assign('vance_terraza')
+      return this.resolve([...dispatched.lines, ...this.exchange('separation:vance', true)], 5, [{ kind: 'scene', id: 'terrace_conflict' }])
+    }
+    if (id === 'threshold_follow') {
+      const difficulty: Difficulty = this.world.getFlag('weder_alertado') ? 'hard' : 'regular'
+      return this.beginSceneRoll(id, 'Tras la puerta de servicio', 'harker', 'Sigilo', difficulty, 'Éxito: alcanzáis las galerías sin ser vistos. Fallo: entráis, pero Weder os descubre.')
+    }
+    if (id === 'threshold_authority' || id === 'threshold_service') {
+      this.completeScene('basement_threshold')
+      this.world.learnFact('ruta_servicio_al_sotano')
+      this.world.unlockJournal('ruta_servicio_al_sotano')
+      this.party.moveTogether('sala_escombros')
+      const trigger = id === 'threshold_authority' ? 'descend:authority' : 'descend:follow'
+      const text = id === 'threshold_authority'
+        ? 'La firma de Behler obliga a los pinches a apartarse. Mahadni no discute el papel; se limita a memorizar vuestras caras.'
+        : 'Vance encuentra el pasador que había estudiado. La escalera evita la mesa de despiece y desemboca en la galería húmeda.'
+      return this.resolve([{ kind: 'narracion', text }, ...this.exchange(trigger)], 10, [
+        { kind: 'door', id: 'sotano' },
+        { kind: 'location', id: 'sala_escombros' },
+      ])
+    }
+    if (id === 'threshold_retreat') {
+      this.completeScene('basement_threshold')
+      this.world.setFlag('umbral_abandonado')
+      return this.resolve([{ kind: 'narracion', text: 'Edith deja que la puerta se cierre. Weder conserva la iniciativa, pero todavía no sabe cuánto habéis visto.' }], 5)
+    }
+    if (id === 'ears_examine' || id === 'ears_protect' || id === 'ears_hurry') {
+      this.completeScene('ears')
+      const lines: Line[] = []
+      if (id === 'ears_examine') {
+        this.world.learnFact('algo_vive_abajo')
+        this.world.unlockJournal('las_orejas')
+        lines.push(...this.resolveDeferred({ kind: 'sanityLoss', loss: '0/1D3' }))
+        lines.push(...this.exchange('ears:examine'))
+      } else if (id === 'ears_protect') {
+        this.world.setFlag('edith_protege_al_equipo')
+        lines.push(...this.resolveDeferred({ kind: 'sanityLoss', loss: '0/1', who: 'harker' }))
+        lines.push(...this.exchange('ears:protect'))
+      } else {
+        this.world.setFlag('orejas_ignoradas')
+        this.party.moveTogether('viejo_templo')
+        lines.push({ kind: 'narracion', text: 'No miráis una segunda vez. Dejáis atrás los sonidos del túnel y alcanzáis el templo antes de que el eco se apague.' })
+      }
+      return this.resolve(lines, 5, [{ kind: 'sanity', id: 'ears' }])
     }
     if (id === 'check_in') {
       this.world.setFlag('investigadores_registrados')
@@ -667,6 +833,24 @@ export class Game {
     throw new Error(`Accion guiada desconocida: "${id}"`)
   }
 
+  private beginSceneRoll(
+    actionId: string,
+    title: string,
+    actorId: string,
+    skill: string,
+    difficulty: Difficulty,
+    stakes: string,
+  ): Turn {
+    const result = this.party.check(this.rng, actorId, skill, { difficulty })
+    this.pendingRoll = { actionId, title, stakes, actorId, roll: result }
+    return this.instant([
+      { kind: 'titular', text: title },
+      this.rollLine(result),
+      { kind: 'sistema', text: stakes },
+      ...(result.success ? [] : this.exchange('roll:failed')),
+    ], [{ kind: 'roll', id: actionId }])
+  }
+
   private beginDiskRoll(actionId: PendingRollState['actionId']): Turn {
     if (!this.currentScene()) {
       return this.instant([{ kind: 'sistema', text: 'La oportunidad ya ha pasado.' }])
@@ -695,7 +879,8 @@ export class Game {
       { kind: 'titular', text: title },
       this.rollLine(result),
       { kind: 'sistema', text: stakes },
-    ])
+      ...(result.success ? [] : this.exchange('roll:failed')),
+    ], [{ kind: 'roll', id: actionId }])
   }
 
   settlePendingRoll(useLuck: boolean): Turn {
@@ -714,8 +899,77 @@ export class Game {
     this.pendingRoll = null
 
     const lines: Line[] = [this.rollLine(result)]
+    if (useLuck) lines.push(...this.exchange('luck:spent'))
+
+    if (!pending.actionId.startsWith('disk_')) {
+      const feedback: FeedbackCue[] = [{ kind: 'roll', id: pending.actionId }]
+      if (useLuck) feedback.push({ kind: 'luck', id: pending.actionId })
+      if (pending.actionId === 'arrival_question_clinton') {
+        this.completeScene('arrival_checkin')
+        this.world.setFlag('investigadores_registrados')
+        this.world.unlockJournal('cita_con_behler')
+        if (result.success) {
+          this.world.learnFact('behler_teme_escandalo')
+          lines.push({ kind: 'narracion', text: 'La nota de Behler fue añadida después de cerrar el turno: no pide una habitación, solo discreción y una mesa desde la que se vea toda la terraza.' })
+          feedback.push({ kind: 'clue', id: 'behler' })
+        } else {
+          this.world.adjustDisposition('clinton', -5)
+          lines.push({ kind: 'dialogo', text: 'Clinton tapa el registro con la mano. «El señor Behler les explicará lo que considere oportuno». Ha contestado demasiado deprisa.' })
+        }
+        return this.resolve(lines, 15, feedback)
+      }
+      if (pending.actionId === 'behler_authority') {
+        this.completeScene('behler_encargo')
+        if (result.success) {
+          this.world.setFlag('autorizacion_behler')
+          if (!this.party.focus.inventory.includes('autorizacion_behler')) this.party.focus.inventory.push('autorizacion_behler')
+          this.world.unlockJournal('autorizacion_behler')
+          lines.push({ kind: 'dialogo', text: 'Behler firma. «Pueden retener cualquier pieza del hotel si creen que corre peligro. No conviertan esto en un espectáculo».' })
+          feedback.push({ kind: 'clue', id: 'autorizacion_behler' })
+        } else {
+          this.world.adjustDisposition('behler', -5)
+          lines.push({ kind: 'dialogo', text: 'Behler guarda la estilográfica. «Les he pedido discreción, señorita Harker, no jurisdicción».' })
+        }
+        return this.resolve(lines, 10, feedback)
+      }
+      if (pending.actionId === 'attention_listen' || pending.actionId === 'attention_interrupt') {
+        this.completeScene('terrace_conflict')
+        this.world.learnFact('carter_y_weder_juntos')
+        if (result.success) {
+          this.world.learnFact('weder_baja_al_sotano')
+          this.world.unlockJournal('weder_y_mahadni')
+          lines.push({ kind: 'dialogo', text: 'Weder —«Mahadni tendrá abierta la puerta de la cocina al mediodía. Carter no necesita saber qué caja buscamos».' })
+          lines.push(...this.exchange('weder:suspicion'))
+          feedback.push({ kind: 'clue', id: 'conspiradores' })
+        } else {
+          this.world.setFlag('weder_alertado')
+          this.world.npc('weder').suspicious = true
+          lines.push({ kind: 'narracion', text: 'Weder interrumpe la frase y mira directamente a Edith. Sonríe, pero a partir de ahora coloca cada palabra para que ella la oiga.' })
+          lines.push(...this.exchange('weder:alerted'))
+        }
+        return this.resolve(lines, 10, feedback)
+      }
+      if (pending.actionId === 'threshold_follow') {
+        this.completeScene('basement_threshold')
+        this.world.learnFact('ruta_servicio_al_sotano')
+        this.world.unlockJournal('ruta_servicio_al_sotano')
+        this.party.moveTogether('sala_escombros')
+        if (result.success) {
+          lines.push({ kind: 'narracion', text: 'Guardáis diez pasos y dos recodos de distancia. Weder no se vuelve cuando la escalera del hotel se convierte en piedra antigua.' })
+        } else {
+          this.world.setFlag('weder_alertado')
+          lines.push({ kind: 'dialogo', text: 'Weder —«La señorita Harker debería aprender que una sombra también hace ruido». No os detiene; quiere saber hasta dónde llegaréis.' })
+        }
+        lines.push(...this.exchange('descend:follow'))
+        feedback.push({ kind: 'door', id: 'sotano' }, { kind: 'location', id: 'sala_escombros' })
+        return this.resolve(lines, 10, feedback)
+      }
+      throw new Error(`Tirada de escena sin resolución: "${pending.actionId}"`)
+    }
+
     this.world.learnFact('disco_solar_existe')
     this.world.setFlag('disco_decision_jugador')
+    this.completeScene('solar_disk')
     if (pending.actionId === 'disk_authority') {
       if (result.success) {
         this.world.setFlag('disco_resuelto')
@@ -727,6 +981,7 @@ export class Game {
           text:
             'Edith despliega la firma de Behler. Weder mira el papel, después al testigo, y vuelve a cubrir el disco. «A las tres hablaré con el director. Entonces veremos quién da órdenes aquí».',
         })
+        lines.push(...this.exchange('ending:delay'))
       } else {
         this.world.setFlag('disco_resuelto')
         this.world.setFlag('weder_alertado')
@@ -749,6 +1004,7 @@ export class Game {
         text:
           'Edith golpea la muñeca de Weder contra el borde de la caja y atrapa el disco antes de que caiga. Mahadni ruge. El corredor de salida sigue libre, pero solo por un instante.',
       })
+      lines.push(...this.exchange('ending:custody'))
     } else {
       const damage = rollDice(this.rng, '1D3')
       this.party.applyDamage('harker', damage)
@@ -765,7 +1021,11 @@ export class Game {
         text: 'Weder guarda el disco y ya no finge cordialidad. Ahora sabe exactamente quiénes sois.',
       })
     }
-    return this.resolve(lines, 5)
+    return this.resolve(lines, 5, [
+      { kind: 'roll', id: pending.actionId },
+      ...(useLuck ? [{ kind: 'luck' as const, id: pending.actionId }] : []),
+      ...(pending.actionId === 'disk_snatch' && !result.success ? [{ kind: 'damage' as const, id: 'harker' }] : []),
+    ])
   }
 
   private resolveDiskWithoutRoll(mode: 'observe'): Turn {
@@ -776,6 +1036,7 @@ export class Game {
     this.world.setHolder('disco_solar', 'weder')
     this.world.learnFact('disco_solar_existe')
     this.world.unlockJournal('weder_toma_el_disco')
+    this.completeScene('solar_disk')
     return this.resolve(
       [
         {
@@ -784,8 +1045,10 @@ export class Game {
             'Contenéis la respiración. Weder envuelve el disco con la tela y se lo entrega a Mahadni solo el tiempo necesario para cerrar la caja. Hablan de la habitación 407 y de una caja fuerte. Luego emprenden el regreso.',
         },
         { kind: 'sistema', text: 'Pista confirmada: Weder llevará el disco a la habitación 407.' },
+        ...this.exchange('ending:observe'),
       ],
       mode === 'observe' ? 5 : 5,
+      [{ kind: 'clue', id: 'disco' }],
     )
   }
 
@@ -817,6 +1080,8 @@ export class Game {
       completesAt,
       ready: false,
       collected: false,
+      quality: null,
+      roll: null,
       extraLines: [],
       extraFacts: [],
       extraJournal: [],
@@ -839,23 +1104,56 @@ export class Game {
       throw new Error('Tenéis que reuniros antes de compartir lo descubierto')
     }
     const def = ASSIGNMENTS.find((item) => item.id === state.id)!
-    for (const fact of [...def.facts, ...state.extraFacts]) this.world.learnFact(fact)
-    for (const entry of [...def.journal, ...state.extraJournal]) this.world.unlockJournal(entry)
+    const quality = state.quality ?? 'partial'
+    const facts = quality === 'complete' ? def.fullFacts : def.partialFacts
+    const journal = quality === 'complete' ? def.fullJournal : def.partialJournal
+    for (const fact of [...facts, ...state.extraFacts]) this.world.learnFact(fact)
+    for (const entry of [...journal, ...state.extraJournal]) this.world.unlockJournal(entry)
     state.collected = true
     this.completedAssignments.add(state.id)
     this.party.setOrder(investigatorId, { kind: 'wait', label: 'Acompañar a Edith' })
     return this.instant([
       { kind: 'titular', text: `Informe de ${inv.name}` },
-      { kind: 'dialogo', text: def.report },
+      ...(state.roll ? [this.rollLine(state.roll)] : []),
+      { kind: 'dialogo', text: quality === 'complete' ? def.fullReport : def.partialReport },
       ...state.extraLines.map((text): Line => ({ kind: 'narracion', text })),
+      ...this.exchange(`report:${state.id}:${quality}`),
       { kind: 'sistema', text: 'Las nuevas pistas ya figuran en el caso.' },
-    ])
+    ], [{ kind: 'report', id: state.id }, { kind: 'clue', id: state.id }])
+  }
+
+  /**
+   * La conversacion reactiva normal es gratuita. Esta accion existe para que
+   * el jugador pueda detenerse deliberadamente a ordenar lo averiguado.
+   */
+  debrief(): Turn {
+    const present = this.party.at(this.party.focus.location)
+    if (present.length < 2) {
+      return this.instant([{ kind: 'sistema', text: 'Edith necesita al menos a un compañero presente para poner ideas en comun.' }])
+    }
+    const likelyTriggers = [
+      this.world.getFlag('weder_alertado') ? 'weder:alerted' : '',
+      this.world.knows('carter_y_weder_juntos') || this.world.knows('weder_y_carter_se_reunen') ? 'weder:suspicion' : '',
+      this.world.getFlag('orejas_vistas') ? 'ears:examine' : '',
+      'debrief:generic',
+    ].filter(Boolean)
+    const lines = likelyTriggers.flatMap((trigger) => this.exchange(trigger)).slice(0, 3)
+    return this.resolve(
+      [
+        { kind: 'titular', text: 'Poner ideas en comun' },
+        ...(lines.length > 0
+          ? lines
+          : [{ kind: 'narracion' as const, text: 'Repasais lo comprobado y separais los hechos de las sospechas. No aparece ninguna conclusion nueva.' }]),
+      ],
+      5,
+    )
   }
 
   /** Destinos principales con su coste total por la ruta mas corta disponible. */
   mapDestinations(): { id: string; name: string; floor: string; minutes: number; current: boolean }[] {
     const ids = [
       'recepcion',
+      'conserjeria',
       'terraza',
       'restaurante',
       'cocina',
@@ -1047,6 +1345,8 @@ export class Game {
     return this.resolve(
       [{ kind: 'narracion', text: 'Dejais correr el reloj.' }],
       Math.min(15, this.clock.minutesToNextSequence || 15),
+      [{ kind: 'clock' }],
+      true,
     )
   }
 
@@ -1067,7 +1367,7 @@ export class Game {
    * mientras tanto. Esta es la costura del juego: haces algo, y el hotel sigue
    * a lo suyo.
    */
-  private resolve(lines: Line[], minutes: number): Turn {
+  private resolve(lines: Line[], minutes: number, feedback: FeedbackCue[] = [], isWait = false): Turn {
     const privateKnowledge = new Map<string, Set<string>>()
     for (const state of this.assignments.values()) {
       if (state.collected) continue
@@ -1129,7 +1429,18 @@ export class Game {
     }
 
     for (const state of this.assignments.values()) {
-      if (!state.collected && this.clock.now >= state.completesAt) state.ready = true
+      if (state.collected || state.ready || this.clock.now < state.completesAt) continue
+      const def = ASSIGNMENTS.find((candidate) => candidate.id === state.id)
+      if (!def) continue
+      state.roll = this.party.check(this.rng, state.investigator, def.skill, { difficulty: def.difficulty })
+      state.quality = state.roll.success ? 'complete' : 'partial'
+      state.ready = true
+      if (!state.roll.success) {
+        if (state.id === 'vance_terraza') this.world.setFlag('weder_alertado')
+        if (state.id === 'vance_servicio') this.world.setFlag('personal_cocina_alertado')
+        if (state.id === 'nadia_registro') this.world.adjustDisposition('clinton', -5)
+        if (state.id === 'nadia_coleccion') this.world.setFlag('mahadni_sospecha_de_nadia')
+      }
     }
     lines.push(...this.renderReport(report))
 
@@ -1155,19 +1466,43 @@ export class Game {
       }
     }
 
+    if (isWait) {
+      const substantive = lines.some((line) => line.text !== 'Dejais correr el reloj.')
+      this.emptyWaits = substantive ? 0 : this.emptyWaits + 1
+      if (this.emptyWaits >= 2) {
+        lines.push({ kind: 'rastro', text: this.hotelReaction() })
+        this.emptyWaits = 0
+      }
+    } else {
+      this.emptyWaits = 0
+    }
+
     return {
       lines: lines.filter((l) => l.text.trim().length > 0),
       minutes,
       over: this.clock.finished || this.party.wipedOut,
+      feedback,
     }
   }
 
-  private instant(lines: Line[]): Turn {
+  private instant(lines: Line[], feedback: FeedbackCue[] = []): Turn {
     return {
       lines: lines.filter((line) => line.text.trim().length > 0),
       minutes: 0,
       over: this.clock.finished || this.party.wipedOut,
+      feedback,
     }
+  }
+
+  private hotelReaction(): string {
+    const reactions: Record<string, string[]> = {
+      recepcion: ['Una campana reclama a un botones. Tres maletas cambian de dueño sin que nadie levante la voz.', 'El montacargas se detiene detrás del mostrador y vuelve a arrancar vacío.'],
+      terraza: ['El toldo golpea una vez con el viento caliente. Una silla se arrastra en la mesa del fondo.', 'Un camarero sustituye una taza intacta por otra y guarda la primera debajo del delantal.'],
+      cocina: ['La vajilla choca detrás de la puerta; después, durante cinco segundos, toda la cocina calla.', 'El montacargas sube con olor a carbón húmedo y baja sin que nadie lo abra.'],
+      salon_isis: ['Las hojas de las palmeras ocultan una risa y luego solo queda el agua de la fuente.', 'Un jardinero abandona las tijeras al oír pasos en la balconada.'],
+    }
+    const pool = reactions[this.party.focus.location] ?? ['El hotel cambia de turno a vuestro alrededor: pasos, llaves y una puerta que se cierra lejos.']
+    return pool[Math.floor(this.clock.now / 15) % pool.length]!
   }
 
   private renderReport(report: TickReport): Line[] {
@@ -1252,7 +1587,7 @@ export class Game {
 
   snapshot(): GameSnapshot {
     return {
-      version: 1,
+      version: 2,
       clock: this.clock.save(),
       rng: this.rng.save(),
       party: this.party.snapshot(),
@@ -1264,6 +1599,7 @@ export class Game {
       examined: [...this.examined],
       assignments: [...this.assignments.values()].map((state) => ({
         ...state,
+        roll: state.roll ? { ...state.roll, candidates: [...state.roll.candidates] } : null,
         extraLines: [...state.extraLines],
         extraFacts: [...state.extraFacts],
         extraJournal: [...state.extraJournal],
@@ -1272,11 +1608,14 @@ export class Game {
       pendingRoll: this.pendingRoll
         ? { ...this.pendingRoll, roll: { ...this.pendingRoll.roll, candidates: [...this.pendingRoll.roll.candidates] } }
         : null,
+      resolvedScenes: [...this.resolvedScenes],
+      firedExchanges: [...this.firedExchanges],
+      emptyWaits: this.emptyWaits,
     }
   }
 
   restore(snap: GameSnapshot): void {
-    if (snap.version !== 1) throw new Error('Esta partida pertenece a una versión incompatible')
+    if (snap.version !== 1 && snap.version !== 2) throw new Error('Esta partida pertenece a una versión incompatible')
     this.clock.restore(snap.clock)
     this.rng.restore(snap.rng)
     this.party.restore(snap.party)
@@ -1291,6 +1630,8 @@ export class Game {
         state.id,
         {
           ...state,
+          quality: state.quality ?? null,
+          roll: state.roll ? { ...state.roll, candidates: [...state.roll.candidates] } : null,
           extraLines: [...state.extraLines],
           extraFacts: [...state.extraFacts],
           extraJournal: [...state.extraJournal],
@@ -1301,6 +1642,9 @@ export class Game {
     this.pendingRoll = snap.pendingRoll
       ? { ...snap.pendingRoll, roll: { ...snap.pendingRoll.roll, candidates: [...snap.pendingRoll.roll.candidates] } }
       : null
+    this.resolvedScenes = new Set(snap.resolvedScenes ?? [])
+    this.firedExchanges = new Set(snap.firedExchanges ?? [])
+    this.emptyWaits = snap.emptyWaits ?? 0
   }
 
   /* ---------------------------------------------------------------- *

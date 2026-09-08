@@ -4,7 +4,16 @@
     "name": "Edith Harker",
     "occupation": "corresponsal de prensa",
     "blurb": "Escribe para un periódico de Londres que ya no le paga los viajes. Ha venido a El Cairo por su cuenta persiguiendo una historia que nadie le ha encargado, que es como ha conseguido todas las buenas.",
-    "chars": { "FUE": 45, "CON": 60, "TAM": 50, "DES": 60, "INT": 80, "APA": 70, "POD": 65, "EDU": 75 },
+    "chars": {
+      "FUE": 45,
+      "CON": 60,
+      "TAM": 50,
+      "DES": 60,
+      "INT": 80,
+      "APA": 70,
+      "POD": 65,
+      "EDU": 75
+    },
     "skills": {
       "Charlateria": 65,
       "Credito": 45,
@@ -25,14 +34,24 @@
       "Tasacion": 20,
       "Saber": 40
     },
-    "luck": 60
+    "luck": 60,
+    "portrait": "edith"
   },
   {
     "id": "nadia",
     "name": "Nadia Farouk",
     "occupation": "egiptóloga",
     "blurb": "Nacida en El Cairo y formada en París, lleva diez años viendo cómo firman con nombre inglés los hallazgos que ella cataloga. Habla cinco idiomas y lee dos que ya no habla nadie.",
-    "chars": { "FUE": 40, "CON": 55, "TAM": 45, "DES": 55, "INT": 85, "APA": 60, "POD": 70, "EDU": 85 },
+    "chars": {
+      "FUE": 40,
+      "CON": 55,
+      "TAM": 45,
+      "DES": 55,
+      "INT": 85,
+      "APA": 60,
+      "POD": 70,
+      "EDU": 85
+    },
     "skills": {
       "Arqueologia": 75,
       "Buscar libros": 70,
@@ -53,14 +72,24 @@
       "Primeros auxilios": 35,
       "Saber": 60
     },
-    "luck": 50
+    "luck": 50,
+    "portrait": "nadia"
   },
   {
     "id": "vance",
     "name": "Samuel Vance",
     "occupation": "detective de hotel retirado",
     "blurb": "Veinte años echando a gente de sitios caros. Sabe entrar donde no le llaman, sabe cuándo alguien miente y sabe que casi siempre es mejor no preguntar. Esta vez va a preguntar.",
-    "chars": { "FUE": 70, "CON": 70, "TAM": 70, "DES": 70, "INT": 60, "APA": 45, "POD": 55, "EDU": 50 },
+    "chars": {
+      "FUE": 70,
+      "CON": 70,
+      "TAM": 70,
+      "DES": 70,
+      "INT": 60,
+      "APA": 45,
+      "POD": 55,
+      "EDU": 50
+    },
     "skills": {
       "Cerrajeria": 65,
       "Charlateria": 40,
@@ -82,6 +111,7 @@
       "Tasacion": 30,
       "Saber": 30
     },
-    "luck": 55
+    "luck": 55,
+    "portrait": "vance"
   }
 ]

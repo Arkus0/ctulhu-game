@@ -3,6 +3,7 @@ import { Game, type GameSnapshot, type Line, type Turn } from './engine/game'
 import type { DialogueTopic } from './engine/dialogue'
 import type { GuidedAction } from './engine/adventure'
 import { ArtRenderer, type TimeOfDay } from './ui/art'
+import { AudioManager, type AudioBus } from './ui/audio'
 import './ui/style.css'
 
 type Mode =
@@ -14,7 +15,7 @@ type Mode =
 
 interface HistoryEntry { time: string; lines: Line[] }
 interface SaveEnvelope {
-  version: 1
+  version: 1 | 2
   savedAt: string
   time: string
   place: string
@@ -33,16 +34,23 @@ class UI {
   private mode: Mode = { kind: 'root' }
   private typing: (() => void) | null = null
   private history: HistoryEntry[] = []
+  private pages: Line[][] = []
+  private pageIndex = 0
   private readonly art: ArtRenderer
+  private readonly audio = new AudioManager()
   private readonly log = $('log')
   private readonly choices = $('choices')
   private readonly time = $('hud-time')
   private readonly place = $('hud-place')
   private readonly title = $('scene-title')
+  private readonly sceneSummary = $('scene-summary')
   private readonly objective = $('objective-text')
   private readonly panel = $('panel')
   private readonly panelBody = $('panel-body')
   private readonly scene = $('scene')
+  private readonly portrait = $('portrait')
+  private readonly portraitImg = $<HTMLImageElement>('portrait-img')
+  private readonly portraitName = $('portrait-name')
 
   constructor(readonly game: Game) {
     this.art = new ArtRenderer($<HTMLCanvasElement>('art'))
@@ -51,9 +59,19 @@ class UI {
     $('hud-team').addEventListener('click', () => this.showTeam())
     $('hud-save').addEventListener('click', () => this.showSaves())
     $('hud-log').addEventListener('click', () => this.showHistory())
+    $('hud-audio').addEventListener('click', () => this.showAudio())
+    $('hud-audio').setAttribute('aria-pressed', String(this.audio.preferences.muted))
     $('panel-close').addEventListener('click', () => this.closePanel())
     this.log.addEventListener('click', () => this.typing?.())
     document.addEventListener('keydown', (event) => this.key(event))
+    const unlockAudio = (): void => {
+      void this.audio.unlock().then(() => {
+        const view = this.game.view()
+        this.audio.sync(view.location.id, view.scene?.id ?? null)
+      })
+    }
+    document.addEventListener('pointerdown', unlockAudio, { once: true })
+    document.addEventListener('keydown', unlockAudio, { once: true })
   }
 
   async start(): Promise<void> {
@@ -66,7 +84,7 @@ class UI {
       },
       {
         kind: 'sistema',
-        text: 'Cada acción consume tiempo. Consultad el Caso para seguir las pistas y el Equipo para repartir el trabajo. Lo que descubra un compañero no lo sabréis hasta volver a reuniros.',
+        text: 'Caso reúne lo descubierto; Mapa mueve; Equipo coordina. Un compañero separado conserva lo que sabe hasta volver a reunirse.',
       },
       { kind: 'titular', text: view.location.name },
       { kind: 'narracion', text: view.description },
@@ -79,14 +97,55 @@ class UI {
     this.time.textContent = view.time
     this.place.textContent = view.location.name
     this.title.textContent = view.scene?.title ?? view.location.name
+    this.sceneSummary.textContent = view.scene?.body ?? ''
+    this.sceneSummary.hidden = view.scene == null
     this.objective.textContent = view.objective
     this.scene.classList.toggle('scene-alert', view.scene != null)
+    this.audio.sync(view.location.id, view.scene?.id ?? null)
     await this.art.draw(view.art, view.timeOfDay as TimeOfDay)
     this.renderChoices()
   }
 
+  /**
+   * Retrato de quien tiene la palabra.
+   *
+   * La interfaz no conoce a ningun personaje por su nombre: pregunta al juego
+   * que retrato corresponde al PNJ con el que se esta hablando. Si ese PNJ
+   * todavia no tiene lamina, el elemento se queda oculto, igual que el fondo
+   * cae en el dibujo procedimental cuando falta el PNG.
+   */
+  private renderPortrait(): void {
+    const npc =
+      this.mode.kind === 'topics'
+        ? this.mode.npc
+        : this.mode.kind === 'approach'
+          ? this.mode.topic.npc
+          : null
+    const file = npc ? this.game.npcPortrait(npc) : undefined
+    if (!npc || !file) {
+      this.portrait.hidden = true
+      return
+    }
+
+    const src = `art/retratos/${file}.png`
+    this.portraitName.textContent = this.game.npcName(npc)
+    if (this.portraitImg.getAttribute('src') !== src) {
+      this.portrait.hidden = true
+      this.portraitImg.onload = (): void => {
+        this.portrait.hidden = false
+      }
+      this.portraitImg.onerror = (): void => {
+        this.portrait.hidden = true
+      }
+      this.portraitImg.setAttribute('src', src)
+      return
+    }
+    this.portrait.hidden = this.portraitImg.naturalWidth === 0
+  }
+
   private renderChoices(): void {
     const view = this.game.view()
+    this.renderPortrait()
     this.choices.replaceChildren()
     if (view.pendingRoll) return this.renderRoll()
     if (view.finished || this.mode.kind === 'end') {
@@ -143,14 +202,20 @@ class UI {
   }
 
   private actionButton(action: GuidedAction): void {
-    if (action.kind === 'talk') {
+    if (action.kind === 'talk' && action.id === 'talk_here') {
       this.button(action.label, () => {
         this.mode = { kind: 'talk' }
         this.renderChoices()
       }, action.minutes, action.urgent ? 'urgent' : '', action.hint)
       return
     }
-    this.button(action.label, () => void this.act(() => this.game.performAction(action.id)), action.minutes, action.urgent ? 'urgent' : '', action.hint)
+    this.button(action.label, () => void this.act(() => this.game.performAction(action.id)), action.minutes, action.urgent ? 'urgent' : '', this.actionHint(action), action.disabled)
+  }
+
+  private actionHint(action: GuidedAction): string {
+    return [action.hint, action.risk ? `Riesgo: ${action.risk}` : '', action.consequence ? `Después: ${action.consequence}` : '']
+      .filter(Boolean)
+      .join(' ')
   }
 
   private topicButton(topic: DialogueTopic): void {
@@ -197,10 +262,11 @@ class UI {
     this.choices.append(element)
   }
 
-  private button(label: string, onClick: () => void, minutes?: number, className = '', hint = ''): void {
+  private button(label: string, onClick: () => void, minutes?: number, className = '', hint = '', disabled = false): void {
     const button = document.createElement('button')
     button.type = 'button'
     button.className = className
+    button.disabled = disabled
     const number = this.choices.querySelectorAll('button').length + 1
     const key = document.createElement('span')
     key.className = 'key'
@@ -244,14 +310,63 @@ class UI {
     this.closePanel()
     this.mode = turn.over ? { kind: 'end' } : { kind: 'root' }
     if (turn.lines.length > 0) this.write(turn.lines)
+    this.feedback(turn.feedback)
+    this.audio.handle(turn.feedback)
     await this.paint()
+  }
+
+  private feedback(cues: Turn['feedback']): void {
+    const game = $('game')
+    const classes = cues.map((cue) => `feedback-${cue.kind}`)
+    game.classList.add(...classes)
+    window.setTimeout(() => game.classList.remove(...classes), 520)
   }
 
   private write(lines: Line[]): void {
     this.typing?.()
     if (lines.length === 0) return
     this.history.push({ time: this.game.view().time, lines: lines.map((line) => ({ ...line })) })
+    this.pages = this.paginate(lines)
+    this.pageIndex = 0
+    this.renderPage()
+  }
+
+  private paginate(lines: Line[]): Line[][] {
+    const expanded = lines.flatMap((line) => {
+      const chunks = line.text.split(/\n+/).flatMap((paragraph) => {
+        if (paragraph.length <= 720) return [paragraph]
+        const sentences = paragraph.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g) ?? [paragraph]
+        const out: string[] = []
+        let current = ''
+        for (const sentence of sentences) {
+          if (current && current.length + sentence.length > 720) { out.push(current.trim()); current = '' }
+          current += sentence
+        }
+        if (current.trim()) out.push(current.trim())
+        return out
+      })
+      return chunks.filter(Boolean).map((text) => ({ ...line, text }))
+    })
+    const pages: Line[][] = []
+    let page: Line[] = []
+    let size = 0
+    for (const line of expanded) {
+      if (page.length > 0 && (size + line.text.length > 760 || page.length >= 4)) {
+        pages.push(page)
+        page = []
+        size = 0
+      }
+      page.push(line)
+      size += line.text.length
+    }
+    if (page.length > 0) pages.push(page)
+    return pages.length > 0 ? pages : [[]]
+  }
+
+  private renderPage(): void {
+    this.typing?.()
     this.log.replaceChildren()
+    const lines = this.pages[this.pageIndex] ?? []
     const paragraphs = lines.map((line) => {
       const paragraph = document.createElement('p')
       paragraph.className = line.kind
@@ -260,6 +375,24 @@ class UI {
       this.log.append(paragraph)
       return paragraph
     })
+    if (this.pages.length > 1) {
+      const navigation = document.createElement('div')
+      navigation.className = 'log-pagination'
+      const previous = document.createElement('button')
+      previous.type = 'button'
+      previous.textContent = '← Anterior'
+      previous.disabled = this.pageIndex === 0
+      previous.addEventListener('click', () => { this.pageIndex -= 1; this.renderPage() })
+      const count = document.createElement('span')
+      count.textContent = `${this.pageIndex + 1}/${this.pages.length}`
+      const next = document.createElement('button')
+      next.type = 'button'
+      next.textContent = 'Siguiente →'
+      next.disabled = this.pageIndex >= this.pages.length - 1
+      next.addEventListener('click', () => { this.pageIndex += 1; this.renderPage() })
+      navigation.append(previous, count, next)
+      this.log.append(navigation)
+    }
     let lineIndex = 0
     let character = 0
     let stopped = false
@@ -268,7 +401,9 @@ class UI {
       stopped = true
       if (timer !== undefined) clearTimeout(timer)
       for (const paragraph of paragraphs) paragraph.textContent = paragraph.dataset['full'] ?? ''
-      this.log.scrollTop = this.log.scrollHeight
+      // Cada pagina es una unidad de lectura: abrirla por el principio evita
+      // ocultar el arranque de un pasaje largo tras el scroll interno.
+      this.log.scrollTop = 0
       this.typing = null
     }
     const step = (): void => {
@@ -311,14 +446,16 @@ class UI {
 
   private showCase(): void {
     this.openPanel('Cuaderno del caso')
-    for (const lead of this.game.view().leads) {
+    const leads = this.game.view().leads
+    if (leads.length === 0) this.panelNote('Todavía no habéis descubierto ninguna línea de investigación.')
+    for (const lead of leads) {
       const card = document.createElement('article')
       card.className = `lead ${lead.status}`
       const header = document.createElement('div')
       const title = document.createElement('h3')
       title.textContent = lead.title
       const status = document.createElement('span')
-      status.textContent = { active: 'EN CURSO', completed: 'RESUELTA', missed: 'PERDIDA', locked: 'BLOQUEADA' }[lead.status]
+      status.textContent = { active: 'EN CURSO', completed: 'RESUELTA', missed: 'PERDIDA' }[lead.status]
       header.append(title, status)
       const detail = document.createElement('p')
       detail.textContent = lead.detail
@@ -359,11 +496,19 @@ class UI {
     const leadTitle = document.createElement('h3')
     leadTitle.textContent = `${leader.name}: líder`
     const leadStats = document.createElement('p')
-    leadStats.textContent = `Salud ${leader.hp}/${leader.hpMax}. Cordura ${leader.san}. Suerte ${leader.luck}.`
+    const relevant: string[] = []
+    if (leader.hp < leader.hpMax || view.scene?.actions.some((action) => action.risk?.includes('daño'))) relevant.push(`Salud ${leader.hp}/${leader.hpMax}`)
+    if (leader.san < leader.sanAtDayStart || view.scene?.id === 'ears') relevant.push(`Cordura ${leader.san}`)
+    if (view.pendingRoll) relevant.push(`Suerte ${leader.luck}`)
+    leadStats.textContent = relevant.length > 0 ? `${relevant.join('. ')}.` : 'Dirige el grupo y decide dónde concentrar la investigación.'
     leadCard.append(leadTitle, leadStats)
-    if (leader.inventory.length > 0) {
+    const relevantInventory = leader.inventory.filter((item) =>
+      item === 'disco_solar' ||
+      (item === 'autorizacion_behler' && ['basement_threshold', 'solar_disk'].includes(view.scene?.id ?? '')),
+    )
+    if (relevantInventory.length > 0) {
       const inventory = document.createElement('small')
-      inventory.textContent = `Lleva: ${leader.inventory.join(', ').replaceAll('_', ' ')}.`
+      inventory.textContent = `Lleva: ${relevantInventory.join(', ').replaceAll('_', ' ')}.`
       leadCard.append(inventory)
     }
     this.panelBody.append(leadCard)
@@ -395,12 +540,21 @@ class UI {
         const label = document.createElement('strong')
         label.textContent = assignment.label
         const detail = document.createElement('span')
-        detail.textContent = `${assignment.brief} Informe en ${assignment.duration} min.`
+        const difficulty = { regular: 'Normal', hard: 'Difícil', extreme: 'Extrema' }[assignment.difficulty]
+        detail.textContent = `${assignment.brief} ${assignment.skill} · ${difficulty}. Informe en ${assignment.duration} min. Riesgo: ${assignment.risk}`
         assign.append(label, detail)
         assign.addEventListener('click', () => void this.act(() => this.game.assign(assignment.id)))
         card.append(assign)
       }
       this.panelBody.append(card)
+    }
+    if (view.party.filter((member) => member.location === view.focus.location).length >= 2) {
+      const debrief = document.createElement('button')
+      debrief.type = 'button'
+      debrief.className = 'panel-action compact'
+      debrief.textContent = 'Poner ideas en común —5 min'
+      debrief.addEventListener('click', () => void this.act(() => this.game.debrief()))
+      this.panelBody.append(debrief)
     }
   }
 
@@ -409,6 +563,47 @@ class UI {
     if (state === 'report_ready') return 'Informe preparado. Debéis reuniros.'
     if (state === 'with_leader') return 'Acompaña a Edith.'
     return 'Disponible.'
+  }
+
+  private showAudio(): void {
+    this.openPanel('Sonido')
+    this.panelNote('El audio solo se activa después de una interacción. La música aparece en momentos concretos y deja espacio al silencio.')
+    const muted = document.createElement('button')
+    muted.type = 'button'
+    muted.className = 'panel-action compact'
+    muted.setAttribute('aria-pressed', String(this.audio.preferences.muted))
+    muted.textContent = this.audio.preferences.muted ? 'Activar sonido' : 'Silenciar todo'
+    muted.addEventListener('click', () => {
+      this.audio.setMuted(!this.audio.preferences.muted)
+      $('hud-audio').setAttribute('aria-pressed', String(this.audio.preferences.muted))
+      this.showAudio()
+    })
+    this.panelBody.append(muted)
+    for (const [bus, label] of [['music', 'Música'], ['ambience', 'Ambiente'], ['effects', 'Efectos']] as const) {
+      this.audioSlider(bus, label)
+    }
+  }
+
+  private audioSlider(bus: AudioBus, label: string): void {
+    const row = document.createElement('label')
+    row.className = 'audio-control'
+    const title = document.createElement('span')
+    title.textContent = label
+    const input = document.createElement('input')
+    input.type = 'range'
+    input.min = '0'
+    input.max = '100'
+    input.step = '5'
+    input.value = String(Math.round(this.audio.preferences[bus] * 100))
+    input.setAttribute('aria-label', `Volumen de ${label.toLowerCase()}`)
+    const value = document.createElement('output')
+    value.textContent = `${input.value}%`
+    input.addEventListener('input', () => {
+      value.textContent = `${input.value}%`
+      this.audio.setVolume(bus, Number(input.value) / 100)
+    })
+    row.append(title, input, value)
+    this.panelBody.append(row)
   }
 
   private showSaves(): void {
@@ -443,7 +638,7 @@ class UI {
   private writeSave(slot: number): void {
     const view = this.game.view()
     const envelope: SaveEnvelope = {
-      version: 1,
+      version: 2,
       savedAt: new Date().toISOString(),
       time: view.time,
       place: view.location.name,
@@ -458,7 +653,7 @@ class UI {
       const raw = localStorage.getItem(`${SAVE_PREFIX}${slot}`)
       if (!raw) return null
       const parsed = JSON.parse(raw) as SaveEnvelope
-      return parsed.version === 1 ? parsed : null
+      return parsed.version === 1 || parsed.version === 2 ? parsed : null
     } catch { return null }
   }
 
@@ -525,16 +720,23 @@ class UI {
 
   textState(): string {
     const view = this.game.view()
+    const resources: Record<string, string | number | string[]> = {}
+    if (view.focus.hp < view.focus.hpMax || view.scene?.actions.some((action) => action.risk?.includes('daño'))) resources['health'] = `${view.focus.hp}/${view.focus.hpMax}`
+    if (view.focus.san < view.focus.sanAtDayStart || view.scene?.id === 'ears') resources['sanity'] = view.focus.san
+    if (view.pendingRoll) resources['luck'] = view.focus.luck
+    const relevantInventory = view.focus.inventory.filter((item) => item === 'disco_solar' || (item === 'autorizacion_behler' && ['basement_threshold', 'solar_disk'].includes(view.scene?.id ?? '')))
+    if (relevantInventory.length > 0) resources['inventory'] = relevantInventory
     return JSON.stringify({
       time: view.time,
       location: view.location.name,
       objective: view.objective,
       scene: view.scene?.title ?? null,
-      actions: view.actions.map((action) => ({ id: action.id, label: action.label, minutes: action.minutes })),
+      actions: view.actions.map((action) => ({ id: action.id, label: action.label, minutes: action.minutes, disabled: action.disabled, risk: action.risk, consequence: action.consequence })),
       leads: view.leads.map((lead) => ({ title: lead.title, status: lead.status, deadline: lead.deadline })),
       companions: view.companions.map((companion) => ({ name: companion.name, location: companion.location, state: companion.state, assignment: companion.assignment })),
-      player: { health: `${view.focus.hp}/${view.focus.hpMax}`, sanity: view.focus.san, luck: view.focus.luck, inventory: view.focus.inventory },
+      resources,
       pendingRoll: view.pendingRoll ? { title: view.pendingRoll.title, value: view.pendingRoll.roll.value, canSpendLuck: view.pendingRoll.canSpendLuck } : null,
+      page: { current: this.pageIndex + 1, total: Math.max(1, this.pages.length) },
       narration: [...this.log.querySelectorAll('p')].map((item) => item.dataset['full'] ?? item.textContent ?? ''),
     })
   }

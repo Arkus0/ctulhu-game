@@ -59,6 +59,7 @@ button { font-family: inherit; }
 
 #hud {
   display: flex;
+  flex: 0 0 auto;
   align-items: stretch;
   min-height: 42px;
   background: var(--blue);
@@ -156,6 +157,63 @@ button { font-family: inherit; }
   text-transform: uppercase;
 }
 
+#scene-summary {
+  position: absolute;
+  left: 0.65rem;
+  right: 0.65rem;
+  top: 1.5rem;
+  z-index: 2;
+  max-width: 68ch;
+  margin: 0 auto;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--magenta);
+  background: rgba(0, 0, 0, 0.86);
+  color: var(--white);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+#scene-summary[hidden] { display: none; }
+
+/* Retrato del interlocutor. Se apoya en el borde derecho de la lámina, que es
+   justo la mitad que las composiciones dejan tranquila. Si el PNG no existe, el
+   elemento queda oculto y la escena se ve entera, sin hueco ni marco vacío. */
+#portrait {
+  position: absolute;
+  z-index: 2;
+  right: 0.4rem;
+  /* Arranca por debajo del aviso de decisión crítica, que vive en la misma
+     esquina, y termina por encima del rótulo de la localización. */
+  top: 20%;
+  bottom: 1.4rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.15rem;
+  pointer-events: none;
+}
+#portrait[hidden] { display: none; }
+#portrait img {
+  height: calc(100% - 0.95rem);
+  width: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  border: 2px solid var(--gray);
+  background: var(--black);
+}
+#portrait figcaption {
+  max-width: 24ch;
+  padding: 0 0.25rem;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.86);
+  color: var(--bright-cyan);
+  font-size: 0.52rem;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 #log {
   flex: 1 1 auto;
   min-height: 112px;
@@ -185,6 +243,24 @@ button { font-family: inherit; }
 .cordura { color: var(--bright-magenta); }
 .rastro { color: var(--ochre); font-style: italic; }
 .sistema { color: var(--gray); font-size: 0.84rem; }
+
+.log-pagination {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.25rem;
+  background: var(--black);
+}
+.log-pagination button {
+  border: 1px solid var(--gray);
+  background: var(--black);
+  color: var(--bright-cyan);
+  cursor: pointer;
+}
+.log-pagination button:disabled { opacity: 0.35; cursor: default; }
 
 #choices {
   flex: 0 0 min(34%, 260px);
@@ -331,6 +407,24 @@ button { font-family: inherit; }
 .panel-action.report { border-color: var(--bright-green); color: var(--bright-green); }
 .panel-action.compact { display: inline-block; width: auto; margin-right: 0.4rem; }
 .panel-action:disabled { cursor: default; opacity: 0.48; }
+.audio-control {
+  display: grid;
+  grid-template-columns: 7rem minmax(8rem, 1fr) 3.5rem;
+  gap: 0.7rem;
+  align-items: center;
+  margin: 0.9rem 0;
+  color: var(--white);
+}
+.audio-control input { width: 100%; accent-color: var(--bright-cyan); }
+.audio-control output { color: var(--bright-cyan); text-align: right; }
+
+#game.feedback-location #scene { border-color: var(--bright-cyan); }
+#game.feedback-clue #objective { background: #001b1b; }
+#game.feedback-report #choices { border-color: var(--bright-green); }
+#game.feedback-roll .roll-card { transform: translateX(2px); }
+#game.feedback-damage { box-shadow: 8px 8px 0 var(--red); }
+#game.feedback-sanity #scene { border-color: var(--bright-magenta); }
+#scene, #objective, #choices, .roll-card, #game { transition: border-color 180ms linear, background-color 180ms linear, transform 90ms linear, box-shadow 180ms linear; }
 .history-entry p { font-size: 0.88rem; }
 .history-entry h3 { margin-bottom: 0.45rem !important; color: var(--ochre) !important; }
 
@@ -344,9 +438,10 @@ button { font-family: inherit; }
   #hud { display: block; }
   .hud-status { min-height: 34px; padding: 0.3rem 0.55rem; }
   .hud-tools { width: 100%; border-top: 1px solid var(--bright-blue); }
-  .hud-tools button { flex: 1; min-width: 0; padding: 0.26rem 0.1rem; }
+  .hud-tools button { flex: 1; min-width: 0; padding: 0.34rem 0.05rem; font-size: 0.66rem; }
   #objective { font-size: 0.72rem; }
   #scene { flex-basis: 27%; min-height: 92px; }
+  #scene-summary { top: 1.25rem; font-size: 0.68rem; max-height: calc(100% - 2.2rem); overflow-y: auto; }
   #log { min-height: 96px; padding: 0.55rem 0.7rem 0.3rem; }
   #choices { flex-basis: min(38%, 260px); max-height: 45%; }
   #choices > button { min-height: 46px; }
@@ -361,5 +456,5 @@ button { font-family: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { scroll-behavior: auto !important; }
+  * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }

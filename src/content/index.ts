@@ -14,6 +14,7 @@ import type { EventDef } from '../engine/scheduler'
 import type { InvestigatorDef } from '../engine/party'
 import type { Difficulty } from '../engine/rules'
 import type { Characteristics, Effect, LocationDef, NpcDef, NpcId, SkillId } from '../engine/types'
+import type { PartyExchangeDef, SceneDef } from '../engine/adventure'
 
 import locationsJson from './locations.json'
 import npcsJson from './npcs.json'
@@ -38,6 +39,8 @@ import rumorsJson from './rumors.json'
 import luctuousJson from './luctuous.json'
 import randomNpcsJson from './random_npcs.json'
 import artifactsJson from './artifacts.json'
+import scenesJson from './scenes.json'
+import partyExchangesJson from './party_exchanges.json'
 
 /** Un suceso de la Lista de eventos luctuosos (1D100), pag. 146 del modulo. */
 export interface LuctuousEventDef {
@@ -130,6 +133,8 @@ export interface Content {
   luctuousEvents: LuctuousEventDef[]
   randomNpcs: RandomNpcTable
   artifacts: Map<string, ArtifactDef>
+  scenes: Map<string, SceneDef>
+  partyExchanges: PartyExchangeDef[]
 }
 
 export class ContentError extends Error {
@@ -167,6 +172,8 @@ export function loadContent(): Content {
   const luctuousEvents = luctuousJson as unknown as LuctuousEventDef[]
   const randomNpcs = randomNpcsJson as unknown as RandomNpcTable
   const artifacts = artifactsJson as unknown as ArtifactDef[]
+  const scenes = scenesJson as unknown as SceneDef[]
+  const partyExchanges = partyExchangesJson as unknown as PartyExchangeDef[]
 
   const problems = validate({
     locations,
@@ -179,6 +186,8 @@ export function loadContent(): Content {
     luctuousEvents,
     randomNpcs,
     artifacts,
+    scenes,
+    partyExchanges,
   })
   if (problems.length > 0) throw new ContentError(problems)
 
@@ -197,6 +206,8 @@ export function loadContent(): Content {
     luctuousEvents,
     randomNpcs,
     artifacts: new Map(artifacts.map((a) => [a.id, a])),
+    scenes: new Map(scenes.map((scene) => [scene.id, scene])),
+    partyExchanges,
   }
 }
 
@@ -211,6 +222,8 @@ interface RawContent {
   luctuousEvents?: LuctuousEventDef[]
   randomNpcs?: RandomNpcTable
   artifacts?: ArtifactDef[]
+  scenes?: SceneDef[]
+  partyExchanges?: PartyExchangeDef[]
 }
 
 /**
@@ -250,6 +263,22 @@ export function validate(c: RawContent): string[] {
 
   // Eventos.
   const eventIds = new Set<string>()
+  const sceneIds = new Set<string>()
+  for (const scene of c.scenes ?? []) {
+    if (sceneIds.has(scene.id)) problems.push(`Escena duplicada: "${scene.id}"`)
+    sceneIds.add(scene.id)
+    if (!scene.title || !scene.body) problems.push(`La escena "${scene.id}" no tiene título o cuerpo`)
+    const actionIds = new Set<string>()
+    for (const action of scene.actions) {
+      if (actionIds.has(action.id)) problems.push(`Acción duplicada "${action.id}" en la escena "${scene.id}"`)
+      actionIds.add(action.id)
+      if (!action.label || !action.consequence) problems.push(`La acción "${action.id}" de "${scene.id}" está incompleta`)
+    }
+    if (scene.actions.length < 2 || scene.actions.length > 4) {
+      problems.push(`La escena "${scene.id}" debe ofrecer entre dos y cuatro acciones`)
+    }
+  }
+
   for (const ev of c.events) {
     if (eventIds.has(ev.id)) problems.push(`Evento duplicado: "${ev.id}"`)
     eventIds.add(ev.id)
@@ -270,6 +299,16 @@ export function validate(c: RawContent): string[] {
     }
     if (!/^[Dd]\d\s+\d{1,2}:\d{2}$/.test(ev.at)) {
       problems.push(`El evento "${ev.id}" tiene una hora rara: "${ev.at}"`)
+    }
+    if (ev.scene && !sceneIds.has(ev.scene)) {
+      problems.push(`El evento "${ev.id}" usa la escena "${ev.scene}", que no existe`)
+    }
+    if (ev.scene && ev.interruptibleBy) {
+      const scene = (c.scenes ?? []).find((item) => item.id === ev.scene)
+      const actions = new Set(scene?.actions.map((action) => action.id) ?? [])
+      for (const action of ev.interruptibleBy) {
+        if (!actions.has(action)) problems.push(`El evento "${ev.id}" permite la acción inexistente "${action}"`)
+      }
     }
   }
 
@@ -433,6 +472,15 @@ export function validate(c: RawContent): string[] {
     if (!art.powers) problems.push(`El artefacto "${art.id}" no tiene poderes`)
     if (art.location && !locationIds.has(art.location)) {
       problems.push(`El artefacto "${art.id}" se encuentra en "${art.location}", que no existe`)
+    }
+  }
+
+  const exchangeIds = new Set<string>()
+  for (const exchange of c.partyExchanges ?? []) {
+    if (exchangeIds.has(exchange.id)) problems.push(`Intercambio de equipo duplicado: "${exchange.id}"`)
+    exchangeIds.add(exchange.id)
+    if (!exchange.trigger || exchange.lines.length < 2) {
+      problems.push(`El intercambio "${exchange.id}" necesita disparador y al menos dos líneas`)
     }
   }
 

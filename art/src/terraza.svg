@@ -1,0 +1,347 @@
+<!--
+  La terraza del Shepheard's, mañana del 21 de noviembre de 1922.
+
+  Composición original, pintada en color continuo. Importante: aquí NO se
+  dibuja con las dieciséis tintas EGA. Se modela con degradados, textura y
+  atmósfera en color real, y la reducción a EGA con difusión de error hace la
+  mezcla. Pintar directamente en las dieciséis tintas produce masas planas y
+  aspecto de muñeco; pintar en continuo y cuantizar después produce el grano de
+  las láminas de finales de los ochenta.
+
+  Punto de fuga en (300, 320). Foco: la mesa del primer término derecho, donde
+  el sol entra por el borde del toldo.
+  Zonas tranquilas: inferior izquierda (suelo) y superior derecha (toldo).
+  El tercio superior queda tapado por el recuadro de escena cuando hay escena.
+-->
+<svg width="1280" height="608" viewBox="0 0 1280 608" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7e93a8"/>
+      <stop offset="0.45" stop-color="#b9bfb4"/>
+      <stop offset="0.8" stop-color="#e6d9b8"/>
+      <stop offset="1" stop-color="#f2e3bc"/>
+    </linearGradient>
+    <linearGradient id="ciudadLejos" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9c968a"/>
+      <stop offset="1" stop-color="#c9bfa8"/>
+    </linearGradient>
+    <linearGradient id="muroHotel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6b6152"/>
+      <stop offset="0.55" stop-color="#a8977c"/>
+      <stop offset="1" stop-color="#cdbb98"/>
+    </linearGradient>
+    <linearGradient id="piedraBaranda" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#efe4c8"/>
+      <stop offset="0.35" stop-color="#cfc0a0"/>
+      <stop offset="1" stop-color="#87795f"/>
+    </linearGradient>
+    <linearGradient id="suelo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8c6a4a"/>
+      <stop offset="0.35" stop-color="#b1885a"/>
+      <stop offset="1" stop-color="#6f5238"/>
+    </linearGradient>
+    <radialGradient id="solSuelo" cx="0.72" cy="0.62" r="0.55">
+      <stop offset="0" stop-color="#ffe9a8" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="#e8b96a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#c08840" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lona" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d2a20"/>
+      <stop offset="0.55" stop-color="#a63d2c"/>
+      <stop offset="1" stop-color="#c2634a"/>
+    </linearGradient>
+    <linearGradient id="lonaClara" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9a071"/>
+      <stop offset="1" stop-color="#e8cfa0"/>
+    </linearGradient>
+    <linearGradient id="franja" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cba173"/>
+      <stop offset="1" stop-color="#e8cb96"/>
+    </linearGradient>
+    <linearGradient id="lino" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f4eeda"/>
+      <stop offset="0.6" stop-color="#d6cbaa"/>
+      <stop offset="1" stop-color="#9b8f74"/>
+    </linearGradient>
+    <linearGradient id="trajeOscuro" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a4a58"/>
+      <stop offset="0.6" stop-color="#2e2e3a"/>
+      <stop offset="1" stop-color="#1b1b24"/>
+    </linearGradient>
+    <linearGradient id="mantel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdf6e2"/>
+      <stop offset="0.6" stop-color="#ded2b4"/>
+      <stop offset="1" stop-color="#a2937a"/>
+    </linearGradient>
+
+    <!-- Bruma: separa los planos sin dibujar una sola línea. -->
+    <filter id="lejos" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="medio" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+    <filter id="apenas" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.1"/>
+    </filter>
+
+    <!-- Textura de superficie: piedra, estuco, lona. Es lo que impide que una
+         zona grande se lea como una mancha de color. -->
+    <filter id="texturaPiedra" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="7"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
+    </filter>
+    <filter id="texturaFina" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="3" seed="3"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.42"/></feComponentTransfer>
+    </filter>
+    <filter id="nubes" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.014" numOctaves="5" seed="11"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.32"/></feComponentTransfer>
+    </filter>
+
+    <radialGradient id="vineta" cx="0.5" cy="0.48" r="0.78">
+      <stop offset="0.55" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#1a1008" stop-opacity="0.55"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 1. Cielo y calima. -->
+  <rect x="0" y="0" width="1280" height="380" fill="url(#cielo)"/>
+  <g opacity="0.5" style="mix-blend-mode:soft-light">
+    <rect x="0" y="0" width="1280" height="380" filter="url(#nubes)"/>
+  </g>
+
+  <!-- 2. El Cairo al fondo, disuelto en la bruma. -->
+  <g filter="url(#lejos)" opacity="0.92">
+    <g fill="url(#ciudadLejos)">
+      <rect x="470" y="268" width="810" height="86"/>
+      <path d="M676 268 q70 -78 140 0 z"/>
+      <rect x="738" y="168" width="20" height="72"/>
+      <path d="M730 168 h36 v-22 l-18 -26 -18 26 z"/>
+      <path d="M974 268 q50 -54 100 0 z"/>
+      <rect x="1156" y="224" width="18" height="44"/>
+      <path d="M1148 224 h34 v-20 l-17 -24 -17 24 z"/>
+      <rect x="528" y="232" width="112" height="36"/>
+      <rect x="836" y="246" width="86" height="22"/>
+    </g>
+    <rect x="470" y="300" width="810" height="46" fill="#e0d4b6" opacity="0.55"/>
+  </g>
+
+  <!-- 3. La calle, doce metros más abajo. -->
+  <g filter="url(#medio)">
+    <rect x="470" y="322" width="810" height="24" fill="#6d6152"/>
+    <rect x="640" y="304" width="70" height="20" fill="#4d4438"/>
+    <rect x="906" y="308" width="54" height="16" fill="#584d3f"/>
+    <rect x="1148" y="302" width="76" height="22" fill="#4d4438"/>
+  </g>
+
+  <!-- 4. Fachada del hotel a la izquierda, con la arcada en sombra. -->
+  <path d="M0 0 L300 236 L300 470 L0 608 Z" fill="url(#muroHotel)"/>
+  <g style="mix-blend-mode:multiply" opacity="0.55">
+    <path d="M0 0 L300 236 L300 470 L0 608 Z" filter="url(#texturaPiedra)"/>
+  </g>
+  <g filter="url(#apenas)">
+    <g fill="#6f6353">
+      <path d="M18 78 L74 122 L74 480 L18 528 Z"/>
+      <path d="M136 170 L180 205 L180 434 L136 462 Z"/>
+      <path d="M232 246 L264 271 L264 400 L232 418 Z"/>
+    </g>
+    <g fill="#2b241c">
+      <path d="M74 122 q30 -40 62 -14 L136 462 L74 480 Z"/>
+      <path d="M180 205 q26 -32 52 -12 L232 418 L180 434 Z"/>
+    </g>
+    <g fill="#c99a4e" opacity="0.5">
+      <path d="M88 300 L128 292 L128 420 L88 432 Z"/>
+      <path d="M192 330 L224 324 L224 400 L192 408 Z"/>
+    </g>
+    <path d="M264 268 q22 -30 42 -14 L306 452 L264 402 Z" fill="#17120d"/>
+  </g>
+  <g fill="#efe2c2" opacity="0.4">
+    <path d="M0 0 L300 236 L300 258 L0 34 Z"/>
+  </g>
+
+  <!-- 5. Balaustrada de piedra, modelada por la luz cenital. -->
+  <g>
+    <rect x="300" y="334" width="980" height="16" fill="url(#piedraBaranda)"/>
+    <rect x="300" y="350" width="980" height="14" fill="#b6a687"/>
+    <g fill="#8a7b60">
+      <rect x="310" y="364" width="18" height="42"/><rect x="358" y="364" width="18" height="42"/>
+      <rect x="406" y="364" width="18" height="42"/><rect x="454" y="364" width="18" height="42"/>
+      <rect x="502" y="364" width="18" height="42"/><rect x="550" y="364" width="18" height="42"/>
+      <rect x="598" y="364" width="18" height="42"/><rect x="646" y="364" width="18" height="42"/>
+      <rect x="694" y="364" width="18" height="42"/><rect x="742" y="364" width="18" height="42"/>
+      <rect x="790" y="364" width="18" height="42"/><rect x="838" y="364" width="18" height="42"/>
+      <rect x="886" y="364" width="18" height="42"/><rect x="934" y="364" width="18" height="42"/>
+      <rect x="982" y="364" width="18" height="42"/><rect x="1030" y="364" width="18" height="42"/>
+      <rect x="1078" y="364" width="18" height="42"/><rect x="1126" y="364" width="18" height="42"/>
+      <rect x="1174" y="364" width="18" height="42"/><rect x="1222" y="364" width="18" height="42"/>
+    </g>
+    <!-- Cada balaustre recibe luz por la izquierda. -->
+    <g fill="#ddcda9">
+      <rect x="310" y="364" width="6" height="42"/><rect x="358" y="364" width="6" height="42"/>
+      <rect x="406" y="364" width="6" height="42"/><rect x="454" y="364" width="6" height="42"/>
+      <rect x="502" y="364" width="6" height="42"/><rect x="550" y="364" width="6" height="42"/>
+      <rect x="598" y="364" width="6" height="42"/><rect x="646" y="364" width="6" height="42"/>
+      <rect x="694" y="364" width="6" height="42"/><rect x="742" y="364" width="6" height="42"/>
+      <rect x="790" y="364" width="6" height="42"/><rect x="838" y="364" width="6" height="42"/>
+      <rect x="886" y="364" width="6" height="42"/><rect x="934" y="364" width="6" height="42"/>
+      <rect x="982" y="364" width="6" height="42"/><rect x="1030" y="364" width="6" height="42"/>
+      <rect x="1078" y="364" width="6" height="42"/><rect x="1126" y="364" width="6" height="42"/>
+      <rect x="1174" y="364" width="6" height="42"/><rect x="1222" y="364" width="6" height="42"/>
+    </g>
+    <rect x="300" y="406" width="980" height="18" fill="url(#piedraBaranda)"/>
+    <rect x="300" y="424" width="980" height="8" fill="#6d6046"/>
+    <g style="mix-blend-mode:multiply" opacity="0.4">
+      <rect x="300" y="334" width="980" height="98" filter="url(#texturaFina)"/>
+    </g>
+  </g>
+
+  <!-- 6. Suelo de la terraza, con el charco de sol y las sombras del toldo. -->
+  <rect x="0" y="428" width="1280" height="180" fill="url(#suelo)"/>
+  <ellipse cx="960" cy="560" rx="420" ry="150" fill="url(#solSuelo)"/>
+  <g stroke="#6b4e34" stroke-width="3" opacity="0.45">
+    <line x1="300" y1="428" x2="-140" y2="608"/>
+    <line x1="300" y1="428" x2="180" y2="608"/>
+    <line x1="300" y1="428" x2="470" y2="608"/>
+    <line x1="300" y1="428" x2="760" y2="608"/>
+    <line x1="300" y1="428" x2="1080" y2="608"/>
+  </g>
+  <g stroke="#96826a" stroke-width="2" opacity="0.3">
+    <line x1="0" y1="474" x2="1280" y2="474"/>
+    <line x1="0" y1="520" x2="1280" y2="520"/>
+    <line x1="0" y1="576" x2="1280" y2="576"/>
+  </g>
+  <!-- Bandas de sombra que proyecta el faldón del toldo. -->
+  <g fill="#5d422c" opacity="0.3" filter="url(#medio)">
+    <path d="M0 470 L1280 442 L1280 486 L0 512 Z"/>
+    <path d="M120 556 L1280 520 L1280 548 L140 588 Z"/>
+  </g>
+  <g style="mix-blend-mode:multiply" opacity="0.45">
+    <rect x="0" y="428" width="1280" height="180" filter="url(#texturaPiedra)"/>
+  </g>
+
+  <!-- 7. Toldo: lona tensada, con sus franjas y su sombra propia. -->
+  <path d="M0 0 L1280 0 L1280 104 L300 236 Z" fill="url(#lona)"/>
+  <g fill="url(#franja)" opacity="0.9">
+    <path d="M470 0 L560 0 L512 214 L458 218 Z"/>
+    <path d="M700 0 L790 0 L672 202 L618 206 Z"/>
+    <path d="M930 0 L1020 0 L832 190 L778 194 Z"/>
+    <path d="M1160 0 L1250 0 L992 178 L938 182 Z"/>
+  </g>
+  <g style="mix-blend-mode:multiply" opacity="0.5">
+    <path d="M0 0 L1280 0 L1280 104 L300 236 Z" filter="url(#texturaFina)"/>
+  </g>
+  <!-- Varillas y su sombra sobre la lona. -->
+  <g stroke="#5e2c22" stroke-width="6" opacity="0.4" filter="url(#apenas)">
+    <line x1="360" y1="228" x2="616" y2="0"/>
+    <line x1="520" y1="210" x2="876" y2="0"/>
+    <line x1="700" y1="196" x2="1140" y2="0"/>
+  </g>
+  <!-- Faldón festoneado, con volumen. -->
+  <g fill="#8f3327">
+    <circle cx="330" cy="234" r="12"/><circle cx="378" cy="228" r="13"/>
+    <circle cx="426" cy="223" r="14"/><circle cx="474" cy="217" r="15"/>
+    <circle cx="522" cy="212" r="15"/><circle cx="570" cy="206" r="16"/>
+    <circle cx="618" cy="201" r="16"/><circle cx="666" cy="195" r="17"/>
+    <circle cx="714" cy="190" r="17"/><circle cx="762" cy="184" r="18"/>
+    <circle cx="810" cy="179" r="18"/><circle cx="858" cy="173" r="19"/>
+    <circle cx="906" cy="168" r="19"/><circle cx="954" cy="162" r="20"/>
+    <circle cx="1002" cy="157" r="20"/><circle cx="1050" cy="151" r="21"/>
+    <circle cx="1098" cy="146" r="21"/><circle cx="1146" cy="140" r="22"/>
+    <circle cx="1194" cy="135" r="22"/><circle cx="1242" cy="129" r="23"/>
+  </g>
+  <g fill="#c8674c" opacity="0.75">
+    <circle cx="330" cy="230" r="7"/><circle cx="426" cy="219" r="8"/>
+    <circle cx="522" cy="208" r="9"/><circle cx="618" cy="197" r="9"/>
+    <circle cx="714" cy="186" r="10"/><circle cx="810" cy="175" r="10"/>
+    <circle cx="906" cy="164" r="11"/><circle cx="1002" cy="153" r="11"/>
+    <circle cx="1098" cy="142" r="12"/><circle cx="1194" cy="131" r="12"/>
+  </g>
+
+  <!-- 8. Palmera del jardín, en masas y no en siluetas. -->
+  <g filter="url(#apenas)">
+    <rect x="1092" y="196" width="18" height="146" fill="#7a6242"/>
+    <g fill="#4b5a2c">
+      <path d="M1100 200 q-92 -32 -124 24 q74 -28 124 4 z"/>
+      <path d="M1100 200 q90 -34 126 22 q-76 -30 -126 4 z"/>
+      <path d="M1100 194 q-36 -72 4 -112 q26 60 12 114 z"/>
+      <path d="M1100 198 q66 -58 120 -40 q-70 24 -108 58 z"/>
+    </g>
+    <g fill="#7d9440" opacity="0.75">
+      <path d="M1100 200 q-72 -22 -96 16 q58 -20 96 2 z"/>
+      <path d="M1100 196 q-24 -52 2 -80 q18 44 8 82 z"/>
+    </g>
+  </g>
+
+  <!-- 9. Mesas del fondo con huéspedes, en escala decreciente. -->
+  <g filter="url(#apenas)">
+    <ellipse cx="404" cy="452" rx="46" ry="12" fill="url(#mantel)"/>
+    <rect x="398" y="452" width="10" height="30" fill="#5b4834"/>
+    <ellipse cx="372" cy="412" rx="17" ry="19" fill="#3a3a46"/>
+    <path d="M352 434 q20 -12 40 0 l8 34 h-56 z" fill="#55555f"/>
+    <ellipse cx="440" cy="416" rx="16" ry="18" fill="#2f2f3a"/>
+    <path d="M422 436 q18 -10 36 0 l6 30 h-48 z" fill="#cfc4a6"/>
+
+    <ellipse cx="668" cy="488" rx="70" ry="17" fill="url(#mantel)"/>
+    <rect x="658" y="488" width="14" height="44" fill="#5b4834"/>
+    <!-- Huésped de lino, luz por la derecha. -->
+    <ellipse cx="612" cy="424" rx="24" ry="26" fill="#c39268"/>
+    <path d="M588 412 q24 -22 48 -4 l-2 -14 q-22 -14 -46 4 z" fill="#4a3a28"/>
+    <path d="M584 456 q28 -18 56 0 l10 50 h-76 z" fill="url(#lino)"/>
+    <!-- Interlocutor de traje, inclinado. -->
+    <ellipse cx="728" cy="428" rx="23" ry="25" fill="#b98a62"/>
+    <path d="M706 416 q22 -20 44 -2 l-2 -14 q-20 -12 -42 4 z" fill="#2a2118"/>
+    <path d="M702 458 q26 -16 52 0 l8 48 h-68 z" fill="url(#trajeOscuro)"/>
+    <rect x="640" y="464" width="12" height="20" fill="#efe6cc"/>
+  </g>
+
+  <!-- 10. Camarero cruzando con la bandeja. -->
+  <g filter="url(#apenas)">
+    <ellipse cx="880" cy="404" rx="26" ry="30" fill="#7a5636"/>
+    <path d="M854 392 q26 -26 52 -6 l4 -16 q-28 -18 -56 4 z" fill="#241a12"/>
+    <path d="M856 374 q24 -14 48 0 l2 -14 q-26 -12 -50 0 z" fill="#8e2f24"/>
+    <path d="M840 436 q40 -22 80 0 l16 148 h-112 z" fill="url(#lino)"/>
+    <path d="M840 440 q-40 -18 -52 -56" stroke="#e8e0c8" stroke-width="18" fill="none"/>
+    <ellipse cx="786" cy="374" rx="46" ry="10" fill="#b9ac8e"/>
+    <rect x="770" y="356" width="14" height="18" fill="#f2ead2"/>
+    <rect x="796" y="358" width="12" height="16" fill="#f2ead2"/>
+    <path d="M872 584 h48 l6 24 h-60 z" fill="#241c14"/>
+    <ellipse cx="900" cy="592" rx="70" ry="14" fill="#5b3f28" opacity="0.45"/>
+  </g>
+
+  <!-- 11. Primer término: la mesa al sol, el periódico y la silla de mimbre. -->
+  <g>
+    <ellipse cx="1136" cy="596" rx="170" ry="30" fill="#5a3d26" opacity="0.5" filter="url(#medio)"/>
+    <ellipse cx="1136" cy="518" rx="152" ry="35" fill="#8a7458"/>
+    <ellipse cx="1136" cy="512" rx="152" ry="35" fill="url(#mantel)"/>
+    <ellipse cx="1180" cy="508" rx="90" ry="24" fill="#fdf3d8" opacity="0.65" filter="url(#medio)"/>
+    <rect x="1122" y="522" width="26" height="86" fill="#6b4a30"/>
+    <!-- El periódico del día, la pista que se puede examinar. -->
+    <path d="M1046 486 l86 -14 l12 32 l-86 15 z" fill="#f6efd8"/>
+    <g fill="#9a9078" opacity="0.85">
+      <rect x="1060" y="487" width="62" height="4" transform="rotate(-9 1060 487)"/>
+      <rect x="1064" y="499" width="54" height="4" transform="rotate(-9 1064 499)"/>
+      <rect x="1068" y="511" width="40" height="4" transform="rotate(-9 1068 511)"/>
+    </g>
+    <ellipse cx="1216" cy="494" rx="24" ry="9" fill="#f6efd8"/>
+    <path d="M1192 484 h48 v10 q-24 10 -48 0 z" fill="#e8dcc0"/>
+    <!-- Silla de mimbre recortada por el borde. -->
+    <path d="M1216 608 v-120 q66 -32 100 0 v120 z" fill="#3a2a1c"/>
+    <g stroke="#8a6a44" stroke-width="7" opacity="0.8">
+      <line x1="1240" y1="498" x2="1240" y2="608"/>
+      <line x1="1266" y1="492" x2="1266" y2="608"/>
+      <line x1="1292" y1="498" x2="1292" y2="608"/>
+    </g>
+  </g>
+
+  <!-- 12. Atmósfera: polvo en suspensión, calor y viñeta. -->
+  <rect x="0" y="0" width="1280" height="608" fill="#e8b45a" opacity="0.09" style="mix-blend-mode:overlay"/>
+  <g style="mix-blend-mode:soft-light" opacity="0.35">
+    <rect x="0" y="0" width="1280" height="608" filter="url(#texturaFina)"/>
+  </g>
+  <rect x="0" y="0" width="1280" height="608" fill="url(#vineta)"/>
+</svg>

@@ -65,6 +65,13 @@ export interface EventDef {
   cancels?: EventId[]
   /** Texto si el grupo esta delante. */
   witnessText?: string
+  /**
+   * Lamina propia mientras el evento esta en curso en esta localizacion. Sirve
+   * para los sucesos que se presencian pero no abren escena interactiva: la
+   * llegada de los Lounpeen, Weder cruzando la cocina, las orejas. Sin esto,
+   * un suceso solo puede cambiar el texto, nunca lo que se ve.
+   */
+  art?: string
   /** Escena con lamina y opciones, si la hay. */
   scene?: SceneId
   /** Que queda si el grupo no estaba. */

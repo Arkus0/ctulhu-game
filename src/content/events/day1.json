@@ -1,5 +1,21 @@
 [
   {
+    "id": "d1_llegada_registro",
+    "at": "D1 09:00",
+    "until": "D1 10:00",
+    "location": "recepcion",
+    "priority": 20,
+    "scene": "arrival_checkin",
+    "interruptibleBy": [
+      "arrival_telegram",
+      "arrival_question_clinton",
+      "arrival_nadia_registry",
+      "arrival_vance_service"
+    ],
+    "tags": ["llegada", "onboarding"],
+    "note": "Escena de entrada jugable. Enmarca el registro canónico sin adelantar información privada."
+  },
+  {
     "id": "d1_lounpeen_registro",
     "at": "D1 09:30",
     "until": "D1 10:00",
@@ -43,6 +59,12 @@
     "priority": 10,
     "witnessText": "Charles Behler os espera en una mesa redonda de hierro, para cuatro. Se limpia el sudor de la frente con un pañuelo bordado con las siglas del hotel. Es temprano y ya hace treinta grados.",
     "scene": "behler_encargo",
+    "interruptibleBy": [
+      "behler_listen",
+      "behler_basement",
+      "behler_authority",
+      "behler_watch_table"
+    ],
     "effects": [
       {
         "kind": "setFlag",
@@ -73,6 +95,13 @@
     ],
     "priority": 5,
     "witnessText": "En otra mesa, dos hombres hablan con las cabezas juntas. Uno es enjuto, de mirada huidiza, con las piernas temblándole de puro tic nervioso: no mira a los ojos ni una sola vez. El otro es alemán, guapo, de pronunciación excelente y ademanes demasiado afables. Ultiman algo.",
+    "scene": "terrace_conflict",
+    "interruptibleBy": [
+      "attention_behler",
+      "attention_listen",
+      "attention_divide",
+      "attention_interrupt"
+    ],
     "effects": [
       {
         "kind": "setFlag",
@@ -113,6 +142,13 @@
       }
     ],
     "witnessText": "Weder cruza el restaurante, saluda al metre con una cordialidad que no siente y entra en las cocinas. Mahadni está descuartizando una docena de corderos. Weder solo hace un gesto con la mano: el cocinero suelta el cuchillo, escupe el cigarro consumido que le cuelga de los labios y le acompaña hasta las escaleras del sótano, limpiándose las manos en el delantal.",
+    "scene": "basement_threshold",
+    "interruptibleBy": [
+      "threshold_follow",
+      "threshold_authority",
+      "threshold_service",
+      "threshold_retreat"
+    ],
     "effects": [
       {
         "kind": "setFlag",
@@ -203,19 +239,14 @@
       }
     ],
     "witnessText": "Del túnel negro del fondo llegan unos quejidos que no son humanos. Mahadni se acerca con precaución y saca algo del bolsillo de la chilaba. Son un par de orejas. Las lanza a la oscuridad. Unas garras peludas salen de las sombras, recogen los trozos con un esmero casi delicado y desaparecen dentro de la abertura de piedra. No llegáis a verles la cara.",
+    "scene": "ears",
+    "interruptibleBy": [
+      "ears_examine",
+      "ears_protect",
+      "ears_hurry"
+    ],
     "effects": [
-      {
-        "kind": "sanityLoss",
-        "loss": "0/1D3"
-      },
-      {
-        "kind": "learnFact",
-        "fact": "algo_vive_abajo"
-      },
-      {
-        "kind": "unlockJournal",
-        "entry": "las_orejas"
-      }
+      { "kind": "setFlag", "flag": "orejas_scene_open" }
     ],
     "traces": [
       {

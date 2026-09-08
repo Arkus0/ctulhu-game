@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import manifiestoCsv from '../art/manifest.csv?raw'
 import { loadContent, validate } from '../src/content/index'
 import { parseTime } from '../src/engine/clock'
 import { RumorDeck } from '../src/engine/dialogue'
@@ -265,6 +266,50 @@ describe('el contenido real carga sin errores', () => {
       for (let n = ev.range.min; n <= ev.range.max; n++) cubiertos.add(n)
     }
     for (let n = 1; n <= 100; n++) expect(cubiertos.has(n)).toBe(true)
+  })
+})
+
+describe('el paquete de arte', () => {
+  /** Identificadores declarados en art/manifest.csv. */
+  const manifiesto = (): Map<string, string> => {
+    const filas = manifiestoCsv.trim().split(/\r?\n/).slice(1)
+    return new Map(filas.map((fila: string) => [fila.split(',')[0]!, fila.split(',')[6]!]))
+  }
+
+  it('todo `art` que usa el contenido esta en el manifiesto', () => {
+    const c = loadContent()
+    const declarados = manifiesto()
+    const usados = new Set<string>()
+    for (const loc of c.locations.values()) {
+      if (loc.art) usados.add(loc.art)
+      for (const v of loc.variants ?? []) if (v.art) usados.add(v.art)
+    }
+    for (const escena of c.scenes.values()) if (escena.art) usados.add(escena.art)
+    for (const evento of c.events) if (evento.art) usados.add(evento.art)
+
+    // Sin esto, una lamina puede quedarse sin producir porque nadie recuerda
+    // que alguien la pidio: el manifiesto es la lista de la compra.
+    const huerfanos = [...usados].filter((nombre) => !declarados.has(nombre))
+    expect(huerfanos).toEqual([])
+  })
+
+  it('el manifiesto no declara laminas que no use nadie', () => {
+    const c = loadContent()
+    const declarados = manifiesto()
+    const usados = new Set<string>()
+    for (const loc of c.locations.values()) if (loc.art) usados.add(loc.art)
+    for (const escena of c.scenes.values()) if (escena.art) usados.add(escena.art)
+    for (const evento of c.events) if (evento.art) usados.add(evento.art)
+    for (const npc of c.npcs.values()) if (npc.portrait) usados.add(npc.portrait)
+    for (const inv of c.investigators) if (inv.portrait) usados.add(inv.portrait)
+
+    // Las escenas y mapas planificados todavia no tienen quien los invoque:
+    // se listan aparte para que la lista no se llene de falsos positivos.
+    const planificados = new Set(['mapa_plantas', 'mapa_sotanos'])
+    const sobrantes = [...declarados.keys()].filter(
+      (nombre) => !usados.has(nombre) && !planificados.has(nombre) && !nombre.startsWith('escena_'),
+    )
+    expect(sobrantes).toEqual([])
   })
 })
 

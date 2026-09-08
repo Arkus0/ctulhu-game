@@ -1,0 +1,48 @@
+archivo,tipo,uso,hora,personajes,foco,estado,origen,nota
+terraza,fondo,Terraza principal (L1),manana,camarero y huespedes de fondo,mesa al sol en primer termino,pendiente,art/src/terraza.svg,Intento vectorial descartado: dibujo por debajo de la lamina del modulo. Sigue el recorte temporal
+recepcion,fondo,Recepcion y hall (L2) y conserjeria (L3),manana,Clinton y el leon encadenado,libro de registro bajo la luz de la puerta,pendiente,art/src/recepcion.svg,Intento vectorial descartado. Sigue el recorte temporal
+sotano_palacio,fondo,Salon de Ali Bey (sotano),sin luz natural,ninguno,armario de ebano y pozo abierto,pendiente,art/src/sotano_palacio.svg,Intento vectorial descartado. Sigue el recorte temporal
+escena_disco_solar,escena,Escena solar_disk a las 12:30,sin luz natural,Weder y Mahadni,el disco levantado,generado,art/src/escena_disco_solar.svg,Provisional: no habia ninguna lamina de escena antes. Rehacer con generador de imagenes
+edith,retrato,Panel de conversacion e informes,cualquiera,Edith Harker,rostro y cuaderno,generado,art/src/retrato_edith.svg,Provisional: fija el formato 72x96. Rehacer con generador de imagenes
+correos,fondo,Oficina de correos (L10) oficina de direccion (L11) y administracion (L12),manana,Thornhill,mostrador y centralita,pendiente,,Reutilizado por tres localizaciones: conviene desdoblarlo
+restaurante,fondo,El restaurante (L15),mediodia,Rolland,cuarenta mesas y escalera de cocina,pendiente,,
+cocina,fondo,La cocina (L20) y servicio del restaurante (L16),cualquiera,Mahadni,mesa de despiece y puerta del sotano,pendiente,,
+bar_largo,fondo,The Long Bar (L18),tarde,Gasparini,barra y puerta acristalada,pendiente,,Necesita variante de bar cerrado antes de las 16:00
+salon_isis,fondo,Salon Isis (L13) y salon morisco (L14),mediodia,ninguno,biblioteca y balconada al jardin,pendiente,,Reutilizado por dos salones distintos
+jardin,fondo,Jardin exterior (L19),mediodia,ninguno,quiosco de la banda,pendiente,,
+pasillo,fondo,Pasillos y escaleras,cualquiera,ninguno,ascensor de rejilla,pendiente,,
+habitacion,fondo,Catorce habitaciones de huesped,cualquiera,ninguno,cama armario y ventilador,pendiente,,Catorce localizaciones comparten esta lamina: es la reutilizacion mas grave
+sotano_almacen,fondo,Almacen de la cocina,sin luz natural,ninguno,estanterias y charco burbujeante,pendiente,,
+sotano_pasillo,fondo,Pasillo intermedio,sin luz natural,ninguno,alcantarilla con la rejilla levantada,pendiente,,
+sotano_escombros,fondo,Sala de los escombros,sin luz natural,ninguno,corredor lateral del hedor,pendiente,,
+viejo_templo,fondo,Viejo Templo de ibn Tulun,sin luz natural,ninguno,sarcofago de basalto,pendiente,,Necesita tres variantes para los cierres del Disco Solar
+salon_baile,fondo,Salon de baile (L17),cualquiera,ninguno,nave principal y reservados del norte,pendiente,,Hoy cae en el fondo procedimental
+tienda_joyas,fondo,Tienda Merryweather (L4),manana,Merryweather,vitrina del anj de oro,pendiente,,Hoy cae en el fondo procedimental
+tienda_cigarros,fondo,Estanco Sandoval (L6),manana,Sandoval,baules de La Habana,pendiente,,Hoy cae en el fondo procedimental
+tienda_moda_caballeros,fondo,Tienda Lords (L5),manana,Murphy,maniquies con salacot,pendiente,,Hoy cae en el fondo procedimental
+tienda_moda_mujer,fondo,Le Petit France (L8),manana,Belanger,taller de costura a medida,pendiente,,Hoy cae en el fondo procedimental
+tienda_relojes,fondo,Relojeria Sechat (L9),manana,Lardinne,vitrina del Cartier Tank,pendiente,,Hoy cae en el fondo procedimental
+tienda_suvenires,fondo,Tienda de suvenires (L7),manana,Fontanarrosa,estanterias abarrotadas,pendiente,,Hoy cae en el fondo procedimental
+mapa_plantas,mapa,Pantalla de mapa,cualquiera,ninguno,plantas del hotel,pendiente,,Redibujar esquematico y propio; no copiar el plano publicado
+mapa_sotanos,mapa,Pantalla de mapa,cualquiera,ninguno,galerias del subsuelo,pendiente,,Redibujar esquematico y propio; no copiar el plano publicado
+escena_llegada_hall,escena,Escena arrival_checkin a las 09:00,manana,Edith Nadia Vance y Clinton,el registro y la pluma,pendiente,,El leon queda como detalle secundario
+escena_registro_lounpeen,escena,Evento d1_lounpeen_registro a las 09:30,manana,Dieter y Olga,Dieter rigido y Olga mirando el hall,pendiente,,
+escena_behler,escena,Escena behler_encargo a las 11:00,manana,Behler y el grupo,el panuelo bordado y el calor,pendiente,,
+escena_carter_weder,escena,Escena terrace_conflict a las 11:00,manana,Carter y Weder,dos cabezas juntas en la mesa del fondo,pendiente,,Nervio contra falsa cordialidad
+escena_weder_cocina,escena,Evento d1_weder_baja a las 12:00,mediodia,Weder y Mahadni,el cuchillo abandonado y la ruta abierta,pendiente,,
+escena_umbral_sotano,escena,Escena basement_threshold,mediodia,el grupo,escalera demasiado antigua para el hotel,pendiente,,
+escena_orejas,escena,Escena ears a las 12:15,sin luz natural,Mahadni,manos sombra y reaccion humana,pendiente,,Horror sugerido; nada de gore gratuito
+escena_cierre_disco_weder,escena,Cierre: Weder se lleva el disco,sin luz natural,Weder,la espalda que se aleja con el disco,pendiente,,Se resolvera como variante de viejo_templo
+escena_cierre_disco_edith,escena,Cierre: Edith conserva el disco,sin luz natural,Edith,el disco en sus manos y la salida,pendiente,,Se resolvera como variante de viejo_templo
+escena_cierre_disco_autoridad,escena,Cierre: Weder se retira ante la autorizacion,sin luz natural,Weder y Edith,el papel firmado entre los dos,pendiente,,Se resolvera como variante de viejo_templo
+escena_informe_companero,escena,Reencuentro con Nadia o Vance,cualquiera,Nadia o Vance,el reencuentro y el informe,pendiente,,Composicion pequena y reutilizable
+nadia,retrato,Panel de conversacion e informes,cualquiera,Nadia Farouk,rostro,pendiente,,
+vance,retrato,Panel de conversacion e informes,cualquiera,Samuel Vance,rostro,pendiente,,
+behler,retrato,Panel de conversacion,cualquiera,Charles Behler,rostro,pendiente,,
+carter,retrato,Panel de conversacion,cualquiera,Howard Carter,rostro,pendiente,,
+weder,retrato,Panel de conversacion,cualquiera,Garth Weder,rostro,pendiente,,Gafas redondas y pelo claro; ya fijado en la escena del disco
+mahadni,retrato,Panel de conversacion,cualquiera,Mustafa ibn Mahadni,rostro,pendiente,,Delantal manchado; ya fijado en la escena del disco
+olga,retrato,Panel de conversacion,cualquiera,Olga Lounpeen,rostro,pendiente,,
+dieter,retrato,Panel de conversacion,cualquiera,Dieter Lounpeen,rostro,pendiente,,
+gasparini,retrato,Panel de conversacion,cualquiera,Gasparini,rostro,pendiente,,
+clinton,retrato,Panel de conversacion,cualquiera,Cleveland Clinton,rostro y llave maestra,generado,art/src/retrato_clinton.svg,Provisional. Rehacer con generador de imagenes

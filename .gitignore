@@ -1,17 +1,26 @@
 node_modules/
 dist/
+tools/__pycache__/
 art/raw/
 art/*.png
+# Renders maestros a 4x: se regeneran con tools/render_art.mjs y pesan de más.
+art/master/
+# Comparativas antes/después: contienen recortes regenerados del PDF.
+art/comparacion/
+# Capturas del recorrido de control: se regeneran con tools/qa_shots.mjs.
+art/qa/
 # Temporary derivatives kept only as local replacement references.
+# Al aprobar un sustituto original hay que retirar su línea de aquí y
+# documentar su procedencia en LICENSE-ART.md.
 public/art/viejo_templo.png
 public/art/terraza.png
-public/art/sotano_pasillo.png
 public/art/sotano_palacio.png
+public/art/recepcion.png
+public/art/sotano_pasillo.png
 public/art/sotano_escombros.png
 public/art/sotano_almacen.png
 public/art/salon_isis.png
 public/art/restaurante.png
-public/art/recepcion.png
 public/art/pasillo.png
 public/art/mapa_sotanos.png
 public/art/mapa_plantas.png

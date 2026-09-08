@@ -1,0 +1,98 @@
+<!--
+  Retrato de Cleveland «Cleve» Clinton, recepcionista. 288x384 = 4x de 72x96.
+
+  Hoy de personaje (fijar y no cambiar entre escenas):
+    treinta y cinco años, cuello ancho y mandíbula cuadrada de sargento;
+    pelo oscuro muy corto, con una calva extraña junto a la oreja izquierda
+      —ahí sigue la bala— que solo se ve si uno se fija;
+    bigote recortado;
+    librea granate del hotel con cuello alto y botonadura dorada;
+    la llave maestra colgada del bolsillo, siempre visible.
+  Mismo esquema de luz que el resto de la serie: foco desde la izquierda,
+  sombra dura a la derecha, fondo tramado de frío a negro.
+-->
+<svg width="288" height="384" viewBox="0 0 288 384" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fondoRetrato" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00aaaa"/>
+      <stop offset="0.6" stop-color="#0000aa"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <linearGradient id="piel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.4" stop-color="#ffff55"/>
+      <stop offset="1" stop-color="#aa5500"/>
+    </linearGradient>
+    <linearGradient id="librea" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#aa0000"/>
+      <stop offset="0.45" stop-color="#aa0000"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="288" height="384" fill="url(#fondoRetrato)"/>
+  <path d="M288 384 L288 160 q-64 34 -88 224 z" fill="#000000" opacity="0.45"/>
+
+  <!-- Hombros anchos: el hall es su territorio y ocupa el encuadre. -->
+  <path d="M6 384 q6 -116 138 -128 q132 12 138 128 z" fill="url(#librea)"/>
+  <!-- Cuello alto de la librea. -->
+  <path d="M104 268 h80 v30 q-40 20 -80 0 z" fill="#aa0000"/>
+  <path d="M104 268 h80 v10 h-80 z" fill="#ffff55"/>
+  <!-- Botonadura dorada. -->
+  <g fill="#ffff55">
+    <circle cx="144" cy="322" r="9"/>
+    <circle cx="144" cy="352" r="9"/>
+  </g>
+  <!-- Galón del hombro izquierdo. -->
+  <g fill="#ffff55" opacity="0.85">
+    <rect x="34" y="336" width="52" height="8"/>
+    <rect x="34" y="352" width="52" height="8"/>
+  </g>
+  <!-- La llave maestra, colgada del bolsillo derecho. -->
+  <g fill="#aaaaaa">
+    <rect x="228" y="318" width="8" height="48"/>
+    <circle cx="232" cy="312" r="14"/>
+    <circle cx="232" cy="312" r="6" fill="#000000"/>
+    <rect x="236" y="352" width="14" height="7"/>
+    <rect x="236" y="336" width="10" height="7"/>
+  </g>
+
+  <!-- Cuello. -->
+  <path d="M116 238 h56 v40 q-28 14 -56 0 z" fill="#aa5500"/>
+  <path d="M116 238 h26 v44 q-16 2 -26 -8 z" fill="#ffff55"/>
+
+  <!-- Cabeza cuadrada. -->
+  <path d="M78 150 q0 -84 66 -84 q66 0 66 84 q0 92 -66 92 q-66 0 -66 -92 z" fill="url(#piel)"/>
+  <path d="M144 66 q66 0 66 84 q0 92 -66 92 q34 -84 0 -176 z" fill="#aa5500" opacity="0.7"/>
+
+  <!-- Pelo militar, muy corto. -->
+  <path d="M76 146 q-4 -86 68 -86 q72 0 68 86 q-14 -46 -68 -46 q-54 0 -68 46 z" fill="#000000"/>
+  <path d="M92 104 q22 -26 52 -26 q-34 8 -44 34 z" fill="#555555"/>
+  <!-- La calva de la bala, junto a la oreja izquierda: se ve si uno se fija. -->
+  <ellipse cx="92" cy="150" rx="16" ry="12" fill="#ffff55"/>
+  <path d="M80 146 q12 -8 24 0" stroke="#aa5500" stroke-width="4" fill="none"/>
+
+  <!-- Cejas y ojos: mirada de sargento que ya lo ha visto todo. -->
+  <rect x="100" y="146" width="34" height="9" fill="#000000"/>
+  <rect x="156" y="146" width="34" height="9" fill="#000000"/>
+  <g>
+    <ellipse cx="117" cy="168" rx="15" ry="9" fill="#ffffff"/>
+    <ellipse cx="173" cy="168" rx="15" ry="9" fill="#ffffff"/>
+    <circle cx="119" cy="168" r="6" fill="#0000aa"/>
+    <circle cx="175" cy="168" r="6" fill="#0000aa"/>
+    <circle cx="119" cy="168" r="3" fill="#000000"/>
+    <circle cx="175" cy="168" r="3" fill="#000000"/>
+  </g>
+
+  <!-- Nariz ancha y bigote recortado. -->
+  <path d="M140 178 l-12 30 h26 z" fill="#aa5500"/>
+  <rect x="112" y="212" width="66" height="14" fill="#000000"/>
+  <path d="M112 212 q32 -10 66 0 z" fill="#000000"/>
+  <!-- Boca discreta: Clinton sonríe poco y dice menos. -->
+  <rect x="122" y="238" width="46" height="6" fill="#aa5500"/>
+  <rect x="122" y="238" width="46" height="3" fill="#000000" opacity="0.6"/>
+
+  <!-- Orejas. -->
+  <ellipse cx="76" cy="176" rx="12" ry="18" fill="#ffff55"/>
+  <ellipse cx="212" cy="176" rx="12" ry="18" fill="#aa5500"/>
+</svg>
