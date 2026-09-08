@@ -10,8 +10,13 @@ type Mode =
   | { kind: 'root' }
   | { kind: 'talk' }
   | { kind: 'topics'; npc: string; page?: number }
-  | { kind: 'approach'; topic: DialogueTopic }
   | { kind: 'end' }
+
+/**
+ * Cuantas opciones caben en una pantalla sin que haya que releerla. Tres obligaba
+ * a paginar tres veces para agotar a un personaje que tiene nueve temas abiertos.
+ */
+const PER_PAGE = 5
 
 interface HistoryEntry { time: string; lines: Line[] }
 interface SaveEnvelope {
@@ -115,12 +120,7 @@ class UI {
    * cae en el dibujo procedimental cuando falta el PNG.
    */
   private renderPortrait(): void {
-    const npc =
-      this.mode.kind === 'topics'
-        ? this.mode.npc
-        : this.mode.kind === 'approach'
-          ? this.mode.topic.npc
-          : null
+    const npc = this.mode.kind === 'topics' ? this.mode.npc : null
     const file = npc ? this.game.npcPortrait(npc) : undefined
     if (!npc || !file) {
       this.portrait.hidden = true
@@ -155,7 +155,7 @@ class UI {
     }
     if (this.mode.kind === 'talk') {
       this.heading('¿Con quién habla Edith?')
-      for (const npc of view.npcs.filter((item) => this.game.topicsFor(item.id).length > 0).slice(0, 3)) {
+      for (const npc of view.npcs.filter((item) => this.game.topicsFor(item.id).length > 0).slice(0, PER_PAGE)) {
         this.button(`${npc.name}: ${npc.title}`, () => {
           this.mode = { kind: 'topics', npc: npc.id }
           this.renderChoices()
@@ -167,34 +167,21 @@ class UI {
     if (this.mode.kind === 'topics') {
       const all = this.game.topicsFor(this.mode.npc)
       const page = this.mode.page ?? 0
-      const start = page === 0 ? 0 : 3 + (page - 1) * 3
-      const topics = all.slice(start, start + 3)
+      const start = page * PER_PAGE
+      const topics = all.slice(start, start + PER_PAGE)
       this.heading(page > 0 ? `Otros temas: página ${page}` : this.game.npcName(this.mode.npc))
       for (const topic of topics) this.topicButton(topic)
-      if (start + 3 < all.length) {
+      if (start + PER_PAGE < all.length) {
         const npc = this.mode.npc
-        this.button(page === 0 ? `Otros temas (${all.length - 3})` : 'Más temas', () => {
+        this.button(page === 0 ? `Otros temas (${all.length - PER_PAGE})` : 'Más temas', () => {
           this.mode = { kind: 'topics', npc, page: page + 1 }
           this.renderChoices()
         })
       }
       const npc = this.mode.npc
       this.back(() => {
-        this.mode = page > 1
-          ? { kind: 'topics', npc, page: page - 1 }
-          : page === 1
-            ? { kind: 'topics', npc }
-            : { kind: 'talk' }
+        this.mode = page > 0 ? { kind: 'topics', npc, page: page - 1 } : { kind: 'talk' }
       })
-      return
-    }
-    if (this.mode.kind === 'approach') {
-      const topic = this.mode.topic
-      this.heading(`${topic.label}: ¿cómo?`)
-      for (const approach of this.game.approachesFor(topic).slice(0, 3)) {
-        this.button(approach.label, () => void this.act(() => this.game.ask(topic.id, approach.id)), undefined, '', approach.hint)
-      }
-      this.back(() => { this.mode = { kind: 'topics', npc: topic.npc } })
       return
     }
     this.heading(view.scene ? view.scene.title : '¿Qué hace Edith?')
@@ -206,27 +193,39 @@ class UI {
       this.button(action.label, () => {
         this.mode = { kind: 'talk' }
         this.renderChoices()
-      }, action.minutes, action.urgent ? 'urgent' : '', action.hint)
+      }, action.minutes, action.urgent ? 'urgent' : '')
       return
     }
     this.button(action.label, () => void this.act(() => this.game.performAction(action.id)), action.minutes, action.urgent ? 'urgent' : '', this.actionHint(action), action.disabled)
   }
 
+  /**
+   * Lo que va debajo de la etiqueta, y solo eso.
+   *
+   * Una opcion activa no lleva nada: se lee la intencion y se decide. La habilidad,
+   * la dificultad y lo que esta en juego aparecen al resolver, en la tarjeta de la
+   * tirada, que es donde el jugador puede hacer algo con ese dato —aceptarlo o
+   * comprarlo con Suerte—. Antes iban los tres pegados en el boton y una sola
+   * opcion ocupaba cuatro lineas de reglamento.
+   *
+   * Una opcion desactivada si lo lleva: hay que saber que falta para poder tomarla.
+   */
   private actionHint(action: GuidedAction): string {
-    return [action.hint, action.risk ? `Riesgo: ${action.risk}` : '', action.consequence ? `Después: ${action.consequence}` : '']
-      .filter(Boolean)
-      .join(' ')
+    return action.disabled ? action.hint : ''
   }
 
+  /**
+   * Un tema es una linea de dialogo: se pulsa y se dice. El tono lo decide el motor
+   * segun el caracter del personaje, y se cuenta despues junto con la tirada.
+   */
   private topicButton(topic: DialogueTopic): void {
-    this.button(topic.label, () => {
-      const approaches = this.game.approachesFor(topic)
-      if (approaches.length <= 1) void this.act(() => this.game.ask(topic.id, approaches[0]?.id ?? 'directo'))
-      else {
-        this.mode = { kind: 'approach', topic }
-        this.renderChoices()
-      }
-    }, topic.minutes)
+    this.button(
+      topic.label,
+      () => void this.act(() => this.game.ask(topic.id)),
+      topic.minutes,
+      '',
+      this.game.hasAskedTopic(topic.id) ? 'Ya lo habéis preguntado.' : '',
+    )
   }
 
   private renderRoll(): void {

@@ -88,7 +88,10 @@
         "thornhill_esta_sola"
       ]
     },
-    "note": "Pág. 95: «Daría un brazo por asistir a las fiestas de Behler, pero nadie la invita. No se acuerdan de ella». Este tema es el que pone la idea delante del jugador."
+    "note": "Pág. 95: «Daría un brazo por asistir a las fiestas de Behler, pero nadie la invita. No se acuerdan de ella». Este tema es el que pone la idea delante del jugador.",
+    "tags": [
+      "invitar"
+    ]
   },
   {
     "id": "thornhill_invitar",
@@ -129,7 +132,10 @@
         "thornhill_hoy"
       ]
     },
-    "note": "Pág. 95: «Daría un brazo por asistir a las fiestas de Behler, pero nadie la invita. No se acuerdan de ella». Es la aliada más barata del hotel: a partir de aquí, sus temas no suben de dificultad, pierden la tirada."
+    "note": "Pág. 95: «Daría un brazo por asistir a las fiestas de Behler, pero nadie la invita. No se acuerdan de ella». Es la aliada más barata del hotel: a partir de aquí, sus temas no suben de dificultad, pierden la tirada.",
+    "tags": [
+      "invitar"
+    ]
   },
   {
     "id": "thornhill_secreto",

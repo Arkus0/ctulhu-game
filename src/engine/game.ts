@@ -7,7 +7,7 @@
  * regla que sostiene todo el juego.
  */
 import { Clock, ACTION_COST, GAME_START, formatClock, formatFull, timeOfDay } from './clock'
-import { DialogueEngine, type AskResult, type Approach, type DialogueTopic } from './dialogue'
+import { APPROACH_NARRATION, DialogueEngine, type AskResult, type Approach, type DialogueTopic } from './dialogue'
 import { Party, createInvestigator, type Order, type PartySnapshot } from './party'
 import {
   ConversationLog,
@@ -329,8 +329,22 @@ export class Game {
     return this.content.npcs.get(id)?.portrait
   }
 
+  /**
+   * Los temas abiertos con un PNJ, ordenados para que la lista no obligue a releer.
+   * Lo que aun no se ha preguntado va primero; lo repetible que ya se pregunto cae
+   * al final, porque volver a preguntarlo casi nunca es lo que quiere el jugador.
+   */
   topicsFor(npc: string): DialogueTopic[] {
-    return this.dialogue.available(npc)
+    const available = this.dialogue.available(npc)
+    return [
+      ...available.filter((topic) => !this.dialogue.hasAsked(topic.id)),
+      ...available.filter((topic) => this.dialogue.hasAsked(topic.id)),
+    ]
+  }
+
+  /** Verdadero si ese tema ya se planteo alguna vez. Lo usa la interfaz para avisar. */
+  hasAskedTopic(topicId: string): boolean {
+    return this.dialogue.hasAsked(topicId)
   }
 
   approachesFor(topic: DialogueTopic): Approach[] {
@@ -638,8 +652,19 @@ export class Game {
     // grupo entero silenciaba los informes mientras el tercer investigador
     // seguia cumpliendo otro encargo.
     if (!allowSeparated && this.party.at(this.party.focus.location).length < 2) return []
+
+    // Y solo puede hablar quien esta delante. Sin esto, Vance replicaba al informe
+    // de Nadia desde la cocina, dos plantas mas abajo, mientras cumplia su encargo.
+    const here = new Set(this.party.at(this.party.focus.location).map((member) => member.id))
+    const canSpeak = (id: string): boolean =>
+      allowSeparated || here.has(id === 'edith' ? 'harker' : id)
+
     const def = this.content.partyExchanges.find(
-      (candidate) => candidate.trigger === trigger && !this.firedExchanges.has(candidate.id),
+      (candidate) =>
+        candidate.trigger === trigger &&
+        !this.firedExchanges.has(candidate.id) &&
+        candidate.lines.every((line) => canSpeak(line.speaker)) &&
+        this.world.testAll(candidate.requires),
     )
     if (!def) return []
     this.firedExchanges.add(def.id)
@@ -696,7 +721,7 @@ export class Game {
       this.world.learnFact('carter_y_weder_juntos')
       this.world.adjustDisposition('behler', -5)
       return this.resolve([
-        { kind: 'narracion', text: 'Edith deja hablar a Behler mientras memoriza la mesa del fondo: Howard Carter frente a Heinrich Weder, demasiado cerca y demasiado atentos al reloj.' },
+        { kind: 'narracion', text: 'Edith asiente a Behler cada pocos segundos, en el sitio justo, mientras aprende de memoria la mesa del fondo: Howard Carter de espaldas al salón, Heinrich Weder frente a él, las cabezas demasiado juntas y los dos mirando el reloj del hall más de lo que mira nadie que esté desayunando.' },
         ...this.exchange('weder:suspicion'),
       ], 5, [{ kind: 'clue', id: 'conspiradores' }])
     }
@@ -740,7 +765,7 @@ export class Game {
     if (id === 'threshold_retreat') {
       this.completeScene('basement_threshold')
       this.world.setFlag('umbral_abandonado')
-      return this.resolve([{ kind: 'narracion', text: 'Edith deja que la puerta se cierre. Weder conserva la iniciativa, pero todavía no sabe cuánto habéis visto.' }], 5)
+      return this.resolve([{ kind: 'narracion', text: 'Edith aguanta la puerta con dos dedos hasta que se cierra sin ruido. Abajo siguen bajando escalones. Nadie ha mirado hacia arriba, y esa es toda la ventaja que os lleváis.' }], 5)
     }
     if (id === 'ears_examine' || id === 'ears_protect' || id === 'ears_hurry') {
       this.completeScene('ears')
@@ -811,7 +836,7 @@ export class Game {
     }
     if (id === 'wait_for_behler') {
       return this.resolve(
-        [{ kind: 'narracion', text: 'Tomáis una mesa desde la que se domina la terraza.' }],
+        [{ kind: 'narracion', text: 'Elegís la mesa desde la que se ve la escalera, la puerta del restaurante y las tres del fondo. Un camarero trae café que nadie ha pedido y no acepta que se le pague.' }],
         Math.max(0, 11 * 60 - this.clock.now),
       )
     }
@@ -1018,7 +1043,7 @@ export class Game {
       })
       lines.push({
         kind: 'narracion',
-        text: 'Weder guarda el disco y ya no finge cordialidad. Ahora sabe exactamente quiénes sois.',
+        text: 'Weder se guarda el disco en el forro de la chaqueta sin dejar de miraros, y por primera vez en toda la mañana no sonríe. Ya no hace falta: ahora sabe cómo os llamáis.',
       })
     }
     return this.resolve(lines, 5, [
@@ -1129,7 +1154,7 @@ export class Game {
   debrief(): Turn {
     const present = this.party.at(this.party.focus.location)
     if (present.length < 2) {
-      return this.instant([{ kind: 'sistema', text: 'Edith necesita al menos a un compañero presente para poner ideas en comun.' }])
+      return this.instant([{ kind: 'sistema', text: 'Edith necesita al menos a un compañero delante para poner ideas en común.' }])
     }
     const likelyTriggers = [
       this.world.getFlag('weder_alertado') ? 'weder:alerted' : '',
@@ -1140,10 +1165,10 @@ export class Game {
     const lines = likelyTriggers.flatMap((trigger) => this.exchange(trigger)).slice(0, 3)
     return this.resolve(
       [
-        { kind: 'titular', text: 'Poner ideas en comun' },
+        { kind: 'titular', text: 'Poner ideas en común' },
         ...(lines.length > 0
           ? lines
-          : [{ kind: 'narracion' as const, text: 'Repasais lo comprobado y separais los hechos de las sospechas. No aparece ninguna conclusion nueva.' }]),
+          : [{ kind: 'narracion' as const, text: 'Repasáis lo comprobado y separáis los hechos de las sospechas. No sale de ahí ninguna conclusión nueva.' }]),
       ],
       5,
     )
@@ -1180,36 +1205,52 @@ export class Game {
   }
 
   travelTo(to: string): Turn {
-    const route = this.shortestRoute(this.party.focus.location, to)
+    const from = this.party.focus.location
+    const route = this.shortestRoute(from, to)
     if (!route) throw new Error('No hay una ruta disponible hasta ese lugar')
     if (route.minutes === 0) return this.instant([{ kind: 'sistema', text: 'Ya estáis aquí.' }])
     this.party.moveTogether(to)
     return this.resolve(
       [
         { kind: 'titular', text: this.location(to).name },
-        { kind: 'narracion', text: `Recorréis ${route.labels.join(', ')}.` },
+        {
+          kind: 'narracion',
+          text: journeyText(this.location(from).name, route.through, this.location(to).name),
+        },
       ],
       route.minutes,
     )
   }
 
-  private shortestRoute(from: string, to: string): { minutes: number; labels: string[] } | null {
-    if (from === to) return { minutes: 0, labels: [] }
+  /**
+   * Ruta mas corta. Devuelve las salas que se atraviesan por el camino, sin el
+   * origen ni el destino.
+   *
+   * Antes devolvia los `label` de las salidas, que son rotulos de boton escritos en
+   * infinitivo —«Volver al hall», «Salir a la terraza»— y al enlazarlos salian
+   * frases como «Recorréis Volver al hall, Salir a la terraza». Un rotulo de
+   * interfaz no es el nombre de un sitio.
+   */
+  private shortestRoute(from: string, to: string): { minutes: number; through: string[] } | null {
+    if (from === to) return { minutes: 0, through: [] }
     const best = new Map<string, number>([[from, 0]])
-    const labels = new Map<string, string[]>([[from, []]])
+    const path = new Map<string, string[]>([[from, []]])
     const open = new Set<string>([from])
     while (open.size > 0) {
       let current = [...open][0]!
       for (const id of open) if ((best.get(id) ?? Infinity) < (best.get(current) ?? Infinity)) current = id
       open.delete(current)
-      if (current === to) return { minutes: best.get(current)!, labels: labels.get(current)! }
+      if (current === to) {
+        const crossed = path.get(current)!
+        return { minutes: best.get(current)!, through: crossed.slice(0, -1).map((id) => this.location(id).name) }
+      }
       const loc = this.content.locations.get(current)
       if (!loc) continue
       for (const exit of loc.exits.filter((item) => this.world.testAll(item.requires))) {
         const distance = best.get(current)! + exit.minutes
         if (distance >= (best.get(exit.to) ?? Infinity)) continue
         best.set(exit.to, distance)
-        labels.set(exit.to, [...(labels.get(current) ?? []), exit.label ?? this.location(exit.to).name])
+        path.set(exit.to, [...(path.get(current) ?? []), exit.to])
         open.add(exit.to)
       }
     }
@@ -1217,7 +1258,7 @@ export class Game {
   }
 
   advanceTime(minutes: number): Turn {
-    return this.resolve([{ kind: 'narracion', text: 'Dejáis correr el reloj.' }], Math.max(0, minutes))
+    return this.resolve([{ kind: 'narracion', text: WAIT_LINE }], Math.max(0, minutes))
   }
 
   /** Moverse. El grupo que acompana al que lleva el foco se mueve con el. */
@@ -1266,14 +1307,26 @@ export class Game {
     return this.resolve(lines, f.minutes ?? ACTION_COST.examine)
   }
 
-  /** Preguntar algo a un PNJ. */
-  ask(topicId: string, approachId = 'directo'): Turn {
+  /**
+   * Preguntar algo a un PNJ.
+   *
+   * Sin `approachId` decide el motor con que registro se plantea la pregunta. El
+   * jugador ya no elige el tono, asi que hay que contarselo: quien lleva la voz,
+   * como lo ha planteado y que gancho del personaje ha saltado. Eso es lo que
+   * explica el dado, y sin ello la tirada automatica parece arbitraria.
+   */
+  ask(topicId: string, approachId?: string): Turn {
     const res: AskResult = this.dialogue.ask(topicId, approachId)
     const lines: Line[] = []
 
     if (res.approach && res.roll) {
+      if (res.speakerName) {
+        const how = APPROACH_NARRATION[res.approach.id] ?? 'lo pregunta'
+        // Por el nombre de pila: dentro del grupo nadie se llama por los apellidos.
+        lines.push({ kind: 'narracion', text: `${res.speakerName.split(' ')[0]!} ${how}.` })
+      }
       for (const h of res.hooksApplied) {
-        lines.push({ kind: 'sistema', text: h.note ?? '' })
+        if (h.note) lines.push({ kind: 'sistema', text: h.note })
       }
       lines.push(this.rollLine(res.roll))
     }
@@ -1313,8 +1366,8 @@ export class Game {
         kind: 'sistema',
         text:
           res.remaining > 0
-            ? `Se te escapan ${res.remaining} retazos mas de esa conversacion.`
-            : 'No se te ha escapado nada.',
+            ? `Se os escapan ${res.remaining} retazos más de esa conversación.`
+            : 'No se os ha escapado nada.',
       })
     } else {
       lines.push({ kind: 'narracion', text: res.narration })
@@ -1343,7 +1396,7 @@ export class Game {
   /** Dejar pasar el tiempo hasta el siguiente bloque de media hora. */
   wait(): Turn {
     return this.resolve(
-      [{ kind: 'narracion', text: 'Dejais correr el reloj.' }],
+      [{ kind: 'narracion', text: WAIT_LINE }],
       Math.min(15, this.clock.minutesToNextSequence || 15),
       [{ kind: 'clock' }],
       true,
@@ -1467,7 +1520,7 @@ export class Game {
     }
 
     if (isWait) {
-      const substantive = lines.some((line) => line.text !== 'Dejais correr el reloj.')
+      const substantive = lines.some((line) => line.text !== WAIT_LINE)
       this.emptyWaits = substantive ? 0 : this.emptyWaits + 1
       if (this.emptyWaits >= 2) {
         lines.push({ kind: 'rastro', text: this.hotelReaction() })
@@ -1575,9 +1628,9 @@ export class Game {
   private rollLine(r: RollResult): Line {
     const mods =
       r.bonus > r.penalty
-        ? ` (+${r.bonus - r.penalty} bonificacion)`
+        ? ` (${dice(r.bonus - r.penalty)} de bonificación)`
         : r.penalty > r.bonus
-          ? ` (+${r.penalty - r.bonus} penalizacion)`
+          ? ` (${dice(r.penalty - r.bonus)} de penalización)`
           : ''
     return {
       kind: 'tirada',
@@ -1692,6 +1745,38 @@ export class Game {
 }
 
 /** Narracion para un cambio de estado de investigador que no viene de danno o Cordura. */
+/**
+ * El trayecto, contado con los nombres de las salas.
+ *
+ * Se construye de manera que no pueda quedar mal con ninguna combinacion: o hay
+ * salas por medio y se enumeran, o no las hay y se dice que el camino es directo.
+ */
+/** El texto de dejar correr el reloj. Una comparacion depende de el, asi que vive aqui. */
+const WAIT_LINE = 'Dejáis correr el reloj.'
+
+/** «un dado» / «dos dados», que es como lo dice el reglamento. */
+function dice(n: number): string {
+  return n === 1 ? 'un dado' : `${n} dados`
+}
+
+function journeyText(from: string, through: string[], to: string): string {
+  const origen = lowerArticle(from)
+  const destino = lowerArticle(to)
+  if (through.length === 0) return `De ${origen} a ${destino}, sin rodeos.`
+  const pasos = through.map(lowerArticle)
+  const list =
+    pasos.length === 1 ? pasos[0]! : `${pasos.slice(0, -1).join(', ')} y ${pasos[pasos.length - 1]!}`
+  return `De ${origen} a ${destino}, pasando por ${list}.`
+}
+
+/**
+ * Los nombres de sala llevan articulo en mayuscula porque encabezan un rotulo:
+ * «La terraza», «El restaurante». Dentro de una frase eso chirria.
+ */
+function lowerArticle(name: string): string {
+  return name.replace(/^(El|La|Los|Las) /, (match) => match.toLowerCase())
+}
+
 function statusNarration(name: string, status: Investigator['status']): string {
   switch (status) {
     case 'fled':

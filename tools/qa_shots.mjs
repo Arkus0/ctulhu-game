@@ -15,6 +15,7 @@
  *   node tools/qa_shots.mjs [http://localhost:5173]
  */
 import { chromium } from 'playwright'
+import { existsSync } from 'node:fs'
 import { mkdir } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -25,7 +26,13 @@ const URL_BASE = process.argv[2] ?? 'http://localhost:5173'
 
 await mkdir(SALIDA, { recursive: true })
 
-const navegador = await chromium.launch()
+// El entorno remoto trae Chromium preinstalado en `/opt/pw-browsers` y puede no
+// coincidir con la compilacion que espera la version de Playwright del proyecto.
+// Si esta ahi, se usa ese binario en vez de intentar descargar otro.
+const BINARIO = process.env['CHROMIUM_PATH'] ?? '/opt/pw-browsers/chromium'
+const navegador = await chromium.launch(
+  existsSync(BINARIO) ? { executablePath: BINARIO } : {},
+)
 const contexto = await navegador.newContext({ viewport: { width: 1024, height: 700 } })
 const pagina = await contexto.newPage()
 
@@ -34,6 +41,10 @@ pagina.on('console', (msg) => {
   if (msg.type() === 'error') errores.push(msg.text())
 })
 pagina.on('pageerror', (error) => errores.push(String(error)))
+pagina.on('requestfailed', (peticion) => errores.push(`falla ${peticion.url()}`))
+pagina.on('response', (respuesta) => {
+  if (respuesta.status() >= 400) errores.push(`${respuesta.status()} ${respuesta.url()}`)
+})
 
 const estado = async () => JSON.parse(await pagina.evaluate(() => window.render_game_to_text()))
 
@@ -82,6 +93,14 @@ async function esperarHasta(predicado, intentos = 30) {
   return predicado(await estado())
 }
 
+/** Resuelve una tirada pendiente, que si no bloquea el resto de la escena. */
+async function resolverTirada() {
+  const s = await estado()
+  if (!s.pendingRoll) return false
+  await pulsar('Aceptar')
+  return true
+}
+
 async function capturar(nombre) {
   await pagina.waitForTimeout(260)
   const s = await estado()
@@ -96,7 +115,7 @@ await pagina.waitForSelector('#choices button')
 await capturar('01_hall')
 
 // 2. Dialogo con Clinton: el panel de retrato.
-await pulsar('Presentar el telegrama', { obligatorio: true })
+await pulsar('telegrama', { obligatorio: true })
 await pulsar('Hablar con alguien', { obligatorio: true })
 await pulsar('Cleveland Clinton', { obligatorio: true })
 await capturar('02_dialogo_retrato')
@@ -115,8 +134,10 @@ await capturar('03_terraza')
 // 4. Behler y la mesa del fondo: hay que pasar por aqui para que el dia avance.
 await esperarHasta((s) => s.scene != null || s.time.includes('11:'))
 await capturar('04_terraza_11h')
-await pulsar('Pedir autoridad por escrito')
-await pulsar('Acercarse a Carter y Weder')
+await pulsar('autoridad por escrito')
+await resolverTirada()
+await pulsar('mesa del fondo')
+await resolverTirada()
 await pulsar('Quedarse con Behler')
 
 // 5. Cocina y descenso: Weder baja a las doce.
@@ -129,16 +150,17 @@ else await pagina.click('#panel-close')
 await pagina.waitForTimeout(400)
 await capturar('05_cocina')
 
-await pulsar('Seguirlos a distancia')
-await pulsar('Mostrar la autorización')
-await pulsar('Usar la ruta reconocida')
+await pulsar('Seguirlos')
+await resolverTirada()
+await pulsar('firma de Behler')
+await pulsar('ruta de servicio')
 await capturar('06_subsuelo')
 
 // 6. Las orejas y el Disco Solar.
 await esperarHasta((s) => s.scene === 'Las orejas' || s.scene === 'El Disco Solar', 12)
 await capturar('07_orejas')
-await pulsar('Apartar la vista y avanzar')
-await pulsar('Mirar hasta comprender')
+await pulsar('Apartar la vista')
+await pulsar('Mirar hasta entender')
 await esperarHasta((s) => s.scene === 'El Disco Solar', 12)
 await capturar('08_disco_solar')
 

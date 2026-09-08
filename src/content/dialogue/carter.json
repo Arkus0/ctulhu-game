@@ -31,7 +31,10 @@
       "facts": [
         "carter_siempre_quiere_irse"
       ]
-    }
+    },
+    "tags": [
+      "egiptologia"
+    ]
   },
   {
     "id": "carter_egiptologia",
@@ -85,7 +88,10 @@
         }
       ]
     },
-    "note": "Pág. 22: «Solo muestra cierto interés si el tema de conversación versa sobre egiptología». Es la palanca del personaje: aquí es donde se le compra la disposición para todo lo demás."
+    "note": "Pág. 22: «Solo muestra cierto interés si el tema de conversación versa sobre egiptología». Es la palanca del personaje: aquí es donde se le compra la disposición para todo lo demás.",
+    "tags": [
+      "egiptologia"
+    ]
   },
   {
     "id": "carter_valle_de_los_reyes",
@@ -125,7 +131,10 @@
       ]
     },
     "note": "Pág. 22: los Amherst, Percy Newberry, Flinders Petrie, Amarna en 1891. «Mataría por lograr un éxito que le ascienda de clase, colocándole en el lugar que considera suyo por mérito propio».",
-    "locked": true
+    "locked": true,
+    "tags": [
+      "egiptologia"
+    ]
   },
   {
     "id": "carter_el_descubrimiento",
@@ -170,7 +179,10 @@
         "carter_es_paranoico"
       ]
     },
-    "locked": true
+    "locked": true,
+    "tags": [
+      "egiptologia"
+    ]
   },
   {
     "id": "carter_carnarvon",
@@ -548,7 +560,10 @@
         "carter_pistola"
       ]
     },
-    "note": "Pág. 49, fragmento 3: «—Yo ya no estaré aquí —aclara Carter». Fragmento 2: «Recuerda: el 22 del 22, a las 22:00»."
+    "note": "Pág. 49, fragmento 3: «—Yo ya no estaré aquí —aclara Carter». Fragmento 2: «Recuerda: el 22 del 22, a las 22:00».",
+    "tags": [
+      "egiptologia"
+    ]
   },
   {
     "id": "carter_pistola",
@@ -715,7 +730,10 @@
         "carter_reacciono_mal"
       ]
     },
-    "note": "Pág. 22: «Es tremendamente paranoico y es posible que intente buscar una manera de deshacerse de ellos. Desde luego, informará a Weder»."
+    "note": "Pág. 22: «Es tremendamente paranoico y es posible que intente buscar una manera de deshacerse de ellos. Desde luego, informará a Weder».",
+    "tags": [
+      "hermandad"
+    ]
   },
   {
     "id": "carter_la_bronca",

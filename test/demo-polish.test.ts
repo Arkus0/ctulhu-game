@@ -128,14 +128,18 @@ describe('encargos, conversaciones y espera', () => {
     const sceneGame = new Game(content, 'party-lines-scene')
     const turn = sceneGame.performAction('arrival_nadia_registry')
     expect(turn.minutes).toBe(5)
-    expect(turn.lines.filter((line) => line.kind === 'dialogo')).toHaveLength(2)
+    const despedida = turn.lines.filter((line) => line.kind === 'dialogo')
+    expect(despedida.length).toBeGreaterThanOrEqual(2)
+    expect(despedida.every((line) => /^(Edith|Nadia|Vance) —/.test(line.text))).toBe(true)
   })
 
   it('poner ideas en común es una pausa voluntaria de cinco minutos', () => {
     const game = new Game(content, 'voluntary-debrief')
     const turn = game.debrief()
     expect(turn.minutes).toBe(5)
-    expect(turn.lines.filter((line) => line.kind === 'dialogo')).toHaveLength(2)
+    const puesta = turn.lines.filter((line) => line.kind === 'dialogo')
+    expect(puesta.length).toBeGreaterThanOrEqual(2)
+    expect(puesta.length).toBeLessThanOrEqual(4)
   })
 
   it('nunca deja dos esperas vacías consecutivas', () => {
@@ -199,11 +203,41 @@ describe('contratos de contenido', () => {
     }
   })
 
-  it('hay entre doce y dieciocho intercambios con voces identificables', () => {
-    expect(content.partyExchanges).toHaveLength(17)
+  it('los intercambios son replicas cortas, a varias voces y sin frases repetidas', () => {
+    expect(content.partyExchanges.length).toBeGreaterThanOrEqual(17)
+    const seen = new Set<string>()
     for (const exchange of content.partyExchanges) {
-      expect(exchange.lines).toHaveLength(2)
-      expect(new Set(exchange.lines.map((line) => line.speaker)).size).toBe(2)
+      // Dos lineas es una replica; cinco ya es una tertulia que frena la partida.
+      expect(exchange.lines.length).toBeGreaterThanOrEqual(2)
+      expect(exchange.lines.length).toBeLessThanOrEqual(4)
+      expect(new Set(exchange.lines.map((line) => line.speaker)).size).toBeGreaterThanOrEqual(2)
+      for (const line of exchange.lines) {
+        // Una frase reciclada delata que el intercambio se escribio con plantilla.
+        expect(seen.has(line.text)).toBe(false)
+        seen.add(line.text)
+      }
+    }
+  })
+
+  it('cada disparador de intercambio tiene alguna version escrita', () => {
+    const triggers = new Set(content.partyExchanges.map((exchange) => exchange.trigger))
+    for (const trigger of [
+      'separation:nadia',
+      'separation:vance',
+      'weder:suspicion',
+      'weder:alerted',
+      'descend:follow',
+      'descend:authority',
+      'ears:examine',
+      'ears:protect',
+      'roll:failed',
+      'luck:spent',
+      'ending:observe',
+      'ending:delay',
+      'ending:custody',
+      'debrief:generic',
+    ]) {
+      expect(triggers.has(trigger)).toBe(true)
     }
   })
 })

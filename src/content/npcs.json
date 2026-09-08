@@ -65,7 +65,7 @@
       },
       {
         "id": "hablar_mal_de_behler",
-        "approach": "criticar_behler",
+        "approach": "presionar",
         "penalty": 2,
         "note": "Behler es su gran amigo y confidente. Hablar mal de él cierra la conversación en seco."
       }

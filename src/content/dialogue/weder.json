@@ -43,7 +43,10 @@
         }
       ]
     },
-    "note": "Pág. 39: «No pierde hilo en la conversación, atento a cualquier detalle»."
+    "note": "Pág. 39: «No pierde hilo en la conversación, atento a cualquier detalle».",
+    "tags": [
+      "posicion"
+    ]
   },
   {
     "id": "weder_egipto_antiguo",
@@ -585,7 +588,11 @@
         }
       ]
     },
-    "note": "Pág. 38: «Le encantaría conocer a Churchill si tiene oportunidad para utilizar semejante contacto en beneficio propio». El éxito fija el flag 'impresionaron_a_weder' que espera el gancho 'posicion' de su ficha: «o no socializa en absoluto o no calla, intentando agradar»."
+    "note": "Pág. 38: «Le encantaría conocer a Churchill si tiene oportunidad para utilizar semejante contacto en beneficio propio». El éxito fija el flag 'impresionaron_a_weder' que espera el gancho 'posicion' de su ficha: «o no socializa en absoluto o no calla, intentando agradar».",
+    "tags": [
+      "posicion",
+      "politica"
+    ]
   },
   {
     "id": "weder_aga_khan",
@@ -618,7 +625,10 @@
         "weder_quiere_contactos"
       ]
     },
-    "note": "Pág. 38: «Weder no conoce al Aga Khan, y le encantaría hacerlo porque podría sacarle dinero con la excusa de financiar proyectos de ampliación del museo o cualquier farsa parecida»."
+    "note": "Pág. 38: «Weder no conoce al Aga Khan, y le encantaría hacerlo porque podría sacarle dinero con la excusa de financiar proyectos de ampliación del museo o cualquier farsa parecida».",
+    "tags": [
+      "posicion"
+    ]
   },
   {
     "id": "weder_dieter",
@@ -766,7 +776,10 @@
         "correspondencia_nazi"
       ]
     },
-    "note": "Pág. 39. Weder procura evitar el apasionamiento que le delataría como protofascista."
+    "note": "Pág. 39. Weder procura evitar el apasionamiento que le delataría como protofascista.",
+    "tags": [
+      "politica"
+    ]
   },
   {
     "id": "weder_traslado",

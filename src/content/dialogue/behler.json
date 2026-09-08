@@ -110,7 +110,10 @@
       ]
     },
     "note": "Pág. 48: «la vajilla del restaurante se oxida al tocarla, haciéndose pedazos delante de nuestros ojos».",
-    "locked": true
+    "locked": true,
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_pesadillas",
@@ -360,7 +363,10 @@
       ]
     },
     "note": "Pág. 103: habitaciones 103 (Richard J. Forrester) y 285 (Mervin Morrison). En ninguna de las dos se precisa presentación para entrar.",
-    "locked": true
+    "locked": true,
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_descubrimiento",
@@ -456,7 +462,10 @@
         "behler_defiende_a_weder"
       ]
     },
-    "note": "Pág. 18: «Behler desconoce las maquinaciones de Weder, pero sabe que se reúne asiduamente con Howard Carter»."
+    "note": "Pág. 18: «Behler desconoce las maquinaciones de Weder, pero sabe que se reúne asiduamente con Howard Carter».",
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_cartas_berlin",
@@ -496,7 +505,10 @@
       ]
     },
     "note": "Pág. 18: «advierte que mantiene una constante relación epistolar con residentes en Berlín (Weder proporciona siempre la dirección del hotel)».",
-    "locked": true
+    "locked": true,
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_sotano",
@@ -528,7 +540,10 @@
       "facts": [
         "behler_esquiva_el_sotano"
       ]
-    }
+    },
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_bajar_juntos",
@@ -613,7 +628,10 @@
         "behler_protege_al_personal"
       ]
     },
-    "note": "Pág. 18 (el cariño a los Meyer, también suizos, que entraron por su recomendación) y pág. 52 (Mahadni y sus hombres en la cocina)."
+    "note": "Pág. 18 (el cariño a los Meyer, también suizos, que entraron por su recomendación) y pág. 52 (Mahadni y sus hombres en la cocina).",
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_los_bohr",
@@ -664,7 +682,10 @@
         "behler_no_sabia_de_bohr"
       ]
     },
-    "note": "Pág. 18: «Behler no ha sido informado de la presencia de los Señores Bohr en el hotel. Es algo que solo conocen Cleveland Clinton y Abraham Murray». El director no sabe que doce de sus habitaciones las ocupa el mismo hombre."
+    "note": "Pág. 18: «Behler no ha sido informado de la presencia de los Señores Bohr en el hotel. Es algo que solo conocen Cleveland Clinton y Abraham Murray». El director no sabe que doce de sus habitaciones las ocupa el mismo hombre.",
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_shakti",
@@ -704,7 +725,10 @@
       "facts": [
         "behler_miente_sobre_shakti"
       ]
-    }
+    },
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_selassie",
@@ -760,7 +784,10 @@
         "behler_fiestas_privadas"
       ]
     },
-    "note": "Módulo, pág. 59: Behler se acerca a Selassie, le abraza y sellan su amistad con un beso, delante de toda la alta sociedad cairota."
+    "note": "Módulo, pág. 59: Behler se acerca a Selassie, le abraza y sellan su amistad con un beso, delante de toda la alta sociedad cairota.",
+    "tags": [
+      "discrecion"
+    ]
   },
   {
     "id": "behler_leones",

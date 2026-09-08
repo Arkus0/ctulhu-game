@@ -50,7 +50,10 @@
         "los_seis_camareros"
       ]
     },
-    "note": "Pág. 134: «Le enorgullece su trabajo». Su gancho `cocina` es una aproximación virtual y no aporta dados: lo que abre a este hombre es el tema, no la tirada."
+    "note": "Pág. 134: «Le enorgullece su trabajo». Su gancho `cocina` es una aproximación virtual y no aporta dados: lo que abre a este hombre es el tema, no la tirada.",
+    "tags": [
+      "cocina"
+    ]
   },
   {
     "id": "mahadni_picante",
@@ -91,7 +94,10 @@
         "mahadni_prueba_a_la_gente"
       ]
     },
-    "note": "GC pág. 24: Sven Meyer «se lleva la mano al estómago varias veces; le duele la tripa, probablemente por el gusto del cocinero Mahadni por el picante»."
+    "note": "GC pág. 24: Sven Meyer «se lleva la mano al estómago varias veces; le duele la tripa, probablemente por el gusto del cocinero Mahadni por el picante».",
+    "tags": [
+      "cocina"
+    ]
   },
   {
     "id": "mahadni_cordero",
@@ -125,7 +131,10 @@
         "mahadni_sabe_la_lista"
       ]
     },
-    "note": "Pág. 55: en el salón de baile «las mesas supletorias se encuentran repletas de delicioso cordero asado (el que descuartizaba Mahadni)»."
+    "note": "Pág. 55: en el salón de baile «las mesas supletorias se encuentran repletas de delicioso cordero asado (el que descuartizaba Mahadni)».",
+    "tags": [
+      "cocina"
+    ]
   },
   {
     "id": "mahadni_provisiones",
@@ -180,7 +189,10 @@
         "mahadni_gerente_de_facto"
       ]
     },
-    "note": "Pág. 135: «Mahadni es el director del submundo; el hombre que se encarga de la contratación de los empleados de más bajo nivel, el jefe del personal de limpieza, de los botones y el abastecimiento general […] Todas las mercancías pasan por su directa supervisión»."
+    "note": "Pág. 135: «Mahadni es el director del submundo; el hombre que se encarga de la contratación de los empleados de más bajo nivel, el jefe del personal de limpieza, de los botones y el abastecimiento general […] Todas las mercancías pasan por su directa supervisión».",
+    "tags": [
+      "cocina"
+    ]
   },
   {
     "id": "mahadni_behler",
@@ -297,7 +309,10 @@
         "mahadni_baja_todos_los_dias"
       ]
     },
-    "note": "Pág. 135: «Alimenta a los monstruos del sótano, que viven allí desde hace décadas»."
+    "note": "Pág. 135: «Alimenta a los monstruos del sótano, que viven allí desde hace décadas».",
+    "tags": [
+      "sotano"
+    ]
   },
   {
     "id": "mahadni_pinche",
@@ -614,7 +629,10 @@
         }
       ]
     },
-    "note": "Pág. 135: Mahadni es miembro de la Hermandad del Faraón Negro y alimenta a lo que vive abajo. Preguntarle por el sótano le convierte en piedra: la rama de fallo deja `mahadni_alertado` y el hecho `la_hermandad_os_ha_visto` para que la agenda del día 2 pueda leerlos."
+    "note": "Pág. 135: Mahadni es miembro de la Hermandad del Faraón Negro y alimenta a lo que vive abajo. Preguntarle por el sótano le convierte en piedra: la rama de fallo deja `mahadni_alertado` y el hecho `la_hermandad_os_ha_visto` para que la agenda del día 2 pueda leerlos.",
+    "tags": [
+      "sotano"
+    ]
   },
   {
     "id": "mahadni_hermandad",
@@ -789,7 +807,10 @@
         "dieter_en_el_frigorifico"
       ]
     },
-    "note": "Módulo, pág. 57: los soldados de Fuad encierran a Dieter en el almacén frigorífico. Los camareros le liberan a las 11:30 del día 2, si nadie se adelanta."
+    "note": "Módulo, pág. 57: los soldados de Fuad encierran a Dieter en el almacén frigorífico. Los camareros le liberan a las 11:30 del día 2, si nadie se adelanta.",
+    "tags": [
+      "sotano"
+    ]
   },
   {
     "id": "mahadni_la_comitiva",

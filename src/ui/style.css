@@ -262,9 +262,14 @@ button { font-family: inherit; }
 }
 .log-pagination button:disabled { opacity: 0.35; cursor: default; }
 
+/*
+ * Las opciones ya no arrastran habilidad, riesgo y consecuencia: cada una ocupa
+ * una linea. Eso permite ensenar la lista entera —hasta cinco temas, su pagina
+ * siguiente y el boton de volver— sin que haya que descubrir que el panel rueda.
+ */
 #choices {
-  flex: 0 0 min(34%, 260px);
-  max-height: 43%;
+  flex: 0 0 min(48%, 360px);
+  max-height: 54%;
   overflow-y: auto;
   padding: 0.45rem;
   border-top: 2px solid var(--gray);
@@ -443,7 +448,7 @@ button { font-family: inherit; }
   #scene { flex-basis: 27%; min-height: 92px; }
   #scene-summary { top: 1.25rem; font-size: 0.68rem; max-height: calc(100% - 2.2rem); overflow-y: auto; }
   #log { min-height: 96px; padding: 0.55rem 0.7rem 0.3rem; }
-  #choices { flex-basis: min(38%, 260px); max-height: 45%; }
+  #choices { flex-basis: min(52%, 340px); max-height: 58%; }
   #choices > button { min-height: 46px; }
   .choice-copy small { font-size: 0.69rem; }
   #panel { inset: 0; width: 100%; height: 100%; border: 0; box-shadow: none; padding: 1rem 0.85rem 2rem; }

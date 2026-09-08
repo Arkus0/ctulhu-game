@@ -8,7 +8,7 @@
  * Sin esto, un dia habra una salida que apunta a una habitacion inexistente y
  * se descubrira jugando.
  */
-import { APPROACHES, type DialogueTopic } from '../engine/dialogue'
+import { APPROACHES, canonicalApproach, type DialogueTopic } from '../engine/dialogue'
 import type { ConversationDef } from '../engine/perception'
 import type { EventDef } from '../engine/scheduler'
 import type { InvestigatorDef } from '../engine/party'
@@ -475,12 +475,48 @@ export function validate(c: RawContent): string[] {
     }
   }
 
+  // Ganchos de PNJ. Un gancho que el motor no sabe activar es contenido muerto: se
+  // escribio pensando en una mesa, no en este juego, y ahi se quedo. Se activan por
+  // aproximacion (o por el nombre que le da el libro, via alias) o por la etiqueta
+  // de un tema del propio PNJ. Un PNJ sin ningun tema escrito todavia queda exento:
+  // su ficha va por delante de su dialogo y eso es legitimo.
+  const topicTagsByNpc = new Map<string, Set<string>>()
+  for (const t of c.topics) {
+    const tags = topicTagsByNpc.get(t.npc) ?? new Set<string>()
+    for (const tag of t.tags ?? []) tags.add(tag)
+    topicTagsByNpc.set(t.npc, tags)
+  }
+  for (const n of c.npcs) {
+    const tags = topicTagsByNpc.get(n.id)
+    if (!tags) continue
+    for (const hook of n.hooks ?? []) {
+      if (canonicalApproach(hook.approach) in APPROACHES) continue
+      if (tags.has(hook.approach)) continue
+      problems.push(
+        `El gancho "${hook.id}" de "${n.id}" se activa con "${hook.approach}", que no es una aproximacion, ` +
+          'ni un alias de una, ni una etiqueta de ninguno de sus temas: no saltaria nunca',
+      )
+    }
+  }
+
   const exchangeIds = new Set<string>()
+  const speakers = new Set(['edith', 'nadia', 'vance'])
   for (const exchange of c.partyExchanges ?? []) {
     if (exchangeIds.has(exchange.id)) problems.push(`Intercambio de equipo duplicado: "${exchange.id}"`)
     exchangeIds.add(exchange.id)
-    if (!exchange.trigger || exchange.lines.length < 2) {
-      problems.push(`El intercambio "${exchange.id}" necesita disparador y al menos dos líneas`)
+    if (!exchange.trigger) problems.push(`El intercambio "${exchange.id}" no tiene disparador`)
+    // Dos lineas es una replica; cinco ya es una tertulia y frena la partida.
+    if (exchange.lines.length < 2 || exchange.lines.length > 4) {
+      problems.push(`El intercambio "${exchange.id}" debe tener entre dos y cuatro lineas`)
+    }
+    if (new Set(exchange.lines.map((line) => line.speaker)).size < 2) {
+      problems.push(`El intercambio "${exchange.id}" lo dice una sola voz: no es un intercambio`)
+    }
+    for (const line of exchange.lines) {
+      if (!speakers.has(line.speaker)) {
+        problems.push(`El intercambio "${exchange.id}" hace hablar a "${line.speaker}", que no es del grupo`)
+      }
+      if (!line.text?.trim()) problems.push(`Una linea del intercambio "${exchange.id}" esta vacia`)
     }
   }
 

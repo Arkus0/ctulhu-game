@@ -44,9 +44,17 @@ Un compañero separado puede presenciar sucesos, fallar, exponerse o volver con 
 
 ### La conversación es una acción
 
-Hablar debe tener propósito, tono y coste. La estructura es tema más aproximación. La interfaz enseña tres temas relevantes y pagina el resto. Las respuestas extensas del módulo se conservan, pero pueden presentarse por párrafos o golpes de diálogo sin mutilar el texto.
+Hablar debe tener propósito, tono y coste. **La única elección que se le pide al jugador es el tema: la línea que se dice.** Preguntar es un clic, y la tirada se resuelve sola.
+
+La aproximación —adular, presionar, untar, fingir, ir de frente— sigue existiendo por debajo, pero la elige el motor: mira los ganchos de carácter del personaje no jugador, la habilidad de quien está delante y el coste social de cada registro, y escoge la mejor. Elegir el tono a mano antes de cada pregunta es una decisión de mesa; repetida cuarenta veces en una partida se convierte en un peaje.
+
+Lo que sí debe verse siempre es **por qué** una pregunta salió como salió: quién del grupo la formula, en qué registro, y qué gancho del personaje se ha activado. Esa es la textura que sustituye al menú.
+
+La interfaz enseña cinco temas y pagina el resto. Un tema que ya se ha preguntado y admite repetición baja al final de la lista y se marca como tal. Las respuestas extensas del módulo se conservan, pero pueden presentarse por párrafos o golpes de diálogo sin mutilar el texto.
 
 Los fallos sociales nunca producen una pared muda. Deben revelar carácter, crear sospecha, consumir una oportunidad o entregar una pista más cara.
+
+Los ganchos de carácter son el alma de los personajes del módulo y por eso viven en `npcs.json` como datos. Un gancho que el motor no sepa activar es contenido muerto: la validación de contenido rechaza cualquier gancho que no corresponda a una aproximación, a un alias de aproximación o a una etiqueta declarada por algún tema de diálogo.
 
 ### El sistema debe producir escenas
 
@@ -135,7 +143,7 @@ Entiende hoteles como máquinas sociales: llaves, turnos, excusas, pasillos y ge
 
 ### Conversaciones del grupo
 
-El grupo necesita intercambios breves y reactivos, no una tertulia continua. Se disparan al:
+El grupo necesita intercambios breves y reactivos, no una tertulia continua. Dos o tres líneas, nunca un debate. Se disparan al:
 
 - aceptar o perder una pista importante;
 - separarse por primera vez;
@@ -146,10 +154,18 @@ El grupo necesita intercambios breves y reactivos, no una tertulia continua. Se 
 
 Cada intercambio debe hacer al menos dos trabajos: caracterizar, interpretar una pista, anticipar un riesgo o plantear una decisión. No debe repetir la información que ya aparece en el cuaderno.
 
+Tres reglas de escritura, porque es donde el texto se echa a perder más deprisa:
+
+- **Solo habla quien está en la sala.** Un compañero separado en un encargo no puede replicar desde otra planta.
+- **Cada uno habla como es.** Edith pregunta y titula; Nadia corrige el dato y señala de quién es lo que se está tocando; Vance habla de puertas, turnos y de lo que va a costar. Si una réplica se le puede dar a cualquiera de los tres, está mal escrita.
+- **Nada de aforismos simétricos.** Una frase ingeniosa contestada por otra frase ingeniosa del mismo tamaño no es una conversación: es un lema partido en dos. Que alguien interrumpa, que alguien no conteste, que alguien conteste a otra cosa.
+
 ## 6. Tiradas, fallo y dificultad
 
 - La habilidad, dificultad, resultado y coste de Suerte deben ser legibles.
-- Antes de tirar se muestran las apuestas, no el resultado exacto de cada rama.
+- Ese aparato **no va en el botón**. Una opción se lee por su intención: qué se dice o qué se hace. La habilidad, la dificultad y lo que está en juego aparecen con la tirada, que es el momento en que el jugador puede hacer algo con ese dato: aceptarla o comprarla con Suerte. Un botón que arrastra habilidad, riesgo y consecuencia se convierte en un párrafo de reglamento y hay cuatro por pantalla.
+- La única excepción es la opción que no se puede tomar: ahí sí hay que decir qué falta, y en una línea.
+- Se muestran las apuestas, no el resultado exacto de cada rama.
 - El fracaso cambia el estado: alerta a un personaje, consume tiempo, empeora una relación, causa daño o entrega una versión incompleta.
 - La Cordura no es una barra decorativa. Una crisis roba tiempo y altera escenas posteriores.
 - La muerte o bloqueo total no debe surgir de una elección inocente sin advertencia.

@@ -18,6 +18,14 @@
  * Negro le vuelve paranoico y además avisa a Weder. Llamar "Príncipe" a Fuad,
  * que es Rey desde marzo, puede terminar con el grupo detenido.
  *
+ * PERO EL SEGUNDO EJE NO SE LE PREGUNTA AL JUGADOR. Elegir el tono antes de cada
+ * pregunta funciona en una mesa, donde se interpreta una vez; en un videojuego se
+ * repite cuarenta veces por partida y casi siempre tiene una respuesta obvia. Así
+ * que la elige `chooseApproach`: mira los ganchos del personaje, la habilidad de
+ * quien tiene delante y lo que cuesta socialmente cada registro. El jugador solo
+ * escoge la línea que dice, y después ve quién ha hablado, cómo, y qué gancho ha
+ * saltado. Los datos no cambian: cambia quién decide.
+ *
  * El nivel de éxito decide cuánto sueltan, no si sueltan: casi siempre hay una
  * respuesta, aunque sea una evasiva reveladora. Fallar hacia delante.
  */
@@ -78,6 +86,61 @@ export const APPROACHES: Record<string, Approach> = {
   },
 }
 
+/**
+ * Cómo se cuenta en la narración que la pregunta se ha hecho de esta manera.
+ * Sustituye al menú desaparecido: el jugador ya no elige el tono, pero tiene que
+ * leerlo, porque es lo que explica el resultado del dado.
+ */
+export const APPROACH_NARRATION: Record<string, string> = {
+  directo: 'lo pregunta sin rodeos',
+  adular: 'lo envuelve en un halago y deja la pregunta dentro',
+  enganar: 'lo pregunta como si ya supiera la respuesta',
+  presionar: 'lo pregunta sin dejar salida',
+  sobornar: 'lo pregunta con un billete doblado bajo el platillo',
+}
+
+/**
+ * Ganchos del libro escritos con otro nombre.
+ *
+ * Las fichas de PNJ vienen del módulo, y el módulo dice "amenazar" donde el motor
+ * dice "presionar", o "seducción" donde dice "adular". Sin este mapa esos ganchos
+ * no se activaban nunca: quince de los cincuenta y uno eran contenido muerto.
+ */
+export const APPROACH_ALIASES: Record<string, string> = {
+  amenazar: 'presionar',
+  cortesia: 'directo',
+  educacion: 'directo',
+  seduccion: 'adular',
+  invitar_copa: 'sobornar',
+  debilidades: 'sobornar',
+}
+
+/**
+ * Lo que cuesta socialmente cada registro, en puntos de habilidad equivalentes.
+ *
+ * Sirve para que el motor no aprieta a un hombre amable por un mísero dado de
+ * bonificación: presionar cuesta relación aunque salga bien, mentir cuesta mucho
+ * más cuando sale mal, y untar cuesta dinero y deja testigos.
+ */
+const SOCIAL_COST: Record<string, number> = {
+  directo: 0,
+  adular: 0,
+  sobornar: 4,
+  enganar: 8,
+  presionar: 12,
+}
+
+/** Orden de desempate: a igualdad de números, la manera más limpia. */
+const APPROACH_PREFERENCE = ['directo', 'adular', 'sobornar', 'enganar', 'presionar']
+
+/** Un dado de bonificación vale, a habilidad media, unos quince puntos de éxito. */
+const DIE_WORTH = 15
+
+/** Normaliza el nombre de gancho del libro al de una aproximación del motor. */
+export function canonicalApproach(id: string): string {
+  return APPROACH_ALIASES[id] ?? id
+}
+
 /** Respuesta a un nivel de éxito concreto. */
 export interface DialogueResponse {
   text: string
@@ -97,6 +160,13 @@ export interface DialogueTopic {
   requires?: Condition[]
   /** Aproximaciones permitidas. Si no se indica, todas. */
   approaches?: string[]
+  /**
+   * De qué va el tema, para los ganchos que no dependen del tono sino del asunto.
+   * Carter da un dado de bonificación en cuanto se habla de egiptología y dos de
+   * penalización en cuanto se menciona la Hermandad, se lo preguntes como se lo
+   * preguntes. Esas etiquetas son las que llevan los `hooks` de `npcs.json`.
+   */
+  tags?: string[]
   /** Tirada exigida. Sin ella, el PNJ responde sin más. */
   check?: { difficulty?: Difficulty; skill?: SkillId }
   /** Si es verdadero, solo se puede preguntar una vez. */
@@ -126,6 +196,10 @@ export interface DialogueTopic {
 export interface AskResult {
   topic: DialogueTopic
   approach: Approach | null
+  /** Verdadero si la aproximación la ha escogido el motor y no quien llama. */
+  approachChosenByEngine: boolean
+  /** Quién del grupo ha llevado la conversación. Null en los temas sin tirada. */
+  speakerName: string | null
   roll: RollResult | null
   response: DialogueResponse
   /** Ganchos que se han aplicado, para poder explicárselo al jugador. */
@@ -176,18 +250,57 @@ export class DialogueEngine {
   }
 
   /**
+   * Elige por el jugador cómo se plantea la pregunta.
+   *
+   * Puntúa cada aproximación permitida por lo que de verdad decide el resultado:
+   * la habilidad de quien la llevaría, los dados que aportan los ganchos del PNJ y
+   * lo que ese registro va a costar en relación. A igualdad, la manera más limpia.
+   */
+  chooseApproach(topic: DialogueTopic): Approach {
+    const candidates = [...this.approachesFor(topic)].sort(
+      (a, b) => preferenceIndex(a.id) - preferenceIndex(b.id),
+    )
+    let best = candidates[0] ?? APPROACHES['directo']!
+    let bestScore = -Infinity
+
+    for (const approach of candidates) {
+      const skill = topic.check?.skill ?? approach.skill
+      const speaker = this.bestSpeaker(topic.npc, skill)
+      const { bonus, penalty } = this.hooksFor(topic.npc, approach, skill, topic.tags ?? [])
+      const net = bonus - penalty - madnessPenalty(speaker)
+      const score = (speaker.skills[skill] ?? 5) + DIE_WORTH * net - (SOCIAL_COST[approach.id] ?? 0)
+      if (score > bestScore) {
+        bestScore = score
+        best = approach
+      }
+    }
+
+    return best
+  }
+
+  /**
    * Calcula los dados de bonificación y penalización que aporta el carácter del
    * PNJ para una aproximación concreta. Es aquí donde viven los ganchos de
    * interpretación del libro, y por eso son datos y no código.
    */
-  hooksFor(npc: NpcId, approach: Approach, skill: SkillId): { bonus: number; penalty: number; applied: NpcHook[] } {
+  hooksFor(
+    npc: NpcId,
+    approach: Approach,
+    skill: SkillId,
+    tags: string[] = [],
+  ): { bonus: number; penalty: number; applied: NpcHook[] } {
     const def = this.npcs.get(npc)
     let bonus = 0
     let penalty = 0
     const applied: NpcHook[] = []
 
     for (const hook of def?.hooks ?? []) {
-      if (hook.approach !== approach.id) continue
+      // Un gancho salta por tono (la aproximación, o el nombre que le da el libro)
+      // o por asunto (la etiqueta del tema). Mahadni se cierra si le preguntas por
+      // el sótano, lo hagas con una sonrisa o con un billete.
+      const byApproach = canonicalApproach(hook.approach) === approach.id
+      const byTag = tags.includes(hook.approach)
+      if (!byApproach && !byTag) continue
       if (hook.skills && hook.skills.length > 0 && !hook.skills.includes(skill)) continue
       if (!this.world.testAll(hook.requires)) continue
       bonus += hook.bonus ?? 0
@@ -210,22 +323,27 @@ export class DialogueEngine {
   /**
    * Preguntar. Devuelve la respuesta, la tirada y lo que ha cambiado.
    */
-  ask(topicId: string, approachId = 'directo'): AskResult {
+  ask(topicId: string, approachId?: string): AskResult {
     const topic = this.topics.get(topicId)
     if (!topic) throw new Error(`Tema de conversación desconocido: "${topicId}"`)
 
-    const approach = APPROACHES[approachId] ?? APPROACHES['directo']!
+    // Sin aproximación explícita decide el motor. Los tests y las escenas guiadas
+    // pueden seguir forzando una concreta cuando el guion la exige.
+    const chosenByEngine = approachId === undefined
+    const approach = chosenByEngine
+      ? this.chooseApproach(topic)
+      : (APPROACHES[approachId] ?? APPROACHES['directo']!)
     this.asked.add(topic.id)
 
     // Tema sin tirada: el PNJ responde y ya está.
     if (!topic.check) {
       const response = topic.always ?? topic.onSuccess ?? { text: '(silencio)' }
-      return this.finish(topic, null, null, response, [], 0)
+      return this.finish(topic, null, null, response, [], 0, chosenByEngine, null)
     }
 
     const skill = topic.check.skill ?? approach.skill
     const speaker = this.bestSpeaker(topic.npc, skill)
-    const { bonus, penalty, applied } = this.hooksFor(topic.npc, approach, skill)
+    const { bonus, penalty, applied } = this.hooksFor(topic.npc, approach, skill, topic.tags ?? [])
 
     const r = roll(this.rng, speaker.skills[skill] ?? 5, {
       difficulty: topic.check.difficulty ?? 'regular',
@@ -245,7 +363,7 @@ export class DialogueEngine {
     if (r.outcome === Outcome.Fumble) delta -= 10
     for (const h of applied) if (h.penalty) delta -= 5
 
-    return this.finish(topic, approach, r, response, applied, delta)
+    return this.finish(topic, approach, r, response, applied, delta, chosenByEngine, speaker.name)
   }
 
   /**
@@ -284,6 +402,8 @@ export class DialogueEngine {
     response: DialogueResponse,
     applied: NpcHook[],
     delta: number,
+    approachChosenByEngine: boolean,
+    speakerName: string | null,
   ): AskResult {
     const deferred: Effect[] = []
 
@@ -299,6 +419,8 @@ export class DialogueEngine {
     return {
       topic,
       approach,
+      approachChosenByEngine,
+      speakerName,
       roll: r,
       response,
       hooksApplied: applied,
@@ -328,6 +450,11 @@ export class DialogueEngine {
     this.asked = new Set(data.asked)
     this.unlocked = new Set(data.unlocked)
   }
+}
+
+function preferenceIndex(id: string): number {
+  const index = APPROACH_PREFERENCE.indexOf(id)
+  return index === -1 ? APPROACH_PREFERENCE.length : index
 }
 
 /** Baraja de rumores: se gasta, y los mejores están al final. */
