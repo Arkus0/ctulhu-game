@@ -201,7 +201,7 @@ class UI {
       // dos veces y obligan a pasar dos paginas antes de la primera decision.
       ...(view.scene ? [] : [{ kind: 'narracion' as const, text: view.description }]),
       ...this.sceneOpeningLines(),
-    ])
+    ]
     this.write(opening)
     await this.paint()
   }
