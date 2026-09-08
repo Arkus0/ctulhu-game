@@ -444,3 +444,15 @@ nuevas— existía en el motor sin llegar al ojo del jugador.
 - [ ] Rastros y diario están construidos y no llegan a pantalla: 73 rastros
   declarados y `view().traces` no se pinta en ninguna parte.
 - [ ] Sigue pendiente la partida humana cronometrada de principio a fin.
+
+## La música vuelve a la partida (verificado, 8 de septiembre de 2026)
+
+- [x] Diagnosticado el motivo de que la intro sonara y la partida no: la música se programaba, pero salía unos 11 dB por debajo del clic de interfaz, con huecos de hasta 14 segundos, y tras la primera acción el juego se quedaba 25 segundos en un estado de investigación hecho de pulsos de 73–104 Hz, inaudibles en un altavoz de portátil.
+- [x] Corregidos dos defectos del motor: la ganancia del bus de música podía quedarse a cero para el resto de la partida si la zona cambiaba con el sonido silenciado o la pestaña oculta, y las voces detenidas antes de su propio comienzo no se descontaban nunca, así que el límite de polifonía dejaba de proteger.
+- [x] La partitura se separa en `src/ui/music.ts`, sin Web Audio: un compositor determinista de eventos que la suite puede medir —densidad, registro, nivel y silencios— sin abrir un navegador.
+- [x] Seis temas nuevos por zona —hall, terraza, tiendas, habitaciones, sótanos y Viejo Templo—, con melodía, bajo arpegiado y contracanto, dos secciones por intensidad y variante tensa para la investigación. La intro se conserva y pasa por el mismo planificador.
+- [x] La música es continua: el planificador programa compás a compás con 160 ms de antelación y solo deja el respiro escrito de uno o dos segundos entre secciones. La zona decide el tema y la situación decide la variante, que entra en el compás siguiente sin cortar nada.
+- [x] Bus de música al 0,45 por defecto y compresor suave; preferencias `v3` que respetan la elección previa del jugador y solo suben la de quien nunca tocó el mando.
+- [x] `node tools/audio_check.mjs` mide lo que sale de verdad con un analizador delante del destino. En el hall la música suena el 87 % del tiempo con un silencio máximo de 1,6 s (antes: dos frases en veinte segundos y tramos con cero voces); investigar sube la tensión sin cambiar de tema; el cambio de zona cambia de tema con 0,8 s de silencio; silenciar y volver recupera la ganancia; la intro sigue sonando como antes.
+- [x] Suite: 249 pruebas en 12 ficheros, `tsc --noEmit` limpio y compilación de producción correcta.
+- [ ] Escuchar la mezcla con altavoces reales y ajustar el equilibrio entre melodía, bajo y efectos. Está medido, no escuchado.

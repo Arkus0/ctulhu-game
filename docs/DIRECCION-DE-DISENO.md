@@ -175,15 +175,16 @@ Tres reglas de escritura, porque es donde el texto se echa a perder más deprisa
 El sonido debe sostener el ritmo, no cubrir la lectura.
 
 - Todo el audio se sintetiza en tiempo real con Web Audio API: sin grabaciones, MIDI, bancos de sonido ni descargas.
-- Música adaptativa y espaciada para hotel público, investigación y subsuelo.
-- Un motivo elegante y colonialmente incómodo para el hotel; pulso incompleto para la investigación; textura grave y casi sin pulso para el subsuelo.
+- Cada zona del hotel tiene su tema: hall, terraza, tiendas, habitaciones, sótanos y Viejo Templo.
+- Un motivo elegante y colonialmente incómodo para el hotel; textura grave y casi sin pulso para el subsuelo.
+- La investigación no cambia de tema: cambia a la variante tensa del tema de la zona, y entra en el compás siguiente.
 - Efectos breves para interfaz, resultados, reloj, pistas, transiciones y Cordura.
 - Silencio deliberado antes de una revelación y golpe sonoro corto después.
 - Controles separados de música y efectos, además de silencio total.
 - Ningún audio comienza antes del primer gesto del usuario.
 - La partitura, sus motivos y el sistema están documentados en `docs/DIRECCION-DE-AUDIO.md`.
 
-La música continua no es obligatoria. En una aventura de lectura, treinta segundos de silencio bien situados pueden valer más que otro bucle.
+Mientras se juega hay música. El silencio se escribe donde significa algo —el respiro de uno o dos segundos entre secciones, la revelación, el final—, no como consecuencia de un planificador que espera. Un tramo mudo de treinta segundos no es contención: es un juego que parece roto.
 
 ## 8. Dirección visual
 

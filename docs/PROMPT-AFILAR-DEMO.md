@@ -44,6 +44,7 @@ Afila la demo en este orden:
 - Diseña ambientes propios para hall, terraza, cocina, jardín y sótano.
 - Añade efectos breves para reloj, cambio de pista, pasos, puerta, papel, dados, daño y Cordura.
 - Usa música con moderación: tema de hotel, capa de sospecha, capa de subsuelo y golpe del Disco Solar. Evita un bucle constante que fatigue durante la lectura.
+  Este punto quedó revisado tras jugarlo: con frases tan espaciadas la partida sonaba muda. La regla vigente está en `docs/DIRECCION-DE-AUDIO.md` —un tema por zona, continuo, con respiros de uno o dos segundos— y manda sobre esta línea.
 - Usa exclusivamente la síntesis Web Audio original descrita en `docs/DIRECCION-DE-AUDIO.md`. No añadas grabaciones, MIDI, bancos de sonido ni archivos descargados.
 
 5. Feedback y presentación
