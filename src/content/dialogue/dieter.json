@@ -2,7 +2,7 @@
   {
     "id": "dieter_por_escrito",
     "npc": "dieter",
-    "label": "Ofrecerle ponérselo por escrito",
+    "label": "Ofrecerle ponérselo todo por escrito",
     "approaches": [
       "directo",
       "adular"
