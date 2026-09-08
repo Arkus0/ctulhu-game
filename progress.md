@@ -274,8 +274,26 @@ The public repository must exclude the source PDF and current cropped module ill
   dos errores de consola que quedan son del entorno: la hoja de Google Fonts la corta
   el proxy de red.
 
+### Objetivo y descripción, tras acordarlo con el usuario
+
+- [x] La escena declara `objective`, la línea de la barra, validada a noventa
+  caracteres, y `body`, la prosa. Eran el mismo texto: la barra es un rótulo encima
+  de la lámina y la descripción la desbordaba a tres líneas.
+- [x] La descripción se narra en el cuadro de texto al abrirse la escena. Con una
+  escena abierta ya no se cuenta además la sala: eran lo mismo dos veces.
+- [x] Fuera el rótulo «DECISIÓN CRÍTICA». Salía en las seis escenas, o sea siempre, y
+  un aviso que sale siempre deja de avisar. El borde sigue marcando la escena.
+- [x] El cuadro paginaba con un presupuesto fijo que no cabía en su propia caja: había
+  que rodar el cuadro *y* pasar de página. Ahora se mide en el DOM, porque el ajuste
+  por palabras desperdicia más cuanto más estrecha es la columna y ninguna cuenta de
+  caracteres acierta en móvil y en escritorio a la vez. Lo que no cabe ni solo se parte
+  por frases, y un titular no puede quedarse solo en una página.
+- [x] La barra de paginación se pega al borde del cuadro; antes asomaba por debajo la
+  línea siguiente y se leía como texto cortado.
+- [x] Comprobado en 1440×900, 1024×768, 1024×700 y 390×844: el cuadro llena su alto
+  exacto y no desborda en ninguno.
+
 ### Pendiente
 
-- [ ] Acordar con el usuario el reparto definitivo entre lámina, caja de texto y
-  lista de opciones: este pase conserva las proporciones del arte nuevo y hace caber
-  la lista acortando el botón, pero no se ha contrastado jugando.
+- [ ] Contrastar jugando el reparto entre lámina, cuadro de texto y lista de opciones.
+  Está medido, no jugado.
