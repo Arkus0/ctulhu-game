@@ -128,6 +128,18 @@ class UI {
   private readonly portrait = $('portrait')
   private readonly portraitImg = $<HTMLImageElement>('portrait-img')
   private readonly portraitName = $('portrait-name')
+  private readonly condition = $('hud-condition')
+  /**
+   * Avisos pendientes de leer sobre Caso y Equipo.
+   *
+   * El destello de 520 ms se pierde si el jugador estaba leyendo la narracion
+   * cuando ocurrio, y entonces una pista nueva o un informe listo solo se
+   * descubren abriendo el panel a ciegas. El distintivo aguanta hasta que se
+   * abre el panel correspondiente.
+   */
+  private readonly unread = { case: false, team: false }
+  /** Hora del ultimo repintado, para saber si el reloj ha saltado. */
+  private lastPaintedTime = ''
 
   constructor(content: ReturnType<typeof loadContent>, seedOverride: string | null) {
     this.content = content
@@ -135,12 +147,26 @@ class UI {
     this.game = this.newGame()
     this.art = new ArtRenderer($<HTMLCanvasElement>('art'))
     $('hud-map').addEventListener('click', () => this.showMap())
-    $('hud-case').addEventListener('click', () => this.showCase())
-    $('hud-team').addEventListener('click', () => this.showTeam())
+    $('hud-case').addEventListener('click', () => {
+      this.unread.case = false
+      this.showCase()
+      // Abrir un panel no repinta la partida, y el distintivo vive en el HUD.
+      this.renderBadges(this.game.view())
+    })
+    $('hud-team').addEventListener('click', () => {
+      this.unread.team = false
+      this.showTeam()
+      this.renderBadges(this.game.view())
+    })
     $('hud-save').addEventListener('click', () => this.showSaves())
     $('hud-log').addEventListener('click', () => this.showHistory())
     $('hud-audio').addEventListener('click', () => this.showAudio())
     $('hud-audio').setAttribute('aria-pressed', String(this.audio.preferences.muted))
+    // Sin esto, si falta el PNG el titulo, la intro y la pantalla final ensenan
+    // el icono de imagen rota del navegador. El fondo de la partida ya cae en el
+    // dibujo procedimental; el frontal no tenia equivalente.
+    this.frontImage.addEventListener('error', () => { this.frontImage.hidden = true })
+    this.frontImage.addEventListener('load', () => { this.frontImage.hidden = false })
     $('panel-close').dataset['audioCue'] = 'cancel'
     $('panel-close').addEventListener('click', () => this.closePanel())
     this.log.addEventListener('click', () => this.typing?.())
@@ -393,8 +419,18 @@ class UI {
 
   private async paint(): Promise<void> {
     const view = this.game.view()
+    // El reloj es el antagonista y hasta ahora cambiaba de cifra sin avisar.
+    if (this.lastPaintedTime && this.lastPaintedTime !== view.time) {
+      this.time.classList.remove('clock-ticked')
+      // Reiniciar la animacion: sin esto, dos saltos seguidos solo animan uno.
+      void this.time.offsetWidth
+      this.time.classList.add('clock-ticked')
+    }
+    this.lastPaintedTime = view.time
     this.time.textContent = view.time
     this.place.textContent = view.location.name
+    this.renderCondition(view)
+    this.renderBadges(view)
     this.title.textContent = view.scene?.title ?? view.location.name
     // El cuerpo de la escena ya ocupa la barra OBJETIVO. Repetirlo sobre la
     // lamina tapaba caras, salidas y objetos en los encuadres panoramicos.
@@ -466,9 +502,14 @@ class UI {
       const page = this.mode.page ?? 0
       const start = page * PER_PAGE
       const topics = all.slice(start, start + PER_PAGE)
-      this.heading(page > 0 ? `Otros temas: página ${page}` : this.game.npcName(this.mode.npc))
-      for (const topic of topics) this.topicButton(topic)
       const npc = this.mode.npc
+      this.heading(page > 0 ? `${this.game.npcName(npc)}: página ${page + 1}` : this.game.npcName(npc))
+      // La conversacion no se cierra al preguntar: cada tema vuelve a esta misma
+      // pagina, asi que hay que decirle al motor a donde regresar.
+      for (const topic of topics) this.topicButton(topic, { kind: 'topics', npc, page })
+      if (topics.length === 0) {
+        this.heading('No se te ocurre nada más que preguntarle.')
+      }
       const nav: [string, () => void][] = []
       if (start + PER_PAGE < all.length) {
         nav.push([
@@ -476,10 +517,12 @@ class UI {
           () => { this.mode = { kind: 'topics', npc, page: page + 1 } },
         ])
       }
-      nav.push([
-        'Volver',
-        () => { this.mode = page > 0 ? { kind: 'topics', npc, page: page - 1 } : { kind: 'talk' } },
-      ])
+      if (page > 0) {
+        nav.push(['Temas anteriores', () => { this.mode = { kind: 'topics', npc, page: page - 1 } }])
+      }
+      // La salida explicita de la conversacion. Sin ella, seguir preguntando
+      // seria una trampa: se entra y no se sabe por donde se sale.
+      nav.push(['Despedirse', () => { this.mode = { kind: 'root' } }])
       this.navRow(nav)
       return
     }
@@ -544,10 +587,10 @@ class UI {
    * Un tema es una linea de dialogo: se pulsa y se dice. El tono lo decide el motor
    * segun el caracter del personaje, y se cuenta despues junto con la tirada.
    */
-  private topicButton(topic: DialogueTopic): void {
+  private topicButton(topic: DialogueTopic, resume: Mode): void {
     this.button(
       topic.label,
-      () => void this.act(() => this.game.ask(topic.id), { investigation: true }),
+      () => void this.act(() => this.game.ask(topic.id), { investigation: true }, resume),
       topic.minutes ?? DEFAULT_TOPIC_MINUTES,
       '',
       this.game.hasAskedTopic(topic.id) ? 'Ya lo habéis preguntado.' : '',
@@ -571,6 +614,18 @@ class UI {
     card.append(value, detail, stakes)
     this.choices.append(card)
     this.button(pending.roll.success ? 'Aceptar el éxito' : 'Aceptar el fallo', () => void this.act(() => this.game.settlePendingRoll(false)))
+    // Empujar la tirada. Es la otra decision de la septima edicion y estaba
+    // implementada en `rules.ts` sin que nadie la ofreciera: hasta ahora un
+    // fallo solo se podia aceptar o comprar con Suerte.
+    if (pending.canPush) {
+      this.button(
+        'Insistir y repetir la tirada',
+        () => void this.act(() => this.game.pushPendingRoll()),
+        undefined,
+        'urgent',
+        pending.pushStakes,
+      )
+    }
     if (pending.canSpendLuck && pending.luckCost != null) {
       this.button(
         `Gastar ${pending.luckCost} de Suerte`,
@@ -661,7 +716,15 @@ class UI {
     }, undefined, '', '', false, 'cancel')
   }
 
-  private async act(action: () => Turn, audioIntent: AudioIntent = {}): Promise<void> {
+  /**
+   * Ejecuta una accion del motor y decide donde queda el jugador despues.
+   *
+   * `resume` es lo que sostiene la conversacion: una pregunta devuelve al mismo
+   * personaje en vez de escupir al menu de la sala, que es como se hablaba antes
+   * y obligaba a cuatro clics por pregunta. `resumeMode` decide si ese regreso
+   * sigue teniendo sentido cuando el turno ha cambiado el mundo.
+   */
+  private async act(action: () => Turn, audioIntent: AudioIntent = {}, resume?: Mode): Promise<void> {
     let turn: Turn
     const sanityBefore = this.totalSanity()
     this.presentationArt = null
@@ -672,13 +735,35 @@ class UI {
       return
     }
     this.closePanel()
-    this.mode = turn.over ? { kind: 'end' } : { kind: 'root' }
+    this.mode = turn.over ? { kind: 'end' } : this.resumeMode(resume)
     this.presentationArt = turn.presentationArt ?? null
     const lines = [...turn.lines, ...this.sceneOpeningLines()]
     if (lines.length > 0) this.write(lines)
     this.feedback(turn.feedback)
     this.audioForTurn(turn, sanityBefore, audioIntent)
     await this.paint()
+  }
+
+  /**
+   * A donde vuelve el jugador despues de una accion.
+   *
+   * Seguir hablando solo vale mientras hablar siga siendo posible: si el turno
+   * ha abierto una escena en esta sala hay algo que mirar y la conversacion no
+   * puede taparlo, y si el interlocutor se ha ido de la sala ya no hay con quien
+   * seguir. En los dos casos se cae a la raiz, que es la pantalla que sabe
+   * contar lo que esta pasando.
+   */
+  private resumeMode(resume?: Mode): Mode {
+    if (!resume || resume.kind !== 'topics') return resume ?? { kind: 'root' }
+    const view = this.game.view()
+    if (view.scene) return { kind: 'root' }
+    const present = view.npcs.some((npc) => npc.id === resume.npc)
+    if (!present) {
+      this.write([{ kind: 'sistema', text: `${this.game.npcName(resume.npc)} ya no está aquí.` }])
+      return { kind: 'root' }
+    }
+    if (this.game.topicsFor(resume.npc).length === 0) return { kind: 'root' }
+    return resume
   }
 
   /**
@@ -724,6 +809,59 @@ class UI {
     const classes = cues.map((cue) => `feedback-${cue.kind}`)
     game.classList.add(...classes)
     window.setTimeout(() => game.classList.remove(...classes), 520)
+    // El destello se apaga; el distintivo no, hasta que se lea.
+    for (const cue of cues) {
+      if (cue.kind === 'clue') this.unread.case = true
+      if (cue.kind === 'report') this.unread.team = true
+    }
+  }
+
+  /**
+   * Lo que el jugador debe poder leer sin abrir nada.
+   *
+   * Cordura y Salud solo aparecen cuando dejan de estar intactas —la regla de
+   * «solo lo relevante» que ya seguia el panel de Equipo— pero, una vez
+   * relevantes, se quedan: una perdida de Cordura que solo se anuncia con una
+   * linea magenta y un destello de medio segundo no deja rastro en pantalla.
+   */
+  private renderCondition(view: ReturnType<Game['view']>): void {
+    const edith = view.focus
+    // La referencia es la Cordura con la que Edith empezo el dia, no `sanMax`:
+    // el maximo de la septima edicion es 99 menos Mitos, asi que comparar con el
+    // enseñaba «Cordura 65/99» desde el primer segundo, sin que hubiese pasado
+    // nada. Lo que el jugador necesita saber es cuanto ha perdido hoy.
+    const perdida = edith.sanAtDayStart - edith.san
+    const herida = edith.hpMax - edith.hp
+    const partes: string[] = []
+    if (perdida > 0) partes.push(`Cordura ${edith.san} (−${perdida})`)
+    if (herida > 0) partes.push(`Salud ${edith.hp}/${edith.hpMax}`)
+    if (view.pendingRoll) partes.push(`Suerte ${edith.luck}`)
+    this.condition.textContent = partes.join(' · ')
+    this.condition.hidden = partes.length === 0
+    this.condition.classList.toggle('condition-hurt', herida > 0)
+    this.condition.classList.toggle('condition-shaken', perdida > 0)
+  }
+
+  /**
+   * Enciende o apaga los distintivos de Caso y Equipo.
+   *
+   * No son el mismo aviso. El de Caso marca «hay algo que no has leido» y se
+   * apaga al abrir el panel. El de Equipo marca «hay un informe sin recoger»,
+   * que es un hecho del mundo: sigue encendido hasta que Edith se reune con el
+   * companero, porque apagarlo al mirar seria mentir sobre lo que queda por
+   * hacer.
+   */
+  private renderBadges(view: ReturnType<Game['view']>): void {
+    const informeEsperando = view.companions.some((companion) => companion.state === 'report_ready')
+    const marca = (id: string, on: boolean, texto: string): void => {
+      const button = $(id)
+      button.classList.toggle('has-news', on)
+      const base = button.dataset['label'] ?? button.textContent ?? ''
+      button.dataset['label'] = base
+      button.setAttribute('aria-label', on ? `${base}: ${texto}` : base)
+    }
+    marca('hud-case', this.unread.case, 'hay algo nuevo sin leer')
+    marca('hud-team', this.unread.team || informeEsperando, 'hay un informe esperando')
   }
 
   private write(lines: Line[]): void {
@@ -840,6 +978,7 @@ class UI {
       navigation.append(previous, count, next)
       this.log.append(navigation)
     }
+    this.log.setAttribute('aria-busy', 'true')
     let lineIndex = 0
     let character = 0
     let stopped = false
@@ -848,6 +987,10 @@ class UI {
       stopped = true
       if (timer !== undefined) clearTimeout(timer)
       for (const paragraph of paragraphs) paragraph.textContent = paragraph.dataset['full'] ?? ''
+      // La pagina ya esta entera: es ahora cuando un lector de pantalla debe
+      // leerla. Mientras se tecleaba, `aria-busy` retenia el anuncio; sin eso
+      // la region viva repetia el parrafo entero cada doce milisegundos.
+      this.log.setAttribute('aria-busy', 'false')
       // Cada pagina es una unidad de lectura: abrirla por el principio evita
       // ocultar el arranque de un pasaje largo tras el scroll interno.
       this.log.scrollTop = 0
@@ -884,15 +1027,20 @@ class UI {
     this.panelReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
     this.panelBody.replaceChildren()
     const heading = document.createElement('h2')
+    heading.id = 'panel-title'
     heading.textContent = title
     this.panelBody.append(heading)
     this.panel.hidden = false
     this.panel.scrollTop = 0
+    // El panel tapa la partida pero vive despues de #game en el DOM, asi que sin
+    // esto el tabulador salia del dialogo hacia una interfaz que no se ve.
+    this.gameRoot.setAttribute('inert', '')
     window.setTimeout(() => $('panel-close').focus(), 0)
   }
 
   private closePanel(restoreFocus = true): void {
     this.panel.hidden = true
+    this.gameRoot.removeAttribute('inert')
     if (restoreFocus && this.panelReturnFocus?.isConnected) this.panelReturnFocus.focus()
     this.panelReturnFocus = null
   }
@@ -1091,7 +1239,13 @@ class UI {
       save.className = 'panel-action compact'
       save.type = 'button'
       save.textContent = saved ? 'Sobrescribir' : 'Guardar aquí'
-      save.addEventListener('click', () => { this.writeSave(slot); this.showSaves() })
+      save.addEventListener('click', () => {
+        // `writeSave` avisa por su cuenta si el navegador no deja guardar; aqui
+        // solo hay que evitar que la excepcion se lleve por delante el repintado
+        // de la lista de ranuras.
+        try { this.writeSave(slot) } catch { this.closePanel(); return }
+        this.showSaves()
+      })
       card.append(title, detail, save)
       if (saved) {
         const load = document.createElement('button')
@@ -1115,7 +1269,14 @@ class UI {
       game: this.game.snapshot(),
       history: this.history.map((entry) => ({ time: entry.time, lines: entry.lines.map((line) => ({ ...line })) })),
     }
-    localStorage.setItem(`${SAVE_PREFIX}${slot}`, JSON.stringify(envelope))
+    try {
+      localStorage.setItem(`${SAVE_PREFIX}${slot}`, JSON.stringify(envelope))
+    } catch {
+      // Navegacion privada o cuota agotada. Sin esto el listener reventaba, la
+      // lista de ranuras no se repintaba y el jugador creia haber guardado.
+      this.write([{ kind: 'sistema', text: 'No se ha podido guardar: el navegador no permite almacenar la partida.' }])
+      throw new Error('almacenamiento no disponible')
+    }
   }
 
   private readSave(slot: number): SaveEnvelope | null {
@@ -1128,7 +1289,16 @@ class UI {
   }
 
   private async loadSave(save: SaveEnvelope): Promise<void> {
-    this.game.restore(save.game)
+    try {
+      this.game.restore(save.game)
+    } catch (error) {
+      // Un guardado de otra version o corrupto dejaba la partida muda, con el
+      // panel abierto y sin ningun mensaje.
+      this.closePanel()
+      this.write([{ kind: 'sistema', text: `No se ha podido cargar esa partida: ${(error as Error).message}` }])
+      await this.paint()
+      return
+    }
     this.history = save.history.map((entry) => ({ time: entry.time, lines: entry.lines.map((line) => ({ ...line })) }))
     this.narratedScene = this.game.view().scene?.id ?? null
     this.mode = { kind: 'root' }
@@ -1257,6 +1427,8 @@ class UI {
         required: threshold(view.pendingRoll.roll.target, view.pendingRoll.roll.difficulty),
         success: view.pendingRoll.roll.success,
         canSpendLuck: view.pendingRoll.canSpendLuck,
+        canPush: view.pendingRoll.canPush,
+        pushed: view.pendingRoll.roll.pushed === true,
       } : null,
       page: { current: this.pageIndex + 1, total: Math.max(1, this.pages.length) },
       narration: [...this.log.querySelectorAll('p')].map((item) => item.dataset['full'] ?? item.textContent ?? ''),
@@ -1265,7 +1437,15 @@ class UI {
   }
 
   private key(event: KeyboardEvent): void {
-    if (event.key.toLowerCase() === 'f' && !event.ctrlKey && !event.metaKey) {
+    // Un control con el foco puesto se queda con la tecla: con un deslizador de
+    // volumen enfocado, la «f» entraba en pantalla completa.
+    const target = event.target
+    const editing =
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      (target instanceof HTMLElement && target.isContentEditable)
+    if (!editing && event.key.toLowerCase() === 'f' && !event.ctrlKey && !event.metaKey && !event.altKey) {
       if (document.fullscreenElement) void document.exitFullscreen()
       else void document.documentElement.requestFullscreen()
       return
@@ -1287,6 +1467,9 @@ class UI {
       this.typing()
       return
     }
+    // Con un panel abierto, la lista de acciones esta debajo y tapada: pulsar
+    // «1» disparaba la primera accion de la escena de fondo sin verla.
+    if (!this.panel.hidden) return
     const number = Number.parseInt(event.key, 10)
     if (number >= 1 && number <= 9) this.choices.querySelectorAll('button')[number - 1]?.click()
   }

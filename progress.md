@@ -297,6 +297,7 @@ The public repository must exclude the source PDF and current cropped module ill
 
 - [ ] Contrastar jugando el reparto entre lámina, cuadro de texto y lista de opciones.
   Está medido, no jugado.
+
 ## El Disco Egipcio: portada, intro y cierre (verificado, 8 de septiembre de 2026)
 
 - [x] El nombre visible del juego pasa a ser `El Disco Egipcio` en la portada, el documento HTML, la entrada de partida y la documentación de producto. Se conservan el paquete, la URL publicada y las claves de guardado para no romper despliegues ni partidas existentes.
@@ -315,3 +316,131 @@ The public repository must exclude the source PDF and current cropped module ill
 - [x] El hotel entra entre 250 y 700 ms después del fundido y alterna tres temas originales sin repetición consecutiva; los ciclos bajan de 18–35 a 10–16 segundos.
 - [x] Investigación y subsuelo también alternan tres variantes y reducen sus pausas, conservando menos densidad que una banda sonora continua.
 - [x] Los diagnósticos de `render_game_to_text` incluyen tema, frases ejecutadas y demora de la siguiente frase.
+
+## Afilado de la demo: ritmo, estado visible, accesibilidad y decisión (8 de septiembre de 2026)
+
+Sesión abierta desde un clon de GitHub. **El paquete local de referencias no
+estaba disponible**: no existen `pdfcoffee.com_la-broma-macabra-5-pdf-free.pdf`
+ni `art/raw/`. Todo lo de este pase evalúa código, datos y experiencia jugable.
+No se ha contrastado fidelidad al módulo, ni comparado láminas, ni aprobado
+ninguna sustitución artística. Los hechos nuevos se apoyan solo en lo que ya
+afirmaba el contenido versionado.
+
+### El diagnóstico del que sale este pase
+
+El motor iba muy por delante del contenido, y la interfaz por detrás de los dos.
+La demo tenía forma de **arranque fuerte, hora muerta y final fuerte**: de los 65
+sucesos de `day1.json`, 12 caían en la ventana jugable y **ninguno entre las 09:30
+y las 11:00**, justo la franja que `DIRECCION-DE-DISENO.md` §4 describe con más
+detalle. Y la capa que debía sostener la tensión —tiempo, Cordura, pistas
+nuevas— existía en el motor sin llegar al ojo del jugador.
+
+### Fase 1. La hora muerta y las conversaciones
+
+- [x] Tres sucesos nuevos entre las 10:00 y las 11:00: `d1_servicio_carga` (la
+  segunda anomalía que pedía §4 y no existía), `d1_mahadni_recibe` (segunda vía
+  hacia el subsuelo) y `d1_olga_aborda`.
+- [x] Séptima escena, `lounpeen_abordaje`: la decisión de información frente a
+  puntualidad que faltaba. Escucharla entera cuesta media hora y llega tarde a
+  Behler; apartarla de su padre es una tirada; excusarse conserva la hora y
+  pierde el hilo.
+- [x] Consecuencias con lector, no banderas sueltas: `behler_impaciente`
+  endurece la firma a Difícil, y hablar con Olga en público activa el gancho de
+  carácter de Dieter que el módulo ya declaraba (`suspicious` mete un dado de
+  penalización en todo lo que se le pregunte después).
+- [x] Olga señala el jardín del salón Isis. La ruta alternativa de las 12:00
+  existía desde el principio **sin ninguna forma de descubrirla**.
+- [x] `hotelReaction` pasa de 4 salas a las 11 jugables, tres frases cada una, y
+  reserva una línea para cuando hay un compañero fuera. Elige con un generador
+  propio: gastar tiradas del RNG común movería todos los dados posteriores.
+- [x] **Las conversaciones no se cierran al preguntar.** Preguntar un tema
+  devolvía al menú de la sala. Ahora se sigue delante del mismo personaje hasta
+  «Despedirse», y `resumeMode` corta el regreso si el turno ha abierto una
+  escena o el interlocutor se ha ido.
+
+### Fase 2. Que el estado se vea
+
+- [x] Distintivo persistente sobre Caso y Equipo. No son el mismo aviso: el de
+  Caso se apaga al leer; el de Equipo marca un informe sin recoger y sigue
+  encendido hasta la reunión, porque apagarlo al mirar sería mentir.
+- [x] Cordura y Salud en la barra superior, medidas contra la Cordura del
+  comienzo del día y no contra `sanMax`: comparar con el máximo enseñaba
+  «Cordura 65/99» desde el primer segundo sin que hubiera pasado nada.
+- [x] Las cuatro señales huérfanas ya pintan. `FeedbackCue` declara diez tipos y
+  la hoja definía seis. Una prueba de contrato lee la declaración del motor.
+- [x] El salto del reloj se anima, y `prefers-reduced-motion` lo desactiva.
+
+### Fase 3. Accesibilidad y cinco bugs
+
+- [x] `aria-live` estaba en `<main>` entero y en `#front` entero, con el tecleo
+  reescribiendo el párrafo cada 12 ms: **el juego era menos usable con lector de
+  pantalla que sin él**. La región viva se acota a `#log` y el anuncio se retiene
+  con `aria-busy` hasta que la página está completa.
+- [x] `#panel` pasa a `role="dialog"` con `aria-modal`, y `#game` queda `inert`
+  mientras está abierto: el panel vive después en el DOM y el tabulador salía
+  hacia la interfaz tapada.
+- [x] Los atajos numéricos atravesaban el panel abierto.
+- [x] `writeSave` no protegía `localStorage.setItem` y `loadSave` no protegía
+  `game.restore`: el jugador creía haber guardado, o se quedaba con una partida
+  muda y sin mensaje.
+- [x] `#front-image` sin `onerror`, y la tecla «f» sin mirar la fase ni el
+  elemento con el foco.
+- [x] `--gray` (#555, 2.8:1) llevaba las líneas de sistema, que es donde va la
+  única indicación de onboarding. Se queda para bordes; el texto usa
+  `--gray-text` (7:1). `:focus-visible` deja de ser idéntico a `:hover`.
+- [x] Objetivos táctiles a 44 px, incluida la paginación (medía ~19 px y es el
+  control más pulsado), y escalón intermedio de 761 a 1100 px.
+- [x] Favicon incrustado: el 404 de `/favicon.ico` contaba como error de consola.
+
+### Fase 4. Decisión, no solo ejecución
+
+- [x] **Empujar la tirada.** `push` y `canPush` estaban en `rules.ts` con sus
+  pruebas y `game.ts` ni los importaba. El precio del segundo fallo está escrito
+  por acción en `PUSH_STAKES`, se lee antes de decidir, y se aplica encima de la
+  consecuencia normal, nunca en su lugar.
+- [x] **El bug de `who`.** `resolveDeferred` lo ignoraba y cobraba a todo el que
+  estuviera delante: «Ponerse delante de Nadia y de Vance» les cobraba Cordura a
+  Nadia y a Vance. Se respeta en `sanityLoss` y `damage`, y solo ahí:
+  `setInvestigatorStatus` usa «random», que no es identificador de nadie.
+- [x] La raíz ofrece hasta dos detalles, y esperar deja de competir por la última
+  ranura del corte de cinco: iba al final y podía caerse.
+- [x] Conserjería, restaurante y bar largo estaban en el mapa con cero detalles.
+- [x] La validación rechaza una tirada de detalle contra una habilidad que no
+  tiene ningún investigador. `Contabilidad` está en las fichas de PNJ y en
+  ninguna del grupo; escribí la regla y me encontré a mí mismo.
+- [x] El coste en minutos desaparecía en la opción resaltada: `.cost` era
+  `--silver` sobre un fondo `--silver`.
+
+### Comprobación
+
+- [x] `npm test`: 258 pruebas en 11 ficheros. `npm run build` limpio salvo el
+  aviso conocido del paquete JavaScript.
+- [x] `tools/qa_shots.mjs` recorre la demo entera hasta el Disco Solar de las
+  12:30, con las seis escenas disparándose.
+- [x] En navegador: dos preguntas seguidas sin salir de la conversación; con el
+  Mapa abierto la tecla «1» no mueve el reloj y `#game` queda inert; a 1440,
+  1100 y 390 no hay desbordamiento y los botones llegan a 44 px en móvil; y con
+  seis semillas hasta dar con un fallo, la tarjeta ofrece aceptar, insistir con
+  su precio escrito y gastar Suerte.
+- [x] Ninguna franja de 30 minutos entre las 09:00 y las 13:00 se queda sin
+  suceso: la cobertura pasa de 1-4 sucesos vivos por tramo, sin ceros.
+
+### Riesgos siguientes
+
+- [ ] **La única fuente de error de consola que queda es la hoja de Google
+  Fonts**, que corta el proxy del entorno. No es solo ruido: el juego cae a
+  `Courier New` y pierde su identidad de píxel si la red falla en casa de
+  cualquiera. Autoalojar `DotGothic16` subsetada.
+- [ ] Primera carga: `content/index.ts` importa 936 KB de JSON de golpe,
+  incluidos ~250 KB de diálogo de PNJ que la demo no alcanza.
+- [ ] El epílogo sigue siendo un titular, un párrafo y tres cifras. `summary()`
+  ya calcula `seen`, `missed` y la cobertura de conversaciones y solo se usa
+  `.length`. No hay créditos pese a `LICENSE-ART.md`.
+- [ ] No hay menú de pausa: no se puede volver al título ni releer «Cómo jugar»
+  sin recargar. Ni ajustes de accesibilidad más allá del volumen.
+- [ ] `interruptibleBy` sigue siendo un no-op: los siete sucesos declaran el
+  mismo conjunto que su escena, así que el filtro nunca quita nada. Es la palanca
+  más barata que hay para dar variedad a las escenas que ya existen.
+- [ ] Rastros y diario están construidos y no llegan a pantalla: 73 rastros
+  declarados y `view().traces` no se pinta en ninguna parte.
+- [ ] Sigue pendiente la partida humana cronometrada de principio a fin.

@@ -251,6 +251,11 @@ export function validate(c: RawContent): string[] {
   }
 
   const locationIds = new Set<string>()
+
+  // Habilidades que alguien del grupo puede tirar de verdad.
+  const skillsDeLosInvestigadores = new Set(
+    (c.investigators ?? []).flatMap((inv) => Object.keys(inv.skills ?? {})),
+  )
   for (const l of c.locations) {
     if (locationIds.has(l.id)) problems.push(`Localizacion duplicada: "${l.id}"`)
     locationIds.add(l.id)
@@ -274,6 +279,14 @@ export function validate(c: RawContent): string[] {
     }
     for (const f of l.features ?? []) {
       if (!f.id) problems.push(`Un detalle de "${l.id}" no tiene identificador`)
+      // Una tirada contra una habilidad que ningun investigador tiene en su
+      // ficha no la puede sacar nadie: el detalle queda escrito y muerto.
+      // `Contabilidad` llego a estar asi, copiada de las fichas de PNJ.
+      if (f.check && !skillsDeLosInvestigadores.has(f.check.skill)) {
+        problems.push(
+          `El detalle "${f.id}" de "${l.id}" pide ${f.check.skill}, que no tiene ningun investigador`,
+        )
+      }
     }
   }
 

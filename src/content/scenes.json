@@ -74,5 +74,17 @@
       {"id": "disk_authority", "kind": "act", "label": "Salir de la sombra e invocar la autoridad de Behler", "hint": "Persuasión · Difícil; requiere autorización y un testigo.", "minutes": 5, "skill": "Persuasion", "difficulty": "hard", "consequence": "Un éxito retrasa a Weder; un fallo lo pone sobre aviso."},
       {"id": "disk_snatch", "kind": "act", "label": "Arrancarle el disco de las manos", "hint": "Pelea · Difícil. Weder responderá con violencia.", "minutes": 5, "skill": "Pelea", "difficulty": "hard", "risk": "Edith puede sufrir daño.", "consequence": "Un éxito cambia la custodia; un fallo causa daño y hostilidad."}
     ]
+  },
+  {
+    "id": "lounpeen_abordaje",
+    "art": "escena_registro_lounpeen",
+    "title": "La hija de Lounpeen",
+    "objective": "Olga quiere hablar. Su padre mira. Behler espera a las once.",
+    "body": "La pelirroja de la 204 lleva media mañana esperando a alguien que no ha entrado por la puerta giratoria, y ha decidido que vosotros servís igual. Se sienta sin pedir permiso y deja el bolso encima de la mesa. Doce metros más allá, su padre baja el periódico lo justo para localizarla, y no vuelve a subirlo.",
+    "actions": [
+      {"id": "lounpeen_escuchar", "kind": "talk", "label": "Dejarla hablar todo lo que quiera hablar", "hint": "Media hora, y su padre sin subir el periódico.", "minutes": 25, "risk": "Dieter Lounpeen os tomará por gente non grata.", "consequence": "Olga cuenta a quién busca y dónde acaba encontrándole siempre."},
+      {"id": "lounpeen_apartar", "kind": "talk", "label": "Llevársela al hueco de la escalera, lejos del periódico", "hint": "Charlatería · Normal. Un fallo os deja a la vista de su padre.", "minutes": 15, "skill": "Charlateria", "difficulty": "regular", "risk": "Si falla, Dieter os ve igual y encima con disimulo.", "consequence": "Un nombre y un sitio sin pagar el escándalo, si sale bien."},
+      {"id": "lounpeen_excusarse", "kind": "act", "label": "Excusarse y subir puntuales a la terraza", "hint": "Behler es el encargo. Olga, de momento, no.", "minutes": 5, "consequence": "Llegáis a la hora y Olga busca otra silla donde esperar."}
+    ]
   }
 ]

@@ -135,6 +135,14 @@ export interface PendingRollView {
   roll: RollResult
   luckCost: number | null
   canSpendLuck: boolean
+  /**
+   * Si se puede empujar la tirada: repetirla apretando mas, sabiendo que un
+   * segundo fallo sale mas caro que el primero. Es la otra decision de la
+   * septima edicion, y hasta ahora el jugador solo tenia aceptar o comprar.
+   */
+  canPush: boolean
+  /** Lo que cuesta el segundo fallo, para poder decidir antes de empujar. */
+  pushStakes: string
 }
 
 export interface PendingRollState {
