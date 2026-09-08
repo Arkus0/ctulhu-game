@@ -422,14 +422,19 @@ button { font-family: inherit; }
 .rastro { color: var(--ochre); font-style: italic; }
 .sistema { color: var(--gray); font-size: 0.84rem; }
 
+/*
+ * La barra se pega al fondo del cuadro y tiene que taparlo hasta el borde: con
+ * `bottom: 0` quedaba un dedo de hueco por debajo del relleno del contenedor y
+ * asomaba la linea siguiente del parrafo, que parece texto cortado.
+ */
 .log-pagination {
   position: sticky;
-  bottom: 0;
+  bottom: -0.45rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.25rem;
+  padding: 0.25rem 0.25rem 0.7rem;
   background: var(--black);
 }
 .log-pagination button {
