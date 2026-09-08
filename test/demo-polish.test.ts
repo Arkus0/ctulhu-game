@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { loadContent } from '../src/content/index'
+import { loadContent, validate } from '../src/content/index'
 import { Game, type GameSnapshot } from '../src/engine/game'
+import { Outcome } from '../src/engine/rules'
 import { parseTime } from '../src/engine/clock'
 import { AudioManager, readAudioPreferences } from '../src/ui/audio'
 import { readFileSync } from 'node:fs'
@@ -482,5 +483,158 @@ describe('accesibilidad y red de seguridad', () => {
     const movil = hojaDeEstilos.slice(hojaDeEstilos.indexOf('@media (max-width: 760px)'))
     expect(movil).toContain('min-height: 44px')
     expect(hojaDeEstilos).toContain('@media (min-width: 761px) and (max-width: 1100px)')
+  })
+})
+
+describe('empujar la tirada, que estaba escrita y no se ofrecia', () => {
+  const conFallo = (seed: string): Game => {
+    const game = at(seed, 'terraza', 'D1 11:00')
+    game.performAction('behler_listen')
+    game.performAction('attention_interrupt')
+    return game
+  }
+
+  it('una tirada fallada se puede repetir apretando más', () => {
+    // `canPush` y `push` vivian en rules.ts con sus pruebas y `game.ts` ni
+    // siquiera los importaba: al fallar solo habia aceptar o gastar Suerte.
+    let game = conFallo('empujar')
+    let intentos = 0
+    while (game.view().pendingRoll?.roll.success && intentos < 40) {
+      game = conFallo(`empujar-${intentos}`)
+      intentos += 1
+    }
+    const pendiente = game.view().pendingRoll
+    expect(pendiente).not.toBeNull()
+    if (pendiente!.roll.success || pendiente!.roll.outcome === Outcome.Fumble) return
+    expect(pendiente!.canPush).toBe(true)
+    expect(pendiente!.pushStakes.length).toBeGreaterThan(20)
+    game.pushPendingRoll()
+    const despues = game.view().pendingRoll
+    expect(despues).not.toBeNull()
+    expect(despues!.roll.pushed).toBe(true)
+    // Y no se puede empujar dos veces.
+    expect(despues!.canPush).toBe(false)
+  })
+
+  it('el segundo fallo sale más caro que el primero', () => {
+    let game = conFallo('precio')
+    let intentos = 0
+    while (
+      (game.view().pendingRoll?.roll.success || game.view().pendingRoll?.roll.outcome === Outcome.Fumble) &&
+      intentos < 40
+    ) {
+      game = conFallo(`precio-${intentos}`)
+      intentos += 1
+    }
+    if (game.view().pendingRoll?.roll.success) return
+    game.pushPendingRoll()
+    const empujada = game.view().pendingRoll!
+    const carterAntes = game.world.npc('carter').disposition
+    game.settlePendingRoll(false)
+    if (!empujada.roll.success) {
+      // La penalizacion de empujar va encima de la consecuencia normal.
+      expect(game.world.npc('weder').suspicious).toBe(true)
+      expect(game.world.npc('carter').disposition).toBeLessThan(carterAntes)
+    }
+  })
+
+  it('todas las tiradas de escena declaran lo que cuesta insistir', () => {
+    const fuente = fuenteDelJuego.slice(fuenteDelJuego.indexOf('const PUSH_STAKES'))
+    for (const accion of [
+      'arrival_question_clinton',
+      'behler_authority',
+      'attention_listen',
+      'attention_interrupt',
+      'threshold_follow',
+      'lounpeen_apartar',
+      'disk_authority',
+      'disk_snatch',
+    ]) {
+      expect(fuente.slice(0, 2200)).toContain(accion)
+    }
+  })
+})
+
+describe('la Cordura hace algo', () => {
+  it('ponerse delante del equipo protege al equipo', () => {
+    const game = at('proteger', 'sala_escombros', 'D1 12:15')
+    expect(game.view().scene?.id).toBe('ears')
+    const antes = new Map(game.party.members.map((inv) => [inv.id, inv.san]))
+    game.performAction('ears_protect')
+    // El efecto declara `who: 'harker'` desde el primer dia y `resolveDeferred`
+    // lo ignoraba: la opcion cobraba Cordura a Nadia y a Vance, que es justo lo
+    // contrario de lo que dice el boton.
+    for (const inv of game.party.members) {
+      if (inv.id === 'harker') continue
+      expect(inv.san).toBe(antes.get(inv.id))
+    }
+  })
+
+  it('mirar de frente sí cobra a quien está delante', () => {
+    const game = at('mirar', 'sala_escombros', 'D1 12:15')
+    const antes = game.party.byId('harker').san
+    game.performAction('ears_examine')
+    expect(game.party.byId('harker').san).toBeLessThanOrEqual(antes)
+  })
+})
+
+describe('densidad de examen y validación', () => {
+  it('las salas del recorrido tienen algo que mirar', () => {
+    for (const id of ['recepcion', 'conserjeria', 'terraza', 'restaurante', 'cocina', 'bar_largo', 'sala_escombros', 'viejo_templo']) {
+      const loc = content.locations.get(id)
+      expect(loc, id).toBeDefined()
+      // Tres salas del mapa jugable no tenian ni un detalle: entrar en ellas
+      // solo ofrecia «Observar la escena» y «Dejar correr el reloj».
+      expect((loc!.features ?? []).length, id).toBeGreaterThan(0)
+    }
+  })
+
+  it('la raíz ofrece dos detalles cuando los hay y nunca pierde la espera', () => {
+    // Sin escena abierta: con una escena, la raiz es la escena.
+    const game = at('detalles', 'bar_largo', 'D1 10:00')
+    const acciones = game.view().actions
+    expect(acciones.length).toBeLessThanOrEqual(5)
+    // Esperar iba al final de la lista y el corte de cinco podia llevarsela.
+    expect(acciones.some((accion) => accion.id === 'wait')).toBe(true)
+    const detalles = acciones.filter((accion) => accion.id.startsWith('inspect:'))
+    expect(detalles.length).toBe(2)
+  })
+
+  it('ningún detalle pide una habilidad que el grupo no tiene', () => {
+    // `Contabilidad` existe en las fichas de PNJ y en ninguna de las tres del
+    // grupo. Un detalle que la pidiera quedaria escrito y sin poder sacarse, y
+    // la validacion no lo miraba.
+    const delGrupo = new Set(content.investigators.flatMap((inv) => Object.keys(inv.skills)))
+    const imposibles: string[] = []
+    for (const loc of content.locations.values()) {
+      for (const f of loc.features ?? []) {
+        if (f.check && !delGrupo.has(f.check.skill)) imposibles.push(`${loc.id}:${f.id} pide ${f.check.skill}`)
+      }
+    }
+    expect(imposibles).toEqual([])
+  })
+
+  it('la validación avisa de una tirada que nadie puede sacar', () => {
+    const problemas = validate({
+      mapArt: { default: 'mapa_plantas', rules: [] },
+      locations: [
+        {
+          id: 'sala_rota', name: 'Sala', floor: 'baja', description: '', exits: [],
+          features: [{ id: 'detalle_muerto', name: 'Detalle', description: '', check: { skill: 'Contabilidad' } }],
+        },
+      ],
+      npcs: [],
+      investigators: [{ id: 'harker', name: 'Edith', occupation: '', blurb: '', chars: {}, skills: { Descubrir: 55 } }],
+      events: [],
+      scenes: [],
+      conversations: [],
+      partyExchanges: [],
+      topics: [],
+      rumors: [],
+      luctuousEvents: [],
+      randomNpcs: { genericStatBlock: {}, masterTable: [], categories: [] },
+      artifacts: [],
+    } as never)
+    expect(problemas.some((problema) => problema.includes('Contabilidad'))).toBe(true)
   })
 })

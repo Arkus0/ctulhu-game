@@ -618,6 +618,18 @@ class UI {
     card.append(value, detail, stakes)
     this.choices.append(card)
     this.button(pending.roll.success ? 'Aceptar el éxito' : 'Aceptar el fallo', () => void this.act(() => this.game.settlePendingRoll(false)))
+    // Empujar la tirada. Es la otra decision de la septima edicion y estaba
+    // implementada en `rules.ts` sin que nadie la ofreciera: hasta ahora un
+    // fallo solo se podia aceptar o comprar con Suerte.
+    if (pending.canPush) {
+      this.button(
+        'Insistir y repetir la tirada',
+        () => void this.act(() => this.game.pushPendingRoll()),
+        undefined,
+        'urgent',
+        pending.pushStakes,
+      )
+    }
     if (pending.canSpendLuck && pending.luckCost != null) {
       this.button(
         `Gastar ${pending.luckCost} de Suerte`,
@@ -1419,6 +1431,8 @@ class UI {
         required: threshold(view.pendingRoll.roll.target, view.pendingRoll.roll.difficulty),
         success: view.pendingRoll.roll.success,
         canSpendLuck: view.pendingRoll.canSpendLuck,
+        canPush: view.pendingRoll.canPush,
+        pushed: view.pendingRoll.roll.pushed === true,
       } : null,
       page: { current: this.pageIndex + 1, total: Math.max(1, this.pages.length) },
       narration: [...this.log.querySelectorAll('p')].map((item) => item.dataset['full'] ?? item.textContent ?? ''),

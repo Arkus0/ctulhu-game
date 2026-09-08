@@ -21,8 +21,10 @@ import {
 } from './perception'
 import { Rng } from './rng'
 import {
+  canPush,
   DIFFICULTY_LABEL,
   luckCost,
+  push as pushRoll,
   OUTCOME_LABEL,
   spendLuck as applyLuck,
   threshold,
@@ -45,6 +47,26 @@ import {
   type PendingRollView,
   type SceneView,
 } from './adventure'
+
+/**
+ * Lo que cuesta empujar y volver a fallar, por accion.
+ *
+ * La septima edicion permite repetir una tirada fallada apretando mas, con la
+ * condicion de que el segundo fallo tenga una consecuencia peor. El motor solo
+ * marca `pushed`; el precio lo pone el contenido, y aqui esta escrito para que
+ * el jugador pueda leerlo antes de decidir. Sin esta linea, empujar seria una
+ * segunda tirada gratis.
+ */
+const PUSH_STAKES: Record<string, string> = {
+  arrival_question_clinton: 'Si insistes y vuelves a fallar, Clinton dejará de contestaros en toda la mañana.',
+  behler_authority: 'Si insistes y vuelves a fallar, Behler no volverá a considerar la firma.',
+  attention_listen: 'Si te acercas más y te oyen, lo sabrán los dos, no solo Weder.',
+  attention_interrupt: 'Si aprietas y falla, Carter se pondrá de su lado delante de todos.',
+  threshold_follow: 'Si bajas otro tramo y te ven, también te verá el jefe de cocina.',
+  lounpeen_apartar: 'Si insistes con su padre mirando, Olga no os dirá nada en absoluto.',
+  disk_authority: 'Si vuelves a levantar la voz y falla, Weder sabrá exactamente quién le persigue.',
+  disk_snatch: 'Si insistes cuerpo a cuerpo y falla, la pelea os costará más sangre.',
+}
 
 /** Una linea de texto en la caja de dialogo, con su tono. */
 export interface Line {
@@ -445,17 +467,22 @@ export class Game {
     }
 
     const loc = this.location(here)
-    const feature = (loc.features ?? []).find(
+    // Hasta dos detalles, no uno. Ofrecer solo el primero agotaba una sala en un
+    // turno y la dejaba en «Observar la escena», que es relleno: fuera de las
+    // escenas guionizadas el hotel dejaba de responder enseguida.
+    const detalles = (loc.features ?? []).filter(
       (item) => this.world.testAll(item.requires) && !this.examined.has(`${loc.id}:${item.id}`),
     )
-    if (feature) {
-      v.push({
-        id: `inspect:${feature.id}`,
-        kind: 'inspect',
-        label: feature.name,
-        hint: feature.description,
-        minutes: feature.minutes ?? ACTION_COST.examine,
-      })
+    if (detalles.length > 0) {
+      for (const feature of detalles.slice(0, 2)) {
+        v.push({
+          id: `inspect:${feature.id}`,
+          kind: 'inspect',
+          label: feature.name,
+          hint: feature.description,
+          minutes: feature.minutes ?? ACTION_COST.examine,
+        })
+      }
     } else {
       v.push({
         id: 'observe_room',
@@ -483,15 +510,18 @@ export class Game {
     }
 
     const waitMinutes = Math.min(15, this.clock.minutesToNextSequence || 15)
-    v.push({
+    const esperar: GuidedAction = {
       id: 'wait',
       kind: 'act',
       label: 'Dejar correr el reloj',
       hint: `Esperar hasta las ${formatClock(this.clock.now + waitMinutes)}.`,
       minutes: waitMinutes,
-    })
+    }
 
-    return v.slice(0, 5)
+    // Cinco como maximo, y una de las cinco es siempre esperar: antes iba al
+    // final de la lista y el corte podia llevarsela, dejando al jugador sin
+    // ninguna forma de dejar pasar el tiempo.
+    return [...v.slice(0, 4), esperar]
   }
 
   private currentScene(): SceneView | null {
@@ -644,6 +674,8 @@ export class Game {
       actorName: actor.name,
       luckCost: cost,
       canSpendLuck: cost != null && cost > 0 && actor.luck >= cost,
+      canPush: canPush(this.pendingRoll.roll),
+      pushStakes: PUSH_STAKES[this.pendingRoll.actionId] ?? 'Un segundo fallo sale más caro que el primero.',
     }
   }
 
@@ -978,6 +1010,59 @@ export class Game {
     ], [{ kind: 'roll', id: actionId, outcome: result.success ? 'success' : 'failure' }])
   }
 
+  /**
+   * Empujar la tirada: repetirla apretando mas.
+   *
+   * No resuelve nada por si misma: sustituye la tirada pendiente por la nueva y
+   * deja al jugador delante de la misma tarjeta, porque el resultado empujado
+   * tambien se puede aceptar o comprar con Suerte. Lo que cambia es que un
+   * fallo empujado arrastra la penalizacion de `PUSH_STAKES`.
+   */
+  pushPendingRoll(): Turn {
+    const pending = this.pendingRoll
+    if (!pending) throw new Error('No hay ninguna tirada pendiente')
+    if (!canPush(pending.roll)) throw new Error('Esta tirada ya no se puede empujar')
+    const actor = this.party.byId(pending.actorId)
+    const repetida = pushRoll(this.rng, pending.roll)
+    this.pendingRoll = { ...pending, roll: repetida }
+    return this.instant(
+      [
+        { kind: 'narracion', text: `${actor.name} no lo deja correr y vuelve a intentarlo, esta vez sin disimular que le importa.` },
+      ],
+      [{ kind: 'roll', id: pending.actionId, outcome: repetida.success ? 'success' : 'failure' }],
+    )
+  }
+
+  /**
+   * El precio del segundo fallo. Se aplica solo cuando la tirada empujada falla,
+   * y siempre encima de la consecuencia normal, nunca en su lugar.
+   */
+  private pushPenalty(actionId: string): Line[] {
+    switch (actionId) {
+      case 'arrival_question_clinton':
+        this.world.adjustDisposition('clinton', -15)
+        this.world.npc('clinton').suspicious = true
+        return [{ kind: 'narracion', text: 'Clinton cierra el libro con las dos manos y llama al siguiente huésped por encima del hombro de Edith. Ya no hay conversación que rescatar.' }]
+      case 'behler_authority':
+        this.world.adjustDisposition('behler', -15)
+        this.world.setFlag('behler_niega_la_firma')
+        return [{ kind: 'dialogo', text: 'Behler —«Le he dicho que no una vez. Que me lo pregunte dos veces me ayuda a entender a quién he contratado».' }]
+      case 'attention_listen':
+      case 'attention_interrupt':
+        this.world.npc('weder').suspicious = true
+        this.world.adjustDisposition('carter', -10)
+        return [{ kind: 'narracion', text: 'Carter se levanta a medias y pone una mano en el hombro de Weder: un gesto de propietario. A partir de ahora sois un problema de los dos.' }]
+      case 'threshold_follow':
+        if (this.world.hasNpc('mahadni')) this.world.npc('mahadni').suspicious = true
+        return [{ kind: 'narracion', text: 'El jefe de cocina levanta la cabeza al oír el escalón y se limpia las manos muy despacio, mirando la escalera hasta que dejáis de bajar.' }]
+      case 'lounpeen_apartar':
+        this.world.adjustDisposition('olga', -10)
+        return [{ kind: 'dialogo', text: 'Olga —«Ya no». Y se va hacia el ascensor sin terminar la frase que estaba empezando.' }]
+      default:
+        return []
+    }
+  }
+
   settlePendingRoll(useLuck: boolean): Turn {
     const pending = this.pendingRoll
     if (!pending) throw new Error('No hay ninguna tirada pendiente')
@@ -995,6 +1080,9 @@ export class Game {
 
     const lines: Line[] = [this.rollLine(result)]
     if (useLuck) lines.push(...this.exchange('luck:spent'))
+    // El precio de haber apretado. Va encima de la consecuencia normal del
+    // fallo, nunca en su lugar: empujar no cambia lo que pasa, lo agrava.
+    if (result.pushed && !result.success) lines.push(...this.pushPenalty(pending.actionId))
 
     if (!pending.actionId.startsWith('disk_')) {
       const feedback: FeedbackCue[] = useLuck
@@ -1120,7 +1208,9 @@ export class Game {
       })
       lines.push(...this.exchange('ending:custody'))
     } else {
-      const damage = rollDice(this.rng, '1D3')
+      // Empujar el forcejeo y volver a fallar cuesta mas sangre: es el precio
+      // que la septima edicion exige a la segunda tirada.
+      const damage = rollDice(this.rng, result.pushed ? '1D6' : '1D3')
       this.party.applyDamage('harker', damage)
       this.world.setFlag('disco_resuelto')
       this.world.setFlag('weder_hostil')
@@ -1779,10 +1869,27 @@ export class Game {
   private resolveDeferred(effect: { kind: string; [k: string]: unknown }): Line[] {
     const lines: Line[] = []
     const here = this.party.at(this.party.focus.location)
-    const targets = here.length > 0 ? here : [this.party.focus]
+    const presentes = here.length > 0 ? here : [this.party.focus]
+
+    /**
+     * A quien le toca pagar.
+     *
+     * `sanityLoss` y `damage` declaran `who` desde el primer dia y esto lo
+     * ignoraba, asi que cobraba a todo el que estuviera delante: la opcion
+     * «Ponerse delante de Nadia y de Vance» les cobraba Cordura a Nadia y a
+     * Vance, justo lo contrario de lo que promete el boton. `who` solo se
+     * respeta aqui: `setInvestigatorStatus` usa la palabra «random», que no es
+     * el identificador de nadie, y elige entre los presentes mas abajo.
+     */
+    const victimas = (): Investigator[] => {
+      const who = typeof effect['who'] === 'string' ? (effect['who'] as string) : null
+      if (!who) return presentes
+      const senalado = this.party.members.find((inv) => inv.id === who)
+      return senalado ? [senalado] : presentes
+    }
 
     if (effect['kind'] === 'sanityLoss') {
-      for (const inv of targets) {
+      for (const inv of victimas()) {
         const res = sanityCheck(this.rng, inv, String(effect['loss']), this.clock.now)
         if (res.loss > 0 || res.bout) {
           lines.push({ kind: 'cordura', text: res.narration })
@@ -1800,7 +1907,7 @@ export class Game {
 
     if (effect['kind'] === 'damage') {
       const amount = rollDice(this.rng, String(effect['amount']))
-      for (const inv of targets) {
+      for (const inv of victimas()) {
         const out = this.party.applyDamage(inv.id, amount)
         lines.push({
           kind: 'sistema',
@@ -1816,7 +1923,7 @@ export class Game {
     if (effect['kind'] === 'setInvestigatorStatus') {
       const who = String(effect['who'])
       const status = effect['status'] as Investigator['status']
-      const inv = who === 'random' ? this.rng.pick(targets) : this.party.byId(who)
+      const inv = who === 'random' ? this.rng.pick(presentes) : this.party.byId(who)
       inv.status = status
       lines.push({ kind: 'sistema', text: statusNarration(inv.name, status) })
     }
