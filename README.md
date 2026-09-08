@@ -1,6 +1,8 @@
-# La Broma Macabra
+# El Disco Egipcio
 
-Aventura gráfica narrativa y sistémica basada en el módulo de rol homónimo de Álex de la Iglesia para La Llamada de Cthulhu. Está diseñada para un jugador y automatiza la agenda, los personajes no jugadores, las tiradas y las consecuencias que normalmente resolvería un Guardián.
+Aventura gráfica narrativa y sistémica basada en el módulo *La Broma Macabra*, de Álex de la Iglesia para La Llamada de Cthulhu. Está diseñada para un jugador y automatiza la agenda, los personajes no jugadores, las tiradas y las consecuencias que normalmente resolvería un Guardián.
+
+[Jugar a la demo en el navegador](https://ctulhu-game.vercel.app/)
 
 La demo jugable actual cubre el 21 de noviembre de 1922 entre las 09:00 y las 13:00. Edith Harker dirige la investigación mientras Nadia Farouk y Samuel Vance pueden ocuparse de otros frentes. El mundo avanza aunque Edith no esté mirando y la mañana culmina en una escena ramificada alrededor del Disco Solar.
 
@@ -16,7 +18,7 @@ npm test
 npm run build
 ```
 
-Estado actual: 205 pruebas automatizadas, tres recorridos completos de navegador y compilación de producción verificada.
+Estado actual: más de 200 pruebas automatizadas, tres recorridos completos de navegador y compilación de producción verificada.
 
 ## Qué se juega
 
@@ -35,6 +37,7 @@ Estado actual: 205 pruebas automatizadas, tres recorridos completos de navegador
 - [Dirección de diseño](docs/DIRECCION-DE-DISENO.md)
 - [Prompt para afilar la demo](docs/PROMPT-AFILAR-DEMO.md)
 - [Prompt para crear arte original](docs/PROMPT-ARTE-ORIGINAL.md)
+- [Dirección de audio original](docs/DIRECCION-DE-AUDIO.md)
 - [Referencias locales necesarias](docs/REFERENCIAS-LOCALES.md)
 - [Estado y traspaso entre sesiones](progress.md)
 
@@ -56,7 +59,8 @@ Los sistemas principales son:
 - `worldstate.ts`: hechos, relaciones, estados y cadena de custodia.
 - `adventure.ts`: pistas, acciones guiadas, encargos, informes y tiradas pendientes.
 - `game.ts`: fachada jugable, escenas, ramificaciones y guardado versionado.
-- `main.ts`: Mapa, Caso, Equipo, Guardar, Historial, paginación y controles accesibles de audio.
+- `main.ts`: Mapa, Caso, Equipo, Guardar, Historial, paginación y adaptación de eventos al audio.
+- `ui/audio.ts`: síntesis FM, partitura adaptativa, efectos y preferencias accesibles.
 
 La interfaz expone `window.render_game_to_text()` y `window.advanceTime(ms)` para pruebas deterministas en navegador. La tecla `F` alterna pantalla completa.
 
@@ -66,6 +70,6 @@ El PDF original y sus ilustraciones no forman parte del repositorio público. Cu
 
 Las sesiones ejecutadas sobre la carpeta local completa sí pueden consultarlos. `CLAUDE.md` y [el manifiesto de referencias](docs/REFERENCIAS-LOCALES.md) indican las rutas exactas y obligan a comprobar su disponibilidad; un clon de GitHub por sí solo no contiene ese material.
 
-El paquete definitivo debe estar compuesto por ilustraciones originales. Su biblia, inventario y proceso de sustitución se describen en [el prompt de arte](docs/PROMPT-ARTE-ORIGINAL.md). El audio de la demo es CC0 y está inventariado con procedencia y huellas SHA-256 en [LICENSE-AUDIO.md](LICENSE-AUDIO.md).
+El paquete definitivo debe estar compuesto por ilustraciones originales. Su biblia, inventario y proceso de sustitución se describen en [el prompt de arte](docs/PROMPT-ARTE-ORIGINAL.md). La música y los efectos se generan íntegramente mediante código y se describen en la [dirección de audio](docs/DIRECCION-DE-AUDIO.md).
 
 El texto, las marcas y los materiales del módulo pertenecen a sus respectivos titulares. Este repositorio es un prototipo no oficial y no incluye el libro necesario para consultar la obra original.

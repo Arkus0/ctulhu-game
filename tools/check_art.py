@@ -23,6 +23,7 @@ from quantize import EGA
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLICO = os.path.join(RAIZ, 'public', 'art')
 RETRATOS = os.path.join(PUBLICO, 'retratos')
+HOJAS = os.path.join(PUBLICO, 'hojas')
 MANIFIESTO = os.path.join(RAIZ, 'art', 'manifest.csv')
 CONTENIDO = os.path.join(RAIZ, 'src', 'content')
 
@@ -31,6 +32,7 @@ TAMANOS = {
     'escena': (320, 152),
     'mapa': (320, 152),
     'retrato': (72, 96),
+    'hoja': (320, 152),
 }
 PESO_MAXIMO = 40 * 1024
 LISTOS = {'generado', 'revisado', 'aprobado'}
@@ -57,6 +59,19 @@ def arte_usado():
     for evento in cargar(os.path.join(CONTENIDO, 'events', 'day1.json')):
         if evento.get('art'):
             usados.setdefault(evento['art'], []).append('evento %s' % evento['id'])
+
+    mapas = cargar(os.path.join(CONTENIDO, 'map_art.json'))
+    usados.setdefault(mapas['default'], []).append('mapa por defecto')
+    for regla in mapas.get('rules', []):
+        usados.setdefault(regla['art'], []).append('mapa plantas %s' % ','.join(regla['floors']))
+
+    # Los informes viven en TypeScript porque sus tiradas y ventanas tambien
+    # forman parte del motor. Extraemos solo el campo declarativo, sin mantener
+    # una segunda lista de identificadores en este comprobador.
+    with open(os.path.join(RAIZ, 'src', 'engine', 'adventure.ts'), encoding='utf-8') as f:
+        import re
+        for nombre in re.findall(r"reportArt:\s*'([^']+)'", f.read()):
+            usados.setdefault(nombre, []).append('informe de companero')
 
     return usados
 
@@ -116,7 +131,7 @@ def main():
             continue
         declarados[(tipo, fila['archivo'])] = fila
 
-        carpeta = RETRATOS if tipo == 'retrato' else PUBLICO
+        carpeta = {'retrato': RETRATOS, 'hoja': HOJAS}.get(tipo, PUBLICO)
         ruta = os.path.join(carpeta, fila['archivo'] + '.png')
         listo = fila['estado'] in LISTOS
 

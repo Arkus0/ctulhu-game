@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "art:check": "python tools/check_art.py",
+    "art:contact": "python tools/contact_art.py fondos && python tools/contact_art.py escenas && python tools/contact_art.py mapas && python tools/contact_art.py retratos && python tools/contact_art.py hojas",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

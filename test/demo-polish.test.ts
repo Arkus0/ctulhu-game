@@ -116,6 +116,7 @@ describe('encargos, conversaciones y espera', () => {
     expect(report.lines.some((line) => line.kind === 'tirada')).toBe(true)
     expect(game.world.knows('registro_lounpeen_revisado')).toBe(true)
     expect(report.feedback.map((cue) => cue.kind)).toContain('report')
+    expect(report.presentationArt).toBe('escena_informe_nadia')
   })
 
   it('los intercambios no consumen tiempo y solo se disparan una vez', () => {
@@ -172,14 +173,14 @@ describe('guardado y audio', () => {
 
   it('recupera volúmenes válidos y corrige valores fuera de rango', () => {
     const prefs = readAudioPreferences({ getItem: () => JSON.stringify({ muted: true, music: 3, ambience: -1, effects: 0.4 }) })
-    expect(prefs).toEqual({ muted: true, music: 1, ambience: 0, effects: 0.4 })
+    expect(prefs).toEqual({ muted: true, music: 1, effects: 0.4 })
   })
 
   it('no intenta reproducir nada antes de desbloquearse con un gesto', () => {
     const memory = { getItem: () => null, setItem: () => undefined }
     const audio = new AudioManager(memory)
     expect(audio.unlocked).toBe(false)
-    expect(() => audio.handle([{ kind: 'roll' }])).not.toThrow()
+    expect(() => audio.playCue('success')).not.toThrow()
     expect(audio.unlocked).toBe(false)
   })
 
@@ -188,8 +189,38 @@ describe('guardado y audio', () => {
     const memory = { getItem: () => saved || null, setItem: (_key: string, value: string) => { saved = value } }
     const audio = new AudioManager(memory)
     audio.setMuted(true)
-    audio.setVolume('ambience', 0.35)
-    expect(readAudioPreferences(memory)).toMatchObject({ muted: true, ambience: 0.35 })
+    audio.setVolume('effects', 0.35)
+    expect(readAudioPreferences(memory)).toMatchObject({ muted: true, effects: 0.35 })
+  })
+
+  it('expone el resultado de una tirada sin obligar a interpretar la narración', () => {
+    const game = new Game(content, 'structured-roll-feedback')
+    const turn = game.performAction('arrival_question_clinton')
+    expect(turn.feedback).toContainEqual({
+      kind: 'roll',
+      id: 'arrival_question_clinton',
+      outcome: game.view().pendingRoll?.roll.success ? 'success' : 'failure',
+    })
+  })
+
+  it('explica sin ambigüedad que 67 contra 55 es una prueba fallida', () => {
+    let match: { game: Game; turn: ReturnType<Game['performAction']> } | null = null
+    for (let index = 0; index < 1000; index += 1) {
+      const game = new Game(content, `roll-under-${index}`)
+      const turn = game.performAction('arrival_question_clinton')
+      if (game.view().pendingRoll?.roll.value === 67) {
+        match = { game, turn }
+        break
+      }
+    }
+
+    expect(match).not.toBeNull()
+    const roll = match!.game.view().pendingRoll!.roll
+    const line = match!.turn.lines.find((candidate) => candidate.kind === 'tirada')
+    expect(roll.target).toBe(55)
+    expect(roll.success).toBe(false)
+    expect(line?.text).toContain('Tirada 67; necesitabas 55 o menos')
+    expect(line?.text).toContain('prueba fallida')
   })
 })
 

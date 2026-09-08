@@ -1,10 +1,10 @@
-# Dirección de diseño de La Broma Macabra
+# Dirección de diseño de El Disco Egipcio
 
 Este documento es la referencia de producto para las siguientes sesiones de desarrollo. Si una idea nueva entra en conflicto con él, debe discutirse y actualizarse aquí antes de implementarla.
 
 ## 1. Visión
 
-La Broma Macabra debe convertirse en una aventura gráfica narrativa y sistémica para un jugador. No es una novela visual, un lector del módulo ni una sucesión de párrafos con botones. Es una investigación contrarreloj donde el jugador:
+El Disco Egipcio debe convertirse en una aventura gráfica narrativa y sistémica para un jugador. No es una novela visual, un lector del módulo ni una sucesión de párrafos con botones. Es una investigación contrarreloj donde el jugador:
 
 1. Interpreta una situación visible.
 2. Elige una intención concreta.
@@ -174,14 +174,14 @@ Tres reglas de escritura, porque es donde el texto se echa a perder más deprisa
 
 El sonido debe sostener el ritmo, no cubrir la lectura.
 
-- Ambiente por espacio: hall, terraza, cocina, jardín y sótano.
-- Efectos diegéticos breves: campanilla, pasos, vajilla, ascensor, papel, puerta, dados y reloj.
-- Música en capas, con pocos temas y cambios por tensión.
-- Un motivo elegante y colonialmente incómodo para el hotel; otro grave y casi sin pulso para el subsuelo.
+- Todo el audio se sintetiza en tiempo real con Web Audio API: sin grabaciones, MIDI, bancos de sonido ni descargas.
+- Música adaptativa y espaciada para hotel público, investigación y subsuelo.
+- Un motivo elegante y colonialmente incómodo para el hotel; pulso incompleto para la investigación; textura grave y casi sin pulso para el subsuelo.
+- Efectos breves para interfaz, resultados, reloj, pistas, transiciones y Cordura.
 - Silencio deliberado antes de una revelación y golpe sonoro corto después.
-- Controles de música, ambiente y efectos, además de silencio total.
+- Controles separados de música y efectos, además de silencio total.
 - Ningún audio comienza antes del primer gesto del usuario.
-- Solo recursos originales o con licencia compatible, documentados en `LICENSE-AUDIO.md`.
+- La partitura, sus motivos y el sistema están documentados en `docs/DIRECCION-DE-AUDIO.md`.
 
 La música continua no es obligatoria. En una aventura de lectura, treinta segundos de silencio bien situados pueden valer más que otro bucle.
 

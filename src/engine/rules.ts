@@ -18,6 +18,12 @@ export enum Outcome {
 
 export type Difficulty = 'regular' | 'hard' | 'extreme'
 
+export const DIFFICULTY_LABEL: Record<Difficulty, string> = {
+  regular: 'normal',
+  hard: 'difícil',
+  extreme: 'extrema',
+}
+
 export const OUTCOME_LABEL: Record<Outcome, string> = {
   [Outcome.Fumble]: 'pifia',
   [Outcome.Fail]: 'fallo',

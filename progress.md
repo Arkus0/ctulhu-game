@@ -121,5 +121,79 @@ The public repository must exclude the source PDF and current cropped module ill
 ### Riesgos siguientes, sin ampliar aún la tarde
 
 - Hacer una prueba cronometrada con personas externas para confirmar los 20–30 minutos; la automatización valida ramas y ritmo sistémico, no velocidad de lectura humana.
-- Equilibrar a oído niveles y fundidos en altavoces y auriculares; todas las fuentes están auditadas como CC0 en `LICENSE-AUDIO.md`.
+- El audio CC0 de aquel pase quedó reemplazado posteriormente por síntesis Web Audio original; la nueva referencia es `docs/DIRECCION-DE-AUDIO.md`.
 - Reducir el paquete JavaScript inicial y sustituir el arte provisional por el lote original aprobado, sin tocar el arco ni las ramas verificadas.
+
+## Paquete visual original 09:00–13:00 (verificado, 8 de septiembre de 2026)
+
+- [x] La comprobación previa confirmó el PDF local de 166 páginas,
+  `art/raw/*.png`, los antiguos `public/art/*.png`, `art/contacto.png` y
+  `art/ega_preview.png`. `tools/crops.csv` se usó únicamente como inventario de
+  nombres anteriores.
+- [x] Se consultó el PDF para hechos, arquitectura, ropa y tono; las imágenes
+  temporales solo sirvieron para auditar cobertura y función. Ninguna referencia
+  ajena se entregó al generador ni se utilizó como composición.
+- [x] Se crearon 58 finales originales: 22 fondos, 2 mapas, 13 escenas, 11
+  retratos y 10 hojas de continuidad. Todas las imágenes públicas son opacas,
+  miden exactamente 320×152 o 72×96 según su tipo, usan solo las 16 tintas EGA
+  y pesan menos de 40 KB.
+- [x] `art/prompts.json` conserva dirección común, fichas de continuidad,
+  descripciones por activo y la edición dirigida del Disco Solar. Los maestros
+  raster permanecen localmente en `art/master/`; los mapas tienen SVG original
+  versionado.
+- [x] `tools/ega.py` recorta a 40:19, reduce y aplica Bayer 4×4 por defecto;
+  `tools/check_art.py` valida las 58 filas; `tools/contact_art.py` genera hojas
+  para fondos, escenas, mapas, retratos y personajes.
+- [x] El inventario detectó que `habitacion` sirve catorce cuartos, `correos`
+  tres despachos y `recepcion`, `cocina` y `salon_isis` dos espacios. Los giros
+  de la demo no reutilizan esos genéricos: tienen trece composiciones propias.
+- [x] `SceneView.art`, `EventDef.art`, `Turn.presentationArt` y
+  `AssignmentDef.reportArt` forman una ruta de datos completa. La interfaz no
+  codifica nombres de escenas; conserva el arte transitorio hasta la siguiente
+  acción y luego vuelve al fondo, escena o cierre correspondiente.
+- [x] Los mapas se seleccionan desde `src/content/map_art.json`; el panel mantiene
+  la lista textual como fallback. El Viejo Templo tiene variantes visuales para
+  custodia de Edith, retirada por autoridad y salida de Weder.
+- [x] Se retiraron las exclusiones individuales de `public/art/` después de
+  comprobar que todos los nombres usados tenían sustituto. El fallback
+  procedimental permanece para cualquier archivo futuro ausente.
+- [x] Revisión visual: cinco hojas de contacto y once capturas reales del
+  cliente (hall, diálogo, mapas, terraza, Behler, cocina, umbral, orejas, Disco
+  Solar y móvil). Se retiró el resumen duplicado que tapaba el arte; la segunda
+  pasada conserva rostros, foco, salida y rótulos legibles, sin errores de
+  consola.
+- [x] Suite final: 208 pruebas en 9 ficheros y compilación de producción
+  correctas. Vite conserva únicamente el aviso no bloqueante por el tamaño del
+  paquete JavaScript inicial.
+
+### Corrección de mapas
+
+- [x] La primera versión vectorial se rechazó por parecer un diagrama de nodos
+  y tener mucha menos calidad que los fondos.
+- [x] `mapa_plantas` y `mapa_sotanos` se regeneraron como maquetas originales
+  en perspectiva oblicua: fondos pintados, geometría facetada y cámaras fijas
+  propias del survival horror de PC de principios de los noventa.
+- [x] Las antiguas fuentes SVG se retiraron para que el pipeline no pueda
+  restaurar accidentalmente el mapa rechazado. Los prompts finales quedan en
+  `art/prompts.json` y los maestros seleccionados en `art/master/`.
+- [x] Ambos mapas se volvieron a reducir y cuantizar a EGA, se inspeccionaron a
+  320×152 y dentro del panel a 1024×700. El recorrido Playwright terminó sin
+  errores de consola.
+
+## Audio original Web Audio (entregado, 8 de septiembre de 2026)
+
+- [x] Sustituido el reproductor de recursos CC0 por síntesis FM y ruido generado en memoria, con estados Hotel, Investigación, Subsuelo y Silencio.
+- [x] Reducidos los controles a Música, Efectos y silencio total; preferencias v2 con migración desde v1.
+- [x] Añadidos resultados estructurados a las señales de tirada y diagnóstico de audio a `render_game_to_text` sin alterar reloj, RNG ni guardados.
+- [x] Retirados los quince recursos de `public/audio`; la compilación pasa y la suite provisional alcanza 213 pruebas.
+- [x] Primer humo con el cliente de `develop-web-game`: AudioContext desbloqueado, estado Hotel, un planificador pendiente, cero voces residuales y cero errores de consola; captura EGA intacta.
+- [x] Documentados los motivos, estados, señales, controles, persistencia, límites de voces y limpieza de nodos en `docs/DIRECCION-DE-AUDIO.md`.
+- [x] El recorrido automatizado corto cubrió hotel, conversación, investigación, subsuelo y cierre sin errores de consola; mute, volúmenes, recarga y activaciones consecutivas quedaron comprobados.
+- [ ] La auditoría continua de quince minutos se detuvo a petición del usuario después de 225 segundos estables en Hotel y la entrada en Investigación; no se reanudó antes de publicar.
+
+## Claridad de las tiradas porcentuales (8 de septiembre de 2026)
+
+- [x] Aclarado en la tarjeta y el historial que las pruebas son *roll-under*: el resultado debe ser igual o menor que el umbral efectivo.
+- [x] La interfaz muestra por separado tirada, umbral requerido, habilidad base, dificultad y veredicto de la prueba.
+- [x] El estado textual estructurado expone `required` y `success` durante una tirada pendiente.
+- [x] Añadida una regresión explícita para el caso comunicado: 67 contra 55 es una prueba fallida.

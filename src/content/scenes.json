@@ -1,6 +1,7 @@
 [
   {
     "id": "arrival_checkin",
+    "art": "escena_llegada_hall",
     "title": "Llegada al Shepheard’s",
     "body": "Cleveland Clinton lleva medio minuto con la pluma en el aire, esperando un nombre. A vuestra espalda el hall se traga maletas, saludos y un ventilador de techo que gira más despacio de lo que debería. Son las nueve de la mañana y ya hace treinta grados.",
     "actions": [
@@ -12,6 +13,7 @@
   },
   {
     "id": "behler_encargo",
+    "art": "escena_behler",
     "title": "La reunión de Behler",
     "body": "Behler ocupa la cuarta silla de una mesa para cuatro y se seca la frente con un pañuelo bordado con las siglas del hotel. Lleva toda la mañana ensayando cómo contarlo y todavía no ha encontrado la manera de que no suene a locura.",
     "actions": [
@@ -23,6 +25,7 @@
   },
   {
     "id": "terrace_conflict",
+    "art": "escena_carter_weder",
     "title": "Dos conversaciones a la vez",
     "body": "Behler baja la voz justo cuando los dos hombres de la mesa del fondo juntan las cabezas. Están a nueve metros y hablan en un idioma que entendéis. No se puede escuchar a los dos.",
     "actions": [
@@ -34,6 +37,7 @@
   },
   {
     "id": "basement_threshold",
+    "art": "escena_umbral_sotano",
     "title": "El umbral del sótano",
     "body": "La puerta de servicio todavía oscila. Detrás hay doce escalones con luz y, a partir del decimotercero, nada. En la mesa de despiece esperan media docena de corderos abiertos y cuatro pinches que han decidido, todos a la vez, no veros.",
     "actions": [
@@ -45,6 +49,7 @@
   },
   {
     "id": "ears",
+    "art": "escena_orejas",
     "title": "Las orejas",
     "body": "Del túnel del fondo llegan unos quejidos que no salen de una garganta humana. Mahadni saca del bolsillo de la chilaba un par de orejas y las tira a la oscuridad. Unas garras peludas las recogen con un esmero casi delicado y se retiran. No llegáis a verle la cara a lo que se las lleva.",
     "actions": [

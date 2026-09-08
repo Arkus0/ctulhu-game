@@ -3,7 +3,7 @@
 Copia el bloque siguiente en una nueva sesión de Codex:
 
 ```text
-Trabaja en el proyecto local «La Broma Macabra». Tu objetivo no es ampliar todavía la historia después de las 13:00, sino convertir la demo 09:00–13:00 en una experiencia pulida, tensa y rejugable de 20–30 minutos.
+Trabaja en el proyecto local «El Disco Egipcio». Tu objetivo no es ampliar todavía la historia después de las 13:00, sino convertir la demo 09:00–13:00 en una experiencia pulida, tensa y rejugable de 20–30 minutos.
 
 Antes de tocar archivos, lee completos:
 - docs/DIRECCION-DE-DISENO.md
@@ -44,7 +44,7 @@ Afila la demo en este orden:
 - Diseña ambientes propios para hall, terraza, cocina, jardín y sótano.
 - Añade efectos breves para reloj, cambio de pista, pasos, puerta, papel, dados, daño y Cordura.
 - Usa música con moderación: tema de hotel, capa de sospecha, capa de subsuelo y golpe del Disco Solar. Evita un bucle constante que fatigue durante la lectura.
-- Usa solo audio original o con licencia compatible. Documenta autor, procedencia y licencia en LICENSE-AUDIO.md. Si no puedes producir archivos de calidad, implementa el sistema y deja un manifiesto exacto de recursos, sin descargar audio dudoso.
+- Usa exclusivamente la síntesis Web Audio original descrita en `docs/DIRECCION-DE-AUDIO.md`. No añadas grabaciones, MIDI, bancos de sonido ni archivos descargados.
 
 5. Feedback y presentación
 - Añade transiciones breves para cambio de lugar, pista actualizada, informe listo y tirada, respetando prefers-reduced-motion.

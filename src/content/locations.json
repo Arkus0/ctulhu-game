@@ -1007,6 +1007,23 @@
     "art": "viejo_templo",
     "restricted": true,
     "description": "Docenas de columnas sostienen una oscuridad que la linterna no llega a morder. Del túnel norte, negro y pestilente, sale una respiración pesada. En la esquina noreste, sobre el polvo de mil años, hay un sarcófago de basalto negro de seis metros: forma cónica, alargada, con prolongaciones laterales asimétricas que ninguna geometría humana explica. A su alrededor, un pedestal, un cubo de cobre labrado y dos grandes cajas de madera recubiertas de oro.",
+    "variants": [
+      {
+        "requires": [{ "kind": "custody", "item": "disco_solar", "holder": "player" }],
+        "art": "escena_cierre_disco_edith",
+        "description": "Edith sostiene el Disco Solar contra el pecho. Mahadni bloquea medio corredor, pero la salida continúa libre durante unos segundos decisivos."
+      },
+      {
+        "requires": [{ "kind": "flag", "flag": "weder_retrasado" }],
+        "art": "escena_cierre_disco_autoridad",
+        "description": "La autorización firmada divide la estancia. Weder retrocede hacia la galería sin dejar de mirar el disco cubierto."
+      },
+      {
+        "requires": [{ "kind": "flag", "flag": "weder_tiene_el_disco" }],
+        "art": "escena_cierre_disco_weder",
+        "description": "Weder se aleja por el corredor con el paquete bajo el brazo. La luz de su linterna se estrecha y la salida sigue visible, demasiado lejos."
+      }
+    ],
     "exits": [
       {
         "to": "sala_escombros",

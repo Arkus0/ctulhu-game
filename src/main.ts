@@ -2,8 +2,9 @@ import { loadContent, ContentError } from './content/index'
 import { Game, type GameSnapshot, type Line, type Turn } from './engine/game'
 import type { DialogueTopic } from './engine/dialogue'
 import type { GuidedAction } from './engine/adventure'
+import { DIFFICULTY_LABEL, threshold } from './engine/rules'
 import { ArtRenderer, type TimeOfDay } from './ui/art'
-import { AudioManager, type AudioBus } from './ui/audio'
+import { AudioManager, type AudioBus, type AudioZone, type MusicState, type SynthCue } from './ui/audio'
 import './ui/style.css'
 
 type Mode =
@@ -18,6 +19,18 @@ type Mode =
  */
 const PER_PAGE = 5
 
+type AppPhase = 'title' | 'intro' | 'playing' | 'ending'
+
+interface IntroFrame {
+  until: number
+  kind: 'image' | 'party'
+  art?: string
+  alt?: string
+  kicker?: string
+  title?: string
+  body?: string
+}
+
 interface HistoryEntry { time: string; lines: Line[] }
 interface SaveEnvelope {
   version: 1 | 2
@@ -28,7 +41,44 @@ interface SaveEnvelope {
   history: HistoryEntry[]
 }
 
+interface AudioIntent {
+  investigation?: boolean
+  revelation?: boolean
+}
+
 const SAVE_PREFIX = 'la-broma-macabra.save.'
+const INTRO_FRAMES: IntroFrame[] = [
+  {
+    until: 4_000,
+    kind: 'image',
+    art: 'escena_disco_solar',
+    alt: 'El Disco Solar emerge entre las sombras del templo',
+    kicker: 'UNA AVENTURA EN EL CAIRO',
+    title: 'EL DISCO EGIPCIO',
+  },
+  {
+    until: 10_000,
+    kind: 'image',
+    art: 'escena_llegada_hall',
+    alt: 'Tres investigadores llegan a la recepción del Hotel Shepheard’s',
+    kicker: 'EL CAIRO · 21 DE NOVIEMBRE DE 1922',
+    title: 'HOTEL SHEPHEARD’S · 09:00',
+  },
+  {
+    until: 17_000,
+    kind: 'party',
+    kicker: 'TRES INVESTIGADORES',
+  },
+  {
+    until: 23_000,
+    kind: 'image',
+    art: 'escena_llegada_hall',
+    alt: 'Edith, Nadia y Vance se presentan ante el recepcionista',
+    kicker: 'UN TELEGRAMA DE CHARLES BEHLER',
+    body: 'Investigar fenómenos inexplicables. Con discreción.',
+  },
+]
+const INTRO_DURATION = INTRO_FRAMES.at(-1)?.until ?? 23_000
 const $ = <T extends HTMLElement>(id: string): T => {
   const element = document.getElementById(id)
   if (!element) throw new Error(`Falta el elemento #${id} en el HTML`)
@@ -36,13 +86,28 @@ const $ = <T extends HTMLElement>(id: string): T => {
 }
 
 class UI {
+  private phase: AppPhase = 'title'
   private mode: Mode = { kind: 'root' }
+  private game: Game
+  private readonly content: ReturnType<typeof loadContent>
+  private readonly seedOverride: string | null
   private typing: (() => void) | null = null
   private history: HistoryEntry[] = []
   private pages: Line[][] = []
   private pageIndex = 0
+  /** Arte de un suceso o informe; se descarta al iniciar la siguiente accion. */
+  private presentationArt: string | null = null
   private readonly art: ArtRenderer
   private readonly audio = new AudioManager()
+  private introElapsed = 0
+  private introTimer: ReturnType<typeof setTimeout> | null = null
+  private panelReturnFocus: HTMLElement | null = null
+  private readonly gameRoot = $('game')
+  private readonly front = $('front')
+  private readonly frontImage = $<HTMLImageElement>('front-image')
+  private readonly frontParty = $('front-party')
+  private readonly frontCopy = $('front-copy')
+  private readonly frontActions = $('front-actions')
   private readonly log = $('log')
   private readonly choices = $('choices')
   private readonly time = $('hud-time')
@@ -57,7 +122,10 @@ class UI {
   private readonly portraitImg = $<HTMLImageElement>('portrait-img')
   private readonly portraitName = $('portrait-name')
 
-  constructor(readonly game: Game) {
+  constructor(content: ReturnType<typeof loadContent>, seedOverride: string | null) {
+    this.content = content
+    this.seedOverride = seedOverride
+    this.game = this.newGame()
     this.art = new ArtRenderer($<HTMLCanvasElement>('art'))
     $('hud-map').addEventListener('click', () => this.showMap())
     $('hud-case').addEventListener('click', () => this.showCase())
@@ -66,23 +134,57 @@ class UI {
     $('hud-log').addEventListener('click', () => this.showHistory())
     $('hud-audio').addEventListener('click', () => this.showAudio())
     $('hud-audio').setAttribute('aria-pressed', String(this.audio.preferences.muted))
+    $('panel-close').dataset['audioCue'] = 'cancel'
     $('panel-close').addEventListener('click', () => this.closePanel())
     this.log.addEventListener('click', () => this.typing?.())
     document.addEventListener('keydown', (event) => this.key(event))
+    document.addEventListener('click', (event) => {
+      const target = event.target
+      const button = target instanceof Element ? target.closest('button') : null
+      if (!button) return
+      if (button.getAttribute('aria-disabled') === 'true') this.audio.playCue('unavailable')
+      else this.audio.playCue(button.dataset['audioCue'] === 'cancel' ? 'cancel' : 'select')
+    }, { capture: true })
+    document.addEventListener('visibilitychange', () => this.audio.setPageHidden(document.hidden))
+    window.addEventListener('beforeunload', () => this.audio.dispose(), { once: true })
+
+    const unlockListeners = new AbortController()
     const unlockAudio = (): void => {
       void this.audio.unlock().then(() => {
-        const view = this.game.view()
-        this.audio.sync(view.location.id, view.scene?.id ?? null)
-      })
+        this.syncAppAudio()
+        unlockListeners.abort()
+      }).catch(() => undefined)
     }
-    document.addEventListener('pointerdown', unlockAudio, { once: true })
-    document.addEventListener('keydown', unlockAudio, { once: true })
+    document.addEventListener('pointerdown', unlockAudio, { signal: unlockListeners.signal })
+    document.addEventListener('keydown', unlockAudio, { signal: unlockListeners.signal })
+    this.audio.setBaseMusicState('silent')
   }
 
   async start(): Promise<void> {
+    const skipIntro = new URLSearchParams(location.search).get('skipIntro') === '1'
+    if (skipIntro) return this.startFreshGame()
+    this.showTitle()
+  }
+
+  private newGame(): Game {
+    return new Game(this.content, this.seedOverride ?? String(Date.now()))
+  }
+
+  private async startFreshGame(): Promise<void> {
+    this.cancelIntroTimer()
+    this.game = this.newGame()
+    this.history = []
+    this.pages = []
+    this.pageIndex = 0
+    this.presentationArt = null
+    this.mode = { kind: 'root' }
+    this.phase = 'playing'
+    this.front.hidden = true
+    this.gameRoot.hidden = false
+    this.closePanel(false)
     const view = this.game.view()
     this.write([
-      { kind: 'titular', text: 'LA BROMA MACABRA' },
+      { kind: 'titular', text: 'EL DISCO EGIPCIO' },
       {
         kind: 'narracion',
         text: 'Hotel Shepheard’s, El Cairo. Martes 21 de noviembre de 1922, nueve de la mañana. Un telegrama del director os ha traído hasta aquí: «fenómenos inexplicables», decía, y «ruego discreción». Fuera hace ya treinta grados y el polvo se pega a la piel.',
@@ -97,17 +199,204 @@ class UI {
     await this.paint()
   }
 
+  private showTitle(): void {
+    this.cancelIntroTimer()
+    this.phase = 'title'
+    this.audio.setBaseMusicState('silent')
+    this.gameRoot.hidden = true
+    this.front.hidden = false
+    this.front.dataset['view'] = 'title'
+    this.front.dataset['frame'] = '0'
+    this.frontImage.hidden = false
+    this.frontImage.src = 'art/escena_disco_solar.png'
+    this.frontImage.alt = 'El Disco Solar bajo el templo del Hotel Shepheard’s'
+    this.frontParty.hidden = true
+    this.frontParty.replaceChildren()
+    this.frontCopy.replaceChildren(
+      this.frontText('p', 'UNA AVENTURA EN EL CAIRO', 'front-kicker'),
+      this.frontText('h1', 'EL DISCO EGIPCIO'),
+      this.frontText('p', 'EL CAIRO · 1922', 'front-subtitle'),
+    )
+    this.frontActions.replaceChildren()
+    this.frontButton('Nueva partida', () => void this.beginIntro(), 'primary')
+    const latest = this.latestSave()
+    if (latest) this.frontButton(`Continuar · ${latest.time}`, () => void this.continueFrom(latest))
+    this.frontButton('Sonido', () => this.showTitleAudio())
+    this.frontButton('Cómo jugar', () => this.showHelp())
+    this.focusFirstFrontButton()
+  }
+
+  private async beginIntro(): Promise<void> {
+    await this.audio.unlock().catch(() => undefined)
+    this.phase = 'intro'
+    this.audio.setBaseMusicState('intro')
+    this.introElapsed = 0
+    this.renderIntroFrame()
+    this.scheduleIntroFrame()
+  }
+
+  private renderIntroFrame(): void {
+    const index = INTRO_FRAMES.findIndex((frame) => this.introElapsed < frame.until)
+    if (index < 0) {
+      void this.finishIntro()
+      return
+    }
+    const frame = INTRO_FRAMES[index]!
+    this.front.hidden = false
+    this.gameRoot.hidden = true
+    this.front.dataset['view'] = 'intro'
+    this.front.dataset['frame'] = String(index)
+    this.frontCopy.replaceChildren()
+    if (frame.kicker) this.frontCopy.append(this.frontText('p', frame.kicker, 'front-kicker'))
+    if (frame.title) this.frontCopy.append(this.frontText('h1', frame.title))
+    if (frame.body) this.frontCopy.append(this.frontText('p', frame.body, 'front-subtitle'))
+    this.frontImage.hidden = frame.kind === 'party'
+    this.frontParty.hidden = frame.kind !== 'party'
+    if (frame.kind === 'image') {
+      this.frontImage.src = `art/${frame.art}.png`
+      this.frontImage.alt = frame.alt ?? ''
+      this.frontParty.replaceChildren()
+    } else {
+      this.renderIntroParty()
+    }
+    this.frontActions.replaceChildren()
+    this.frontButton('Saltar intro', () => void this.finishIntro(), 'skip')
+    this.animateFront(frame.kind === 'party' ? [this.frontParty, this.frontCopy] : [this.frontImage, this.frontCopy])
+  }
+
+  private renderIntroParty(): void {
+    this.frontParty.replaceChildren()
+    for (const [id, name] of [['edith', 'Edith Harker'], ['nadia', 'Nadia Farouk'], ['vance', 'Samuel Vance']] as const) {
+      const card = document.createElement('figure')
+      card.className = 'front-character'
+      const image = document.createElement('img')
+      image.src = `art/hojas/${id}.png`
+      image.alt = name
+      const caption = document.createElement('figcaption')
+      caption.textContent = name
+      card.append(image, caption)
+      this.frontParty.append(card)
+    }
+  }
+
+  private scheduleIntroFrame(): void {
+    this.cancelIntroTimer()
+    const frame = INTRO_FRAMES.find((candidate) => this.introElapsed < candidate.until)
+    if (!frame) return void this.finishIntro()
+    this.introTimer = setTimeout(() => {
+      this.introElapsed = frame.until
+      this.renderIntroFrame()
+      if (this.phase === 'intro') this.scheduleIntroFrame()
+    }, frame.until - this.introElapsed)
+  }
+
+  private cancelIntroTimer(): void {
+    if (this.introTimer) clearTimeout(this.introTimer)
+    this.introTimer = null
+  }
+
+  private async finishIntro(): Promise<void> {
+    if (this.phase !== 'intro') return
+    this.cancelIntroTimer()
+    await this.startFreshGame()
+  }
+
+  private async continueFrom(save: SaveEnvelope): Promise<void> {
+    await this.audio.unlock().catch(() => undefined)
+    this.phase = 'playing'
+    this.front.hidden = true
+    this.gameRoot.hidden = false
+    await this.loadSave(save)
+  }
+
+  private latestSave(): SaveEnvelope | null {
+    return [1, 2, 3]
+      .map((slot) => this.readSave(slot))
+      .filter((save): save is SaveEnvelope => save != null)
+      .sort((a, b) => (Date.parse(b.savedAt) || 0) - (Date.parse(a.savedAt) || 0))[0] ?? null
+  }
+
+  private showHelp(): void {
+    this.front.dataset['view'] = 'info'
+    this.frontImage.hidden = false
+    this.frontImage.src = 'art/mapa_plantas.png'
+    this.frontImage.alt = 'Mapa del Hotel Shepheard’s'
+    this.frontParty.hidden = true
+    this.frontCopy.replaceChildren(
+      this.frontText('h2', 'CÓMO JUGAR'),
+      this.frontText('p', 'Elige con el ratón o las teclas 1–9.'),
+      this.frontText('p', 'Cada acción consume minutos.'),
+      this.frontText('p', 'Mapa mueve · Caso reúne pistas · Equipo coordina.'),
+      this.frontText('p', 'Espacio o Intro completa el texto. F activa pantalla completa.'),
+    )
+    this.frontActions.replaceChildren()
+    this.frontButton('Volver', () => this.showTitle(), 'primary', 'cancel')
+    this.focusFirstFrontButton()
+  }
+
+  private showTitleAudio(): void {
+    this.front.dataset['view'] = 'info'
+    this.frontImage.hidden = false
+    this.frontImage.src = 'art/escena_disco_solar.png'
+    this.frontImage.alt = ''
+    this.frontParty.hidden = true
+    this.frontCopy.replaceChildren(this.frontText('h2', 'SONIDO'))
+    this.appendAudioControls(this.frontCopy)
+    this.frontActions.replaceChildren()
+    this.frontButton('Volver', () => this.showTitle(), 'primary', 'cancel')
+    this.focusFirstFrontButton()
+  }
+
+  private frontText(tag: 'h1' | 'h2' | 'p', text: string, className = ''): HTMLElement {
+    const element = document.createElement(tag)
+    element.textContent = text
+    element.className = className
+    return element
+  }
+
+  private frontButton(label: string, onClick: () => void, className = '', audioCue: 'select' | 'cancel' = 'select'): void {
+    const button = document.createElement('button')
+    button.type = 'button'
+    button.textContent = label
+    button.className = className
+    button.dataset['audioCue'] = audioCue
+    button.addEventListener('click', onClick)
+    this.frontActions.append(button)
+  }
+
+  private focusFirstFrontButton(): void {
+    window.setTimeout(() => this.frontActions.querySelector('button')?.focus(), 0)
+  }
+
+  private animateFront(elements: HTMLElement[]): void {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    for (const element of elements) {
+      element.animate(
+        [{ opacity: 0.72 }, { opacity: 1 }],
+        { duration: 620, easing: 'steps(6, end)' },
+      )
+    }
+  }
+
+  private syncAppAudio(): void {
+    if (this.phase === 'intro') this.audio.setBaseMusicState('intro')
+    else if (this.phase === 'playing') this.syncAudio(this.game.view())
+    else this.audio.setBaseMusicState('silent')
+  }
+
   private async paint(): Promise<void> {
     const view = this.game.view()
     this.time.textContent = view.time
     this.place.textContent = view.location.name
     this.title.textContent = view.scene?.title ?? view.location.name
-    this.sceneSummary.textContent = view.scene?.body ?? ''
-    this.sceneSummary.hidden = view.scene == null
+    // El cuerpo de la escena ya ocupa la barra OBJETIVO. Repetirlo sobre la
+    // lamina tapaba caras, salidas y objetos en los encuadres panoramicos.
+    this.sceneSummary.textContent = ''
+    this.sceneSummary.hidden = true
     this.objective.textContent = view.objective
     this.scene.classList.toggle('scene-alert', view.scene != null)
-    this.audio.sync(view.location.id, view.scene?.id ?? null)
-    await this.art.draw(view.art, view.timeOfDay as TimeOfDay)
+    this.syncAudio(view)
+    await this.art.draw(this.presentationArt ?? view.art, view.timeOfDay as TimeOfDay)
     this.renderChoices()
   }
 
@@ -145,6 +434,7 @@ class UI {
 
   private renderChoices(): void {
     const view = this.game.view()
+    this.syncAudio(view)
     this.renderPortrait()
     this.choices.replaceChildren()
     if (view.pendingRoll) return this.renderRoll()
@@ -188,6 +478,24 @@ class UI {
     for (const action of view.actions) this.actionButton(action)
   }
 
+  private syncAudio(view: ReturnType<Game['view']>): void {
+    const underground =
+      ['sotano', 'templo'].includes(view.location.floor) ||
+      ['basement_threshold', 'ears', 'solar_disk'].includes(view.scene?.id ?? '')
+    const baseState: MusicState = view.finished ? 'silent' : underground ? 'underground' : 'hotel'
+    const zone: AudioZone = underground
+      ? 'underground'
+      : /^\d+$/.test(view.location.floor)
+        ? 'private'
+        : 'public'
+    const investigationOpen =
+      !underground &&
+      (view.pendingRoll != null || this.mode.kind === 'topics' || this.mode.kind === 'approach')
+    this.audio.setBaseMusicState(baseState)
+    this.audio.setInvestigationActive(investigationOpen)
+    this.audio.noteLocation(view.location.id, zone)
+  }
+
   private actionButton(action: GuidedAction): void {
     if (action.kind === 'talk' && action.id === 'talk_here') {
       this.button(action.label, () => {
@@ -196,7 +504,16 @@ class UI {
       }, action.minutes, action.urgent ? 'urgent' : '')
       return
     }
-    this.button(action.label, () => void this.act(() => this.game.performAction(action.id)), action.minutes, action.urgent ? 'urgent' : '', this.actionHint(action), action.disabled)
+    const investigation = action.kind === 'inspect' || action.kind === 'listen'
+    const revelation = action.id === 'ears_examine' || action.id === 'ears_protect'
+    this.button(
+      action.label,
+      () => void this.act(() => this.game.performAction(action.id), { investigation, revelation }),
+      action.minutes,
+      action.urgent ? 'urgent' : '',
+      this.actionHint(action),
+      action.disabled,
+    )
   }
 
   /**
@@ -221,7 +538,7 @@ class UI {
   private topicButton(topic: DialogueTopic): void {
     this.button(
       topic.label,
-      () => void this.act(() => this.game.ask(topic.id)),
+      () => void this.act(() => this.game.ask(topic.id), { investigation: true }),
       topic.minutes,
       '',
       this.game.hasAskedTopic(topic.id) ? 'Ya lo habéis preguntado.' : '',
@@ -236,8 +553,10 @@ class UI {
     card.className = `roll-card ${pending.roll.success ? 'success' : 'failure'}`
     const value = document.createElement('strong')
     value.textContent = String(pending.roll.value).padStart(2, '0')
+    value.setAttribute('aria-label', `Tirada ${pending.roll.value}`)
     const detail = document.createElement('span')
-    detail.textContent = `${pending.roll.label}. Objetivo difícil: ${Math.floor(pending.roll.target / 2)}.`
+    const required = threshold(pending.roll.target, pending.roll.difficulty)
+    detail.textContent = `${pending.roll.success ? 'Prueba superada' : 'Prueba fallida'}. Necesitas ${required} o menos · ${pending.roll.label} ${pending.roll.target}% · dificultad ${DIFFICULTY_LABEL[pending.roll.difficulty]}.`
     const stakes = document.createElement('small')
     stakes.textContent = pending.stakes
     card.append(value, detail, stakes)
@@ -261,11 +580,20 @@ class UI {
     this.choices.append(element)
   }
 
-  private button(label: string, onClick: () => void, minutes?: number, className = '', hint = '', disabled = false): void {
+  private button(
+    label: string,
+    onClick: () => void,
+    minutes?: number,
+    className = '',
+    hint = '',
+    disabled = false,
+    audioCue: 'select' | 'cancel' = 'select',
+  ): void {
     const button = document.createElement('button')
     button.type = 'button'
     button.className = className
-    button.disabled = disabled
+    button.dataset['audioCue'] = audioCue
+    if (disabled) button.setAttribute('aria-disabled', 'true')
     const number = this.choices.querySelectorAll('button').length + 1
     const key = document.createElement('span')
     key.className = 'key'
@@ -287,7 +615,10 @@ class UI {
       cost.textContent = `${minutes} min`
       button.append(cost)
     }
-    button.addEventListener('click', onClick)
+    button.addEventListener('click', () => {
+      if (disabled) return
+      onClick()
+    })
     this.choices.append(button)
   }
 
@@ -296,22 +627,49 @@ class UI {
       if (change) change()
       else this.mode = { kind: 'root' }
       this.renderChoices()
-    })
+    }, undefined, '', '', false, 'cancel')
   }
 
-  private async act(action: () => Turn): Promise<void> {
+  private async act(action: () => Turn, audioIntent: AudioIntent = {}): Promise<void> {
     let turn: Turn
+    const sanityBefore = this.totalSanity()
+    this.presentationArt = null
     try { turn = action() }
     catch (error) {
+      this.audio.playCue('unavailable')
       this.write([{ kind: 'sistema', text: `No se puede: ${(error as Error).message}` }])
       return
     }
     this.closePanel()
     this.mode = turn.over ? { kind: 'end' } : { kind: 'root' }
+    this.presentationArt = turn.presentationArt ?? null
     if (turn.lines.length > 0) this.write(turn.lines)
     this.feedback(turn.feedback)
-    this.audio.handle(turn.feedback)
+    this.audioForTurn(turn, sanityBefore, audioIntent)
     await this.paint()
+  }
+
+  private totalSanity(): number {
+    return this.game.view().party.reduce((sum, investigator) => sum + investigator.san, 0)
+  }
+
+  private audioForTurn(turn: Turn, sanityBefore: number, intent: AudioIntent): void {
+    const sanityLost = this.totalSanity() < sanityBefore
+    const unavailable = turn.minutes === 0 && turn.lines.some(
+      (line) => line.kind === 'sistema' && /^(No |Esa |Hace falta|Primero |Ya est)/i.test(line.text),
+    )
+    const roll = turn.feedback.find((cue) => cue.kind === 'roll' && cue.outcome)
+    let cue: SynthCue | null = null
+    if (sanityLost || intent.revelation) cue = 'sanity'
+    else if (unavailable) cue = 'unavailable'
+    else if (turn.feedback.some((item) => item.kind === 'damage') || roll?.outcome === 'failure') cue = 'failure'
+    else if (turn.feedback.some((item) => item.kind === 'clue' || item.kind === 'report')) cue = 'clue'
+    else if (roll?.outcome === 'success' || turn.feedback.some((item) => item.kind === 'luck')) cue = 'success'
+    else if (turn.minutes >= 15 || turn.feedback.some((item) => item.kind === 'clock')) cue = 'clock'
+    if (cue) this.audio.playCue(cue)
+    if (intent.investigation || roll || turn.feedback.some((item) => item.kind === 'clue' || item.kind === 'report')) {
+      this.audio.focusInvestigation()
+    }
   }
 
   private feedback(cues: Turn['feedback']): void {
@@ -429,19 +787,25 @@ class UI {
   }
 
   private tone(text: string): string {
-    return /pifia|fallo/.test(text) ? 'failure' : /éxito|exito/.test(text) ? 'success' : ''
+    return /pifia|fallo|fallida/.test(text) ? 'failure' : /éxito|exito|superada/.test(text) ? 'success' : ''
   }
 
   private openPanel(title: string): void {
+    this.panelReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
     this.panelBody.replaceChildren()
     const heading = document.createElement('h2')
     heading.textContent = title
     this.panelBody.append(heading)
     this.panel.hidden = false
     this.panel.scrollTop = 0
+    window.setTimeout(() => $('panel-close').focus(), 0)
   }
 
-  private closePanel(): void { this.panel.hidden = true }
+  private closePanel(restoreFocus = true): void {
+    this.panel.hidden = true
+    if (restoreFocus && this.panelReturnFocus?.isConnected) this.panelReturnFocus.focus()
+    this.panelReturnFocus = null
+  }
 
   private showCase(): void {
     this.openPanel('Cuaderno del caso')
@@ -470,18 +834,28 @@ class UI {
 
   private showMap(): void {
     this.openPanel('Mapa del Shepheard’s')
+    const view = this.game.view()
+    const map = document.createElement('img')
+    map.className = 'map-art'
+    map.src = `art/${view.mapArt}.png`
+    map.alt = `Esquema de la planta ${view.location.floor}`
+    map.addEventListener('error', () => { map.hidden = true }, { once: true })
+    this.panelBody.append(map)
     this.panelNote('El coste incluye el trayecto completo. Los compañeros que están trabajando no siguen a Edith.')
     for (const destination of this.game.mapDestinations()) {
       const button = document.createElement('button')
       button.className = 'panel-action map-destination'
       button.type = 'button'
-      button.disabled = destination.current
+      if (destination.current) button.setAttribute('aria-disabled', 'true')
       const label = document.createElement('strong')
       label.textContent = destination.name
       const detail = document.createElement('span')
       detail.textContent = destination.current ? `Planta ${destination.floor}. Estáis aquí.` : `Planta ${destination.floor}. ${destination.minutes} min.`
       button.append(label, detail)
-      button.addEventListener('click', () => void this.act(() => this.game.travelTo(destination.id)))
+      button.addEventListener('click', () => {
+        if (destination.current) return
+        void this.act(() => this.game.travelTo(destination.id))
+      })
       this.panelBody.append(button)
     }
   }
@@ -566,7 +940,11 @@ class UI {
 
   private showAudio(): void {
     this.openPanel('Sonido')
-    this.panelNote('El audio solo se activa después de una interacción. La música aparece en momentos concretos y deja espacio al silencio.')
+    this.panelNote('Síntesis original Web Audio. Solo se activa después de una interacción y deja largos espacios de silencio.')
+    this.appendAudioControls(this.panelBody)
+  }
+
+  private appendAudioControls(container: HTMLElement): void {
     const muted = document.createElement('button')
     muted.type = 'button'
     muted.className = 'panel-action compact'
@@ -575,15 +953,17 @@ class UI {
     muted.addEventListener('click', () => {
       this.audio.setMuted(!this.audio.preferences.muted)
       $('hud-audio').setAttribute('aria-pressed', String(this.audio.preferences.muted))
-      this.showAudio()
+      if (!this.audio.preferences.muted) this.audio.playCue('select')
+      if (this.phase === 'title') this.showTitleAudio()
+      else this.showAudio()
     })
-    this.panelBody.append(muted)
-    for (const [bus, label] of [['music', 'Música'], ['ambience', 'Ambiente'], ['effects', 'Efectos']] as const) {
-      this.audioSlider(bus, label)
+    container.append(muted)
+    for (const [bus, label] of [['music', 'Música'], ['effects', 'Efectos']] as const) {
+      this.audioSlider(bus, label, container)
     }
   }
 
-  private audioSlider(bus: AudioBus, label: string): void {
+  private audioSlider(bus: AudioBus, label: string, container: HTMLElement): void {
     const row = document.createElement('label')
     row.className = 'audio-control'
     const title = document.createElement('span')
@@ -601,8 +981,9 @@ class UI {
       value.textContent = `${input.value}%`
       this.audio.setVolume(bus, Number(input.value) / 100)
     })
+    input.addEventListener('change', () => this.audio.playCue('select'))
     row.append(title, input, value)
-    this.panelBody.append(row)
+    container.append(row)
   }
 
   private showSaves(): void {
@@ -660,6 +1041,7 @@ class UI {
     this.game.restore(save.game)
     this.history = save.history.map((entry) => ({ time: entry.time, lines: entry.lines.map((line) => ({ ...line })) }))
     this.mode = { kind: 'root' }
+    this.presentationArt = null
     this.closePanel()
     this.write([{ kind: 'sistema', text: `Partida cargada: ${save.time}, ${save.place}.` }])
     await this.paint()
@@ -692,32 +1074,75 @@ class UI {
   }
 
   private showEnding(): void {
-    this.openPanel('13:00. Consecuencias')
+    this.cancelIntroTimer()
+    this.phase = 'ending'
+    this.audio.setBaseMusicState('silent')
+    this.closePanel(false)
+    this.gameRoot.hidden = true
+    this.front.hidden = false
+    this.front.dataset['view'] = 'ending'
+    this.front.dataset['frame'] = '0'
+    this.frontParty.hidden = true
+    this.frontParty.replaceChildren()
+    const view = this.game.view()
+    this.frontImage.hidden = false
+    this.frontImage.src = `art/${this.presentationArt ?? view.art}.png`
+    this.frontImage.alt = 'Consecuencia de la decisión sobre el Disco Solar'
     const holder = this.game.world.holderOf('disco_solar')
-    const heading = document.createElement('h3')
-    const paragraph = document.createElement('p')
+    let heading = ''
+    let paragraph = ''
     if (holder === 'player') {
-      heading.textContent = 'Habéis cambiado la historia'
-      paragraph.textContent = 'Edith conserva el Disco Solar. Weder sabe quién se lo quitó y el hotel ya no es terreno neutral.'
+      heading = 'Habéis cambiado la historia'
+      paragraph = 'Edith conserva el Disco Solar. Weder sabe quién se lo quitó y el hotel ya no es terreno neutral.'
     } else if (this.game.world.getFlag('weder_retrasado')) {
-      heading.textContent = 'Habéis ganado dos horas'
-      paragraph.textContent = 'Weder volverá a las tres con argumentos mejores. El disco sigue bajo tierra y ahora ambos bandos preparan su siguiente movimiento.'
+      heading = 'Habéis ganado dos horas'
+      paragraph = 'Weder volverá a las tres. El disco sigue bajo tierra y ambos bandos preparan su siguiente movimiento.'
     } else {
-      heading.textContent = 'La cadena de custodia ha empezado'
-      paragraph.textContent = 'Weder sube hacia la habitación 407 con el Disco Solar. Sabéis más o menos de lo ocurrido, pero el reloj no se detiene.'
+      heading = 'La cadena de custodia ha empezado'
+      paragraph = 'Weder sube hacia la habitación 407 con el Disco Solar. El reloj no se detiene.'
     }
-    this.panelBody.append(heading, paragraph)
     const stats = this.game.summary()
-    this.panelNote(`Presenciasteis ${stats.seen.length} escenas. ${stats.missed.length} ocurrieron lejos de Edith. Quedan ${stats.traces} rastros recuperables.`)
+    this.frontCopy.replaceChildren(
+      this.frontText('p', '13:00 · FIN DE LA DEMO', 'front-kicker'),
+      this.frontText('h2', heading),
+      this.frontText('p', paragraph, 'front-subtitle'),
+      this.frontText('p', `${stats.seen.length} escenas presenciadas · ${stats.missed.length} lejos de Edith · ${stats.traces} rastros pendientes`, 'front-stats'),
+    )
+    this.frontActions.replaceChildren()
+    this.frontButton('Jugar otra vez', () => void this.startFreshGame(), 'primary')
+    this.frontButton('Volver al título', () => this.showTitle(), '', 'cancel')
+    this.focusFirstFrontButton()
   }
 
-  async debugAdvance(_milliseconds: number): Promise<void> {
+  async debugAdvance(milliseconds: number): Promise<void> {
+    if (this.phase === 'intro') {
+      this.introElapsed = Math.min(INTRO_DURATION, this.introElapsed + Math.max(0, milliseconds))
+      if (this.introElapsed >= INTRO_DURATION) await this.finishIntro()
+      else {
+        this.renderIntroFrame()
+        this.scheduleIntroFrame()
+      }
+      return
+    }
     // El juego avanza por acciones, no por fotogramas. Esta entrada solo hace
     // determinista la animacion de texto para clientes de prueba.
     this.typing?.()
   }
 
   textState(): string {
+    if (this.phase !== 'playing') {
+      const introFrame = this.phase === 'intro'
+        ? INTRO_FRAMES.findIndex((frame) => this.introElapsed < frame.until)
+        : null
+      return JSON.stringify({
+        phase: this.phase,
+        title: 'El Disco Egipcio',
+        introFrame,
+        introElapsed: this.phase === 'intro' ? this.introElapsed : null,
+        actions: [...this.frontActions.querySelectorAll('button')].map((button) => button.textContent ?? ''),
+        audio: this.audio.diagnostics,
+      })
+    }
     const view = this.game.view()
     const resources: Record<string, string | number | string[]> = {}
     if (view.focus.hp < view.focus.hpMax || view.scene?.actions.some((action) => action.risk?.includes('daño'))) resources['health'] = `${view.focus.hp}/${view.focus.hpMax}`
@@ -726,6 +1151,7 @@ class UI {
     const relevantInventory = view.focus.inventory.filter((item) => item === 'disco_solar' || (item === 'autorizacion_behler' && ['basement_threshold', 'solar_disk'].includes(view.scene?.id ?? '')))
     if (relevantInventory.length > 0) resources['inventory'] = relevantInventory
     return JSON.stringify({
+      phase: this.phase,
       time: view.time,
       location: view.location.name,
       objective: view.objective,
@@ -734,18 +1160,36 @@ class UI {
       leads: view.leads.map((lead) => ({ title: lead.title, status: lead.status, deadline: lead.deadline })),
       companions: view.companions.map((companion) => ({ name: companion.name, location: companion.location, state: companion.state, assignment: companion.assignment })),
       resources,
-      pendingRoll: view.pendingRoll ? { title: view.pendingRoll.title, value: view.pendingRoll.roll.value, canSpendLuck: view.pendingRoll.canSpendLuck } : null,
+      pendingRoll: view.pendingRoll ? {
+        title: view.pendingRoll.title,
+        value: view.pendingRoll.roll.value,
+        required: threshold(view.pendingRoll.roll.target, view.pendingRoll.roll.difficulty),
+        success: view.pendingRoll.roll.success,
+        canSpendLuck: view.pendingRoll.canSpendLuck,
+      } : null,
       page: { current: this.pageIndex + 1, total: Math.max(1, this.pages.length) },
       narration: [...this.log.querySelectorAll('p')].map((item) => item.dataset['full'] ?? item.textContent ?? ''),
+      audio: this.audio.diagnostics,
     })
   }
 
   private key(event: KeyboardEvent): void {
-    if (event.key === 'Escape') return this.closePanel()
     if (event.key.toLowerCase() === 'f' && !event.ctrlKey && !event.metaKey) {
       if (document.fullscreenElement) void document.exitFullscreen()
       else void document.documentElement.requestFullscreen()
       return
+    }
+    if (this.phase === 'intro') {
+      if (event.key === 'Escape' || event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault()
+        void this.finishIntro()
+      }
+      return
+    }
+    if (this.phase !== 'playing') return
+    if (event.key === 'Escape') {
+      if (!this.panel.hidden) this.audio.playCue('cancel')
+      return this.closePanel()
     }
     if (this.typing && (event.key === ' ' || event.key === 'Enter')) {
       event.preventDefault()
@@ -778,8 +1222,8 @@ function fatal(message: string, detail = ''): void {
 
 try {
   const content = loadContent()
-  const seed = new URLSearchParams(location.search).get('seed') ?? String(Date.now())
-  const ui = new UI(new Game(content, seed))
+  const seed = new URLSearchParams(location.search).get('seed')
+  const ui = new UI(content, seed)
   window.render_game_to_text = () => ui.textState()
   window.advanceTime = (milliseconds: number) => ui.debugAdvance(milliseconds)
   void ui.start()

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="La Broma Macabra — dos días de locura en el Hotel Shepheard's. Aventura conversacional." />
+    <meta name="description" content="El Disco Egipcio — una investigación contrarreloj en el Hotel Shepheard's, El Cairo, 1922." />
     <meta name="theme-color" content="#000000" />
-    <title>La Broma Macabra</title>
+    <title>El Disco Egipcio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,7 +16,7 @@
   </head>
   <body>
     <div id="crt">
-      <main id="game" aria-live="polite">
+      <main id="game" aria-live="polite" hidden>
         <header id="hud">
           <div class="hud-status">
             <span id="hud-time">21 de noviembre, 09:00</span>
@@ -52,6 +52,15 @@
         <nav id="choices" aria-label="Acciones disponibles"></nav>
       </main>
 
+      <section id="front" class="front-screen" aria-live="polite">
+        <div class="front-stage">
+          <img id="front-image" alt="" />
+          <div id="front-party" class="front-party" hidden></div>
+          <div id="front-copy" class="front-copy"></div>
+        </div>
+        <nav id="front-actions" class="front-actions" aria-label="Menú principal"></nav>
+      </section>
+
       <aside id="panel" hidden>
         <button id="panel-close" type="button" aria-label="Cerrar">×</button>
         <div id="panel-body"></div>
@@ -60,7 +69,7 @@
 
     <noscript>
       <p style="color: #aaa; font-family: monospace; padding: 2rem">
-        La Broma Macabra necesita JavaScript. Actívalo y vuelve a cargar.
+        El Disco Egipcio necesita JavaScript. Actívalo y vuelve a cargar.
       </p>
     </noscript>
 

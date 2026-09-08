@@ -3,7 +3,7 @@
 Copia el bloque siguiente en una nueva sesión de Codex con generación de imágenes disponible:
 
 ```text
-Sustituye el arte temporal de «La Broma Macabra» por un paquete visual completamente original y crea las escenas nuevas que necesita la demo 09:00–13:00.
+Sustituye el arte temporal de «El Disco Egipcio» por un paquete visual completamente original y crea las escenas nuevas que necesita la demo 09:00–13:00.
 
 Usa la skill imagegen para generar y editar imágenes. Antes de generar nada, lee completos:
 - docs/DIRECCION-DE-DISENO.md

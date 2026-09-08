@@ -1,0 +1,9 @@
+{
+  "default": "mapa_plantas",
+  "rules": [
+    {
+      "art": "mapa_sotanos",
+      "floors": ["sotano", "templo"]
+    }
+  ]
+}

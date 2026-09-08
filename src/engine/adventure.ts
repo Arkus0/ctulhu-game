@@ -84,6 +84,8 @@ export interface AssignmentDef {
   fullFacts: string[]
   partialJournal: string[]
   fullJournal: string[]
+  /** Lamina breve que acompana el informe al reunirse con el investigador. */
+  reportArt?: string
 }
 
 export type AssignmentQuality = 'partial' | 'complete'
@@ -153,6 +155,7 @@ export const ASSIGNMENTS: AssignmentDef[] = [
     fullFacts: ['registro_lounpeen_revisado', 'registro_lounpeen_irregular'],
     partialJournal: ['informe_registro_lounpeen'],
     fullJournal: ['informe_registro_lounpeen'],
+    reportArt: 'escena_informe_nadia',
   },
   {
     id: 'nadia_coleccion',
@@ -174,6 +177,7 @@ export const ASSIGNMENTS: AssignmentDef[] = [
     fullFacts: ['coleccion_sotano_irregular', 'objeto_circular_movido'],
     partialJournal: ['informe_coleccion_sotano'],
     fullJournal: ['informe_coleccion_sotano'],
+    reportArt: 'escena_informe_nadia',
   },
   {
     id: 'vance_terraza',
@@ -196,6 +200,7 @@ export const ASSIGNMENTS: AssignmentDef[] = [
     fullFacts: ['vance_siguio_a_weder', 'weder_y_carter_se_reunen', 'ruta_servicio_al_sotano'],
     partialJournal: ['informe_vance_weder'],
     fullJournal: ['informe_vance_weder', 'informe_rutas_servicio'],
+    reportArt: 'escena_informe_vance',
   },
   {
     id: 'vance_servicio',
@@ -217,5 +222,6 @@ export const ASSIGNMENTS: AssignmentDef[] = [
     fullFacts: ['ruta_servicio_al_sotano', 'pasador_servicio_preparado'],
     partialJournal: ['informe_rutas_servicio'],
     fullJournal: ['informe_rutas_servicio'],
+    reportArt: 'escena_informe_vance',
   },
 ]

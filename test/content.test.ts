@@ -324,6 +324,7 @@ describe('la validacion detecta erratas', () => {
     conversations: [],
     events: [],
     topics: [],
+    mapArt: { default: 'mapa_plantas', rules: [] },
   } as never
 
   const con = (over: object): string[] => validate({ ...(base as object), ...over } as never)

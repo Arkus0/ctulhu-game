@@ -1,48 +1,59 @@
-archivo,tipo,uso,hora,personajes,foco,estado,origen,nota
-terraza,fondo,Terraza principal (L1),manana,camarero y huespedes de fondo,mesa al sol en primer termino,pendiente,art/src/terraza.svg,Intento vectorial descartado: dibujo por debajo de la lamina del modulo. Sigue el recorte temporal
-recepcion,fondo,Recepcion y hall (L2) y conserjeria (L3),manana,Clinton y el leon encadenado,libro de registro bajo la luz de la puerta,pendiente,art/src/recepcion.svg,Intento vectorial descartado. Sigue el recorte temporal
-sotano_palacio,fondo,Salon de Ali Bey (sotano),sin luz natural,ninguno,armario de ebano y pozo abierto,pendiente,art/src/sotano_palacio.svg,Intento vectorial descartado. Sigue el recorte temporal
-escena_disco_solar,escena,Escena solar_disk a las 12:30,sin luz natural,Weder y Mahadni,el disco levantado,generado,art/src/escena_disco_solar.svg,Provisional: no habia ninguna lamina de escena antes. Rehacer con generador de imagenes
-edith,retrato,Panel de conversacion e informes,cualquiera,Edith Harker,rostro y cuaderno,generado,art/src/retrato_edith.svg,Provisional: fija el formato 72x96. Rehacer con generador de imagenes
-correos,fondo,Oficina de correos (L10) oficina de direccion (L11) y administracion (L12),manana,Thornhill,mostrador y centralita,pendiente,,Reutilizado por tres localizaciones: conviene desdoblarlo
-restaurante,fondo,El restaurante (L15),mediodia,Rolland,cuarenta mesas y escalera de cocina,pendiente,,
-cocina,fondo,La cocina (L20) y servicio del restaurante (L16),cualquiera,Mahadni,mesa de despiece y puerta del sotano,pendiente,,
-bar_largo,fondo,The Long Bar (L18),tarde,Gasparini,barra y puerta acristalada,pendiente,,Necesita variante de bar cerrado antes de las 16:00
-salon_isis,fondo,Salon Isis (L13) y salon morisco (L14),mediodia,ninguno,biblioteca y balconada al jardin,pendiente,,Reutilizado por dos salones distintos
-jardin,fondo,Jardin exterior (L19),mediodia,ninguno,quiosco de la banda,pendiente,,
-pasillo,fondo,Pasillos y escaleras,cualquiera,ninguno,ascensor de rejilla,pendiente,,
-habitacion,fondo,Catorce habitaciones de huesped,cualquiera,ninguno,cama armario y ventilador,pendiente,,Catorce localizaciones comparten esta lamina: es la reutilizacion mas grave
-sotano_almacen,fondo,Almacen de la cocina,sin luz natural,ninguno,estanterias y charco burbujeante,pendiente,,
-sotano_pasillo,fondo,Pasillo intermedio,sin luz natural,ninguno,alcantarilla con la rejilla levantada,pendiente,,
-sotano_escombros,fondo,Sala de los escombros,sin luz natural,ninguno,corredor lateral del hedor,pendiente,,
-viejo_templo,fondo,Viejo Templo de ibn Tulun,sin luz natural,ninguno,sarcofago de basalto,pendiente,,Necesita tres variantes para los cierres del Disco Solar
-salon_baile,fondo,Salon de baile (L17),cualquiera,ninguno,nave principal y reservados del norte,pendiente,,Hoy cae en el fondo procedimental
-tienda_joyas,fondo,Tienda Merryweather (L4),manana,Merryweather,vitrina del anj de oro,pendiente,,Hoy cae en el fondo procedimental
-tienda_cigarros,fondo,Estanco Sandoval (L6),manana,Sandoval,baules de La Habana,pendiente,,Hoy cae en el fondo procedimental
-tienda_moda_caballeros,fondo,Tienda Lords (L5),manana,Murphy,maniquies con salacot,pendiente,,Hoy cae en el fondo procedimental
-tienda_moda_mujer,fondo,Le Petit France (L8),manana,Belanger,taller de costura a medida,pendiente,,Hoy cae en el fondo procedimental
-tienda_relojes,fondo,Relojeria Sechat (L9),manana,Lardinne,vitrina del Cartier Tank,pendiente,,Hoy cae en el fondo procedimental
-tienda_suvenires,fondo,Tienda de suvenires (L7),manana,Fontanarrosa,estanterias abarrotadas,pendiente,,Hoy cae en el fondo procedimental
-mapa_plantas,mapa,Pantalla de mapa,cualquiera,ninguno,plantas del hotel,pendiente,,Redibujar esquematico y propio; no copiar el plano publicado
-mapa_sotanos,mapa,Pantalla de mapa,cualquiera,ninguno,galerias del subsuelo,pendiente,,Redibujar esquematico y propio; no copiar el plano publicado
-escena_llegada_hall,escena,Escena arrival_checkin a las 09:00,manana,Edith Nadia Vance y Clinton,el registro y la pluma,pendiente,,El leon queda como detalle secundario
-escena_registro_lounpeen,escena,Evento d1_lounpeen_registro a las 09:30,manana,Dieter y Olga,Dieter rigido y Olga mirando el hall,pendiente,,
-escena_behler,escena,Escena behler_encargo a las 11:00,manana,Behler y el grupo,el panuelo bordado y el calor,pendiente,,
-escena_carter_weder,escena,Escena terrace_conflict a las 11:00,manana,Carter y Weder,dos cabezas juntas en la mesa del fondo,pendiente,,Nervio contra falsa cordialidad
-escena_weder_cocina,escena,Evento d1_weder_baja a las 12:00,mediodia,Weder y Mahadni,el cuchillo abandonado y la ruta abierta,pendiente,,
-escena_umbral_sotano,escena,Escena basement_threshold,mediodia,el grupo,escalera demasiado antigua para el hotel,pendiente,,
-escena_orejas,escena,Escena ears a las 12:15,sin luz natural,Mahadni,manos sombra y reaccion humana,pendiente,,Horror sugerido; nada de gore gratuito
-escena_cierre_disco_weder,escena,Cierre: Weder se lleva el disco,sin luz natural,Weder,la espalda que se aleja con el disco,pendiente,,Se resolvera como variante de viejo_templo
-escena_cierre_disco_edith,escena,Cierre: Edith conserva el disco,sin luz natural,Edith,el disco en sus manos y la salida,pendiente,,Se resolvera como variante de viejo_templo
-escena_cierre_disco_autoridad,escena,Cierre: Weder se retira ante la autorizacion,sin luz natural,Weder y Edith,el papel firmado entre los dos,pendiente,,Se resolvera como variante de viejo_templo
-escena_informe_companero,escena,Reencuentro con Nadia o Vance,cualquiera,Nadia o Vance,el reencuentro y el informe,pendiente,,Composicion pequena y reutilizable
-nadia,retrato,Panel de conversacion e informes,cualquiera,Nadia Farouk,rostro,pendiente,,
-vance,retrato,Panel de conversacion e informes,cualquiera,Samuel Vance,rostro,pendiente,,
-behler,retrato,Panel de conversacion,cualquiera,Charles Behler,rostro,pendiente,,
-carter,retrato,Panel de conversacion,cualquiera,Howard Carter,rostro,pendiente,,
-weder,retrato,Panel de conversacion,cualquiera,Garth Weder,rostro,pendiente,,Gafas redondas y pelo claro; ya fijado en la escena del disco
-mahadni,retrato,Panel de conversacion,cualquiera,Mustafa ibn Mahadni,rostro,pendiente,,Delantal manchado; ya fijado en la escena del disco
-olga,retrato,Panel de conversacion,cualquiera,Olga Lounpeen,rostro,pendiente,,
-dieter,retrato,Panel de conversacion,cualquiera,Dieter Lounpeen,rostro,pendiente,,
-gasparini,retrato,Panel de conversacion,cualquiera,Gasparini,rostro,pendiente,,
-clinton,retrato,Panel de conversacion,cualquiera,Cleveland Clinton,rostro y llave maestra,generado,art/src/retrato_clinton.svg,Provisional. Rehacer con generador de imagenes
+archivo,tipo,uso,hora,personajes,foco,estado
+recepcion,fondo,Recepcion y conserjeria,09:00-13:00,Clinton y huespedes,mostrador iluminado y leon secundario,aprobado
+terraza,fondo,Terraza principal,09:00-13:00,camareros y huespedes,toldos y mesa al sol,aprobado
+restaurante,fondo,Restaurante,11:00-13:00,comensales,escalera hacia cocina,aprobado
+cocina,fondo,Cocina y servicio,09:00-13:00,Mahadni y pinches,mesa de trabajo y puerta antigua,aprobado
+correos,fondo,Correos direccion y administracion,09:00-13:00,Thornhill,centralita y mostrador,aprobado
+bar_largo,fondo,The Long Bar cerrado,09:00-13:00,ninguno,barra larga tras cristal,aprobado
+salon_isis,fondo,Salon Isis y salon morisco,09:00-13:00,huespedes lejanos,fuente bajo balconada,aprobado
+jardin,fondo,Jardin exterior,09:00-13:00,paseantes,quiosco y palmeras,aprobado
+pasillo,fondo,Pasillos y escaleras,09:00-13:00,botones lejano,ascensor de rejilla,aprobado
+habitacion,fondo,Habitaciones de huesped,09:00-13:00,ninguno,cama ventilador y luz de persiana,aprobado
+sotano_almacen,fondo,Almacen del sotano,12:00-13:00,ninguno,charco estantes y salida,aprobado
+sotano_pasillo,fondo,Pasillo intermedio,12:00-13:00,ninguno,rejilla levantada y salida,aprobado
+sotano_palacio,fondo,Salon de Ali Bey,12:00-13:00,ninguno,armario pozo y caja,aprobado
+sotano_escombros,fondo,Sala de escombros,12:00-13:00,ninguno,corredor lateral y derrumbe,aprobado
+viejo_templo,fondo,Viejo Templo,12:15-13:00,ninguno,sarcofago cajas y salida,aprobado
+salon_baile,fondo,Salon de baile,09:00-13:00,personal lejano,nave y escenario,aprobado
+tienda_joyas,fondo,Tienda Merryweather,09:00-13:00,Merryweather,vitrina central,aprobado
+tienda_cigarros,fondo,Estanco Sandoval,09:00-13:00,Sandoval,baules de cigarros,aprobado
+tienda_moda_caballeros,fondo,Tienda Lords,09:00-13:00,Murphy,maniquies y probador,aprobado
+tienda_moda_mujer,fondo,Le Petit France,09:00-13:00,Belanger,mesa de patronaje,aprobado
+tienda_relojes,fondo,Relojeria Sechat,09:00-13:00,Lardinne,reloj central y vitrinas,aprobado
+tienda_suvenires,fondo,Tienda de suvenires,09:00-13:00,Fontanarrosa,estanterias y mostrador,aprobado
+mapa_plantas,mapa,Mapa funcional del hotel,09:00-13:00,ninguno,circulacion por plantas,aprobado
+mapa_sotanos,mapa,Mapa funcional del subsuelo,12:00-13:00,ninguno,ruta salida peligro y templo,aprobado
+escena_llegada_hall,escena,Llegada y registro,09:00,Edith Nadia Vance y Clinton,Clinton y la pluma,aprobado
+escena_registro_lounpeen,escena,Registro de los Lounpeen,09:30,Dieter Olga y Clinton,rigidez frente a mirada exploratoria,aprobado
+escena_behler,escena,Reunion de Behler,11:00,Edith Nadia Vance y Behler,panuelo bordado y tension,aprobado
+escena_carter_weder,escena,Conversacion conspirativa,11:00-12:00,Carter y Weder,nervios frente a falsa cordialidad,aprobado
+escena_weder_cocina,escena,Weder cruza la cocina,12:00,Weder y Mahadni,cuchillo abandonado y ruta abierta,aprobado
+escena_umbral_sotano,escena,Umbral del sotano,12:00,Edith Nadia y Vance,escalera demasiado antigua,aprobado
+escena_orejas,escena,Las orejas,12:15,investigadores y Mahadni,manos sombra y reaccion sin gore,aprobado
+escena_disco_solar,escena,Revelacion del Disco Solar,12:30,Weder y Mahadni,disco salida y segundos para actuar,aprobado
+escena_cierre_disco_weder,escena,Cierre Weder conserva el disco,12:35,Weder,paquete alejandose hacia la salida,aprobado
+escena_cierre_disco_edith,escena,Cierre Edith conserva el disco,12:35,Edith,disco protegido y salida,aprobado
+escena_cierre_disco_autoridad,escena,Cierre por autorizacion,12:35,Edith y Weder,papel firmado entre ambos,aprobado
+escena_informe_nadia,escena,Informe reutilizable de Nadia,09:35-13:00,Edith y Nadia,cuaderno compartido y reencuentro,aprobado
+escena_informe_vance,escena,Informe reutilizable de Vance,09:40-13:00,Edith y Vance,plano senalado y reencuentro,aprobado
+edith,retrato,Panel de conversacion,09:00-13:00,Edith Harker,rostro y lazada roja,aprobado
+nadia,retrato,Panel de conversacion,09:00-13:00,Nadia Farouk,rostro y broche dorado,aprobado
+vance,retrato,Panel de conversacion,09:00-13:00,Samuel Vance,rostro y chaqueta marron,aprobado
+behler,retrato,Panel de conversacion,11:00-12:00,Charles Behler,rostro y panuelo,aprobado
+carter,retrato,Panel de conversacion,11:00-12:00,Howard Carter,rostro cansado,aprobado
+weder,retrato,Panel de conversacion,11:00-13:00,Garth Weder,gafas redondas y pelo claro,aprobado
+mahadni,retrato,Panel de conversacion,12:00-13:00,Mustafa ibn Mahadni,cabeza rapada y delantal,aprobado
+olga,retrato,Panel de conversacion,09:30-13:00,Olga Lounpeen,pelo cobrizo y vestido granate,aprobado
+dieter,retrato,Panel de conversacion,09:30-13:00,Dieter Lounpeen,rostro rigido y traje marron,aprobado
+gasparini,retrato,Panel de conversacion,12:00-13:00,Gasparini,bigote y chaleco negro,aprobado
+clinton,retrato,Panel de conversacion,09:00-13:00,Cleveland Clinton,bigote librea y llave,aprobado
+edith,hoja,Continuidad de personaje,cualquiera,Edith Harker,frente perfil espalda y gestos,aprobado
+nadia,hoja,Continuidad de personaje,cualquiera,Nadia Farouk,frente perfil espalda y gestos,aprobado
+vance,hoja,Continuidad de personaje,cualquiera,Samuel Vance,frente perfil espalda y gestos,aprobado
+behler,hoja,Continuidad de personaje,cualquiera,Charles Behler,frente perfil espalda y gestos,aprobado
+carter,hoja,Continuidad de personaje,cualquiera,Howard Carter,frente perfil espalda y gestos,aprobado
+weder,hoja,Continuidad de personaje,cualquiera,Garth Weder,frente perfil espalda y gestos,aprobado
+mahadni,hoja,Continuidad de personaje,cualquiera,Mustafa ibn Mahadni,frente perfil espalda y gestos,aprobado
+olga,hoja,Continuidad de personaje,cualquiera,Olga Lounpeen,frente perfil espalda y gestos,aprobado
+dieter,hoja,Continuidad de personaje,cualquiera,Dieter Lounpeen,frente perfil espalda y gestos,aprobado
+gasparini,hoja,Continuidad de personaje,cualquiera,Gasparini,frente perfil espalda y gestos,aprobado
