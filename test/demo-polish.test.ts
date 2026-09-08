@@ -9,6 +9,8 @@ import fuenteDelJuego from '../src/engine/game.ts?raw'
 // La hoja de estilos se lee del disco: Vite convierte un `?raw` de CSS en un
 // modulo procesado y llega vacia.
 const hojaDeEstilos = readFileSync(new URL('../src/ui/style.css', import.meta.url), 'utf8')
+const marcado = readFileSync(new URL('../index.html', import.meta.url), 'utf8')
+const fuenteDeLaInterfaz = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8')
 
 const content = loadContent()
 
@@ -422,5 +424,63 @@ describe('el estado se ve sin abrir un panel', () => {
     game.advanceTime(parseTime('D1 10:30') - game.clock.now)
     // La interfaz enciende el distintivo con este mismo estado.
     expect(game.view().companions.some((c) => c.state === 'report_ready')).toBe(true)
+  })
+})
+
+describe('accesibilidad y red de seguridad', () => {
+  it('la región viva es solo la narración, no la pantalla entera', () => {
+    // En <main> entero convertia el reloj, el objetivo, el titulo de escena y la
+    // lista de acciones en region viva, y el tecleo la reescribia cada 12 ms.
+    expect(/<main id="game"[^>]*aria-live/.test(marcado)).toBe(false)
+    expect(/<section id="front"[^>]*aria-live/.test(marcado)).toBe(false)
+    expect(/<section id="log"[^>]*aria-live="polite"/.test(marcado)).toBe(true)
+    expect(/<section id="log"[^>]*role="log"/.test(marcado)).toBe(true)
+    // Y el anuncio se retiene mientras dura la animacion de texto.
+    expect(fuenteDeLaInterfaz).toContain("setAttribute('aria-busy', 'true')")
+    expect(fuenteDeLaInterfaz).toContain("setAttribute('aria-busy', 'false')")
+  })
+
+  it('el panel es un diálogo y atrapa el foco', () => {
+    expect(/<aside id="panel"[^>]*role="dialog"/.test(marcado)).toBe(true)
+    expect(/<aside id="panel"[^>]*aria-modal="true"/.test(marcado)).toBe(true)
+    // El panel vive despues de #game en el DOM: sin inert, el tabulador salia
+    // del dialogo hacia la interfaz que queda tapada.
+    expect(fuenteDeLaInterfaz).toContain("setAttribute('inert', '')")
+    expect(fuenteDeLaInterfaz).toContain("removeAttribute('inert')")
+  })
+
+  it('los atajos numéricos no atraviesan un panel abierto', () => {
+    // Con el Mapa abierto, pulsar «1» disparaba la primera accion de la escena
+    // de fondo, que ni siquiera se estaba viendo.
+    const bloque = fuenteDeLaInterfaz.slice(fuenteDeLaInterfaz.indexOf('private key('))
+    const guarda = bloque.indexOf('if (!this.panel.hidden) return')
+    const atajo = bloque.indexOf('Number.parseInt(event.key, 10)')
+    expect(guarda).toBeGreaterThan(-1)
+    expect(guarda).toBeLessThan(atajo)
+  })
+
+  it('guardar y cargar avisan en vez de romperse en silencio', () => {
+    const escribir = fuenteDeLaInterfaz.slice(fuenteDeLaInterfaz.indexOf('private writeSave('))
+    expect(escribir.slice(0, 900)).toContain('try {')
+    const cargar = fuenteDeLaInterfaz.slice(fuenteDeLaInterfaz.indexOf('private async loadSave('))
+    expect(cargar.slice(0, 400)).toContain('try {')
+  })
+
+  it('el texto pequeño no se pinta con el gris que falla contraste', () => {
+    // #555 sobre negro da 2.8:1 y llevaba las lineas de sistema, que es donde va
+    // la unica indicacion de onboarding. --gray se queda para bordes.
+    expect(hojaDeEstilos).toContain('--gray-text')
+    expect(/color:\s*var\(--gray\)\s*[;}]/.test(hojaDeEstilos)).toBe(false)
+  })
+
+  it('el foco visible no se confunde con el ratón por encima', () => {
+    expect(hojaDeEstilos).not.toContain('outline: 0')
+    expect(hojaDeEstilos).toContain(':focus-visible { outline:')
+  })
+
+  it('la pantalla táctil tiene dónde pulsar y hay un escalón intermedio', () => {
+    const movil = hojaDeEstilos.slice(hojaDeEstilos.indexOf('@media (max-width: 760px)'))
+    expect(movil).toContain('min-height: 44px')
+    expect(hojaDeEstilos).toContain('@media (min-width: 761px) and (max-width: 1100px)')
   })
 })

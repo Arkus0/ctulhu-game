@@ -162,6 +162,11 @@ class UI {
     $('hud-log').addEventListener('click', () => this.showHistory())
     $('hud-audio').addEventListener('click', () => this.showAudio())
     $('hud-audio').setAttribute('aria-pressed', String(this.audio.preferences.muted))
+    // Sin esto, si falta el PNG el titulo, la intro y la pantalla final ensenan
+    // el icono de imagen rota del navegador. El fondo de la partida ya cae en el
+    // dibujo procedimental; el frontal no tenia equivalente.
+    this.frontImage.addEventListener('error', () => { this.frontImage.hidden = true })
+    this.frontImage.addEventListener('load', () => { this.frontImage.hidden = false })
     $('panel-close').dataset['audioCue'] = 'cancel'
     $('panel-close').addEventListener('click', () => this.closePanel())
     this.log.addEventListener('click', () => this.typing?.())
@@ -965,6 +970,7 @@ class UI {
       navigation.append(previous, count, next)
       this.log.append(navigation)
     }
+    this.log.setAttribute('aria-busy', 'true')
     let lineIndex = 0
     let character = 0
     let stopped = false
@@ -973,6 +979,10 @@ class UI {
       stopped = true
       if (timer !== undefined) clearTimeout(timer)
       for (const paragraph of paragraphs) paragraph.textContent = paragraph.dataset['full'] ?? ''
+      // La pagina ya esta entera: es ahora cuando un lector de pantalla debe
+      // leerla. Mientras se tecleaba, `aria-busy` retenia el anuncio; sin eso
+      // la region viva repetia el parrafo entero cada doce milisegundos.
+      this.log.setAttribute('aria-busy', 'false')
       // Cada pagina es una unidad de lectura: abrirla por el principio evita
       // ocultar el arranque de un pasaje largo tras el scroll interno.
       this.log.scrollTop = 0
@@ -1009,15 +1019,20 @@ class UI {
     this.panelReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
     this.panelBody.replaceChildren()
     const heading = document.createElement('h2')
+    heading.id = 'panel-title'
     heading.textContent = title
     this.panelBody.append(heading)
     this.panel.hidden = false
     this.panel.scrollTop = 0
+    // El panel tapa la partida pero vive despues de #game en el DOM, asi que sin
+    // esto el tabulador salia del dialogo hacia una interfaz que no se ve.
+    this.gameRoot.setAttribute('inert', '')
     window.setTimeout(() => $('panel-close').focus(), 0)
   }
 
   private closePanel(restoreFocus = true): void {
     this.panel.hidden = true
+    this.gameRoot.removeAttribute('inert')
     if (restoreFocus && this.panelReturnFocus?.isConnected) this.panelReturnFocus.focus()
     this.panelReturnFocus = null
   }
@@ -1216,7 +1231,13 @@ class UI {
       save.className = 'panel-action compact'
       save.type = 'button'
       save.textContent = saved ? 'Sobrescribir' : 'Guardar aquí'
-      save.addEventListener('click', () => { this.writeSave(slot); this.showSaves() })
+      save.addEventListener('click', () => {
+        // `writeSave` avisa por su cuenta si el navegador no deja guardar; aqui
+        // solo hay que evitar que la excepcion se lleve por delante el repintado
+        // de la lista de ranuras.
+        try { this.writeSave(slot) } catch { this.closePanel(); return }
+        this.showSaves()
+      })
       card.append(title, detail, save)
       if (saved) {
         const load = document.createElement('button')
@@ -1240,7 +1261,14 @@ class UI {
       game: this.game.snapshot(),
       history: this.history.map((entry) => ({ time: entry.time, lines: entry.lines.map((line) => ({ ...line })) })),
     }
-    localStorage.setItem(`${SAVE_PREFIX}${slot}`, JSON.stringify(envelope))
+    try {
+      localStorage.setItem(`${SAVE_PREFIX}${slot}`, JSON.stringify(envelope))
+    } catch {
+      // Navegacion privada o cuota agotada. Sin esto el listener reventaba, la
+      // lista de ranuras no se repintaba y el jugador creia haber guardado.
+      this.write([{ kind: 'sistema', text: 'No se ha podido guardar: el navegador no permite almacenar la partida.' }])
+      throw new Error('almacenamiento no disponible')
+    }
   }
 
   private readSave(slot: number): SaveEnvelope | null {
@@ -1253,7 +1281,16 @@ class UI {
   }
 
   private async loadSave(save: SaveEnvelope): Promise<void> {
-    this.game.restore(save.game)
+    try {
+      this.game.restore(save.game)
+    } catch (error) {
+      // Un guardado de otra version o corrupto dejaba la partida muda, con el
+      // panel abierto y sin ningun mensaje.
+      this.closePanel()
+      this.write([{ kind: 'sistema', text: `No se ha podido cargar esa partida: ${(error as Error).message}` }])
+      await this.paint()
+      return
+    }
     this.history = save.history.map((entry) => ({ time: entry.time, lines: entry.lines.map((line) => ({ ...line })) }))
     this.narratedScene = this.game.view().scene?.id ?? null
     this.mode = { kind: 'root' }
@@ -1390,7 +1427,15 @@ class UI {
   }
 
   private key(event: KeyboardEvent): void {
-    if (event.key.toLowerCase() === 'f' && !event.ctrlKey && !event.metaKey) {
+    // Un control con el foco puesto se queda con la tecla: con un deslizador de
+    // volumen enfocado, la «f» entraba en pantalla completa.
+    const target = event.target
+    const editing =
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      (target instanceof HTMLElement && target.isContentEditable)
+    if (!editing && event.key.toLowerCase() === 'f' && !event.ctrlKey && !event.metaKey && !event.altKey) {
       if (document.fullscreenElement) void document.exitFullscreen()
       else void document.documentElement.requestFullscreen()
       return
@@ -1412,6 +1457,9 @@ class UI {
       this.typing()
       return
     }
+    // Con un panel abierto, la lista de acciones esta debajo y tapada: pulsar
+    // «1» disparaba la primera accion de la escena de fondo sin verla.
+    if (!this.panel.hidden) return
     const number = Number.parseInt(event.key, 10)
     if (number >= 1 && number <= 9) this.choices.querySelectorAll('button')[number - 1]?.click()
   }

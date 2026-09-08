@@ -9,6 +9,10 @@
   --silver: #aaaaaa;
   --dark-gray: #2a2a2a;
   --gray: #555555;
+  /* #555 sobre negro da 2.8:1 y se usaba como color de texto en las lineas de
+     sistema, en el estado de las pistas y en los pies del panel. Los bordes
+     siguen con --gray; el texto pequeno pasa a este, que da 7:1. */
+  --gray-text: #949494;
   --bright-blue: #5555ff;
   --bright-green: #55ff55;
   --bright-cyan: #55ffff;
@@ -276,7 +280,12 @@ button { font-family: inherit; }
 .hud-tools button:focus-visible {
   background: var(--yellow);
   color: var(--blue);
-  outline: 0;
+}
+/* El foco no puede leerse igual que el raton por encima: quien navega con
+   teclado necesita saber donde esta, no solo que algo esta resaltado. */
+.hud-tools button:focus-visible {
+  outline: 2px solid var(--bright-cyan);
+  outline-offset: -2px;
 }
 
 #objective {
@@ -413,7 +422,7 @@ button { font-family: inherit; }
 .tirada.failure { color: var(--bright-red); }
 .cordura { color: var(--bright-magenta); }
 .rastro { color: var(--ochre); font-style: italic; }
-.sistema { color: var(--gray); font-size: 0.84rem; }
+.sistema { color: var(--gray-text); font-size: 0.84rem; }
 
 /*
  * La barra se pega al fondo del cuadro y tiene que taparlo hasta el borde: con
@@ -431,7 +440,9 @@ button { font-family: inherit; }
   background: var(--black);
 }
 .log-pagination button {
-  padding: 0.05rem 0.4rem;
+  min-height: 30px;
+  min-width: 44px;
+  padding: 0.05rem 0.6rem;
   border: 1px solid var(--gray);
   background: var(--black);
   color: var(--bright-cyan);
@@ -486,7 +497,6 @@ button { font-family: inherit; }
   border-color: var(--silver);
   background: var(--silver);
   color: var(--black);
-  outline: 0;
 }
 #choices > button[aria-disabled="true"] {
   cursor: not-allowed;
@@ -496,8 +506,9 @@ button { font-family: inherit; }
 #choices > button[aria-disabled="true"]:focus-visible {
   border-color: var(--dark-gray);
   background: var(--black);
-  color: var(--gray);
+  color: var(--gray-text);
 }
+#choices > button:focus-visible { outline: 2px solid var(--bright-cyan); outline-offset: -3px; }
 #choices > button.urgent { border-left: 4px solid var(--magenta); }
 
 /* Navegacion de la lista: comparte una linea y no compite con las decisiones. */
@@ -512,7 +523,7 @@ button { font-family: inherit; }
   padding: 0.2rem 0.5rem;
   border: 1px solid #151515;
   background: var(--black);
-  color: var(--gray);
+  color: var(--gray-text);
   font-size: 0.8rem;
   cursor: pointer;
 }
@@ -520,8 +531,8 @@ button { font-family: inherit; }
 .choice-nav button:focus-visible {
   border-color: var(--bright-cyan);
   color: var(--bright-cyan);
-  outline: 0;
 }
+.choice-nav button:focus-visible { outline: 2px solid var(--bright-cyan); outline-offset: -2px; }
 .key { color: var(--yellow); font-weight: bold; }
 .choice-copy { display: flex; flex-direction: column; min-width: 0; }
 .choice-copy strong { color: inherit; font-size: 0.91rem; font-weight: normal; }
@@ -587,7 +598,7 @@ button { font-family: inherit; }
 }
 #panel h3 { margin: 0; color: var(--bright-cyan); font-size: 0.94rem; }
 #panel p { max-width: 70ch; margin: 0.35rem 0; }
-#panel small { display: block; color: var(--gray); }
+#panel small { display: block; color: var(--gray-text); }
 .panel-note { margin-bottom: 1rem !important; color: var(--silver); }
 
 .lead,
@@ -600,7 +611,7 @@ button { font-family: inherit; }
   border-left-width: 4px;
 }
 .lead > div { display: flex; justify-content: space-between; gap: 1rem; }
-.lead > div span { color: var(--gray); font-size: 0.68rem; letter-spacing: 0.08em; }
+.lead > div span { color: var(--gray-text); font-size: 0.68rem; letter-spacing: 0.08em; }
 .lead.active { border-left-color: var(--bright-cyan); }
 .lead.completed { border-left-color: var(--bright-green); }
 .lead.completed > div span { color: var(--bright-green); }
@@ -624,7 +635,7 @@ button { font-family: inherit; }
   cursor: pointer;
 }
 .panel-action:hover,
-.panel-action:focus-visible { border-color: var(--yellow); color: var(--white); outline: 0; }
+.panel-action:focus-visible { border-color: var(--yellow); color: var(--white); outline: 2px solid var(--yellow); outline-offset: -4px; }
 .panel-action span { color: var(--silver); font-size: 0.76rem; }
 .panel-action.report { border-color: var(--bright-green); color: var(--bright-green); }
 .panel-action.compact { display: inline-block; width: auto; margin-right: 0.4rem; }
@@ -712,15 +723,28 @@ button { font-family: inherit; }
   #hud { display: block; }
   .hud-status { min-height: 34px; padding: 0.3rem 0.55rem; }
   .hud-tools { width: 100%; border-top: 1px solid var(--bright-blue); }
-  .hud-tools button { flex: 1; min-width: 0; padding: 0.34rem 0.05rem; font-size: 0.66rem; }
+  /* Antes ~25 px de alto con el rotulo a 9,9 px. Los pulgares no aciertan ahi. */
+  .hud-tools button { flex: 1; min-width: 0; min-height: 44px; padding: 0.34rem 0.05rem; font-size: 0.7rem; }
   #objective { font-size: 0.72rem; }
   #scene { flex-basis: 27%; min-height: 92px; }
   #scene-summary { top: 1.25rem; font-size: 0.68rem; max-height: calc(100% - 2.2rem); overflow-y: auto; }
   #log { min-height: 96px; padding: 0.55rem 0.7rem 0.3rem; }
   #choices { flex-basis: min(38%, 260px); max-height: 45%; }
-  #choices > button { min-height: 40px; }
+  #choices > button { min-height: 44px; }
+  .choice-nav button { min-height: 44px; font-size: 0.82rem; }
+  /* El control mas pulsado de la partida medía unos 19 px. */
+  .log-pagination button { min-height: 40px; min-width: 52px; font-size: 0.84rem; }
+  #panel-close { width: 44px; height: 44px; }
   .choice-copy small { font-size: 0.69rem; }
   #panel { inset: 0; width: 100%; height: 100%; border: 0; box-shadow: none; padding: 1rem 0.85rem 2rem; }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hud-tools button { padding: 0.34rem 0.5rem; font-size: 0.78rem; }
+  #objective { font-size: 0.8rem; }
+  #scene { flex-basis: 32%; }
+  #choices { flex-basis: min(42%, 300px); }
+  .log-pagination button { min-height: 30px; }
 }
 
 @media (max-height: 620px) and (min-width: 761px) {

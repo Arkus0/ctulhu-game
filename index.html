@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="El Disco Egipcio — una investigación contrarreloj en el Hotel Shepheard's, El Cairo, 1922." />
     <meta name="theme-color" content="#000000" />
+    <!-- Disco solar en las dos tintas de la portada. Va incrustado porque el
+         navegador pide /favicon.ico siempre y un 404 es un error de consola. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000'/%3E%3Ccircle cx='8' cy='8' r='5' fill='%23ffff55'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23aa5500'/%3E%3C/svg%3E"
+    />
     <title>El Disco Egipcio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +22,7 @@
   </head>
   <body>
     <div id="crt">
-      <main id="game" aria-live="polite" hidden>
+      <main id="game" hidden>
         <header id="hud">
           <div class="hud-status">
             <span id="hud-time">21 de noviembre, 09:00</span>
@@ -48,12 +54,12 @@
           <p id="scene-summary"></p>
         </section>
 
-        <section id="log" aria-label="Narración" tabindex="0"></section>
+        <section id="log" aria-label="Narración" role="log" aria-live="polite" tabindex="0"></section>
 
         <nav id="choices" aria-label="Acciones disponibles"></nav>
       </main>
 
-      <section id="front" class="front-screen" aria-live="polite">
+      <section id="front" class="front-screen">
         <div class="front-stage">
           <img id="front-image" alt="" />
           <div id="front-party" class="front-party" hidden></div>
@@ -62,7 +68,7 @@
         <nav id="front-actions" class="front-actions" aria-label="Menú principal"></nav>
       </section>
 
-      <aside id="panel" hidden>
+      <aside id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden>
         <button id="panel-close" type="button" aria-label="Cerrar">×</button>
         <div id="panel-body"></div>
       </aside>
