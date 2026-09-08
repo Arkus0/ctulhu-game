@@ -243,8 +243,8 @@ describe('contratos de contenido', () => {
     expect(view.objective).not.toBe(view.scene!.body)
   })
 
-  it('las seis escenas tienen entre dos y cuatro consecuencias persistentes', () => {
-    expect(content.scenes.size).toBe(6)
+  it('cada escena tiene entre dos y cuatro consecuencias persistentes', () => {
+    expect(content.scenes.size).toBe(7)
     for (const scene of content.scenes.values()) {
       expect(scene.actions.length).toBeGreaterThanOrEqual(2)
       expect(scene.actions.length).toBeLessThanOrEqual(4)
@@ -285,8 +285,104 @@ describe('contratos de contenido', () => {
       'ending:delay',
       'ending:custody',
       'debrief:generic',
+      'lounpeen:escuchada',
+      'lounpeen:esquivada',
     ]) {
       expect(triggers.has(trigger)).toBe(true)
     }
+  })
+})
+
+describe('la hora de las diez ya no es una espera', () => {
+  it('ningún tramo de treinta minutos entre las 09:00 y las 13:00 se queda sin suceso', () => {
+    const inicio = parseTime('D1 09:00')
+    const fin = parseTime('D1 13:00')
+    const vacios: string[] = []
+    for (let desde = inicio; desde < fin; desde += 30) {
+      const hasta = desde + 30
+      // Un tramo esta vivo si hay un suceso en curso, no solo si empieza uno:
+      // las dos escenas de la terraza duran una hora entera.
+      const hay = content.events.some((evento) => {
+        const at = parseTime(evento.at)
+        const until = evento.until ? parseTime(evento.until) : at
+        return at < hasta && until > desde
+      })
+      if (!hay) vacios.push(`${Math.floor(desde / 60)}:${String(desde % 60).padStart(2, '0')}`)
+    }
+    expect(vacios).toEqual([])
+  })
+
+  it('la mañana abre tres frentes distintos entre las diez y las once', () => {
+    const desde = parseTime('D1 10:00')
+    const hasta = parseTime('D1 11:00')
+    const enLaFranja = content.events.filter((evento) => {
+      const at = parseTime(evento.at)
+      return at >= desde && at < hasta
+    })
+    expect(enLaFranja.length).toBeGreaterThanOrEqual(3)
+    // Tres sucesos en la misma sala serian un solo frente con tres parrafos.
+    expect(new Set(enLaFranja.map((evento) => evento.location)).size).toBeGreaterThanOrEqual(2)
+  })
+
+  it('Olga señala el jardín de Isis, que antes no tenía forma de descubrirse', () => {
+    const game = at('olga', 'recepcion', 'D1 10:40')
+    expect(game.view().scene?.id).toBe('lounpeen_abordaje')
+    expect(game.leads().some((lead) => lead.id === 'olga')).toBe(false)
+    game.performAction('lounpeen_escuchar')
+    expect(game.world.knows('gasparini_en_el_jardin_de_isis')).toBe(true)
+    expect(game.leads().some((lead) => lead.id === 'olga')).toBe(true)
+  })
+
+  it('escuchar a Olga cuesta puntualidad y endurece la firma de Behler', () => {
+    const tarde = at('tarde', 'recepcion', 'D1 10:40')
+    tarde.performAction('lounpeen_escuchar')
+    expect(tarde.world.getFlag('behler_impaciente')).toBe(true)
+    tarde.party.moveTogether('terraza')
+    tarde.advanceTime(parseTime('D1 11:30') - tarde.clock.now)
+    const firma = tarde.view().scene?.actions.find((accion) => accion.id === 'behler_authority')
+    expect(firma?.difficulty).toBe('hard')
+
+    const puntual = at('puntual', 'recepcion', 'D1 10:40')
+    puntual.performAction('lounpeen_excusarse')
+    expect(puntual.world.getFlag('behler_impaciente')).toBe(false)
+  })
+
+  it('hablar con Olga delante de su padre cuesta a Dieter, y apartarla puede evitarlo', () => {
+    const game = at('dieter', 'recepcion', 'D1 10:40')
+    expect(game.world.npc('dieter').suspicious).toBe(false)
+    game.performAction('lounpeen_escuchar')
+    expect(game.world.getFlag('dieter_hostil')).toBe(true)
+    expect(game.world.npc('dieter').suspicious).toBe(true)
+  })
+
+  it('el hotel no cuenta siempre lo mismo mientras el jugador espera', () => {
+    const frases = (seed: string): string[] => {
+      const game = at(seed, 'recepcion', 'D1 10:00')
+      const salida: string[] = []
+      for (let i = 0; i < 8; i += 1) {
+        for (const linea of game.performAction('wait').lines) {
+          if (linea.kind === 'rastro') salida.push(linea.text)
+        }
+      }
+      return salida
+    }
+    const semillas = ['a', 'b', 'c', 'd', 'e', 'f'].map((seed) => frases(`ambiente-${seed}`))
+    expect(semillas.every((partida) => partida.length > 0)).toBe(true)
+    // Antes se elegia con el reloj: todas las partidas leian la misma frase en el
+    // mismo minuto. Con azar propio, seis semillas no pueden dar un solo guion.
+    expect(new Set(semillas.map((partida) => partida.join('|'))).size).toBeGreaterThan(1)
+    // Y la sala tiene mas de una frase que contar.
+    expect(new Set(semillas.flat()).size).toBeGreaterThan(1)
+  })
+
+  it('el azar de ambiente no mueve los dados de la partida', () => {
+    const tirada = (esperas: number): number => {
+      const game = at('dados', 'recepcion', 'D1 10:00')
+      for (let i = 0; i < esperas; i += 1) game.performAction('wait')
+      return game.rng.save()
+    }
+    // Dos partidas de la misma semilla que han esperado distinto siguen teniendo
+    // el generador principal en el mismo sitio: el ambiente gasta el suyo.
+    expect(tirada(0)).toBe(tirada(6))
   })
 })

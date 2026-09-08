@@ -1,151 +1,520 @@
 [
-  { "id": "sep_nadia", "trigger": "separation:nadia", "lines": [
-    { "speaker": "edith", "text": "El libro de registro. No me interesan los nombres: me interesa cuál de ellos está escrito con otra letra." },
-    { "speaker": "nadia", "text": "Los nombres me interesan a mí. —Se está poniendo los guantes y no levanta la vista—. Llevo diez años leyendo listas donde el mío no sale." }
-  ]},
-
-  { "id": "sep_vance", "trigger": "separation:vance", "lines": [
-    { "speaker": "edith", "text": "Mira las puertas, no a la gente." },
-    { "speaker": "vance", "text": "Las puertas de servicio de esta casa las conozco sin verlas. Lo que quiero saber es a qué hora cambia el turno de cocina." },
-    { "speaker": "edith", "text": "Pues eso. Vuelve antes de las once." }
-  ]},
-
-  { "id": "report_registro_parcial", "trigger": "report:nadia_registro:partial", "lines": [
-    { "speaker": "nadia", "text": "«Negocios». Una palabra. Y no he leído más porque Clinton cerró el libro con la mano abierta, muy despacio, para que se notara que lo cerraba." },
-    { "speaker": "edith", "text": "Entonces vuelvo yo. A un hombre que cierra un libro despacio hay que preguntarle otra cosa." }
-  ]},
-
-  { "id": "report_registro_completo", "trigger": "report:nadia_registro:complete", "lines": [
-    { "speaker": "nadia", "text": "La página entera está escrita con la misma letra menos dos líneas. Las de los Lounpeen." },
-    { "speaker": "edith", "text": "¿Y eso qué prueba?" },
-    { "speaker": "nadia", "text": "Que alguien los inscribió fuera de turno. Nada más. —Deja los guantes sobre la mesa, doblados—. Pero eso en un hotel cuesta dinero, y el dinero siempre deja un nombre debajo." }
-  ]},
-
-  { "id": "report_coleccion_completo", "trigger": "report:nadia_coleccion:complete", "lines": [
-    { "speaker": "nadia", "text": "Nueve piezas, ninguna del hotel. Los sellos de aduana están rotos con la uña." },
-    { "speaker": "edith", "text": "¿Robadas?" },
-    { "speaker": "nadia", "text": "Sacadas. Robadas es la palabra que usará tu periódico cuando alguien las venda en Londres con una firma inglesa debajo." }
-  ]},
-
-  { "id": "report_servicio_parcial", "trigger": "report:vance_servicio:partial", "lines": [
-    { "speaker": "vance", "text": "Hay escalera. Está abierta. El cocinero mira quién baja y no disimula que mira." },
-    { "speaker": "edith", "text": "¿Puedes pasar?" },
-    { "speaker": "vance", "text": "Puedo pasar. Prefiero saber antes qué digo si me ven, porque decirlo mal le cuesta el trabajo a un camarero, no a mí." }
-  ]},
-
-  { "id": "report_servicio_completo", "trigger": "report:vance_servicio:complete", "lines": [
-    { "speaker": "vance", "text": "El pasador se corre desde los dos lados. Eso no es una cerradura: es un contador. Sirve para saber quién ha bajado, no para impedirlo." },
-    { "speaker": "edith", "text": "Entonces bajaremos sabiendo que nos cuentan." },
-    { "speaker": "vance", "text": "Bajaréis. Yo voy delante." }
-  ]},
-
-  { "id": "report_terraza_completo", "trigger": "report:vance_terraza:complete", "lines": [
-    { "speaker": "vance", "text": "Cuarenta minutos en levantarse de la mesa de Carter y once segundos en encontrar al jefe de cocina. Sabía dónde estaba." },
-    { "speaker": "edith", "text": "¿Le has cronometrado?" },
-    { "speaker": "vance", "text": "Veinte años en una silla junto a la puerta. Es lo único que se puede medir desde ahí." }
-  ]},
-
-  { "id": "weder_sospecha_nadia", "trigger": "weder:suspicion", "lines": [
-    { "speaker": "edith", "text": "Weder no le habla a Carter como un director de museo." },
-    { "speaker": "nadia", "text": "Le habla como quien ya ha decidido de quién es la pieza. Lo he visto en tres excavaciones, y en las tres acabó teniendo razón él." }
-  ]},
-
-  { "id": "weder_sospecha_vance", "trigger": "weder:suspicion", "lines": [
-    { "speaker": "edith", "text": "Esos dos no están desayunando juntos por casualidad." },
-    { "speaker": "vance", "text": "Le habla como un hombre que ha reservado esa mesa por teléfono. La del rincón. La que no tiene a nadie detrás." }
-  ]},
-
-  { "id": "weder_alertado", "trigger": "weder:alerted", "lines": [
-    { "speaker": "vance", "text": "Ya te ha medido." },
-    { "speaker": "edith", "text": "Bien." },
-    { "speaker": "vance", "text": "No, bien no. Ahora la próxima puerta la elige él." }
-  ]},
-
-  { "id": "descenso_seguimiento", "trigger": "descend:follow", "lines": [
-    { "speaker": "vance", "text": "Diez pasos y dos recodos. Si se vuelve, miramos la pared." },
-    { "speaker": "edith", "text": "La pared tiene jeroglíficos." },
-    { "speaker": "vance", "text": "Mejor. Por una vez pareceréis lo que decís que sois." }
-  ]},
-
-  { "id": "descenso_autoridad", "trigger": "descend:authority", "lines": [
-    { "speaker": "edith", "text": "La firma nos abre la puerta." },
-    { "speaker": "nadia", "text": "La firma de un suizo que alquila un templo como almacén. —Se detiene en el primer escalón—. Que nos abra la puerta no lo hace legal, Edith. Solo hace que el primer golpe tenga que darlo otro." }
-  ]},
-
-  { "id": "orejas_nadia", "trigger": "ears:examine", "lines": [
-    { "speaker": "nadia", "text": "Eso no ha sido una ofrenda. Ha sido una rutina. Le ha echado de comer." },
-    { "speaker": "edith", "text": "¿A qué?" },
-    { "speaker": "nadia", "text": "No lo sé. —Y se le nota que le cuesta decirlo—. Llevo veinte años poniéndole nombre a todo lo que sale de un agujero." }
-  ]},
-
-  { "id": "orejas_vance", "trigger": "ears:examine", "lines": [
-    { "speaker": "vance", "text": "Lo ha hecho sin mirar. Como el que deja el cubo en el sitio de siempre." },
-    { "speaker": "edith", "text": "Entonces lo hace todos los días." },
-    { "speaker": "vance", "text": "Entonces alguien le paga por hacerlo todos los días. Que es lo que a mí me preocupa." }
-  ]},
-
-  { "id": "orejas_protegidos", "trigger": "ears:protect", "lines": [
-    { "speaker": "vance", "text": "No tenías que ponerte delante." },
-    { "speaker": "edith", "text": "Sí." },
-    { "speaker": "vance", "text": "…Ya. —Se pasa la mano por la nuca—. La próxima avísame, que a mí me pagan por esto y a ti no." }
-  ]},
-
-  { "id": "fallo_vance", "trigger": "roll:failed", "lines": [
-    { "speaker": "vance", "text": "Eso ha salido mal." },
-    { "speaker": "edith", "text": "¿Cuánto de mal?" },
-    { "speaker": "vance", "text": "Todavía no lo sé. Esa es justo la parte que no me gusta." }
-  ]},
-
-  { "id": "fallo_nadia", "trigger": "roll:failed", "lines": [
-    { "speaker": "nadia", "text": "No ha funcionado." },
-    { "speaker": "edith", "text": "Ya lo veo, Nadia." },
-    { "speaker": "nadia", "text": "Lo digo porque vas a intentarlo otra vez y quiero que conste que lo he dicho." }
-  ]},
-
-  { "id": "suerte_gastada", "trigger": "luck:spent", "lines": [
-    { "speaker": "nadia", "text": "Eso ha estado demasiado cerca." },
-    { "speaker": "edith", "text": "Ha salido bien." },
-    { "speaker": "nadia", "text": "Ha salido bien porque hemos gastado algo que no sé cómo se repone." }
-  ]},
-
-  { "id": "final_observar", "trigger": "ending:observe", "lines": [
-    { "speaker": "vance", "text": "La cuatrocientos siete. Y una caja fuerte." },
-    { "speaker": "edith", "text": "Entonces ya no es un rumor. Es una dirección." },
-    { "speaker": "vance", "text": "Es una habitación con un hombre dentro. No es lo mismo." }
-  ]},
-
-  { "id": "final_retraso", "trigger": "ending:delay", "lines": [
-    { "speaker": "nadia", "text": "Dos horas no cambian lo que es esa cosa." },
-    { "speaker": "edith", "text": "Cambian quién llega primero a entenderla." },
-    { "speaker": "nadia", "text": "Eso lo dices porque escribes. Yo lo único que quiero es que no salga de Egipto." }
-  ]},
-
-  { "id": "final_custodia", "trigger": "ending:custody", "lines": [
-    { "speaker": "vance", "text": "Tenemos el disco y ochenta metros de pasillo entre nosotros y la calle." },
-    { "speaker": "edith", "text": "¿Y?" },
-    { "speaker": "vance", "text": "Que ahora somos nosotros los que llevamos encima algo que alguien quiere. Eso cambia de qué lado de la puerta estamos." }
-  ]},
-
-  { "id": "debrief_autorizacion", "trigger": "debrief:generic",
-    "requires": [{ "kind": "flag", "flag": "autorizacion_behler" }],
+  {
+    "id": "sep_nadia",
+    "trigger": "separation:nadia",
     "lines": [
-      { "speaker": "edith", "text": "Tenemos un papel firmado." },
-      { "speaker": "vance", "text": "Tenemos un papel firmado por un hombre que lleva cuatro años sin bajar a su propia cocina. Yo eso no lo llamaría respaldo." }
-  ]},
-
-  { "id": "debrief_trio", "trigger": "debrief:generic", "lines": [
-    { "speaker": "edith", "text": "Hechos. Lo que sabemos y lo que estamos suponiendo, en dos columnas." },
-    { "speaker": "vance", "text": "Sabemos que esta casa tiene más puertas de las que reconoce." },
-    { "speaker": "nadia", "text": "Y que ninguno de los que las usan ha nacido aquí." }
-  ]},
-
-  { "id": "debrief_vance", "trigger": "debrief:generic", "lines": [
-    { "speaker": "edith", "text": "Hechos. ¿Qué sabemos y qué estamos suponiendo?" },
-    { "speaker": "vance", "text": "Sabemos que esta casa tiene más puertas de las que reconoce. Lo demás todavía hay que ganárselo." }
-  ]},
-
-  { "id": "debrief_nadia", "trigger": "debrief:generic", "lines": [
-    { "speaker": "edith", "text": "Dime qué tenemos y qué me estoy inventando." },
-    { "speaker": "nadia", "text": "Sabemos que hay piezas egipcias bajo este edificio y que ninguna figura en un inventario. El resto es lo que a ti te gustaría que fuera verdad." }
-  ]}
+      {
+        "speaker": "edith",
+        "text": "El libro de registro. No me interesan los nombres: me interesa cuál de ellos está escrito con otra letra."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Los nombres me interesan a mí. —Se está poniendo los guantes y no levanta la vista—. Llevo diez años leyendo listas donde el mío no sale."
+      }
+    ]
+  },
+  {
+    "id": "sep_vance",
+    "trigger": "separation:vance",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Mira las puertas, no a la gente."
+      },
+      {
+        "speaker": "vance",
+        "text": "Las puertas de servicio de esta casa las conozco sin verlas. Lo que quiero saber es a qué hora cambia el turno de cocina."
+      },
+      {
+        "speaker": "edith",
+        "text": "Pues eso. Vuelve antes de las once."
+      }
+    ]
+  },
+  {
+    "id": "report_registro_parcial",
+    "trigger": "report:nadia_registro:partial",
+    "lines": [
+      {
+        "speaker": "nadia",
+        "text": "«Negocios». Una palabra. Y no he leído más porque Clinton cerró el libro con la mano abierta, muy despacio, para que se notara que lo cerraba."
+      },
+      {
+        "speaker": "edith",
+        "text": "Entonces vuelvo yo. A un hombre que cierra un libro despacio hay que preguntarle otra cosa."
+      }
+    ]
+  },
+  {
+    "id": "report_registro_completo",
+    "trigger": "report:nadia_registro:complete",
+    "lines": [
+      {
+        "speaker": "nadia",
+        "text": "La página entera está escrita con la misma letra menos dos líneas. Las de los Lounpeen."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿Y eso qué prueba?"
+      },
+      {
+        "speaker": "nadia",
+        "text": "Que alguien los inscribió fuera de turno. Nada más. —Deja los guantes sobre la mesa, doblados—. Pero eso en un hotel cuesta dinero, y el dinero siempre deja un nombre debajo."
+      }
+    ]
+  },
+  {
+    "id": "report_coleccion_completo",
+    "trigger": "report:nadia_coleccion:complete",
+    "lines": [
+      {
+        "speaker": "nadia",
+        "text": "Nueve piezas, ninguna del hotel. Los sellos de aduana están rotos con la uña."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿Robadas?"
+      },
+      {
+        "speaker": "nadia",
+        "text": "Sacadas. Robadas es la palabra que usará tu periódico cuando alguien las venda en Londres con una firma inglesa debajo."
+      }
+    ]
+  },
+  {
+    "id": "report_servicio_parcial",
+    "trigger": "report:vance_servicio:partial",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "Hay escalera. Está abierta. El cocinero mira quién baja y no disimula que mira."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿Puedes pasar?"
+      },
+      {
+        "speaker": "vance",
+        "text": "Puedo pasar. Prefiero saber antes qué digo si me ven, porque decirlo mal le cuesta el trabajo a un camarero, no a mí."
+      }
+    ]
+  },
+  {
+    "id": "report_servicio_completo",
+    "trigger": "report:vance_servicio:complete",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "El pasador se corre desde los dos lados. Eso no es una cerradura: es un contador. Sirve para saber quién ha bajado, no para impedirlo."
+      },
+      {
+        "speaker": "edith",
+        "text": "Entonces bajaremos sabiendo que nos cuentan."
+      },
+      {
+        "speaker": "vance",
+        "text": "Bajaréis. Yo voy delante."
+      }
+    ]
+  },
+  {
+    "id": "report_terraza_completo",
+    "trigger": "report:vance_terraza:complete",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "Cuarenta minutos en levantarse de la mesa de Carter y once segundos en encontrar al jefe de cocina. Sabía dónde estaba."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿Le has cronometrado?"
+      },
+      {
+        "speaker": "vance",
+        "text": "Veinte años en una silla junto a la puerta. Es lo único que se puede medir desde ahí."
+      }
+    ]
+  },
+  {
+    "id": "weder_sospecha_nadia",
+    "trigger": "weder:suspicion",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Weder no le habla a Carter como un director de museo."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Le habla como quien ya ha decidido de quién es la pieza. Lo he visto en tres excavaciones, y en las tres acabó teniendo razón él."
+      }
+    ]
+  },
+  {
+    "id": "weder_sospecha_vance",
+    "trigger": "weder:suspicion",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Esos dos no están desayunando juntos por casualidad."
+      },
+      {
+        "speaker": "vance",
+        "text": "Le habla como un hombre que ha reservado esa mesa por teléfono. La del rincón. La que no tiene a nadie detrás."
+      }
+    ]
+  },
+  {
+    "id": "weder_alertado",
+    "trigger": "weder:alerted",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "Ya te ha medido."
+      },
+      {
+        "speaker": "edith",
+        "text": "Bien."
+      },
+      {
+        "speaker": "vance",
+        "text": "No, bien no. Ahora la próxima puerta la elige él."
+      }
+    ]
+  },
+  {
+    "id": "descenso_seguimiento",
+    "trigger": "descend:follow",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "Diez pasos y dos recodos. Si se vuelve, miramos la pared."
+      },
+      {
+        "speaker": "edith",
+        "text": "La pared tiene jeroglíficos."
+      },
+      {
+        "speaker": "vance",
+        "text": "Mejor. Por una vez pareceréis lo que decís que sois."
+      }
+    ]
+  },
+  {
+    "id": "descenso_autoridad",
+    "trigger": "descend:authority",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "La firma nos abre la puerta."
+      },
+      {
+        "speaker": "nadia",
+        "text": "La firma de un suizo que alquila un templo como almacén. —Se detiene en el primer escalón—. Que nos abra la puerta no lo hace legal, Edith. Solo hace que el primer golpe tenga que darlo otro."
+      }
+    ]
+  },
+  {
+    "id": "orejas_nadia",
+    "trigger": "ears:examine",
+    "lines": [
+      {
+        "speaker": "nadia",
+        "text": "Eso no ha sido una ofrenda. Ha sido una rutina. Le ha echado de comer."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿A qué?"
+      },
+      {
+        "speaker": "nadia",
+        "text": "No lo sé. —Y se le nota que le cuesta decirlo—. Llevo veinte años poniéndole nombre a todo lo que sale de un agujero."
+      }
+    ]
+  },
+  {
+    "id": "orejas_vance",
+    "trigger": "ears:examine",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "Lo ha hecho sin mirar. Como el que deja el cubo en el sitio de siempre."
+      },
+      {
+        "speaker": "edith",
+        "text": "Entonces lo hace todos los días."
+      },
+      {
+        "speaker": "vance",
+        "text": "Entonces alguien le paga por hacerlo todos los días. Que es lo que a mí me preocupa."
+      }
+    ]
+  },
+  {
+    "id": "orejas_protegidos",
+    "trigger": "ears:protect",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "No tenías que ponerte delante."
+      },
+      {
+        "speaker": "edith",
+        "text": "Sí."
+      },
+      {
+        "speaker": "vance",
+        "text": "…Ya. —Se pasa la mano por la nuca—. La próxima avísame, que a mí me pagan por esto y a ti no."
+      }
+    ]
+  },
+  {
+    "id": "fallo_vance",
+    "trigger": "roll:failed",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "Eso ha salido mal."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿Cuánto de mal?"
+      },
+      {
+        "speaker": "vance",
+        "text": "Todavía no lo sé. Esa es justo la parte que no me gusta."
+      }
+    ]
+  },
+  {
+    "id": "fallo_nadia",
+    "trigger": "roll:failed",
+    "lines": [
+      {
+        "speaker": "nadia",
+        "text": "No ha funcionado."
+      },
+      {
+        "speaker": "edith",
+        "text": "Ya lo veo, Nadia."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Lo digo porque vas a intentarlo otra vez y quiero que conste que lo he dicho."
+      }
+    ]
+  },
+  {
+    "id": "suerte_gastada",
+    "trigger": "luck:spent",
+    "lines": [
+      {
+        "speaker": "nadia",
+        "text": "Eso ha estado demasiado cerca."
+      },
+      {
+        "speaker": "edith",
+        "text": "Ha salido bien."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Ha salido bien porque hemos gastado algo que no sé cómo se repone."
+      }
+    ]
+  },
+  {
+    "id": "final_observar",
+    "trigger": "ending:observe",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "La cuatrocientos siete. Y una caja fuerte."
+      },
+      {
+        "speaker": "edith",
+        "text": "Entonces ya no es un rumor. Es una dirección."
+      },
+      {
+        "speaker": "vance",
+        "text": "Es una habitación con un hombre dentro. No es lo mismo."
+      }
+    ]
+  },
+  {
+    "id": "final_retraso",
+    "trigger": "ending:delay",
+    "lines": [
+      {
+        "speaker": "nadia",
+        "text": "Dos horas no cambian lo que es esa cosa."
+      },
+      {
+        "speaker": "edith",
+        "text": "Cambian quién llega primero a entenderla."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Eso lo dices porque escribes. Yo lo único que quiero es que no salga de Egipto."
+      }
+    ]
+  },
+  {
+    "id": "final_custodia",
+    "trigger": "ending:custody",
+    "lines": [
+      {
+        "speaker": "vance",
+        "text": "Tenemos el disco y ochenta metros de pasillo entre nosotros y la calle."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿Y?"
+      },
+      {
+        "speaker": "vance",
+        "text": "Que ahora somos nosotros los que llevamos encima algo que alguien quiere. Eso cambia de qué lado de la puerta estamos."
+      }
+    ]
+  },
+  {
+    "id": "debrief_autorizacion",
+    "trigger": "debrief:generic",
+    "requires": [
+      {
+        "kind": "flag",
+        "flag": "autorizacion_behler"
+      }
+    ],
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Tenemos un papel firmado."
+      },
+      {
+        "speaker": "vance",
+        "text": "Tenemos un papel firmado por un hombre que lleva cuatro años sin bajar a su propia cocina. Yo eso no lo llamaría respaldo."
+      }
+    ]
+  },
+  {
+    "id": "debrief_trio",
+    "trigger": "debrief:generic",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Hechos. Lo que sabemos y lo que estamos suponiendo, en dos columnas."
+      },
+      {
+        "speaker": "vance",
+        "text": "Sabemos que esta casa tiene más puertas de las que reconoce."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Y que ninguno de los que las usan ha nacido aquí."
+      }
+    ]
+  },
+  {
+    "id": "debrief_vance",
+    "trigger": "debrief:generic",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Hechos. ¿Qué sabemos y qué estamos suponiendo?"
+      },
+      {
+        "speaker": "vance",
+        "text": "Sabemos que esta casa tiene más puertas de las que reconoce. Lo demás todavía hay que ganárselo."
+      }
+    ]
+  },
+  {
+    "id": "debrief_nadia",
+    "trigger": "debrief:generic",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Dime qué tenemos y qué me estoy inventando."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Sabemos que hay piezas egipcias bajo este edificio y que ninguna figura en un inventario. El resto es lo que a ti te gustaría que fuera verdad."
+      }
+    ]
+  },
+  {
+    "id": "lounpeen_escuchada_nadia",
+    "trigger": "lounpeen:escuchada",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Media hora de reloj para sacarle un nombre y un jardín. Behler ya estará mirando la puerta."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Ha comprobado dos veces si su padre la oía. Una al decir el nombre y otra al decir dónde."
+      },
+      {
+        "speaker": "edith",
+        "text": "…lo cual convierte a un barman que hoy libra en la persona más interesante del hotel."
+      }
+    ]
+  },
+  {
+    "id": "lounpeen_escuchada_vance",
+    "trigger": "lounpeen:escuchada",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Gasparini. El del bar largo. Y ella sabe exactamente en qué jardín empieza a buscarle."
+      },
+      {
+        "speaker": "vance",
+        "text": "Hoy libra. Un empleado que libra y no está en su casa es un empleado que sigue en el hotel por algo."
+      },
+      {
+        "speaker": "edith",
+        "text": "¿Y eso lo sabes porque…?"
+      },
+      {
+        "speaker": "vance",
+        "text": "Porque he leído el cuadro de turnos mientras usted escuchaba media hora de biografía."
+      }
+    ]
+  },
+  {
+    "id": "lounpeen_esquivada_nadia",
+    "trigger": "lounpeen:esquivada",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "Llegamos puntuales. Behler nos paga por eso, entre otras cosas."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Lleva desde las nueve sentada de cara a la puerta giratoria. Eso no es esperar a alguien: eso es vigilar una entrada."
+      },
+      {
+        "speaker": "edith",
+        "text": "Se lo preguntaremos luego."
+      },
+      {
+        "speaker": "nadia",
+        "text": "Si luego sigue en la silla."
+      }
+    ]
+  },
+  {
+    "id": "lounpeen_esquivada_vance",
+    "trigger": "lounpeen:esquivada",
+    "lines": [
+      {
+        "speaker": "edith",
+        "text": "La dejamos esperando. Behler es el encargo."
+      },
+      {
+        "speaker": "vance",
+        "text": "Me parece bien. Pero apunte la hora: si a la una sigue ahí sentada, no espera a una persona, espera a un turno."
+      }
+    ]
+  }
 ]

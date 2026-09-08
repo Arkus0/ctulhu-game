@@ -108,6 +108,8 @@ export interface GameSnapshot {
   version: 1 | 2
   clock: number
   rng: number
+  /** Opcional: los guardados anteriores al azar de ambiente no lo traen. */
+  flavorRng?: number
   party: PartySnapshot
   world: WorldSnapshot
   scheduler: SchedulerSnapshot
@@ -153,10 +155,21 @@ export class Game {
   private resolvedScenes = new Set<string>()
   private firedExchanges = new Set<string>()
   private emptyWaits = 0
+  /**
+   * Azar propio para el ambiente del hotel.
+   *
+   * La partitura ya sigue esta regla: el planificador musical tiene su azar y no
+   * consulta el RNG del juego. El ambiente necesita lo mismo. Si las frases de
+   * relleno gastaran tiradas del generador comun, elegir una frase movería todos
+   * los dados posteriores y dos partidas con la misma semilla dejarian de ser la
+   * misma partida en cuanto una esperase un turno mas que la otra.
+   */
+  private readonly flavorRng: Rng
 
   constructor(content: Content, seed: string | number = Date.now()) {
     this.content = content
     this.rng = new Rng(seed)
+    this.flavorRng = new Rng(`ambiente:${seed}`)
     this.clock = new Clock(GAME_START)
 
     const start = 'recepcion'
@@ -511,6 +524,10 @@ export class Game {
           copy.hint = 'Vance ya está ocupado con otro encargo.'
         }
         if (action.id === 'arrival_nadia_registry' && this.companionBusy('nadia')) copy.disabled = true
+        if (action.id === 'behler_authority' && this.world.getFlag('behler_impaciente')) {
+          copy.difficulty = 'hard'
+          copy.hint = 'Persuasión · Difícil. Le habéis hecho esperar y lo sabe.'
+        }
         if (action.id === 'threshold_follow' && this.world.getFlag('weder_alertado')) {
           copy.difficulty = 'hard'
           copy.hint = 'Sigilo · Difícil. Weder ya conoce vuestra vigilancia.'
@@ -580,6 +597,15 @@ export class Game {
         ),
       })
     else if (now >= 12 * 60 + 30) visible.push(this.anonymousMissed('sotano'))
+
+    if (this.world.knows('olga_busca_a_gasparini')) visible.push({
+        id: 'olga',
+        title: 'A quién espera la hija de Lounpeen',
+        detail: 'Olga busca al barman del bar largo, y sabe dónde empieza siempre a buscarle.',
+        deadline: '12:00 a 13:00',
+        status: done(this.world.getFlag('gasparini_olga_jardin'), now >= 13 * 60),
+      })
+    else if (now >= 13 * 60) visible.push(this.anonymousMissed('olga'))
 
     const diskKnown =
       this.world.knows('disco_solar_existe') ||
@@ -803,6 +829,33 @@ export class Game {
       }
       return this.resolve(lines, 5, [{ kind: 'sanity', id: 'ears' }])
     }
+    if (id === 'lounpeen_escuchar') {
+      this.completeScene('lounpeen_abordaje')
+      const late = this.clock.now + 25 >= 11 * 60
+      if (late) this.world.setFlag('behler_impaciente')
+      this.world.learnFact('olga_busca_a_gasparini')
+      this.world.learnFact('gasparini_en_el_jardin_de_isis')
+      this.world.unlockJournal('olga_y_el_barman')
+      this.angerDieter()
+      const lines: Line[] = [
+        { kind: 'dialogo', text: 'Olga —«Barman. Del bar largo, no del de la terraza, que ese tiene mujer y se le nota. Gasparini. Libra hoy y no ha bajado a desayunar». Se ríe sin ganas. «Ustedes preguntan por todo el mundo. Pregunten también por él».' },
+        { kind: 'narracion', text: 'Tarda media hora en contarlo y solo la última frase es información: Gasparini empieza siempre por el jardín del salón Isis, y ella lo sabe porque no es la primera vez que le busca allí.' },
+      ]
+      if (late) lines.push({ kind: 'sistema', text: 'Son más de las once. Behler lleva un rato solo en la terraza.' })
+      lines.push(...this.exchange('lounpeen:escuchada'))
+      return this.resolve(lines, 25, [{ kind: 'clue', id: 'olga' }])
+    }
+    if (id === 'lounpeen_apartar') {
+      return this.beginSceneRoll(id, 'Lejos del periódico', 'harker', 'Charlateria', 'regular', 'Éxito: el nombre y el sitio sin que su padre lo vea. Fallo: el nombre a medias y Dieter mirando.')
+    }
+    if (id === 'lounpeen_excusarse') {
+      this.completeScene('lounpeen_abordaje')
+      this.world.setFlag('olga_esquivada')
+      return this.resolve([
+        { kind: 'narracion', text: 'Edith se disculpa con la fórmula que usa cuando la historia buena no es la que tiene delante. Olga no insiste: recoge el bolso, mira otra vez la puerta giratoria y se acomoda para seguir esperando.' },
+        ...this.exchange('lounpeen:esquivada'),
+      ], 5)
+    }
     if (id === 'check_in') {
       this.world.setFlag('investigadores_registrados')
       this.world.unlockJournal('cita_con_behler')
@@ -994,6 +1047,21 @@ export class Game {
           lines.push(...this.exchange('weder:alerted'))
         }
         return this.resolve(lines, 10, feedback)
+      }
+      if (pending.actionId === 'lounpeen_apartar') {
+        this.completeScene('lounpeen_abordaje')
+        if (this.clock.now + 15 >= 11 * 60) this.world.setFlag('behler_impaciente')
+        this.world.learnFact('olga_busca_a_gasparini')
+        if (result.success) {
+          this.world.learnFact('gasparini_en_el_jardin_de_isis')
+          this.world.unlockJournal('olga_y_el_barman')
+          lines.push({ kind: 'dialogo', text: 'Olga, en el hueco de la escalera —«Gasparini. El del bar largo. Y no me lo pregunten aquí, pregúntenlo en el jardín del salón Isis, que es donde empieza siempre».' })
+          feedback.push({ kind: 'clue', id: 'olga' })
+        } else {
+          this.angerDieter()
+          lines.push({ kind: 'narracion', text: 'Olga suelta un nombre —Gasparini— y se calla en seco: su padre ha doblado el periódico y viene por el pasillo sin prisa, que es como camina la gente que ya ha decidido lo que va a decir.' })
+        }
+        return this.resolve(lines, 15, feedback)
       }
       if (pending.actionId === 'threshold_follow') {
         this.completeScene('basement_threshold')
@@ -1590,15 +1658,103 @@ export class Game {
     }
   }
 
+  /**
+   * El precio de hablar con Olga en publico. Es su gancho de caracter: cualquier
+   * insinuacion sobre su hija, o pillarles simplemente charlando con ella, os
+   * convierte en gente non grata. `suspicious` mete un dado de penalizacion en
+   * todo lo que se le pregunte a partir de ahora.
+   */
+  private angerDieter(): void {
+    this.world.setFlag('dieter_hostil')
+    this.world.adjustDisposition('dieter', -40)
+    if (this.world.hasNpc('dieter')) this.world.npc('dieter').suspicious = true
+  }
+
+  /**
+   * La reaccion del hotel cuando el jugador encadena esperas vacias.
+   *
+   * Antes cubria cuatro salas con dos frases cada una y elegia con el reloj
+   * (`clock.now / 15`), asi que alternaba las dos mismas frases y una hora de
+   * espera se leia dos veces. Ahora cubre las once salas jugables y elige con el
+   * RNG de la partida, que es determinista por semilla pero distinto entre
+   * partidas. La regla del scheduler dice que el mundo sigue andando aunque no
+   * mires; esto es lo unico que el jugador oye de eso mientras espera.
+   */
   private hotelReaction(): string {
-    const reactions: Record<string, string[]> = {
-      recepcion: ['Una campana reclama a un botones. Tres maletas cambian de dueño sin que nadie levante la voz.', 'El montacargas se detiene detrás del mostrador y vuelve a arrancar vacío.'],
-      terraza: ['El toldo golpea una vez con el viento caliente. Una silla se arrastra en la mesa del fondo.', 'Un camarero sustituye una taza intacta por otra y guarda la primera debajo del delantal.'],
-      cocina: ['La vajilla choca detrás de la puerta; después, durante cinco segundos, toda la cocina calla.', 'El montacargas sube con olor a carbón húmedo y baja sin que nadie lo abra.'],
-      salon_isis: ['Las hojas de las palmeras ocultan una risa y luego solo queda el agua de la fuente.', 'Un jardinero abandona las tijeras al oír pasos en la balconada.'],
+    // Reservado a que alguien del grupo este fuera cumpliendo un encargo. Es la
+    // unica ventana a un compañero separado antes de que vuelva con su informe,
+    // y por eso no puede salir cuando estan los tres delante.
+    const away: string[] = []
+    if (this.companionBusy('nadia')) {
+      away.push('Dos plantas más allá alguien pide en árabe que le dejen ver una página otra vez. Le contestan que no, en inglés.')
     }
-    const pool = reactions[this.party.focus.location] ?? ['El hotel cambia de turno a vuestro alrededor: pasos, llaves y una puerta que se cierra lejos.']
-    return pool[Math.floor(this.clock.now / 15) % pool.length]!
+    if (this.companionBusy('vance')) {
+      away.push('Una puerta de servicio se abre y se cierra en el ala norte con la calma de quien ha decidido que tiene derecho a estar ahí.')
+    }
+    if (away.length > 0 && this.flavorRng.chance(35)) return away[this.flavorRng.int(0, away.length - 1)]!
+
+    const reactions: Record<string, string[]> = {
+      recepcion: [
+        'Una campana reclama a un botones. Tres maletas cambian de dueño sin que nadie levante la voz.',
+        'El montacargas se detiene detrás del mostrador y vuelve a arrancar vacío.',
+        'Clinton cambia la hoja del registro y alisa la anterior con el canto de la mano antes de guardarla.',
+      ],
+      conserjeria: [
+        'Los hermanos Meyer entran con equipaje ajeno, lo dejan numerado y salen sin cruzar palabra con nadie.',
+        'Suena un timbre en el tablero de llaves. Nadie mira qué habitación lo ha pulsado.',
+        'Un mozo repasa la lista de excursiones al Fayum con el lápiz detrás de la oreja y no apunta nada.',
+      ],
+      terraza: [
+        'El toldo golpea una vez con el viento caliente. Una silla se arrastra en la mesa del fondo.',
+        'Un camarero sustituye una taza intacta por otra y guarda la primera debajo del delantal.',
+        'Abajo, en la calle, un vendedor de escarabajos falsos levanta la vista hacia la terraza y calcula.',
+      ],
+      restaurante: [
+        'El metre recoloca por tercera vez los cubiertos de una mesa que nadie ha ocupado.',
+        'De la cocina sale un olor a carbón húmedo que no pega con nada de lo que hay en la carta.',
+        'Dos camareros se cruzan en la puerta de vaivén y ninguno de los dos lleva nada en las manos.',
+      ],
+      cocina: [
+        'La vajilla choca detrás de la puerta; después, durante cinco segundos, toda la cocina calla.',
+        'El montacargas sube con olor a carbón húmedo y baja sin que nadie lo abra.',
+        'Un pinche lleva fregando la misma cazuela desde que entrasteis y os da la espalda con mucho cuidado.',
+      ],
+      salon_isis: [
+        'Las hojas de las palmeras ocultan una risa y luego solo queda el agua de la fuente.',
+        'Un jardinero abandona las tijeras al oír pasos en la balconada.',
+        'La puerta del jardín se queda entreabierta el tiempo justo para que salga alguien sin que se le vea la cara.',
+      ],
+      correos: [
+        'La máquina de telegrafía arranca sola, escupe cuatro palabras y se para.',
+        'Thornhill separa un sobre del montón y lo deja boca abajo, debajo del secante.',
+        'Un botones espera un cambio de sello con la gorra en la mano y sin ninguna prisa.',
+      ],
+      bar_largo: [
+        'El hielo se asienta en una copa que nadie ha pedido y que ya estaba ahí cuando entrasteis.',
+        'El ventilador reparte el humo de un puro que se apagó hace rato.',
+        'El hueco de detrás de la barra está limpio y ordenado como un sitio del que se han ido con tiempo de sobra.',
+      ],
+      salon_ali_bey: [
+        'La bombilla del pasillo baja de intensidad, aguanta y vuelve. Aquí abajo eso pasa cada pocos minutos.',
+        'Una de las cajas cruje al reasentarse. No la ha tocado nadie.',
+        'Corre un aire que no viene de la escalera: viene de más adentro, y viene más frío.',
+      ],
+      sala_escombros: [
+        'Cae arenilla del techo en una línea recta y deja de caer de golpe.',
+        'El eco devuelve vuestros pasos con medio segundo de más, como si el pasillo fuese más largo de lo que se ve.',
+        'Algo se arrastra al fondo del túnel, se detiene cuando os detenéis, y espera.',
+      ],
+      viejo_templo: [
+        'La linterna encuentra una pared pintada, y la pintura está demasiado entera para llevar tres mil años ahí.',
+        'El polvo del suelo tiene huellas que van y vienen: mucha gente, muchas veces, hace poco.',
+        'Se oye agua muy abajo, y entre trago y trago hay un silencio que no dura siempre lo mismo.',
+      ],
+    }
+    const pool = reactions[this.party.focus.location] ?? [
+      'El hotel cambia de turno a vuestro alrededor: pasos, llaves y una puerta que se cierra lejos.',
+      'En algún pasillo alguien discute en voz muy baja, que es como se discute en los sitios caros.',
+    ]
+    return pool[this.flavorRng.int(0, pool.length - 1)]!
   }
 
   private renderReport(report: TickReport): Line[] {
@@ -1690,6 +1846,7 @@ export class Game {
       version: 2,
       clock: this.clock.save(),
       rng: this.rng.save(),
+      flavorRng: this.flavorRng.save(),
       party: this.party.snapshot(),
       world: this.world.snapshot(),
       scheduler: this.scheduler.snapshot(),
@@ -1718,6 +1875,7 @@ export class Game {
     if (snap.version !== 1 && snap.version !== 2) throw new Error('Esta partida pertenece a una versión incompatible')
     this.clock.restore(snap.clock)
     this.rng.restore(snap.rng)
+    if (snap.flavorRng != null) this.flavorRng.restore(snap.flavorRng)
     this.party.restore(snap.party)
     this.world.restore(snap.world)
     this.scheduler.restore(snap.scheduler)

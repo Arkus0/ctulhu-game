@@ -50,6 +50,94 @@
     "note": "Módulo, pág. 46: La extraña pareja."
   },
   {
+    "id": "d1_servicio_carga",
+    "at": "D1 10:00",
+    "until": "D1 10:45",
+    "location": "recepcion",
+    "actors": ["clinton"],
+    "priority": 6,
+    "witnessText": "Dos mozos cruzan el hall con una caja de listones sin remite y no la llevan al montacargas de equipajes, que está libre. Doblan detrás del mostrador, empujan una puerta forrada de la misma tela que la pared y desaparecen. Clinton no levanta la vista del registro mientras dura la maniobra, y eso es lo único de todo el trayecto que parece ensayado.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "el_hotel_tiene_puertas_de_servicio"
+      },
+      {
+        "kind": "unlockJournal",
+        "entry": "puertas_que_no_estan_en_el_plano"
+      }
+    ],
+    "traces": [
+      {
+        "id": "puerta_forrada",
+        "location": "recepcion",
+        "text": "Detrás del mostrador, donde la tela de la pared cambia de dirección, hay una hoja de puerta sin tirador. El zócalo de debajo está desportillado a la altura exacta de una caja mal llevada."
+      }
+    ],
+    "tags": ["preparacion", "sotano"],
+    "note": "Segunda anomalía de la mañana que pide la dirección de diseño: la actividad discreta del personal. No entrega la ruta de servicio, solo la sospecha de que existe."
+  },
+  {
+    "id": "d1_mahadni_recibe",
+    "at": "D1 10:20",
+    "until": "D1 11:00",
+    "location": "cocina",
+    "actors": ["mahadni"],
+    "priority": 6,
+    "requires": [
+      {
+        "kind": "npcAlive",
+        "npc": "mahadni"
+      }
+    ],
+    "witnessText": "Mahadni firma un albarán apoyado en la jamba, sin mirarlo. La caja que le dejan no huele a nada y no pesa lo que pesa la carne: los dos hombres la bajan al suelo con las rodillas, no con la espalda. El jefe de cocina espera a que salgan, la empuja con el pie hasta la puerta del fondo y vuelve a los corderos como si no hubiera interrumpido el despiece.",
+    "effects": [
+      {
+        "kind": "learnFact",
+        "fact": "mahadni_guarda_cajas_abajo"
+      }
+    ],
+    "traces": [
+      {
+        "id": "albaran_sin_membrete",
+        "location": "cocina",
+        "text": "Clavado en el corcho de la cocina, entre pedidos de pescado, un albarán sin membrete: una línea, sin concepto, con la firma de Mahadni y el sello de nadie."
+      }
+    ],
+    "tags": ["preparacion", "sotano"],
+    "note": "Segunda vía para relacionar a Mahadni con el subsuelo, presenciable solo si el jugador elige la cocina antes de las once."
+  },
+  {
+    "id": "d1_olga_aborda",
+    "art": "escena_registro_lounpeen",
+    "at": "D1 10:40",
+    "until": "D1 11:15",
+    "location": "recepcion",
+    "actors": ["olga", "dieter"],
+    "priority": 9,
+    "scene": "lounpeen_abordaje",
+    "interruptibleBy": [
+      "lounpeen_escuchar",
+      "lounpeen_apartar",
+      "lounpeen_excusarse"
+    ],
+    "effects": [
+      {
+        "kind": "setFlag",
+        "flag": "olga_abordo_a_edith"
+      }
+    ],
+    "traces": [
+      {
+        "id": "olga_esperando",
+        "location": "recepcion",
+        "text": "La pelirroja de la 204 lleva media mañana sentada de cara a la puerta giratoria, con un cigarrillo sin encender. Cuando el reloj del hall da las once y cuarto, lo guarda en el bolso y se va sola hacia los salones."
+      }
+    ],
+    "tags": ["preparacion", "escena"],
+    "note": "Decisión de información frente a puntualidad. Olga señala el jardín del salón Isis, que hasta ahora era una ruta alternativa sin ninguna forma de descubrirla; su padre cobra el precio de hablar con ella en público."
+  },
+  {
     "id": "d1_behler_terraza",
     "at": "D1 11:00",
     "until": "D1 12:00",

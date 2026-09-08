@@ -470,9 +470,14 @@ class UI {
       const page = this.mode.page ?? 0
       const start = page * PER_PAGE
       const topics = all.slice(start, start + PER_PAGE)
-      this.heading(page > 0 ? `Otros temas: página ${page}` : this.game.npcName(this.mode.npc))
-      for (const topic of topics) this.topicButton(topic)
       const npc = this.mode.npc
+      this.heading(page > 0 ? `${this.game.npcName(npc)}: página ${page + 1}` : this.game.npcName(npc))
+      // La conversacion no se cierra al preguntar: cada tema vuelve a esta misma
+      // pagina, asi que hay que decirle al motor a donde regresar.
+      for (const topic of topics) this.topicButton(topic, { kind: 'topics', npc, page })
+      if (topics.length === 0) {
+        this.heading('No se te ocurre nada más que preguntarle.')
+      }
       const nav: [string, () => void][] = []
       if (start + PER_PAGE < all.length) {
         nav.push([
@@ -480,10 +485,12 @@ class UI {
           () => { this.mode = { kind: 'topics', npc, page: page + 1 } },
         ])
       }
-      nav.push([
-        'Volver',
-        () => { this.mode = page > 0 ? { kind: 'topics', npc, page: page - 1 } : { kind: 'talk' } },
-      ])
+      if (page > 0) {
+        nav.push(['Temas anteriores', () => { this.mode = { kind: 'topics', npc, page: page - 1 } }])
+      }
+      // La salida explicita de la conversacion. Sin ella, seguir preguntando
+      // seria una trampa: se entra y no se sabe por donde se sale.
+      nav.push(['Despedirse', () => { this.mode = { kind: 'root' } }])
       this.navRow(nav)
       return
     }
@@ -548,10 +555,10 @@ class UI {
    * Un tema es una linea de dialogo: se pulsa y se dice. El tono lo decide el motor
    * segun el caracter del personaje, y se cuenta despues junto con la tirada.
    */
-  private topicButton(topic: DialogueTopic): void {
+  private topicButton(topic: DialogueTopic, resume: Mode): void {
     this.button(
       topic.label,
-      () => void this.act(() => this.game.ask(topic.id), { investigation: true }),
+      () => void this.act(() => this.game.ask(topic.id), { investigation: true }, resume),
       topic.minutes ?? DEFAULT_TOPIC_MINUTES,
       '',
       this.game.hasAskedTopic(topic.id) ? 'Ya lo habéis preguntado.' : '',
@@ -665,7 +672,15 @@ class UI {
     }, undefined, '', '', false, 'cancel')
   }
 
-  private async act(action: () => Turn, audioIntent: AudioIntent = {}): Promise<void> {
+  /**
+   * Ejecuta una accion del motor y decide donde queda el jugador despues.
+   *
+   * `resume` es lo que sostiene la conversacion: una pregunta devuelve al mismo
+   * personaje en vez de escupir al menu de la sala, que es como se hablaba antes
+   * y obligaba a cuatro clics por pregunta. `resumeMode` decide si ese regreso
+   * sigue teniendo sentido cuando el turno ha cambiado el mundo.
+   */
+  private async act(action: () => Turn, audioIntent: AudioIntent = {}, resume?: Mode): Promise<void> {
     let turn: Turn
     const sanityBefore = this.totalSanity()
     this.presentationArt = null
@@ -676,13 +691,35 @@ class UI {
       return
     }
     this.closePanel()
-    this.mode = turn.over ? { kind: 'end' } : { kind: 'root' }
+    this.mode = turn.over ? { kind: 'end' } : this.resumeMode(resume)
     this.presentationArt = turn.presentationArt ?? null
     const lines = [...turn.lines, ...this.sceneOpeningLines()]
     if (lines.length > 0) this.write(lines)
     this.feedback(turn.feedback)
     this.audioForTurn(turn, sanityBefore, audioIntent)
     await this.paint()
+  }
+
+  /**
+   * A donde vuelve el jugador despues de una accion.
+   *
+   * Seguir hablando solo vale mientras hablar siga siendo posible: si el turno
+   * ha abierto una escena en esta sala hay algo que mirar y la conversacion no
+   * puede taparlo, y si el interlocutor se ha ido de la sala ya no hay con quien
+   * seguir. En los dos casos se cae a la raiz, que es la pantalla que sabe
+   * contar lo que esta pasando.
+   */
+  private resumeMode(resume?: Mode): Mode {
+    if (!resume || resume.kind !== 'topics') return resume ?? { kind: 'root' }
+    const view = this.game.view()
+    if (view.scene) return { kind: 'root' }
+    const present = view.npcs.some((npc) => npc.id === resume.npc)
+    if (!present) {
+      this.write([{ kind: 'sistema', text: `${this.game.npcName(resume.npc)} ya no está aquí.` }])
+      return { kind: 'root' }
+    }
+    if (this.game.topicsFor(resume.npc).length === 0) return { kind: 'root' }
+    return resume
   }
 
   /**
