@@ -128,6 +128,18 @@ class UI {
   private readonly portrait = $('portrait')
   private readonly portraitImg = $<HTMLImageElement>('portrait-img')
   private readonly portraitName = $('portrait-name')
+  private readonly condition = $('hud-condition')
+  /**
+   * Avisos pendientes de leer sobre Caso y Equipo.
+   *
+   * El destello de 520 ms se pierde si el jugador estaba leyendo la narracion
+   * cuando ocurrio, y entonces una pista nueva o un informe listo solo se
+   * descubren abriendo el panel a ciegas. El distintivo aguanta hasta que se
+   * abre el panel correspondiente.
+   */
+  private readonly unread = { case: false, team: false }
+  /** Hora del ultimo repintado, para saber si el reloj ha saltado. */
+  private lastPaintedTime = ''
 
   constructor(content: ReturnType<typeof loadContent>, seedOverride: string | null) {
     this.content = content
@@ -135,8 +147,17 @@ class UI {
     this.game = this.newGame()
     this.art = new ArtRenderer($<HTMLCanvasElement>('art'))
     $('hud-map').addEventListener('click', () => this.showMap())
-    $('hud-case').addEventListener('click', () => this.showCase())
-    $('hud-team').addEventListener('click', () => this.showTeam())
+    $('hud-case').addEventListener('click', () => {
+      this.unread.case = false
+      this.showCase()
+      // Abrir un panel no repinta la partida, y el distintivo vive en el HUD.
+      this.renderBadges(this.game.view())
+    })
+    $('hud-team').addEventListener('click', () => {
+      this.unread.team = false
+      this.showTeam()
+      this.renderBadges(this.game.view())
+    })
     $('hud-save').addEventListener('click', () => this.showSaves())
     $('hud-log').addEventListener('click', () => this.showHistory())
     $('hud-audio').addEventListener('click', () => this.showAudio())
@@ -397,8 +418,18 @@ class UI {
 
   private async paint(): Promise<void> {
     const view = this.game.view()
+    // El reloj es el antagonista y hasta ahora cambiaba de cifra sin avisar.
+    if (this.lastPaintedTime && this.lastPaintedTime !== view.time) {
+      this.time.classList.remove('clock-ticked')
+      // Reiniciar la animacion: sin esto, dos saltos seguidos solo animan uno.
+      void this.time.offsetWidth
+      this.time.classList.add('clock-ticked')
+    }
+    this.lastPaintedTime = view.time
     this.time.textContent = view.time
     this.place.textContent = view.location.name
+    this.renderCondition(view)
+    this.renderBadges(view)
     this.title.textContent = view.scene?.title ?? view.location.name
     // El cuerpo de la escena ya ocupa la barra OBJETIVO. Repetirlo sobre la
     // lamina tapaba caras, salidas y objetos en los encuadres panoramicos.
@@ -765,6 +796,59 @@ class UI {
     const classes = cues.map((cue) => `feedback-${cue.kind}`)
     game.classList.add(...classes)
     window.setTimeout(() => game.classList.remove(...classes), 520)
+    // El destello se apaga; el distintivo no, hasta que se lea.
+    for (const cue of cues) {
+      if (cue.kind === 'clue') this.unread.case = true
+      if (cue.kind === 'report') this.unread.team = true
+    }
+  }
+
+  /**
+   * Lo que el jugador debe poder leer sin abrir nada.
+   *
+   * Cordura y Salud solo aparecen cuando dejan de estar intactas —la regla de
+   * «solo lo relevante» que ya seguia el panel de Equipo— pero, una vez
+   * relevantes, se quedan: una perdida de Cordura que solo se anuncia con una
+   * linea magenta y un destello de medio segundo no deja rastro en pantalla.
+   */
+  private renderCondition(view: ReturnType<Game['view']>): void {
+    const edith = view.focus
+    // La referencia es la Cordura con la que Edith empezo el dia, no `sanMax`:
+    // el maximo de la septima edicion es 99 menos Mitos, asi que comparar con el
+    // enseñaba «Cordura 65/99» desde el primer segundo, sin que hubiese pasado
+    // nada. Lo que el jugador necesita saber es cuanto ha perdido hoy.
+    const perdida = edith.sanAtDayStart - edith.san
+    const herida = edith.hpMax - edith.hp
+    const partes: string[] = []
+    if (perdida > 0) partes.push(`Cordura ${edith.san} (−${perdida})`)
+    if (herida > 0) partes.push(`Salud ${edith.hp}/${edith.hpMax}`)
+    if (view.pendingRoll) partes.push(`Suerte ${edith.luck}`)
+    this.condition.textContent = partes.join(' · ')
+    this.condition.hidden = partes.length === 0
+    this.condition.classList.toggle('condition-hurt', herida > 0)
+    this.condition.classList.toggle('condition-shaken', perdida > 0)
+  }
+
+  /**
+   * Enciende o apaga los distintivos de Caso y Equipo.
+   *
+   * No son el mismo aviso. El de Caso marca «hay algo que no has leido» y se
+   * apaga al abrir el panel. El de Equipo marca «hay un informe sin recoger»,
+   * que es un hecho del mundo: sigue encendido hasta que Edith se reune con el
+   * companero, porque apagarlo al mirar seria mentir sobre lo que queda por
+   * hacer.
+   */
+  private renderBadges(view: ReturnType<Game['view']>): void {
+    const informeEsperando = view.companions.some((companion) => companion.state === 'report_ready')
+    const marca = (id: string, on: boolean, texto: string): void => {
+      const button = $(id)
+      button.classList.toggle('has-news', on)
+      const base = button.dataset['label'] ?? button.textContent ?? ''
+      button.dataset['label'] = base
+      button.setAttribute('aria-label', on ? `${base}: ${texto}` : base)
+    }
+    marca('hud-case', this.unread.case, 'hay algo nuevo sin leer')
+    marca('hud-team', this.unread.team || informeEsperando, 'hay un informe esperando')
   }
 
   private write(lines: Line[]): void {

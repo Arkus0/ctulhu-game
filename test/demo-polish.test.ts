@@ -3,6 +3,12 @@ import { loadContent } from '../src/content/index'
 import { Game, type GameSnapshot } from '../src/engine/game'
 import { parseTime } from '../src/engine/clock'
 import { AudioManager, readAudioPreferences } from '../src/ui/audio'
+import { readFileSync } from 'node:fs'
+import fuenteDelJuego from '../src/engine/game.ts?raw'
+
+// La hoja de estilos se lee del disco: Vite convierte un `?raw` de CSS en un
+// modulo procesado y llega vacia.
+const hojaDeEstilos = readFileSync(new URL('../src/ui/style.css', import.meta.url), 'utf8')
 
 const content = loadContent()
 
@@ -384,5 +390,37 @@ describe('la hora de las diez ya no es una espera', () => {
     // Dos partidas de la misma semilla que han esperado distinto siguen teniendo
     // el generador principal en el mismo sitio: el ambiente gasta el suyo.
     expect(tirada(0)).toBe(tirada(6))
+  })
+})
+
+describe('el estado se ve sin abrir un panel', () => {
+  it('las diez señales de feedback pintan algo', () => {
+    // Los tipos se leen de la propia declaracion de `FeedbackCue`, para que
+    // anadir una senal nueva sin regla de estilo rompa esta prueba.
+    const bloque = /export interface FeedbackCue \{([\s\S]*?)\n\}/.exec(fuenteDelJuego)
+    expect(bloque).not.toBeNull()
+    const declaradas = /kind: ((?:'[a-z]+' \| )+'[a-z]+')/.exec(bloque![1]!)
+    expect(declaradas).not.toBeNull()
+    const tipos = [...declaradas![1]!.matchAll(/'([a-z]+)'/g)].map((m) => m[1]!)
+    expect(tipos.length).toBe(10)
+    // Cuatro de ellas se anadian como clase y se retiraban sin ninguna regla
+    // detras: gastar Suerte o saltar el reloj no se distinguian de no hacer nada.
+    const sinPintar = tipos.filter((tipo) => !hojaDeEstilos.includes(`.feedback-${tipo}`))
+    expect(sinPintar).toEqual([])
+  })
+
+  it('Cordura y Salud tienen sitio propio en la barra superior', () => {
+    expect(hojaDeEstilos).toContain('#hud-condition')
+    expect(hojaDeEstilos).toContain('condition-shaken')
+    expect(hojaDeEstilos).toContain('condition-hurt')
+  })
+
+  it('un informe listo se puede ver desde fuera del panel de Equipo', () => {
+    const game = at('informe', 'recepcion', 'D1 09:00')
+    game.performAction('arrival_vance_service')
+    expect(game.view().companions.some((c) => c.state === 'working')).toBe(true)
+    game.advanceTime(parseTime('D1 10:30') - game.clock.now)
+    // La interfaz enciende el distintivo con este mismo estado.
+    expect(game.view().companions.some((c) => c.state === 'report_ready')).toBe(true)
   })
 })

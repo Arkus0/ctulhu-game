@@ -657,6 +657,37 @@ button { font-family: inherit; }
 #game.feedback-roll .roll-card { transform: translateX(2px); }
 #game.feedback-damage { box-shadow: 8px 8px 0 var(--red); }
 #game.feedback-sanity #scene { border-color: var(--bright-magenta); }
+/* El motor emite diez senales y solo seis pintaban. Estas cuatro se anadian
+   como clase y se retiraban sin efecto: abrir una escena, gastar Suerte, saltar
+   el reloj y cruzar una puerta eran indistinguibles de que no pasara nada. */
+#game.feedback-scene #objective { border-color: var(--yellow); background: #1b1b00; }
+#game.feedback-luck #hud-condition { color: var(--yellow); background: #1b1b00; }
+#game.feedback-clock #hud-time { color: var(--yellow); }
+#game.feedback-door #scene { border-color: var(--ochre); }
+
+/* Aviso persistente sobre Caso y Equipo. El destello dura medio segundo; esto
+   aguanta hasta que se abre el panel. */
+.hud-tools button.has-news { color: var(--bright-green); }
+.hud-tools button.has-news::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 0.3em;
+  vertical-align: 0.35em;
+  background: var(--bright-green);
+}
+
+#hud-condition { color: var(--silver); }
+#hud-condition.condition-shaken { color: var(--bright-magenta); }
+#hud-condition.condition-hurt { color: var(--bright-red); }
+
+/* El salto del reloj. Antes cambiaba de cifra sin ningun aviso visual. */
+@keyframes clock-tick {
+  0% { color: var(--yellow); transform: translateX(2px); }
+  100% { color: inherit; transform: none; }
+}
+#hud-time.clock-ticked { animation: clock-tick 420ms steps(4, end); }
 #scene, #objective, #choices, .roll-card, #game { transition: border-color 180ms linear, background-color 180ms linear, transform 90ms linear, box-shadow 180ms linear; }
 .history-entry p { font-size: 0.88rem; }
 .history-entry h3 { margin-bottom: 0.45rem !important; color: var(--ochre) !important; }
@@ -700,5 +731,6 @@ button { font-family: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  #hud-time.clock-ticked { animation: none; }
   * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
