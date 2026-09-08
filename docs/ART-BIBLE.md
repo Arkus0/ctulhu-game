@@ -1,4 +1,4 @@
-# Biblia visual de La Broma Macabra
+# Biblia visual de El Disco Egipcio
 
 Referencia de producción del paquete de arte original. Si una lámina nueva
 contradice este documento, se discute aquí antes de dibujarla.

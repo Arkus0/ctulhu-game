@@ -121,7 +121,7 @@ The public repository must exclude the source PDF and current cropped module ill
 ### Riesgos siguientes, sin ampliar aún la tarde
 
 - Hacer una prueba cronometrada con personas externas para confirmar los 20–30 minutos; la automatización valida ramas y ritmo sistémico, no velocidad de lectura humana.
-- Equilibrar a oído niveles y fundidos en altavoces y auriculares; todas las fuentes están auditadas como CC0 en `LICENSE-AUDIO.md`.
+- El audio CC0 de aquel pase quedó reemplazado posteriormente por síntesis Web Audio original; la nueva referencia es `docs/DIRECCION-DE-AUDIO.md`.
 - Reducir el paquete JavaScript inicial y sustituir el arte provisional por el lote original aprobado, sin tocar el arco ni las ramas verificadas.
 
 ## Paquete visual original 09:00–13:00 (verificado, 8 de septiembre de 2026)
@@ -179,3 +179,14 @@ The public repository must exclude the source PDF and current cropped module ill
 - [x] Ambos mapas se volvieron a reducir y cuantizar a EGA, se inspeccionaron a
   320×152 y dentro del panel a 1024×700. El recorrido Playwright terminó sin
   errores de consola.
+
+## Audio original Web Audio (entregado, 8 de septiembre de 2026)
+
+- [x] Sustituido el reproductor de recursos CC0 por síntesis FM y ruido generado en memoria, con estados Hotel, Investigación, Subsuelo y Silencio.
+- [x] Reducidos los controles a Música, Efectos y silencio total; preferencias v2 con migración desde v1.
+- [x] Añadidos resultados estructurados a las señales de tirada y diagnóstico de audio a `render_game_to_text` sin alterar reloj, RNG ni guardados.
+- [x] Retirados los quince recursos de `public/audio`; la compilación pasa y la suite provisional alcanza 213 pruebas.
+- [x] Primer humo con el cliente de `develop-web-game`: AudioContext desbloqueado, estado Hotel, un planificador pendiente, cero voces residuales y cero errores de consola; captura EGA intacta.
+- [x] Documentados los motivos, estados, señales, controles, persistencia, límites de voces y limpieza de nodos en `docs/DIRECCION-DE-AUDIO.md`.
+- [x] El recorrido automatizado corto cubrió hotel, conversación, investigación, subsuelo y cierre sin errores de consola; mute, volúmenes, recarga y activaciones consecutivas quedaron comprobados.
+- [ ] La auditoría continua de quince minutos se detuvo a petición del usuario después de 225 segundos estables en Hotel y la entrada en Investigación; no se reanudó antes de publicar.

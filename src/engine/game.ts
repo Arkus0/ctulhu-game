@@ -57,6 +57,8 @@ export interface Turn {
 export interface FeedbackCue {
   kind: 'location' | 'clue' | 'report' | 'roll' | 'damage' | 'sanity' | 'scene' | 'luck' | 'clock' | 'door'
   id?: string
+  /** Resultado estructurado para que la interfaz no tenga que interpretar texto localizado. */
+  outcome?: 'success' | 'failure'
 }
 
 export interface ExitView {
@@ -855,7 +857,7 @@ export class Game {
       this.rollLine(result),
       { kind: 'sistema', text: stakes },
       ...(result.success ? [] : this.exchange('roll:failed')),
-    ], [{ kind: 'roll', id: actionId }])
+    ], [{ kind: 'roll', id: actionId, outcome: result.success ? 'success' : 'failure' }])
   }
 
   private beginDiskRoll(actionId: PendingRollState['actionId']): Turn {
@@ -887,7 +889,7 @@ export class Game {
       this.rollLine(result),
       { kind: 'sistema', text: stakes },
       ...(result.success ? [] : this.exchange('roll:failed')),
-    ], [{ kind: 'roll', id: actionId }])
+    ], [{ kind: 'roll', id: actionId, outcome: result.success ? 'success' : 'failure' }])
   }
 
   settlePendingRoll(useLuck: boolean): Turn {
@@ -909,8 +911,12 @@ export class Game {
     if (useLuck) lines.push(...this.exchange('luck:spent'))
 
     if (!pending.actionId.startsWith('disk_')) {
-      const feedback: FeedbackCue[] = [{ kind: 'roll', id: pending.actionId }]
-      if (useLuck) feedback.push({ kind: 'luck', id: pending.actionId })
+      const feedback: FeedbackCue[] = useLuck
+        ? [
+            { kind: 'luck', id: pending.actionId },
+            { kind: 'roll', id: pending.actionId, outcome: result.success ? 'success' : 'failure' },
+          ]
+        : []
       if (pending.actionId === 'arrival_question_clinton') {
         this.completeScene('arrival_checkin')
         this.world.setFlag('investigadores_registrados')
@@ -1029,8 +1035,12 @@ export class Game {
       })
     }
     return this.resolve(lines, 5, [
-      { kind: 'roll', id: pending.actionId },
-      ...(useLuck ? [{ kind: 'luck' as const, id: pending.actionId }] : []),
+      ...(useLuck
+        ? [
+            { kind: 'luck' as const, id: pending.actionId },
+            { kind: 'roll' as const, id: pending.actionId, outcome: result.success ? 'success' as const : 'failure' as const },
+          ]
+        : []),
       ...(pending.actionId === 'disk_snatch' && !result.success ? [{ kind: 'damage' as const, id: 'harker' }] : []),
     ])
   }
@@ -1270,7 +1280,11 @@ export class Game {
       if (req.kind === 'defer') lines.push(...this.resolveDeferred(req.effect))
     }
 
-    return this.resolve(lines, f.minutes ?? ACTION_COST.examine)
+    return this.resolve(
+      lines,
+      f.minutes ?? ACTION_COST.examine,
+      r ? [{ kind: 'roll', id: `${loc.id}:${f.id}`, outcome: r.success ? 'success' : 'failure' }] : [],
+    )
   }
 
   /** Preguntar algo a un PNJ. */
@@ -1299,7 +1313,11 @@ export class Game {
       })
     }
 
-    return this.resolve(lines, res.minutes)
+    return this.resolve(
+      lines,
+      res.minutes,
+      res.roll ? [{ kind: 'roll', id: topicId, outcome: res.roll.success ? 'success' : 'failure' }] : [],
+    )
   }
 
   /** Espiar una conversacion en curso. */
@@ -1327,7 +1345,9 @@ export class Game {
       lines.push({ kind: 'narracion', text: res.narration })
     }
 
-    return this.resolve(lines, ACTION_COST.eavesdrop)
+    return this.resolve(lines, ACTION_COST.eavesdrop, [
+      { kind: 'roll', id: conversationId, outcome: res.fragments.length > 0 ? 'success' : 'failure' },
+    ])
   }
 
   /** Seguir a un PNJ hasta donde vaya. */
@@ -1344,7 +1364,9 @@ export class Game {
       lines.push({ kind: 'narracion', text: res.narration })
     }
 
-    return this.resolve(lines, ACTION_COST.tail)
+    return this.resolve(lines, ACTION_COST.tail, [
+      { kind: 'roll', id: npcId, outcome: res.success ? 'success' : 'failure' },
+    ])
   }
 
   /** Dejar pasar el tiempo hasta el siguiente bloque de media hora. */

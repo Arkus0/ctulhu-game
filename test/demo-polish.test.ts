@@ -169,14 +169,14 @@ describe('guardado y audio', () => {
 
   it('recupera volúmenes válidos y corrige valores fuera de rango', () => {
     const prefs = readAudioPreferences({ getItem: () => JSON.stringify({ muted: true, music: 3, ambience: -1, effects: 0.4 }) })
-    expect(prefs).toEqual({ muted: true, music: 1, ambience: 0, effects: 0.4 })
+    expect(prefs).toEqual({ muted: true, music: 1, effects: 0.4 })
   })
 
   it('no intenta reproducir nada antes de desbloquearse con un gesto', () => {
     const memory = { getItem: () => null, setItem: () => undefined }
     const audio = new AudioManager(memory)
     expect(audio.unlocked).toBe(false)
-    expect(() => audio.handle([{ kind: 'roll' }])).not.toThrow()
+    expect(() => audio.playCue('success')).not.toThrow()
     expect(audio.unlocked).toBe(false)
   })
 
@@ -185,8 +185,18 @@ describe('guardado y audio', () => {
     const memory = { getItem: () => saved || null, setItem: (_key: string, value: string) => { saved = value } }
     const audio = new AudioManager(memory)
     audio.setMuted(true)
-    audio.setVolume('ambience', 0.35)
-    expect(readAudioPreferences(memory)).toMatchObject({ muted: true, ambience: 0.35 })
+    audio.setVolume('effects', 0.35)
+    expect(readAudioPreferences(memory)).toMatchObject({ muted: true, effects: 0.35 })
+  })
+
+  it('expone el resultado de una tirada sin obligar a interpretar la narración', () => {
+    const game = new Game(content, 'structured-roll-feedback')
+    const turn = game.performAction('arrival_question_clinton')
+    expect(turn.feedback).toContainEqual({
+      kind: 'roll',
+      id: 'arrival_question_clinton',
+      outcome: game.view().pendingRoll?.roll.success ? 'success' : 'failure',
+    })
   })
 })
 

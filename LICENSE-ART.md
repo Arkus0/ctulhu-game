@@ -49,7 +49,7 @@ Salvo decisión distinta del titular antes de la primera distribución pública,
 las láminas finales y las descripciones originales de este
 paquete se publican bajo **CC BY-SA 4.0**.
 
-Autoría: proyecto La Broma Macabra, producido con asistencia del generador de
+Autoría: proyecto El Disco Egipcio, producido con asistencia del generador de
 imágenes integrado de Codex bajo la dirección artística del repositorio.
 
 Esta licencia cubre exclusivamente el arte original descrito aquí. No alcanza
