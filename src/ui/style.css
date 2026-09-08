@@ -407,6 +407,16 @@ button { font-family: inherit; }
 .panel-action.report { border-color: var(--bright-green); color: var(--bright-green); }
 .panel-action.compact { display: inline-block; width: auto; margin-right: 0.4rem; }
 .panel-action:disabled { cursor: default; opacity: 0.48; }
+
+.map-art {
+  display: block;
+  width: min(100%, 640px);
+  margin: 0 auto 0.85rem;
+  border: 2px solid var(--dark-gray);
+  background: var(--black);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
 .audio-control {
   display: grid;
   grid-template-columns: 7rem minmax(8rem, 1fr) 3.5rem;

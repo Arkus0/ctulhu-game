@@ -1,6 +1,7 @@
 [
   {
     "id": "arrival_checkin",
+    "art": "escena_llegada_hall",
     "title": "Llegada al Shepheard’s",
     "body": "Clinton sostiene la pluma sobre el registro. A vuestra espalda el hall engulle maletas, nombres y rumores; decidir cómo entrar en él será la primera parte del trabajo.",
     "actions": [
@@ -12,6 +13,7 @@
   },
   {
     "id": "behler_encargo",
+    "art": "escena_behler",
     "title": "La reunión de Behler",
     "body": "Behler ocupa la cuarta silla y seca su frente con el pañuelo bordado del hotel. Quiere discreción, pero la urgencia le desordena las palabras.",
     "actions": [
@@ -23,6 +25,7 @@
   },
   {
     "id": "terrace_conflict",
+    "art": "escena_carter_weder",
     "title": "Dos conversaciones a la vez",
     "body": "Behler baja la voz justo cuando Carter y Weder juntan las cabezas en la mesa del fondo. No podéis prestar la misma atención a ambos frentes.",
     "actions": [
@@ -34,6 +37,7 @@
   },
   {
     "id": "basement_threshold",
+    "art": "escena_umbral_sotano",
     "title": "El umbral del sótano",
     "body": "La puerta de servicio oscila detrás de Weder y Mahadni. Abajo no hay luz; arriba, los pinches han decidido no veros.",
     "actions": [
@@ -45,6 +49,7 @@
   },
   {
     "id": "ears",
+    "art": "escena_orejas",
     "title": "Las orejas",
     "body": "Mahadni arroja un par de orejas al túnel. Unas garras peludas salen de la oscuridad, recogen los trozos con un esmero casi delicado y vuelven a desaparecer.",
     "actions": [

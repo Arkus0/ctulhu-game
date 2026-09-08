@@ -27,6 +27,16 @@ function gameWithRoll(
 }
 
 describe('lamina de la escena', () => {
+  it('la llegada usa su composicion propia desde el primer fotograma', () => {
+    expect(new Game(content, 'lamina-llegada').view().art).toBe('escena_llegada_hall')
+  })
+
+  it('un evento presenciado entrega una lamina transitoria a la interfaz', () => {
+    const game = new Game(content, 'lamina-lounpeen')
+    const turn = game.advanceTime(30)
+    expect(turn.presentationArt).toBe('escena_registro_lounpeen')
+  })
+
   it('una escena abierta sustituye el fondo de la localizacion', () => {
     const game = atDisk('lamina')
     const view = game.view()
@@ -45,6 +55,13 @@ describe('lamina de la escena', () => {
     const view = game.view()
     expect(view.scene).toBeNull()
     expect(view.art).toBe('jardin')
+  })
+
+  it('elige el mapa por planta desde los datos de contenido', () => {
+    const game = new Game(content, 'mapas')
+    expect(game.view().mapArt).toBe('mapa_plantas')
+    game.party.moveTogether('viejo_templo')
+    expect(game.view().mapArt).toBe('mapa_sotanos')
   })
 })
 
@@ -68,6 +85,7 @@ describe('director de investigacion', () => {
 
     game.travelTo('terraza')
     const report = game.collectReport('vance')
+    expect(report.presentationArt).toBe('escena_informe_vance')
     expect(report.lines.some((line) => line.text.includes('Weder'))).toBe(true)
     expect(game.world.knows('carter_y_weder_juntos')).toBe(true)
     expect(game.world.knows('ruta_servicio_al_sotano')).toBe(true)
@@ -109,6 +127,7 @@ describe('escena del Disco Solar', () => {
     game.performAction('disk_observe')
     expect(game.world.holderOf('disco_solar')).toBe('weder')
     expect(game.world.getFlag('disco_resuelto')).toBe(true)
+    expect(game.view().art).toBe('escena_cierre_disco_weder')
   })
 
   it('la autoridad puede retrasar a Weder hasta las 15:00', () => {
@@ -117,6 +136,7 @@ describe('escena del Disco Solar', () => {
     expect(game.world.getFlag('weder_retrasado')).toBe(true)
     expect(game.world.holderOf('disco_solar')).toBe('nobody')
     expect(game.scheduler.scheduledAt('d1_weder_toma_disco')).toBe(parseTime('D1 15:00'))
+    expect(game.view().art).toBe('escena_cierre_disco_autoridad')
   })
 
   it('arrebatar el disco cambia su custodia si la tirada tiene exito', () => {
@@ -125,6 +145,7 @@ describe('escena del Disco Solar', () => {
     expect(game.world.holderOf('disco_solar')).toBe('player')
     expect(game.world.getFlag('disco_robado_por_investigadores')).toBe(true)
     expect(game.party.byId('harker').inventory).toContain('disco_solar')
+    expect(game.view().art).toBe('escena_cierre_disco_edith')
   })
 
   it('un fallo aceptado deja a Weder hostil y causa daño', () => {

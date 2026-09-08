@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "generator": "imagegen integrado de Codex",
+  "method": "Una generacion maestra independiente por activo; el PDF y los recortes temporales nunca se adjuntaron al generador.",
+  "shared_prompt": {
+    "format": "Composicion maestra horizontal 40:19 a alta resolucion; arte para aventura grafica de PC de finales de los anos ochenta.",
+    "rendering": "Formas pintadas amplias, contornos duros, perspectiva y anatomia limpias, un foco teatral, detalle que sobreviva al reducir a 320x152.",
+    "continuity": "El Cairo, Hotel Shepheard's, martes 21 de noviembre de 1922; arquitectura, muebles y ropa plausibles para 1922.",
+    "layout": "Reservar zonas tranquilas en la esquina inferior izquierda y superior derecha. En escenas, mantener objeto, cara activa y salida en los dos tercios inferiores.",
+    "negative": "Sin texto, letras, numeros, rotulos, interfaz, marco, logotipo, firma, objetos modernos, fotografia, ruido, gore, celebridades ni parecido con actores reales; composicion original sin copiar poses, encuadres o disenos reconocibles.",
+    "postprocess": "Recorte centrado 40:19, reduccion LANCZOS, cuantizacion opaca a EGA estricta con Bayer 4x4 mediante tools/ega.py."
+  },
+  "characters": {
+    "edith": "Mujer britanica de 34 anos, rostro alargado, pelo castano oscuro a lo garcon, chaqueta azul marino, blusa blanca, lazada roja, cuaderno.",
+    "nadia": "Mujer egipcia de 29 anos, complexion esbelta, pelo negro ondulado recogido, vestido verde oscuro de linea recta, broche dorado, cartera de notas.",
+    "vance": "Hombre estadounidense de 38 anos, atletico contenido, pelo castano peinado hacia atras, chaqueta marron, camisa crema, corbata verde, libreta de bolsillo.",
+    "behler": "Director europeo de 52 anos, ancho y sudoroso, pelo gris escaso, traje crema, corbata roja, panuelo blanco bordado en cian.",
+    "carter": "Arqueologo britanico de 48 anos, delgado y cansado, bigote fino, traje de lino tostado y chaleco, manos nerviosas.",
+    "weder": "Aleman alto de 43 anos, rigido, pelo rubio muy claro, gafas redondas, traje azul, camisa blanca, corbata roja, falsa sonrisa cordial.",
+    "mahadni": "Jefe de cocina egipcio de 46 anos, corpulento, cabeza rapada, bigote oscuro, galabeya blanca, delantal gris, mangas remangadas.",
+    "olga": "Mujer alemana de 25 anos, alta, pelo cobrizo ondulado, vestido granate de cintura baja, chal cian, mirada exploratoria.",
+    "dieter": "Hombre aleman de 57 anos, muy alto y enjuto, cabello gris severo, traje marron oscuro, chaleco amarillo apagado, postura militar.",
+    "gasparini": "Barman italiano de 36 anos, agil, pelo negro engominado, bigote fino, chaleco negro, camisa blanca y pajarita roja.",
+    "clinton": "Recepcionista de 45 anos, cuello ancho, mandibula cuadrada, bigote recortado, librea granate y dorada, llave plateada."
+  },
+  "sheets": {
+    "ids": ["edith", "nadia", "vance", "behler", "carter", "weder", "mahadni", "olga", "dieter", "gasparini"],
+    "prompt": "Hoja de continuidad sin etiquetas: figura completa frontal, perfil y espalda, mas dos bustos expresivos; proporciones y vestuario identicos entre vistas; fondo neutro claro."
+  },
+  "portraits": {
+    "ids": ["edith", "nadia", "vance", "behler", "carter", "weder", "mahadni", "olga", "dieter", "gasparini", "clinton"],
+    "prompt": "Retrato vertical 3:4 de cabeza y hombros, giro tres cuartos, luz dura desde la izquierda, silueta limpia, fondo oscuro verde azulado sin objetos."
+  },
+  "locations": {
+    "recepcion": "Gran hall visto desde un lateral: mostrador de madera domina el centro, puertas altas al sol, balconada y palmeras; Clinton tras el registro y un leon encadenado lejano como detalle secundario.",
+    "terraza": "Terraza profunda con toldos a franjas, arcos de fachada, mesas redondas de hierro y Cairo en calima; una mesa al sol es el foco.",
+    "restaurante": "Comedor de cuarenta mesas, columnas, ventiladores y escalera de servicio en diagonal; luz blanca de mediodia contra interior rojo oscuro.",
+    "cocina": "Cocina industrial de 1922 con hornos de carbon, cobre, mesa de despiece y puerta de servicio de piedra; suelo, cuchillo, salida y peligro separados.",
+    "correos": "Oficina de correos y telegrafos del hotel, mostrador de madera, casilleros y centralita manual; luz cuadrada sobre la mesa.",
+    "bar_largo": "Bar ancho aun cerrado: larga barra, botellas, taburetes invertidos y puertas acristaladas; reflejo cian y un unico haz amarillo.",
+    "salon_isis": "Salon interior morisco con fuente central, arcos, biblioteca y balconada hacia palmeras; geometria verde y cian.",
+    "jardin": "Jardin del hotel con quiosco de musica octogonal, senderos, palmeras y mesas; masas de follaje y sol blanco.",
+    "pasillo": "Pasillo largo con alfombra roja, puertas repetidas, ascensor de rejilla y escalera; luz al fondo como guia.",
+    "habitacion": "Habitacion elegante de huesped: cama con mosquitera, armario, palangana, maleta y ventilador de techo; persianas proyectan franjas.",
+    "sotano_almacen": "Almacen de piedra, estantes y sacos sobre suelo humedo; charco verde, arco de salida cian y objeto cobrizo separados.",
+    "sotano_pasillo": "Galeria de ladrillo irregular con rejilla levantada, tuberia antigua y arco de salida; suelo azul, peligro negro y farol amarillo legibles.",
+    "sotano_palacio": "Sala palaciega sepultada: columnas, armario de ebano, pozo abierto y caja dorada; no confundir salida con pozo.",
+    "sotano_escombros": "Camara derrumbada con corredor lateral, cascotes, viga rota y polvo; el camino util recibe luz cian.",
+    "viejo_templo": "Templo mas antiguo que el hotel: bosque de columnas, sarcofago conico de basalto, pedestal y dos cajas doradas; corredor de salida azul visible.",
+    "salon_baile": "Nave de baile de doble altura con escenario de jazz de 1922, columnas, balcon y reservados; pista vacia como gran masa central.",
+    "tienda_joyas": "Joyeria pequena de hotel con vitrinas de madera, anj dorado aislado y propietario al fondo.",
+    "tienda_cigarros": "Estanco con baules de La Habana, humidor, ventilador y mostrador; diagonales de cajas y humo sugerido sin texto.",
+    "tienda_moda_caballeros": "Sastreria masculina con dos maniquies de trajes y salacot, espejo, rollos de tela y probador.",
+    "tienda_moda_mujer": "Atelier femenino con vestido de cintura baja, mesa de patronaje, maquina de coser de pedal y cortinas.",
+    "tienda_relojes": "Relojeria compacta con vitrinas, reloj de pared central, herramientas y una pieza rectangular aislada.",
+    "tienda_suvenires": "Tienda abarrotada pero legible con ceramica, postales sin escritura, figurillas y mostrador iluminado."
+  },
+  "scenes": {
+    "escena_llegada_hall": "Edith, Nadia y Vance ante el mostrador; Clinton y la pluma dominan, el leon queda lejos en segundo plano.",
+    "escena_registro_lounpeen": "Dieter rigido ante el registro mientras Olga barre el hall con la mirada; Clinton media entre ambos.",
+    "escena_behler": "Mesa redonda para cuatro en la terraza; Behler seca el sudor con su panuelo bordado, calor y tension contenidos.",
+    "escena_carter_weder": "Segunda mesa: Carter encoge manos nerviosas, Weder inclina la falsa sonrisa; conspiracion silenciosa.",
+    "escena_weder_cocina": "Weder cruza; Mahadni suelta el cuchillo sobre la mesa y abre la puerta de piedra hacia servicio.",
+    "escena_umbral_sotano": "Los tres investigadores de espaldas ante una escalera de piedra demasiado antigua; arriba queda la cocina moderna del hotel de 1922.",
+    "escena_orejas": "Horror sugerido: manos de Mahadni cierran un pano, una sombra peluda se proyecta desde el tunel y los investigadores reaccionan; nada anatomico ni sangriento visible.",
+    "escena_disco_solar": "Interior del templo: Weder eleva a la altura del pecho un disco cobrizo, Mahadni vigila y el arco de salida cian queda libre.",
+    "escena_cierre_disco_weder": "Weder se aleja con el paquete bajo el brazo hacia el corredor; investigadores quedan atras y la salida estrecha el tiempo.",
+    "escena_cierre_disco_edith": "Edith protege el disco contra el pecho, equipo reagrupado, Mahadni amenaza y la salida permanece abierta.",
+    "escena_cierre_disco_autoridad": "Edith presenta el papel firmado; Weder retrocede, el documento forma la barrera visual y el disco queda cubierto.",
+    "escena_informe_nadia": "Composicion pequena de reencuentro: Nadia y Edith comparten cuaderno bajo una lampara, rostros relajados pero urgentes.",
+    "escena_informe_vance": "Composicion pequena de reencuentro: Vance senala una ruta en su libreta a Edith, hombros juntos y puerta al fondo."
+  },
+  "maps": {
+    "mapa_plantas": "Maqueta arquitectonica oblicua y seccionada de un gran hotel cairota de 1922: tres niveles apilados; recepcion, terraza, comedor, cocina y tiendas abajo; habitaciones en el nivel medio; salon de baile y azotea arriba; ascensor de jaula y gran escalera como eje. Fondo de survival horror de camara fija de principios de los noventa, bitmap pintado y geometria low-poly angulosa; diseno original, sin texto ni plano copiado.",
+    "mapa_sotanos": "Maqueta subterranea oblicua en zigzag: escalera y almacen, galeria de ladrillo con rejilla, palacio enterrado con pozo, sala derrumbada y templo de columnas con sarcofago y cajas. Ruta util en luz cian, focos ambar y vacio negro; fondo de survival horror de camara fija de principios de los noventa, bitmap pintado y arquitectura facetada; sin nodos, texto ni composicion ajena."
+  },
+  "edits": [
+    {
+      "asset": "escena_disco_solar",
+      "instruction": "Conservar personajes y lenguaje visual; bajar el disco al pecho de Weder, sustituir el paisaje exterior por la galeria interior ambar del templo y mantener visible la salida cian.",
+      "result": "aplicado"
+    }
+  ]
+}

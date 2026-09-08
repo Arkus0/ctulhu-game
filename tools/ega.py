@@ -3,11 +3,11 @@ Reduce un render maestro a una lamina EGA de 320x152 con tramado Bayer.
 
 Este es el segundo paso del pipeline de arte original:
 
-    art/src/<id>.svg  --render_art.mjs-->  art/master/<id>.png  --ega.py-->  public/art/<id>.png
+    imagegen o art/src/<id>.svg  -->  art/master/<id>.png  --ega.py-->  public/art/<id>.png
 
 La diferencia con `quantize.py` (que cocinaba recortes del PDF) es el tramado.
 Floyd-Steinberg reparte el error a los vecinos y sobre una fotografia produce
-grano; sobre arte vectorial produce sal y pimienta, que es justo lo que la
+grano y, sobre masas planas, produce sal y pimienta, que es justo lo que la
 direccion artistica prohibe. Aqui se usa una matriz Bayer 4x4 ordenada: el
 patron es regular, se repite, y a 320x152 se lee como el tramado deliberado de
 una aventura de finales de los ochenta.
@@ -16,7 +16,8 @@ Uso:
     python tools/ega.py                      # todos los maestros
     python tools/ega.py terraza              # solo ese
     python tools/ega.py --retrato edith      # formato de retrato, 72x96
-    python tools/ega.py terraza --bayer      # tramado ordenado en vez de difusion
+    python tools/ega.py --hoja edith         # hoja de continuidad, 320x152
+    python tools/ega.py terraza --floyd      # solo para comparar; nunca para finales
 """
 import os
 import sys
@@ -47,19 +48,23 @@ DISPERSION = 80
 
 
 def encajar(img, tamano):
-    """Reescala llenando el marco y recorta lo que sobra, centrado."""
+    """Reescala llenando el marco y devuelve tambien el recorte reproducible."""
     ancho, alto = tamano
     objetivo = ancho / alto
     actual = img.width / img.height
     if actual > objetivo:
         nuevo_ancho = int(img.height * objetivo)
         x = (img.width - nuevo_ancho) // 2
-        img = img.crop((x, 0, x + nuevo_ancho, img.height))
+        caja = (x, 0, x + nuevo_ancho, img.height)
+        img = img.crop(caja)
     elif actual < objetivo:
         nuevo_alto = int(img.width / objetivo)
         y = (img.height - nuevo_alto) // 2
-        img = img.crop((0, y, img.width, y + nuevo_alto))
-    return img.resize(tamano, Image.LANCZOS)
+        caja = (0, y, img.width, y + nuevo_alto)
+        img = img.crop(caja)
+    else:
+        caja = (0, 0, img.width, img.height)
+    return img.resize(tamano, Image.LANCZOS), caja
 
 
 def tinta_mas_cercana(r, g, b, paleta=EGA):
@@ -131,53 +136,70 @@ def difundir(img, paleta=EGA):
     return img.quantize(palette=referencia, dither=Image.Dither.FLOYDSTEINBERG)
 
 
-def cocinar(origen, destino, tamano=FONDO, tramado='fs', contraste=1.0, saturacion=1.0, brillo=1.0):
+def cocinar(origen, destino, tamano=FONDO, tramado='bayer', contraste=1.0, saturacion=1.0, brillo=1.0):
     img = Image.open(origen).convert('RGB')
-    img = encajar(img, tamano)
+    img, caja = encajar(img, tamano)
     if (contraste, saturacion, brillo) != (1.0, 1.0, 1.0):
         img = preparar(img, contraste=contraste, saturacion=saturacion, brillo=brillo)
     salida = difundir(img) if tramado == 'fs' else tramar(img)
     os.makedirs(os.path.dirname(destino), exist_ok=True)
     salida.save(destino, optimize=True)
-    return salida
+    return salida, caja
 
 
-def procesar(solo=None, retrato=False, tramado='fs'):
+def procesar(solo=None, modo='fondo', tramado='bayer'):
     if not os.path.isdir(MAESTROS):
         raise SystemExit('Falta %s (ejecuta antes tools/render_art.mjs)' % MAESTROS)
 
-    tamano = RETRATO if retrato else FONDO
-    subcarpeta = 'retratos' if retrato else ''
+    tamano = RETRATO if modo == 'retrato' else FONDO
+    subcarpeta = {'retrato': 'retratos', 'hoja': 'hojas'}.get(modo, '')
+    prefijo = {'retrato': 'retrato_', 'hoja': 'hoja_'}.get(modo)
 
     hechas = 0
     for nombre in sorted(os.listdir(MAESTROS)):
         if not nombre.endswith('.png'):
             continue
         base = nombre[:-4]
-        es_retrato = base.startswith('retrato_')
-        if es_retrato != retrato:
+        if base.endswith('_draft'):
             continue
-        limpio = base[len('retrato_'):] if es_retrato else base
+        if prefijo:
+            if not base.startswith(prefijo):
+                continue
+            limpio = base[len(prefijo):]
+        else:
+            if base.startswith(('retrato_', 'hoja_')):
+                continue
+            limpio = base
         if solo and limpio != solo:
             continue
 
         destino = os.path.join(SALIDA, subcarpeta, limpio + '.png')
-        cocinar(os.path.join(MAESTROS, nombre), destino, tamano, tramado)
+        _, caja = cocinar(os.path.join(MAESTROS, nombre), destino, tamano, tramado)
         peso = os.path.getsize(destino)
         hechas += 1
-        print('  %-24s -> %s (%d bytes)' % (nombre, os.path.relpath(destino, RAIZ), peso))
+        recorte = '%d,%d,%d,%d' % caja
+        print('  %-32s -> %s (%d bytes; crop %s)' %
+              (nombre, os.path.relpath(destino, RAIZ), peso, recorte))
 
     print('\n%d laminas cocinadas' % hechas)
 
 
 if __name__ == '__main__':
     args = list(sys.argv[1:])
-    retrato = '--retrato' in args
-    if retrato:
+    modo = 'fondo'
+    if '--retrato' in args:
+        modo = 'retrato'
         args.remove('--retrato')
-    # Difusion de error por defecto: es la que da grano a una composicion
-    # modelada. `--bayer` deja el tramado ordenado, mejor para masas planas.
-    tramado = 'bayer' if '--bayer' in args else 'fs'
-    if '--bayer' in args:
+    if '--hoja' in args:
+        if modo != 'fondo':
+            raise SystemExit('Elige solo uno: --retrato o --hoja')
+        modo = 'hoja'
+        args.remove('--hoja')
+    # Bayer es obligatorio por defecto para los finales. Floyd queda disponible
+    # solo como comparativa explicita de desarrollo.
+    tramado = 'fs' if '--floyd' in args else 'bayer'
+    if '--floyd' in args:
+        args.remove('--floyd')
+    if '--bayer' in args:  # compatibilidad con comandos antiguos
         args.remove('--bayer')
-    procesar(args[0] if args else None, retrato, tramado)
+    procesar(args[0] if args else None, modo, tramado)

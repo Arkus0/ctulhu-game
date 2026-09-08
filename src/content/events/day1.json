@@ -17,6 +17,7 @@
   },
   {
     "id": "d1_lounpeen_registro",
+    "art": "escena_registro_lounpeen",
     "at": "D1 09:30",
     "until": "D1 10:00",
     "location": "recepcion",
@@ -127,6 +128,7 @@
   },
   {
     "id": "d1_weder_baja",
+    "art": "escena_weder_cocina",
     "at": "D1 12:00",
     "until": "D1 12:15",
     "location": "cocina",

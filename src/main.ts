@@ -36,6 +36,8 @@ class UI {
   private history: HistoryEntry[] = []
   private pages: Line[][] = []
   private pageIndex = 0
+  /** Arte de un suceso o informe; se descarta al iniciar la siguiente accion. */
+  private presentationArt: string | null = null
   private readonly art: ArtRenderer
   private readonly audio = new AudioManager()
   private readonly log = $('log')
@@ -97,12 +99,14 @@ class UI {
     this.time.textContent = view.time
     this.place.textContent = view.location.name
     this.title.textContent = view.scene?.title ?? view.location.name
-    this.sceneSummary.textContent = view.scene?.body ?? ''
-    this.sceneSummary.hidden = view.scene == null
+    // El cuerpo de la escena ya ocupa la barra OBJETIVO. Repetirlo sobre la
+    // lamina tapaba caras, salidas y objetos en los encuadres panoramicos.
+    this.sceneSummary.textContent = ''
+    this.sceneSummary.hidden = true
     this.objective.textContent = view.objective
     this.scene.classList.toggle('scene-alert', view.scene != null)
     this.audio.sync(view.location.id, view.scene?.id ?? null)
-    await this.art.draw(view.art, view.timeOfDay as TimeOfDay)
+    await this.art.draw(this.presentationArt ?? view.art, view.timeOfDay as TimeOfDay)
     this.renderChoices()
   }
 
@@ -302,6 +306,7 @@ class UI {
 
   private async act(action: () => Turn): Promise<void> {
     let turn: Turn
+    this.presentationArt = null
     try { turn = action() }
     catch (error) {
       this.write([{ kind: 'sistema', text: `No se puede: ${(error as Error).message}` }])
@@ -309,6 +314,7 @@ class UI {
     }
     this.closePanel()
     this.mode = turn.over ? { kind: 'end' } : { kind: 'root' }
+    this.presentationArt = turn.presentationArt ?? null
     if (turn.lines.length > 0) this.write(turn.lines)
     this.feedback(turn.feedback)
     this.audio.handle(turn.feedback)
@@ -471,6 +477,13 @@ class UI {
 
   private showMap(): void {
     this.openPanel('Mapa del Shepheard’s')
+    const view = this.game.view()
+    const map = document.createElement('img')
+    map.className = 'map-art'
+    map.src = `art/${view.mapArt}.png`
+    map.alt = `Esquema de la planta ${view.location.floor}`
+    map.addEventListener('error', () => { map.hidden = true }, { once: true })
+    this.panelBody.append(map)
     this.panelNote('El coste incluye el trayecto completo. Los compañeros que están trabajando no siguen a Edith.')
     for (const destination of this.game.mapDestinations()) {
       const button = document.createElement('button')
@@ -661,6 +674,7 @@ class UI {
     this.game.restore(save.game)
     this.history = save.history.map((entry) => ({ time: entry.time, lines: entry.lines.map((line) => ({ ...line })) }))
     this.mode = { kind: 'root' }
+    this.presentationArt = null
     this.closePanel()
     this.write([{ kind: 'sistema', text: `Partida cargada: ${save.time}, ${save.place}.` }])
     await this.paint()

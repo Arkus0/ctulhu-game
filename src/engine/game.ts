@@ -50,6 +50,8 @@ export interface Turn {
   /** Verdadero si la partida ha terminado. */
   over: boolean
   feedback: FeedbackCue[]
+  /** Lamina transitoria: permanece mientras el jugador lee este turno. */
+  presentationArt?: string
 }
 
 export interface FeedbackCue {
@@ -70,6 +72,8 @@ export interface GameView {
   location: LocationDef
   description: string
   art: string
+  /** Mapa esquematico elegido por las reglas de contenido para esta planta. */
+  mapArt: string
   exits: ExitView[]
   npcs: { id: string; name: string; title: string }[]
   features: LocationFeature[]
@@ -263,6 +267,9 @@ export class Game {
       // Lo que se ve manda sobre donde se esta: una escena abierta sustituye el
       // fondo, y un suceso en curso lo sustituye tambien mientras dura.
       art: scene?.art ?? this.ongoingArt() ?? variant?.art ?? loc.art ?? 'placeholder',
+      mapArt:
+        this.content.mapArt.rules.find((rule) => rule.floors.includes(loc.floor))?.art ??
+        this.content.mapArt.default,
       exits: loc.exits
         .filter((e) => this.world.testAll(e.requires))
         .map((e) => ({
@@ -1119,7 +1126,7 @@ export class Game {
       ...state.extraLines.map((text): Line => ({ kind: 'narracion', text })),
       ...this.exchange(`report:${state.id}:${quality}`),
       { kind: 'sistema', text: 'Las nuevas pistas ya figuran en el caso.' },
-    ], [{ kind: 'report', id: state.id }, { kind: 'clue', id: state.id }])
+    ], [{ kind: 'report', id: state.id }, { kind: 'clue', id: state.id }], def.reportArt)
   }
 
   /**
@@ -1374,6 +1381,9 @@ export class Game {
       privateKnowledge.set(state.investigator, new Set(this.party.byId(state.investigator).knows))
     }
     const report: TickReport = this.scheduler.advance(minutes)
+    let presentationArt = [...report.witnessed]
+      .reverse()
+      .find((event) => event.witnesses.includes(this.party.focus.id) && event.def.art)?.def.art
 
     // Durante la rebanada jugable, una escena sin testigos no entrega sus
     // conocimientos por telepatia. El mundo cambia, pero la libreta no.
@@ -1448,6 +1458,7 @@ export class Game {
     // tambien cuenta como haberla presenciado: con su texto y con su factura de
     // Cordura, que quedo sin cobrar porque no habia nadie delante al empezar.
     for (const def of this.scheduler.witnessOngoingAt(this.party.focus.location)) {
+      presentationArt ??= def.art
       if (def.id === 'd1_behler_terraza') {
         this.world.setFlag('reunion_behler')
         this.world.learnFact('fenomenos_inexplicables')
@@ -1482,15 +1493,17 @@ export class Game {
       minutes,
       over: this.clock.finished || this.party.wipedOut,
       feedback,
+      presentationArt,
     }
   }
 
-  private instant(lines: Line[], feedback: FeedbackCue[] = []): Turn {
+  private instant(lines: Line[], feedback: FeedbackCue[] = [], presentationArt?: string): Turn {
     return {
       lines: lines.filter((line) => line.text.trim().length > 0),
       minutes: 0,
       over: this.clock.finished || this.party.wipedOut,
       feedback,
+      presentationArt,
     }
   }
 

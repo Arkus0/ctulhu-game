@@ -116,6 +116,7 @@ describe('encargos, conversaciones y espera', () => {
     expect(report.lines.some((line) => line.kind === 'tirada')).toBe(true)
     expect(game.world.knows('registro_lounpeen_revisado')).toBe(true)
     expect(report.feedback.map((cue) => cue.kind)).toContain('report')
+    expect(report.presentationArt).toBe('escena_informe_nadia')
   })
 
   it('los intercambios no consumen tiempo y solo se disparan una vez', () => {

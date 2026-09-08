@@ -1,7 +1,13 @@
 # Arte de la versión pública
 
-Las ilustraciones temporales extraídas del módulo original no se distribuyen en este repositorio público. Si falta `public/art/<id>.png`, el juego dibuja automáticamente un fondo EGA procedimental y sigue siendo completamente jugable.
+Este directorio contiene el paquete original de la demo 09:00–13:00: fondos,
+mapas e ilustraciones de escena a 320×152. `retratos/` contiene bustos a 72×96
+y `hojas/` las hojas de continuidad a 320×152.
 
-El plan para crear el paquete definitivo, original y redistribuible está en [`docs/PROMPT-ARTE-ORIGINAL.md`](../../docs/PROMPT-ARTE-ORIGINAL.md).
+Todos los PNG son opacos y usan únicamente la paleta EGA de dieciséis tintas
+de `src/ui/art.ts`. `art/manifest.csv` es el inventario canónico;
+`art/prompts.json`, `docs/ART-BIBLE.md` y `LICENSE-ART.md` documentan método,
+continuidad y procedencia.
 
-Los archivos finales deben usar una resolución exacta de 320×152, la paleta EGA declarada en `src/ui/art.ts` y nombres coincidentes con los identificadores `art` del contenido.
+Si un archivo falta o no se puede cargar, el renderizador conserva el fondo
+procedimental EGA y el juego sigue siendo utilizable.

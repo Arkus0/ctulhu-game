@@ -41,6 +41,12 @@ import randomNpcsJson from './random_npcs.json'
 import artifactsJson from './artifacts.json'
 import scenesJson from './scenes.json'
 import partyExchangesJson from './party_exchanges.json'
+import mapArtJson from './map_art.json'
+
+export interface MapArtDef {
+  default: string
+  rules: { art: string; floors: string[] }[]
+}
 
 /** Un suceso de la Lista de eventos luctuosos (1D100), pag. 146 del modulo. */
 export interface LuctuousEventDef {
@@ -135,6 +141,7 @@ export interface Content {
   artifacts: Map<string, ArtifactDef>
   scenes: Map<string, SceneDef>
   partyExchanges: PartyExchangeDef[]
+  mapArt: MapArtDef
 }
 
 export class ContentError extends Error {
@@ -174,6 +181,7 @@ export function loadContent(): Content {
   const artifacts = artifactsJson as unknown as ArtifactDef[]
   const scenes = scenesJson as unknown as SceneDef[]
   const partyExchanges = partyExchangesJson as unknown as PartyExchangeDef[]
+  const mapArt = mapArtJson as unknown as MapArtDef
 
   const problems = validate({
     locations,
@@ -188,6 +196,7 @@ export function loadContent(): Content {
     artifacts,
     scenes,
     partyExchanges,
+    mapArt,
   })
   if (problems.length > 0) throw new ContentError(problems)
 
@@ -208,6 +217,7 @@ export function loadContent(): Content {
     artifacts: new Map(artifacts.map((a) => [a.id, a])),
     scenes: new Map(scenes.map((scene) => [scene.id, scene])),
     partyExchanges,
+    mapArt,
   }
 }
 
@@ -224,6 +234,7 @@ interface RawContent {
   artifacts?: ArtifactDef[]
   scenes?: SceneDef[]
   partyExchanges?: PartyExchangeDef[]
+  mapArt?: MapArtDef
 }
 
 /**
@@ -233,6 +244,11 @@ interface RawContent {
  */
 export function validate(c: RawContent): string[] {
   const problems: string[] = []
+
+  if (!c.mapArt?.default) problems.push('El mapa no declara una lamina por defecto')
+  for (const [index, rule] of (c.mapArt?.rules ?? []).entries()) {
+    if (!rule.art || rule.floors.length === 0) problems.push(`La regla de mapa ${index + 1} esta incompleta`)
+  }
 
   const locationIds = new Set<string>()
   for (const l of c.locations) {
