@@ -34,7 +34,7 @@ Original prompt: Implement the proposed plan for rebuilding La Broma Macabra as 
 - [x] Added a reusable prompt for polishing the 09:00–13:00 demo.
 - [x] Added a reusable prompt and production checklist for a fully original EGA art pack.
 - [x] Updated README and replaced the obsolete Sonnet handoff.
-- [ ] Publish the clean source tree to `Arkus0/ctulhu-game`.
+- [x] Published the clean source tree to `Arkus0/ctulhu-game` on branch `main`.
 
 ## Next recommended milestone
 
