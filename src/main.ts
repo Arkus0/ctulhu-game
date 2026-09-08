@@ -4,7 +4,8 @@ import { DEFAULT_TOPIC_MINUTES, type DialogueTopic } from './engine/dialogue'
 import type { GuidedAction } from './engine/adventure'
 import { DIFFICULTY_LABEL, threshold } from './engine/rules'
 import { ArtRenderer, type TimeOfDay } from './ui/art'
-import { AudioManager, type AudioBus, type AudioZone, type MusicState, type SynthCue } from './ui/audio'
+import { AudioManager, type AudioBus, type MusicScene, type SynthCue } from './ui/audio'
+import { musicZoneFor } from './ui/music'
 import './ui/style.css'
 
 type Mode =
@@ -190,7 +191,7 @@ class UI {
     }
     document.addEventListener('pointerdown', unlockAudio, { signal: unlockListeners.signal })
     document.addEventListener('keydown', unlockAudio, { signal: unlockListeners.signal })
-    this.audio.setBaseMusicState('silent')
+    this.audio.setMusicScene('silent')
   }
 
   async start(): Promise<void> {
@@ -235,7 +236,7 @@ class UI {
   private showTitle(): void {
     this.cancelIntroTimer()
     this.phase = 'title'
-    this.audio.setBaseMusicState('silent')
+    this.audio.setMusicScene('silent')
     this.gameRoot.hidden = true
     this.front.hidden = false
     this.front.dataset['view'] = 'title'
@@ -262,7 +263,7 @@ class UI {
   private async beginIntro(): Promise<void> {
     await this.audio.unlock().catch(() => undefined)
     this.phase = 'intro'
-    this.audio.setBaseMusicState('intro')
+    this.audio.setMusicScene('intro')
     this.introElapsed = 0
     this.renderIntroFrame()
     this.scheduleIntroFrame()
@@ -412,9 +413,9 @@ class UI {
   }
 
   private syncAppAudio(): void {
-    if (this.phase === 'intro') this.audio.setBaseMusicState('intro')
+    if (this.phase === 'intro') this.audio.setMusicScene('intro')
     else if (this.phase === 'playing') this.syncAudio(this.game.view())
-    else this.audio.setBaseMusicState('silent')
+    else this.audio.setMusicScene('silent')
   }
 
   private async paint(): Promise<void> {
@@ -530,21 +531,19 @@ class UI {
     for (const action of view.actions) this.actionButton(action)
   }
 
+  /**
+   * La musica sigue a la planta, no al guion.
+   *
+   * La zona decide el tema —hall, terraza, tiendas, habitaciones, sotanos o
+   * templo— y la situacion decide la intensidad. Una tirada abierta o un menu
+   * de dialogo no cambian de tema: pasan a la variante tensa del mismo, que
+   * entra en el compas siguiente sin cortar nada.
+   */
   private syncAudio(view: ReturnType<Game['view']>): void {
-    const underground =
-      ['sotano', 'templo'].includes(view.location.floor) ||
-      ['basement_threshold', 'ears', 'solar_disk'].includes(view.scene?.id ?? '')
-    const baseState: MusicState = view.finished ? 'silent' : underground ? 'underground' : 'hotel'
-    const zone: AudioZone = underground
-      ? 'underground'
-      : /^\d+$/.test(view.location.floor)
-        ? 'private'
-        : 'public'
-    const investigationOpen =
-      !underground &&
-      (view.pendingRoll != null || this.mode.kind === 'topics')
-    this.audio.setBaseMusicState(baseState)
-    this.audio.setInvestigationActive(investigationOpen)
+    const zone = musicZoneFor(view.location.id, view.location.floor, view.scene?.id ?? null)
+    const scene: MusicScene = view.finished ? 'silent' : zone
+    this.audio.setMusicScene(scene)
+    this.audio.setIntensityActive(view.pendingRoll != null || this.mode.kind === 'topics')
     this.audio.noteLocation(view.location.id, zone)
   }
 
@@ -800,7 +799,7 @@ class UI {
     else if (turn.minutes >= 15 || turn.feedback.some((item) => item.kind === 'clock')) cue = 'clock'
     if (cue) this.audio.playCue(cue)
     if (intent.investigation || roll || turn.feedback.some((item) => item.kind === 'clue' || item.kind === 'report')) {
-      this.audio.focusInvestigation()
+      this.audio.focusIntensity()
     }
   }
 
@@ -1178,7 +1177,7 @@ class UI {
 
   private showAudio(): void {
     this.openPanel('Sonido')
-    this.panelNote('Síntesis original Web Audio. Solo se activa después de una interacción y deja largos espacios de silencio.')
+    this.panelNote('Síntesis original Web Audio. Solo se activa después de una interacción. Cada zona del hotel tiene su tema y la investigación cambia de variante sin cortar la música.')
     this.appendAudioControls(this.panelBody)
   }
 
@@ -1337,7 +1336,7 @@ class UI {
   private showEnding(): void {
     this.cancelIntroTimer()
     this.phase = 'ending'
-    this.audio.setBaseMusicState('silent')
+    this.audio.setMusicScene('silent')
     this.closePanel(false)
     this.gameRoot.hidden = true
     this.front.hidden = false

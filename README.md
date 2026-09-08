@@ -60,7 +60,8 @@ Los sistemas principales son:
 - `adventure.ts`: pistas, acciones guiadas, encargos, informes y tiradas pendientes.
 - `game.ts`: fachada jugable, escenas, ramificaciones y guardado versionado.
 - `main.ts`: Mapa, Caso, Equipo, Guardar, Historial, paginación y adaptación de eventos al audio.
-- `ui/audio.ts`: síntesis FM, partitura adaptativa, efectos y preferencias accesibles.
+- `ui/music.ts`: la partitura. Temas por zona, variantes de intensidad y un compositor determinista de eventos, sin Web Audio.
+- `ui/audio.ts`: síntesis FM, planificador continuo compás a compás, efectos y preferencias accesibles.
 
 La interfaz expone `window.render_game_to_text()` y `window.advanceTime(ms)` para pruebas deterministas en navegador. La tecla `F` alterna pantalla completa.
 
