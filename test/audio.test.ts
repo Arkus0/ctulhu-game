@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { AudioManager, readAudioPreferences } from '../src/ui/audio'
+import { AudioManager, MUSIC_TIMING, readAudioPreferences } from '../src/ui/audio'
 import audioSource from '../src/ui/audio.ts?raw'
 
 class FakeParam {
@@ -41,6 +41,13 @@ class FakeContext {
 afterEach(() => vi.useRealTimers())
 
 describe('audio sintetizado', () => {
+  it('cubre la intro completa y hace entrar pronto la música del hotel', () => {
+    const introDuration = MUSIC_TIMING.introSectionsMs.reduce((total, duration) => total + duration, 0)
+    expect(introDuration).toBe(22_800)
+    expect(MUSIC_TIMING.hotelEntryMs[1]).toBeLessThanOrEqual(700)
+    expect(MUSIC_TIMING.hotelCycleMs[1]).toBeLessThanOrEqual(16_000)
+  })
+
   it('migra la preferencia v1 a los dos buses nuevos', () => {
     const storage = {
       getItem: (key: string) => key.endsWith('.v1')

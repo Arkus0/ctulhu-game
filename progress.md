@@ -297,3 +297,21 @@ The public repository must exclude the source PDF and current cropped module ill
 
 - [ ] Contrastar jugando el reparto entre lámina, cuadro de texto y lista de opciones.
   Está medido, no jugado.
+## El Disco Egipcio: portada, intro y cierre (verificado, 8 de septiembre de 2026)
+
+- [x] El nombre visible del juego pasa a ser `El Disco Egipcio` en la portada, el documento HTML, la entrada de partida y la documentación de producto. Se conservan el paquete, la URL publicada y las claves de guardado para no romper despliegues ni partidas existentes.
+- [x] Nueva portada EGA con `Nueva partida`, continuación del guardado más reciente cuando existe, sonido y una ayuda de cuatro líneas. No hay pantalla ni botón de créditos.
+- [x] Intro automática y saltable de 23 segundos: título; El Cairo, 21 de noviembre de 1922; Hotel Shepheard's, 09:00; Edith, Nadia y Vance; y el encargo breve de Behler.
+- [x] Tras la intro se entra directamente en la escena, sin repetir el briefing; el acceso de pruebas que la omite conserva una sola frase de contexto.
+- [x] La intro reutiliza las ilustraciones EGA originales, presenta al grupo con encuadres legibles en escritorio y móvil y tiene un motivo de audio propio aislado del foco de investigación.
+- [x] El cierre jugable se presenta ahora como una lámina EGA breve con consecuencia, una línea de estado y solo las acciones `Jugar otra vez` y `Volver al título`.
+- [x] Portada, ayuda, los cuatro fotogramas, salto por botón/teclado, continuación y vistas móviles verificadas sin desbordamiento ni errores de consola.
+- [x] Tres recorridos completos verificados en 1440×900, 1024×768 y 390×844: ocho auditorías de pantalla y cero errores de consola. Capturas en `artifacts/el-disco/` y `artifacts/demo-09-13/`.
+- [x] Suite final: 214 pruebas en 10 ficheros, compilación de producción correcta y 58/58 láminas validadas. Permanece el aviso no bloqueante de Vite por el paquete inicial de unos 860 kB y el inventario avisa de 31 retratos de PNJ aún no ilustrados.
+
+## Mayor presencia y variedad musical (8 de septiembre de 2026)
+
+- [x] La intro musical pasa de una frase corta con un gran vacío a cuatro secciones enlazadas que cubren 22,8 de sus 23 segundos y siguen las láminas de título, hotel, grupo y telegrama.
+- [x] El hotel entra entre 250 y 700 ms después del fundido y alterna tres temas originales sin repetición consecutiva; los ciclos bajan de 18–35 a 10–16 segundos.
+- [x] Investigación y subsuelo también alternan tres variantes y reducen sus pausas, conservando menos densidad que una banda sonora continua.
+- [x] Los diagnósticos de `render_game_to_text` incluyen tema, frases ejecutadas y demora de la siguiente frase.
