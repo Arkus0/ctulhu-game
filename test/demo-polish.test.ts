@@ -70,11 +70,15 @@ describe('escenas de la mañana', () => {
     expect(examine.world.journal).toContain('las_orejas')
   })
 
-  it('cierra la demo al resolver el disco sin exigir esperas vacías hasta las 13:00', () => {
+  it('resolver el disco ya no cierra la partida: la tarde sigue abierta', () => {
     const game = at('clean-ending', 'viejo_templo', 'D1 12:30')
     game.performAction('disk_observe')
-    expect(game.view().sliceFinished).toBe(true)
-    expect(game.view().finished).toBe(true)
+    expect(game.world.getFlag('disco_decision_jugador')).toBe(true)
+    // El Disco era el final de la rebanada de mediodia y ahora es su hito
+    // central: la demo llega hasta el cierre de la mascarada.
+    expect(game.view().sliceFinished).toBe(false)
+    expect(game.view().finished).toBe(false)
+    expect(game.view().actions.length).toBeGreaterThan(0)
   })
 })
 

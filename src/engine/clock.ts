@@ -17,6 +17,13 @@ export const SEQUENCE_MINUTES = 30
 export const GAME_START = 9 * 60
 /** Weder llega al museo a las 3:00 de la madrugada del 23. */
 export const GAME_END = 2 * MINUTES_PER_DAY + 3 * 60
+/**
+ * Final de la rebanada jugable: las 7:00 del dia 22, cuando se clausura la
+ * mascarada y el ultimo suceso de la noche (`d1_selassie_se_retira_con_olga`)
+ * ha cerrado su ventana. El reloj llega hasta GAME_END, pero la demo entrega
+ * su epilogo aqui.
+ */
+export const DEMO_END = MINUTES_PER_DAY + 7 * 60
 
 /** Construye un minuto absoluto a partir de dia (1..3) y hora. */
 export function t(day: number, hour: number, minute = 0): number {

@@ -6,7 +6,16 @@
  * vez. Cada accion CUESTA TIEMPO y el mundo avanza mientras la haces. Esa es la
  * regla que sostiene todo el juego.
  */
-import { Clock, ACTION_COST, GAME_START, formatClock, formatFull, timeOfDay } from './clock'
+import {
+  Clock,
+  ACTION_COST,
+  DEMO_END,
+  GAME_START,
+  MINUTES_PER_DAY,
+  formatClock,
+  formatFull,
+  timeOfDay,
+} from './clock'
 import { APPROACH_NARRATION, DialogueEngine, type AskResult, type Approach, type DialogueTopic } from './dialogue'
 import { Party, createInvestigator, type Order, type PartySnapshot } from './party'
 import {
@@ -299,10 +308,10 @@ export class Game {
 
     const scene = this.currentScene()
     const leads = this.leads()
+    // La decision sobre el Disco era el final de la rebanada de mediodia y ahora
+    // es su hito central: la partida sigue hasta que se clausura la mascarada.
     const sliceFinished =
-      (this.world.getFlag('disco_decision_jugador') || this.clock.now >= 13 * 60) &&
-      scene == null &&
-      this.pendingRoll == null
+      this.clock.now >= DEMO_END && scene == null && this.pendingRoll == null
     return {
       time: formatFull(this.clock.now),
       timeOfDay: timeOfDay(this.clock.now),
@@ -347,7 +356,7 @@ export class Game {
       objective: scene
         ? scene.objective
         : sliceFinished
-          ? 'La primera mañana ha cerrado su arco. Sus consecuencias quedan fijadas.'
+          ? 'La mascarada se ha clausurado. Sus consecuencias quedan fijadas.'
           : leads.find((lead) => lead.status === 'active')?.detail ??
             'Buscar una nueva vía antes de que cambie la agenda del hotel.',
       sliceFinished,
@@ -405,7 +414,7 @@ export class Game {
 
   /** Cinco decisiones como maximo. El mapa, el caso y el equipo viven fuera de esta lista. */
   private contextActions(scene: SceneView | null): GuidedAction[] {
-    if (this.pendingRoll || this.clock.now >= 13 * 60) return []
+    if (this.pendingRoll || this.clock.now >= DEMO_END) return []
     if (scene) return scene.actions
 
     const v: GuidedAction[] = []
@@ -518,10 +527,44 @@ export class Game {
       minutes: waitMinutes,
     }
 
+    // La noche tiene dos tramos muertos de verdad -de la pelea del templo a la
+    // mascarada, y de las 02:30 al amanecer-. Cruzarlos de cuarto de hora en
+    // cuarto de hora son decenas de pulsaciones que no deciden nada, asi que
+    // cuando el proximo suceso esta lejos se ofrece el salto largo. Por debajo
+    // de media hora no aparece: ahi esperar todavia es una decision.
+    const saltoMinutos = this.longWaitMinutes()
+    if (saltoMinutos != null) {
+      v.push({
+        id: 'wait_long',
+        kind: 'act',
+        label: 'Esperar a que pase algo',
+        hint: `El hotel está tranquilo. Dejar pasar el rato hasta las ${formatClock(this.clock.now + saltoMinutos)}.`,
+        minutes: saltoMinutos,
+      })
+    }
+
     // Cinco como maximo, y una de las cinco es siempre esperar: antes iba al
     // final de la lista y el corte podia llevarsela, dejando al jugador sin
     // ninguna forma de dejar pasar el tiempo.
     return [...v.slice(0, 4), esperar]
+  }
+
+  /**
+   * Minutos hasta el proximo suceso de la agenda, si merece la pena saltarlos.
+   *
+   * Devuelve null cuando el salto no aporta nada: si hay menos de media hora
+   * hasta lo siguiente, si algo esta ocurriendo aqui mismo, o si ya no queda
+   * agenda. El tope de hora y media evita que un unico clic se lleve por
+   * delante media noche, y el corte en DEMO_END evita saltar por encima del
+   * final de la rebanada.
+   */
+  private longWaitMinutes(): number | null {
+    if (this.scheduler.ongoingAt(this.party.focus.location).length > 0) return null
+    const next = this.scheduler.nextMinute
+    if (next == null) return null
+    const hasta = Math.min(next, DEMO_END)
+    const salto = Math.min(90, hasta - this.clock.now)
+    return salto >= 30 ? salto : null
   }
 
   private currentScene(): SceneView | null {
@@ -652,6 +695,77 @@ export class Game {
             : 'active',
       })
     else if (now >= 13 * 60) visible.push(this.anonymousMissed('disco'))
+
+    /* ---------------------------------------------------------------- *
+     * La tarde y la noche.
+     *
+     * Mismo contrato que las de la manana: la pista solo se ve si el grupo
+     * tiene alguna razon para saber que existe, y si la ventana vence sin
+     * haberla descubierto queda el hueco anonimo. Todas cuelgan de banderas y
+     * hechos que `day1.json` ya escribe, y las tres ultimas se resuelven por
+     * los detalles `control_de_invitados`, `telegrama_para_shakti` y
+     * `puerta_del_corredor`, que ya existen en `locations.json`.
+     * ---------------------------------------------------------------- */
+    const d2 = (hour: number, minute = 0): number => MINUTES_PER_DAY + hour * 60 + minute
+
+    if (this.world.knows('disco_solar_existe')) visible.push({
+        id: 'venta_407',
+        title: 'La venta de la 407',
+        detail: 'Weder guarda el Disco en la caja fuerte de su habitación. No piensa quedárselo.',
+        deadline: '16:00 a 17:00',
+        status: done(this.world.knows('precio_del_disco'), now >= 17 * 60),
+      })
+    else if (now >= 17 * 60) visible.push(this.anonymousMissed('venta_407'))
+
+    const sacoConocido =
+      this.world.knows('carter_evita_su_habitacion') ||
+      this.world.knows('olor_de_la_cocina') ||
+      this.world.knows('carter_baja_con_el_saco')
+    if (sacoConocido) visible.push({
+        id: 'saco_carter',
+        title: 'Lo que Carter lleva al hombro',
+        detail: 'El arqueólogo no sube a la 362 desde el mediodía, y algo gotea de ese saco.',
+        deadline: '16:00 a 17:20',
+        status: done(this.world.knows('carter_alimenta_a_las_criaturas'), now >= 17 * 60 + 20),
+      })
+    else if (now >= 17 * 60 + 20) visible.push(this.anonymousMissed('saco_carter'))
+
+    if (this.world.knows('carter_baja_con_el_saco')) visible.push({
+        id: 'colera_carter',
+        title: 'Cuando Carter abra la caja',
+        detail: 'Bajó a catalogar sus piezas. Falta la mejor, y todavía no lo sabe.',
+        deadline: '17:20 a 18:00',
+        status: done(this.world.knows('carter_sabe_que_falta_el_disco'), now >= 18 * 60),
+      })
+    else if (now >= 18 * 60) visible.push(this.anonymousMissed('colera_carter'))
+
+    if (this.world.knows('mascarada_esta_noche')) visible.push({
+        id: 'mascarada',
+        title: 'Entrar en la mascarada',
+        detail: 'Dos nubios con la lista en la puerta. Sin figurar en ella no se entra al salón.',
+        deadline: '21:00 a 23:00',
+        status: done(this.world.getFlag('invitados_mascarada'), now >= 23 * 60),
+      })
+    else if (now >= 23 * 60) visible.push(this.anonymousMissed('mascarada'))
+
+    if (this.world.knows('telegrama_en_la_bandeja')) visible.push({
+        id: 'telegrama',
+        title: 'El telegrama de la suite real',
+        detail: 'Sale con el primer turno. Hasta entonces está en una bandeja de mimbre, encima de todo.',
+        deadline: '00:35 a 01:30',
+        status: done(this.world.getFlag('telegrama_interceptado'), now >= d2(1, 30)),
+      })
+    else if (now >= d2(1, 30)) visible.push(this.anonymousMissed('telegrama'))
+
+    if (this.world.knows('najir_encerrado_abajo')) visible.push({
+        id: 'najir',
+        title: 'Najir al otro lado de la puerta',
+        detail: 'El pasador está echado por fuera y del túnel norte viene algo que no tiene prisa.',
+        deadline: '01:00 a 02:00',
+        status: done(this.world.getFlag('najir_rescatado'), now >= d2(2)),
+      })
+    else if (now >= d2(2)) visible.push(this.anonymousMissed('najir'))
+
     return visible
   }
 
@@ -943,6 +1057,11 @@ export class Game {
       )
     }
     if (id === 'wait') return this.wait()
+    if (id === 'wait_long') {
+      const salto = this.longWaitMinutes()
+      if (salto == null) return this.wait()
+      return this.resolve([{ kind: 'narracion', text: WAIT_LONG_LINE }], salto, [{ kind: 'clock' }], true)
+    }
     if (id === 'trail_weder') {
       if (!this.world.hasNpc('weder')) return this.instant([])
       const turn = this.follow('weder')
@@ -1358,27 +1477,74 @@ export class Game {
   }
 
   /** Destinos principales con su coste total por la ruta mas corta disponible. */
+  /**
+   * Las salas a las que se puede ir desde el panel del mapa.
+   *
+   * El mapa es la unica forma de moverse, asi que lo que no este en esta lista
+   * no existe para el jugador por muy bien conectado que este en el grafo. La
+   * lista nacio con las once salas de la manana, y con eso el salon de baile
+   * -trece sucesos, el centro de la noche-, la 407 y la 204 quedaban fuera:
+   * la mascarada ocurria y no habia manera de entrar.
+   *
+   * Tres capas:
+   *  - Las salas publicas del hotel estan siempre. Que se pueda ENTRAR es otra
+   *    cosa y lo decide el contenido: al salon de baile se pasa por el detalle
+   *    `control_de_invitados`, no escondiendolo del plano.
+   *  - El subsuelo pide conocer la ruta de servicio, como hasta ahora.
+   *  - Una habitacion ajena aparece cuando el grupo sabe quien duerme en ella.
+   *    Cada llave es un hecho que el juego ensena de verdad: el registro canta
+   *    la 204, Clinton canta la 487, la llegada del Principe canta la suite.
+   */
   mapDestinations(): { id: string; name: string; floor: string; minutes: number; current: boolean }[] {
-    const ids = [
+    const publicas = [
       'recepcion',
       'conserjeria',
       'terraza',
       'restaurante',
+      'salon_baile',
       'cocina',
       'salon_isis',
+      'salon_morisco',
       'correos',
       'bar_largo',
-      'salon_ali_bey',
-      'sala_escombros',
-      'viejo_templo',
+      'tienda_moda_mujer',
+      'tienda_moda_caballeros',
+      'tienda_joyas',
+      'tienda_relojes',
+      'tienda_cigarros',
+      'tienda_suvenires',
+      'jardin_exterior',
+      'pasillo_habitaciones',
+      'hab_investigadores',
     ]
-    const underground = new Set(['salon_ali_bey', 'sala_escombros', 'viejo_templo'])
+    const underground = ['salon_ali_bey', 'sala_escombros', 'viejo_templo']
     const routeKnown =
       this.world.knows('ruta_servicio_al_sotano') ||
       this.world.knows('weder_baja_al_sotano') ||
-      underground.has(this.party.focus.location)
+      underground.includes(this.party.focus.location)
+
+    // Habitacion ajena -> el hecho que revela quien la ocupa.
+    const habitaciones: [string, string[]][] = [
+      ['hab_carter', ['carter_y_weder_juntos', 'carter_evita_su_habitacion']],
+      ['hab_weder', ['disco_solar_existe', 'weder_baja_al_sotano']],
+      ['hab_lounpeen', ['lounpeen_en_el_hotel']],
+      ['hab_fuad', ['fuad_ha_llegado']],
+      ['hab_najir', ['faraz_najir']],
+      ['hab_aga_khan', ['aga_khan_viene']],
+      ['hab_selassie', ['selassie_en_el_hotel']],
+    ]
+
+    const ids = [
+      ...publicas,
+      ...(routeKnown ? underground : []),
+      ...habitaciones
+        .filter(([id, llaves]) =>
+          this.party.focus.location === id || llaves.some((fact) => this.world.knows(fact)),
+        )
+        .map(([id]) => id),
+    ]
+
     return ids.flatMap((id) => {
-      if (underground.has(id) && !routeKnown) return []
       const route = this.shortestRoute(this.party.focus.location, id)
       const loc = this.content.locations.get(id)
       return loc && route
@@ -1628,7 +1794,7 @@ export class Game {
 
     // Durante la rebanada jugable, una escena sin testigos no entrega sus
     // conocimientos por telepatia. El mundo cambia, pero la libreta no.
-    for (const fired of report.offscreen.filter((event) => event.minute <= 13 * 60)) {
+    for (const fired of report.offscreen.filter((event) => event.minute <= DEMO_END)) {
       for (const effect of fired.def.effects ?? []) {
         if (effect.kind !== 'learnFact' || effect.who != null) continue
         for (const member of this.party.members) {
@@ -1719,7 +1885,9 @@ export class Game {
     }
 
     if (isWait) {
-      const substantive = lines.some((line) => line.text !== WAIT_LINE)
+      const substantive = lines.some(
+        (line) => line.text !== WAIT_LINE && line.text !== WAIT_LONG_LINE,
+      )
       this.emptyWaits = substantive ? 0 : this.emptyWaits + 1
       if (this.emptyWaits >= 2) {
         lines.push({ kind: 'rastro', text: this.hotelReaction() })
@@ -2065,6 +2233,8 @@ export class Game {
  */
 /** El texto de dejar correr el reloj. Una comparacion depende de el, asi que vive aqui. */
 const WAIT_LINE = 'Dejáis correr el reloj.'
+const WAIT_LONG_LINE =
+  'El hotel sigue a lo suyo un buen rato: pasos en un pasillo, una puerta, una risa lejana. Nada que os incumba, hasta que algo lo hace.'
 
 /** «un dado» / «dos dados», que es como lo dice el reglamento. */
 function dice(n: number): string {

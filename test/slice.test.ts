@@ -387,6 +387,133 @@ describe('la tarde y la mascarada del dia 1', () => {
   })
 })
 
+describe('la noche es jugable, no solo simulable', () => {
+  /**
+   * La agenda de la noche siempre se ejecuto bien; lo que no habia era manera de
+   * verla. La demo se cortaba a las 13:00 y cincuenta de los sesenta y ocho
+   * sucesos se disparaban sin que ningun jugador pudiera estar delante.
+   */
+  it('el jugador conserva acciones despues de las 13:00 y hasta el amanecer', () => {
+    for (const hora of ['D1 14:00', 'D1 17:00', 'D1 21:30', 'D1 23:45', 'D2 03:00', 'D2 06:30']) {
+      const g = newGame('acciones-' + hora)
+      g.advanceTime(parseTime(hora) - g.clock.now)
+      expect({ hora, acciones: g.view().actions.length > 0 }).toEqual({ hora, acciones: true })
+      expect({ hora, fin: g.view().finished }).toEqual({ hora, fin: false })
+    }
+  })
+
+  it('la rebanada se cierra al clausurarse la mascarada, no a mediodia', () => {
+    const g = newGame('cierre')
+    g.advanceTime(parseTime('D2 06:59') - g.clock.now)
+    expect(g.view().sliceFinished).toBe(false)
+    g.advanceTime(1)
+    expect(g.view().sliceFinished).toBe(true)
+    expect(g.view().finished).toBe(true)
+    expect(g.view().actions).toEqual([])
+  })
+
+  it('el tablero del caso ofrece objetivos durante toda la noche', () => {
+    const g = newGame('tablero')
+    const activas = (): string[] =>
+      g.view().leads.filter((l) => l.status === 'active').map((l) => l.id)
+    // El grupo se entera de lo que hay que enterarse estando donde toca.
+    g.party.moveTogether('terraza')
+    g.advanceTime(parseTime('D1 11:05') - g.clock.now)
+    g.party.moveTogether('restaurante')
+    g.advanceTime(parseTime('D1 13:50') - g.clock.now)
+    expect(g.world.knows('carter_evita_su_habitacion')).toBe(true)
+    expect(activas()).toContain('saco_carter')
+
+    g.party.moveTogether('salon_baile')
+    g.advanceTime(parseTime('D1 18:30') - g.clock.now)
+    expect(g.world.knows('mascarada_esta_noche')).toBe(true)
+    expect(activas()).toContain('mascarada')
+  })
+
+  it('una pista de noche que vence sin descubrirse deja el hueco anonimo', () => {
+    const g = newGame('vencidas')
+    g.advanceTime(parseTime('D2 02:30') - g.clock.now)
+    const anonimas = g.view().leads.filter((l) => l.anonymous)
+    expect(anonimas.length).toBeGreaterThanOrEqual(4)
+    expect(new Set(anonimas.map((l) => l.title))).toEqual(new Set(['Oportunidad perdida']))
+    // Lo que no se descubrio no se nombra. Se mira lo que el jugador lee de
+    // verdad -titulo, detalle y ventana-, porque el `id` es la clave interna
+    // del tablero y `showCase` no lo pinta en ninguna parte.
+    const visible = JSON.stringify(
+      anonimas.map((l) => ({ title: l.title, detail: l.detail, deadline: l.deadline })),
+    )
+    expect(visible).not.toMatch(/Najir|telegrama|Shakti|mascarada|Selassie|Carter|Weder/i)
+  })
+
+  it('la espera larga cruza los tramos muertos sin saltarse el final', () => {
+    const g = newGame('espera-larga')
+    g.party.moveTogether('recepcion')
+    g.advanceTime(parseTime('D1 20:00') - g.clock.now)
+    const larga = g.view().actions.find((a) => a.id === 'wait_long')
+    expect(larga).toBeDefined()
+    expect(larga!.minutes).toBeGreaterThanOrEqual(30)
+    expect(larga!.minutes).toBeLessThanOrEqual(90)
+    const antes = g.clock.now
+    g.performAction('wait_long')
+    expect(g.clock.now).toBeGreaterThan(antes + 29)
+
+    // Nunca por encima del cierre de la rebanada.
+    const fin = newGame('espera-fin')
+    fin.advanceTime(parseTime('D2 06:00') - fin.clock.now)
+    for (const accion of fin.view().actions) {
+      if (accion.id === 'wait_long') {
+        expect(fin.clock.now + accion.minutes!).toBeLessThanOrEqual(parseTime('D2 07:00'))
+      }
+    }
+  })
+
+  /**
+   * El mapa es la unica forma de moverse: una sala que no sale en el panel no
+   * existe para el jugador. Trece sucesos de la noche ocurren en el salon de
+   * baile, cuatro en la 407 y dos en la 204.
+   */
+  it('toda sala con sucesos se puede alcanzar desde el mapa', () => {
+    const g = newGame('mapa-completo')
+    // Un grupo que se ha enterado de todo lo que el dia ensena.
+    for (const fact of [
+      'ruta_servicio_al_sotano', 'carter_y_weder_juntos', 'disco_solar_existe',
+      'lounpeen_en_el_hotel', 'fuad_ha_llegado', 'faraz_najir',
+      'aga_khan_viene', 'selassie_en_el_hotel',
+    ]) g.world.learnFact(fact)
+
+    const alcanzables = new Set(g.mapDestinations().map((d) => d.id))
+    const conSucesos = [...new Set(content.events.map((e) => e.location))]
+    const inalcanzables = conSucesos.filter((id) => !alcanzables.has(id))
+    expect(inalcanzables).toEqual([])
+  })
+
+  it('una habitación ajena no aparece en el mapa hasta saber quién la ocupa', () => {
+    const g = newGame('mapa-discreto')
+    const ids = (): string[] => g.mapDestinations().map((d) => d.id)
+    expect(ids()).toContain('salon_baile')
+    expect(ids()).toContain('pasillo_habitaciones')
+    expect(ids()).not.toContain('hab_selassie')
+    expect(ids()).not.toContain('hab_fuad')
+    g.world.learnFact('selassie_en_el_hotel')
+    expect(ids()).toContain('hab_selassie')
+    expect(ids()).not.toContain('hab_fuad')
+  })
+
+  it('el subsuelo sigue pidiendo conocer la ruta de servicio', () => {
+    const g = newGame('mapa-subsuelo')
+    expect(g.mapDestinations().map((d) => d.id)).not.toContain('viejo_templo')
+    g.world.learnFact('ruta_servicio_al_sotano')
+    expect(g.mapDestinations().map((d) => d.id)).toContain('viejo_templo')
+  })
+
+  it('no se ofrece salto largo cuando hay algo ocurriendo delante', () => {
+    const g = newGame('salto-en-escena')
+    g.party.moveTogether('salon_baile')
+    g.advanceTime(parseTime('D1 21:15') - g.clock.now)
+    expect(g.view().actions.some((a) => a.id === 'wait_long')).toBe(false)
+  })
+})
+
 describe('setInvestigatorStatus: sucesos que sacan a un investigador de la partida sin danno', () => {
   // No hay ningun sitio real del hotel pensado para probar esto, asi que se
   // inyecta una localizacion de usar y tirar sobre una copia del contenido

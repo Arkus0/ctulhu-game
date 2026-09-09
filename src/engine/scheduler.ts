@@ -159,6 +159,18 @@ export class Scheduler {
     return this.pending.length
   }
 
+  /**
+   * Minuto del proximo suceso de la agenda, o null si no queda ninguno.
+   *
+   * La cola esta ordenada por minuto, asi que es mirar la cabeza. Lo usa la
+   * accion de esperar largo: sin esto, cruzar los tramos muertos de la noche
+   * -entre la pelea del templo y la mascarada, y de las 02:30 al amanecer- son
+   * decenas de pulsaciones de quince minutos que no deciden nada.
+   */
+  get nextMinute(): number | null {
+    return this.pending[0]?.minute ?? null
+  }
+
   definition(id: EventId): EventDef | undefined {
     return this.byId.get(id)
   }

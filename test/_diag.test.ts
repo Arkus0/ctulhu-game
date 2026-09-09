@@ -42,10 +42,10 @@ describe('diagnostico', () => {
     const nuevos = [
       ['clinton', 'clinton_najir'], ['clinton', 'clinton_quien_es_selassie'], ['clinton', 'clinton_saqueos'],
       ['thornhill', 'thornhill_telegrama'], ['mahadni', 'mahadni_frigorifico'], ['mahadni', 'mahadni_la_comitiva'],
-      ['rolland', 'rolland_carter_come_solo'], ['gasparini', 'gasparini_visita_de_najir'],
+      ['gasparini', 'gasparini_visita_de_najir'],
       ['gasparini', 'gasparini_selassie'], ['behler', 'behler_selassie'], ['behler', 'behler_leones'],
-      ['carter', 'carter_la_bronca'], ['carter', 'carter_mecenas'], ['weder', 'weder_la_venta'],
-      ['dieter', 'dieter_el_disco'], ['dieter', 'dieter_frigorifico'], ['olga', 'olga_selassie'],
+      ['carter', 'carter_la_bronca'], ['carter', 'carter_mecenas'],
+      ['dieter', 'dieter_frigorifico'], ['olga', 'olga_selassie'],
       ['najir', 'najir_la_comitiva'], ['najir', 'najir_rescate'],
     ]
     const invisibles: string[] = []
@@ -54,6 +54,37 @@ describe('diagnostico', () => {
     }
     console.log('temas nuevos que NO aparecen:', invisibles.length, invisibles.join(', '))
     expect(invisibles).toEqual([])
+  })
+
+  /**
+   * Tres temas de la noche no dependen de una bandera del mundo sino de que el
+   * grupo ESTUVIERA DELANTE. Antes pasaban por el camino equivocado: el filtro
+   * de sucesos no presenciados solo llegaba hasta las 13:00, asi que quien
+   * esperaba sentado en el hall se enteraba por telepatia de una venta ocurrida
+   * en la cuarta planta. Con el filtro extendido hasta el final de la rebanada,
+   * la unica via es la legitima, y esto lo comprueba.
+   */
+  it('los temas que exigen presencia se abren estando delante, y solo asi', () => {
+    const casos: [string, string, string, string, string][] = [
+      ['rolland', 'rolland_carter_come_solo', 'carter_evita_su_habitacion', 'restaurante', 'D1 13:45'],
+      ['weder', 'weder_la_venta', 'weder_vende_las_piezas', 'hab_weder', 'D1 16:00'],
+      ['dieter', 'dieter_el_disco', 'dieter_tiene_el_disco', 'hab_lounpeen', 'D1 17:00'],
+    ]
+    for (const [npc, topic, fact, location, hora] of casos) {
+      const presente = new Game(content, 'presente-' + topic)
+      presente.party.moveTogether(location!)
+      presente.scheduler.advance(parseTime(hora!) + 5 - presente.clock.now)
+      expect(presente.world.knows(fact!)).toBe(true)
+      expect(presente.topicsFor(npc!).some((t) => t.id === topic)).toBe(true)
+
+      // El filtro de lo no presenciado vive en `Game.resolve`, no en el
+      // scheduler: hay que avanzar por la puerta del juego, no por la de al lado.
+      const ausente = new Game(content, 'ausente-' + topic)
+      ausente.party.moveTogether('recepcion')
+      ausente.advanceTime(parseTime(hora!) + 5 - ausente.clock.now)
+      expect(ausente.world.knows(fact!)).toBe(false)
+      expect(ausente.topicsFor(npc!).some((t) => t.id === topic)).toBe(false)
+    }
   })
 
   it('las conversaciones nuevas son espiables en su ventana', () => {

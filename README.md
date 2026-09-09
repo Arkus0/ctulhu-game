@@ -4,7 +4,7 @@ Aventura gráfica narrativa y sistémica basada en el módulo *La Broma Macabra*
 
 [Jugar a la demo en el navegador](https://ctulhu-game.vercel.app/)
 
-La demo jugable actual cubre el 21 de noviembre de 1922 entre las 09:00 y las 13:00. Edith Harker dirige la investigación mientras Nadia Farouk y Samuel Vance pueden ocuparse de otros frentes. El mundo avanza aunque Edith no esté mirando y la mañana culmina en una escena ramificada alrededor del Disco Solar.
+La demo jugable actual cubre el 21 de noviembre de 1922 desde las 09:00 hasta que se clausura la mascarada, a las 06:00 de la madrugada siguiente. Edith Harker dirige la investigación mientras Nadia Farouk y Samuel Vance pueden ocuparse de otros frentes. El mundo avanza aunque Edith no esté mirando: el Disco Solar cambia de manos tres veces a lo largo del día, y dónde amanezca depende de dónde estuvierais vosotros.
 
 ## Probar el juego
 

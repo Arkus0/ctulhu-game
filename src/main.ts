@@ -483,7 +483,7 @@ class UI {
     this.choices.replaceChildren()
     if (view.pendingRoll) return this.renderRoll()
     if (view.finished || this.mode.kind === 'end') {
-      this.heading('Fin de la primera mañana')
+      this.heading('Se clausura la mascarada')
       this.button('Ver las consecuencias', () => this.showEnding(), undefined, 'urgent')
       return
     }
@@ -1347,25 +1347,64 @@ class UI {
     const view = this.game.view()
     this.frontImage.hidden = false
     this.frontImage.src = `art/${this.presentationArt ?? view.art}.png`
-    this.frontImage.alt = 'Consecuencia de la decisión sobre el Disco Solar'
-    const holder = this.game.world.holderOf('disco_solar')
-    let heading = ''
-    let paragraph = ''
-    if (holder === 'player') {
-      heading = 'Habéis cambiado la historia'
-      paragraph = 'Edith conserva el Disco Solar. Weder sabe quién se lo quitó y el hotel ya no es terreno neutral.'
-    } else if (this.game.world.getFlag('weder_retrasado')) {
-      heading = 'Habéis ganado dos horas'
-      paragraph = 'Weder volverá a las tres. El disco sigue bajo tierra y ambos bandos preparan su siguiente movimiento.'
-    } else {
-      heading = 'La cadena de custodia ha empezado'
-      paragraph = 'Weder sube hacia la habitación 407 con el Disco Solar. El reloj no se detiene.'
+    this.frontImage.alt = 'Amanece sobre el Shepheard’s después de la mascarada'
+    const world = this.game.world
+    const holder = world.holderOf('disco_solar')
+
+    // El titular lo pone la cadena de custodia, que es la columna vertebral del
+    // dia: donde amanece el Disco Solar resume quien ha ganado la noche.
+    const DESENLACES: Record<string, { heading: string; paragraph: string }> = {
+      player: {
+        heading: 'Habéis cambiado la historia',
+        paragraph:
+          'El Disco Solar amanece en vuestro poder. La cadena de custodia que el hotel llevaba semanas tejiendo se rompió en vuestras manos, y hay tres hombres que saben exactamente a quién buscar.',
+      },
+      dieter: {
+        heading: 'Cinco mil libras y una caja bajo el colchón',
+        paragraph:
+          'Dieter Lounpeen amanece con el Disco en una caja metálica que trajo preparada desde Alejandría. Carter lo sabe, Weder cobró por ello, y ninguno de los dos va a dejarlo así.',
+      },
+      selassie: {
+        heading: 'El Gordo Nubio pesa el saco y sonríe',
+        paragraph:
+          'Los esbirros de Selassie levantaron el colchón de la 204 sin dudar un segundo. El Disco Solar sale del Shepheard’s en un saco de tela, y nadie que lo busque va a mirar en la dirección correcta.',
+      },
+      weder: {
+        heading: 'El alemán sigue teniendo la llave',
+        paragraph:
+          'El Disco no ha salido de la caja fuerte de la 407. La venta no llegó a cerrarse, y eso deja a Weder con la pieza y con todos los compradores de El Cairo sabiendo que la tiene.',
+      },
+      nobody: {
+        heading: 'El disco sigue bajo tierra',
+        paragraph:
+          'Nadie sacó el Disco Solar del Viejo Templo. Sigue en su caja labrada, a doce metros bajo un salón de baile lleno de cristales rotos, esperando a la primera persona que vuelva a bajar.',
+      },
     }
+    const desenlace = DESENLACES[holder] ?? DESENLACES['nobody']!
+
+    // Debajo, lo que el grupo hizo o dejó de hacer con las tres decisiones que
+    // la noche pone de verdad en sus manos.
+    const consecuencias: string[] = []
+    if (world.getFlag('najir_rescatado')) {
+      consecuencias.push('Faraz Najir os debe la vida y lee egipcio clásico: eso vale más que el oro que os ofrezca.')
+    } else if (world.getFlag('najir_muerto')) {
+      consecuencias.push('Faraz Najir no salió del Viejo Templo. La 487 no ha entregado su llave.')
+    }
+    if (world.getFlag('telegrama_interceptado')) {
+      consecuencias.push('Sabéis que Omar Shakti viene de camino, y sabéis por qué. Él no sabe que lo sabéis.')
+    } else if (world.getFlag('shakti_avisado')) {
+      consecuencias.push('El telegrama salió con el primer turno. Omar Shakti viene de camino y nadie os ha avisado.')
+    }
+    if (world.getFlag('pacto_con_fuad')) {
+      consecuencias.push('Carter tiene mecenas, Fuad tiene la Daga de Akhenatón y el traslado al museo está pactado.')
+    }
+
     const stats = this.game.summary()
     this.frontCopy.replaceChildren(
-      this.frontText('p', '13:00 · FIN DE LA DEMO', 'front-kicker'),
-      this.frontText('h2', heading),
-      this.frontText('p', paragraph, 'front-subtitle'),
+      this.frontText('p', '06:00 · SE CLAUSURA LA MASCARADA', 'front-kicker'),
+      this.frontText('h2', desenlace.heading),
+      this.frontText('p', desenlace.paragraph, 'front-subtitle'),
+      ...consecuencias.map((linea) => this.frontText('p', linea, 'front-subtitle')),
       this.frontText('p', `${stats.seen.length} escenas presenciadas · ${stats.missed.length} lejos de Edith · ${stats.traces} rastros pendientes`, 'front-stats'),
     )
     this.frontActions.replaceChildren()
