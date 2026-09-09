@@ -456,3 +456,24 @@ nuevas— existía en el motor sin llegar al ojo del jugador.
 - [x] `node tools/audio_check.mjs` mide lo que sale de verdad con un analizador delante del destino. En el hall la música suena el 87 % del tiempo con un silencio máximo de 1,6 s (antes: dos frases en veinte segundos y tramos con cero voces); investigar sube la tensión sin cambiar de tema; el cambio de zona cambia de tema con 0,8 s de silencio; silenciar y volver recupera la ganancia; la intro sigue sonando como antes.
 - [x] Suite: 249 pruebas en 12 ficheros, `tsc --noEmit` limpio y compilación de producción correcta.
 - [ ] Escuchar la mezcla con altavoces reales y ajustar el equilibrio entre melodía, bajo y efectos. Está medido, no escuchado.
+
+## La noche de la mascarada deja de ser invisible (verificado, 9 de septiembre de 2026)
+
+- [x] Auditada `events/day1.json` antes de tocar nada: ya estaba completa. 68 sucesos de las 09:00 a las 07:00 del día siguiente, los hitos del módulo (páginas impresas 54-60) escritos y fieles, la cadena de custodia del Disco atada con `requires`/`custody`, ninguna referencia rota —comprobados también `moveNpc.to`, `moveCustody.item`, los holders, el arte y los tellers, que la validación de `content/index.ts` no cubre— y ninguna franja de 30 minutos vacía. `fuera_del_hotel` no era un error: es el centinela de `game.ts:158`.
+- [x] Lo que faltaba no era contenido, era acceso: la demo se cortaba a las 13:00 y **cincuenta de los sesenta y ocho sucesos se disparaban sin que ningún jugador pudiera estar delante**. `DEMO_END` (D2 07:00) sustituye a los tres cortes de `game.ts` que lo causaban. Los otros cuatro `13 * 60` se quedan donde estaban: son los plazos reales de las pistas de Olga y del Disco.
+- [x] **La trampa del pase.** El filtro que impide aprender por telepatía lo que no se ha presenciado solo llegaba hasta las 13:00. Abrir la tarde sin moverlo le regalaba al grupo los 51 hechos de la noche. Una prueba de `_diag` lo fija ahora en los dos sentidos: estando delante en la 407 a las 16:00 se aprende la venta, y esperando sentado en el hall no. Tres temas de diálogo pasaban solo por esa vía equivocada.
+- [x] La decisión sobre el Disco Solar deja de terminar la partida y pasa a ser el hito de mediodía.
+- [x] Seis pistas nuevas en el tablero para la tarde y la noche —la venta de la 407, el saco de Carter, su cólera, entrar en la mascarada, el telegrama y Najir al otro lado de la puerta—. Sin ellas el jugador se quedaba dieciocho horas sin un solo objetivo. Las tres últimas se resuelven por detalles que ya existían y nadie podía alcanzar.
+- [x] `mapDestinations` era una lista fija de once salas de la mañana, y el mapa es la única forma de moverse: **el salón de baile —trece sucesos, el centro de la noche—, la 407 y la 204 no se podían pisar**. Ahora las salas públicas están siempre, el subsuelo sigue pidiendo la ruta de servicio y una habitación ajena aparece cuando el grupo sabe quién duerme en ella. Una prueba impide que vuelva a quedarse fuera una sala con sucesos.
+- [x] «Esperar a que pase algo» salta al siguiente suceso de la agenda, con tope de hora y media y sin pasarse del cierre. Cruzar de las 14:00 a las 21:00 baja de 28 pulsaciones a 17.
+- [x] Epílogo nuevo: lo escribe dónde amanece el Disco —jugador, Dieter, Selassie, Weder o nadie—, más Najir, el telegrama y el pacto del sótano.
+- [x] Comprobación: 283 pruebas en 12 ficheros, `tsc --noEmit` limpio, compilación correcta y partida completa en navegador de las 09:00 al amanecer, sin errores de consola, entrando en la mascarada y con el epílogo leyendo el estado real de la noche.
+- [x] `docs/NOCHE-DE-LA-MASCARADA.md` recoge lo que falta para que esto parezca un videojuego, con un prompt copiable por tarea.
+
+### Lo que la partida completa deja a la vista
+
+- [ ] **Cero escenas de decisión después de las 12:30.** Los cincuenta sucesos de la tarde y la noche se presencian; no se decide en ninguno.
+- [ ] **El salón de baile tiene un solo detalle para las nueve horas que dura la fiesta**, y se consume al primer uso. `pasillo_habitaciones` tiene cero mientras los esbirros lo saquean durante siete. Cuarenta detalles para cuarenta salas.
+- [ ] **Fuad, Selassie y el Aga Khan no tienen ni un tema de diálogo**, y salen en 22 sucesos entre los tres.
+- [ ] **Catorce habitaciones comparten `habitacion.png`** y no hay ni una lámina de escena para la noche. El fondo procedural de `art.ts` es una red de desarrollo, no una entrega.
+- [ ] 22 hechos de la noche siguen huérfanos: se aprenden y no los usa nadie.
